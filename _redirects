@@ -1,0 +1,5 @@
+# Cloudflare Pages — every /library/{id}/ route is served by the generic shell.
+# Status 200 = internal rewrite: the browser URL stays /library/{id}/.
+# GitHub Pages ignores this file and uses its own 404.html fallback instead.
+/library/:id/  /404.html  200
+/library/:id   /404.html  200
