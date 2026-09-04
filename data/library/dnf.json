@@ -84,7 +84,7 @@
 
   "components": [
     {
-      "id": "linux",
+      "id": "fedora",
       "role": "kernel"
     },
     {
