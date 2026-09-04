@@ -16,7 +16,14 @@
  */
 
 var LIBRARY_RESOURCES = [
-  "fedora"
+  "fedora",
+  // Development test fixtures — not real technologies. Safe to remove.
+  "test-linux",
+  "test-desktop",
+  "test-network",
+  "test-tool",
+  "test-project",
+  "test-framework"
 ];
 
 (function () {

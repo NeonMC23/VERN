@@ -1,0 +1,27 @@
+{
+  "id": "test-network",
+  "name": "Test Network",
+  "type": "protocol",
+  "summary": "Development fixture containing deliberately broken references. Several components and relations point at IDs that do not exist, verifying that unresolved references stay inert instead of breaking the page.",
+  "tags": ["test-fixture", "missing-references", "inert", "network"],
+  "status": "experimental",
+  "platforms": ["Cross-platform"],
+  "content": {
+    "introduction": "A development fixture describing a fictional network protocol. Its real purpose is to reference resources that were never created.",
+    "what_is_it": "A test document whose component and relation lists mix valid and invalid targets.",
+    "verdict": "The two valid references below must be clickable; every reference to a non-existent ID must render as plain, non-clickable text, and the page must render completely."
+  },
+  "components": [
+    { "id": "test-tool", "name": "Test Tool", "role": "application", "note": "Exists — should be clickable." },
+    { "id": "test-missing-component", "name": "Test Missing Component", "role": "library", "note": "Does not exist — must stay inert." },
+    { "id": "test-absent-daemon", "name": "Test Absent Daemon", "role": "service", "note": "Does not exist — must stay inert." }
+  ],
+  "relations": [
+    { "id": "test-linux", "name": "Test Linux", "relation": "compatible_with", "note": "Exists — should be clickable." },
+    { "id": "test-nonexistent-protocol", "name": "Test Nonexistent Protocol", "relation": "alternative", "note": "Does not exist — must stay inert." }
+  ],
+  "sources": [
+    { "title": "Example Domain", "url": "https://example.org/", "type": "specification" }
+  ],
+  "last_verified": "2026-09-04"
+}

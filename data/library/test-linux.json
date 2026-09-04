@@ -1,0 +1,24 @@
+{
+  "id": "test-linux",
+  "name": "Test Linux",
+  "type": "distribution",
+  "summary": "Development fixture exercising multiple component references. Its components point at other test fixtures that actually exist, so every component card should be clickable.",
+  "tags": ["test-fixture", "components", "distribution"],
+  "status": "active",
+  "platforms": ["x86_64", "aarch64"],
+  "license": "GPL-2.0-only",
+  "content": {
+    "introduction": "A development fixture built to test how several component cards render together and whether cross-resource navigation resolves correctly.",
+    "what_is_it": "A fictional distribution composed of three other test fixtures.",
+    "verdict": "If all three component cards below are clickable, component resolution works."
+  },
+  "components": [
+    { "id": "test-desktop", "name": "Test Desktop", "role": "desktop_environment", "note": "Default graphical session." },
+    { "id": "test-network", "name": "Test Network", "role": "protocol" },
+    { "id": "test-tool", "name": "Test Tool", "role": "application" }
+  ],
+  "sources": [
+    { "title": "Example Domain", "url": "https://example.org/", "type": "documentation" }
+  ],
+  "last_verified": "2026-09-04"
+}

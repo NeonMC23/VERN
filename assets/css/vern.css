@@ -219,6 +219,14 @@ a:focus-visible .card__title > .marker {
 .btn--accent:focus-visible { background: var(--accent-hover); border-color: var(--accent-hover); }
 .btn--accent:active { transform: translateY(1px); }
 
+/* Inline brand glyph inside a button: sized in em so it tracks the label. */
+.btn__icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: 0 0 auto;
+  display: block;
+}
+
 .icon-btn {
   display: inline-flex;
   align-items: center;
