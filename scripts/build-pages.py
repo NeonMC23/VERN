@@ -14,6 +14,7 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DISCORD = "https://discord.gg/dcFYVAqVs"
+GITHUB = "https://github.com/neonmc23/VERN"
 
 # Top-level sections of the site. Used by the runtime base detection: whatever
 # precedes one of these segments in the URL is the site root.
@@ -23,19 +24,29 @@ NAV = [("Tracks", "tracks/"), ("Library", "library/"),
        ("Tools", "tools/"), ("About", "about/")]
 
 
-def brand(href=""):
-    return (f'<a class="brand" href="{href}">'
-            f'<span class="brand__mark" aria-hidden="true">&gt;_</span>'
+def brand(href="", extra=""):
+    """`>_ VΞRN`. The underscore is its own element so the cursor can blink
+    between `>_` and `>` — no other character is ever introduced."""
+    cls = "brand" + (" " + extra if extra else "")
+    return (f'<a class="{cls}" href="{href}">'
+            f'<span class="brand__mark" aria-hidden="true">'
+            f'<span class="brand__chevron">&gt;</span>'
+            f'<span class="brand__cursor">_</span>'
+            f'</span>'
             f'<span class="brand__name">V\u039eRN</span></a>')
 
 
-DISCORD_BTN = (f'<a class="btn btn--accent" href="{DISCORD}" rel="noopener noreferrer">'
-               f'Discord</a>')
+DISCORD_BTN = (f'<a class="btn btn--accent has-marker" href="{DISCORD}" rel="noopener noreferrer">'
+               f'<span class="marker" aria-hidden="true">&gt;</span>'
+               f'<span>Discord</span></a>')
 
 
 def header(current):
     items = "\n".join(
-        f'            <li><a href="{href}"{" aria-current=\"page\"" if href == current else ""}>{label}</a></li>'
+        f'            <li><a class="has-marker" href="{href}"'
+        + (' aria-current="page"' if href == current else "")
+        + f'><span class="marker" aria-hidden="true">&gt;</span>'
+        + f'<span>{label}</span></a></li>'
         for label, href in NAV)
     return f'''<header class="site-header">
   <div class="wrap site-header__inner">
@@ -60,30 +71,35 @@ def header(current):
 
 FOOTER = f'''<footer class="site-footer">
   <div class="wrap">
-    <div class="site-footer__top">
-      {brand()}
-      <p class="site-footer__tagline">Learn &rarr; Explore &rarr; Build</p>
-    </div>
-    <div class="site-footer__grid">
-      <section class="footer-col">
-        <h2>Explore</h2>
-        <ul>
-          <li><a href="tracks/">Tracks</a></li>
-          <li><a href="library/">Library</a></li>
-          <li><a href="tools/">Tools</a></li>
-        </ul>
-      </section>
-      <section class="footer-col">
-        <h2>Project</h2>
-        <ul>
-          <li><a href="about/">About</a></li>
-          <li><a href="{DISCORD}" rel="noopener noreferrer">Discord</a></li>
-        </ul>
-      </section>
+    <div class="site-footer__main">
+      <div class="site-footer__identity">
+        {brand()}
+        <p class="site-footer__tagline">Learn &rarr; Explore &rarr; Build</p>
+        <p class="site-footer__desc">An independent, open-source-oriented knowledge
+        and learning platform. Static by design: no accounts, no tracking.</p>
+      </div>
+      <nav class="site-footer__nav" aria-label="Footer">
+        <section class="footer-col">
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="tracks/">Tracks</a></li>
+            <li><a href="library/">Library</a></li>
+            <li><a href="tools/">Tools</a></li>
+          </ul>
+        </section>
+        <section class="footer-col">
+          <h2>Project</h2>
+          <ul>
+            <li><a href="about/">About</a></li>
+            <li><a href="{GITHUB}" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="{DISCORD}" rel="noopener noreferrer">Discord</a></li>
+          </ul>
+        </section>
+      </nav>
     </div>
     <div class="site-footer__base">
-      <p>&copy; V\u039eRN</p>
-      <p class="site-footer__note">Independent knowledge platform</p>
+      <p>&copy; 2026 V\u039eRN</p>
+      <p class="site-footer__note">Independent open-source project</p>
     </div>
   </div>
 </footer>'''
@@ -162,15 +178,15 @@ HOME = '''<main id="main">
     </div>
     <ul class="cards">
       <li><a class="card card--link" href="library/">
-        <h3 class="card__title">Library</h3>
+        <h3 class="card__title"><span class="marker" aria-hidden="true">&gt;</span>Library</h3>
         <p class="card__text">Reference resources built from <span class="mono">data/library/*.json</span>.</p>
       </a></li>
       <li><a class="card card--link" href="tracks/">
-        <h3 class="card__title">Tracks</h3>
+        <h3 class="card__title"><span class="marker" aria-hidden="true">&gt;</span>Tracks</h3>
         <p class="card__text">No content yet.</p>
       </a></li>
       <li><a class="card card--link" href="tools/">
-        <h3 class="card__title">Tools</h3>
+        <h3 class="card__title"><span class="marker" aria-hidden="true">&gt;</span>Tools</h3>
         <p class="card__text">No content yet.</p>
       </a></li>
     </ul>

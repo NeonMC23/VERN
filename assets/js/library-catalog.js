@@ -56,7 +56,10 @@ var LIBRARY_RESOURCES = [
 
     a.appendChild(el("h3", {
       className: "card__title",
-      text: data && typeof data.name === "string" ? data.name : id
+      children: [
+        el("span", { className: "marker", text: "\u003e", attrs: { "aria-hidden": "true" } }),
+        document.createTextNode(data && typeof data.name === "string" ? data.name : id)
+      ]
     }));
 
     if (data && typeof data.summary === "string") {

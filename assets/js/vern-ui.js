@@ -55,7 +55,18 @@
     });
   }
 
-  function init() { initNav(); initTheme(); }
+  // Sticky header gains a hairline + faint shadow once the page scrolls.
+  function initHeaderScroll() {
+    var header = document.querySelector(".site-header");
+    if (!header) return;
+    function update() {
+      header.setAttribute("data-scrolled", String(window.scrollY > 4));
+    }
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+
+  function init() { initNav(); initTheme(); initHeaderScroll(); }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

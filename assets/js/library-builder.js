@@ -240,7 +240,13 @@
       .map(function (k) { return isStr(ref[k]) ? humanize(ref[k]) : null; })
       .filter(Boolean).join(" · ");
 
-    var children = [el("span", { className: "ref__name", text: label })];
+    var children = [el("span", {
+      className: "ref__name",
+      children: [
+        el("span", { className: "marker", text: "\u003e", attrs: { "aria-hidden": "true" } }),
+        document.createTextNode(label)
+      ]
+    })];
     if (qualifier) children.push(el("span", { className: "ref__role", text: qualifier }));
     if (isStr(ref.note)) children.push(el("span", { className: "muted", text: ref.note }));
 
