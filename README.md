@@ -124,6 +124,19 @@ Data is inserted with `createElement` and `textContent` only — never `innerHTM
 
 ---
 
+## 3b. Catalog search, filters and sorting
+
+`/library/` loads the JSON of every ID declared in `LIBRARY_RESOURCES` **once**, keeps the parsed documents in an in-memory array for the page session, and runs search, filtering and sorting entirely against that array. No network request is made while typing, and **no index file is generated** — `data/library/*.json` remains the only source of truth.
+
+- **Search** matches `name`, `summary`, `tags`, `type`, `status`, `license`, `platforms` and the `content` body. Matching is case- and diacritic-insensitive, and each token must match the **start of a word**, so `secur` finds "security" while `test` does not match "lightest". Multiple words are combined with AND.
+- **Filters** (Type, Status, Tags, Platforms, License) are generated from the loaded dataset, so an option only appears when some resource actually uses it. Logic is **OR within a category, AND between categories**.
+- **Sorting**: default (the `LIBRARY_RESOURCES` order), name A→Z / Z→A, and recently / oldest verified using the real `last_verified` field.
+- The filter panel is **collapsed by default**, toggled by a `Filters` button that carries `aria-expanded` and `aria-controls`. State is in-memory only: no localStorage, sessionStorage or cookies.
+
+### Type accents
+
+Each card derives a subtle secondary colour from its `type` through a small `TYPE_ACCENTS` map in `library-catalog.js`, applied only to the type badge and a 2px card edge. Unknown or newly added schema types fall back to a neutral grey with no code change required. This is a **presentation mapping only** — it never affects how content is rendered, and VΞRN pink remains the sole brand/interaction colour.
+
 ## 4. Adding a Library resource
 
 ### Step 1 — create the JSON

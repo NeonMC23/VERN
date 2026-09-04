@@ -26,6 +26,22 @@
   --accent-soft:   rgba(255, 102, 196, .12);
   --accent-line:   rgba(255, 102, 196, .38);
 
+
+  /* ---- type accents ----------------------------------------------------
+     Secondary, low-saturation hues used ONLY on the type badge and a hairline
+     card edge, so a large Library is easier to scan. Deliberately desaturated
+     and always subordinate to --accent (VΞRN pink), which stays the single
+     brand/interaction colour. Referenced via [data-type-accent] tokens. */
+  --t-neutral: #9A9AA2;
+  --t-blue:    #7C9CC4;
+  --t-violet:  #9B8CC4;
+  --t-teal:    #6FA8A0;
+  --t-green:   #86AE84;
+  --t-amber:   #C2A16A;
+  --t-orange:  #C08E6E;
+  --t-cyan:    #74A3B5;
+  --t-slate:   #8993A6;
+
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
@@ -74,6 +90,18 @@
   --accent-soft:   rgba(200, 0, 126, .08);
   --accent-line:   rgba(200, 0, 126, .32);
 
+
+  /* Type accents, darkened for contrast on a light background. */
+  --t-neutral: #6B6B73;
+  --t-blue:    #45699A;
+  --t-violet:  #6A5B96;
+  --t-teal:    #3F7A72;
+  --t-green:   #4F7A4D;
+  --t-amber:   #8A6A2E;
+  --t-orange:  #8C5A38;
+  --t-cyan:    #3E7286;
+  --t-slate:   #56607A;
+
   --shadow-soft: 0 1px 2px rgba(16, 16, 20, .06);
 }
 
@@ -121,6 +149,18 @@ main { flex: 1 0 auto; }
 .page { padding-block: clamp(2.25rem, 6vw, 3.5rem) var(--sp-7); }
 
 .stack > * + * { margin-top: var(--sp-5); }
+
+/* Available to assistive tech, removed from the visual layout. */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 
 .skip-link { position: absolute; left: -9999px; z-index: 100; }
 .skip-link:focus {
@@ -190,12 +230,31 @@ a:focus-visible .card__title > .marker {
 }
 .card__title > .marker { width: 1ch; margin-right: .35ch; }
 
+/* Inside a flex button the parent's `gap` already spaces the children, so the
+   marker must not add its own margin (that produced a compounded offset). */
+.btn > .marker {
+  margin-right: 0;
+  width: auto;
+  transform: none;
+  line-height: 1;
+  opacity: .55;
+}
+.btn:hover > .marker,
+.btn:focus-visible > .marker { transform: none; }
+/* On the accent CTA the marker must read against pink, not disappear into it. */
+.btn--accent > .marker { color: var(--accent-ink); opacity: .6; }
+/* letter-spacing also renders after the final glyph, nudging the flex group
+   off-centre; reclaim that trailing sliver on the label. */
+.btn > span:last-child { margin-right: -.1em; }
+.btn--accent:hover > .marker,
+.btn--accent:focus-visible > .marker { opacity: 1; }
+
 /* ---------- buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: .4rem;
+  gap: .45rem;
   height: 34px;
   padding: 0 .95rem;
   border: 1px solid var(--border);
@@ -515,6 +574,206 @@ a.card:focus-visible .card__title { color: var(--accent); }
 .badge__key { color: var(--text-faint); }
 
 .pill-row { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; }
+
+/* ==========================================================================
+   Library catalog — search, filters, type accents (library-catalog.js)
+   ========================================================================== */
+
+.catalog__controls { margin-bottom: var(--sp-4); }
+
+.catalog__search { position: relative; display: block; }
+.catalog__search .field-icon {
+  position: absolute;
+  left: .85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  pointer-events: none;
+}
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 .9rem 0 2.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: .95rem;
+}
+.input::placeholder { color: var(--text-faint); }
+.input:hover { border-color: var(--border-strong); }
+.input:focus-visible {
+  outline: none;
+  border-color: var(--accent-line);
+  box-shadow: var(--ring);
+}
+
+/* closed state stays compact: one small button + the live count */
+.catalog__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: var(--sp-2);
+}
+.catalog__count {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .04em;
+}
+.catalog__count b { color: var(--text); font-weight: 500; }
+
+.btn--ghost {
+  height: 34px;
+  padding: 0 .8rem;
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+.btn--ghost:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface-2); }
+.btn--ghost[aria-expanded="true"] {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+.btn__caret { font-size: .6em; opacity: .75; }
+.btn--ghost[aria-expanded="true"] .btn__caret { transform: rotate(180deg); }
+
+.filter-count {
+  min-width: 1.25rem;
+  padding: 0 .3rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: .68rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.filters {
+  margin-top: var(--sp-3);
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-sunken);
+}
+.filters[hidden] { display: none; }
+.filters__grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+.filters__group > h3,
+.filters__group > legend {
+  padding: 0;
+  margin-bottom: .6rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+.filters__group { border: 0; margin: 0; }
+.filters__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  max-height: 9.5rem;
+  overflow-y: auto;
+}
+
+/* checkable chip: a real <input> + <label>, never a clickable div */
+.chip { position: relative; display: inline-flex; }
+.chip input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  min-height: 30px;
+  padding: .2rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: .715rem;
+  cursor: pointer;
+}
+.chip input:hover + span { border-color: var(--border-strong); color: var(--text); }
+.chip input:checked + span {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.chip input:focus-visible + span { outline: none; box-shadow: var(--ring); border-color: var(--accent-line); }
+
+.select {
+  width: 100%;
+  height: 34px;
+  padding: 0 .6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .74rem;
+}
+.select:focus-visible { outline: none; border-color: var(--accent-line); box-shadow: var(--ring); }
+
+.filters__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+}
+
+.catalog__empty {
+  padding: var(--sp-6) var(--sp-4);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text-muted);
+}
+.catalog__empty p { margin-bottom: var(--sp-3); }
+
+/* ---- type accents: a hairline edge + the type badge only ---- */
+.card[data-type-accent] { border-left: 2px solid var(--type-accent, var(--border)); }
+.badge--type {
+  border-color: color-mix(in srgb, var(--type-accent, var(--text-faint)) 38%, transparent);
+  background: color-mix(in srgb, var(--type-accent, var(--text-faint)) 12%, transparent);
+  color: var(--type-accent, var(--text-muted));
+  text-transform: none;
+}
+
+[data-type-accent="neutral"] { --type-accent: var(--t-neutral); }
+[data-type-accent="blue"]    { --type-accent: var(--t-blue); }
+[data-type-accent="violet"]  { --type-accent: var(--t-violet); }
+[data-type-accent="teal"]    { --type-accent: var(--t-teal); }
+[data-type-accent="green"]   { --type-accent: var(--t-green); }
+[data-type-accent="amber"]   { --type-accent: var(--t-amber); }
+[data-type-accent="orange"]  { --type-accent: var(--t-orange); }
+[data-type-accent="cyan"]    { --type-accent: var(--t-cyan); }
+[data-type-accent="slate"]   { --type-accent: var(--t-slate); }
+
+@media (max-width: 640px) {
+  .catalog__bar { flex-direction: column; align-items: stretch; gap: .6rem; }
+  .catalog__bar .btn { width: 100%; height: 44px; }
+  .catalog__count { text-align: center; }
+  .filters__grid { grid-template-columns: 1fr; }
+  .chip span { min-height: 36px; padding-inline: .85rem; }
+}
 
 /* ==========================================================================
    Library — rendered by the generic builder from JSON
