@@ -22,7 +22,18 @@ var LIBRARY_RESOURCES = [
 (function () {
   "use strict";
 
-  var DATA_BASE = "/data/library/";
+  // Site root, shared with the <base> element installed by the inline
+  // bootstrap in <head>. Works at a domain root and under a project subpath
+  // such as /VERN/ — nothing is hardcoded.
+  function siteBase() {
+    var el = document.querySelector("base");
+    if (el) return new URL(el.getAttribute("href"), location.href).pathname;
+    return location.pathname.replace(/[^/]*$/, "");
+  }
+
+  var BASE = siteBase();
+  var DATA_BASE = BASE + "data/library/";
+  var LIBRARY_BASE = BASE + "library/";
   var ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
   function el(tag, opts) {
@@ -41,7 +52,7 @@ var LIBRARY_RESOURCES = [
 
   // The whole card is the anchor: the entire surface is clickable and focusable.
   function card(id, data) {
-    var a = el("a", { className: "card card--link", attrs: { href: "/library/" + id + "/" } });
+    var a = el("a", { className: "card card--link", attrs: { href: LIBRARY_BASE + id + "/" } });
 
     a.appendChild(el("h3", {
       className: "card__title",

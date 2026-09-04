@@ -5,24 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VΞRN</title>
 <meta name="color-scheme" content="dark light">
+<script>
+(function () {
+  var SECTIONS = ["library", "tracks", "tools", "about"];
+  var parts = location.pathname.split("/");
+  var base = location.pathname.replace(/[^/]*$/, "");
+  for (var i = 1; i < parts.length; i++) {
+    if (SECTIONS.indexOf(parts[i]) !== -1) { base = parts.slice(0, i).join("/") + "/"; break; }
+  }
+  var el = document.createElement("base");
+  el.setAttribute("href", base);
+  document.head.appendChild(el);
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/assets/css/vern.css">
+<link rel="stylesheet" href="assets/css/vern.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap site-header__inner">
-    <a class="brand" href="/"><span class="brand__mark" aria-hidden="true">&gt;_</span><span class="brand__name">VΞRN</span></a>
+    <a class="brand" href=""><span class="brand__mark" aria-hidden="true">&gt;_</span><span class="brand__name">VΞRN</span></a>
     <div class="nav-cluster">
       <div class="site-nav" id="site-nav">
         <nav aria-label="Main">
           <ul class="site-nav__list">
-            <li><a href="/tracks/">Tracks</a></li>
-            <li><a href="/library/">Library</a></li>
-            <li><a href="/tools/">Tools</a></li>
-            <li><a href="/about/">About</a></li>
+            <li><a href="tracks/">Tracks</a></li>
+            <li><a href="library/">Library</a></li>
+            <li><a href="tools/">Tools</a></li>
+            <li><a href="about/">About</a></li>
           </ul>
         </nav>
         <div class="site-nav__actions">
@@ -42,15 +55,15 @@
       <p class="lede">A static, data-driven knowledge base. Library content is stored as JSON and rendered client-side.</p>
     </div>
     <ul class="cards">
-      <li><a class="card card--link" href="/library/">
+      <li><a class="card card--link" href="library/">
         <h3 class="card__title">Library</h3>
         <p class="card__text">Reference resources built from <span class="mono">data/library/*.json</span>.</p>
       </a></li>
-      <li><a class="card card--link" href="/tracks/">
+      <li><a class="card card--link" href="tracks/">
         <h3 class="card__title">Tracks</h3>
         <p class="card__text">No content yet.</p>
       </a></li>
-      <li><a class="card card--link" href="/tools/">
+      <li><a class="card card--link" href="tools/">
         <h3 class="card__title">Tools</h3>
         <p class="card__text">No content yet.</p>
       </a></li>
@@ -60,22 +73,22 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="site-footer__top">
-      <a class="brand" href="/"><span class="brand__mark" aria-hidden="true">&gt;_</span><span class="brand__name">VΞRN</span></a>
+      <a class="brand" href=""><span class="brand__mark" aria-hidden="true">&gt;_</span><span class="brand__name">VΞRN</span></a>
       <p class="site-footer__tagline">Learn &rarr; Explore &rarr; Build</p>
     </div>
     <div class="site-footer__grid">
       <section class="footer-col">
         <h2>Explore</h2>
         <ul>
-          <li><a href="/tracks/">Tracks</a></li>
-          <li><a href="/library/">Library</a></li>
-          <li><a href="/tools/">Tools</a></li>
+          <li><a href="tracks/">Tracks</a></li>
+          <li><a href="library/">Library</a></li>
+          <li><a href="tools/">Tools</a></li>
         </ul>
       </section>
       <section class="footer-col">
         <h2>Project</h2>
         <ul>
-          <li><a href="/about/">About</a></li>
+          <li><a href="about/">About</a></li>
           <li><a href="https://discord.gg/dcFYVAqVs" rel="noopener noreferrer">Discord</a></li>
         </ul>
       </section>
@@ -86,6 +99,6 @@
     </div>
   </div>
 </footer>
-<script src="/assets/js/vern-ui.js"></script>
+<script src="assets/js/vern-ui.js"></script>
 </body>
 </html>

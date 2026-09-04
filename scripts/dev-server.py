@@ -41,7 +41,9 @@ DEFAULT_PORT = 5500
 DEFAULT_HOST = "127.0.0.1"
 
 # /library/{id} or /library/{id}/ — ids are lowercase, hyphen separated.
-LIBRARY_ROUTE = re.compile(r"^/library/[a-z0-9]+(?:-[a-z0-9]+)*/?$")
+# An optional leading prefix lets the same rule work when the site is served
+# under a project subpath (e.g. /VERN/library/fedora/), matching GitHub Pages.
+LIBRARY_ROUTE = re.compile(r"^(?:/[^/]+)*?/library/[a-z0-9]+(?:-[a-z0-9]+)*/?$")
 RESOURCE_SHELL = os.path.join(ROOT, "404.html")
 
 BANNER = "\u256d\u2500 V\u039eRN Dev Server"

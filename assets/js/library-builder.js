@@ -6,7 +6,18 @@
 (function () {
   "use strict";
 
-  var DATA_BASE = "/data/library/";
+  // Site root, shared with the <base> element installed by the inline
+  // bootstrap in <head>. Works at a domain root and under a project subpath
+  // such as /VERN/ — nothing is hardcoded.
+  function siteBase() {
+    var el = document.querySelector("base");
+    if (el) return new URL(el.getAttribute("href"), location.href).pathname;
+    return location.pathname.replace(/[^/]*$/, "");
+  }
+
+  var BASE = siteBase();
+  var DATA_BASE = BASE + "data/library/";
+  var LIBRARY_BASE = BASE + "library/";
   var ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
   /* ------------------------------------------------------------------ URL */
@@ -237,7 +248,7 @@
     if (id) {
       return el("a", {
         className: "ref",
-        attrs: { href: "/library/" + id + "/", "data-ref-id": id },
+        attrs: { href: LIBRARY_BASE + id + "/", "data-ref-id": id },
         children: children
       });
     }
@@ -459,7 +470,7 @@
       children: [
         el("h1", { text: title }),
         detail ? el("p", { text: detail }) : null,
-        el("p", { children: [el("a", { text: "\u2190 Back to Library", attrs: { href: "/library/" } })] })
+        el("p", { children: [el("a", { text: "\u2190 Back to Library", attrs: { href: LIBRARY_BASE } })] })
       ].filter(Boolean)
     }));
   }
@@ -494,7 +505,7 @@
       })
       .catch(function (err) {
         showMessage(mount, "Resource unavailable",
-          "Could not build /library/" + id + "/ from " + DATA_BASE + id + ".json (" + err.message + ").");
+          "Could not build " + LIBRARY_BASE + id + "/ from " + DATA_BASE + id + ".json (" + err.message + ").");
       })
       .finally(function () { mount.removeAttribute("aria-busy"); });
   }

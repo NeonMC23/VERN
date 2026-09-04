@@ -1,17 +1,29 @@
 #!/usr/bin/env python3
 """Generates the static HTML shells so navbar/footer stay identical everywhere.
 Output files are plain static HTML committed to the repo; this script is a local
-authoring convenience only and is never needed at runtime."""
+authoring convenience only and is never needed at runtime.
+
+BASE PATH
+---------
+Every URL emitted here is RELATIVE (no leading slash). A tiny inline bootstrap
+in <head> computes the site root at runtime and installs <base href="...">, so
+the same files work at a domain root and under a project subpath such as
+/VERN/. Nothing is hardcoded.
+"""
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DISCORD = "https://discord.gg/dcFYVAqVs"
 
-NAV = [("Tracks", "/tracks/"), ("Library", "/library/"),
-       ("Tools", "/tools/"), ("About", "/about/")]
+# Top-level sections of the site. Used by the runtime base detection: whatever
+# precedes one of these segments in the URL is the site root.
+SECTIONS = ["library", "tracks", "tools", "about"]
+
+NAV = [("Tracks", "tracks/"), ("Library", "library/"),
+       ("Tools", "tools/"), ("About", "about/")]
 
 
-def brand(href="/"):
+def brand(href=""):
     return (f'<a class="brand" href="{href}">'
             f'<span class="brand__mark" aria-hidden="true">&gt;_</span>'
             f'<span class="brand__name">V\u039eRN</span></a>')
@@ -56,15 +68,15 @@ FOOTER = f'''<footer class="site-footer">
       <section class="footer-col">
         <h2>Explore</h2>
         <ul>
-          <li><a href="/tracks/">Tracks</a></li>
-          <li><a href="/library/">Library</a></li>
-          <li><a href="/tools/">Tools</a></li>
+          <li><a href="tracks/">Tracks</a></li>
+          <li><a href="library/">Library</a></li>
+          <li><a href="tools/">Tools</a></li>
         </ul>
       </section>
       <section class="footer-col">
         <h2>Project</h2>
         <ul>
-          <li><a href="/about/">About</a></li>
+          <li><a href="about/">About</a></li>
           <li><a href="{DISCORD}" rel="noopener noreferrer">Discord</a></li>
         </ul>
       </section>
@@ -76,6 +88,22 @@ FOOTER = f'''<footer class="site-footer">
   </div>
 </footer>'''
 
+# Runs before any relative URL is resolved. Keeps the site portable between
+# https://host/ and https://host/VERN/ without hardcoding either.
+BASE_BOOTSTRAP = '''<script>
+(function () {
+  var SECTIONS = %s;
+  var parts = location.pathname.split("/");
+  var base = location.pathname.replace(/[^/]*$/, "");
+  for (var i = 1; i < parts.length; i++) {
+    if (SECTIONS.indexOf(parts[i]) !== -1) { base = parts.slice(0, i).join("/") + "/"; break; }
+  }
+  var el = document.createElement("base");
+  el.setAttribute("href", base);
+  document.head.appendChild(el);
+})();
+</script>''' % str(SECTIONS).replace("'", '"')
+
 HEAD = '''<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -83,24 +111,25 @@ HEAD = '''<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="color-scheme" content="dark light">
+__BASE_BOOTSTRAP__
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/assets/css/vern.css">
+<link rel="stylesheet" href="assets/css/vern.css">
 </head>
 <body>
 <a class="skip-link" href="#{mount}">Skip to content</a>
 '''
 
 TAIL = '''
-<script src="/assets/js/vern-ui.js"></script>
+<script src="assets/js/vern-ui.js"></script>
 {scripts}</body>
 </html>
 '''
 
 
 def page(path, title, current, body, mount="main", scripts=""):
-    html = (HEAD.format(title=title, mount=mount)
+    html = (HEAD.format(title=title, mount=mount).replace("__BASE_BOOTSTRAP__", BASE_BOOTSTRAP)
             + header(current) + "\n"
             + body + "\n"
             + FOOTER
@@ -132,15 +161,15 @@ HOME = '''<main id="main">
       <p class="lede">A static, data-driven knowledge base. Library content is stored as JSON and rendered client-side.</p>
     </div>
     <ul class="cards">
-      <li><a class="card card--link" href="/library/">
+      <li><a class="card card--link" href="library/">
         <h3 class="card__title">Library</h3>
         <p class="card__text">Reference resources built from <span class="mono">data/library/*.json</span>.</p>
       </a></li>
-      <li><a class="card card--link" href="/tracks/">
+      <li><a class="card card--link" href="tracks/">
         <h3 class="card__title">Tracks</h3>
         <p class="card__text">No content yet.</p>
       </a></li>
-      <li><a class="card card--link" href="/tools/">
+      <li><a class="card card--link" href="tools/">
         <h3 class="card__title">Tools</h3>
         <p class="card__text">No content yet.</p>
       </a></li>
@@ -164,17 +193,17 @@ RESOURCE_SHELL = '''<!-- Generic mount point. All content is built by the Librar
 
 
 def main():
-    page("index.html", "V\u039eRN", "/", HOME)
-    page("tracks/index.html", "Tracks \u2014 V\u039eRN", "/tracks/", placeholder("Tracks"))
-    page("tools/index.html", "Tools \u2014 V\u039eRN", "/tools/", placeholder("Tools"))
-    page("about/index.html", "About \u2014 V\u039eRN", "/about/", placeholder("About"))
-    page("library/index.html", "Library \u2014 V\u039eRN", "/library/", LIBRARY_INDEX,
-         scripts='<script src="/assets/js/library-catalog.js"></script>\n')
+    page("index.html", "V\u039eRN", "", HOME)
+    page("tracks/index.html", "Tracks \u2014 V\u039eRN", "tracks/", placeholder("Tracks"))
+    page("tools/index.html", "Tools \u2014 V\u039eRN", "tools/", placeholder("Tools"))
+    page("about/index.html", "About \u2014 V\u039eRN", "about/", placeholder("About"))
+    page("library/index.html", "Library \u2014 V\u039eRN", "library/", LIBRARY_INDEX,
+         scripts='<script src="assets/js/library-catalog.js"></script>\n')
     # 404.html is the single generic shell: real 404 page, GitHub Pages
     # fallback for /library/{id}/, and Cloudflare rewrite target.
-    page("404.html", "Library \u2014 V\u039eRN", "/library/", RESOURCE_SHELL,
+    page("404.html", "Library \u2014 V\u039eRN", "library/", RESOURCE_SHELL,
          mount="library-resource",
-         scripts='<script src="/assets/js/library-builder.js"></script>\n')
+         scripts='<script src="assets/js/library-builder.js"></script>\n')
 
 
 if __name__ == "__main__":

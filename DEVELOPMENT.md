@@ -52,8 +52,23 @@ Note: GitHub Pages returns HTTP **404** while displaying the correct page.
 Invisible to users; crawlers will not index those routes. Cloudflare Pages
 returns a true 200.
 
-Paths are absolute (`/assets/…`, `/data/…`), so the site must be published at a
-domain root (`user.github.io` or a custom domain), not in a subfolder.
+### Base path
+
+All URLs in the HTML and JS are **relative** — none start with `/`. A small
+inline script in `<head>` computes the site root at runtime and installs
+`<base href="…">`:
+
+* served at a domain root  → `base = /`
+* served under `/VERN/`    → `base = /VERN/`
+
+It works by scanning `location.pathname` for the first known section segment
+(`library`, `tracks`, `tools`, `about`); everything before it is the site root.
+This matters because `404.html` is served at varying depths (e.g.
+`/VERN/library/fedora/`), where fixed relative paths would break.
+
+`library-builder.js` and `library-catalog.js` read the same base and derive
+`<base>data/library/{id}.json` from it. Nothing is hardcoded, so the repo can be
+renamed or moved to a custom domain with no code change.
 
 ## Local server
 
