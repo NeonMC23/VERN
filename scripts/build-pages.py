@@ -130,6 +130,15 @@ BASE_BOOTSTRAP = '''<script>
   var el = document.createElement("base");
   el.setAttribute("href", base);
   document.head.appendChild(el);
+  // Favicon emitted here, with the base already applied, because the browser's
+  // preload scanner resolves <link rel="icon"> against the DOCUMENT url, not
+  // the injected <base>. On a deep route such as /VERN/library/fedora/ a plain
+  // relative href would be requested as .../library/fedora/assets/icon/icon.png.
+  var icon = document.createElement("link");
+  icon.setAttribute("rel", "icon");
+  icon.setAttribute("type", "image/png");
+  icon.setAttribute("href", base + "assets/icon/icon.png");
+  document.head.appendChild(icon);
 })();
 </script>''' % str(SECTIONS).replace("'", '"')
 
@@ -141,11 +150,6 @@ HEAD = '''<!DOCTYPE html>
 <title>{title}</title>
 <meta name="color-scheme" content="dark light">
 __BASE_BOOTSTRAP__
-<!-- Favicon. Relative href resolved against the <base> injected just above,
-     so it points at the site root: /assets/icon/icon.png locally and
-     /VERN/assets/icon/icon.png on GitHub Pages. Same mechanism as the
-     stylesheet and scripts below — no hardcoded absolute path. -->
-<link rel="icon" type="image/png" href="assets/icon/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
@@ -162,8 +166,12 @@ TAIL = '''
 '''
 
 
-def page(path, title, current, body, mount="main", scripts=""):
-    html = (HEAD.format(title=title, mount=mount).replace("__BASE_BOOTSTRAP__", BASE_BOOTSTRAP)
+def page(path, title, current, body, mount="main", scripts="", skip=None):
+    # `skip` overrides the skip-link target. The Tracks page uses the hash for
+    # routing, so it must not emit href="#tracks-app" (the router would read
+    # that as a track id and show "Track not found").
+    html = (HEAD.format(title=title, mount=(skip if skip is not None else mount))
+            .replace("__BASE_BOOTSTRAP__", BASE_BOOTSTRAP)
             + header(current) + "\n"
             + body + "\n"
             + FOOTER
@@ -222,13 +230,27 @@ LIBRARY_INDEX = '''<main id="main">
   </div>
 </main>'''
 
+TRACKS_INDEX = '''<!-- Generic mount point. Every Tracks view is built by the
+     Tracks app from data/tracks/*.json — no per-Track or per-Lesson HTML. -->
+<a id="tracks-top" tabindex="-1"></a>
+<main id="tracks-app" class="tracks-app">
+  <div class="wrap page stack">
+    <p class="status">Loading Tracks\u2026</p>
+  </div>
+</main>'''
+
 RESOURCE_SHELL = '''<!-- Generic mount point. All content is built by the Library Builder from JSON. -->
 <main id="library-resource" class="wrap page"></main>'''
 
 
 def main():
     page("index.html", "V\u039eRN", "", HOME)
-    page("tracks/index.html", "Tracks \u2014 V\u039eRN", "tracks/", placeholder("Tracks"))
+    page("tracks/index.html", "Tracks \u2014 V\u039eRN", "tracks/", TRACKS_INDEX,
+         mount="tracks-app", skip="tracks-top",
+         scripts='<script src="assets/js/tracks/tracks-router.js"></script>\n'
+                 '<script src="assets/js/tracks/tracks-data.js"></script>\n'
+                 '<script src="assets/js/tracks/tracks-renderer.js"></script>\n'
+                 '<script src="assets/js/tracks/tracks-app.js"></script>\n')
     page("tools/index.html", "Tools \u2014 V\u039eRN", "tools/", placeholder("Tools"))
     page("about/index.html", "About \u2014 V\u039eRN", "about/", placeholder("About"))
     page("library/index.html", "Library \u2014 V\u039eRN", "library/", LIBRARY_INDEX,

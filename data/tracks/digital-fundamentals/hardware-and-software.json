@@ -1,0 +1,10 @@
+{
+  "id": "hardware-and-software",
+  "title": "Hardware and Software",
+  "description": "The difference between the machine and the instructions it runs.",
+  "content": [
+    { "type": "heading", "text": "Two halves of one system" },
+    { "type": "text", "text": "Hardware is the physical machine. Software is the set of instructions telling that machine what to do. Neither is useful alone." },
+    { "type": "list", "items": ["Hardware: CPU, memory, disk", "Software: the operating system and applications"] }
+  ]
+}

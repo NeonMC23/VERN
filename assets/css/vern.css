@@ -576,6 +576,103 @@ a.card:focus-visible .card__title { color: var(--accent); }
 .pill-row { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; }
 
 /* ==========================================================================
+   Tracks — dynamic views built by assets/js/tracks/* from data/tracks/*.json
+   Reuses the existing tokens, cards, badges and focus states.
+   ========================================================================== */
+
+/* The view heading receives focus after a hash change; the outline is the
+   standard focus ring, never suppressed. */
+.tracks-app .page-title:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--radius-xs);
+}
+
+.tracks-back {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+}
+.tracks-back:hover,
+.tracks-back:focus-visible { color: var(--accent); }
+
+/* ---- lesson list (Track view) ---- */
+.lesson-list { list-style: none; display: grid; gap: .6rem; counter-reset: none; }
+
+.lesson-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+}
+.lesson-item:hover,
+.lesson-item:focus-visible {
+  border-color: var(--accent-line);
+  background: var(--surface-hover);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .18), var(--ring);
+  transform: translateY(-2px);
+}
+.lesson-item__index {
+  flex: 0 0 auto;
+  min-width: 1.6rem;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--text-faint);
+  padding-top: .15rem;
+}
+.lesson-item__body { display: grid; gap: .2rem; }
+.lesson-item__title { font-weight: 600; }
+.lesson-item:hover .lesson-item__title,
+.lesson-item:focus-visible .lesson-item__title { color: var(--accent); }
+.lesson-item__desc { color: var(--text-muted); font-size: .9rem; }
+.lesson-item__go {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-.2ch);
+}
+.lesson-item:hover .lesson-item__go,
+.lesson-item:focus-visible .lesson-item__go { opacity: 1; transform: translateX(0); }
+
+/* ---- lesson body ---- */
+.lesson { max-width: var(--maxw-prose); }
+.lesson > * + * { margin-top: var(--sp-4); }
+.lesson .block__title { margin-bottom: 0; }
+.lesson .prose { color: var(--text-muted); }
+
+.codeblock {
+  margin: 0;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-sunken);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre;
+  tab-size: 2;
+}
+.codeblock:focus-visible { outline: none; border-color: var(--accent-line); box-shadow: var(--ring); }
+.codeblock code { font-size: inherit; }
+
+@media (max-width: 640px) {
+  .lesson-item { padding: var(--sp-3); }
+  .lesson-item__go { display: none; }
+  .codeblock { font-size: .8rem; padding: var(--sp-3); }
+}
+
+/* ==========================================================================
    Library catalog — search, filters, type accents (library-catalog.js)
    ========================================================================== */
 
@@ -986,5 +1083,6 @@ a.ref:focus-visible .marker { opacity: 1; transform: translateX(0); }
   .brand__cursor { animation: none !important; opacity: 1; }
   a.card:hover, a.card:focus-visible,
   a.ref:hover, a.ref:focus-visible,
+  .lesson-item:hover, .lesson-item:focus-visible,
   .footer-col a:hover, .footer-col a:focus-visible { transform: none; }
 }

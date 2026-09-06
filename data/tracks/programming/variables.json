@@ -1,0 +1,13 @@
+{
+  "id": "variables",
+  "title": "Variables",
+  "description": "Naming values so they can be reused.",
+  "content": [
+    { "type": "heading", "text": "What is a variable?" },
+    { "type": "text", "text": "A variable is a name that refers to a value. Instead of repeating a value everywhere, you store it once and refer to it by name." },
+    { "type": "code", "language": "python", "code": "name = \"Ada\"\nage = 36\nprint(name, age)" },
+    { "type": "heading", "text": "Why it matters" },
+    { "type": "text", "text": "If the value changes, you only change it in one place. That single idea is the basis of almost every program you will write." },
+    { "type": "list", "items": ["A name refers to a value", "The value can change over time", "The name stays the same"] }
+  ]
+}

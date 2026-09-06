@@ -16,20 +16,24 @@
   var el = document.createElement("base");
   el.setAttribute("href", base);
   document.head.appendChild(el);
+  // Favicon emitted here, with the base already applied, because the browser's
+  // preload scanner resolves <link rel="icon"> against the DOCUMENT url, not
+  // the injected <base>. On a deep route such as /VERN/library/fedora/ a plain
+  // relative href would be requested as .../library/fedora/assets/icon/icon.png.
+  var icon = document.createElement("link");
+  icon.setAttribute("rel", "icon");
+  icon.setAttribute("type", "image/png");
+  icon.setAttribute("href", base + "assets/icon/icon.png");
+  document.head.appendChild(icon);
 })();
 </script>
-<!-- Favicon. Relative href resolved against the <base> injected just above,
-     so it points at the site root: /assets/icon/icon.png locally and
-     /VERN/assets/icon/icon.png on GitHub Pages. Same mechanism as the
-     stylesheet and scripts below — no hardcoded absolute path. -->
-<link rel="icon" type="image/png" href="assets/icon/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/css/vern.css">
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#tracks-top">Skip to content</a>
 <header class="site-header">
   <div class="wrap site-header__inner">
     <a class="brand" href=""><span class="brand__mark" aria-hidden="true"><span class="brand__chevron">&gt;</span><span class="brand__cursor">_</span></span><span class="brand__name">VΞRN</span></a>
@@ -52,13 +56,12 @@
     </div>
   </div>
 </header>
-<main id="main">
+<!-- Generic mount point. Every Tracks view is built by the
+     Tracks app from data/tracks/*.json — no per-Track or per-Lesson HTML. -->
+<a id="tracks-top" tabindex="-1"></a>
+<main id="tracks-app" class="tracks-app">
   <div class="wrap page stack">
-    <div>
-      <p class="eyebrow">VΞRN</p>
-      <h1 class="page-title">Tracks</h1>
-    </div>
-    <p class="note">This section has no content yet.</p>
+    <p class="status">Loading Tracks…</p>
   </div>
 </main>
 <footer class="site-footer">
@@ -96,5 +99,9 @@
   </div>
 </footer>
 <script src="assets/js/vern-ui.js"></script>
+<script src="assets/js/tracks/tracks-router.js"></script>
+<script src="assets/js/tracks/tracks-data.js"></script>
+<script src="assets/js/tracks/tracks-renderer.js"></script>
+<script src="assets/js/tracks/tracks-app.js"></script>
 </body>
 </html>

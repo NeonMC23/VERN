@@ -1,0 +1,49 @@
+{
+  "version": "mtrack1-prototype",
+  "tracks": [
+    {
+      "id": "digital-fundamentals",
+      "name": "Digital Fundamentals",
+      "description": "How computers represent, store and process information.",
+      "order": 1,
+      "lessons": [
+        {
+          "id": "how-computers-work",
+          "title": "How Computers Work",
+          "description": "The basic loop every computer follows.",
+          "order": 1,
+          "file": "digital-fundamentals/how-computers-work.json"
+        },
+        {
+          "id": "hardware-and-software",
+          "title": "Hardware and Software",
+          "description": "The difference between the machine and the instructions it runs.",
+          "order": 2,
+          "file": "digital-fundamentals/hardware-and-software.json"
+        }
+      ]
+    },
+    {
+      "id": "programming",
+      "name": "Programming",
+      "description": "Writing instructions a computer can execute.",
+      "order": 2,
+      "lessons": [
+        {
+          "id": "what-is-programming",
+          "title": "What Is Programming?",
+          "description": "Turning an idea into a sequence of instructions.",
+          "order": 1,
+          "file": "programming/what-is-programming.json"
+        },
+        {
+          "id": "variables",
+          "title": "Variables",
+          "description": "Naming values so they can be reused.",
+          "order": 2,
+          "file": "programming/variables.json"
+        }
+      ]
+    }
+  ]
+}
