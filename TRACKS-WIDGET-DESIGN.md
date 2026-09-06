@@ -4,6 +4,11 @@
 This document defines the *pedagogical vocabulary* of VΞRN TRACKS so the lesson
 schema can be frozen in MTrack2-B with confidence.
 
+**Revision 2** — extended with §14, the locked decisions D1–D5
+(inline content, fill_blank representation, validation semantics, choice
+semantics, provenance). §14 is authoritative where it conflicts with an
+earlier section.
+
 Baseline (MTrack1, shipped and verified): the renderer dispatches on
 `block.type` only, and **unknown types are skipped rather than throwing**
 (`var fn = BLOCKS[block.type]; return fn ? fn(block) : null;`). That single
@@ -20,8 +25,8 @@ Currently implemented: `heading`, `text`, `code`, `list` (4 leaf renderers,
 | Widget | Category | Necessary | Interactive | Nesting | Complexity |
 |---|---|---|---|---|---|
 | `heading` | content | yes — **shipped** | no | no | low |
-| `text` | content | yes — **shipped** | no | no | low |
-| `list` | content | yes — **shipped** | no | no | low |
+| `text` | content | yes — **shipped** | no | inline (D1) | low |
+| `list` | content | yes — **shipped** | no | inline (D1) | low |
 | `code` | content | yes — **shipped** | no | no | low |
 | `callout` | content | yes | no | **container** | low |
 | `definition` | content | yes | no | no | low |
@@ -31,7 +36,7 @@ Currently implemented: `heading`, `text`, `code`, `list` (4 leaf renderers,
 | `steps` | structure | yes | no | **container** | medium |
 | `choice` | exercise | yes | yes | stem only | medium |
 | `text_input` | exercise | yes | yes | stem only | medium |
-| `fill_blank` | exercise | yes | yes | no | medium‑high |
+| `fill_blank` | exercise | yes | yes | structured (D2) | medium‑high |
 | `tabs` | structure | **defer** | yes | container | high |
 | `matching` | exercise | **defer** | yes | no | high |
 | `ordering` | exercise | **defer** | yes | no | high |
@@ -50,6 +55,11 @@ Currently implemented: `heading`, `text`, `code`, `list` (4 leaf renderers,
 **Core set: 13 widgets** (8 content/media, 2 structure, 3 exercise) — down from
 the ~30 in the hypothesis. Four deferred, eleven rejected or folded.
 
+**Unchanged by the D1–D5 design lock.** The five decisions refine the *shape* of
+existing widgets; they add no widget and remove none. `inline_code`, `strong`,
+`emphasis` and `link` (D1) are **inline content within blocks**, not blocks, and
+`source_ref` / `sources` (D5) are metadata, not widgets. The count stays 13.
+
 ---
 
 ## 2. Rejected — and why
@@ -61,7 +71,7 @@ Each rejection removes renderer surface without removing teaching capability.
 | `code_example` | Pure duplicate. `code` already displays static code; a second type with identical data would be two code paths for one job. | `code` |
 | `true_false` | `choice` with two options. Sugar, not capability. | `choice` with `["True","False"]` |
 | `select` | Same data as `choice`, worse pedagogy — a dropdown *hides* the distractors, and reading the wrong answers is part of the learning. | `choice` |
-| `number_input` | Not a widget, a **validation mode**. | `text_input` with `match: "numeric"` |
+| `number_input` | Not a widget, a **validation mode**. | `text_input` with `compare: "numeric"` |
 | `multi_select` | Same data, same feedback, same validation as `multiple_choice`; only the cardinality differs. | `choice` with `multiple: true` |
 | `multiple_choice` | Renamed → **`choice`**, absorbing the four types above. Four widgets collapse into one. | `choice` |
 | `key_points` | A styled summary list. Distinct type = distinct renderer for zero new capability. | `callout` with `variant: "key-points"` |
@@ -97,18 +107,21 @@ carries real a11y cost):
   to 2–3 rather than a free integer.
 - **Nesting** — none.
 
-### `text` *(shipped)*
+### `text` *(shipped, extended by D1)*
 - **Purpose** — the default. Most of a lesson should be this.
-- **Data** — `{ type, text }`. Blank lines split paragraphs (already implemented).
-- **Rendering** — `<div class="prose"><p>…</p></div>`, `textContent` per paragraph.
-- **Open question** — inline emphasis / inline `code` / inline links. See §9 Q1.
-  This is the single biggest unresolved question in the whole design.
+- **Data** — either the shipped string form `{ type, text }` **or** the locked
+  inline form `{ type, content: [ inline… ] }`. See **D1 (§14.1)** for the
+  inline model, which is now closed.
+- **Rendering** — `<div class="prose"><p>…</p></div>`.
+  String form: blank lines split paragraphs (already implemented).
+  Inline form: **one `content` array = exactly one paragraph.**
+- **Nesting** — none at block level.
 
 ### `list` *(shipped)*
 - **Purpose** — enumerate short parallel items.
-- **Data** — `{ type, items: [string], ordered?: boolean }`.
-- **Rendering** — `<ul class="bullets">` / `<ol>`. Items are strings only; a list
-  of rich blocks is `steps`.
+- **Data** — `{ type, items: [ string | inline[] ], ordered?: boolean }`.
+- **Rendering** — `<ul class="bullets">` / `<ol>`. An item is either a plain
+  string or an inline array (D1); a list of *rich blocks* is `steps`.
 - **Nesting** — none (deliberate: nested bullet trees signal a missing heading).
 
 ### `code` *(shipped)*
@@ -231,7 +244,8 @@ exercises, and output-prediction exercises — with no widget per variety, and
 - **Data**
   ```
   { type: "choice",
-    prompt, stem?, multiple?: false,
+    prompt, stem?,
+    multiple: false,                        // REQUIRED, explicit
     options: [ { id, text, feedback? } ],
     answer: [ id, ... ],
     hint?, explanation? }
@@ -239,8 +253,9 @@ exercises, and output-prediction exercises — with no widget per variety, and
 - **Rendering** — `<fieldset>` + `<legend>` (the prompt) + native
   `<input type="radio">` (or `checkbox` when `multiple`) with real `<label>`s,
   plus a **Check** `<button type="button">`.
-- **Validation** — set equality between selected `id`s and `answer`. `multiple`
-  is derived from `answer.length > 1` unless stated, so the two cannot disagree.
+- **Validation** — set equality between selected `id`s and `answer`.
+  `multiple` is **explicit and required** — never inferred from `answer.length`.
+  Full rules, including malformed `answer`, duplicates and unknown ids: **D4 (§14.4)**.
 - **Per-option `feedback`** — the pedagogically valuable field: it explains why
   *that specific distractor* is wrong. This is what makes the exercise teach
   rather than merely grade.
@@ -255,35 +270,26 @@ exercises, and output-prediction exercises — with no widget per variety, and
     prompt, stem?,
     input?: "text" | "number",
     accept: [ string, ... ],
-    match?: "ci" | "exact" | "numeric" | "contains",
-    normalize?: { trim?: true, collapse_ws?: true },
-    tolerance?: number,          // numeric only
+    compare?: "exact" | "ci" | "numeric" | "contains",   // default "ci"
+    normalize?: { trim?: bool, collapse_ws?: bool },     // separate stage, see D3
+    tolerance?: number,                                   // numeric only
     placeholder?, hint?, explanation?, feedback? }
   ```
+- **`match` is renamed `compare`**, and normalisation is a separate `normalize`
+  object — the two stages never hide inside one another (**D3, §14.3**).
 - **`accept` is always an array** — one uniform shape for "one right answer" and
   "several acceptable phrasings", which removes a whole class of authoring error.
 - **Rendering** — `<label>` + `<input>` (+ `inputmode="numeric"` when
   `input: "number"`) + Check button. Submitting via Enter must also work.
 
-### 5.4 `fill_blank`
+### 5.4 `fill_blank` *(representation locked by D2)*
 - **Purpose** — the strongest widget for syntax and precise vocabulary: the
   learner produces the answer instead of recognising it, but within a scaffold.
-- **Data**
-  ```
-  { type: "fill_blank",
-    prompt?, language?,
-    template: "for i in ____(3):",
-    blanks: [ { id, accept: [...], match?, hint? } ],
-    explanation? }
-  ```
-- **Template** — a literal marker (`____`) splits the text; the *n*-th marker
-  binds to the *n*-th entry in `blanks`. If marker count ≠ `blanks.length`, the
-  block is **skipped** rather than rendered half-wired.
-- **Rendering** — the template split on the marker, with `<input>` elements
-  inserted between the literal text runs, all inside `<pre>` when `language` is
-  set. Every input needs an accessible name (`aria-label` such as "Blank 1 of 2").
-- **Complexity** — the highest of the three; the parsing and per-blank state are
-  what earn it "medium-high".
+- **Representation** — the `____` marker template is **withdrawn**; `_` is a
+  legal identifier character (`__init__`, `user_name`). Replaced by a structured
+  `content` array. Full schema and semantics: **D2 (§14.2)**.
+- **Complexity** — still the highest of the three, but the parsing risk is gone:
+  there is nothing to parse, only an array to walk.
 
 ### 5.5 Not implemented now
 `matching` and `ordering` — see §2.
@@ -292,20 +298,17 @@ exercises, and output-prediction exercises — with no widget per variety, and
 
 ## 6. Validation system
 
-**The smallest declarative set that covers ordinary teaching.** No rule engine,
-no expression language, no regex.
+**Superseded in detail by D3 (§14.3), which is authoritative.** Summary:
 
-| Mode | Applies to | Behaviour |
-|---|---|---|
-| `set` | `choice` | Selected id set equals `answer` set. Implicit — not author-specified. |
-| `ci` | text | Case-insensitive equality after normalisation. **Default.** |
-| `exact` | text | Byte equality after normalisation. For case-sensitive code. |
-| `numeric` | text | Parse both sides as numbers; equal within `tolerance` (default 0). Accepts `3`, `3.0`, `+3`. |
-| `contains` | text | Normalised answer contains one of the `accept` strings. For "mention the key idea". |
+Answer checking is a two-stage pipeline, and the stages are **named separately
+and never implied by one another**:
 
-Normalisation, applied before comparison, defaults to `{ trim: true,
-collapse_ws: true }` — which is what makes free-text code answers usable
-(`x  =  1` matches `x = 1`) without any language awareness.
+```
+user answer -> normalization (declared in `normalize`) -> comparison (declared in `compare`)
+```
+
+Comparison modes: `exact`, `ci`, `numeric`, `contains` (+ implicit `set` for
+`choice`). Normalisation options: `trim`, `collapse_ws`.
 
 **Deliberately excluded:** regex (ReDoS risk, and authors get it wrong),
 boolean expression trees, cross-question dependencies, partial credit.
@@ -313,8 +316,6 @@ Partial credit in particular is a scoring concept and belongs with progression,
 not here.
 
 **Every rule is declarative data.** No JSON field ever contains executable code.
-
----
 
 ## 7. Feedback system
 
@@ -377,6 +378,9 @@ from becoming an XSS vector.
   attributes, no `style` from JSON.
 - **`language` is metadata**, never used to select code to run.
 - **Table/definition values are strings**, never markup.
+- **Inline content (D1) is a closed tagged union.** An unknown inline `type` is
+  rendered as its `text` in plain form, never as markup. `inline_link.href`
+  goes through the same https-only allowlist as `image.src`.
 - **Honest limitation:** answers ship in client JSON and are trivially visible in
   devtools. Acceptable — TRACKS is a learning aid, not an exam. This must be an
   explicit product decision (§10 Q6), because it forecloses graded assessment
@@ -433,25 +437,391 @@ Suggested MTrack2-B split, if it should be smaller still:
 
 | # | Question | Options | My recommendation |
 |---|---|---|---|
-| **Q1** | **Inline markup in `text`** — how to express inline `code`, emphasis and links inside a sentence? Currently text is plain, which is a real limitation for teaching. | (a) stay plain; (b) an inline array `["Run ", {code:"ls"}, " now"]`; (c) a tiny safe Markdown subset (`` ` ``, `**`, links) | **(b)** — explicit, no parser, no injection surface. (c) means shipping a parser and re-introducing an escaping problem. **This is the most important open question.** |
-| **Q2** | Fold the 4 choice types into one `choice`? | fold / keep separate | **Fold.** One widget, one validation path. |
+| ~~Q1~~ | Inline markup in `text` | — | **CLOSED → D1 (§14.1).** Structured inline array adopted. |
+| ~~Q2~~ | Fold the 4 choice types into one `choice`? | — | **CLOSED.** Folded; `multiple` made explicit by **D4 (§14.4)**. |
 | **Q3** | Drop `video`/`audio` permanently? | drop / revisit later | **Drop now.** Re-open only with a privacy-respecting, non-iframe answer. |
-| **Q4** | Exercise `stem` instead of `code_exercise`? | stem / dedicated type | **Stem.** Composition beats a widget per question flavour. |
+| ~~Q4~~ | Exercise `stem` instead of `code_exercise`? | — | **CLOSED.** Stem retained; unaffected by D1–D5. |
 | **Q5** | Defer `tabs`, `matching`, `ordering`? | defer / include in 2-B | **Defer.** They are ~46% of the code and ~90% of the a11y risk. |
 | **Q6** | Accept that answers are visible in client JSON? | accept / obfuscate / backend | **Accept and document.** Obfuscation is theatre; a backend is out of scope. |
-| **Q7** | Add `schema_version` to lesson JSON now? | yes / no | **Yes** — one cheap field now; painful to retrofit later. |
+| **Q7** | Add `schema_version` to lesson JSON now? | yes / no | **Yes** — one cheap field now; painful to retrofit later. Still open. |
 | **Q8** | Lesson body: flat `content[]` or explicit `sections[]`? | flat / sections | **Flat**, as today. `heading` provides structure; sections add a tier for no gain. |
 | **Q9** | Should an unknown block type be visibly flagged? | silent skip / dev-visible note | **Silent in production**, plus a small offline validator script later. |
 | **Q10** | Are the 4 MTrack1 fixtures migrated in 2-B? | migrate / leave | **Leave.** They already validate; migration is content work, not schema work. |
 
 ---
 
+## 14. Locked design decisions (MTrack2-A addendum)
+
+These five points are **closed**. Where they conflict with an earlier section,
+this section wins.
+
+---
+
+### 14.1 — D1: Inline content model
+
+**Decision.** Adopt a structured inline array. No Markdown, no HTML, no marker
+syntax inside strings. Exactly **four** inline object types.
+
+**Schema.** An *inline array* is an ordered list whose items are either a plain
+string (literal text) or an inline object:
+
+```
+inline      := string | inline_object
+inline_object :=
+    { "type": "inline_code", "text": string }
+  | { "type": "strong",      "text": string }
+  | { "type": "emphasis",    "text": string }
+  | { "type": "link",        "text": string, "href": string }
+```
+
+Accepted by: `text.content`, `list.items[]`, `table` cells, `callout` titles,
+`definition.definition`, and every exercise `prompt`. **One inline array renders
+exactly one paragraph** — inline objects never nest, and there is no inline array
+inside an inline object.
+
+**Rendering.**
+
+| Item | Element |
+|---|---|
+| `string` | text node via `textContent` |
+| `inline_code` | `<code>` |
+| `strong` | `<strong>` |
+| `emphasis` | `<em>` |
+| `link` | `<a href rel="noopener noreferrer">` |
+
+**Validation.**
+- `text` is required and must be a non-empty string; otherwise the item is skipped.
+- Unknown `type` → **render `text` as a plain text node** (forward compatible,
+  never markup, never dropped silently if text exists).
+- `link` without a valid https `href` (§9 allowlist) → **degrades to plain text**,
+  keeping the sentence readable rather than dropping a word from it.
+- No item is ever passed to `innerHTML`.
+
+**Valid.**
+```json
+{
+  "type": "text",
+  "content": [
+    "Utilisez ",
+    { "type": "inline_code", "text": "ls" },
+    " pour afficher le contenu du répertoire. Voir la ",
+    { "type": "link", "text": "documentation", "href": "https://example.org/ls" },
+    "."
+  ]
+}
+```
+
+**Invalid → degraded, never fatal.**
+```json
+{
+  "type": "text",
+  "content": [
+    "Lancez ",
+    { "type": "link", "text": "ce script", "href": "javascript:alert(1)" },
+    " puis ",
+    { "type": "blink", "text": "attention" },
+    { "type": "inline_code" }
+  ]
+}
+```
+Renders: `Lancez ce script puis attention` — the `javascript:` link becomes plain
+text, the unknown `blink` becomes plain text, the `inline_code` without `text` is
+skipped. **Nothing executes and the sentence stays readable.**
+
+**Rationale.** Two representations of a paragraph now exist (`text` string and
+`content` array), which is a real cost — but the string form is already shipped
+and is the right tool for plain prose. Keeping both avoids a pointless migration,
+and the renderer branch is one `if`. A Markdown subset was rejected: it means
+shipping a parser and re-introducing the escaping problem the design exists to
+avoid.
+
+---
+
+### 14.2 — D2: `fill_blank` representation
+
+**Decision.** Withdraw the `____` marker template. Use a structured `content`
+array in which blanks are objects. Code is preserved **exactly as written**,
+because it is never parsed.
+
+**Schema.**
+```
+{ "type": "fill_blank",
+  "prompt"?:   string | inline[],
+  "language"?: string,
+  "content":   [ string | blank ],
+  "explanation"?: string | inline[] }
+
+blank := { "blank": true,
+           "id"?: string,
+           "accept": [ string, ... ],
+           "compare"?: "exact" | "ci" | "numeric" | "contains",   // default "exact"
+           "normalize"?: { trim?: bool, collapse_ws?: bool },
+           "size"?: integer,
+           "hint"?: string }
+```
+
+Strings are literal text rendered verbatim (inside `<pre>` when `language` is
+set). Each `blank` becomes one `<input>`. Order is positional — array order is
+answer order. Multiple blanks are naturally supported.
+
+**Note the default:** `compare` defaults to **`exact`** here (code is
+case-sensitive), unlike `text_input` where it defaults to `ci`.
+
+**Rendering.** `<pre class="codeblock">` when `language` is set, otherwise inline
+flow. Literal runs are text nodes; each blank is
+`<input type="text" size aria-label="Blank 1 of 2">`. A single **Check** button
+validates all blanks; each blank reports its own result.
+
+**Validation.**
+- `content` must contain at least one `blank`, otherwise the block is skipped.
+- A `blank` with a missing or empty `accept` array → block skipped (it would be
+  unanswerable).
+- `id` is optional and used only for feedback wiring; duplicates are ignored.
+
+**Valid.**
+```json
+{
+  "type": "fill_blank",
+  "language": "python",
+  "prompt": "Complétez la boucle.",
+  "content": [
+    "for i in ",
+    { "blank": true, "accept": ["range"] },
+    "(3):\n    print(user_name)"
+  ]
+}
+```
+`user_name` and a hypothetical `__init__` are preserved literally — the exact
+failure the marker template caused.
+
+**Invalid.**
+```json
+{ "type": "fill_blank",
+  "content": ["for i in range(3):"] }
+```
+No `blank` object → **skipped**. It is a `code` block, not an exercise.
+
+**Rationale.** No marker means no escaping rule, no ambiguity with `_`, and no
+templating language. The representation is the same shape as D1, so authors learn
+one pattern.
+
+---
+
+### 14.3 — D3: Validation semantics
+
+**Decision.** Normalisation and comparison are **two separate, separately
+declared stages**. `exact` means exact *on the normalised value*, and the
+normalisation applied is always visible in the JSON — never silent.
+
+**Pipeline.**
+```
+raw user answer
+      ↓  stage 1: normalization   (from `normalize`; applied to BOTH sides)
+normalised answer + normalised accept[]
+      ↓  stage 2: comparison      (from `compare`)
+boolean
+```
+
+**Stage 1 — normalization.** Explicit object, applied identically to the learner's
+answer and to every `accept` value.
+
+| Option | Default | Effect |
+|---|---|---|
+| `trim` | `true` | Strip leading/trailing whitespace |
+| `collapse_ws` | `true` | Collapse internal whitespace runs to one space |
+
+Defaults apply when `normalize` is absent. `"normalize": {}` is **not** "no
+normalisation" — write `{ "trim": false, "collapse_ws": false }` for raw bytes.
+Case is **never** handled here; casing belongs to `compare`.
+
+**Stage 2 — comparison.** Closed set of four (plus `set`, implicit for `choice`).
+
+| `compare` | Semantics | Case | Typical use |
+|---|---|---|---|
+| `exact` | normalised answer equals an `accept` value | sensitive | code, identifiers |
+| `ci` | as `exact`, Unicode-lowercased both sides | insensitive | prose, terms (**default for `text_input`**) |
+| `numeric` | both parsed as finite numbers, `abs(a-b) <= tolerance` (default `0`) | n/a | quantities |
+| `contains` | normalised answer contains an `accept` value as substring | follows `ci` if `compare` is `ci`-style; `contains` itself is case-insensitive | "mention the key idea" |
+| `set` | selected id set == answer id set | n/a | `choice` only, implicit |
+
+Success = a match against **any** entry of `accept` (`accept` is an OR-list).
+`numeric` on an unparseable answer is simply incorrect, never an error.
+
+**Explicitly excluded:** regex, expression languages, scripting, partial credit,
+cross-question dependencies, custom comparators.
+
+**Valid.**
+```json
+{ "type": "text_input",
+  "prompt": "Quelle commande liste un répertoire ?",
+  "accept": ["ls", "ls -l"],
+  "compare": "exact",
+  "normalize": { "trim": true, "collapse_ws": true } }
+```
+`"  ls   -l  "` → normalised `"ls -l"` → **correct**. `"LS"` → **incorrect**
+(`exact` is case-sensitive — and that is now unambiguous).
+
+**Invalid.**
+```json
+{ "type": "text_input", "prompt": "…", "accept": [], "compare": "regex" }
+```
+Empty `accept` → block skipped (unanswerable). `compare: "regex"` is not in the
+closed set → falls back to the default `ci`; regex is never supported.
+
+**Rationale.** The earlier wording ("`exact` … after normalisation") was exactly
+the ambiguity to remove. Separating the stages makes every check readable from
+the JSON alone and keeps the engine deterministic and tiny.
+
+---
+
+### 14.4 — D4: `choice` semantics
+
+**Decision.** `multiple` is a **required, explicit boolean**. It is never
+inferred from `answer.length`.
+
+**Schema.**
+```
+{ "type": "choice",
+  "prompt": string | inline[],
+  "stem"?: [ leaf blocks ],
+  "multiple": boolean,                       // REQUIRED
+  "options": [ { "id": string, "text": string | inline[], "feedback"?: … } ],
+  "answer": [ string, ... ],
+  "hint"?: …, "explanation"?: …, "feedback"?: { correct?, incorrect? } }
+```
+
+**Rendering.** `multiple: false` → `<input type="radio">`; `multiple: true` →
+`<input type="checkbox">`. Both inside `<fieldset>` + `<legend>`.
+When `multiple: true`, the UI states *"Select all that apply."*
+
+**Validation rules.**
+
+| Condition | Behaviour |
+|---|---|
+| `multiple` missing or not a boolean | **Block skipped.** No inference. Authoring error surfaced, not guessed. |
+| `multiple: false` and `answer.length !== 1` | **Block skipped** — contradictory. |
+| `multiple: true` and `answer.length < 1` | **Block skipped** — unanswerable. |
+| `answer` contains an id absent from `options` | **Block skipped** — ungradeable (the correct answer cannot be selected). |
+| duplicate ids **within `answer`** | De-duplicated, then rules re-applied. Harmless. |
+| duplicate ids **across `options`** | **Block skipped** — ambiguous grading target. |
+| `options.length < 2` | **Block skipped** — not a choice. |
+| Learner submits nothing | Not graded; prompt to answer first. |
+
+**Grading.** Set equality between selected ids and de-duplicated `answer`.
+For `multiple: true` this means all correct options and no incorrect ones —
+no partial credit (§6).
+
+Skipped blocks are omitted from the lesson; they never throw and never blank the
+page, consistent with MTrack1's unknown-type behaviour.
+
+**Valid.**
+```json
+{ "type": "choice",
+  "prompt": "Lesquels sont des gestionnaires de paquets ?",
+  "multiple": true,
+  "options": [
+    { "id": "a", "text": "dnf" },
+    { "id": "b", "text": "ext4", "feedback": "ext4 est un système de fichiers." },
+    { "id": "c", "text": "apt" }
+  ],
+  "answer": ["a", "c"] }
+```
+
+**Invalid.**
+```json
+{ "type": "choice",
+  "multiple": false,
+  "options": [ { "id": "a", "text": "x" }, { "id": "a", "text": "y" } ],
+  "answer": ["a", "z"] }
+```
+Three faults: duplicate option id `a`, `answer.length` 2 with `multiple: false`,
+and unknown id `z`. → **Block skipped.**
+
+**Rationale.** Inference made two fields able to disagree silently; an author
+adding a second correct answer would have flipped the control type without
+noticing. Explicit intent is checkable.
+
+---
+
+### 14.5 — D5: Lesson provenance / sources
+
+**Decision — option C, asymmetric.** Lesson-level `sources` is the canonical
+list. Blocks carry an optional lightweight **reference** (`source_ref`) — an id
+pointing into that list, **never** duplicated metadata.
+
+This is the only option that satisfies both stated requirements: cite the lesson
+without repeating metadata (A alone), *and* attribute a specific factual block
+when needed (B alone). Rejected: **A** cannot attribute a block; **B** duplicates
+title/url across blocks and has no lesson-level list; a full citation system
+(CSL/BibTeX) is far beyond need.
+
+**Schema.**
+```
+// lesson root
+"sources": [
+  { "id": string,          // referenced by blocks
+    "title": string,
+    "url"?: string,        // https allowlist (§9)
+    "publisher"?: string,
+    "accessed"?: "YYYY-MM-DD" } ]
+
+// any block, optional
+"source_ref": string | [ string, ... ]
+```
+
+**Rendering.**
+- Lesson end: a **Sources** section listing every entry, numbered in array order.
+- A block with `source_ref` gets a small superscript marker linking to the entry
+  (`<sup><a href="#src-…">`), with an accessible name such as "Source 2".
+- A `source_ref` pointing at an unknown id is **ignored**; the block still
+  renders. Provenance never breaks content.
+- A `sources` entry referenced by nobody still appears in the list (a lesson may
+  cite generally).
+
+**Validation.** `id` and `title` required; entries missing either are dropped.
+Duplicate ids: first wins. `url` must pass the https allowlist, otherwise the
+entry renders as text without a link.
+
+**Valid.**
+```json
+{
+  "id": "variables",
+  "title": "Variables",
+  "content": [
+    { "type": "text", "text": "Python names are bound, not typed.",
+      "source_ref": "pydocs" }
+  ],
+  "sources": [
+    { "id": "pydocs", "title": "The Python Language Reference",
+      "url": "https://docs.python.org/3/reference/", "accessed": "2026-09-04" }
+  ]
+}
+```
+
+**Invalid → degraded.**
+```json
+{ "content": [ { "type": "text", "text": "…", "source_ref": "nope" } ],
+  "sources": [ { "url": "https://example.org/" } ] }
+```
+The `sources` entry has no `id`/`title` → dropped. `source_ref: "nope"` resolves
+to nothing → marker omitted, **text still renders**.
+
+**Rationale.** Matches the Library's existing `sources` convention, so the two
+halves of VΞRN describe provenance the same way. Referencing by id keeps authored
+JSON small and makes a source correctable in one place.
+
+---
+
 ## 13. Scope statement
 
-Nothing in this document is implemented. MTrack1 is untouched: `/tracks/`,
+Nothing in this document is implemented, **including the D1–D5 decisions in §14**,
+which are specification only. MTrack1 is untouched: `/tracks/`,
 `/tracks/#programming`, `/tracks/#programming/variables`, lazy loading, the
 in-memory cache, the hash router, the error states and the `<base>`-aware link
 fix all remain exactly as verified. Library is untouched. No new files beyond
 this document. No dependency, no storage, no backend.
 
-**Awaiting audit of §12 before MTrack2-B.**
+**Schema status: ready to freeze.** D1–D5 (§14) close the five blocking design
+points. The remaining open items in §12 (Q3, Q5–Q10) are scope and policy
+choices, not schema shape — none of them changes a field name or a widget
+contract, so MTrack2-B can begin against this specification.
