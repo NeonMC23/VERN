@@ -1,0 +1,452 @@
+{
+  "schema_version": 1,
+  "id": "widget-laboratory",
+  "title": "TRACKS Widget Laboratory",
+  "description": "A manual validation fixture demonstrating every supported VΞRN TRACKS widget.",
+  "content": [
+    {
+      "type": "callout",
+      "variant": "warning",
+      "title": "Development validation fixture",
+      "content": [
+        {
+          "type": "text",
+          "text": "This is not a normal learning lesson. It exists to test widget rendering and interaction manually, in the real TRACKS interface. The Linux content below is deliberately short and factual so that it never distracts from what is being validated: layout, spacing, keyboard behaviour, and exercise feedback."
+        }
+      ]
+    },
+
+    { "type": "heading", "text": "1. Text and inline content" },
+    {
+      "type": "text",
+      "content": [
+        "The shell always runs inside a ",
+        { "type": "strong", "text": "working directory" },
+        ". Before running anything destructive, check where you are with ",
+        { "type": "inline_code", "text": "pwd" },
+        ", then list the contents with ",
+        { "type": "inline_code", "text": "ls" },
+        ". This habit matters ",
+        { "type": "emphasis", "text": "more than it first appears" },
+        " — most beginner accidents come from running a correct command in the wrong place. The full reference is in the ",
+        { "type": "link", "text": "GNU Coreutils manual", "href": "https://www.gnu.org/software/coreutils/manual/coreutils.html" },
+        "."
+      ]
+    },
+
+    { "type": "heading", "text": "2. Paragraph variety" },
+    { "type": "text", "text": "A terminal is a text interface to your machine." },
+    {
+      "type": "text",
+      "text": "The terminal you see on screen is an emulator: a window that draws text and forwards your keystrokes. Behind it runs a shell, which is the program that actually reads what you type, interprets it, and starts other programs on your behalf. Distinguishing the two explains why you can keep the same shell inside very different terminal applications, and why changing your shell changes how commands are parsed while the window itself stays the same."
+    },
+    {
+      "type": "text",
+      "text": "Legacy string form, first paragraph.\n\nSecond paragraph in the same block, separated by a blank line.\n\nThird paragraph, confirming MTrack1 string compatibility beside D1 content arrays."
+    },
+
+    { "type": "heading", "text": "3. Lists" },
+    {
+      "type": "list",
+      "items": [
+        "inspect the current directory",
+        ["list files with ", { "type": "inline_code", "text": "ls" }],
+        "move into a directory before editing anything"
+      ]
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "items": [
+        "open a terminal",
+        ["run ", { "type": "inline_code", "text": "pwd" }, " to confirm your location"],
+        ["run ", { "type": "inline_code", "text": "ls" }, " to see what is there"]
+      ]
+    },
+
+    { "type": "heading", "text": "4. Code block" },
+    {
+      "type": "text",
+      "text": "A standalone code block at the top level of the lesson. It must be horizontally scrollable and reachable with the keyboard when the content overflows."
+    },
+    {
+      "type": "code",
+      "language": "bash",
+      "code": "$ pwd\n/home/user/projects\n$ ls -l\ntotal 12\n-rw-r--r-- 1 user user 1240 notes.md\ndrwxr-xr-x 2 user user 4096 src\ndrwxr-xr-x 2 user user 4096 build\n$ cd src && pwd    # a deliberately long line, to verify horizontal scrolling behaviour inside the code block"
+    },
+
+    { "type": "heading", "text": "5. Callouts" },
+    {
+      "type": "callout",
+      "variant": "note",
+      "content": [
+        { "type": "text", "text": "This callout has no author title, so the renderer must supply a visible variant label. Check that the word \"Note\" appears above this sentence." }
+      ]
+    },
+    {
+      "type": "callout",
+      "variant": "tip",
+      "title": "Reading a path quickly",
+      "content": [
+        {
+          "type": "text",
+          "content": [
+            "A leading ",
+            { "type": "inline_code", "text": "/" },
+            " means the path is absolute; anything else is relative to your working directory."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "callout",
+      "variant": "warning",
+      "content": [
+        {
+          "type": "text",
+          "content": [
+            "Never run ",
+            { "type": "inline_code", "text": "rm -rf" },
+            " without reading the path twice. There is no undo and no recycle bin."
+          ]
+        },
+        { "type": "code", "code": "rm -rf ./build     # deletes ./build, permanently", "language": "bash" }
+      ]
+    },
+    {
+      "type": "callout",
+      "variant": "key-points",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "the shell always has a working directory",
+            ["confirm it with ", { "type": "inline_code", "text": "pwd" }],
+            "relative paths depend on where you are"
+          ]
+        }
+      ]
+    },
+
+    { "type": "heading", "text": "6. Definitions" },
+    {
+      "type": "definition",
+      "items": [
+        {
+          "term": "Terminal",
+          "definition": "The window that displays text output and forwards your keystrokes to a program."
+        },
+        {
+          "term": "Shell",
+          "definition": ["The program that reads and interprets your commands, such as ", { "type": "inline_code", "text": "bash" }, " or ", { "type": "inline_code", "text": "zsh" }, "."]
+        },
+        {
+          "term": ["Working directory (", { "type": "inline_code", "text": "pwd" }, ")"],
+          "definition": ["The directory a command runs in when you do not give an absolute path."]
+        }
+      ]
+    },
+
+    { "type": "heading", "text": "7. Table" },
+    {
+      "type": "table",
+      "caption": "Core navigation commands and typical usage",
+      "columns": ["Command", "Purpose", "Example", "Typical output"],
+      "rows": [
+        [
+          ["", { "type": "inline_code", "text": "pwd" }],
+          "Print the absolute path of the working directory",
+          ["", { "type": "inline_code", "text": "pwd" }],
+          ["", { "type": "inline_code", "text": "/home/user/projects" }]
+        ],
+        [
+          ["", { "type": "inline_code", "text": "ls" }],
+          "List the entries contained in a directory",
+          ["", { "type": "inline_code", "text": "ls -l /etc" }],
+          "One line per entry, with permissions and size"
+        ],
+        [
+          ["", { "type": "inline_code", "text": "cd" }],
+          "Change the working directory of the current shell",
+          ["", { "type": "inline_code", "text": "cd ../notes" }],
+          "No output when it succeeds"
+        ]
+      ]
+    },
+
+    { "type": "heading", "text": "8. Accordion" },
+    {
+      "type": "accordion",
+      "items": [
+        {
+          "title": "Why does pwd matter?",
+          "open": true,
+          "content": [
+            { "type": "text", "text": "Because most commands accept relative paths. The same command can be harmless in one directory and destructive in another, and the only difference is where the shell thinks you are." }
+          ]
+        },
+        {
+          "title": "What does ls actually show?",
+          "content": [
+            { "type": "text", "text": "By default, only non-hidden entries in the target directory. Long form adds metadata:" },
+            { "type": "code", "code": "ls -l\n# -rw-r--r-- 1 user user 1240 notes.md", "language": "bash" },
+            {
+              "type": "list",
+              "items": [
+                "permissions come first",
+                "then owner and group",
+                "then size and name"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "What happens when a directory is empty?",
+          "content": [
+            {
+              "type": "text",
+              "content": [
+                { "type": "inline_code", "text": "ls" },
+                " prints nothing at all and exits successfully. Silence means an empty directory, not an error."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    { "type": "heading", "text": "9. Steps — inspecting a directory" },
+    {
+      "type": "steps",
+      "items": [
+        {
+          "title": "Open the terminal",
+          "content": [
+            { "type": "text", "text": "Start your terminal application. The shell prints a prompt and waits." }
+          ]
+        },
+        {
+          "title": "Check the current location",
+          "content": [
+            { "type": "code", "code": "pwd", "language": "bash" },
+            { "type": "text", "text": "Read the output before typing anything else." }
+          ]
+        },
+        {
+          "title": "List the files",
+          "content": [
+            { "type": "code", "code": "ls", "language": "bash" },
+            {
+              "type": "definition",
+              "items": [
+                { "term": "Entry", "definition": "Anything listed by ls: a file, a directory, or a link." }
+              ]
+            }
+          ]
+        },
+        {
+          "content": [
+            { "type": "text", "text": "This step has no title, which is valid. Confirm the native numbering still reads 4." }
+          ]
+        }
+      ]
+    },
+
+    { "type": "heading", "text": "10. Single-answer question" },
+    {
+      "type": "choice",
+      "prompt": "Which command prints the current working directory?",
+      "multiple": false,
+      "options": [
+        { "id": "ls", "text": ["", { "type": "inline_code", "text": "ls" }], "feedback": "ls lists the contents of a directory, but it never tells you which directory you are in." },
+        { "id": "pwd", "text": ["", { "type": "inline_code", "text": "pwd" }], "feedback": "Correct — pwd stands for \"print working directory\" and outputs an absolute path." },
+        { "id": "cd", "text": ["", { "type": "inline_code", "text": "cd" }], "feedback": "cd changes the working directory rather than reporting it, and prints nothing on success." },
+        { "id": "mkdir", "text": ["", { "type": "inline_code", "text": "mkdir" }], "feedback": "mkdir creates a new directory; it does not report your location." }
+      ],
+      "answer": ["pwd"],
+      "hint": "The name is an abbreviation of three words: print working directory.",
+      "explanation": "pwd resolves and prints the absolute path of the shell's working directory. It is the safest command to run before anything that modifies files.",
+      "feedback": {
+        "correct": "That is the one to run before any destructive command.",
+        "incorrect": "Re-read what each command changes versus what it reports."
+      }
+    },
+
+    { "type": "heading", "text": "11. Multiple-answer question" },
+    {
+      "type": "choice",
+      "prompt": "Which commands report information without modifying the filesystem?",
+      "multiple": true,
+      "options": [
+        { "id": "pwd", "text": ["", { "type": "inline_code", "text": "pwd" }] },
+        { "id": "ls", "text": ["", { "type": "inline_code", "text": "ls" }] },
+        { "id": "rm", "text": ["", { "type": "inline_code", "text": "rm" }] },
+        { "id": "whoami", "text": ["", { "type": "inline_code", "text": "whoami" }] },
+        { "id": "mkdir", "text": ["", { "type": "inline_code", "text": "mkdir" }] }
+      ],
+      "answer": ["pwd", "ls", "whoami"],
+      "explanation": "pwd, ls and whoami are read-only: they inspect and print. rm deletes and mkdir creates, so both change the filesystem.",
+      "feedback": {
+        "correct": "Exactly — all three only read state.",
+        "incorrect": "Separate the commands that report from the commands that change something."
+      }
+    },
+
+    { "type": "heading", "text": "12. Text input — default comparison" },
+    {
+      "type": "text_input",
+      "prompt": "Which command lists the files in a directory?",
+      "accept": ["ls"],
+      "placeholder": "command",
+      "hint": "Two letters, short for \"list\".",
+      "explanation": "ls lists directory entries. The default comparison is case-insensitive and trims surrounding whitespace, so \"LS\" and \"  ls  \" are both accepted here.",
+      "feedback": {
+        "correct": "Accepted — the default comparison ignores case and surrounding spaces.",
+        "incorrect": "The answer is a single two-letter command."
+      }
+    },
+
+    { "type": "heading", "text": "13. Text input — exact comparison" },
+    {
+      "type": "text_input",
+      "prompt": "Type the long-listing form of the list command, with its flag.",
+      "accept": ["ls -l"],
+      "compare": "exact",
+      "placeholder": "ls -l",
+      "hint": "The flag is a single lowercase letter after a hyphen.",
+      "explanation": "Comparison is exact, so case matters: \"LS -L\" is rejected. Normalisation still runs first, so \"  ls   -l  \" is accepted — extra spacing is collapsed before the comparison.",
+      "feedback": {
+        "correct": "Correct, and note that the extra spacing form is accepted too.",
+        "incorrect": "Check the case: exact comparison is case-sensitive."
+      }
+    },
+
+    { "type": "heading", "text": "14. Text input — numeric" },
+    {
+      "type": "text_input",
+      "prompt": "A directory contains exactly three entries. How many does ls print?",
+      "input": "number",
+      "accept": ["3"],
+      "compare": "numeric",
+      "placeholder": "3",
+      "explanation": "Numeric comparison parses both sides as numbers, so \"3\" and \"3.0\" are equivalent. Text that is not a number is simply incorrect.",
+      "feedback": {
+        "correct": "Correct.",
+        "incorrect": "Enter the number of entries as a digit."
+      }
+    },
+    {
+      "type": "text_input",
+      "prompt": "A timing script reports 3.05 seconds. Enter the measured duration in seconds.",
+      "input": "number",
+      "accept": ["3"],
+      "compare": "numeric",
+      "tolerance": 0.1,
+      "placeholder": "3.0",
+      "hint": "Anything within a tenth of a second of 3 is accepted.",
+      "explanation": "With tolerance 0.1, any value from 2.9 to 3.1 is accepted. 3.5 is outside the tolerance and is rejected.",
+      "feedback": {
+        "correct": "Within tolerance.",
+        "incorrect": "The accepted range is 2.9 to 3.1."
+      }
+    },
+
+    { "type": "heading", "text": "15. Text input — contains" },
+    {
+      "type": "text_input",
+      "prompt": "In one sentence, describe how you would see what a directory holds. Your answer must mention the command name.",
+      "accept": ["ls"],
+      "compare": "contains",
+      "placeholder": "I would run ...",
+      "hint": "Name the two-letter listing command somewhere in your sentence.",
+      "explanation": "Substring comparison checks that your answer mentions the key idea. It is always case-insensitive, so \"Run LS in the folder\" also matches.",
+      "feedback": {
+        "correct": "Good — the key command was mentioned.",
+        "incorrect": "Mention the listing command by name in your sentence."
+      }
+    },
+
+    { "type": "heading", "text": "16. Fill in the blank — one blank" },
+    {
+      "type": "fill_blank",
+      "prompt": "Complete the loop so it runs three times.",
+      "language": "python",
+      "content": [
+        "for i in ",
+        { "blank": true, "accept": ["range"], "size": 8 },
+        "(3):\n    print(i)"
+      ],
+      "explanation": "range(3) produces 0, 1 and 2. The default comparison for a blank is exact, so \"Range\" is rejected."
+    },
+
+    { "type": "heading", "text": "17. Fill in the blank — several blanks" },
+    {
+      "type": "fill_blank",
+      "prompt": "Complete both blanks to iterate over the list and print each entry.",
+      "language": "python",
+      "content": [
+        "entries = [\"notes.md\", \"src\", \"build\"]\n\nfor entry in ",
+        { "blank": true, "accept": ["entries"], "size": 10 },
+        ":\n    print(",
+        { "blank": true, "accept": ["entry"], "size": 10 },
+        ")"
+      ],
+      "explanation": "The loop iterates over entries and prints entry on each pass. Each blank reports its own result, so a partially correct answer shows exactly which one is wrong."
+    },
+
+    { "type": "heading", "text": "18. Underscore preservation" },
+    {
+      "type": "text",
+      "text": "The literal code below contains underscore identifiers. They must appear exactly as written, with no blank created from them. Only the single structured blank is an input."
+    },
+    {
+      "type": "fill_blank",
+      "prompt": "Assign the constructor argument to the attribute.",
+      "language": "python",
+      "content": [
+        "class User:\n    def __init__(self, user_name):\n        self.user_name = ",
+        { "blank": true, "accept": ["user_name"], "size": 12 }
+      ],
+      "explanation": "__init__ and user_name are literal strings in the content array. D2 has no marker syntax, so underscores are never interpreted."
+    },
+
+    { "type": "heading", "text": "19. Exercise with a stem" },
+    {
+      "type": "choice",
+      "prompt": "The session above is run in a fresh terminal. What does the highlighted command report?",
+      "stem": [
+        { "type": "code", "code": "$ pwd\n/home/user/projects\n$ ls\nnotes.md  src  build", "language": "bash" },
+        { "type": "text", "text": "The stem is rendered above the prompt and uses leaf blocks only." }
+      ],
+      "multiple": false,
+      "options": [
+        { "id": "loc", "text": "The absolute path of the current working directory", "feedback": "Correct — pwd printed /home/user/projects." },
+        { "id": "files", "text": "The list of files in the directory", "feedback": "That is what the second command, ls, printed." },
+        { "id": "user", "text": "The name of the logged-in user", "feedback": "That would be whoami; pwd reports a path." }
+      ],
+      "answer": ["loc"],
+      "explanation": "pwd printed the working directory; ls then printed its three entries."
+    },
+
+    { "type": "heading", "text": "20. Recap" },
+    {
+      "type": "callout",
+      "variant": "key-points",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            ["confirm your location with ", { "type": "inline_code", "text": "pwd" }, " before anything destructive"],
+            ["inspect a directory with ", { "type": "inline_code", "text": "ls" }, ", and use ", { "type": "inline_code", "text": "ls -l" }, " for metadata"],
+            "read-only commands report, other commands change state",
+            "answers are validated in the browser: normalisation runs first, then comparison"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "End of the laboratory. Normal lesson content resumes here, which confirms the transition out of exercise blocks renders correctly."
+    }
+  ]
+}

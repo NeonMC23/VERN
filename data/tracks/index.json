@@ -44,6 +44,21 @@
           "file": "programming/variables.json"
         }
       ]
+    },
+    {
+      "id": "widget-lab",
+      "name": "Widget Laboratory (dev)",
+      "description": "Development fixture for manual validation of every TRACKS widget. Not a learning track.",
+      "order": 99,
+      "lessons": [
+        {
+          "id": "widget-laboratory",
+          "title": "TRACKS Widget Laboratory",
+          "description": "Manual validation of every supported widget.",
+          "order": 1,
+          "file": "lab/widget-laboratory.json"
+        }
+      ]
     }
   ]
 }

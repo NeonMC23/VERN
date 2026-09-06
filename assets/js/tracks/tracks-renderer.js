@@ -140,6 +140,87 @@ window.VernTracksRenderer = (function () {
     return true;
   }
 
+  /* ------------------------------------------------- D3: validation engine
+   * Two stages, deliberately separate and separately declared:
+   *
+   *   raw answer -> normalization (`normalize`) -> comparison (`compare`) -> bool
+   *
+   * Everything is declarative data. Nothing from the JSON is ever executed:
+   * no regex, no expressions, no custom comparators.
+   */
+
+  // Defaults apply when `normalize` is absent OR partially specified.
+  // `normalize: {}` therefore still trims and collapses — raw bytes require
+  // { trim: false, collapse_ws: false } explicitly (D3).
+  function normalizeValue(value, opts) {
+    var out = String(value);
+    var o = (opts && typeof opts === "object") ? opts : {};
+    var trim = o.trim === false ? false : true;
+    var collapse = o.collapse_ws === false ? false : true;
+    if (collapse) out = out.replace(/\s+/g, " ");
+    if (trim) out = out.trim();
+    return out;
+  }
+
+  var COMPARE_MODES = ["exact", "ci", "numeric", "contains"];
+
+  function compareMode(value, fallback) {
+    return COMPARE_MODES.indexOf(value) === -1 ? fallback : value;
+  }
+
+  function toNumber(str) {
+    var t = String(str).trim();
+    if (t === "") return null;
+    var n = Number(t);
+    return isFinite(n) ? n : null;
+  }
+
+  // Returns true when `answer` matches ANY entry of `accepts` (OR-list).
+  function checkAnswer(answer, accepts, mode, normOpts, tolerance) {
+    var list = Array.isArray(accepts) ? accepts.filter(isUsableAccept) : [];
+    if (!list.length) return false;
+
+    var a = normalizeValue(answer, normOpts);
+
+    if (mode === "numeric") {
+      var an = toNumber(a);
+      if (an === null) return false;                       // invalid -> incorrect
+      var tol = (typeof tolerance === "number" && isFinite(tolerance)) ? Math.abs(tolerance) : 0;
+      return list.some(function (acc) {
+        var bn = toNumber(normalizeValue(acc, normOpts));
+        return bn !== null && Math.abs(an - bn) <= tol;
+      });
+    }
+
+    if (mode === "contains") {
+      // Always case-insensitive; there is no case-sensitive substring mode.
+      var hay = a.toLowerCase();
+      return list.some(function (acc) {
+        return hay.indexOf(normalizeValue(acc, normOpts).toLowerCase()) !== -1;
+      });
+    }
+
+    if (mode === "ci") {
+      var lc = a.toLowerCase();
+      return list.some(function (acc) {
+        return normalizeValue(acc, normOpts).toLowerCase() === lc;
+      });
+    }
+
+    // exact
+    return list.some(function (acc) { return normalizeValue(acc, normOpts) === a; });
+  }
+
+  // An accept value is usable when it is a string or a finite number.
+  function isUsableAccept(v) {
+    if (typeof v === "number") return isFinite(v);
+    return typeof v === "string" && v !== "";
+  }
+
+  function usableAccepts(accepts) {
+    return Array.isArray(accepts) ? accepts.filter(isUsableAccept) : [];
+  }
+
   /* ------------------------------------------------------------ transient */
 
   function loading(mount, message) {
@@ -412,6 +493,124 @@ window.VernTracksRenderer = (function () {
     return n;
   }
 
+  /* --------------------------------------------------- exercise scaffolding
+   * Shared by choice / text_input / fill_blank. Builds the common shell:
+   * optional stem (leaf blocks only), prompt, body, actions row, hint, and a
+   * polite live region for the verdict.
+   *
+   * All state is transient DOM state. Nothing is recorded, counted or stored.
+   */
+
+  var exerciseSeq = 0;   // renderer-controlled DOM ids; authored ids are never used
+
+  function nextExerciseId() { exerciseSeq += 1; return "ex-" + exerciseSeq; }
+
+  function buildExercise(block, opts) {
+    var wrap = el("section", { className: "exercise" });
+
+    // Stem: Tier 2 leaf blocks only, via the existing B1 dispatch.
+    if (Array.isArray(block.stem)) {
+      var stem = el("div", { className: "exercise__stem" });
+      if (appendLeaves(stem, block.stem)) wrap.appendChild(stem);
+    }
+
+    // Prompt (string or D1 inline). For choice this becomes the <legend>.
+    var promptNode = null;
+    if (hasInline(block.prompt)) {
+      promptNode = el(opts.promptTag || "p", { className: "exercise__prompt" });
+      appendInline(promptNode, block.prompt);
+    }
+
+    var body = el("div", { className: "exercise__body" });
+    var actions = el("p", { className: "exercise__actions" });
+    var result = el("div", { className: "exercise__result" });
+    // Verdict is announced politely; never role="alert".
+    result.setAttribute("aria-live", "polite");
+
+    var check = el("button", {
+      className: "btn btn--ghost exercise__check",
+      text: "Check",
+      attrs: { type: "button" }
+    });
+    actions.appendChild(check);
+
+    // Hint: on demand only, never revealed automatically.
+    if (hasInline(block.hint)) {
+      var hintBox = el("p", { className: "exercise__hint" });
+      hintBox.setAttribute("hidden", "");
+      appendInline(hintBox, block.hint);
+      var hintBtn = el("button", {
+        className: "btn btn--ghost exercise__hint-btn",
+        text: "Show hint",
+        attrs: { type: "button", "aria-expanded": "false" }
+      });
+      hintBtn.addEventListener("click", function () {
+        var shown = !hintBox.hasAttribute("hidden");
+        if (shown) { hintBox.setAttribute("hidden", ""); }
+        else { hintBox.removeAttribute("hidden"); }
+        hintBtn.setAttribute("aria-expanded", shown ? "false" : "true");
+        hintBtn.textContent = shown ? "Show hint" : "Hide hint";
+      });
+      actions.appendChild(hintBtn);
+      wrap.__hint = hintBox;
+    }
+
+    return {
+      wrap: wrap, promptNode: promptNode, body: body,
+      actions: actions, result: result, check: check
+    };
+  }
+
+  // Renders the verdict + optional specific/generic feedback + explanation.
+  // `specific` wins over the generic verdict text when the author supplied it.
+  function showResult(result, ok, block, specific) {
+    clear(result);
+    result.className = "exercise__result " + (ok ? "is-correct" : "is-incorrect");
+
+    // Text verdict — never colour alone. A symbol plus a word.
+    var verdict = el("p", { className: "exercise__verdict" });
+    verdict.appendChild(el("span", {
+      className: "exercise__mark",
+      text: ok ? "\u2713" : "\u2715",
+      attrs: { "aria-hidden": "true" }
+    }));
+    verdict.appendChild(document.createTextNode(ok ? "Correct." : "Incorrect."));
+    result.appendChild(verdict);
+
+    var added = false;
+    if (hasInline(specific)) {
+      var sp = el("p", { className: "exercise__feedback" });
+      appendInline(sp, specific);
+      result.appendChild(sp);
+      added = true;
+    }
+
+    // Generic feedback still shows when no per-option feedback applied.
+    var generic = block.feedback && typeof block.feedback === "object"
+      ? (ok ? block.feedback.correct : block.feedback.incorrect)
+      : null;
+    if (!added && hasInline(generic)) {
+      var gp = el("p", { className: "exercise__feedback" });
+      appendInline(gp, generic);
+      result.appendChild(gp);
+    }
+
+    // Explanation is teaching content: shown on BOTH outcomes.
+    if (hasInline(block.explanation)) {
+      var ex = el("div", { className: "exercise__explanation" });
+      var ep = el("p");
+      appendInline(ep, block.explanation);
+      ex.appendChild(ep);
+      result.appendChild(ex);
+    }
+  }
+
+  function showNotice(result, message) {
+    clear(result);
+    result.className = "exercise__result is-notice";
+    result.appendChild(el("p", { className: "exercise__verdict", text: message }));
+  }
+
   /* --------------------------------------------------------- containers */
 
   var CALLOUT_VARIANTS = {
@@ -480,9 +679,232 @@ window.VernTracksRenderer = (function () {
     }
   };
 
+  /* ---------------------------------------------------------- D4: choice */
+
+  function choiceWidget(b) {
+    // `multiple` is REQUIRED and explicit; never inferred from answer.length.
+    if (typeof b.multiple !== "boolean") return null;
+
+    var options = Array.isArray(b.options) ? b.options.filter(function (o) {
+      return o && typeof o === "object" && isStr(o.id) && hasInline(o.text);
+    }) : [];
+    if (options.length < 2) return null;
+
+    // Duplicate option ids are an ambiguous grading target -> skip.
+    var ids = options.map(function (o) { return o.id; });
+    if (new Set(ids).size !== ids.length) return null;
+
+    // Duplicate ids WITHIN answer are harmless: de-duplicate, then re-check.
+    var answer = Array.isArray(b.answer) ? b.answer.filter(isStr) : [];
+    answer = Array.from(new Set(answer));
+    if (!answer.length) return null;
+    if (!b.multiple && answer.length !== 1) return null;
+    if (answer.some(function (id) { return ids.indexOf(id) === -1; })) return null;
+
+    var ex = buildExercise(b, { promptTag: "legend" });
+    var name = nextExerciseId();
+    var fs = el("fieldset", { className: "choice" });
+    // <fieldset>/<legend> group natively: no redundant radiogroup ARIA.
+    fs.appendChild(ex.promptNode || el("legend", { className: "exercise__prompt", text: "Choose:" }));
+
+    if (b.multiple) {
+      fs.appendChild(el("p", { className: "choice__note", text: "Select all that apply." }));
+    }
+
+    var inputs = [];
+    options.forEach(function (o, i) {
+      var inputId = name + "-o" + i;
+      var input = el("input", {
+        attrs: {
+          type: b.multiple ? "checkbox" : "radio",
+          name: name,
+          id: inputId,
+          value: o.id
+        }
+      });
+      var label = el("label", { className: "choice__option", attrs: { for: inputId } });
+      var span = el("span", { className: "choice__text" });
+      appendInline(span, o.text);
+      var row = el("div", { className: "choice__row", children: [input, label] });
+      label.appendChild(span);
+      fs.appendChild(row);
+      inputs.push({ input: input, opt: o });
+    });
+
+    ex.body.appendChild(fs);
+
+    ex.check.addEventListener("click", function () {
+      var selected = inputs.filter(function (x) { return x.input.checked; });
+      if (!selected.length) {
+        showNotice(ex.result, "Select an answer first.");
+        return;
+      }
+      var chosen = selected.map(function (x) { return x.opt.id; });
+      var ok = chosen.length === answer.length &&
+               chosen.every(function (id) { return answer.indexOf(id) !== -1; });
+
+      // Per-option feedback has priority; only meaningful for a single pick.
+      var specific = null;
+      if (selected.length === 1 && hasInline(selected[0].opt.feedback)) {
+        specific = selected[0].opt.feedback;
+      }
+      showResult(ex.result, ok, b, specific);
+    });
+
+    ex.wrap.appendChild(ex.body);
+    ex.wrap.appendChild(ex.actions);
+    if (ex.wrap.__hint) ex.wrap.appendChild(ex.wrap.__hint);
+    ex.wrap.appendChild(ex.result);
+    return ex.wrap;
+  }
+
+  /* ------------------------------------------------------ text_input */
+
+  function textInputWidget(b) {
+    var accepts = usableAccepts(b.accept);
+    if (!accepts.length) return null;                     // unanswerable -> skip
+
+    var mode = compareMode(b.compare, "ci");              // widget default: ci
+    var ex = buildExercise(b, {});
+    var id = nextExerciseId();
+
+    var input = el("input", {
+      className: "exercise__input",
+      attrs: { type: "text", id: id }
+    });
+    if (b.input === "number") input.setAttribute("inputmode", "numeric");
+    if (isStr(b.placeholder)) input.setAttribute("placeholder", b.placeholder);
+
+    // Every input needs a real label.
+    var label;
+    if (ex.promptNode) {
+      label = el("label", { className: "exercise__prompt", attrs: { "for": id } });
+      while (ex.promptNode.firstChild) label.appendChild(ex.promptNode.firstChild);
+      ex.promptNode = label;
+    } else {
+      label = el("label", { className: "exercise__prompt", text: "Your answer", attrs: { "for": id } });
+      ex.promptNode = label;
+    }
+
+    var submit = function () {
+      if (!input.value.trim()) { showNotice(ex.result, "Enter an answer first."); return; }
+      var ok = checkAnswer(input.value, accepts, mode, b.normalize, b.tolerance);
+      showResult(ex.result, ok, b, null);
+    };
+    ex.check.addEventListener("click", submit);
+    // Enter submits; no form element, so no reload or navigation is possible.
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); submit(); }
+    });
+
+    ex.body.appendChild(ex.promptNode);
+    ex.body.appendChild(input);
+    ex.wrap.appendChild(ex.body);
+    ex.wrap.appendChild(ex.actions);
+    if (ex.wrap.__hint) ex.wrap.appendChild(ex.wrap.__hint);
+    ex.wrap.appendChild(ex.result);
+    return ex.wrap;
+  }
+
+  /* ------------------------------------------------- D2: fill_blank
+   * The content array is walked directly. Strings stay literal, so
+   * `__init__` and `user_name` are preserved exactly. Nothing is parsed.
+   */
+
+  function isBlank(item) {
+    return item && typeof item === "object" && item.blank === true;
+  }
+
+  function fillBlankWidget(b) {
+    var content = Array.isArray(b.content) ? b.content : [];
+    var blanks = content.filter(isBlank);
+    if (!blanks.length) return null;                        // no blank -> not an exercise
+    // Every blank must be answerable, otherwise skip the whole block.
+    if (blanks.some(function (bl) { return !usableAccepts(bl.accept).length; })) return null;
+
+    var ex = buildExercise(b, {});
+    var id = nextExerciseId();
+    var total = blanks.length;
+
+    var host = isStr(b.language)
+      ? el("pre", { className: "codeblock fill-blank__pre" })
+      : el("p", { className: "fill-blank__flow" });
+    if (isStr(b.language)) host.setAttribute("data-language", b.language);
+
+    var fields = [];
+    var index = 0;
+    content.forEach(function (item) {
+      if (typeof item === "string") {
+        if (item !== "") host.appendChild(document.createTextNode(item));
+        return;
+      }
+      if (!isBlank(item)) return;
+      index += 1;
+      var input = el("input", {
+        className: "fill-blank__input",
+        // Renderer-controlled DOM id; authored `id` is never used as a DOM id.
+        attrs: {
+          type: "text",
+          id: id + "-b" + index,
+          "aria-label": "Blank " + index + " of " + total
+        }
+      });
+      var size = parseInt(item.size, 10);
+      if (isFinite(size) && size > 0) input.setAttribute("size", String(size));
+      host.appendChild(input);
+      var status = el("span", { className: "fill-blank__status" });
+      status.setAttribute("aria-live", "polite");
+      host.appendChild(status);
+      fields.push({ input: input, spec: item, status: status, n: index });
+    });
+
+    ex.body.appendChild(host);
+    if (ex.promptNode) ex.body.insertBefore(ex.promptNode, host);
+
+    // One Check validates all blanks; each blank reports its own result.
+    var submit = function () {
+      var allOk = true, answered = 0;
+      fields.forEach(function (f) {
+        var mode = compareMode(f.spec.compare, "exact");   // fill_blank default: exact
+        if (f.input.value.trim()) answered += 1;
+        var ok = checkAnswer(f.input.value, f.spec.accept, mode, f.spec.normalize, f.spec.tolerance);
+        if (!ok) allOk = false;
+        f.input.className = "fill-blank__input " + (ok ? "is-correct" : "is-incorrect");
+        clear(f.status);
+        // Text, not colour: each blank states its own verdict.
+        f.status.appendChild(el("span", {
+          className: "fill-blank__badge",
+          text: ok ? "\u2713 correct" : "\u2715 incorrect"
+        }));
+      });
+      if (!answered) { showNotice(ex.result, "Fill in the blanks first."); return; }
+      showResult(ex.result, allOk, b, null);
+    };
+    ex.check.addEventListener("click", submit);
+    fields.forEach(function (f) {
+      f.input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") { e.preventDefault(); submit(); }
+      });
+    });
+
+    ex.wrap.appendChild(ex.body);
+    ex.wrap.appendChild(ex.actions);
+    if (ex.wrap.__hint) ex.wrap.appendChild(ex.wrap.__hint);
+    ex.wrap.appendChild(ex.result);
+    return ex.wrap;
+  }
+
+  // Exercises are Tier 0 only: never reachable from a container or a stem.
+  var EXERCISES = {
+    choice: choiceWidget,
+    text_input: textInputWidget,
+    fill_blank: fillBlankWidget
+  };
+
   // Tier 0 dispatch: leaf blocks and containers. Unknown types are skipped.
   function renderBlock(block) {
     if (!block || typeof block !== "object") return null;
+    if (EXERCISES[block.type]) return EXERCISES[block.type](block);
     if (CONTAINERS[block.type]) return CONTAINERS[block.type](block);
     var fn = BLOCKS[block.type];
     return fn ? fn(block) : null;

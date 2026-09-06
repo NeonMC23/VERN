@@ -1211,6 +1211,122 @@ a.ref:focus-visible .marker { opacity: 1; transform: translateX(0); }
   background: var(--bg-sunken);
 }
 
+/* ---------------------------------------------------------------------------
+   Tracks — MTrack2-B2 exercises. Existing tokens only.
+   Correct / incorrect / unanswered are always carried by TEXT (a mark plus a
+   word), never by colour alone.
+   --------------------------------------------------------------------------- */
+
+.exercise {
+  margin: var(--sp-5) 0;
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.exercise__stem { margin-bottom: var(--sp-3); }
+.exercise__stem > *:first-child { margin-top: 0; }
+.exercise__prompt {
+  display: block;
+  margin: 0 0 var(--sp-3);
+  font-weight: 600;
+  color: var(--text);
+}
+.exercise__body { margin-bottom: var(--sp-3); }
+.exercise__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin: 0 0 var(--sp-2);
+}
+
+/* choice */
+.choice { border: 0; padding: 0; margin: 0; }
+.choice__note {
+  margin: 0 0 var(--sp-2);
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+.choice__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  padding: var(--sp-2) 0;
+}
+.choice__row input { margin-top: .25rem; flex: none; }
+.choice__option { cursor: pointer; color: var(--text); }
+.choice__row input:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* text_input */
+.exercise__input,
+.fill-blank__input {
+  font-family: var(--font-mono);
+  font-size: .92rem;
+  padding: var(--sp-2);
+  color: var(--text);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+}
+.exercise__input { width: 100%; max-width: 24rem; }
+.exercise__input:focus-visible,
+.fill-blank__input:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+
+/* fill_blank */
+.fill-blank__pre { white-space: pre-wrap; }
+.fill-blank__flow { line-height: 2.2; }
+.fill-blank__input { display: inline-block; width: 8rem; padding: .1rem .35rem; }
+.fill-blank__input.is-correct { border-color: var(--t-green); }
+.fill-blank__input.is-incorrect { border-color: var(--t-orange); }
+.fill-blank__badge {
+  margin-left: .4rem;
+  font-family: var(--font-sans);
+  font-size: .75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* hint / result */
+.exercise__hint {
+  margin: 0 0 var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 2px solid var(--t-slate);
+  background: var(--bg-sunken);
+  color: var(--text-muted);
+  font-size: .9rem;
+}
+.exercise__result:empty { display: none; }
+.exercise__result {
+  margin-top: var(--sp-2);
+  padding: var(--sp-3);
+  border-radius: var(--radius-xs);
+  background: var(--bg-sunken);
+  border-left: 2px solid var(--border-strong);
+}
+.exercise__result.is-correct { border-left-color: var(--t-green); }
+.exercise__result.is-incorrect { border-left-color: var(--t-orange); }
+.exercise__result.is-notice { border-left-color: var(--t-slate); }
+.exercise__verdict { margin: 0; font-weight: 600; color: var(--text); }
+.exercise__mark { margin-right: .4rem; }
+.exercise__feedback,
+.exercise__explanation p {
+  margin: var(--sp-2) 0 0;
+  color: var(--text-muted);
+  font-size: .92rem;
+}
+.exercise__explanation {
+  margin-top: var(--sp-2);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 40rem) {
+  .exercise { padding: var(--sp-3); }
+  .exercise__input { max-width: 100%; }
+  .fill-blank__input { width: 6rem; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a, .card, .ref, .btn, .icon-btn, .site-nav__list a, .footer-col a, .marker {
     transition: color .14s ease, background-color .14s ease,
