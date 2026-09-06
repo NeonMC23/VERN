@@ -1069,6 +1069,148 @@ a.ref:focus-visible .marker { opacity: 1; transform: translateX(0); }
 .error a { color: var(--accent); }
 
 /* motion */
+/* ---------------------------------------------------------------------------
+   Tracks — MTrack2-B1 content & structure widgets.
+   Existing tokens only. No gradients, no new palette, no animation.
+   --------------------------------------------------------------------------- */
+
+/* callout — variant is carried by a visible text label, never colour alone. */
+.callout {
+  margin: var(--sp-4) 0;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--t-slate);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.callout__title {
+  margin: 0 0 var(--sp-2);
+  font-weight: 600;
+  font-size: .9rem;
+  letter-spacing: .01em;
+  color: var(--text);
+}
+.callout__body > *:first-child { margin-top: 0; }
+.callout__body > *:last-child { margin-bottom: 0; }
+.callout--note      { border-left-color: var(--t-slate); }
+.callout--tip       { border-left-color: var(--t-green); }
+.callout--warning   { border-left-color: var(--t-amber); }
+.callout--key-points{ border-left-color: var(--accent); }
+
+/* definition — native <dl>. */
+.deflist { margin: var(--sp-4) 0; }
+.deflist dt {
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .9rem;
+}
+.deflist dd {
+  margin: var(--sp-1) 0 var(--sp-3);
+  padding-left: var(--sp-3);
+  border-left: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.deflist dd:last-child { margin-bottom: 0; }
+
+/* table — horizontally scrollable, never collapsed into cards. */
+.table-wrap {
+  margin: var(--sp-4) 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.table-wrap:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .92rem;
+}
+.data-table caption {
+  padding: var(--sp-2) var(--sp-3);
+  text-align: left;
+  color: var(--text-muted);
+  font-size: .85rem;
+  border-bottom: 1px solid var(--border);
+}
+.data-table th,
+.data-table td {
+  padding: var(--sp-2) var(--sp-3);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.data-table th {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--bg-sunken);
+}
+.data-table tbody tr:last-child td { border-bottom: 0; }
+.data-table code { font-size: .85em; }
+
+/* image — secondary support, deliberately plain. */
+.figure { margin: var(--sp-4) 0; }
+.figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-sunken);
+}
+.figure figcaption {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+.figure__credit { display: block; color: var(--text-faint); font-size: .8rem; }
+
+/* accordion — native <details>/<summary>, no animation. */
+.accordion { margin: var(--sp-4) 0; }
+.accordion details {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  margin-bottom: var(--sp-2);
+}
+.accordion details:last-child { margin-bottom: 0; }
+.accordion summary {
+  padding: var(--sp-3) var(--sp-4);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--text);
+  list-style-position: inside;
+}
+.accordion summary:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+.accordion summary:hover { background: var(--surface-hover); }
+.accordion__body { padding: 0 var(--sp-4) var(--sp-3); }
+.accordion__body > *:first-child { margin-top: 0; }
+.accordion__body > *:last-child { margin-bottom: 0; }
+
+/* steps — numbering comes from the native <ol>. */
+.steps {
+  margin: var(--sp-4) 0;
+  padding-left: var(--sp-5);
+}
+.steps__item { margin-bottom: var(--sp-4); padding-left: var(--sp-2); }
+.steps__item::marker { color: var(--accent); font-weight: 600; }
+.steps__item:last-child { margin-bottom: 0; }
+.steps__title { margin: 0 0 var(--sp-2); font-weight: 600; color: var(--text); }
+.steps__body > *:first-child { margin-top: 0; }
+.steps__body > *:last-child { margin-bottom: 0; }
+
+/* Inline (D1) inside lesson prose. */
+.lesson :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: .88em;
+  padding: .1em .35em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--bg-sunken);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a, .card, .ref, .btn, .icon-btn, .site-nav__list a, .footer-col a, .marker {
     transition: color .14s ease, background-color .14s ease,
