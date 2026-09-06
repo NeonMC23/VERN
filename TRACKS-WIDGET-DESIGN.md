@@ -392,9 +392,11 @@ from becoming an XSS vector.
 - **No iframe widget**, no arbitrary HTML, no `<script>`, no inline event
   attributes, no `style` from JSON.
 - **`language` is metadata**, never used to select code to run.
-- **Table/definition values are strings**, never markup.
+- **Table/definition values may be strings or D1 inline arrays**, never
+  arbitrary markup. An inline array is a closed tagged union rendered through
+  `createElement`/`textContent`, so it carries no markup interpretation.
 - **Inline content (D1) is a closed tagged union.** An unknown inline `type` is
-  rendered as its `text` in plain form, never as markup. `inline_link.href`
+  rendered as its `text` in plain form, never as markup. `link.href`
   goes through the same https-only allowlist as `image.src`.
 - **Honest limitation:** answers ship in client JSON and are trivially visible in
   devtools. Acceptable — TRACKS is a learning aid, not an exam. This must be an
