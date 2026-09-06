@@ -11,6 +11,26 @@
 window.VernTracksRenderer = (function () {
   "use strict";
 
+  /* ------------------------------------------------------------ hash hrefs
+   * A bare "#id" href is resolved by the browser against <base href> — which
+   * the site sets to the ROOT (e.g. /VERN/) — not against the current page.
+   * On /VERN/tracks/ that turned "#programming" into /VERN/#programming.
+   * Prefixing with the Tracks page URL keeps every link on /tracks/ and works
+   * unchanged at a domain root and under a project subpath.
+   */
+  function siteBase() {
+    var b = document.querySelector("base");
+    if (b) return new URL(b.getAttribute("href"), location.href).pathname;
+    return location.pathname.replace(/[^/]*$/, "");
+  }
+
+  var TRACKS_URL = siteBase() + "tracks/";
+
+  // hash: "" -> the Tracks view, "programming", or "programming/variables".
+  function trackHref(hash) {
+    return TRACKS_URL + "#" + hash;
+  }
+
   function el(tag, opts) {
     var n = document.createElement(tag);
     opts = opts || {};
@@ -32,9 +52,10 @@ window.VernTracksRenderer = (function () {
     return el("h1", { className: "page-title", text: text, attrs: { tabindex: "-1" } });
   }
 
-  function backLink(href, label) {
+  // `hash` is a bare route value ("" | "trackId" | "trackId/lessonId").
+  function backLink(hash, label) {
     return el("p", {
-      children: [el("a", { className: "tracks-back", attrs: { href: href }, text: "\u2190 " + label })]
+      children: [el("a", { className: "tracks-back", attrs: { href: trackHref(hash) }, text: "\u2190 " + label })]
     });
   }
 
@@ -64,7 +85,7 @@ window.VernTracksRenderer = (function () {
       b.addEventListener("click", a.onClick);
       row.appendChild(b);
     });
-    row.appendChild(el("a", { className: "tracks-back", attrs: { href: "#" }, text: "\u2190 Back to Tracks" }));
+    row.appendChild(el("a", { className: "tracks-back", attrs: { href: trackHref("") }, text: "\u2190 Back to Tracks" }));
     box.appendChild(row);
 
     mount.appendChild(el("div", { className: "wrap page stack", children: [box] }));
@@ -87,7 +108,7 @@ window.VernTracksRenderer = (function () {
 
     var list = el("ul", { className: "cards" });
     tracks.forEach(function (t) {
-      var a = el("a", { className: "card card--link", attrs: { href: "#" + t.id } });
+      var a = el("a", { className: "card card--link", attrs: { href: trackHref(t.id) } });
       a.appendChild(el("h2", {
         className: "card__title",
         children: [
@@ -120,7 +141,7 @@ window.VernTracksRenderer = (function () {
 
     var head = el("div", {
       children: [
-        backLink("#", "Back to Tracks"),
+        backLink("", "Back to Tracks"),
         el("p", { className: "eyebrow", text: "Track" }),
         pageTitle(track.name),
         isStr(track.description) ? el("p", { className: "lede", text: track.description }) : null
@@ -135,7 +156,7 @@ window.VernTracksRenderer = (function () {
       track.lessons.forEach(function (l, i) {
         var a = el("a", {
           className: "lesson-item",
-          attrs: { href: "#" + track.id + "/" + l.id }
+          attrs: { href: trackHref(track.id + "/" + l.id) }
         });
         a.appendChild(el("span", { className: "lesson-item__index", text: String(i + 1), attrs: { "aria-hidden": "true" } }));
         var textCol = el("span", { className: "lesson-item__body" });
@@ -206,7 +227,7 @@ window.VernTracksRenderer = (function () {
 
     var head = el("div", {
       children: [
-        backLink("#" + track.id, "Back to " + track.name),
+        backLink(track.id, "Back to " + track.name),
         el("p", { className: "eyebrow", text: track.name }),
         pageTitle(title),
         isStr(desc) ? el("p", { className: "lede", text: desc }) : null
@@ -224,7 +245,7 @@ window.VernTracksRenderer = (function () {
     }
 
     var nav = el("p", {
-      children: [el("a", { className: "tracks-back", attrs: { href: "#" + track.id }, text: "\u2190 Back to " + track.name })]
+      children: [el("a", { className: "tracks-back", attrs: { href: trackHref(track.id) }, text: "\u2190 Back to " + track.name })]
     });
 
     mount.appendChild(el("div", { className: "wrap page stack", children: [head, article, nav] }));
