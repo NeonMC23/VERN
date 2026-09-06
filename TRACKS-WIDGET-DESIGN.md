@@ -1,13 +1,21 @@
 # MTrack2-A — Lesson Widget Inventory & Design
 
-**Status: design proposal. Nothing here is implemented or frozen.**
-This document defines the *pedagogical vocabulary* of VΞRN TRACKS so the lesson
-schema can be frozen in MTrack2-B with confidence.
+> ## **MTrack2-A — DESIGN FROZEN / READY FOR MTrack2-B**
+>
+> The lesson schema defined here is **frozen**. D1–D6 (§13) are authoritative
+> and binding on the MTrack2-B implementation. Every question in the register
+> (§12) is resolved.
+>
+> **Frozen means specified, not built.** No widget described here is implemented
+> yet; MTrack2-B writes the code *against* this document. Changing a frozen
+> decision requires an explicit new milestone, not an edit in passing.
 
-**Revision 2** — extended with §14, the locked decisions D1–D5
+This document defines the *pedagogical vocabulary* of VΞRN TRACKS.
+
+**Revision 3** — design frozen. §13 holds the binding decisions **D1–D6**
 (inline content, fill_blank representation, validation semantics, choice
-semantics, provenance). §14 is authoritative where it conflicts with an
-earlier section.
+semantics, provenance, schema_version). §13 is authoritative where it conflicts
+with an earlier section.
 
 Baseline (MTrack1, shipped and verified): the renderer dispatches on
 `block.type` only, and **unknown types are skipped rather than throwing**
@@ -55,7 +63,7 @@ Currently implemented: `heading`, `text`, `code`, `list` (4 leaf renderers,
 **Core set: 13 widgets** (8 content/media, 2 structure, 3 exercise) — down from
 the ~30 in the hypothesis. Four deferred, eleven rejected or folded.
 
-**Unchanged by the D1–D5 design lock.** The five decisions refine the *shape* of
+**Unchanged by the D1–D6 design lock.** The six decisions refine the *shape* of
 existing widgets; they add no widget and remove none. `inline_code`, `strong`,
 `emphasis` and `link` (D1) are **inline content within blocks**, not blocks, and
 `source_ref` / `sources` (D5) are metadata, not widgets. The count stays 13.
@@ -110,7 +118,7 @@ carries real a11y cost):
 ### `text` *(shipped, extended by D1)*
 - **Purpose** — the default. Most of a lesson should be this.
 - **Data** — either the shipped string form `{ type, text }` **or** the locked
-  inline form `{ type, content: [ inline… ] }`. See **D1 (§14.1)** for the
+  inline form `{ type, content: [ inline… ] }`. See **D1 (§13.1)** for the
   inline model, which is now closed.
 - **Rendering** — `<div class="prose"><p>…</p></div>`.
   String form: blank lines split paragraphs (already implemented).
@@ -138,7 +146,8 @@ carries real a11y cost):
   common mistake, a recap. The pedagogical justification over a plain paragraph
   is *visual triage* — a learner scanning a lesson should be able to spot
   "this is the thing that will bite you" without reading every word.
-- **Data** — `{ type, variant, title?, content: [leaf blocks] }`
+- **Data** — `{ type, variant, title?: string | inline[], content: [leaf blocks] }`
+  (`title` accepts an inline array per D1 §13.1.)
 - **`variant`** — closed set: `note` | `tip` | `warning` | `key-points`.
   Unknown variants fall back to `note` (never fail).
 - **Rendering** — `<aside class="callout callout--{variant}">`, optional
@@ -152,21 +161,27 @@ carries real a11y cost):
 - **Purpose** — introduce vocabulary. Teaching a technical subject is largely
   teaching its words; a dedicated type makes terms consistently styled and, later,
   mechanically extractable into a glossary.
-- **Data** — `{ type, items: [{ term, definition }] }`
+- **Data** — `{ type, items: [{ term: string | inline[], definition: string | inline[] }] }`
+  (Both fields accept an inline array per D1 §13.1.)
 - **Rendering** — `<dl>` / `<dt>` / `<dd>`. Native semantics, no ARIA needed.
-- **Nesting** — none; `definition` values are plain strings.
+- **Nesting** — no block nesting. `term` and `definition` are a string or an
+  inline array (D1); never blocks.
 
 ### `table` — *new*
 - **Purpose** — genuine two-dimensional comparison (protocol vs protocol,
   option vs option). Not layout.
-- **Data** — `{ type, caption?, columns: [string], rows: [[string]] }`
+- **Data** — `{ type, caption?: string, columns: [string], rows: [[string | inline[]]] }`
+  **Cells accept an inline array** (D1 §13.1) — a comparison table routinely
+  needs `inline_code` in a cell. `caption` and `columns` stay **plain strings**
+  deliberately: headers are short labels, and keeping them simple limits the
+  renderer surface without costing expressiveness.
 - **Validation at render** — rows whose length ≠ `columns.length` are **skipped**,
   not padded, so malformed data cannot silently misalign a comparison.
 - **Rendering** — `<table>` + `<caption>` + `<thead>` with
   `<th scope="col">` + `<tbody>`; wrapped in a horizontally scrollable
   container that is focusable.
 - **Accessibility** — `scope` on every header; `<caption>` strongly recommended.
-  Cells are `textContent` strings only — no nested blocks, no colspan/rowspan.
+  Cells hold a string or an inline array — **no nested blocks**, no colspan/rowspan.
 - **Responsive** — horizontal scroll on narrow screens. No card-collapse
   transformation: it reorders content unpredictably for screen readers.
 
@@ -255,7 +270,7 @@ exercises, and output-prediction exercises — with no widget per variety, and
   plus a **Check** `<button type="button">`.
 - **Validation** — set equality between selected `id`s and `answer`.
   `multiple` is **explicit and required** — never inferred from `answer.length`.
-  Full rules, including malformed `answer`, duplicates and unknown ids: **D4 (§14.4)**.
+  Full rules, including malformed `answer`, duplicates and unknown ids: **D4 (§13.4)**.
 - **Per-option `feedback`** — the pedagogically valuable field: it explains why
   *that specific distractor* is wrong. This is what makes the exercise teach
   rather than merely grade.
@@ -276,7 +291,7 @@ exercises, and output-prediction exercises — with no widget per variety, and
     placeholder?, hint?, explanation?, feedback? }
   ```
 - **`match` is renamed `compare`**, and normalisation is a separate `normalize`
-  object — the two stages never hide inside one another (**D3, §14.3**).
+  object — the two stages never hide inside one another (**D3, §13.3**).
 - **`accept` is always an array** — one uniform shape for "one right answer" and
   "several acceptable phrasings", which removes a whole class of authoring error.
 - **Rendering** — `<label>` + `<input>` (+ `inputmode="numeric"` when
@@ -287,7 +302,7 @@ exercises, and output-prediction exercises — with no widget per variety, and
   learner produces the answer instead of recognising it, but within a scaffold.
 - **Representation** — the `____` marker template is **withdrawn**; `_` is a
   legal identifier character (`__init__`, `user_name`). Replaced by a structured
-  `content` array. Full schema and semantics: **D2 (§14.2)**.
+  `content` array. Full schema and semantics: **D2 (§13.2)**.
 - **Complexity** — still the highest of the three, but the parsing risk is gone:
   there is nothing to parse, only an array to walk.
 
@@ -298,7 +313,7 @@ exercises, and output-prediction exercises — with no widget per variety, and
 
 ## 6. Validation system
 
-**Superseded in detail by D3 (§14.3), which is authoritative.** Summary:
+**Superseded in detail by D3 (§13.3), which is authoritative.** Summary:
 
 Answer checking is a two-stage pipeline, and the stages are **named separately
 and never implied by one another**:
@@ -433,31 +448,34 @@ Suggested MTrack2-B split, if it should be smaller still:
 
 ---
 
-## 12. Decisions required before MTrack2-B
+## 12. Question register — all resolved
 
-| # | Question | Options | My recommendation |
+No question remains open. Q1, Q2, Q4, Q7 became **D1–D6** (§13). Q8 and Q9 are
+closed here as **contract decisions** because they bind the implementation. Q3,
+Q5, Q6 and Q10 are scope/policy: they change *what gets built and when*, not the
+shape of any field.
+
+| # | Question | Resolution | Kind |
 |---|---|---|---|
-| ~~Q1~~ | Inline markup in `text` | — | **CLOSED → D1 (§14.1).** Structured inline array adopted. |
-| ~~Q2~~ | Fold the 4 choice types into one `choice`? | — | **CLOSED.** Folded; `multiple` made explicit by **D4 (§14.4)**. |
-| **Q3** | Drop `video`/`audio` permanently? | drop / revisit later | **Drop now.** Re-open only with a privacy-respecting, non-iframe answer. |
-| ~~Q4~~ | Exercise `stem` instead of `code_exercise`? | — | **CLOSED.** Stem retained; unaffected by D1–D5. |
-| **Q5** | Defer `tabs`, `matching`, `ordering`? | defer / include in 2-B | **Defer.** They are ~46% of the code and ~90% of the a11y risk. |
-| **Q6** | Accept that answers are visible in client JSON? | accept / obfuscate / backend | **Accept and document.** Obfuscation is theatre; a backend is out of scope. |
-| **Q7** | Add `schema_version` to lesson JSON now? | yes / no | **Yes** — one cheap field now; painful to retrofit later. Still open. |
-| **Q8** | Lesson body: flat `content[]` or explicit `sections[]`? | flat / sections | **Flat**, as today. `heading` provides structure; sections add a tier for no gain. |
-| **Q9** | Should an unknown block type be visibly flagged? | silent skip / dev-visible note | **Silent in production**, plus a small offline validator script later. |
-| **Q10** | Are the 4 MTrack1 fixtures migrated in 2-B? | migrate / leave | **Leave.** They already validate; migration is content work, not schema work. |
+| Q1 | Inline markup in `text` | **D1 (§13.1)** — structured inline array, 4 types | contract |
+| Q2 | Fold the 4 choice types | **D4 (§13.4)** — folded into `choice`, `multiple` explicit | contract |
+| Q3 | Drop `video`/`audio` | **Dropped.** Re-open only with a privacy-respecting, non-iframe answer. Not in MTrack2-B. | policy |
+| Q4 | `stem` instead of `code_exercise` | **Stem retained.** No `code_exercise` type. | contract |
+| Q5 | Defer `tabs`, `matching`, `ordering` | **Deferred** past MTrack2-B (~46% of code, ~90% of a11y risk). | scope |
+| Q6 | Answers visible in client JSON | **Accepted and documented** (§9). TRACKS is a learning aid, not an exam. | policy |
+| Q7 | `schema_version` | **D6 (§13.6)** — optional integer, current value `1`, lessons only | contract |
+| Q8 | Flat `content[]` vs `sections[]` | **CLOSED: flat `content[]`**, as shipped. The lesson root holds `content`; `heading` provides structure. No `sections` key exists. Binding on the renderer, hence a contract decision. | contract |
+| Q9 | Flag unknown block types? | **CLOSED: silent skip in production.** Confirms MTrack1's shipped behaviour and is the mechanism every "block skipped" rule in §13 depends on. An offline validator may be added later; it is not part of the renderer. | contract |
+| Q10 | Migrate the 4 MTrack1 fixtures | **No.** They remain valid under D6 (absent `schema_version` = `1`). Migration is content work. | scope |
 
----
+## 13. Locked design decisions (MTrack2-A addendum)
 
-## 14. Locked design decisions (MTrack2-A addendum)
-
-These five points are **closed**. Where they conflict with an earlier section,
+These six decisions are **frozen**. Where they conflict with an earlier section,
 this section wins.
 
 ---
 
-### 14.1 — D1: Inline content model
+### 13.1 — D1: Inline content model
 
 **Decision.** Adopt a structured inline array. No Markdown, no HTML, no marker
 syntax inside strings. Exactly **four** inline object types.
@@ -537,7 +555,7 @@ avoid.
 
 ---
 
-### 14.2 — D2: `fill_blank` representation
+### 13.2 — D2: `fill_blank` representation
 
 **Decision.** Withdraw the `____` marker template. Use a structured `content`
 array in which blanks are objects. Code is preserved **exactly as written**,
@@ -607,7 +625,7 @@ one pattern.
 
 ---
 
-### 14.3 — D3: Validation semantics
+### 13.3 — D3: Validation semantics
 
 **Decision.** Normalisation and comparison are **two separate, separately
 declared stages**. `exact` means exact *on the normalised value*, and the
@@ -641,11 +659,24 @@ Case is **never** handled here; casing belongs to `compare`.
 | `exact` | normalised answer equals an `accept` value | sensitive | code, identifiers |
 | `ci` | as `exact`, Unicode-lowercased both sides | insensitive | prose, terms (**default for `text_input`**) |
 | `numeric` | both parsed as finite numbers, `abs(a-b) <= tolerance` (default `0`) | n/a | quantities |
-| `contains` | normalised answer contains an `accept` value as substring | follows `ci` if `compare` is `ci`-style; `contains` itself is case-insensitive | "mention the key idea" |
+| `contains` | normalised answer contains an `accept` value as substring, **both Unicode-lowercased first** | **always insensitive** | "mention the key idea" |
 | `set` | selected id set == answer id set | n/a | `choice` only, implicit |
 
 Success = a match against **any** entry of `accept` (`accept` is an OR-list).
 `numeric` on an unparseable answer is simply incorrect, never an error.
+
+**`contains` is always case-insensitive**, independently of `compare`'s other
+modes — there is no case-sensitive substring mode:
+
+```
+normalized answer  ->  Unicode lowercase
+normalized accept  ->  Unicode lowercase
+                   ->  substring containment
+```
+
+The other comparators are unaffected: `exact` is case-sensitive, `ci` is
+case-insensitive, `numeric` compares numbers within `tolerance`, and `set`
+applies to `choice` only.
 
 **Explicitly excluded:** regex, expression languages, scripting, partial credit,
 cross-question dependencies, custom comparators.
@@ -674,7 +705,7 @@ the JSON alone and keeps the engine deterministic and tiny.
 
 ---
 
-### 14.4 — D4: `choice` semantics
+### 13.4 — D4: `choice` semantics
 
 **Decision.** `multiple` is a **required, explicit boolean**. It is never
 inferred from `answer.length`.
@@ -712,7 +743,7 @@ For `multiple: true` this means all correct options and no incorrect ones —
 no partial credit (§6).
 
 Skipped blocks are omitted from the lesson; they never throw and never blank the
-page, consistent with MTrack1's unknown-type behaviour.
+page, consistent with MTrack1's unknown-type behaviour (Q9).
 
 **Valid.**
 ```json
@@ -743,7 +774,7 @@ noticing. Explicit intent is checkable.
 
 ---
 
-### 14.5 — D5: Lesson provenance / sources
+### 13.5 — D5: Lesson provenance / sources
 
 **Decision — option C, asymmetric.** Lesson-level `sources` is the canonical
 list. Blocks carry an optional lightweight **reference** (`source_ref`) — an id
@@ -757,10 +788,10 @@ title/url across blocks and has no lesson-level list; a full citation system
 
 **Schema.**
 ```
-// lesson root
-"sources": [
-  { "id": string,          // referenced by blocks
-    "title": string,
+// lesson root — OPTIONAL
+"sources"?: [
+  { "id": string,          // required, referenced by blocks
+    "title": string,       // required
     "url"?: string,        // https allowlist (§9)
     "publisher"?: string,
     "accessed"?: "YYYY-MM-DD" } ]
@@ -770,9 +801,22 @@ title/url across blocks and has no lesson-level list; a full citation system
 ```
 
 **Rendering.**
-- Lesson end: a **Sources** section listing every entry, numbered in array order.
+- **`sources` is optional.** Absent, empty, or reduced to nothing after
+  validation → **no `Sources` section is rendered at all** (never an empty
+  heading) and **no error**. A lesson may legitimately cite nothing.
+- When present and non-empty: a **Sources** section at the end of the lesson,
+  listing every entry, numbered in array order.
 - A block with `source_ref` gets a small superscript marker linking to the entry
-  (`<sup><a href="#src-…">`), with an accessible name such as "Source 2".
+  (`<sup><a href="#src-2">`), with an accessible name such as "Source 2".
+- **Anchor rule (implementation, MTrack2-B).** The value of `source_ref` is
+  authored data and must **never** be used directly as an HTML `id`, fragment, or
+  selector. Anchors are generated **deterministically from the entry's position**
+  in the validated `sources` array — `src-1`, `src-2`, `src-3` — so the DOM id
+  space is fully controlled by the renderer. `source_ref` is used **only** to look
+  up the matching entry; its resolved index then yields the anchor. This prevents
+  id collisions, selector injection, and clashes with existing page ids
+  (`tracks-app`, `tracks-top`). *Security/implementation note only — D5 itself is
+  unchanged.*
 - A `source_ref` pointing at an unknown id is **ignored**; the block still
   renders. Provenance never breaks content.
 - A `sources` entry referenced by nobody still appears in the list (a lesson may
@@ -812,16 +856,91 @@ JSON small and makes a source correctable in one place.
 
 ---
 
-## 13. Scope statement
+### 13.6 — D6: `schema_version`
 
-Nothing in this document is implemented, **including the D1–D5 decisions in §14**,
-which are specification only. MTrack1 is untouched: `/tracks/`,
+**Decision.** One integer field at the lesson root. Nothing else.
+
+| Property | Value |
+|---|---|
+| Field name | `schema_version` |
+| Type | **integer** (not a string, not semver) |
+| Current value | `1` |
+| Required | **No.** Absent is treated as `1`. |
+| Scope | **Lesson files only.** Not `data/tracks/index.json`. |
+
+**Why integer, not `"1.0.0"`.** Semver invites minor/patch negotiation, which
+implies a compatibility matrix. An integer supports exactly one operation —
+equality — which is all a static client-side renderer can honestly do.
+
+**Why optional.** The four shipped MTrack1 fixtures have no such field, and Q10
+leaves them unmigrated. Treating absent as `1` keeps them valid, so no content
+changes and the field costs nothing today.
+
+**Why lessons only.** `index.json` is a small track/lesson listing owned by the
+site, loaded once, and not an authoring surface. Versioning it would add a second
+version axis for a file containing no widget vocabulary. If its shape ever
+changes, that is a site-wide change, not a content-compatibility problem.
+
+**Renderer behaviour on an unsupported version.**
+
+| Value | Behaviour |
+|---|---|
+| absent, or `1` | Render normally. |
+| integer `> 1` (future) | **Do not attempt to render blocks.** Show a lesson-level message: *"This lesson requires a newer version of the site."* Reuse the existing error view — no new UI. |
+| non-integer, `< 1`, or unparseable | Treat as invalid content → the existing *"Unable to load this lesson."* state. |
+
+A future version is refused **whole-lesson**, never block-by-block: partially
+rendering a lesson written against an unknown vocabulary would silently drop
+content and mislead the learner. Failing visibly is the honest outcome.
+
+**No migrations, no negotiation, no compatibility layer, no second schema.**
+A version `2` would only ever be introduced by a future milestone that explicitly
+decides how it is handled.
+
+**Valid.**
+```json
+{
+  "schema_version": 1,
+  "id": "variables",
+  "title": "Variables",
+  "content": []
+}
+```
+
+**Valid (legacy — absent is `1`).**
+```json
+{ "id": "variables", "title": "Variables", "content": [] }
+```
+
+**Refused — future version.**
+```json
+{ "schema_version": 2, "id": "variables", "title": "Variables", "content": [] }
+```
+→ *"This lesson requires a newer version of the site."* No blocks rendered.
+
+**Refused — malformed.**
+```json
+{ "schema_version": "1.0", "id": "variables", "title": "Variables", "content": [] }
+```
+→ not an integer → *"Unable to load this lesson."*
+
+---
+
+## 14. Scope and status
+
+**Status: DESIGN FROZEN — ready for MTrack2-B.**
+
+Frozen refers to the *specification*. Nothing in this document is implemented:
+D1–D6 are the contract MTrack2-B will build against, not code that exists.
+
+MTrack1 is untouched and remains as verified: `/tracks/`,
 `/tracks/#programming`, `/tracks/#programming/variables`, lazy loading, the
 in-memory cache, the hash router, the error states and the `<base>`-aware link
-fix all remain exactly as verified. Library is untouched. No new files beyond
-this document. No dependency, no storage, no backend.
+fix. Library is untouched. The four lesson fixtures are unmodified and stay
+valid under D6. No dependency, no storage, no backend, no code execution.
 
-**Schema status: ready to freeze.** D1–D5 (§14) close the five blocking design
-points. The remaining open items in §12 (Q3, Q5–Q10) are scope and policy
-choices, not schema shape — none of them changes a field name or a widget
-contract, so MTrack2-B can begin against this specification.
+**Binding on MTrack2-B:** the 13-widget core set (§1), the nesting tiers (§8),
+the security rules (§9), the accessibility rules (§10), and D1–D6 (§13).
+
+**Next:** MTrack2-B implementation, on approval. Reopening any frozen decision
+requires an explicit milestone.
