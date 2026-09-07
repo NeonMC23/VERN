@@ -67,12 +67,16 @@ window.VernTracksRenderer = (function () {
    * as "java\tscript:" or leading control characters cannot slip through a
    * regex.
    */
-  function safeUrl(value) {
+  // `relativeBase` overrides the resolution base for bare relative paths
+  // (lesson media). The accepted-scheme policy below is unchanged.
+  function safeUrl(value, relativeBase) {
     if (!isStr(value)) return null;
     var raw = value.trim();
     if (/^\/\//.test(raw)) return null;            // protocol-relative
+    // Control characters (tabs/newlines) can hide a scheme: "java\tscript:".
+    if (/[\u0000-\u001F\u007F]/.test(raw)) return null;
     var u;
-    try { u = new URL(raw, document.baseURI); } catch (e) { return null; }
+    try { u = new URL(raw, relativeBase || document.baseURI); } catch (e) { return null; }
     if (u.protocol === "https:") return u.href;
     if (u.protocol === "http:" &&
         (u.hostname === "localhost" || u.hostname === "127.0.0.1" || u.hostname === "[::1]")) {
@@ -80,6 +84,43 @@ window.VernTracksRenderer = (function () {
     }
     return null;
   }
+
+  /* ------------------------------------------------- lesson media context
+   * Approved media convention: a lesson references local media with a path
+   * relative to its own JSON file, e.g. "media/diagram.svg" inside
+   * data/tracks/<track-id>/<lesson>.json -> data/tracks/<track-id>/media/...
+   *
+   * A bare relative path must NOT be resolved against document.baseURI: that
+   * is the site root (/ or /VERN/), which would yield /VERN/media/... This is
+   * the same <base> trap already fixed for hash links.
+   *
+   * The directory is derived from data already exposed by the data layer
+   * (VernTracksData.base + the lesson's `file` metadata), so no protected
+   * architecture file needs to change. It is set by lessonView() before the
+   * blocks render and cleared afterwards.
+   */
+  var lessonMediaBase = null;
+
+  function tracksDataBase() {
+    var d = window.VernTracksData;
+    if (d && typeof d.base === "string" && d.base) return d.base;
+    return siteBase() + "data/tracks/";   // same convention as the data layer
+  }
+
+  // `file` is relative to data/tracks/, e.g. "lab/widget-laboratory.json".
+  function setLessonMediaBase(track, meta) {
+    var rel = (meta && typeof meta.file === "string" && meta.file)
+      ? meta.file
+      : (track && track.id ? track.id + "/" : "");
+    var dir = String(rel).replace(/[^/]*$/, "");     // strip the file name
+    try {
+      lessonMediaBase = new URL(tracksDataBase() + dir, location.href).href;
+    } catch (e) {
+      lessonMediaBase = null;
+    }
+  }
+
+  function clearLessonMediaBase() { lessonMediaBase = null; }
 
   /* ----------------------------------------------------------- D1: inline
    * The closed union is exactly: string | inline_code | strong | emphasis |
@@ -443,9 +484,48 @@ window.VernTracksRenderer = (function () {
       return wrap;
     },
 
+    /* -------------------------------------------------------------- quote
+     * Attributed external text. Content is a string or a D1 inline array and
+     * is never interpreted as markup. An unsafe href simply yields no link.
+     */
+    quote: function (b) {
+      if (!hasInline(b.content)) return null;       // content is required
+
+      var p = el("p", { className: "quote__text" });
+      appendInline(p, b.content);
+      var bq = el("blockquote", { className: "quote", children: [p] });
+
+      var hasAuthor = isStr(b.author);
+      var hasSource = isStr(b.source);
+      if (!hasAuthor && !hasSource) return bq;
+
+      var footer = el("footer", { className: "quote__attrib" });
+      if (hasAuthor) footer.appendChild(document.createTextNode(b.author));
+
+      if (hasSource) {
+        if (hasAuthor) footer.appendChild(document.createTextNode(", "));
+        var cite = el("cite", { className: "quote__source" });
+        var href = safeUrl(b.href, lessonMediaBase);
+        if (href) {
+          // A source with a safe href becomes a link; otherwise plain text,
+          // so an unsafe or absent href never produces broken UI.
+          cite.appendChild(el("a", {
+            text: b.source,
+            attrs: { href: href, rel: "noopener noreferrer" }
+          }));
+        } else {
+          cite.appendChild(document.createTextNode(b.source));
+        }
+        footer.appendChild(cite);
+      }
+      bq.appendChild(footer);
+      return bq;
+    },
+
     /* -------------------------------------------------------------- image */
     image: function (b) {
-      var src = safeUrl(b.src);
+      // Relative media resolves against the lesson's own directory.
+      var src = safeUrl(b.src, lessonMediaBase);
       if (!src || !isStr(b.alt)) return null;      // both required
 
       var img = el("img", {
@@ -475,7 +555,7 @@ window.VernTracksRenderer = (function () {
    * structurally impossible rather than merely discouraged. There is no
    * generic recursive DOM system here.
    */
-  var LEAF = ["heading", "text", "list", "code", "definition", "image", "table"];
+  var LEAF = ["heading", "text", "list", "code", "definition", "image", "table", "quote"];
 
   function renderLeaf(block) {
     if (!block || typeof block !== "object") return null;
@@ -658,6 +738,75 @@ window.VernTracksRenderer = (function () {
         box.appendChild(d);
       });
       return box.childNodes.length ? box : null;
+    },
+
+    /* ---------------------------------------------------------------- tabs
+     * Parallel alternatives (Windows / macOS / Linux). Standard tablist
+     * pattern: real <button type="button"> tabs, aria-selected, aria-controls,
+     * roving tabindex, and Arrow/Home/End keys. State is in-memory DOM state
+     * only: nothing is persisted and the URL is untouched.
+     */
+    tabs: function (b) {
+      var items = Array.isArray(b.items) ? b.items : [];
+      var valid = [];
+      items.forEach(function (it) {
+        if (!it || typeof it !== "object" || !isStr(it.label)) return;
+        var panel = el("div", { className: "tabs__panel-body" });
+        // Leaf blocks only: a container or exercise inside tabs is dropped.
+        if (!appendLeaves(panel, it.blocks)) return;
+        valid.push({ label: it.label, body: panel });
+      });
+      if (valid.length < 2) return null;            // fewer than 2 tabs -> skip
+
+      var group = nextExerciseId();                 // renderer-controlled ids
+      var wrap = el("div", { className: "tabs" });
+      var list = el("div", { className: "tabs__list" });
+      list.setAttribute("role", "tablist");
+
+      var buttons = [], panels = [];
+
+      function select(i, focus) {
+        buttons.forEach(function (btn, n) {
+          var on = n === i;
+          btn.setAttribute("aria-selected", on ? "true" : "false");
+          // Roving tabindex: only the active tab is in the tab sequence.
+          btn.setAttribute("tabindex", on ? "0" : "-1");
+          btn.className = "tabs__tab" + (on ? " is-active" : "");
+          if (on) panels[n].removeAttribute("hidden");
+          else panels[n].setAttribute("hidden", "");
+        });
+        if (focus) buttons[i].focus();
+      }
+
+      valid.forEach(function (v, i) {
+        var tabId = group + "-tab" + i, panelId = group + "-panel" + i;
+        var btn = el("button", {
+          className: "tabs__tab",
+          text: v.label,
+          attrs: { type: "button", role: "tab", id: tabId, "aria-controls": panelId }
+        });
+        var panel = el("div", {
+          className: "tabs__panel",
+          attrs: { role: "tabpanel", id: panelId, "aria-labelledby": tabId, tabindex: "0" },
+          children: [v.body]
+        });
+        btn.addEventListener("click", function () { select(i, false); });
+        btn.addEventListener("keydown", function (e) {
+          var last = valid.length - 1, n = null;
+          if (e.key === "ArrowRight") n = i === last ? 0 : i + 1;
+          else if (e.key === "ArrowLeft") n = i === 0 ? last : i - 1;
+          else if (e.key === "Home") n = 0;
+          else if (e.key === "End") n = last;
+          if (n !== null) { e.preventDefault(); select(n, true); }
+        });
+        buttons.push(btn); panels.push(panel);
+        list.appendChild(btn);
+      });
+
+      wrap.appendChild(list);
+      panels.forEach(function (pn) { wrap.appendChild(pn); });
+      select(0, false);                             // first tab active, no focus steal
+      return wrap;
     },
 
     /* Step numbers come from the native <ol>; authors never hand-number. */
@@ -894,11 +1043,156 @@ window.VernTracksRenderer = (function () {
     return ex.wrap;
   }
 
+  /* ------------------------------------------------------------ matching
+   * Accessible select-based interaction — no drag-and-drop. The right-hand
+   * options are shuffled for display; the correct mapping is never altered.
+   */
+
+  // Deterministic-free shuffle of a copy; the source array is untouched.
+  function shuffled(list) {
+    var out = list.slice();
+    for (var i = out.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = out[i]; out[i] = out[j]; out[j] = t;
+    }
+    return out;
+  }
+
+  function matchingWidget(b) {
+    var pairs = Array.isArray(b.pairs) ? b.pairs.filter(function (p) {
+      return p && typeof p === "object" && isStr(p.left) && isStr(p.right);
+    }) : [];
+    if (pairs.length < 2) return null;
+    if (pairs.length !== (b.pairs || []).length) return null;   // malformed pair
+
+    var lefts = pairs.map(function (p) { return p.left; });
+    var rights = pairs.map(function (p) { return p.right; });
+    if (new Set(lefts).size !== lefts.length) return null;      // duplicate left
+    if (new Set(rights).size !== rights.length) return null;    // duplicate right
+
+    var ex = buildExercise(b, {});
+    var id = nextExerciseId();
+    var options = shuffled(rights);
+
+    var list = el("div", { className: "matching" });
+    var rows = [];
+    pairs.forEach(function (p, i) {
+      var selId = id + "-s" + i;
+      var row = el("div", { className: "matching__row" });
+      var label = el("label", { className: "matching__left", attrs: { "for": selId } });
+      label.appendChild(document.createTextNode(p.left));
+      var sel = el("select", { className: "matching__select", attrs: { id: selId } });
+      sel.appendChild(el("option", { text: "\u2014 choose \u2014", attrs: { value: "" } }));
+      options.forEach(function (o) { sel.appendChild(el("option", { text: o, attrs: { value: o } })); });
+      var status = el("span", { className: "matching__status" });
+      status.setAttribute("aria-live", "polite");
+      row.appendChild(label); row.appendChild(sel); row.appendChild(status);
+      list.appendChild(row);
+      rows.push({ sel: sel, status: status, expect: p.right, left: p.left });
+    });
+    ex.body.appendChild(list);
+
+    ex.check.addEventListener("click", function () {
+      var answered = 0, allOk = true;
+      rows.forEach(function (r) {
+        if (r.sel.value) answered++;
+        var ok = r.sel.value === r.expect;
+        if (!ok) allOk = false;
+        clear(r.status);
+        // Per-pair textual verdict; never colour alone.
+        r.status.appendChild(el("span", {
+          className: "matching__badge",
+          text: (ok ? "\u2713 " : "\u2715 ") + r.left + " \u2014 " + (ok ? "correct" : "incorrect")
+        }));
+      });
+      if (!answered) { showNotice(ex.result, "Match at least one item first."); return; }
+      showResult(ex.result, allOk, b, null);
+    });
+
+    ex.wrap.appendChild(ex.body);
+    ex.wrap.appendChild(ex.actions);
+    if (ex.wrap.__hint) ex.wrap.appendChild(ex.wrap.__hint);
+    ex.wrap.appendChild(ex.result);
+    return ex.wrap;
+  }
+
+  /* ------------------------------------------------------------ ordering
+   * Move Up / Move Down buttons — no drag-and-drop. Boundary buttons are
+   * disabled. Correct only when the whole order matches; no partial credit.
+   */
+  function orderingWidget(b) {
+    var items = Array.isArray(b.items) ? b.items.filter(function (i) {
+      return i && typeof i === "object" && isStr(i.id) && isStr(i.text);
+    }) : [];
+    if (items.length < 2) return null;
+    if (items.length !== (b.items || []).length) return null;
+
+    var ids = items.map(function (i) { return i.id; });
+    if (new Set(ids).size !== ids.length) return null;          // duplicate item id
+
+    var answer = Array.isArray(b.answer) ? b.answer.filter(isStr) : [];
+    if (answer.length !== items.length) return null;            // missing/extra
+    if (new Set(answer).size !== answer.length) return null;    // duplicate answer id
+    if (answer.some(function (a) { return ids.indexOf(a) === -1; })) return null;
+    if (ids.some(function (i) { return answer.indexOf(i) === -1; })) return null;
+
+    var ex = buildExercise(b, {});
+    var order = items.slice();                                  // displayed order
+    var listBox = el("ol", { className: "ordering" });
+    ex.body.appendChild(listBox);
+
+    function draw() {
+      clear(listBox);
+      order.forEach(function (it, i) {
+        var li = el("li", { className: "ordering__item" });
+        var ctrl = el("div", { className: "ordering__controls" });
+        var up = el("button", {
+          className: "btn btn--ghost ordering__btn", text: "\u2191",
+          attrs: { type: "button", "aria-label": "Move \u201c" + it.text + "\u201d up" }
+        });
+        var down = el("button", {
+          className: "btn btn--ghost ordering__btn", text: "\u2193",
+          attrs: { type: "button", "aria-label": "Move \u201c" + it.text + "\u201d down" }
+        });
+        if (i === 0) up.setAttribute("disabled", "");
+        if (i === order.length - 1) down.setAttribute("disabled", "");
+        up.addEventListener("click", function () {
+          if (i === 0) return;
+          var t = order[i - 1]; order[i - 1] = order[i]; order[i] = t;
+          draw(); listBox.querySelectorAll(".ordering__btn")[(i - 1) * 2].focus();
+        });
+        down.addEventListener("click", function () {
+          if (i === order.length - 1) return;
+          var t = order[i + 1]; order[i + 1] = order[i]; order[i] = t;
+          draw(); listBox.querySelectorAll(".ordering__btn")[(i + 1) * 2 + 1].focus();
+        });
+        ctrl.appendChild(up); ctrl.appendChild(down);
+        li.appendChild(ctrl);
+        li.appendChild(el("span", { className: "ordering__text", text: it.text }));
+        listBox.appendChild(li);
+      });
+    }
+    draw();
+
+    ex.check.addEventListener("click", function () {
+      var ok = order.every(function (it, i) { return it.id === answer[i]; });
+      showResult(ex.result, ok, b, null);
+    });
+
+    ex.wrap.appendChild(ex.body);
+    ex.wrap.appendChild(ex.actions);
+    if (ex.wrap.__hint) ex.wrap.appendChild(ex.wrap.__hint);
+    ex.wrap.appendChild(ex.result);
+    return ex.wrap;
+  }
+
   // Exercises are Tier 0 only: never reachable from a container or a stem.
   var EXERCISES = {
     choice: choiceWidget,
     text_input: textInputWidget,
-    fill_blank: fillBlankWidget
+    fill_blank: fillBlankWidget,
+    matching: matchingWidget,
+    ordering: orderingWidget
   };
 
   // Tier 0 dispatch: leaf blocks and containers. Unknown types are skipped.
@@ -928,10 +1222,15 @@ window.VernTracksRenderer = (function () {
 
     var article = el("article", { className: "lesson" });
     var blocks = (lesson && Array.isArray(lesson.content)) ? lesson.content : [];
-    blocks.forEach(function (b) {
-      var node = renderBlock(b);
-      if (node) article.appendChild(node);
-    });
+    setLessonMediaBase(track, meta);
+    try {
+      blocks.forEach(function (b) {
+        var node = renderBlock(b);
+        if (node) article.appendChild(node);
+      });
+    } finally {
+      clearLessonMediaBase();
+    }
     if (!article.childNodes.length) {
       article.appendChild(el("p", { className: "note", text: "This lesson has no content yet." }));
     }

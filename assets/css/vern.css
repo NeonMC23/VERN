@@ -1327,6 +1327,127 @@ a.ref:focus-visible .marker { opacity: 1; transform: translateX(0); }
   .fill-blank__input { width: 6rem; }
 }
 
+/* ---------------------------------------------------------------------------
+   Tracks — MTrack2-B3: tabs, quote, matching, ordering.
+   Existing tokens only. States never rely on colour alone.
+   --------------------------------------------------------------------------- */
+
+/* tabs */
+.tabs { margin: var(--sp-4) 0; }
+.tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  border-bottom: 1px solid var(--border);
+}
+.tabs__tab {
+  padding: var(--sp-2) var(--sp-3);
+  font: inherit;
+  font-size: .92rem;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+.tabs__tab:hover { color: var(--text); background: var(--surface-hover); }
+.tabs__tab:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+/* Active state carries weight + underline, not colour alone. */
+.tabs__tab.is-active {
+  color: var(--text);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+  background: var(--surface);
+}
+.tabs__panel { padding: var(--sp-3) 0 0; }
+.tabs__panel:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.tabs__panel-body > *:first-child { margin-top: 0; }
+.tabs__panel-body > *:last-child { margin-bottom: 0; }
+
+/* quote */
+.quote {
+  margin: var(--sp-4) 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 3px solid var(--border-strong);
+  background: var(--bg-sunken);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.quote__text { margin: 0; color: var(--text); }
+.quote__attrib {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+.quote__attrib::before { content: "\2014\00a0"; }
+.quote__source { font-style: normal; }
+
+/* matching */
+.matching { display: flex; flex-direction: column; gap: var(--sp-2); }
+.matching__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.matching__left {
+  flex: 0 0 9rem;
+  font-family: var(--font-mono);
+  font-size: .9rem;
+  color: var(--text);
+}
+.matching__select {
+  flex: 1 1 12rem;
+  font: inherit;
+  font-size: .9rem;
+  padding: var(--sp-2);
+  color: var(--text);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+}
+.matching__select:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+.matching__badge {
+  font-size: .78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ordering */
+.ordering { margin: 0; padding: 0; list-style: none; counter-reset: ord; }
+.ordering__item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2);
+  margin-bottom: var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+  counter-increment: ord;
+}
+.ordering__item:last-child { margin-bottom: 0; }
+.ordering__item::before {
+  content: counter(ord);
+  flex: none;
+  min-width: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: var(--text-faint);
+}
+.ordering__controls { display: flex; gap: var(--sp-1); flex: none; }
+.ordering__btn { padding: .15rem .5rem; font-size: .9rem; line-height: 1.2; }
+.ordering__btn[disabled] { opacity: .4; cursor: not-allowed; }
+.ordering__btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.ordering__text { color: var(--text); }
+
+@media (max-width: 40rem) {
+  .matching__left { flex-basis: 100%; }
+  .matching__select { flex-basis: 100%; }
+  .tabs__tab { flex: 1 1 auto; text-align: left; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a, .card, .ref, .btn, .icon-btn, .site-nav__list a, .footer-col a, .marker {
     transition: color .14s ease, background-color .14s ease,

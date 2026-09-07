@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 260" width="520" height="260" role="img" aria-label="Filesystem tree showing the working directory">
+  <style>
+    .bg { fill: #12141a; }
+    .box { fill: #1b1e26; stroke: #2c313d; stroke-width: 1; }
+    .cur { fill: #241d24; stroke: #d64f8d; stroke-width: 1.5; }
+    .line { stroke: #2c313d; stroke-width: 1.5; fill: none; }
+    .t { font-family: ui-monospace, "JetBrains Mono", monospace; font-size: 13px; fill: #c9cedb; }
+    .dim { fill: #7b8496; }
+    .hi { fill: #f0a6c8; }
+    .cap { font-family: ui-sans-serif, Inter, sans-serif; font-size: 11px; fill: #7b8496; }
+  </style>
+  <rect class="bg" x="0" y="0" width="520" height="260" rx="6"/>
+
+  <rect class="box" x="20" y="20" width="110" height="30" rx="4"/>
+  <text class="t" x="34" y="40">/</text>
+  <text class="t dim" x="48" y="40">(root)</text>
+
+  <path class="line" d="M40 50 V 78 H 70"/>
+  <rect class="box" x="70" y="63" width="130" height="30" rx="4"/>
+  <text class="t" x="84" y="83">home/</text>
+
+  <path class="line" d="M90 93 V 121 H 120"/>
+  <rect class="box" x="120" y="106" width="130" height="30" rx="4"/>
+  <text class="t" x="134" y="126">user/</text>
+
+  <path class="line" d="M140 136 V 164 H 170"/>
+  <rect class="cur" x="170" y="149" width="150" height="30" rx="4"/>
+  <text class="t hi" x="184" y="169">projects/</text>
+
+  <path class="line" d="M190 179 V 207 H 220"/>
+  <rect class="box" x="220" y="192" width="140" height="30" rx="4"/>
+  <text class="t dim" x="234" y="212">notes.md</text>
+
+  <line class="line" x1="330" y1="164" x2="378" y2="164" stroke-dasharray="4 3"/>
+  <text class="t hi" x="386" y="160">pwd</text>
+  <text class="cap" x="386" y="176">prints this path</text>
+  <text class="t dim" x="386" y="196">/home/user/</text>
+  <text class="t dim" x="386" y="211">projects</text>
+</svg>

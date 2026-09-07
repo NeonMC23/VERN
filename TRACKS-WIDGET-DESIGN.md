@@ -12,6 +12,10 @@
 
 This document defines the *pedagogical vocabulary* of VΞRN TRACKS.
 
+**Revision 4** — MTrack2-B3: the media convention and the four previously
+deferred widgets (`tabs`, `matching`, `ordering`, `quote`) are now
+**implemented and frozen**; see §15. Revision 3 text below is unchanged.
+
 **Revision 3** — design frozen. §13 holds the binding decisions **D1–D6**
 (inline content, fill_blank representation, validation semantics, choice
 semantics, provenance, schema_version). §13 is authoritative where it conflicts
@@ -45,10 +49,10 @@ Currently implemented: `heading`, `text`, `code`, `list` (4 leaf renderers,
 | `choice` | exercise | yes | yes | stem only | medium |
 | `text_input` | exercise | yes | yes | stem only | medium |
 | `fill_blank` | exercise | yes | yes | structured (D2) | medium‑high |
-| `tabs` | structure | **defer** | yes | container | high |
-| `matching` | exercise | **defer** | yes | no | high |
-| `ordering` | exercise | **defer** | yes | no | high |
-| `quote` | content | **defer** | no | no | low |
+| `tabs` | structure | yes — **implemented (§15.2)** | yes | **container** | high |
+| `matching` | exercise | yes — **implemented (§15.3)** | yes | stem only | high |
+| `ordering` | exercise | yes — **implemented (§15.4)** | yes | stem only | high |
+| `quote` | content | yes — **implemented (§15.5)** | no | inline (D1) | low |
 | `code_example` | content | **reject** | — | — | — |
 | `true_false` | exercise | **reject** | — | — | — |
 | `select` | exercise | **reject** | — | — | — |
@@ -60,8 +64,9 @@ Currently implemented: `heading`, `text`, `code`, `list` (4 leaf renderers,
 | `divider` | content | **reject** | — | — | — |
 | `video` / `audio` | media | **reject** | — | — | — |
 
-**Core set: 13 widgets** (8 content/media, 2 structure, 3 exercise) — down from
-the ~30 in the hypothesis. Four deferred, eleven rejected or folded.
+**Core set: 17 widgets** — 13 frozen in MTrack2-A (8 content/media, 2 structure,
+3 exercise) plus 4 added and frozen in **MTrack2-B3** (§15): `tabs`, `matching`,
+`ordering`, `quote`. Eleven candidates remain rejected or folded.
 
 **Unchanged by the D1–D6 design lock.** The six decisions refine the *shape* of
 existing widgets; they add no widget and remove none. `inline_code`, `strong`,
@@ -87,8 +92,8 @@ Each rejection removes renderer surface without removing teaching capability.
 | `divider` | Purely presentational, zero semantics. Sections are created by `heading`; a divider is a symptom of a missing heading. | `heading` |
 | `video`, `audio` | **Deliberate rejection on privacy grounds.** External video means a YouTube/Vimeo iframe, i.e. third-party tracking on a site that advertises *no telemetry* — a direct contradiction of the project's stated position. Self-hosting means a media pipeline VΞRN has no infrastructure for, and the brief forbids a general iframe widget. | Text + `code` + `image`; link out to a video as a plain external link |
 
-**Deferred** (valuable, but not required to prove the pedagogical model, and each
-carries real a11y cost):
+**Deferred** — *superseded by MTrack2-B3 (§15): all four are now implemented and
+frozen. The original reasoning is kept below for the record.*
 
 - **`tabs`** — genuinely useful for parallel alternatives (Windows / macOS / Linux).
   But a correct tablist needs roving `tabindex`, arrow-key handling, `aria-selected`,
@@ -306,8 +311,8 @@ exercises, and output-prediction exercises — with no widget per variety, and
 - **Complexity** — still the highest of the three, but the parsing risk is gone:
   there is nothing to parse, only an array to walk.
 
-### 5.5 Not implemented now
-`matching` and `ordering` — see §2.
+### 5.5 `matching` and `ordering`
+**Implemented in MTrack2-B3** — schemas and semantics in §15.3 and §15.4.
 
 ---
 
@@ -463,7 +468,7 @@ shape of any field.
 | Q2 | Fold the 4 choice types | **D4 (§13.4)** — folded into `choice`, `multiple` explicit | contract |
 | Q3 | Drop `video`/`audio` | **Dropped.** Re-open only with a privacy-respecting, non-iframe answer. Not in MTrack2-B. | policy |
 | Q4 | `stem` instead of `code_exercise` | **Stem retained.** No `code_exercise` type. | contract |
-| Q5 | Defer `tabs`, `matching`, `ordering` | **Deferred** past MTrack2-B (~46% of code, ~90% of a11y risk). | scope |
+| Q5 | Defer `tabs`, `matching`, `ordering` | **Superseded.** Deferred through MTrack2-B, then implemented and frozen in MTrack2-B3 (§15). | scope |
 | Q6 | Answers visible in client JSON | **Accepted and documented** (§9). TRACKS is a learning aid, not an exam. | policy |
 | Q7 | `schema_version` | **D6 (§13.6)** — optional integer, current value `1`, lessons only | contract |
 | Q8 | Flat `content[]` vs `sections[]` | **CLOSED: flat `content[]`**, as shipped. The lesson root holds `content`; `heading` provides structure. No `sections` key exists. Binding on the renderer, hence a contract decision. | contract |
@@ -930,7 +935,7 @@ decides how it is handled.
 
 ## 14. Scope and status
 
-**Status: DESIGN FROZEN — ready for MTrack2-B.**
+**Status: DESIGN FROZEN — MTrack2-A (§1–§13) and MTrack2-B3 (§15) both frozen.**
 
 Frozen refers to the *specification*. Nothing in this document is implemented:
 D1–D6 are the contract MTrack2-B will build against, not code that exists.
@@ -941,8 +946,189 @@ in-memory cache, the hash router, the error states and the `<base>`-aware link
 fix. Library is untouched. The four lesson fixtures are unmodified and stay
 valid under D6. No dependency, no storage, no backend, no code execution.
 
-**Binding on MTrack2-B:** the 13-widget core set (§1), the nesting tiers (§8),
-the security rules (§9), the accessibility rules (§10), and D1–D6 (§13).
+**Binding:** the 17-widget core set (§1), the nesting tiers (§8 and §15.6), the
+security rules (§9 and §15.1), the accessibility rules (§10), D1–D6 (§13), and
+the MTrack2-B3 conventions (§15).
+
+**Implemented / frozen:** all 17 widgets. **Deferred:** none remaining.
 
 **Next:** MTrack2-B implementation, on approval. Reopening any frozen decision
 requires an explicit milestone.
+
+---
+
+## 15. MTrack2-B3 — media convention and the four remaining widgets
+
+**Status: IMPLEMENTED / FROZEN.** These conventions were approved for
+implementation and are now binding, exactly like §13. D1–D6 are unchanged.
+
+---
+
+### 15.1 — Track media convention
+
+**Canonical location.** Media belongs next to the Track content:
+
+```
+data/tracks/<track-id>/media/<file>
+```
+
+**Reference form.** A lesson references local media with a path **relative to
+its own JSON file**:
+
+```json
+{ "type": "image",
+  "src": "media/working-directory.svg",
+  "alt": "Filesystem tree with the working directory highlighted",
+  "caption": "Optional caption" }
+```
+
+From `data/tracks/lab/widget-laboratory.json` this resolves to
+`data/tracks/lab/media/working-directory.svg`, under `/` and `/VERN/` alike.
+
+**Resolution rule.** A bare relative `src` is **not** resolved against
+`document.baseURI` — that is the site root, which would yield
+`/VERN/media/...`. It is the same `<base>` trap fixed earlier for hash links.
+The lesson directory is derived from data the loader already exposes
+(`VernTracksData.base` + the lesson's `file` metadata) and applied while the
+lesson's blocks render. **No protected architecture file was modified.**
+
+**Formats.** webp preferred, svg for vector diagrams, png when necessary. No
+conversion pipeline, no CDN, no backend, no external media service.
+
+**Editorial.** Images must be meaningful; `alt` is required and descriptive;
+`caption` and `credit` optional. Official content uses repository-controlled
+relative paths rather than invented external URLs.
+
+**Safety (unchanged).** Rejected: `javascript:`, `data:`, `blob:`, `vbscript:`,
+protocol-relative `//`, and control-character tricks. Relative repository paths
+and `https:` are allowed. An invalid `src` or a missing `alt` means the block is
+**not rendered**.
+
+---
+
+### 15.2 — `tabs` (container)
+
+```
+{ "type": "tabs",
+  "items": [ { "label": string, "blocks": [ leaf blocks ] } ] }
+```
+
+**Validation.** `label` must be a non-empty string and `blocks` must yield at
+least one leaf block, otherwise the item is dropped. **Fewer than 2 valid items
+→ the block is skipped.**
+
+**Rendering.** `role="tablist"` with real `<button type="button" role="tab">`,
+`aria-selected`, `aria-controls`, and `role="tabpanel"` + `aria-labelledby`.
+The first tab is active on render; inactive panels carry `hidden`.
+
+**Keyboard.** Roving `tabindex` (only the active tab is in the tab sequence);
+`ArrowLeft` / `ArrowRight` wrap, `Home` / `End` jump. Tab/Shift+Tab move in and
+out of the tablist. No focus is stolen on render.
+
+**State.** In-memory DOM state only — no persistence, no storage, no URL state.
+
+**Nesting.** Tier 1 container: **leaf blocks only**. Tabs inside tabs, any other
+container, and exercises are structurally rejected by the leaf-only dispatch.
+
+**Not colour alone.** The active tab carries a weight change and an underline in
+addition to colour.
+
+---
+
+### 15.3 — `matching` (Tier 0 exercise)
+
+```
+{ "type": "matching",
+  "prompt": string | inline[],
+  "pairs": [ { "left": string, "right": string } ],
+  "hint"?, "explanation"?,
+  "feedback"?: { "correct"?, "incorrect"? } }
+```
+
+**Validation — the block is skipped when** fewer than 2 pairs remain, any pair
+is malformed (`left`/`right` not a non-empty string), `left` values are not
+unique, or `right` values are not unique.
+
+**Interaction.** Accessible `<select>` per row — **no drag-and-drop**. Every
+select has a real `<label>`. The right-hand options are **shuffled for display
+only**; the correct mapping is never altered.
+
+**Grading.** Correct only when *every* pair is correct — no partial credit. In
+addition, each row gets an individual textual verdict
+(`✓ ls — correct` / `✕ cd — incorrect`) alongside the global result. Submitting
+nothing is not graded. Unlimited retry, nothing recorded.
+
+**Feedback.** Reuses the §7 infrastructure: `hint`, `feedback.correct` /
+`.incorrect`, `explanation` on both outcomes, `aria-live="polite"`, no
+`role="alert"`.
+
+---
+
+### 15.4 — `ordering` (Tier 0 exercise)
+
+```
+{ "type": "ordering",
+  "prompt": string | inline[],
+  "items": [ { "id": string, "text": string } ],
+  "answer": [ id, ... ],
+  "hint"?, "explanation"?,
+  "feedback"?: { "correct"?, "incorrect"? } }
+```
+
+`items` may be deliberately shuffled; `answer` defines the correct order.
+
+**Validation — the block is skipped when** fewer than 2 items remain, any item
+is malformed, item ids are not unique, `answer` contains a duplicate or an
+unknown id, or `answer` does not contain every item exactly once.
+
+**Interaction.** Move Up / Move Down `<button type="button">` per row — **no
+drag-and-drop**. Each button has an accessible label naming its item
+(`Move “Open the terminal” up`). Boundary buttons are `disabled`. The displayed
+order updates immediately and focus follows the moved item, so the control stays
+usable from the keyboard alone.
+
+**Grading.** Correct only when the whole order equals `answer` — no partial
+credit, no score, unlimited retry, no persistence.
+
+---
+
+### 15.5 — `quote` (Tier 2 leaf)
+
+```
+{ "type": "quote",
+  "content": string | inline[],     // required
+  "author"?: string,
+  "source"?: string,
+  "href"?: string }
+```
+
+**Validation.** `content` is required; an empty or missing `content` means the
+block is not rendered.
+
+**Rendering.** `<blockquote>` containing the content, plus a `<footer>` with the
+author and a `<cite>` source when either is present. A `source` with a **safe**
+`href` becomes a link with `rel="noopener noreferrer"`; an unsafe or absent
+`href` degrades to plain text, so a bad URL never produces broken UI. An `href`
+without a `source` simply produces no link.
+
+**Safety.** Content is a string or a D1 inline array rendered through
+`createElement`/`textContent`. Hostile strings such as `<script>…` or
+`<img onerror=…>` remain visible text and never become nodes. No iframe, no
+embeds, no social sharing.
+
+---
+
+### 15.6 — Nesting summary after B3
+
+| Widget | Tier | May contain |
+|---|---|---|
+| `tabs` | 1 (container) | leaf blocks only |
+| `quote` | 2 (leaf) | D1 inline content only |
+| `matching` | 0 (exercise) | optional `stem` of leaf blocks |
+| `ordering` | 0 (exercise) | optional `stem` of leaf blocks |
+
+The tier model is unchanged: containers cannot contain containers or exercises,
+exercises live at Tier 0 only, and maximum effective depth remains 2. Enforcement
+stays structural (a leaf-only dispatch table), not conventional.
+
+---
