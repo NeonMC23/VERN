@@ -2,141 +2,504 @@
   "id": "fedora",
   "name": "Fedora",
   "type": "operating_system",
-
-  "summary": "A community-driven Linux distribution sponsored by Red Hat, focused on modern technologies, security, and upstream development.",
-
+  "summary": "A community-driven Linux distribution sponsored by Red Hat, built only from software the project may legally redistribute, with a release every six months and about thirteen months of support per release.",
   "tags": [
     "linux",
     "open-source",
+    "distribution",
     "desktop",
-    "security",
-    "rpm"
+    "server",
+    "containers",
+    "rpm",
+    "release-cadence"
   ],
-
   "status": "active",
-
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
   "content": {
-    "introduction": "Fedora is a general-purpose Linux distribution developed by the Fedora Project and sponsored by Red Hat. It is known for adopting modern Linux technologies relatively early while maintaining a strong focus on open-source software and security.",
-
-    "what_is_it": "Fedora provides a complete operating system built around the Linux kernel. Rather than being designed for a single specialized purpose, it offers editions and variants covering desktop computing, servers, development, containers, and other use cases.",
-
-    "how_it_works": "A Fedora system combines the Linux kernel with a collection of system components, libraries, services, applications, and development tools. Its traditional package ecosystem is based on RPM packages and is primarily managed through DNF.",
-
-    "privacy": {
-      "overview": "Fedora provides a relatively strong foundation for users who want a transparent and open-source operating system. However, using Fedora does not automatically make a system private. Privacy depends on the applications, online services, telemetry, browser configuration, and user practices built on top of the operating system.",
-
-      "strengths": [
-        "Large open-source software ecosystem",
-        "Strong security technologies",
-        "Transparent development process"
+    "introduction": "Fedora, also called Fedora Linux, is a general-purpose operating system produced by the Fedora Project, a community sponsored by Red Hat. The project describes its output as a base rather than a single product: “we build a platform, not just a distribution”.\n\nIt began in 2003, when the Red Hat Linux project merged with Fedora Linux, a volunteer repository of extra packages started by Warren Togami in 2002. Releases were named Fedora Core until Fedora 7, when the separate core and extras package sets were unified.\n\nFedora ships only software the project is allowed to redistribute. That is a policy choice and not a technical limitation: codecs, drivers and applications Fedora may not distribute are reachable through third-party repositories or through Flatpaks the user opts into.",
+    "what_is_it": "A Fedora release is a complete operating system assembled by the project: the Linux kernel plus the components, libraries, services, applications and developer tools built in its own infrastructure and signed with its own key. Six editions cover different uses, and the same package collection also produces desktop Spins, curated Labs and the image-based Atomic Desktops.\n\nWhat is offered, and under what conditions, is decided by FESCo, a nine-member technical board elected by the community. The project's stated foundations are Freedom, Friends, Features and First, the last of which means Fedora aims to carry current upstream technology rather than wait for it to settle.",
+    "how_does_it_work": {
+      "overview": "Three mechanisms define how a Fedora system is built and how it ages: the package manager, the release cycle, and on the image-based editions the update mechanism.",
+      "packages_tools": "Packages use the RPM format and are managed with DNF. Releases since Fedora 41 use DNF5 by default, so the dnf command is backed by the newer libdnf5 engine rather than DNF4. PackageKit, which serves GNOME Software and KDE Discover, moved onto that same engine in Fedora 44.",
+      "packages_repositories": "Four repositories describe a release. fedora holds the frozen state of the release, updates holds later fixes, updates-testing holds candidates and is enabled by default only on pre-release trees, and rawhide is the always-rolling development tree from which no release is built. Community maintainers can publish packages in Copr, which is a service of the project but not part of a release.",
+      "packages_stability_rule": "Inside a stable release, updates are meant to fix bugs and not to introduce features, and the update rate is expected to fall towards zero as the release approaches its end of life. Documented exceptions cover the kernel, KDE, LXQt, the Go toolchain and a named list of other packages, which is why a Fedora release keeps receiving new upstream versions of some components while staying on the same major number.",
+      "release_cycle": "A new release targets the third Tuesday of April and October, about every six months, and each release is supported until four weeks after the release two versions later, which works out to roughly thirteen months; that overlap is what lets a user skip one release and remain supported. A release is delayed if it does not meet the Fedora Release Criteria, so a target date is not a promise: Fedora 44 shipped on 2026-04-28, two weeks late. Fedora 44 and Fedora 43 are currently supported, with Fedora 43 scheduled to reach end of life on 2026-12-02 and Fedora 42 already past it on 2026-05-27; Fedora 44 has no end-of-life date published yet, because it depends on the release of Fedora 46.",
+      "image_based_updates": "On the image-based editions the system is composed as an image: the root filesystem is mounted read-only, an update is staged and applied at the next reboot, and the previous deployment stays selectable for rollback. rpm-ostree can layer extra RPMs onto the image, which composes a new image locally and then requires a reboot."
+    },
+    "editions_spins_and_labs": {
+      "editions": "The six editions are the project's flagship outputs, each carried by a working group whose members hold decision-making power. The image-based desktops and the CoreOS and IoT images draw on the same package collection but are built, updated and configured differently.",
+      "spins": "Desktop Spins are complete images built from the same packages, configured around another desktop or window manager. They are not editions, and their continuation depends on an active volunteer team: the release schedule carries a keepalive deadline for spins.",
+      "labs": "Fedora Labs are bundles of software curated for one purpose, installable as whole images or added on top of an existing installation. They are software selections rather than desktop environments.",
+      "spin_names": [
+        "Xfce Desktop",
+        "Cinnamon Desktop",
+        "MATE+Compiz Desktop",
+        "i3 Tiling WM",
+        "LXQt Desktop",
+        "LXDE Desktop",
+        "SOAS Desktop",
+        "Sway Tiling WM",
+        "Budgie Desktop",
+        "Miracle Desktop",
+        "KDE Mobile Desktop",
+        "COSMIC Desktop"
       ],
-
-      "weaknesses": [
-        "Some default services may communicate with external servers",
-        "Privacy depends heavily on the applications and services chosen by the user"
+      "lab_names": [
+        "Astronomy",
+        "Design Suite",
+        "Games",
+        "Jam",
+        "Python Classroom",
+        "Scientific",
+        "Security Lab"
       ]
     },
-
+    "desktop": {
+      "default_desktop": "Fedora Workstation ships GNOME and is the project's flagship desktop; Fedora 44 ships GNOME 50. Budgie, COSMIC and the other environments arrive as Spins, Labs or Atomic Desktops.",
+      "display_server": "Desktop editions use Wayland by default. GNOME's X11 session is no longer offered: X11 was dropped from the Workstation media in Fedora 41 and the GNOME X11 session packages were removed in Fedora 43. X.org is still distributed and other desktops and window managers can run on it, and a 2025 proposal to replace it with the XLibre fork for Fedora 44 was withdrawn. The accurate statement is that Workstation no longer offers a GNOME session under X11, not that Fedora has abandoned X11.",
+      "audio": "PipeWire is the default audio and video server and has been since Fedora 34, replacing the PulseAudio and JACK daemons, with WirePlumber as its session manager since Fedora 35. Both remain switchable by the user."
+    },
+    "obtaining_software": {
+      "channels": "Software reaches a Fedora desktop through three distinct channels that should not be conflated: RPM packages in Fedora's repositories, Flatpaks built by the project into its own Fedora Flatpak index, and sources the user enables afterwards.",
+      "flathub": "Flathub, the wider Flatpak repository, is available but is not enabled by default. From Fedora 35 a filtered subset of Flathub could be turned on with the third-party repositories switch, and from Fedora 38 that same opt-in exposes all of Flathub. In GNOME Software, the documented source order for an application available on several channels is Fedora Flatpaks, then RPM packages, then Flathub; that ordering is the software centre's own documented preference setting, not a ranking of the formats by the Fedora Project. The project's own release note for the change reads: “Flathub is not enabled by default”. Guides claiming the opposite are describing the opt-in offered during initial setup.",
+      "third_party": "Software Fedora may not redistribute, such as patented media codecs, the proprietary NVIDIA driver or the Steam client, comes from RPM Fusion, an independent volunteer project, or from a vendor repository. Fedora documents these mechanisms and its enablement interface states that third-party repositories contain proprietary software, but the project neither operates nor vets them.",
+      "openh264": "One proprietary-licensed component does come from an enabled-by-default repository: the fedora-cisco-openh264 repository carries Cisco's OpenH264 build, distributed by Cisco so that its licensing fees are covered, and the project's documentation describes it as enabled by default since Fedora 33. It exists to make H.264 usable in WebRTC and does not enable general media playback."
+    },
     "security": {
-      "overview": "Security is one of Fedora's major strengths. The distribution integrates technologies such as SELinux and secure boot support while benefiting from rapid security updates.",
-
+      "overview": "Security is a strength the project itself claims. What can be checked is how it is implemented: the relevant mechanisms are enabled by default rather than left to a hardening step by the user.",
       "features": [
-        "SELinux",
+        "SELinux enforcing",
+        "Signed packages",
         "Secure Boot support",
-        "Rapid security updates",
-        "Modern kernel and userspace components"
-      ]
+        "firewalld enabled",
+        "Sandboxed Flatpaks",
+        "Fast kernel updates"
+      ],
+      "mandatory_access": "SELinux runs in enforcing mode with the targeted policy by default. Fedora's policy sources are shared with Red Hat Enterprise Linux and CentOS Stream, so the same policy work serves all three.",
+      "updates": "Every package is signed with a Fedora Project GPG key, and security fixes travel through the same Bodhi pipeline as bug fixes, carrying a severity and the identifiers they address. There is no separate advisory channel and no support service level agreement. Unattended installation is available through dnf-automatic but is not switched on by default; on the image-based editions, automatic updating is part of the model.",
+      "secure_boot": "UEFI Secure Boot is supported through the project's shim, and Machine Owner Keys can be enrolled for third-party driver modules. Microsoft's 2011 UEFI certificate expires in June 2026, which prevents new signing but does not stop existing systems from booting. The project advises refreshing the firmware key database and warns against removing or revoking the 2011 key, because option ROMs still depend on it.",
+      "firewall": "firewalld is installed and running and assigns an edition-specific zone. The FedoraWorkstation zone deliberately allows ports 1025 to 65535 so that applications a user installs keep working; the project documents this as a reviewed design decision and points to the FedoraServer zone for a closed default."
     },
-
-    "usability": "Fedora is relatively accessible to Linux newcomers while still providing the flexibility expected by experienced Linux users. Its default GNOME desktop provides a polished environment, while other desktop environments are available through official variants.",
-
-    "performance": "Performance depends heavily on the chosen desktop environment, hardware, applications, and configuration. Fedora itself is not specifically designed to be an ultra-lightweight distribution, although lighter desktop environments can be used.",
-
-    "who_is_it_for": [
-      "Users looking for a modern Linux desktop",
-      "Developers",
-      "Users interested in recent Linux technologies",
-      "Users who value open-source software and security"
-    ],
-
-    "who_is_it_not_for": [
-      "Users requiring extremely long-term software stability",
-      "Users looking for the absolute lightest possible Linux system",
-      "Users who depend heavily on proprietary software unavailable on Linux"
-    ],
-
+    "privacy": {
+      "overview": "The project's homepage describes the desktop as free and private, saying it carries no ads and that the user's data belongs to the user. That is a statement of policy and intent. The narrower, checkable reading of the same material is that no advertising and no mandatory system-wide telemetry service were identified in the Fedora documentation reviewed for this page.",
+      "documented_mechanisms": [
+        "Package metadata refreshes",
+        "OpenH264 repository",
+        "Optional online accounts",
+        "Third-party repo opt-in"
+      ],
+      "what_is_absent": "A proposal to collect anonymous, opt-out usage metrics on Workstation was written up for Fedora 40 and never reached a decision, so nothing shipped. That is a conclusion about the documentation, not a guarantee about behaviour, and it covers the project alone.",
+      "layers": "Privacy on Fedora is set at four layers, decided by different people: the Fedora Project, the desktop project whose defaults it inherits, the applications a user installs, and any external repository or service the user turns on. Each has its own policy, and the project's websites and accounts have a separate one of their own."
+    },
+    "hardware": {
+      "architectures": "Fedora defines two tiers. x86_64 and AArch64 are primary architectures, where a failed build blocks a release. ppc64le, s390x and RISC-V are alternative architectures carried by their own maintainer teams, where a missed target does not block a release, and an architecture that misses its targets twice is re-evaluated. The x86_64 baseline remains v1: unlike Red Hat Enterprise Linux, Fedora does not require x86-64-v2 instructions, and installation guides that say a pre-2012 CPU will refuse to boot are describing RHEL. The 32-bit i686 archives were discontinued long ago, and a 2025 proposal to remove the remaining multilib support for Fedora 44 was withdrawn.",
+      "requirements": "The download pages recommend 4 GB of memory and 40 GB of storage for most variants, suggest doubling both for comfortable use, and ask for a 4 GB USB stick. The project publishes no per-edition benchmarks or memory figures.",
+      "devices": "AArch64 is delivered both as live media and as raw disk images for boards; the project's ARM page lists Raspberry Pi 3 and 4 series devices and the Zero 2 W, and Fedora IoT names the Raspberry Pi 4 a reference platform. Apple silicon Macs are served by Fedora Asahi Remix, a distribution produced jointly by the Asahi Linux project and the Fedora Project and based on Fedora Linux 44, whose platform packages are in upstream Fedora. Fedora 44 added automatic device-tree selection so that AArch64 live images boot on Windows-on-ARM laptops out of the box."
+    },
+    "installation": {
+      "media": "A release is published as a Live ISO for each edition and spin, an Everything network installer that downloads what it installs, a Minimal image without a desktop environment, raw images for AArch64 boards, container and WSL images, and BitTorrent copies.",
+      "verification": "Each image is published with a SHA256 checksum inside a CHECKSUM file that is itself signed by a Fedora Project OpenPGP certificate, and the project documents verification with sq or gpgv against its published certificates. Checking the checksum alone detects corruption; checking the signature is what detects a substituted image.",
+      "installer": "Anaconda installs the package-based editions, and the project recommends Fedora Media Writer for preparing the USB stick. Fedora 44 narrowed Anaconda's behaviour so that it creates network profiles only for devices configured during installation. Fedora CoreOS has no interactive installer at all: it is written with coreos-installer and configured at first boot by an Ignition config."
+    },
+    "updating": {
+      "routine": "Updates are applied with dnf upgrade. Candidates wait in updates-testing, which stable systems do not poll by default, so staying on the default repositories means installing only what has been promoted after community feedback.",
+      "upgrades": "Upgrading to a new major version is documented for the package-based editions and, as a rebase onto a new image, for the rpm-ostree editions. The support overlap makes skipping exactly one release workable.",
+      "caveats": "Third-party repositories are not always rebuilt on release day, and material written against DNF4 refers to commands, plugins and configuration options that DNF5 renamed or absorbed. Older guides are therefore a common source of false claims about current Fedora behaviour."
+    },
+    "development": {
+      "toolchain": "Fedora is positioned as a developer desktop: current compilers, runtimes and container tools are available from the project's own repositories, and a dedicated portal documents development and deployment workflows. Fedora 44 updated the toolchain to GCC 16, binutils 2.46, glibc 2.43, LLVM 22, Go 1.26, Ruby 4.0 and CMake 4 with the ninja generator as default, and added packaging for the Nix package manager. Those versions are specific to Fedora 44, which each release rebases.",
+      "build_chain": "Packages are built in Koji from the project's dist-git sources, queued and gated through Bodhi, and Fedora 44 approved Packit as dist-git CI. The same pipeline is public, which is what makes the provenance of a Fedora package checkable.",
+      "containers": "Podman, Buildah, Skopeo and the Fedora Toolbox images are promoted as the container path, and the upstream Toolbx project documents Toolbox as installed by default on Workstation and Silverblue. A Toolbox container shares the home directory, display and most devices with the host, so it is a workflow convenience and not a security boundary. Fedora also publishes its own base, minimal and toolbox container images, and a WSL image, so Fedora itself can run inside another operating system."
+    },
+    "gaming": {
+      "in_fedora": "Fedora ships the open-source graphics stack and Wine, and its Games Lab collects the games available in the repositories, reworked onto KDE Plasma for Fedora 44. Fedora 44 also enables the NTSYNC kernel module through a package recommendation on Wine and Steam packages, so installing them configures NTSYNC for later boots: a compatibility and performance gain for running Windows titles.",
+      "not_in_fedora": "Steam and the proprietary NVIDIA driver come from RPM Fusion, and Proton is Valve's compatibility layer rather than a Fedora component. Gaming distributions built on Fedora, such as Nobara or Bazzite, add those pieces themselves and carry their own kernel patches and codecs."
+    },
+    "performance": "Fedora publishes no benchmarks of its own, so there is no official figure to quote. What is documented is structural: a release tracks recent upstream code, the desktop or window manager chosen is the largest single factor in how light the system feels, and lighter options exist as Spins and as the Minimal image. Numbers quoted elsewhere describe somebody's hardware and configuration rather than the distribution.",
     "advantages": [
-      "Modern software stack",
-      "Strong security features",
-      "Excellent developer ecosystem",
-      "Large community",
-      "Strong relationship with upstream projects"
+      "Six-month release cadence",
+      "Recent upstream software",
+      "Six editions plus variants",
+      "Image updates with rollback",
+      "SELinux enforcing by default",
+      "Signed packages and images",
+      "Elected technical board",
+      "Free software only by policy"
     ],
-
     "disadvantages": [
-      "Relatively short release lifecycle",
-      "Updates can be more frequent than on conservative distributions",
-      "Some proprietary software requires additional configuration"
+      "Thirteen months of support",
+      "Major upgrades every cycle",
+      "No patented codecs shipped",
+      "No NVIDIA driver by default",
+      "No security response SLA",
+      "Third-party repos may lag",
+      "Secondary alt architectures",
+      "LWN: fewer active packagers"
     ],
-
-    "verdict": "Fedora is a strong general-purpose Linux distribution for users who want a modern, secure, and open-source computing environment without having to build their system from scratch."
+    "who_is_it_for": [
+      "Developers who want a current toolchain without maintaining it themselves",
+      "Users who want upstream GNOME or KDE defaults on a laptop or desktop",
+      "Home labs and small businesses running Fedora Server",
+      "Operators wanting an automatically updated container and Kubernetes host",
+      "Makers building IoT or edge devices on signed, atomic images",
+      "Contributors who want to work inside a documented community process"
+    ],
+    "who_is_it_not_for": [
+      "Anyone needing years of support on one version, for whom the project itself points to CentOS Stream or RHEL",
+      "Users whose work depends on software no third-party repository provides",
+      "People wanting a rolling workstation, since Rawhide is a development tree and not a product",
+      "Organisations buying contractual support and certification"
+    ],
+    "verdict": "Fedora is a general-purpose Linux distribution whose official outputs cover desktop, server, cloud, container, edge and image-based use cases from a single package collection. The traditional editions are built and updated as RPM packages with DNF, while the Atomic Desktops, Fedora CoreOS and Fedora IoT are composed as images and updated with rpm-ostree. What a release contains, and when it ships, follows decisions by the elected FESCo board and the release criteria rather than a vendor roadmap."
   },
-
   "components": [
     {
       "id": "linux",
-      "role": "kernel"
+      "name": "Linux",
+      "role": "kernel",
+      "note": "The kernel Fedora ships is built and packaged by the Fedora Project, not taken unmodified from upstream."
     },
     {
       "id": "gnome",
-      "role": "desktop_environment"
+      "name": "GNOME",
+      "role": "desktop_environment",
+      "note": "Default on Workstation; the other desktops arrive through Spins and Labs."
     },
     {
       "id": "dnf",
-      "role": "package_manager"
+      "name": "DNF",
+      "role": "package_manager",
+      "note": "DNF5 is the default since Fedora 41; image-based editions use rpm-ostree instead."
     },
     {
       "id": "rpm",
-      "role": "package_format"
+      "name": "RPM",
+      "role": "package_format",
+      "note": "Package format: how software is packed and signed."
     },
     {
       "id": "systemd",
-      "role": "init_system"
+      "name": "systemd",
+      "role": "init_system",
+      "note": "System and service manager."
     },
     {
       "id": "wayland",
-      "role": "display_protocol"
+      "name": "Wayland",
+      "role": "display_protocol",
+      "note": "Default on desktop editions; the GNOME session on X11 was removed from the media in Fedora 41."
     },
     {
       "id": "selinux",
-      "role": "security_technology"
+      "name": "SELinux",
+      "role": "security_technology",
+      "note": "Enforcing with the targeted policy, shared with Red Hat Enterprise Linux."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_server",
+      "note": "Default since Fedora 34, with WirePlumber since Fedora 35."
+    },
+    {
+      "id": "flatpak",
+      "name": "Flatpak",
+      "role": "application_format",
+      "note": "Fedora's own index is enabled by default; Flathub is available but not enabled by default."
+    },
+    {
+      "id": "rpm-ostree",
+      "name": "rpm-ostree",
+      "role": "image_update_tool",
+      "note": "On the image-based editions only."
+    },
+    {
+      "id": "firewalld",
+      "name": "firewalld",
+      "role": "firewall_manager",
+      "note": "Enabled by default, with edition-specific zones."
     }
   ],
-
   "relations": [
     {
+      "id": "red-hat-enterprise-linux",
+      "name": "Red Hat Enterprise Linux",
+      "relation": "upstream_of",
+      "note": "The project describes Fedora as the first upstream of RHEL; Red Hat in turn sponsors Fedora."
+    },
+    {
+      "id": "centos-stream",
+      "name": "CentOS Stream",
+      "relation": "downstream_of",
+      "note": "Sits between Fedora and RHEL and carries ongoing work on released RHEL versions."
+    },
+    {
+      "id": "nobara",
+      "name": "Nobara Linux",
+      "relation": "downstream_derivative",
+      "note": "Independent gaming distribution based on Fedora with its own patch set."
+    },
+    {
+      "id": "bazzite",
+      "name": "Bazzite",
+      "relation": "downstream_derivative",
+      "note": "Universal Blue image built on the Fedora Atomic Desktops."
+    },
+    {
+      "id": "asahi-remix",
+      "name": "Fedora Asahi Remix",
+      "relation": "collaboration",
+      "note": "The project describes itself as “the result of a close multi-year collaboration between the Asahi Linux project and the Fedora Project”, based on Fedora Linux 44, with all Asahi platform-specific packages merged into upstream Fedora."
+    },
+    {
       "id": "debian",
-      "type": "alternative"
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "Independent packaging family with no shared code or derivation; listed only as a distribution alternative, not as a claim that the two suit the same cases."
     },
     {
       "id": "arch-linux",
-      "type": "alternative"
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Independent packaging family with no shared code or derivation; listed only as a distribution alternative, not as a claim that the two suit the same cases."
     }
   ],
-
+  "variants": [
+    {
+      "name": "Fedora Workstation",
+      "description": "The flagship edition with the GNOME desktop, designed for laptops and desktops. It asks at first startup whether to enable third-party repositories and drivers, and its default firewall zone is FedoraWorkstation."
+    },
+    {
+      "name": "Fedora KDE Plasma Desktop",
+      "description": "Fedora's edition built around the KDE Plasma desktop. Fedora Linux 44 ships Plasma 6.6 together with the new Plasma Login Manager."
+    },
+    {
+      "name": "Fedora Server",
+      "description": "Managed edition administered from Cockpit's web management console. It ships free software by default, offers RPM Fusion drivers as an option, and applies SELinux policy tailored to server roles."
+    },
+    {
+      "name": "Fedora Cloud",
+      "description": "Images for public clouds and for edge and container-first deployments. Fedora Linux 44 moved the /boot of those images to its own Btrfs subvolume."
+    },
+    {
+      "name": "Fedora CoreOS",
+      "description": "A minimal, secure, immutable, burn-after-reading operating system for clustered and containerized environments, configured with Ignition and installed with coreos-installer."
+    },
+    {
+      "name": "Fedora IoT",
+      "description": "An image-mode operating system for edge devices, updated with rpm-ostree and rolled back with OSTree."
+    },
+    {
+      "name": "Fedora Silverblue",
+      "description": "Image-based edition of the Workstation with the GNOME desktop. The operating system and the applications are managed with rpm-ostree and Flatpak."
+    },
+    {
+      "name": "Fedora Kinoite",
+      "description": "Image-based edition built around the KDE Plasma desktop. Fedora 44 added a KDE developer profile for image builds and CI."
+    },
+    {
+      "name": "Fedora Sway Atomic",
+      "description": "Image-based edition with the Sway tiling compositor."
+    },
+    {
+      "name": "Fedora Budgie Atomic",
+      "description": "Image-based edition with the Budgie desktop, first built for Fedora Linux 44."
+    },
+    {
+      "name": "Fedora COSMIC Atomic",
+      "description": "Image-based edition with the COSMIC desktop, first built for Fedora Linux 44."
+    }
+  ],
   "links": {
-    "website": "https://fedoraproject.org/",
+    "homepage": "https://fedoraproject.org/",
     "documentation": "https://docs.fedoraproject.org/",
+    "editions": "https://fedoraproject.org/#editions",
+    "downloads": "https://fedoraproject.org/workstation/download/",
+    "security": "https://fedoraproject.org/security",
+    "support": "https://discussion.fedoraproject.org/c/ask/",
     "repository": "https://src.fedoraproject.org/"
   },
-
   "sources": [
     {
-      "title": "Fedora Project",
-      "url": "https://fedoraproject.org/",
-      "type": "official"
+      "title": "Fedora Project — about the project and its foundations",
+      "url": "https://docs.fedoraproject.org/en-US/project/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora Linux releases — release life cycle",
+      "url": "https://docs.fedoraproject.org/en-US/releases/lifecycle/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora Linux releases — end of life",
+      "url": "https://docs.fedoraproject.org/en-US/releases/eol/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "FESCo — Fedora release engineering and update policy",
+      "url": "https://docs.fedoraproject.org/en-US/fesco/Updates_Policy/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "FESCo — elected technical board",
+      "url": "https://docs.fedoraproject.org/en-US/fesco/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Using the DNF software package manager",
+      "url": "https://docs.fedoraproject.org/en-US/quick-docs/dnf/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora repositories",
+      "url": "https://docs.fedoraproject.org/en-US/quick-docs/fedora-repositories/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora Atomic Desktops user guide",
+      "url": "https://docs.fedoraproject.org/en-US/atomic-desktops/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora CoreOS documentation",
+      "url": "https://docs.fedoraproject.org/en-US/fedora-coreos/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora IoT documentation",
+      "url": "https://docs.fedoraproject.org/en-US/iot/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Download Fedora Workstation 44 — images, checksums and OpenPGP verification",
+      "url": "https://fedoraproject.org/workstation/download/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora Project — Miscellaneous Downloads",
+      "url": "https://fedoraproject.org/misc/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora Project — Server edition",
+      "url": "https://fedoraproject.org/server/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora Project — Cloud edition",
+      "url": "https://fedoraproject.org/cloud/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora Project — Labs",
+      "url": "https://fedoraproject.org/labs/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora 44 approved ChangeSet",
+      "url": "https://fedoraproject.org/wiki/Releases/44/ChangeSet",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Change proposal: Unfiltered Flathub",
+      "url": "https://fedoraproject.org/wiki/Changes/UnfilteredFlathub",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Change proposal: route all audio to PipeWire",
+      "url": "https://fedoraproject.org/wiki/Changes/DefaultPipeWire",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora architectures — primary and alternative",
+      "url": "https://fedoraproject.org/wiki/Architectures",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora documentation — OpenH264",
+      "url": "https://fedoraproject.org/wiki/OpenH264",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Announcing Fedora Linux 44",
+      "url": "https://fedoramagazine.org/announcing-fedora-linux-44/",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Expiration of the Microsoft Secure Boot keys",
+      "url": "https://fedoramagazine.org/expiration-of-microsoft-secure-boot-keys/",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Control the firewall at the command line",
+      "url": "https://fedoramagazine.org/control-the-firewall-at-the-command-line/",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora and CentOS Stream",
+      "url": "https://fedoramagazine.org/fedora-and-centos-stream/",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Statement from the Fedora Project Leader on the Fedora and Flathub relationship",
+      "url": "https://communityblog.fedoraproject.org/a-statement-concerning-the-fedora-and-flathub-relationship-from-the-fpl/",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "RPM Fusion FAQ — why Fedora does not ship these packages",
+      "url": "https://rpmfusion.org/FAQ",
+      "type": "third-party",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Fedora Asahi Remix — the Asahi Linux and Fedora collaboration",
+      "url": "https://asahilinux.org/fedora/",
+      "type": "third-party",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Bazzite: a gem for Linux gamers",
+      "url": "https://lwn.net/Articles/1046228/",
+      "type": "independent",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "The state of Fedora in 2026",
+      "url": "https://lwn.net/Articles/1077832/",
+      "type": "independent",
+      "publisher": "LWN.net",
+      "date": "2026-06-16",
+      "accessed": "2026-09-19",
+      "note": "Report of the Fedora Project Leader's Flock keynote, including the decline in active packagers"
     }
   ],
-
-  "last_verified": "2026-08-31"
+  "last_verified": "2026-09-19"
 }
