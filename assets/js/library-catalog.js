@@ -18,6 +18,9 @@
 
 var LIBRARY_RESOURCES = [
   "fedora",
+  "debian",
+  "ubuntu",
+  "arch-linux",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
