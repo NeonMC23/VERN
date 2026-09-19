@@ -1,0 +1,735 @@
+{
+  "id": "ubuntu",
+  "name": "Ubuntu",
+  "type": "operating_system",
+  "summary": "A Linux distribution published by Canonical and governed with volunteer-led bodies, built on a signed deb archive split into main, restricted, universe and multiverse, with snaps, charms and rocks beside it. Ubuntu 26.04 “Resolute Raccoon” of 2026-04-23 is the current LTS, five years of standard security maintenance in main, extendable to fifteen years with Ubuntu Pro and its Legacy add-on.",
+  "tags": [
+    "linux",
+    "open-source",
+    "distribution",
+    "deb-and-snap",
+    "long-term-support",
+    "canonical-published",
+    "many-architectures",
+    "official-flavours"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64",
+    "arm64",
+    "armhf",
+    "ppc64el",
+    "riscv64",
+    "s390x"
+  ],
+  "content": {
+    "introduction": "Ubuntu is published by Canonical and governed with volunteer-led bodies: the About page says Canonical is the publisher, that its team leads areas such as the kernel, the default desktop, foundations, security, OpenStack and Kubernetes, and that governance is “somewhat independent of Canonical”, with volunteers responsible for many parts of the project. It began when Mark Shuttleworth gathered a team of Debian developers and founded Canonical to produce an easy-to-use Linux desktop; the first release, 4.10 “Warty Warthog”, came in October 2004, and the project claims to have been the first operating system committed to a predictable six-month cadence, with long-term support for every fourth release decided in 2006. Ubuntu 26.04 “Resolute Raccoon”, released 2026-04-23, is the current LTS; 26.10 “Stonking Stingray” is in development.",
+    "what_is_it": "What Ubuntu publishes is one signed deb archive and the installers, tools and editions that consume it. The archive has four components — main and restricted as the supported base, universe and multiverse as community-maintained or legally encumbered material — and five pockets per series: the release, updates, security, proposed and backports. Beside debs the project places snaps for applications, charms for operators and rocks for container images, and names three editions: Classic, Core and Minimal. It is fixed-release in the strict sense used by its own security manual: updates arrive as backported patches that “won't generally introduce new functionality”, with feature refreshes handled separately through Stable Release Updates and Hardware Enablement stacks.",
+    "origin_and_relation_to_debian": {
+      "founded_by_debian_developers": "The origin is described as Mark Shuttleworth gathering “a small team of Debian developers who together founded Canonical” in 2004. Ubuntu's own version file lists the first release as warty, 4.10, dated 2004-10-20.",
+      "imported_from_debian": "The mechanism is documented rather than asserted: the 26.04 schedule carries a Debian Import Freeze on 2026-02-19 and an archive-wide activity “enable autosync from Debian”, and removals cite the amont, as with dmraid, dropped in 24.10 “primarily due to its removal from Debian unstable”. The archive browser shows the same filiation per package, naming an “Original Maintainer (usually from Debian)” under the Ubuntu maintainer.",
+      "independent_infrastructure": "The security documentation gives the clearest statement: the archive verification scheme “is inherited from Debian, which is Ubuntu's upstream distribution”, so most of that page also applies to Debian, while “the infrastructure for distributing the official Ubuntu Archive, as well as Launchpad are completely independent of the Debian infrastructure”. Ubuntu's pages describe the sync and the shared tooling; they carry no derivative slogan."
+    },
+    "governance": {
+      "code_of_conduct": "The governance page presents the Code of Conduct as one of Ubuntu's innovations in free software and “the foundation for all of our governance practices”, in use since 2004 and copied by other communities. The text in force is version 2.0 and governs behaviour “in public or in private whenever the project will be judged by our actions”.",
+      "decision_bodies": "Two bodies are named. The Community Council supervises community processes, runs nominations and elections for Ubuntu boards and councils, owns the Code of Conduct and is “ultimately responsible for dispute resolution”, meeting with the other bodies every two months. The Technical Board holds technical direction and decides package selection, packaging policy, installation systems, the kernel, the X server, display management and library versions and dependencies, meeting fortnightly on IRC with a public agenda. Both are to decide “in an accountable, fair and transparent fashion”, with a single escalation path and decisions taken even where consensus is missing.",
+      "sponsor_and_teams": "The page states that “This is not a democracy, it's a meritocracy” and that Mark Shuttleworth is the self-appointed benevolent dictator for life: he sponsors the project, may direct Canonical employees at particular projects, feature goals or bugs, and holds a casting vote on both councils, “not used lightly”. He short-lists nominees, whose membership is then voted or vetoed by the relevant community. Work is delegated to teams — documentation, kernel, servers, laptops, translation — and to local Ubuntu Circles, with no headcount published."
+    },
+    "release_model": {
+      "cadence_and_naming": "A release comes every six months, numbered by year and month and named by an adjective and an animal, so 26.04 is the April 2026 release. Interims are supported for nine months and addressed to users who move fast, with production pointed to the LTS, which appears every two years.",
+      "freeze_schedule": "Each series publishes a schedule of named freezes: for 26.04, toolchain upload on 2025-10-16, feature freeze with Debian Import Freeze on 2026-02-19, mandatory beta on 2026-03-26, release on 2026-04-23 and the 26.04.1 point release on 2026-08-27, alongside a table of disruptive archive-wide activities such as the Python 3.14 and Go 1.25 transitions. The 26.10 schedule places its final release on 2026-10-15, a published plan rather than an event, and the notes index already lists 27.04 as “T T” and 27.10 as “U U”, without animal names.",
+      "version_file": "The file read by the release upgrader, meta-release, lists every published series from warty 4.10 to resolute 26.04.1 with dates, release notes and a signed upgrade tarball served from the archive. Its Supported flag is an upgrade-availability signal, not a support policy: resolute reads Supported: 1 there while the LTS-only file did not mark it the same way at the same moment."
+    },
+    "releases_and_support": {
+      "current": "Ubuntu 26.04 LTS “Resolute Raccoon” was released on 2026-04-23, the archive Release file carrying that date, with 26.04.1 on 2026-08-27. Its release notes say it “will be supported until April 2031”, while the release-cycle matrix puts the end of standard maintenance at May 2031; both are Ubuntu documents and the difference is left here as found.",
+      "other_releases": "The documentation still lists 24.04 “Noble Numbat”, to point release 24.04.5, and 22.04 “Jammy Jellyfish”, to 22.04.5, with matrix rows ending May 2029 and May 2027 for standard maintenance and two further five-year layers each. 20.04 is no longer in that list, while cloud-images keeps trusty and xenial directories marked END OF STANDARD SUPPORT. The development series is 26.10, after 25.10 “Questing Quokka” of 2025-10-09 and 25.04 “Plucky Puffin” of 2025-04-17.",
+      "support_layers": "The security manual's table separates free from paid coverage. For main and restricted: nine months on an interim, five years on an LTS, ten with ESM infra and fifteen with ESM infra and apps plus Legacy. For universe and multiverse: community support for the same nine months or five years, and ten or fifteen years only with ESM apps. Standard maintenance is described as CVE patches for packages in main, so universe does not carry the same promise.",
+      "pro_and_esm": "Ubuntu Pro is a subscription “always free for personal use”, documented as free on up to five machines, with a thirty-day trial for enterprises, and attachable in place without redeployment. ESM supplies ten years of fixes for critical, high and selected medium vulnerabilities across the whole archive as defined by Ubuntu priority, and the Legacy add-on adds five years more. ESM is not a longer-lived version of the same pocket: it is served from pockets on esm.ubuntu.com, split into infra for main and apps for universe, written into APT sources by the Pro client with their own keyrings, pinned at priority 510, and its notices mark which updates are Pro-only.",
+      "livepatch": "Kernel Livepatch “shrinks the exploit window for critical and high severity Linux kernel vulnerabilities, by patching the Linux kernel between security maintenance windows, while the system runs”, issuing a livepatch and a Livepatch Security Notice per vulnerability, with per-machine delay and cut-off date. It comes with Pro and is free for up to five machines for personal use or evaluation."
+    },
+    "package_system": {
+      "deb_and_snap_side_by_side": "The release-cycle page places the two formats without substituting them: debs “remain at the core of every release”, with the archive's dependency management, while snaps serve applications that evolve outside the system and should come from publishers one trusts. Charms carry operational logic and rocks are minimal OCI images built from Debian packages, in chiselled variants with no shell and no package manager.",
+      "apt_usage": "APT is “the recommended way to install Debian packages”, with apt update for the index then install, remove with an optional purge, and upgrade; the manual puts repository definitions in deb822 form in /etc/apt/sources.list.d/ubuntu.sources since 24.04, older releases using sources.list, states that apt is meant to be interactive while apt-get belongs in scripts, and documents aptitude as the text frontend.",
+      "snaps": "Confinement sets a snap's isolation. Strict uses AppArmor, seccomp, device cgroups, capabilities, mount namespaces and file permissions, granting resources through interfaces. Classic has, in the security documentation's words, no confinement and access to system resources “in much the same way traditional packages do”, needs manual review before publication and may hit runtime binary incompatibilities like any third-party package; Ubuntu Core does not support classic snaps at all. The desktop integrates snaps further: 26.04 added a GNOME Shell search provider for snap applications, which can be switched off in Settings.",
+      "archive_components": "Main is Canonical-supported free and open-source software, universe community-maintained free and open-source software, restricted proprietary device drivers, and multiverse software restricted by copyright or legal issues, with restricted and multiverse able to carry non-open-source material. Install media carry main and restricted, so a machine with no network can still install from them. A separate partner repository, off by default, offers proprietary and closed-source software outside the four components.",
+      "trust_and_third_parties": "Package authenticity is decoupled from how packages are distributed, the signatures being generated on systems independent of the distribution infrastructure, which is why verification works over mirrors and plain HTTP; the key material is itself a package, ubuntu-keyring, described as “GnuPG keys of the Ubuntu archive”. The limit is stated in the same pages: third-party repositories and PPAs are not recommended because “APT repositories run code that is not sandboxed” and because “there is no automatic mechanism to establish the trustworthiness of a repository”, and users are told to install by package name rather than pointing apt at a .deb file."
+    },
+    "hardware": {
+      "architectures": "Three official lists coexist. The archive Release file for 26.04 names eight: amd64, amd64v3, arm64, armhf, i386, ppc64el, riscv64 and s390x. The server manual lists six supported architectures for Ubuntu Server and refers to the certification programme for specific platforms. The release-cycle matrix names amd64, armhf, arm64, s390x, riscv64 and ppc64el with a Power generation qualifier. i386 and amd64v3 thus exist in the archive without being install targets.",
+      "architecture_variants": "Since 25.10 Ubuntu can build several variants of one package; the first is amd64v3, “optimized for the x86-64-v3 microarchitecture level”, and the notes state it is “opt-in by default” for maximum compatibility, enabled by setting APT::Architecture-Variants and upgrading. That is an added optimised path, not a raised baseline: no document says plain amd64 packages were dropped for a newer instruction set. On RISC-V the constraint is hard, the 26.04 release “only supports hardware that implements the RVA23S64 ISA profile”, while 24.04 keeps older boards. For i386 the shrinkage is per package, as when PostgreSQL 18 stopped building for it and took its libraries with it.",
+      "requirements": "The desktop asks for a 2 GHz dual-core processor or better, 6 GB RAM and 25 GB of storage “for a comfortable experience”, and recommends a flavour such as Xubuntu or Lubuntu on 2 GB machines. Server requirements “scale with your specific use case, starting as low as 1.5 GB RAM and 4 GB of storage space”, the server reference giving 1 GB and 2.5 to 4 GB for cloud images, 3 GB and 25 GB suggested, with its own warning that the figures are those of 24.04 on amd64."
+    },
+    "installers": {
+      "server_installer": "The server installer is Subiquity, released per Ubuntu series with its own notes from 24.08.1 to 26.04, documented with screens, storage configuration and an unattended path called autoinstall, which has an introduction, quick starts, a validation guide and per-platform variants including s390x. Media and boot methods are documented per platform: amd64 and arm64 netboot, a page on choosing arm64 or arm64+largemem, ppc64el with petitboot, s390x under z/VM or LPAR.",
+      "desktop_installer": "26.04 ships a new desktop installer and its notes list gains and limits together: installation is now possible with a screen reader, with Super+Alt+S to start one, but the live session is not localised, so a non-English install needs internet access for language packs, and OEM installs are “not supported yet”. A third-party interaction is documented too, with advice to flash the ISO directly rather than use a broken Ventoy build.",
+      "preinstalled_images": "Ubuntu on Raspberry Pi is documented through the Raspberry Pi Imager, itself installed as a snap, with a note that certain releases need a minimum EEPROM date on Pi 4 and Pi 5 and that the desktop image on that board asks for 4 GB RAM and 16 GB storage. Cloud and preinstalled images deploy through cloud-init, which is disabled on systems installed from ISO images."
+    },
+    "images_and_editions": {
+      "editions": "Three editions are named: Ubuntu Classic, the traditional install; Ubuntu Core, an all-snap, strictly confined and immutable system for edge and IoT; and Ubuntu Minimal, offered on the main public clouds. The download site sorts retrieval by use instead — Desktop, Server, WSL, Flavours, Cloud, Core — which is a different axis from editions.",
+      "media_and_hosts": "amd64 images are published on the releases host with desktop and live-server ISOs, netboot tarballs and a .wsl image for 26.04.1; other architectures are on cdimage, with desktop for arm64 and riscv64, live-server for arm64, arm64+largemem, ppc64el, riscv64 and s390x, preinstalled server images including arm64+raspi and riscv64, and WSL for arm64. Cloud images live on a third host per code-name with daily and release trees, older series left marked end of standard support. Mirrors and BitTorrent are documented alternatives, past releases hold POWER, IBMz, ARM and older point releases with their original stack, and a network installer ships the minimal packages and fetches the rest over the network.",
+      "image_verification": "Verification is documented as manual and necessary: “You must manually verify the authenticity of Ubuntu installation images, as standard HTTP or FTP clients (such as browsers) don't have this capability”, which the page calls worthwhile even over TLS. All media are signed with the Ubuntu CD Image Automatic Signing Key, whose keyring is downloadable from the archive, and the four steps are to fetch it, establish trust in the key — the page names the chicken-and-egg problem — validate the image and sign the key for later use. The release directories publish SHA256SUMS with a matching SHA256SUMS.gpg."
+    },
+    "updates_and_upgrades": {
+      "automatic_by_default": "Security updates are applied without being asked: “Ubuntu will apply security updates automatically, without user interaction. This is done via the unattended-upgrades package, which is installed by default”, enabled right after installation including ESM where present, running once per day, able to reboot, and configured in /etc/apt/apt.conf.d/50unattended-upgrades and 20auto-upgrades with logs under /var/log/unattended-upgrades. Adding another repository does not make the tool consider it. On the desktop the documented chain is update-notifier for notices, software-properties for settings and update-manager to apply, and update-notifier-common for server notices.",
+      "phased_updates": "Rollouts are staged: an update is “provided only to a small subset of Ubuntu machines” at first and to more as it proves stable. Users are told the “packages have been kept back” message can be safely ignored, since the update arrives when fully phased, and the purpose is to contain bugs that testing missed. Two machines on one release are therefore expected to sit on different versions for a while.",
+      "release_upgrades": "A release upgrade is separate from routine updates and limited to one step: “You can only upgrade from one LTS release directly to the next sequential LTS release... you cannot skip releases”, staging through each LTS in turn. The 26.04 notes apply this now, requiring users on 22.04 or 25.04 to go via 24.04 LTS or 25.10, while the matrix describes 24.04's way forward as through 24.10. The recommended command on server and cloud images is do-release-upgrade, with -d for development releases; the checklist is to read the notes, run a full dist-upgrade including phased packages, check the reboot-required flag, allow disk space, stay available for questions, remember that third-party repositories and PPAs are disabled during the upgrade, and back up.",
+      "backports": "Newer applications for older releases come from Backports, which “do not come with any security support guarantee”: the Security Team does not update them and maintenance stays with whoever requested the backport, even though the pocket is signed like the rest of the archive."
+    },
+    "security": {
+      "model": "Maintenance means backported patches inside the support window, with the level depending on the component a package sits in. The Ubuntu Security Team prepares updates for supported releases and sponsors community-prepared fixes, and publishes a notice whenever a problem is fixed.",
+      "cves_and_priorities": "The project tracks every CVE and assigns its own priority — negligible, low, medium, high or critical — from severity, importance, risk, number of affected users, default configuration and active exploitation, stating these priorities are distinct from CVSS and that CVSS is not a measure of risk. Statuses include fixed with the package version and won't fix for unsupported releases or removed packages, and low-priority issues are fixed mainly when a higher priority forces it or in accumulation.",
+      "machine_readable_data": "The tracker is exposed as JSON APIs for CVEs and notices, and the security manual adds OVAL, OSV and VEX feeds. The VEX page explains the need: generic databases report upstream components, may call something affected when the Ubuntu build patched it or never enabled the code path, and do not recognise Ubuntu's version suffixes, while the Ubuntu data tracks status per package version.",
+      "mandatory_access_control": "AppArmor provides per-program mandatory access control beside the discretionary model and “is installed and loaded by default” in Ubuntu, checkable with aa-status, with profiles in /etc/apparmor.d, complaining and enforcing modes and extra profiles in their own packages. Tightening is recorded per package rather than announced globally: the 26.04 notes say OpenLDAP is now “Running in AppArmor enforce mode”.",
+      "secure_boot": "Secure Boot arrived with 12.04 LTS, enforcing for the bootloader and non-enforcing for the kernel, and since 18.04 LTS “Secure Boot verifies all critical components: bootloader, kernel, and kernel modules”, on amd64 throughout and on arm64 since 20.04. The pieces are ordinary main-archive packages, a shim signed by Microsoft and a GRUB signed by Canonical, because most x86 firmware carries Microsoft certificates and the Linux community relies on that model for compatibility.",
+      "compliance": "Pro includes hardening and compliance profiles listed as FIPS 140, DISA-STIG, CIS, FedRAMP, CMMC, PCI-DSS and Cyber Essentials. The FIPS page is precise about scope: all certified modules are available with Ubuntu Pro, validation was done by atsec as an accredited laboratory, modules are listed per release with certificate numbers and sunset dates, and FIPS 140-2 Level 1 certifications move to the historical list after September 2026 with new work under 140-3 Level 1."
+    },
+    "privacy": {
+      "overview": "Collection at install and first login is governed by a dedicated legal document, the Product Data Collection and Usage Notice of September 2026, which covers Ubuntu and Multipass and lists fields per component; the website privacy policy points to it, noting that Canonical “may also collect system information during installation of Ubuntu and on first login to Ubuntu”.",
+      "documented_mechanisms": [
+        "Opt-in Ubuntu Insights",
+        "Blocking error reports",
+        "Certified-hardware lookup",
+        "Site analytics separate"
+      ],
+      "consent_and_content": "The notice frames this as a choice: “you will have the option to share with Canonical the following system information. Should you choose not to share the system information, Canonical will not receive any system information related to that product.” The fields are hardware and software inventory — CPU, GPU, accelerators, memory, disks, screens, BIOS, locale, timezone, kernel — plus Pro attachment state, installer and upgrader details and desktop session type. The desktop mechanism is Ubuntu Insights, introduced as “a successor to Ubuntu Report”, while the notice still lists Ubuntu Report as included in 26.04 and older, and the release upgrader now reports through Insights at the end of an upgrade according to existing consent, on desktop and WSL only since those are the platforms that include it.",
+      "other_channels": "Error reporting is separate: a report “includes a unique identifier for your computer”, may contain personal information such as the state of running programs, and “you can block future error reports from the privacy panel of System Settings”; the mechanism, apport, is defined in the glossary as a debugging and crash reporting system. Checking whether a machine is Ubuntu Certified sends its own inventory, including loaded kernel modules and PCI and USB devices, but only “if you choose to check”. The website's analytics and marketing scripts named in the policy belong to the site rather than to the installed system.",
+      "what_this_means": "What the documents describe is opt-in reporting of hardware and installation metadata, with the notice stating that aggregated system information may be made publicly available, that Canonical cannot identify a person from it and for that reason cannot supply a copy or delete it on request, and that it may be processed globally and used by Canonical and selected third parties for engineering purposes. Those are statements about Ubuntu's own documents and default components, not a guarantee about software installed afterwards, about the Snap Store, or about what a flavour or a downstream distribution configures."
+    },
+    "desktop": {
+      "default_stack": "The 26.04 desktop is GNOME 50 against GNOME 46 in 24.04 LTS, with the notes tracing each step: hardware-accelerated screen recording, better small-screen and fractional scaling behaviour, HDR capture, updated colour management under Wayland and smoother NVIDIA behaviour. The Rust-based Resources app replaces the system monitor and power statistics apps. Application versions given are Firefox 150, LibreOffice 25.8, Thunderbird 140 and GIMP 3.2.",
+      "bundled_selection": "The notes also describe a trimmed ubuntu-desktop meta-package, with applications such as a character map, a video player and a torrent client left in place for upgraders because the meta-package remains manually installed, and record that installing an application explicitly marks it as manually installed, which excludes it from automatic removal."
+    },
+    "flavours_and_derivatives": {
+      "official_flavours": "Ten flavours are listed: Edubuntu, Kubuntu, Lubuntu, Ubuntu Budgie, Ubuntu Cinnamon, Ubuntu Kylin, Ubuntu MATE, Ubuntu Studio, Ubuntu Unity and Xubuntu. They are “owned and developed by members of our global community” and “backed by the full Ubuntu archive for packages and updates”, that is, a shared archive with a different default environment and package set, not a separate distribution; the release-cycle page adds that their release cycle may differ. The 26.04 notes link flavour release notes for nine of them, Ubuntu MATE not among the links, and cdimage publishes image trees per flavour beside retired ones such as mythbuntu and ubuntu-gnome.",
+      "what_ubuntu_does_not_document": "Editions, ports and special images — Core, Minimal, cloud, WSL, arm64+largemem, the +raspi images — are published by the project itself and are not flavours. The pages reviewed carry no list of third-party distributions built on Ubuntu, so no claim about them is made here; the vendor relationship is documented instead as a certification programme and, for device makers, an embedding FAQ."
+    },
+    "specialised_uses": {
+      "server_and_cloud": "The server manual covers installation per architecture, storage, Netplan networking, Kerberos, SSSD and Active Directory, OpenSSH with two-factor options, TPM-backed LUKS with Clevis, LXD, Multipass, QEMU with AMD SEV and Intel TDX, containers with Docker and rocks, high availability with DRBD and Pacemaker, and debuginfod. Cloud images are published per series with guides for the main clouds and marketplace images labelled Ubuntu Pro; the 26.04 notes record a first-boot delay on Google Cloud from a cloud-init and systemd interaction as a known issue.",
+      "virtualisation_and_accelerators": "26.04 introduces a Hardware Enablement virtualization stack — qemu-hwe, libvirt-hwe, seabios-hwe and edk2-hwe — delivered like the HWE kernel, refreshed twice a year and interchangeable with but mutually exclusive to the base stack. Firmware packaging changed with it: OVMF became a metapackage over per-CPU variants, NX is enabled in all Secure Boot variants, the strictnx variant was dropped, and qemu-efi-arm, ovmf-ia32 and the loongarch64 target are gone. On accelerators the release brings the NVIDIA CUDA toolkit into the archive and AMD ROCm 7.1.0 into universe, tested in Canonical's CI with applications such as pytorch and Blender.",
+      "databases_and_edge": "Database work recorded for 26.04 includes MariaDB 11.8.6 as fully supported, MySQL at 8.4 with its server no longer built for 32-bit while the client and library stay on armhf and i386, and DocumentDB arriving as a MongoDB-compatible database on PostgreSQL. For immutable and edge deployments, Core is published for boards including the Raspberry Pi, where Core 24 is offered next to the 26.04.1 desktop and server images."
+    },
+    "advantages": [
+      "Six-month release cadence",
+      "Five years of standard LTS",
+      "Free Pro for five machines",
+      "Automatic security updates",
+      "Shared archive for flavours",
+      "Eight archive architectures",
+      "Signed images and archive",
+      "Public CVE and USN data"
+    ],
+    "disadvantages": [
+      "Universe: community support",
+      "Phasing holds packages back",
+      "One LTS to the next only",
+      "New installer: known limits",
+      "No documented rollback path",
+      "RISC-V locked to RVA23S64",
+      "i386 narrowed per package",
+      "FIPS and ESM require Pro"
+    ],
+    "who_is_it_for": [
+      "Operators who want a fixed-release system with a published date, five years per LTS and a purchased extension to fifteen years on the same install, without changing the package manager or the archive.",
+      "Mixed estates where one archive has to serve workstations, servers, clouds, boards and immutable edge devices, since per-architecture media, cloud and WSL images, Core and Minimal are all documented.",
+      "Teams that want security work done upstream of them: prioritised CVE tracking with notices, automatic updates, phased rollouts, kernel livepatching and compliance profiles are documented as services.",
+      "Hardware whose only driver is proprietary, given a restricted component for drivers, signed shim and GRUB for Secure Boot, a CUDA toolkit now in the archive and documented third-party repository mechanics."
+    ],
+    "who_is_it_not_for": [
+      "Anyone who expects to move an existing install two releases at once: the rule is one LTS to the next, the current release requires a stop at 24.04 or 25.10, and no rollback procedure appears in the material reviewed.",
+      "Setups that need every package at the newest upstream version on a supported release: security work is backported by design, features come through Stable Release Updates or HWE stacks, and backports carry no security guarantee.",
+      "Projects wanting an Ubuntu-managed route for their own fork of the archive: ten community flavours share it, no derivatives register is documented, and a third-party distribution is on its own maintenance.",
+      "Administrators who will not review defaults: security updates install automatically and may reboot, and phasing can hold packages back, all configured in files under /etc/apt/apt.conf.d rather than discovered by chance."
+    ],
+    "verdict": "Ubuntu is one signed deb archive, divided into four components and five pockets per series, addressed by APT and dpkg, with snaps beside it for applications that move faster than the system, charms for operators and rocks for containers. Its unit of publication is a dated release with a published freeze schedule, its unit of maintenance is a component-sensitive window of nine months or five years, extendable to ten and fifteen through Pro pockets served outside the standard archive, and its unit of decision is a Technical Board with a sponsoring founder holding a casting vote beside volunteer councils. Media, upgrade paths, automatic updates, phasing, AppArmor, Secure Boot signing, telemetry consent and image verification are each described in Ubuntu's own documentation with named packages, files and dates — including the limits, which are documented in the same pages."
+  },
+  "components": [
+    {
+      "id": "apt",
+      "name": "APT",
+      "role": "package_manager",
+      "note": "Documented as the recommended way to install Debian packages, with update, install, remove and upgrade as the core commands, apt-get prescribed for scripts, and repository definitions in deb822 form in /etc/apt/sources.list.d/ubuntu.sources since 24.04. Automatic security updates and the phased rollout both act through it."
+    },
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "The low-level layer behind .deb installation. Ubuntu's manual describes installing by package name so that the frontends can verify the archive signature, and treats a bare .deb file as the path that skips that check."
+    },
+    {
+      "id": "snapd",
+      "name": "snapd and snaps",
+      "role": "application_format",
+      "note": "Snap packaging for applications that evolve outside the release, with strict confinement built from AppArmor, seccomp, device cgroups, capabilities and namespaces, and classic confinement described as having no confinement, reviewed by hand and unsupported on Ubuntu Core. Debs remain “at the core of every release”."
+    },
+    {
+      "id": "unattended-upgrades",
+      "name": "unattended-upgrades",
+      "role": "update_tool",
+      "note": "Installed by default, applying security updates without interaction once a day, able to reboot and to block packages, extended to ESM where attached, and deliberately not extended to repositories the administrator adds."
+    },
+    {
+      "id": "subiquity",
+      "name": "Subiquity",
+      "role": "installer",
+      "note": "The server installer, released per Ubuntu series with its own notes, documented together with autoinstall for unattended installs, including the s390x variants."
+    },
+    {
+      "id": "ubuntu-desktop-installer",
+      "name": "Ubuntu Desktop Installer",
+      "role": "installer",
+      "note": "The new desktop installer shipped with 26.04, documented with its gains, screen-reader support, and its limits: no localisation in the live session and no supported OEM installs."
+    },
+    {
+      "id": "linux",
+      "name": "Linux kernel",
+      "role": "kernel",
+      "note": "Updated from 6.8 to 7.0 on the general availability stack and from the 25.10 backport of 6.17 to 7.0 on the Hardware Enablement stack, with crash dumps enabled by default, a signed-module requirement under Secure Boot since 18.04, and livepatching of high and critical vulnerabilities through Pro."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "Version 259.5 in 26.04, recorded as having dropped cgroup v1 support and deprecated legacy System V service scripts, and as the manager of snap services, which is where confinement is applied."
+    },
+    {
+      "id": "apparmor",
+      "name": "AppArmor",
+      "role": "security_module",
+      "note": "Mandatory access control per program profile, installed and loaded by default in Ubuntu, with profiles in /etc/apparmor.d, complaining and enforcing modes, and enforcement tightened package by package, such as OpenLDAP running in enforce mode in 26.04."
+    },
+    {
+      "id": "grub",
+      "name": "GRUB and shim",
+      "role": "boot_loader",
+      "note": "A Microsoft-signed shim and a Canonical-signed GRUB are shipped in main per architecture, which is how Ubuntu's Secure Boot chain reaches the kernel; the 26.04 firmware work covers OVMF variants and NX enablement for virtual machines."
+    },
+    {
+      "id": "gnome",
+      "name": "GNOME",
+      "role": "desktop_environment",
+      "note": "The default desktop, at version 50 in 26.04 LTS with the release notes tracing the changes since the 46 shipped in 24.04; flavours supply other environments from the same archive."
+    },
+    {
+      "id": "wayland",
+      "name": "Wayland",
+      "role": "display_protocol",
+      "note": "Named in the 26.04 desktop changes for colour management, screen recording, HDR capture and NVIDIA behaviour, which is where the release notes document the display stack rather than a separate announcement."
+    },
+    {
+      "id": "ubuntu-pro-client",
+      "name": "Ubuntu Pro client",
+      "role": "update_tool",
+      "note": "The agent that attaches a machine to a subscription, writes the ESM APT sources for the infra and apps pockets on esm.ubuntu.com with their own signing keys and pins them at priority 510, and manages Livepatch rollout controls."
+    },
+    {
+      "id": "cloud-init",
+      "name": "cloud-init",
+      "role": "provisioning",
+      "note": "The deployment mechanism of preinstalled and cloud images, documented as disabled on systems installed from ISO images, and used for the Raspberry Pi swap file, with boot-time network requirements recorded as a known issue."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_of",
+      "note": "Ubuntu's own security documentation calls Debian “Ubuntu's upstream distribution”, whose verification scheme it inherits, while stating that the Ubuntu archive and Launchpad infrastructure are independent; the archive browser shows an Original Maintainer usually from Debian next to the Ubuntu maintainer for each package."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Another distribution with its own archive, package tooling and governance; listed as a difference of structure, in particular on the free versus paid extension of support, and not as a ranking."
+    },
+    {
+      "id": "openstack",
+      "name": "OpenStack",
+      "relation": "related",
+      "note": "Named on the About page among the areas where the Canonical team leads aspects of Ubuntu, and documented in the server manual as one of the private cloud options alongside the published cloud images."
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes",
+      "relation": "related",
+      "note": "Also named among the areas led by Canonical within Ubuntu, with charmed operators as the documented mechanism for packaging operational logic."
+    },
+    {
+      "id": "lxd",
+      "name": "LXD",
+      "relation": "related",
+      "note": "A container and virtual-machine manager documented in the Ubuntu server manual beside Multipass and QEMU, not a component of the base system."
+    },
+    {
+      "id": "multipass",
+      "name": "Multipass",
+      "relation": "related",
+      "note": "A local VM tool for Ubuntu images, documented in the server manual and named in the data collection notice as a product covered alongside Ubuntu."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Ubuntu 26.04 LTS “Resolute Raccoon”",
+      "description": "The current long-term-support release, published 2026-04-23 with point release 26.04.1, kernel 7.0 on both the general availability and Hardware Enablement stacks, GNOME 50, and standard maintenance to 2031 with the month given differently by two official pages."
+    },
+    {
+      "name": "Ubuntu 24.04 LTS “Noble Numbat”",
+      "description": "Previous LTS, up to point release 24.04.5, standard maintenance to May 2029, ESM to May 2034 and the Legacy add-on to May 2039; the release-cycle matrix gives the way forward as through 24.10 to 26.04."
+    },
+    {
+      "name": "Ubuntu 22.04 LTS “Jammy Jellyfish”",
+      "description": "LTS still listed as supported, up to 22.04.5, with standard maintenance to May 2027 and the extended layers to 2032 and 2037; from here, reaching 26.04 requires an intermediate step through 24.04 LTS or 25.10."
+    },
+    {
+      "name": "Ubuntu 26.10 “Stonking Stingray”",
+      "description": "The development series, with a published schedule placing feature freeze on 2026-08-20, mandatory beta on 2026-09-21 and final release on 2026-10-15, and daily cloud images already published under its code-name."
+    },
+    {
+      "name": "Interim releases",
+      "description": "Releases between LTS editions, every six months, supported for nine months: 25.10 “Questing Quokka” of 2025-10-09 and 25.04 “Plucky Puffin” of 2025-04-17 are the recent ones listed, and they are addressed to users who move fast."
+    },
+    {
+      "name": "Future series 27.04 and 27.10",
+      "description": "Announced by their code-name letters only, “T T” and “U U”, with release schedules published and no animal name or date beyond the schedule."
+    },
+    {
+      "name": "Official flavours",
+      "description": "Ten community-owned variants with their own default desktop and application set, from Kubuntu and Xubuntu to Ubuntu Studio and Ubuntu Kylin, all “backed by the full Ubuntu archive for packages and updates”, with images published on the cdimage host and possibly a different release cycle."
+    },
+    {
+      "name": "Ubuntu Core",
+      "description": "An all-snap edition, strictly confined and immutable, aimed at edge and IoT devices, published for boards such as the Raspberry Pi, where Core 24 is offered; classic snaps are not supported there."
+    },
+    {
+      "name": "Ubuntu Minimal",
+      "description": "A reduced system image available on the main public clouds, named alongside Classic and Core among the editions described on the release-cycle page."
+    },
+    {
+      "name": "Server and cloud images",
+      "description": "Live server images per architecture on the release and cdimage hosts, netboot tarballs, and cloud images published per code-name with daily and release trees, guides for the main clouds and marketplace images carrying Ubuntu Pro."
+    },
+    {
+      "name": "WSL images",
+      "description": "Published as .wsl files for amd64 and arm64 beside the ISOs, with Ubuntu Insights integrated for the opt-in metrics prompt, the consent persisted on the Windows host."
+    },
+    {
+      "name": "Preinstalled and variant images",
+      "description": "Compressed disk images for amd64, arm64, riscv64 and Raspberry Pi, desktop and server, plus installer and kernel variants named amd64v3 and arm64+largemem."
+    },
+    {
+      "name": "Ubuntu Pro",
+      "description": "Not a different build of the system but a subscription attached in place, which unlocks the ESM infra and apps pockets, Livepatch, Landscape and compliance profiles; free for personal use on up to five machines, with a thirty-day trial for enterprises."
+    }
+  ],
+  "links": {
+    "homepage": "https://ubuntu.com/",
+    "documentation": "https://documentation.ubuntu.com/",
+    "downloads": "https://ubuntu.com/download/",
+    "releases": "https://documentation.ubuntu.com/release-notes/",
+    "security": "https://documentation.ubuntu.com/security/",
+    "archive": "https://archive.ubuntu.com/ubuntu/",
+    "governance": "https://ubuntu.com/community/docs/governance"
+  },
+  "sources": [
+    {
+      "title": "About Ubuntu: mission, history, publisher and governance of the project",
+      "url": "https://ubuntu.com/about",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Debian developers founding Canonical, October 2004, first release 4.10, six-month cadence, LTS decided in 2006, Canonical as publisher with volunteer governance"
+    },
+    {
+      "title": "Ubuntu release cycle: cadence, support matrix, package formats and editions",
+      "url": "https://ubuntu.com/about/release-cycle",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Nine-month interims, five-year LTS, Pro to fifteen years, ESM for main and universe, Legacy add-on, debs at the core with snaps, charms and rocks, Classic, Core and Minimal, flavours, architecture list and LTS date matrix"
+    },
+    {
+      "title": "Download Ubuntu: Desktop, Server, WSL, flavours, cloud and Core",
+      "url": "https://ubuntu.com/download",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Five years of free security updates on desktop and server, mirrors, BitTorrent, past releases, network installer, embedding FAQ for device makers"
+    },
+    {
+      "title": "Ubuntu flavours: the ten official variants",
+      "url": "https://ubuntu.com/download/flavours",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Community-owned and “backed by the full Ubuntu archive for packages and updates”"
+    },
+    {
+      "title": "Install Ubuntu on a Raspberry Pi",
+      "url": "https://ubuntu.com/download/raspberry-pi",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Raspberry Pi Imager installed as a snap, 26.04.1 desktop and server for Pi, Core 24, minimum EEPROM date for Pi 4 and 5, 4 GB RAM and 16 GB storage"
+    },
+    {
+      "title": "Ubuntu Pro: subscription, free personal use, ESM, Livepatch, Landscape, compliance",
+      "url": "https://ubuntu.com/pro",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Five to ten years for the whole archive and fifteen with the Legacy add-on, trial for enterprises, in-place attach without redeployment, chiselled images"
+    },
+    {
+      "title": "Ubuntu security: disclosure policy, notices, mailing lists",
+      "url": "https://ubuntu.com/security",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Responsible disclosure statement and links to the update and security announcement lists"
+    },
+    {
+      "title": "About Ubuntu CVE tracking and priorities",
+      "url": "https://ubuntu.com/security/cves/about",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "CVEs tracked with an Ubuntu priority distinct from CVSS, statuses including fixed and won't fix, JSON APIs for CVEs and notices"
+    },
+    {
+      "title": "Linux Kernel Livepatch",
+      "url": "https://ubuntu.com/security/livepatch",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Mitigation of critical and high kernel vulnerabilities while running, per-machine rollout controls, free for up to five machines"
+    },
+    {
+      "title": "Project governance: Code of Conduct, Community Council, Technical Board, SABDFL",
+      "url": "https://ubuntu.com/community/docs/governance",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Code of Conduct as foundation since 2004, remits of both councils, meritocracy statement, sponsor's casting vote, teams and Circles"
+    },
+    {
+      "title": "Ubuntu Code of Conduct version 2.0",
+      "url": "https://ubuntu.com/community/docs/ethos/code-of-conduct",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Scope of the document and its statement of the project's expectations"
+    },
+    {
+      "title": "Product Data Collection and Usage Notice",
+      "url": "https://ubuntu.com/legal/systems-information-notice",
+      "type": "official",
+      "date": "September 2026",
+      "accessed": "2026-09-19",
+      "note": "Field-by-field list of Ubuntu Insights, Ubuntu Report, certified-hardware and Multipass data, opt-in framing, aggregation and retention statements"
+    },
+    {
+      "title": "Canonical website privacy policy",
+      "url": "https://ubuntu.com/legal/data-privacy",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "System information collected at installation and first login referred to the legal notice, error report identifiers and how to block them, site analytics named separately"
+    },
+    {
+      "title": "Ubuntu release notes index",
+      "url": "https://documentation.ubuntu.com/release-notes/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Supported LTS list with point releases, currently in development 26.10, older series, and future releases listed as 27.04 T T and 27.10 U U"
+    },
+    {
+      "title": "Ubuntu 26.04 LTS release notes",
+      "url": "https://documentation.ubuntu.com/release-notes/26.04/",
+      "type": "documentation",
+      "date": "2026-04-23",
+      "accessed": "2026-09-19",
+      "note": "Support until April 2031, ESM ten years with Pro, desktop and server requirements, upgrade path through 24.04 or 25.10, links to nine flavour notes"
+    },
+    {
+      "title": "Ubuntu 26.04 LTS summary for LTS users",
+      "url": "https://documentation.ubuntu.com/release-notes/26.04/summary-for-lts-users/",
+      "type": "documentation",
+      "date": "2026-04-23",
+      "accessed": "2026-09-19",
+      "note": "Kernel 7.0 on both stacks, GNOME 50 and application versions, amd64v3 as an opt-in architecture variant, RISC-V RVA23S64 requirement, Ubuntu Insights in WSL, HWE virtualization stack"
+    },
+    {
+      "title": "Ubuntu 26.04 LTS: changes since 25.10",
+      "url": "https://documentation.ubuntu.com/release-notes/26.04/changes-since-previous-interim/",
+      "type": "documentation",
+      "date": "2026-04-23",
+      "accessed": "2026-09-19",
+      "note": "systemd 259.5 and cgroup v1 removal, OpenLDAP in AppArmor enforce mode, CUDA and ROCm in the archive, PostgreSQL i386 build dropped, OVMF and Secure Boot firmware changes, installer known issues, TPM-backed encryption, Insights in the release upgrader"
+    },
+    {
+      "title": "Ubuntu Resolute Raccoon release schedule",
+      "url": "https://documentation.ubuntu.com/release-notes/26.04/schedule/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Toolchain upload, feature and Debian Import Freeze, beta, final release and point release dates, planned archive-wide transitions"
+    },
+    {
+      "title": "Ubuntu Stonking Stingray release schedule",
+      "url": "https://documentation.ubuntu.com/release-notes/26.10/schedule/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Published plan for the development series, with final release on 2026-10-15"
+    },
+    {
+      "title": "Install and manage packages",
+      "url": "https://documentation.ubuntu.com/server/how-to/software/package-management/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "apt as the recommended tool, deb822 ubuntu.sources since 24.04, apt-get for scripts, aptitude"
+    },
+    {
+      "title": "Automatic updates",
+      "url": "https://documentation.ubuntu.com/server/how-to/software/automatic-updates/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "unattended-upgrades installed and enabled by default, once a day, configuration and log paths, ESM inclusion, added repositories excluded"
+    },
+    {
+      "title": "How to upgrade your Ubuntu release",
+      "url": "https://documentation.ubuntu.com/server/how-to/software/upgrade-your-release/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "One LTS to the next with no skipping, do-release-upgrade and its -d flag, pre-upgrade checklist with phased packages, third-party repositories disabled, Pro free on five machines"
+    },
+    {
+      "title": "About apt upgrade and phased updates",
+      "url": "https://documentation.ubuntu.com/server/explanation/software/about-apt-upgrade-and-phased-updates/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Staged rollouts, the kept-back message and its rationale"
+    },
+    {
+      "title": "Third party repository usage",
+      "url": "https://documentation.ubuntu.com/server/explanation/software/third-party-repository-usage/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Not recommended, unsandboxed maintainer code, no automatic trust mechanism for repositories and PPAs"
+    },
+    {
+      "title": "Server system requirements",
+      "url": "https://documentation.ubuntu.com/server/reference/installation/system-requirements/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Six supported architectures and the memory and disk minima, with the page's own warning that the figures are those of 24.04 on amd64"
+    },
+    {
+      "title": "AppArmor",
+      "url": "https://documentation.ubuntu.com/server/how-to/security/apparmor/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Installed and loaded by default, profiles in /etc/apparmor.d, complaining and enforcing modes, extra profile packages"
+    },
+    {
+      "title": "Server installation how-to index",
+      "url": "https://documentation.ubuntu.com/server/how-to/installation/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Per-architecture netboot and platform-specific install methods, arm64+largemem choice, s390x autoinstall pages"
+    },
+    {
+      "title": "Ubuntu server documentation glossary",
+      "url": "https://documentation.ubuntu.com/server/reference/glossary/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Definitions of apport and AppArmor, with several entries marked work in progress"
+    },
+    {
+      "title": "Ubuntu security documentation index",
+      "url": "https://documentation.ubuntu.com/security/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Structure of the security manual: software integrity, security updates, OVAL OSV and VEX data, security features, cryptography, compliance"
+    },
+    {
+      "title": "Ubuntu image integrity verification",
+      "url": "https://documentation.ubuntu.com/security/software-integrity/image-verification/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Four-step manual verification of installation images, the CD Image Automatic Signing Key, keyring location and the trust-establishment problem"
+    },
+    {
+      "title": "Ubuntu archive integrity verification",
+      "url": "https://documentation.ubuntu.com/security/software-integrity/archive-verification/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Signatures decoupled from distribution, verification scheme inherited from Debian described as Ubuntu's upstream distribution, independent archive and Launchpad infrastructure, install by package name"
+    },
+    {
+      "title": "Security updates and support windows",
+      "url": "https://documentation.ubuntu.com/security/security-updates/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Fixed-release backporting policy, Stable Release Update as a separate feature path, table of windows by component and support level, desktop and server update tooling"
+    },
+    {
+      "title": "Expanded Security Maintenance",
+      "url": "https://documentation.ubuntu.com/security/security-updates/esm/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Dedicated infra and apps pockets on esm.ubuntu.com, deb822 sources written by the Pro client, separate keyrings, priority 510 pinning, Pro-only marking in notices"
+    },
+    {
+      "title": "Snap confinement",
+      "url": "https://documentation.ubuntu.com/security/security-features/privilege-restriction/snap-confinement/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Strict, classic and devmode levels, the isolation mechanisms combined, manual review for classic snaps and their absence on Ubuntu Core"
+    },
+    {
+      "title": "UEFI Secure Boot",
+      "url": "https://documentation.ubuntu.com/security/security-features/platform-protections/secure-boot/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Enforcement history since 12.04 LTS, kernel and module verification since 18.04, signed shim and GRUB packages on amd64 and arm64, the Microsoft certificate model"
+    },
+    {
+      "title": "Using an SBOM with Ubuntu VEX data",
+      "url": "https://documentation.ubuntu.com/security/security-features/vex-sbom/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Why generic vulnerability databases misreport Ubuntu packages, the +ubuntu version suffixes, and the CVE tracker as the reference for per-package status"
+    },
+    {
+      "title": "Overview of FIPS-certified modules",
+      "url": "https://documentation.ubuntu.com/security/compliance/fips/fips-overview/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Certified modules available with Pro, validation by an accredited laboratory, per-release module table with sunset dates, transition from 140-2 to 140-3 after September 2026"
+    },
+    {
+      "title": "Ubuntu Desktop documentation index",
+      "url": "https://documentation.ubuntu.com/desktop/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Tutorials and how-to pages listed by title, including installation, bootable media and upgrading, whose deep links returned errors when checked"
+    },
+    {
+      "title": "Ubuntu on WSL documentation",
+      "url": "https://documentation.ubuntu.com/wsl/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Home of the Windows Subsystem for Linux documentation in Ubuntu's documentation portal"
+    },
+    {
+      "title": "Subiquity documentation",
+      "url": "https://canonical-subiquity.readthedocs-hosted.com/en/latest/",
+      "type": "documentation",
+      "publisher": "Canonical",
+      "accessed": "2026-09-19",
+      "note": "Autoinstall introduction and quick starts, operating the installer, storage configuration and validation"
+    },
+    {
+      "title": "Repositories/Ubuntu",
+      "url": "https://help.ubuntu.com/community/Repositories/Ubuntu",
+      "type": "community",
+      "accessed": "2026-09-19",
+      "note": "Definitions of main, universe, restricted and multiverse, media containing main and restricted, partner repository off by default, PPAs and configuration files; a community page that predates current tooling names"
+    },
+    {
+      "title": "UpgradeNotes",
+      "url": "https://help.ubuntu.com/community/UpgradeNotes",
+      "type": "community",
+      "accessed": "2026-09-19",
+      "note": "One-release-at-a-time upgrade rule and caution against uncontrolled packages, with support durations superseded by ubuntu.com, last edited in 2019"
+    },
+    {
+      "title": "UbuntuBackports",
+      "url": "https://help.ubuntu.com/community/UbuntuBackports",
+      "type": "community",
+      "accessed": "2026-09-19",
+      "note": "Backports as newer packages for older releases with no security support guarantee and requester-side maintenance"
+    },
+    {
+      "title": "Meta-release: published Ubuntu versions and upgrade tools",
+      "url": "https://changelogs.ubuntu.com/meta-release",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Series from warty 4.10 to resolute 26.04.1 with dates, Supported flags, and per-release release notes and signed upgrade tool URLs"
+    },
+    {
+      "title": "Meta-release LTS subset",
+      "url": "https://changelogs.ubuntu.com/meta-release-lts",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "The LTS-only view of the same file, used by upgrades restricted to LTS releases"
+    },
+    {
+      "title": "Archive Release file for resolute 26.04",
+      "url": "https://archive.ubuntu.com/ubuntu/dists/resolute/Release",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Suite, version, date, description, the eight architectures including amd64v3 and i386, and the four components"
+    },
+    {
+      "title": "Archive Release file for noble 24.04",
+      "url": "https://archive.ubuntu.com/ubuntu/dists/noble/Release",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Same structure without amd64v3, which dates the arrival of the variant in the archive"
+    },
+    {
+      "title": "Archive Release file for resolute-updates",
+      "url": "https://archive.ubuntu.com/ubuntu/dists/resolute-updates/Release",
+      "type": "infrastructure",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Archive Release file for resolute-security",
+      "url": "https://archive.ubuntu.com/ubuntu/dists/resolute-security/Release",
+      "type": "infrastructure",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Archive Release file for resolute-proposed",
+      "url": "https://archive.ubuntu.com/ubuntu/dists/resolute-proposed/Release",
+      "type": "infrastructure",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Archive Release file for resolute-backports",
+      "url": "https://archive.ubuntu.com/ubuntu/dists/resolute-backports/Release",
+      "type": "infrastructure",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "ubuntu-keyring package in resolute",
+      "url": "https://packages.ubuntu.com/resolute/ubuntu-keyring",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Described as the GnuPG keys of the Ubuntu archive, maintained by Ubuntu Core Developers with a named Debian original maintainer"
+    },
+    {
+      "title": "Published 26.04 images for amd64",
+      "url": "https://releases.ubuntu.com/26.04/",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Desktop, live-server, netboot and WSL images for 26.04.1 with SHA256SUMS and its GPG signature, torrents and zsync"
+    },
+    {
+      "title": "Published resolute images for other architectures",
+      "url": "https://cdimage.ubuntu.com/ubuntu/releases/resolute/release/",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "arm64, riscv64, ppc64el and s390x images, arm64+largemem, preinstalled and Raspberry Pi variants, netboot tarballs"
+    },
+    {
+      "title": "cdimage directory listing",
+      "url": "https://cdimage.ubuntu.com/",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Separate publication trees per flavour, for server, core, base, mini ISO, netboot, WSL and legacy images"
+    },
+    {
+      "title": "Cloud images: releases by series",
+      "url": "https://cloud-images.ubuntu.com/releases/",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Directory per code-name from hardy to resolute, with older series marked end of standard support in the parent listing"
+    },
+    {
+      "title": "Cloud images index",
+      "url": "https://cloud-images.ubuntu.com/",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Daily and release trees per series, minimal, oci, vagrant and wsl directories"
+    }
+  ],
+  "last_verified": "2026-09-19"
+}

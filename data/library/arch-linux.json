@@ -1,0 +1,591 @@
+{
+  "id": "arch-linux",
+  "name": "Arch Linux",
+  "type": "operating_system",
+  "summary": "A rolling-release, x86-64-only Linux distribution built by unpaid volunteers around signed package repositories and a command-line installer guide: there are no major Arch releases and no end-of-life dates for a version, only a package set that is upgraded continuously with pacman -Syu, and dated installation images, the current one being 2026.09.01.",
+  "tags": [
+    "linux",
+    "open-source",
+    "distribution",
+    "rolling-release",
+    "x86-64-only",
+    "pacman",
+    "arch-user-repository",
+    "volunteer-governed"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "content": {
+    "introduction": "Arch Linux is described by its own wiki as “an independently developed, x86-64 general-purpose GNU/Linux distribution that strives to provide the latest stable versions of most software by following a rolling release model”, whose “default installation is a minimal base system, configured by the user to only add what is purposely required”. The site calls it “a lightweight and flexible Linux® distribution that tries to Keep It Simple”, with official packages for x86-64 only, complemented by “a community-operated package repository”. Development began in early 2001 under Judd Vinet, the first formal release was Arch Linux 0.1 on 2002-03-11, and “apart from select exceptions, Arch developers remain unpaid, part-time volunteers, and there are no prospects for monetizing Arch Linux”. The current installation image is dated 2026.09.01 and carries Linux 7.2.2.",
+    "what_is_it": "What the project publishes is a set of signed package repositories for one architecture, an installation guide for assembling a system from them, and dated live images for new installs. The stable repositories are core, extra and multilib, counted on 2026-09-19 at 299, 14 968 and 181 x86_64 packages from the sync databases on the project's mirror; the package browser offers no other repository or architecture, and community no longer exists as a repository, having been merged into extra in May 2023. Beside the binaries sits the Arch User Repository, holding build scripts rather than installable packages. The distribution ships no desktop, no installer wizard and no configuration tool: “Upon installation, only a command-line environment is provided”, and “Arch as a distribution does not promote GUI tools for system configuration”.",
+    "origin_and_history": {
+      "beginning": "Judd Vinet, “a Canadian programmer and occasional guitarist”, started Arch in early 2001 and released Arch Linux 0.1 on 2002-03-11, inspired by Slackware, BSD, PLD Linux and CRUX; dissatisfied by their lack of package management, he wrote pacman “to automatically handle package dependency resolution, installation, removal, and upgrades”. The website footer carries the same chronology as “Copyright © 2002-2026 Judd Vinet, Aaron Griffin and Levente Polyák”.",
+      "documentation_from_the_start": "The ArchWiki was set up on MediaWiki on 2005-07-08 and is the project's central documentation, with anyone able to contribute while the normative articles are protected from editing.",
+      "later_turns": "Vinet handed the project to Aaron Griffin in late 2007; the image of 2012-07-15 replaced the menu-driven Arch Installation Framework with the Arch Install Scripts; systemd replaced SysVinit between 2012 and 2013; i686 was phased out after an announcement of 2017-01-25, gone from mirrors by the end of November 2017; and in May 2023 packaging moved to a self-hosted GitLab, which split testing and staging per repository and merged community into extra, with the Flyspray tracker following in November 2023 and a static copy kept for old FS# links."
+    },
+    "principles": {
+      "simplicity": "Simplicity is defined by subtraction: “Arch Linux defines simplicity as without unnecessary additions or modifications. It ships software as released by the original developers — upstream — with minimal distribution-specific downstream changes.” Patches upstream will not take are avoided and “Arch's downstream patches consist almost entirely of backported bug fixes that are obsoleted by the project's next release”. It also declines automation: “It does not add automation features such as enabling a service simply because the package was installed”, and provides no system-wide GUI configuration utilities, “encouraging users to perform most system configuration from a command-line shell and a text editor”.",
+      "modernity_and_pragmatism": "The project keeps “the latest stable release versions of its software as long as systemic package breakage can be reasonably avoided”, on “a rolling-release system, which allows a one-time installation with continuous upgrades”, and adopts systemd, modern file systems, LVM2, software RAID, udev and mkinitcpio, adding that “Arch Linux does not keep using ancient things if there are modern, future-proof, and better options”. The stance is stated as non-ideological: “Arch is a pragmatic distribution rather than an ideological one”, decisions being made case by case “through developer consensus”, and the repositories carrying proprietary packages as well as free ones. “The Arch Way” is described in the terminology page as the “unofficial term traditionally used to refer to the main Arch Linux principles”.",
+      "user_centrality": "The distribution “is intended to fill the needs of those contributing to it, rather than trying to appeal to as many users as possible”, targeted at “the proficient GNU/Linux user, or anyone with a do-it-yourself attitude who is willing to read the documentation, and solve their own problems”, with contributors often ending up on the team. The FAQ states the same in another form: “Arch is not designed for any particular type of use. Rather, it is designed for a particular type of user.”"
+    },
+    "governance": {
+      "project_leader": "The written role combines four duties: deciding “on any aspect of the distribution that fails to reach consensus on the mailing lists”, where consensus is “the absence of sustained opposition to substantial issues” and “does not imply unanimity”; acting as “the Arch Linux representative on the SPI” and approving spending from the Arch account, reporting to the team yearly alongside the SPI report; being “the Arch Linux representative in all legal matters” and “primarily” responsible for “holding the Arch Linux Trademark”; and overseeing projects with distribution-wide effect. The announcement of the 2026 re-election adds community leadership and “Code of Conduct enforcement” to that list.",
+      "election": "The leader is elected by the Arch Linux Team: two weeks of nominations needing two supporters, instant-runoff voting when more than two candidates stand, a two-week vote with “no quorum in effect”, counting by a team member who is neither candidate nor nominator, and a Developers' veto exercisable within fourteen days, which, if used, removes the winner and repeats the count. Voters are the Developers, the Package Maintainers and the Support Staff, each person voting once even with several roles, from a list “fixed at the beginning of the voting period”. The term defaults to two years with unlimited re-election, and removal needs a two-thirds majority with a 50 % quorum. On 2026-06-04 the project announced the re-election of Levente “anthraxx” Polyák.",
+      "roles_and_sizes": "The website publishes the roster by role: 23 Developers, 70 Package Maintainers and 47 Support Staff on 2026-09-19. The package maintainer role — “Trusted User (TU) is the old name for the package maintainer role” — is defined as maintaining packages in extra and overseeing the AUR, appointed “by a majority vote by the existing package maintainers”, bound by the AUR Package Maintainer guidelines and the Package Maintainer Bylaws, while Developers maintain the official repositories, “core in particular”.",
+      "code_of_conduct_and_trademark": "The Code of Conduct contains a support rule rather than only conduct rules: “Arch-based distributions have their own support fora and users of those distributions should be actively encouraged to seek support there... Community technical support shall only be provided for the Arch Linux distribution and the Arch User Repository. Posting issues with, and requesting support for, derivative distributions or operating systems other than Arch Linux are prohibited.” Enforcement goes to the moderators of the relevant forum first, and to the project leader when Arch staff are involved. The site's notice is “The Arch Linux name and logo are recognized trademarks. Some rights reserved.”"
+    },
+    "release_model": {
+      "no_major_releases": "The repository model is the release model: “Packages in the official repositories are constantly upgraded: when a package is upgraded, its old version is removed from the repository. There are no major Arch releases: each package is upgraded as new versions become available from upstream sources. Each repository is always coherent, i.e. the packages that it hosts always have reciprocally compatible versions.” There is therefore no version number of the distribution to name, no LTS to choose, and no end-of-life date to track; what is supported is the current state of the repositories.",
+      "dated_images": "What is dated is the installer. The FAQ answers “When will the new release be made available?” by saying that “Arch Linux releases are simply a live environment for installation or rescue, which include the base meta package and a few other packages. The releases are issued usually in the first half of every month”, and the release engineering page says images are made “typically done on a monthly cadence, containing the latest kernel and base packages from the package repositories”, listing the current one as 2026.09.01 with kernel 7.2.2, available, with torrent and magnet. Older images may remain seeded by peers but not served, and “We always recommend running the latest available release.” The download page adds for installed systems: “It is intended for new installations only; an existing Arch Linux system can always be updated with pacman -Syu.”",
+      "no_sla_for_updates": "There is no published timing commitment for a fix: “Package updates will be released when they are ready. The specific amount of time can be as short as a few hours after upstream releases a minor bugfix update to as long as several weeks after a large package group's major update”, depending on the packages and maintainers, with testing sometimes adding delay. Mirror freshness belongs to the same picture: “pacman mirrors are not synced immediately. It may take over 24 hours before an update is available to you.”"
+    },
+    "repositories": {
+      "core": "core “contains packages for: booting Arch Linux, connecting to the Internet, building packages, management and repair of supported file systems, the system setup process (e.g. openssh)... and the base meta package”, summarised in the terminology page as “everything needed to get a working command-line system”. It has explicit quality requirements: “developers/users need to signoff on updates before package updates are accepted”, with up to a week in core-testing for low-usage packages, no outstanding bug reports and the maintainer's implicit signoff.",
+      "extra_and_multilib": "extra “contains all packages that do not fit in core”, is “jointly maintained by the Package Maintainers and Arch Developers” and holds Xorg, window managers, web browsers, media players and language toolchains. multilib carries “32-bit software and libraries that can be used to run and build 32-bit applications on 64-bit installs (e.g. Steam etc.)”, is not enabled by default — the [multilib] section in /etc/pacman.conf must be uncommented — puts its libraries in /usr/lib32 under lib32- package names, and documents its own clean removal command.",
+      "testing_and_unstable": "The -testing repositories are a staging area, not a freshness channel: “The testing repositories are not for the ‘newest of the new’ package versions. Part of their purpose is to hold package updates that have the potential to break the system.” Everything bound for core passes core-testing, as do updates expected to break something, packages many others depend on such as perl or python, and anything built by a Junior Package Maintainer; enabling one testing repository requires enabling its counterpart, and a warning states that only users “who know how to deal with potential system breakage” should. gnome-unstable and kde-unstable carry pre-release GNOME and KDE packages before their transition to extra-testing, must be listed above the testing entries, and are bug-reported respectively to Arch's GitLab for packaging and upstream, or to upstream for the rest."
+    },
+    "package_manager": {
+      "pacman_and_libalpm": "Pacman is the front-end and the upgrade mechanism: “a lightweight, simple and fast package manager that allows for continuously upgrading the entire system with one command”, and “a front-end to libalpm(3) — the ‘Arch Linux Package Management’ library — which allows alternative front-ends, like a GUI front-end, to be written”. Configuration lives in /etc/pacman.conf, official mirrors are included from /etc/pacman.d/mirrorlist, sync databases in /var/lib/pacman/sync and downloaded packages in /var/cache/pacman/pkg/; the shipped configuration sets ParallelDownloads to 5, and VerbosePkgLists can be uncommented to see version changes.",
+      "packages_and_cache": "Packages are built as .pkg.tar.zst archives. pacman “does not offer the possibility to keep a number of past versions and is therefore more aggressive than paccache default options”, paccache being part of pacman-contrib, and the wiki warns never to symlink the cache directory because pacman controls it. When a repository is dropped from the configuration, pacman can clean its leftover database files.",
+      "one_shared_library_version": "Only one version of each shared library exists in the official repositories, unlike distributions shipping libfoo1, libfoo2 and libfoo3 side by side: “In case of a distribution like Arch, only the latest packaged versions are officially supported. By dropping support for outdated software, package maintainers are able to spend more time ensuring that the newest versions work as expected.” Affected packages are rebuilt when a library moves, and one that cannot build gets a versioned dependency and is removed on conflict."
+    },
+    "updates_and_maintenance": {
+      "no_partial_upgrades": "The rule is stated as a prohibition rather than advice: “Avoid doing partial upgrades. In other words, never run pacman -Sy; instead, always use pacman -Syu”, and “When refreshing the package database, always do a full upgrade with pacman -Syu.” The same warning is repeated where it is tempting to reach for it, on the ignore lists: “Be careful in skipping packages, since partial upgrades are unsupported”, and likewise for package groups. Even “pacman -Syuw carries the same risks as pacman -Sy, because it will update the pacman sync database without installing the newer packages.”",
+      "if_it_breaks": "The documented remedy is more upgrading, not surgery: “If a partial upgrade scenario has been created, and binaries are broken because they cannot find the libraries they are linked against, do not ‘fix’ the problem simply by symlinking. Libraries receive soname bumps when they are not backwards compatible. A simple pacman -Syu to a properly synced mirror will fix the problem as long as pacman is not broken.” If an upgrade stops after the database sync, “the error must be resolved and the upgrade operation completed before other package management operations”. Forcing databases with -Syyu is documented as “never needed under normal circumstances”.",
+      "safe_checking_and_rollback": "checkupdates, shipped in pacman-contrib, is presented as “a safe way to check for upgrades to installed packages without running a system update”, with an option to download pending updates into the cache. For going back in time, the Arch Linux Archive (formerly the Arch Linux Rollback Machine) “stores official repositories snapshots, ISO images and bootstrap tarballs across time”, and the local package cache plus downgrade procedures cover shorter steps back."
+    },
+    "signing_and_trust": {
+      "web_of_trust": "Trust is a web rather than a hierarchy: “To determine if packages are authentic, pacman uses OpenPGP keys in a web of trust model... At least three of these Master Signing Keys are used to sign the Developers' and Package Maintainers' own keys. They are then used to sign their packages. Each user also has a unique OpenPGP key, which is generated when you configure pacman-key(8).” The wiki distinguishes custom packages signed with a local key, unofficial packages signed by a developer and locally co-signed, and official packages, whose developer key is signed by the master keys that the user has chosen to trust.",
+      "keyring_and_defaults": "The keys travel as a package: “The archlinux-keyring package, which is a dependency of base, contains the latest keys”, and an out-of-date keyring is named as a cause of verification failure. The default policy is “SigLevel = Required DatabaseOptional”, which the Pacman page glosses as enabling “signature verification for all the packages on a global level”, per-repository overrides being possible, while LocalFileSigLevel in the shipped configuration leaves locally built packages unsigned under pacman -U. Fetching an unknown key requires a keyserver, and the wiki notes HKP uses port 11371/tcp.",
+      "image_signatures": "The download page publishes SHA256 and BLAKE2b sums plus a detached signature for the ISO and the bootstrap tarball, with the release signing key reachable through WKD for pierre@archlinux.org and the fingerprint 0x54449A5C printed on both the download page and the image's release-engineering page, verification offered with Sequoia (“sq verify”) or GnuPG. The Installation guide explains why it matters: “It is recommended to verify the image signature before use, especially when downloading from an HTTP mirror, where downloads are generally prone to be intercepted to serve malicious images”, and warns that the signature itself can be manipulated if taken from a mirror instead of archlinux.org."
+    },
+    "user_repository_and_build_system": {
+      "what_it_is": "“The Arch User Repository (AUR) is a community-driven repository for Arch Linux users. It contains package descriptions (PKGBUILDs) that allow you to compile a package from source with makepkg and then install it via pacman”, created “to organize and share new packages from the community and to help expedite popular packages' inclusion into the extra repository”; its interface counted 119 660 entries on 2026-09-19.",
+      "not_a_binary_repository": "The AUR is not an extra set of supported binaries, in two directions. Content-wise: “AUR packages are user-produced content. These PKGBUILDs are completely unofficial and have not been thoroughly vetted. Any use of the provided files is at your own risk”, and the documented installation sequence places verification first: “Verify the PKGBUILD; the most important step to verify that the PKGBUILD and accompanying files are not malicious or untrustworthy.” Practically, building assumes base-devel is installed, since “packages in the AUR assume that base-devel is installed in the build environment”, and any unsupported driver “might break things for you if you do not rebuild it... Users are responsible for updating any unsupported driver packages that they have installed.”",
+      "flow_into_official_and_incident": "The AUR feeds the official repositories: “A good number of new packages that enter the official repositories start in the AUR”, and a package “may be entered into the extra repository” when it is popular enough, has a compatible licence and good packaging technique, votes being the community signal. The risk of that openness was documented recently: on 2026-06-12 the project announced “a high volume of malicious package adoptions and updates in the Arch User Repository”, with account creation, pushes and adoptions disrupted while it worked on “a more permanent solution”, users asked to “review all PKGBUILD and install script changes when updating”, and suspicious commits to be reported to Arch staff on the aur-general mailing list — the list the wiki already recommends following because it “has been used for security warnings in the past”.",
+      "makepkg": "The build side is a plain Bash script and a runner: a PKGBUILD is a “small Bash script”, and “makepkg will read the metadata required from a PKGBUILD file. All it needs is a build-capable Linux platform, curl, and some build scripts”, after which it downloads and validates sources, checks dependencies, configures build settings, builds, installs into a temporary root, customises, generates metadata and produces the package for pacman. /etc/makepkg.conf exposes MAKEFLAGS, compression and CFLAGS for optimisation, namcap analyses packages and PKGBUILDs, and AUR helpers, the submission guidelines, .SRCINFO and an RPC interface are documented alongside. The old abs tool and its rsync endpoint were deprecated by announcement on 2017-05-15."
+    },
+    "installation": {
+      "documented_method": "The reference path is a written guide rather than a program: “This document is a guide for installing Arch Linux using the live system booted from an installation medium made from an official installation image”, kept concise and meant to be followed in order, with deeper detail in wiki articles and man pages. It assumes “a working internet connection”, because “the installation process needs to retrieve packages from a remote repository”, and installs the base system with a single selection command, “pacstrap -K /mnt base linux linux-firmware”, noting that “this initial package selection in pacstrap only needs to include what is required for the system to boot”.",
+      "live_environment": "Requirements are stated low: “Arch Linux should run on any x86_64-compatible machine with a minimum of 512 MiB RAM, though more memory is needed to boot the live system for installation. A basic installation should take less than 2 GiB of disk space”, the FAQ adding 1 GiB to 2.5 GiB for the live system by image type. One is root on the first virtual console with a Zsh prompt and Lynx for the guide; the image “uses systemd-boot for UEFI and syslinux for BIOS booting” and netboot uses iPXE with a mirror menu, with network tools pre-enabled only in the live environment. The live package list is published as pkglist.x86_64.txt.",
+      "no_gui_installer": "Arch's own answer about an installer is short: to “Arch needs an installer. Maybe a GUI installer?” the FAQ replies “A guided installer with a text-based user interface is available. See archinstall for details.” That package lives in extra as “Just another guided/automated Arch Linux installer with a twist”, licensed GPL-3.0-only, maintained by three named people and built 2026-06-28; the guide itself remains the documented method, and nothing in the material reviewed says the installer is part of the image.",
+      "secure_boot": "The images do not boot under Secure Boot: “Arch Linux installation images do not support Secure Boot. You will need to disable Secure Boot to boot the installation medium. If desired, Secure Boot can be set up after completing the installation.” The security article adds a related correction about kernel lockdown: the claim that lockdown is enabled automatically on EFI Secure Boot “is not the behaviour of the upstream kernel, nor Arch's packaged kernels”."
+    },
+    "hardware_and_ports": {
+      "one_architecture": "The scope is repeated in three places and identical: “Arch only supports the x86-64 (sometimes called amd64) architecture”, official packages are “optimized for the x86-64 architecture”, and the package browser offers only x86_64 and “any”. Support for i686 “was dropped in November 2017”, announced on 2017-01-25 for its decreasing popularity among developers and community.",
+      "ports_are_other_peoples_distributions": "Other architectures are outside the project's support, in its own words: “There are derivative distributions for the i686 architecture and ARM CPUs, each with their own community channels. They are not supported by Arch Linux”, with an invitation to help “with existing porting efforts or start your own”. Arch Linux ARM accordingly describes itself as “a distribution of Linux for ARM computers” that “brings users the best platform, newest packages, and installation support” through “our collaboration with Arch Linux”, with its own ARMv7 and AArch64 targets, its own rolling cycle, sponsors and copyright since 2009.",
+      "microarchitecture_level": "No official page reviewed here states a microarchitecture-level requirement beyond plain x86-64, and the discussion of levels such as x86-64-v2 or v3 appears in community proposal pages rather than in the release or installation documentation. It is recorded as an open question, not as a fact of the distribution: the material supporting “Arch requires x86-64-vN” was not found on the project's own pages."
+    },
+    "security_and_notices": {
+      "team_and_tracker": "“The Arch Security Team is a group of volunteers whose goal is to track security issues with Arch Linux packages. All issues are tracked on the Arch Linux security tracker.” Its “most important duty” is finding and tracking CVEs, grouped as AVGs, Arch Linux Vulnerability Groups, over packages sharing a pkgbase, and “packages qualified for an advisory must be part of the core, extra, or multilib repository” — AUR content is out of scope. Advisories, ASAs, “are scheduled in the tracker for peer-review, and need two acknowledgments from team members before being published”. The wiki page carries a banner that it is out of date because “the tracker is currently not updated”, and the tracker page itself showed AVG-2843 / CVE-2023-0433 as its top entry when consulted on 2026-09-19.",
+      "procedure_and_channels": "The written procedure is to reach a team member, verify the CVE against the current packaged version including patches, then either flag the package out-of-date when upstream has fixed it or file a bug report — immediately for a critical issue — with impact, CVE links and mitigation patches when no release exists. Coordination runs through the #archlinux-security channel, the arch-security and oss-security lists, and code on GitHub, and “derivative distributions that rely on Arch Linux package repositories are encouraged to contribute”.",
+      "manual_interventions": "Beyond tracking, the project publishes notices for updates that need human action, with commands. The front page of 2026-09-19 listed, among others, “virtualbox-ext-vnc >= 7.2.12-2 requires manual intervention” of 2026-07-21 with three options including an overwrite path, and kea ownership fixes of 2026-04-07; the announcement index is paginated with author and date per entry.",
+      "hardening_is_yours": "Security of an installed system is described as configuration work: the wiki's Security article “contains recommendations and best practices for hardening an Arch Linux system”, opening on trade-offs — “It is possible to tighten security to the point where the system is unusable”, “The biggest threat is, and will always be, the user” — and covering least privilege, defence in depth, hardening automatic module loading through sysctl, Xwayland without root, snapshot retention of deleted files, and the note that “the default domain name resolution configuration is highly compatible but has security weaknesses”. No mandatory access control or firewall is described as enabled by default in the material reviewed."
+    },
+    "privacy": {
+      "overview": "The project publishes no privacy policy for the system: neither archlinux.org nor the wiki carries one, the page titled Privacy holding no text. What can be said is therefore what the documentation describes the system to do, which is narrower than a policy, and is how this section limits itself.",
+      "documented_mechanisms": [
+        "No telemetry documented",
+        "Mirrors carry update traffic",
+        "HKP keyserver lookups",
+        "AUR sources per package"
+      ],
+      "what_this_means": "In the material reviewed, the documented network behaviour of a base system is repository and mirror traffic, plus a keyserver query on port 11371/tcp when pacman-key must fetch an unknown key, and — for anything built from the AUR — whatever source URLs that package declares. No usage-reporting or crash-reporting service is named in the pages read, and no installer prompt asks for such consent, since the documented installation is a guide rather than a program. This is a conclusion about the documentation consulted on 2026-09-19 and about the default package set; it is not a guarantee about what an administrator adds later, about the website's own analytics, or about what a derivative distribution configures."
+    },
+    "desktop_and_defaults": {
+      "no_editions": "There are no Arch editions or flavours to list: the desktop is a user choice from extra, and the FAQ's answer to “Which desktop environment or window manager should I use?” is “Since many are available to you, use the one that best fits your needs”, pointing at the Desktop environment and Window manager articles. GNOME and KDE are therefore not editions of Arch, and the projects that ship them preconfigured — the thirty entries in the active list of Arch-based distributions — are separate distributions that Arch's Code of Conduct excludes from community technical support.",
+      "what_the_base_has": "The base is a command-line system with systemd conventions: “Arch Linux follows the file system hierarchy for operating systems using the systemd service manager. ... /bin, /sbin and /usr/sbin are symbolic links to /usr/bin, and /lib and /lib64 are symbolic links to /usr/lib”, initramfs images are produced by mkinitcpio — “usually not required” to rebuild by hand, since it runs when the kernel package is installed — and the account step the guide ends with is setting the root password.",
+      "nothing_installed_by_default": "Absence of automation is a design statement: no service is enabled because its package was installed, no distribution-specific patches beyond backported fixes, and “Arch Linux official packages do not provide system-wide GUI configuration utilities”. The practical consequence for an administrator is that the first boot is a shell and the composition of the system is an explicit decision at every step."
+    },
+    "advantages": [
+      "Rolling one-command upgrades",
+      "Signed by named packagers",
+      "Coherent repository set",
+      "Documentation-first project",
+      "Election by written rules",
+      "Open trackers and news",
+      "No edition lock-in",
+      "AUR as a packaging feed"
+    ],
+    "disadvantages": [
+      "One architecture only",
+      "Partial upgrades unsupported",
+      "No support window to plan",
+      "Manual intervention notices",
+      "Secure Boot off the images",
+      "Tracker flagged as stale",
+      "AUR content unvetted",
+      "No privacy policy published"
+    ],
+    "who_is_it_for": [
+      "Administrators who accept assembling and maintaining the system themselves, the target user being “anyone with a do-it-yourself attitude who is willing to read the documentation, and solve their own problems”.",
+      "Setups that need current upstream software without waiting for a release, knowing updates arrive “when they are ready”, that only the latest version of each library is kept, and that supported drivers are rebuilt with the kernel.",
+      "People who want a minimal, auditable base: a command-line system from the base meta package, no automation at install time, and authenticity carried by an OpenPGP web of trust with per-package signatures by named packagers.",
+      "Projects building their own distribution on Arch, accommodated through a trademark policy and a published list of Arch-based distributions, while support channels stay reserved to Arch and the AUR."
+    ],
+    "who_is_it_not_for": [
+      "Anyone needing another architecture: ARM and i686 live in derivative distributions “not supported by Arch Linux”, whatever their collaboration with the project.",
+      "Those who want a supported version with a planned end date: there are no major releases, no LTS and no EOL, only the current repository state and dated images.",
+      "Environments that cannot afford a full-system upgrade with news to read beforehand, since partial upgrades are unsupported and manual interventions are announced per package.",
+      "Users who need Secure Boot to install, since the images “do not support Secure Boot”, or who want a vendor documenting updates, compliance profiles and support terms as services."
+    ],
+    "verdict": "Arch Linux is a package repository and a documentation set rather than a product with releases: one architecture, three stable repositories whose contents replace each other as upstream moves, dated install images produced monthly by a release engineering team, packages signed by named packagers through a web of trust, and a build system that lets the community's PKGBUILDs become official packages. Its governance is written down — an elected leader with a two-year term, a veto, a two-thirds removal rule and a code of conduct that restricts support to Arch itself — and its support model is the same in reverse: no schedule, no LTS, no rollback promise, and a rule that the system be kept fully upgraded. What the project documents, it documents in the open and dated; what it leaves to the administrator, it says it leaves."
+  },
+  "components": [
+    {
+      "id": "pacman",
+      "name": "pacman",
+      "role": "package_manager",
+      "note": "Front-end to libalpm, configured in /etc/pacman.conf with mirrors included from /etc/pacman.d/mirrorlist, signatures checked at SigLevel = Required DatabaseOptional by default, ParallelDownloads at 5, and no facility to keep older package versions in the manager itself."
+    },
+    {
+      "id": "makepkg",
+      "name": "makepkg and PKGBUILD",
+      "role": "package_manager",
+      "note": "The build side of the Arch build system: makepkg reads a small Bash PKGBUILD, downloads and validates sources, checks dependencies, builds and produces the package for pacman; namcap audits the result and /etc/makepkg.conf holds build and compression options."
+    },
+    {
+      "id": "pkg-tar-zst",
+      "name": ".pkg.tar.zst",
+      "role": "package_format",
+      "note": "The package format documented across the wiki: zstd-compressed tarballs installed by pacman, built by makepkg, and explicitly not interchangeable with other distributions' packages."
+    },
+    {
+      "id": "arch-install-scripts",
+      "name": "arch-install-scripts",
+      "role": "installer",
+      "note": "pacstrap and the companion scripts the Installation guide uses to install the base system; they replaced the menu-driven AIF with the image of 2012-07-15."
+    },
+    {
+      "id": "archinstall",
+      "name": "archinstall",
+      "role": "installer",
+      "note": "The guided installer the FAQ points to, packaged in extra as “Just another guided/automated Arch Linux installer with a twist”, GPL-3.0-only, with three named maintainers."
+    },
+    {
+      "id": "arch-user-repository",
+      "name": "Arch User Repository",
+      "role": "repository",
+      "note": "Community build scripts, 119 660 entries on 2026-09-19, described as “completely unofficial” and unvetted, feeding extra through votes and maintainer judgement rather than shipping supported binaries."
+    },
+    {
+      "id": "archlinux-keyring",
+      "name": "archlinux-keyring",
+      "role": "keyring",
+      "note": "Package holding the master and packager keys, a dependency of base, initialised with pacman-key --init and --populate; being out of date is a documented cause of failed signature verification."
+    },
+    {
+      "id": "linux",
+      "name": "Linux kernel",
+      "role": "kernel",
+      "note": "Installed as part of the documented base selection; the current image 2026.09.01 carries 7.2.2, and major kernel updates are documented as always accompanied by rebuilds of supported driver packages."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "Adopted between 2012 and 2013; it sets the file system hierarchy conventions Arch follows, with /bin, /sbin and /usr/sbin as links into /usr."
+    },
+    {
+      "id": "mkinitcpio",
+      "name": "mkinitcpio",
+      "role": "init_system",
+      "note": "The initramfs generator Arch ships, run when the kernel package is installed and re-run with mkinitcpio -P after changes for encryption, LVM or RAID; boot parameters are documented under mkinitcpio-archiso."
+    },
+    {
+      "id": "arch-security-tracker",
+      "name": "Arch Linux security tracker",
+      "role": "security_module",
+      "note": "Volunteer-run tracking of CVEs as AVG groups over core, extra and multilib packages, with ASAs requiring two team acknowledgments; the wiki flags the tracker as not currently updated as of 2026-09-19."
+    }
+  ],
+  "relations": [
+    {
+      "id": "arch-linux-arm",
+      "name": "Arch Linux ARM",
+      "relation": "downstream_derivative",
+      "note": "Listed in the project's own page of Arch-based distributions since 2009 and described by the FAQ as one of the derivative distributions for ARM CPUs that “are not supported by Arch Linux”; ALARM presents its own targets, rolling cycle and sponsors."
+    },
+    {
+      "id": "arch-linux-32",
+      "name": "Arch Linux 32",
+      "relation": "downstream_derivative",
+      "note": "The continuation of i686 packages outside the project, listed as Arch-based since 2017, the year Arch removed i686 from its mirrors."
+    },
+    {
+      "id": "manjaro",
+      "name": "Manjaro",
+      "relation": "downstream_derivative",
+      "note": "Arch-based since 2011 in the project's list; Arch's code of conduct sends its users to their own support channels and prohibits support requests for derivatives."
+    },
+    {
+      "id": "endeavouros",
+      "name": "EndeavourOS",
+      "relation": "downstream_derivative",
+      "note": "Listed among active Arch-based distributions since 2019, with no support relationship to Arch."
+    },
+    {
+      "id": "garuda-linux",
+      "name": "Garuda Linux",
+      "relation": "downstream_derivative",
+      "note": "Listed among active Arch-based distributions since 2020."
+    },
+    {
+      "id": "cachyos",
+      "name": "CachyOS",
+      "relation": "downstream_derivative",
+      "note": "Listed among active Arch-based distributions since 2022; the microarchitecture-level optimisations it advertises are its own decision, not an Arch baseline change."
+    },
+    {
+      "id": "blackarch-linux",
+      "name": "BlackArch Linux",
+      "relation": "downstream_derivative",
+      "note": "Listed since 2014 as an Arch-based distribution with its own repository, an example of the custom-repository mechanism the project documents as open to anyone."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Another rolling-leaning, volunteer-governed distribution that instead publishes dated releases with their own support windows; listed for contrast of model, not of value."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "A distribution with named releases, a stable branch and support horizons, and a package format pacman cannot consume — the wiki makes the point directly."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "alternative",
+      "note": "Cited here for the documented differences of model: dated releases with nine-month and five-year windows, extended maintenance as a service, a signed installer set, telemetry under a data-collection notice, and Secure Boot support on the images."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Installation image 2026.09.01",
+      "description": "The current dated ISO, 1.5 GB, with Linux 7.2.2 and the base meta package, published with signatures, checksums, torrent and magnet, intended for new installations only."
+    },
+    {
+      "name": "Older and unavailable images",
+      "description": "The release engineering page lists each image and marks availability; unavailable ones “may still be seeded by peers, but may no longer be available from WebSeeds”, and running the latest available release is recommended."
+    },
+    {
+      "name": "Netboot image",
+      "description": "A network-bootable variant that picks a mirror from an iPXE menu, documented for wired connections and needing more RAM than the ISO to run the live system."
+    },
+    {
+      "name": "Bootstrap tarball",
+      "description": "A compressed root tarball published beside the ISO, with its own signature, used to build a system or a container from a foreign host."
+    },
+    {
+      "name": "Official Docker image",
+      "description": "Published on Docker Hub and documented with a single run command, “docker run -it archlinux”."
+    },
+    {
+      "name": "Virtual machine images",
+      "description": "Official images published on the project's GitLab instance, with details in the project's README."
+    },
+    {
+      "name": "WSL image",
+      "description": "Installable from Windows with “wsl --install archlinux” and also downloadable from mirrors."
+    },
+    {
+      "name": "core",
+      "description": "299 packages on 2026-09-19, the boot, network, build and filesystem-repair set plus the base meta package, with signoff requirements and mandatory passage through core-testing."
+    },
+    {
+      "name": "extra",
+      "description": "14 968 packages on 2026-09-19, jointly maintained by package maintainers and developers: Xorg, desktop environments and window managers, browsers, media players and language toolchains."
+    },
+    {
+      "name": "multilib",
+      "description": "181 packages on 2026-09-19 providing 32-bit libraries and applications on 64-bit systems, disabled by default and enabled by uncommenting a section of /etc/pacman.conf."
+    },
+    {
+      "name": "Testing repositories",
+      "description": "core-testing, extra-testing and multilib-testing as pre-acceptance areas for risky or wide-reaching updates, to be enabled in pairs, with a warning that only experienced users should."
+    },
+    {
+      "name": "gnome-unstable and kde-unstable",
+      "description": "Optional repositories carrying GNOME and KDE pre-releases before their move to extra-testing, to be listed above the testing entries."
+    },
+    {
+      "name": "Arch User Repository",
+      "description": "Not an edition but a parallel channel: community PKGBUILDs, 119 660 entries on 2026-09-19, built locally with makepkg, with the wiki placing verification of the build script as the most important step."
+    },
+    {
+      "name": "Arch Linux Archive",
+      "description": "Snapshots of the official repositories, ISOs and bootstrap tarballs across time, the mechanism available for returning to an earlier state in the absence of parallel supported versions."
+    }
+  ],
+  "links": {
+    "homepage": "https://archlinux.org/",
+    "wiki": "https://wiki.archlinux.org/",
+    "downloads": "https://archlinux.org/download/",
+    "packages": "https://archlinux.org/packages/",
+    "aur": "https://aur.archlinux.org/",
+    "security": "https://security.archlinux.org/",
+    "mirrors": "https://archlinux.org/mirrors/"
+  },
+  "sources": [
+    {
+      "title": "Arch Linux homepage: description, x86-64 scope, AUR as complement, latest news",
+      "url": "https://archlinux.org/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "News entries dated 2025-12 to 2026-07 including the AUR malicious packages incident and the 2026 leader election results"
+    },
+    {
+      "title": "Arch Linux downloads: current image, netboot, Docker, VM and WSL images, checksums and verification",
+      "url": "https://archlinux.org/download/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "“Intended for new installations only”, current release 2026.09.01 with kernel 7.2.2, 1.5 GB, BLAKE2b and SHA256 sums, PGP fingerprint 0x54449A5C, key via WKD, mirror lists, BitTorrent recommendation"
+    },
+    {
+      "title": "Release engineering: ISO release list",
+      "url": "https://archlinux.org/releng/releases/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Monthly cadence wording, kernel per image, availability column and the recommendation to use the latest available release"
+    },
+    {
+      "title": "Release engineering: details of image 2026.09.01",
+      "url": "https://archlinux.org/releng/releases/2026.09.01/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Checksums, PGP fingerprint and torrent metadata for the current image"
+    },
+    {
+      "title": "Package search interface",
+      "url": "https://archlinux.org/packages/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Only x86_64 and any architectures, and the eight listed repositories without a community repository"
+    },
+    {
+      "title": "Package page for base",
+      "url": "https://archlinux.org/packages/core/any/base/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "“Minimal package set to define a basic Arch Linux installation”, GPL, signed by a named packager, build date 2026-02-06"
+    },
+    {
+      "title": "Package page for archinstall",
+      "url": "https://archlinux.org/packages/extra/any/archinstall/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Guided installer in extra, GPL-3.0-only, upstream at the project's GitHub, three maintainers, build 2026-06-28"
+    },
+    {
+      "title": "Mirror list and status",
+      "url": "https://archlinux.org/mirrors/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Per-country official mirrors used by the documented installation and update path"
+    },
+    {
+      "title": "People: Arch Linux Developers",
+      "url": "https://archlinux.org/people/developers/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Roster of 23 listed developers on 2026-09-19"
+    },
+    {
+      "title": "People: Package Maintainers",
+      "url": "https://archlinux.org/people/package-maintainers/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Roster of 70 listed package maintainers on 2026-09-19"
+    },
+    {
+      "title": "People: Support Staff",
+      "url": "https://archlinux.org/people/support-staff/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Roster of 47 listed support staff on 2026-09-19"
+    },
+    {
+      "title": "Visualization and statistics pages",
+      "url": "https://archlinux.org/visualize/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Project-side statistics pages; consulted for structure only"
+    },
+    {
+      "title": "News index with dates and authors",
+      "url": "https://archlinux.org/news/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Paginated announcements, including manual-intervention notices and deprecation posts"
+    },
+    {
+      "title": "News: Active AUR malicious packages incident",
+      "url": "https://archlinux.org/news/active-aur-malicious-packages-incident/",
+      "type": "official",
+      "publisher": "Campbell Jones",
+      "date": "2026-06-12",
+      "accessed": "2026-09-19",
+      "note": "Malicious adoptions and updates in the AUR, restrictions on accounts and pushes, advice to review PKGBUILD changes, reports to aur-general"
+    },
+    {
+      "title": "News: Arch Linux 2026 Leader Election Results",
+      "url": "https://archlinux.org/news/arch-linux-2026-leader-election-results/",
+      "type": "official",
+      "publisher": "Christian Heusel",
+      "date": "2026-06-04",
+      "accessed": "2026-09-19",
+      "note": "Re-election of Levente Polyák for a two-year term, role described as decisions without consensus, community leadership, Code of Conduct enforcement, SPI finances, project management"
+    },
+    {
+      "title": "Arch Linux security tracker",
+      "url": "https://security.archlinux.org/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Issues and advisories with AVG identifiers, affected and fixed versions, severity, status and ticket columns; top entry AVG-2843 / CVE-2023-0433 on 2026-09-19"
+    },
+    {
+      "title": "ArchWiki: Arch Linux",
+      "url": "https://wiki.archlinux.org/title/Arch_Linux",
+      "type": "documentation",
+      "date": "revision 884455",
+      "accessed": "2026-09-19",
+      "note": "Definition and principles, history through systemd, i686 drop, GitLab era and the 2023 repository changes, volunteer status"
+    },
+    {
+      "title": "ArchWiki: Frequently asked questions",
+      "url": "https://wiki.archlinux.org/title/Frequently_asked_questions",
+      "type": "documentation",
+      "date": "revision 885850",
+      "accessed": "2026-09-19",
+      "note": "x86-64 only and unsupported derivatives, monthly images, live system memory, archinstall as the guided installer, FHS and merged /usr, stability responsibility, mirror delay, single library versions, kernel rebuild policy, who Arch is not for"
+    },
+    {
+      "title": "ArchWiki: Official repositories",
+      "url": "https://wiki.archlinux.org/title/Official_repositories",
+      "type": "documentation",
+      "date": "revision 868026",
+      "accessed": "2026-09-19",
+      "note": "No major releases and old versions removed, core definition and signoff rules, extra and multilib scope, testing purpose and warnings, gnome-unstable and kde-unstable"
+    },
+    {
+      "title": "ArchWiki: Arch terminology",
+      "url": "https://wiki.archlinux.org/title/Arch_terminology",
+      "type": "documentation",
+      "date": "revision 884492",
+      "accessed": "2026-09-19",
+      "note": "ABS, ALA, AUR, core and extra summaries, makepkg, namcap, PKGBUILD, package maintainer and the retired Trusted User name, KISS, the pacman/Debian package note"
+    },
+    {
+      "title": "ArchWiki: Pacman",
+      "url": "https://wiki.archlinux.org/title/Pacman",
+      "type": "documentation",
+      "date": "revision 885065",
+      "accessed": "2026-09-19",
+      "note": "Configuration files and directories, SigLevel default, cache behaviour, ParallelDownloads, partial upgrade warnings on ignore lists, troubleshooting including -Syyu"
+    },
+    {
+      "title": "ArchWiki: System maintenance",
+      "url": "https://wiki.archlinux.org/title/System_maintenance",
+      "type": "documentation",
+      "date": "revision 885170",
+      "accessed": "2026-09-19",
+      "note": "Never run pacman -Sy, always -Syu, same risk for -Syuw, checkupdates from pacman-contrib, no symlinking libraries, complete a failed upgrade before other operations"
+    },
+    {
+      "title": "ArchWiki: Pacman/Package signing",
+      "url": "https://wiki.archlinux.org/title/Pacman/Package_signing",
+      "type": "documentation",
+      "date": "revision 866946",
+      "accessed": "2026-09-19",
+      "note": "Web of trust with master signing keys, SigLevel semantics, archlinux-keyring as a dependency of base, keyring initialisation, HKP port 11371, database signing noted as work in progress in 2018"
+    },
+    {
+      "title": "ArchWiki: Arch User Repository",
+      "url": "https://wiki.archlinux.org/title/Arch_User_Repository",
+      "type": "documentation",
+      "date": "revision 882754",
+      "accessed": "2026-09-19",
+      "note": "Definition, unofficial and unvetted warning, verify-the-PKGBUILD step, base-devel assumption, SSH interface, path into extra through votes, aur-general as security warning channel"
+    },
+    {
+      "title": "ArchWiki: Installation guide",
+      "url": "https://wiki.archlinux.org/title/Installation_guide",
+      "type": "documentation",
+      "date": "revision 885444",
+      "accessed": "2026-09-19",
+      "note": "Guide method and prerequisites, 512 MiB RAM and 2 GiB disk figures, pacstrap base linux linux-firmware, live environment defaults, systemd-boot and syslinux, signature verification advice, Secure Boot unsupported on images"
+    },
+    {
+      "title": "ArchWiki: Arch-based distributions",
+      "url": "https://wiki.archlinux.org/title/Arch-based_distributions",
+      "type": "documentation",
+      "date": "revision 876817",
+      "accessed": "2026-09-19",
+      "note": "Thirty active entries with first-release years, inactive section, the page's stated purpose of enforcing the trademark policy, and the warning that Arch-based distributions are not supported"
+    },
+    {
+      "title": "Arch Linux Code of Conduct",
+      "url": "https://terms.archlinux.org/docs/code-of-conduct/",
+      "type": "documentation",
+      "publisher": "Arch Linux",
+      "accessed": "2026-09-19",
+      "note": "Reached from wiki.archlinux.org/title/Code_of_conduct, which redirects here; support restricted to Arch Linux and the AUR, prohibition of derivative support requests, enforcement routed to forum moderators then to the project leader"
+    },
+    {
+      "title": "ArchWiki: DeveloperWiki Project Leader",
+      "url": "https://wiki.archlinux.org/title/DeveloperWiki:Project_Leader",
+      "type": "documentation",
+      "date": "revision 825915",
+      "accessed": "2026-09-19",
+      "note": "Leader duties, definition of consensus, nomination and instant-runoff election, developer veto, removal quorum, two-year term"
+    },
+    {
+      "title": "ArchWiki: Arch Security Team",
+      "url": "https://wiki.archlinux.org/title/Arch_Security_Team",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Team mission, ASAs with two acknowledgments, AVG grouping, core/extra/multilib scope, procedure and channels; the page carries an out-of-date banner about the tracker"
+    },
+    {
+      "title": "ArchWiki: Security",
+      "url": "https://wiki.archlinux.org/title/Security",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Hardening as administrator work, least privilege and defence in depth, snapshot retention warning, DNS note, kernel lockdown man-page correction"
+    },
+    {
+      "title": "Arch Linux ARM project site",
+      "url": "https://archlinuxarm.org/",
+      "type": "third-party",
+      "publisher": "Arch Linux ARM",
+      "accessed": "2026-09-19",
+      "note": "Self-description as a separate ARM distribution collaborating with Arch, its own targets, rolling cycle, sponsors and copyright"
+    },
+    {
+      "title": "AUR package search",
+      "url": "https://aur.archlinux.org/packages",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Counter of 119 660 AUR entries on 2026-09-19"
+    },
+    {
+      "title": "Distribution mirror: current image directory",
+      "url": "https://geo.mirror.pkgbuild.com/iso/latest/",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "ISO, bootstrap tarball, signatures, torrent, sha256sums.txt and b2sums.txt for 2026.09.01"
+    },
+    {
+      "title": "Distribution mirror: x86_64 repository sync databases",
+      "url": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.db",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Package counts of core 299, extra 14 968 and multilib 181 computed from the desc entries of the sync databases on 2026-09-19"
+    }
+  ],
+  "last_verified": "2026-09-19"
+}
