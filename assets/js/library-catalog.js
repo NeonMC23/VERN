@@ -18,6 +18,11 @@
 
 var LIBRARY_RESOURCES = [
   "fedora",
+  "debian",
+  "arch-linux",
+  "endeavouros",
+  "linux-mint",
+  "opensuse-leap",
   "arch-linux",
   "debian",
   "linux-mint",

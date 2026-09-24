@@ -1,0 +1,346 @@
+{
+  "id": "endeavouros",
+  "name": "EndeavourOS",
+  "type": "operating_system",
+  "summary": "A terminal-centric, rolling-release Linux distribution based directly on Arch Linux. Created in 2019 following the discontinuation of Antergos, EndeavourOS provides a graphical installation experience via Calamares, an offline installation path featuring KDE Plasma, and an online netinstall supporting multiple desktop environments with near-vanilla configurations. The system consumes unmodified Arch Linux repositories alongside a lightweight [endeavouros] repository for in-house maintenance tools, uses dracut for initramfs generation, defaults to systemd-boot, preinstalls the yay AUR helper, and enforces a strict zero-telemetry policy.",
+  "tags": [
+    "linux",
+    "open-source",
+    "distribution",
+    "rolling-release",
+    "arch-based",
+    "terminal-centric",
+    "calamares-installer",
+    "community-governed"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "content": {
+    "introduction": "EndeavourOS is an independent, community-driven Linux distribution built directly on the foundations of Arch Linux, designed to offer an accessible gateway to the Arch ecosystem without sacrificing user autonomy or technical control.\n\nDescribing itself officially as 'a terminal-centric distro with a vibrant and friendly community at its core', EndeavourOS bridges the gap between the complex manual installation of upstream Arch Linux and the desire for an operating system that remains uncluttered by heavy background services, proprietary frameworks, or opinionated desktop overhauls. Rather than hiding the underlying system behind extensive abstraction layers or graphical app stores, EndeavourOS equips the user with a streamlined graphical installer, a welcoming first-run assistant, and targeted maintenance utilities, while intentionally encouraging the use of the terminal for ongoing package management and system upkeep.\n\nThe distribution operates as a pure rolling release. Installed systems synchronize continuously with the official Arch Linux package repositories, receiving kernel and software updates as soon as they are compiled and packaged upstream. Operating system milestones (such as the Titan Nova release published in late August 2026) represent snapshots of the installation media rather than static operational releases, meaning that an existing installation kept up to date never requires a disruptive operating system upgrade.",
+    "what_is_it": "In practical terms, EndeavourOS is a full-featured desktop and workstation operating system for 64-bit personal computers. It is tailored for Linux users who appreciate the currency, simplicity, and flexibility of Arch Linux, but who prefer to bypass the command-line installation procedure or who value an active, helpful community forum for troubleshooting.\n\nUpon booting the installation media, users encounter a fully functional KDE Plasma live desktop environment equipped with hardware diagnostics, disk partitioning tools, and network setup utilities. Through the Calamares installer, users can perform a rapid offline installation of the default KDE Plasma desktop or connect to the internet for a netinstall, selecting from major desktop environments including GNOME, Xfce, Cinnamon, MATE, i3, or Sway.\n\nUnlike derivative distributions that maintain extensive package mirrors with altered dependencies or custom graphic app stores, EndeavourOS preserves upstream Arch packages in their native state. Its desktop implementations are deliberately near-vanilla, applying only subtle branding accents and default configuration fixes that can be easily inspected or removed.\n\nThe distribution also serves as an educational stepping stone. Because EndeavourOS does not disguise its Arch heritage, users learn standard Arch Linux administration skills — such as managing packages with pacman, inspecting systemd journal logs, and checking upstream release announcements — that translate directly to vanilla Arch systems.",
+    "origin_and_history": "The genesis of EndeavourOS lies in the sudden demise of Antergos, an earlier Arch-based distribution that had operated since 2012. On 21 May 2019, the Antergos development team announced the end of the project due to a lack of maintenance time. Within days, a small group of former Antergos moderators and community contributors — including Bryan Poerwoatmodjo (Bryanpwo), Johannes Kamprad (joekamprad), and Fernando Maroto (fernandomaroto), later joined by Manuel, Pudge, dalto, and sradjoker — committed to continuing the community spirit under a new identity.\n\nDetermined to avoid the architectural vulnerabilities that burdened Antergos, the founders made several critical design decisions: they abandoned the complex, fragile in-house installer (Cnchi) in favour of the modular, upstream-supported Calamares installer; they drastically reduced the custom repository footprint from hundreds of packages to a compact set of essential helper scripts; and they chose not to bundle a graphical software manager, avoiding the database lockups and packaging conflicts that had plagued earlier derivatives.\n\nThe first stable ISO of EndeavourOS was released on 15 July 2019 with an offline Xfce installation. Subsequent releases introduced the online netinstall option, switched the live environment to KDE Plasma, transitioned the initramfs generator from mkinitcpio to dracut, made systemd-boot the default bootloader, and introduced hardware detection tools like eos-hwtool. By its fifth anniversary in mid-2024, EndeavourOS had established itself as one of the most widely adopted Arch derivatives worldwide.",
+    "community_and_governance": "EndeavourOS is structured as a non-commercial, volunteer-governed community project. It possesses no corporate board, parent company, or commercial support licensing apparatus.\n\nProject coordination is led by founder Bryan Poerwoatmodjo alongside core developers Johannes Kamprad, Manuel, and key infrastructure collaborators. Technical decisions regarding ISO assembly, helper tool development, and packaging are discussed openly on the project forum and GitHub repositories. Funding for server hosting, domain names, and mirror infrastructure is raised entirely through community micro-donations via Open Collective.\n\nThe community culture is explicitly oriented toward mutual assistance and technical education. The project's moderation guidelines foster an inclusive atmosphere where newcomers to Arch Linux can ask questions without condescension. However, the project also maintains a clear boundary of responsibility: users are expected to learn the fundamentals of pacman and read maintenance announcements rather than expecting full automation or commercial handholding.",
+    "release_model": "EndeavourOS adheres strictly to the rolling-release paradigm established by Arch Linux. The operating system does not have versioned lifecycles, major version milestones, or support end-of-life deadlines.\n\nA system installed in 2019 that has been maintained with regular pacman updates is running the identical software stack as a system installed from the latest ISO in 2026. Package updates arrive daily as they are tested and released by upstream Arch Linux developers, spanning the Linux kernel, graphics drivers, desktop environments, and application libraries.\n\nTo facilitate installation on contemporary hardware, the project publishes updated ISO images named after astronomical bodies and space missions (such as Cassini, Galileo, Gemini, Mercury, and Titan). The current milestone, Titan Nova (released on 28 August 2026 with installation media dated 2026.08.15), provides an updated kernel (Linux 7.1.8.arch1-3), contemporary Mesa graphics drivers, recent NVIDIA drivers, and an updated Calamares installer. As the project repeatedly emphasizes in its release notes, existing users do not 'upgrade' to Titan Nova; running regular system updates keeps any running installation fully current.",
+    "relation_to_arch_linux": "The architectural relationship between EndeavourOS and upstream Arch Linux is one of direct consumption and minimal intervention.\n\nAn installed EndeavourOS system draws over 99 percent of its software directly from the official Arch Linux package repositories: [core], [extra], and [multilib]. EndeavourOS does not rebuild, recompile, or modify Arch binaries. The kernel, glibc, systemd, display servers, and desktop environments are identical to those running on a vanilla Arch Linux installation.\n\nEndeavourOS introduces only two fundamental system-level deviations from upstream Arch defaults:\n\nFirst, it uses dracut rather than mkinitcpio as its default initramfs generator. The packages kernel-install-for-dracut and eos-dracut manage the automatic regeneration of kernel initramfs images during system updates, providing modular configuration and seamless integration with systemd-boot.\n\nSecond, it pre-configures systemd-boot as the primary bootloader choice during installation, while keeping GRUB available as a secondary option. Because the system utilizes standard Arch packages, users can reference the extensive ArchWiki for virtually all technical documentation, driver configurations, and application management.",
+    "installation": "EndeavourOS is distributed as a hybrid live ISO image (approximately 3.4 GiB for Titan Nova) that boots into a responsive KDE Plasma desktop environment on x86_64 hardware.\n\nUpon boot, the EndeavourOS Welcome application appears automatically, offering access to hardware detection tools, mirror ranking, and the Calamares installer. Users can verify screen resolution, test wireless connectivity, or inspect partition tables using GParted or KDE Partition Manager prior to initiating the installation.\n\nThe installation media provides full support for UEFI and legacy BIOS booting, automatic or manual partitioning, swap file or partition configuration, and full disk encryption via LUKS. Integrity of the downloaded ISO is verified using SHA-512 checksum files (.sha512sum) and detached GPG cryptographic signatures (.sig) signed by the official EndeavourOS packaging key.",
+    "calamares_and_install_options": "The EndeavourOS installer is built upon a customized fork of Calamares, adapted with custom modules developed by the team.\n\nThe installer presents two distinct operational modes:\n\nOffline Install: Designed for rapid installation without requiring an active internet connection. The installer extracts the exact KDE Plasma squashfs image running in the live environment directly onto the destination disk. It then removes packages needed solely for the live media, detects system hardware, and configures user credentials and bootloaders.\n\nOnline Install (Netinstall): Requires a working network connection. Using a custom pacstrap module, Calamares connects directly to Arch Linux mirrors and downloads a fresh base system. The user is presented with a choice of desktop environments: KDE Plasma, GNOME, Xfce, Cinnamon, MATE, i3-wm, or Sway (the Budgie desktop option was temporarily suspended in Titan Nova pending upstream Wayland transition). Within each environment, users can inspect package lists and deselect individual EndeavourOS theming components to obtain an entirely vanilla desktop.\n\nFor bootloader configuration, Calamares defaults to systemd-boot for modern UEFI systems, mounting the EFI System Partition at /efi. Users who prefer GRUB or who run legacy BIOS systems can select GRUB, in which case the ESP is mounted at /boot/efi. An option to install without any bootloader is also available for custom dual-boot configurations.",
+    "package_manager": "Software management in EndeavourOS is centred on pacman, the high-performance package manager developed by Arch Linux, and its underlying library libalpm (Arch Linux Package Management).\n\nIn /etc/pacman.conf, EndeavourOS configures several quality-of-life defaults: colored terminal output (Color), animated progress indicators (ILoveCandy), verbose package lists, and ParallelDownloads set to 5 for faster parallel package retrieval. Critical system components — including pacman, glibc, dracut, kernel-install-for-dracut, and eos-dracut — are placed in HoldPkg to prevent accidental removal during maintenance.\n\nIn accordance with its terminal-centric philosophy, EndeavourOS deliberately excludes GUI software stores (such as Discover, GNOME Software, or Pamac) by default. The project takes this stance because graphical package wrappers on Arch can mask important pacman prompts, fail to handle package replacement warnings, and encourage dependency mismanagement. Instead, users are guided to perform package operations directly via the terminal.",
+    "repositories_and_aur": "The package source hierarchy in EndeavourOS is straightforward and transparently configured in /etc/pacman.conf:\n\nThe [endeavouros] repository is placed first in the configuration, preceding the standard Arch repositories. It contains a small collection of custom packages (around 70 PKGBUILDs maintained on GitHub) comprising system tools, keyrings, mirrorlists, themes, and the yay AUR helper. Packages in this repository are cryptographically signed by the EndeavourOS team.\n\nThe official Arch Linux repositories — [core], [extra], and [multilib] — follow immediately, populated from the standard Arch mirrorlist. Through these repositories, EndeavourOS users have immediate access to over 13,000 officially maintained Arch packages.\n\nFor software not available in the official repositories, EndeavourOS pre-installs yay (Yet Another Yogurt), a widely used AUR helper written in Go. yay automates the searching, downloading, dependency resolution, and building of PKGBUILD recipes from the Arch User Repository. Official documentation reminds users that the AUR consists of unvetted, user-submitted build scripts and that each PKGBUILD should be inspected prior to compilation.",
+    "endeavouros_applications": "Rather than developing a monolithic control center, EndeavourOS maintains a modular suite of lightweight helper scripts and utilities designed to assist with routine maintenance tasks:\n\nWelcome: A yad-based graphical greeter presenting quick-access tabs for mirror ranking, system updates, package cache cleaning, documentation links, and custom command shortcuts. Welcome can be set to hide on startup with a single click.\n\neos-hwtool: Introduced in the Titan release series, this hardware detection tool identifies installed GPUs (NVIDIA, AMD, Intel) and virtual machine environments, installs matching drivers, configures Vulkan support and hardware video decoding, and sets up early driver loading in the initramfs.\n\neos-apps-info: A documentation and application launcher that displays detailed manual pages and help topics for all EndeavourOS tools.\n\neos-rankmirrors and reflector-simple: Utilities that test and sort Arch Linux and EndeavourOS mirrors by latency and download speed, ensuring fast package downloads.\n\neos-log-tool: A diagnostic helper that aggregates system journals, boot logs, and hardware listings (via inxi), allowing users to review them locally before uploading them to a pastebin service for community troubleshooting.\n\neos-update: A maintenance wrapper that automates the dual synchronization of official repositories and AUR packages.",
+    "hardware_and_architectures": "The official EndeavourOS distribution and its primary installation media are compiled exclusively for the 64-bit x86_64 architecture.\n\nThe operating system adheres to the standard Arch Linux x86_64 baseline, supporting contemporary 64-bit Intel and AMD processors. EndeavourOS does not maintain 32-bit (i686) installation media or package repositories, though 32-bit application compatibility on x86_64 systems is supported via the standard Arch [multilib] repository (e.g., for Steam and Wine runtimes).\n\nGPU hardware support is comprehensive: AMD and Intel graphics function out of the box using open-source Mesa drivers, while NVIDIA hardware is detected by eos-hwtool and configured with appropriate proprietary or open-kernel modules (such as nvidia-open on newer Turing, Ampere, Ada Lovelace, and Blackwell GPUs).\n\nA separate community-led ARM initiative (maintained primarily by community developer Pudge) provides automated installation scripts for single-board ARM64 computers, including Raspberry Pi 4/5, Odroid N2, and Pinebook Pro. However, this ARM branch is managed as an independent community effort and is not packaged into the main live ISO.",
+    "security_and_keyrings": "Security in EndeavourOS relies on cryptographic signing, upstream tracking, and standard Linux security modules:\n\nDual Keyring System: Package integrity is verified through two distinct GPG keyrings. The archlinux-keyring validates packages downloaded from official Arch Linux repositories ([core], [extra], [multilib]). The endeavouros-keyring contains the public signing keys of authorized EndeavourOS developers (including Johannes Kamprad, Bryan Poerwoatmodjo, dalto, Manuel, Pudge, and sradjoker), enforcing SigLevel = PackageRequired on the [endeavouros] repository.\n\nVulnerability Management: EndeavourOS does not operate an independent security response team or issue proprietary CVE advisories. Because core binaries come directly from Arch, security fixes flow immediately from upstream packagers and are tracked via the Arch Linux Security Tracker (security.archlinux.org).\n\nManual Interventions: When upstream package transitions require user intervention (such as configuration migrations or library renames), the project alerts users via the forum's Important Notifications category and through the eos-manual-intervention tool.\n\nSecure Boot: EndeavourOS installation media and kernels do not carry Microsoft UEFI Secure Boot signatures out of the box. Users wishing to enable Secure Boot must configure custom keys or shim loaders manually following ArchWiki guidelines.",
+    "privacy": "EndeavourOS enforces a strict, transparent zero-telemetry policy across its operating system and software utilities.\n\nThe distribution contains no tracking daemons, usage monitors, system analytics agents, or unique installation identifiers. In an official statement published in March 2026 addressing proposed operating system age verification and tracking legislation, the project affirmed: 'Like Arch, we don’t have any infrastructure to track how many users download or install our system, let alone who is running Endeavour on their machines. Besides the fact that it goes against FOSS fundamentals, we simply don’t have the manpower or resources to take on this near-impossible task.'\n\nAll network interactions are user-initiated: package synchronizations via pacman, mirror latency checks via reflector, and log sharing. When using diagnostic utilities such as eos-log-tool, logs are displayed on screen for user inspection before transmission, and uploads occur only upon explicit confirmation, sending non-sensitive hardware and error output to temporary pastebins.",
+    "desktop_and_theming": "EndeavourOS is distinguished by its light, respectful approach to desktop customization.\n\nThe default live session and offline installation feature KDE Plasma (Plasma 6.x), configured with the Breeze theme complemented by subtle EndeavourOS purple wallpaper accents and a branded SDDM login screen (eos-breeze-sddm). In the online installer, users can choose from an extensive array of desktop environments: KDE Plasma, GNOME, Xfce, Cinnamon, MATE, i3-wm, Sway, LXQt, and LXDE.\n\nRather than heavily patching desktop source code or altering application menus, EndeavourOS packages its customizations as modular settings packages (e.g., eos-settings-plasma, eos-settings-xfce4, eos-settings-gnome). In Calamares, users can uncheck these customization groups during installation to receive an unadorned, completely vanilla desktop experience. Audio is driven natively by PipeWire, and display servers utilize Xorg on current live media with a planned migration to Wayland in the upcoming Triton release.",
+    "updates_and_maintenance": "Maintaining an EndeavourOS installation requires regular, disciplined execution of standard Arch Linux maintenance practices:\n\nBecause the system is a rolling release, updates should be applied regularly using the terminal command pacman -Syu or through the convenience wrapper eos-update, which synchronizes both official Arch repositories and AUR packages. Users are strongly advised against partial updates (e.g., installing a new package without updating the entire system), as Arch packages assume a globally synchronized library environment.\n\nThe eos-update-notifier utility runs unobtrusively in the user session to display desktop notifications when new packages or critical updates become available.\n\nBefore performing major system updates, users should monitor the EndeavourOS forum or Arch Linux News for manual intervention notices. System cache maintenance is facilitated by paccache-service-manager, which configures systemd timers to purge obsolete package archives and preserve storage capacity.",
+    "infrastructure_and_incident_history": "EndeavourOS operates a lean web and mirror infrastructure supported by educational institutions, open-source hosting providers, and volunteer sponsors worldwide.\n\nRepository packages and ISO downloads are distributed across dozens of global mirrors coordinated through MirrorCache and dedicated mirror networks in Europe, North America, Asia, and Africa. Discourse provides the platform for the project's forum, which serves as the primary communications hub for announcements, release notes, and troubleshooting.\n\nIn early September 2026, the project experienced a significant security incident: the legacy WordPress backend hosting the main website and the Discovery wiki was severely compromised. In response, the team immediately decommissioned the affected WordPress instances, successfully shielded the Discourse forum and package repositories from breach, and initiated a migration of the main website to a modern, secure Astro-based static architecture while taking the Discovery wiki temporarily offline for reconstruction. Official download links and mirror lists were temporarily published directly on the Discourse forum to maintain user access.",
+    "advantages": [
+      "Pure Arch rolling base",
+      "Friendly Calamares installer",
+      "Offline and online install",
+      "Dracut and systemd boot",
+      "Unmodified vanilla desktops",
+      "Preinstalled yay AUR helper",
+      "Zero telemetry or tracking",
+      "Helpful community forum"
+    ],
+    "disadvantages": [
+      "Rolling maintenance vigilance",
+      "Frequent terminal usage needed",
+      "No GUI app store by default",
+      "Manual Secure Boot setup",
+      "Unvetted AUR security risks",
+      "x86 64 only for main ISO",
+      "No commercial support SLA",
+      "Discovery wiki maintenance"
+    ],
+    "who_is_it_for": [
+      "Arch curious users",
+      "Intermediate Linux users",
+      "Rolling release advocates",
+      "Terminal comfortable users",
+      "Vanilla desktop lovers",
+      "Hardware gaming enthusiasts",
+      "Software developers",
+      "Community oriented users"
+    ],
+    "who_is_it_not_for": [
+      "Absolute Linux beginners",
+      "GUI only application users",
+      "Enterprise SLA seekers",
+      "Air gapped long term setups",
+      "Infrequently updated systems",
+      "Thirty two bit hardware",
+      "Out of box Secure Boot users",
+      "Commercial contract teams"
+    ],
+    "verdict": "EndeavourOS stands out as an exemplary implementation of an accessible Arch-based distribution. By combining an intuitive Calamares installer, sensible modern defaults (systemd-boot and dracut), and a lightweight suite of in-house helper tools with direct access to unmodified Arch Linux repositories, it strips away the installation friction of Arch without compromising its purity or performance. Its refusal to bundle bloated software stores or force desktop customizations preserves user agency, while its active community provides a welcoming safety net. However, as a pure rolling release requiring periodic terminal maintenance, manual intervention awareness, and active oversight, EndeavourOS is best suited for users willing to take ownership of their operating system."
+  },
+  "components": [
+    {
+      "id": "pacman",
+      "name": "pacman",
+      "role": "package_manager",
+      "note": "The primary package manager from Arch Linux; operates directly on official Arch and EndeavourOS repositories with ParallelDownloads enabled and key verification."
+    },
+    {
+      "id": "libalpm",
+      "name": "libalpm",
+      "role": "package_manager",
+      "note": "The underlying package management library powering pacman; handles dependency graph solving, transaction hooks, and local database locking."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares",
+      "role": "installer",
+      "note": "Customized distribution installer supporting offline squashfs copying of KDE Plasma and online netinstall deployments via pacstrap with multiple desktop choices."
+    },
+    {
+      "id": "dracut",
+      "name": "dracut",
+      "role": "init_system",
+      "note": "The default initramfs generation framework in EndeavourOS, selected over mkinitcpio for modularity and integrated via kernel-install-for-dracut and eos-dracut."
+    },
+    {
+      "id": "welcome",
+      "name": "EndeavourOS Welcome",
+      "role": "application",
+      "note": "Interactive yad-based first-run assistant providing one-click mirror ranking, system update launching, package cache management, and documentation links."
+    },
+    {
+      "id": "yay",
+      "name": "yay",
+      "role": "package_manager",
+      "note": "Yet Another Yogurt: pre-installed Go-based AUR helper automating the search, PKGBUILD retrieval, and compilation of Arch User Repository packages."
+    },
+    {
+      "id": "eos-apps-info",
+      "name": "eos-apps-info",
+      "role": "application",
+      "note": "Internal documentation browser and launcher detailing the function, syntax, and operation of all EndeavourOS helper scripts."
+    },
+    {
+      "id": "eos-hwtool",
+      "name": "eos-hwtool",
+      "role": "system_tool",
+      "note": "Hardware detection utility introduced in the Titan series; automates the identification and configuration of GPU drivers, Vulkan libraries, and early initramfs loading."
+    },
+    {
+      "id": "endeavouros-keyring",
+      "name": "endeavouros-keyring",
+      "role": "keyring",
+      "note": "Official cryptographic keyring package containing PGP public keys of authorized EndeavourOS developers for signing repository packages."
+    },
+    {
+      "id": "systemd-boot",
+      "name": "systemd-boot",
+      "role": "boot_loader",
+      "note": "The default UEFI bootloader configured by Calamares in EndeavourOS, offering rapid, lightweight boot entry management via systemd kernel-install."
+    },
+    {
+      "id": "plasma-desktop",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "The desktop environment featured on the Live ISO and installed during offline deployments, configured with Breeze and subtle EndeavourOS accents."
+    }
+  ],
+  "relations": [
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "upstream_of",
+      "note": "The rolling upstream parent distribution from which EndeavourOS directly consumes binary packages, kernel builds, and base system architecture."
+    },
+    {
+      "id": "arch-user-repository",
+      "name": "Arch User Repository",
+      "relation": "related",
+      "note": "The community-driven repository of build recipes accessible via the preinstalled yay helper; unvetted and independent of official distribution guarantees."
+    },
+    {
+      "id": "manjaro",
+      "name": "Manjaro",
+      "relation": "alternative",
+      "note": "An Arch-derived rolling distribution that maintains held-back package branches, custom system tools, and its own graphical package store (Pamac)."
+    },
+    {
+      "id": "garuda-linux",
+      "name": "Garuda Linux",
+      "relation": "alternative",
+      "note": "An Arch-based distribution tailored for performance and gaming, featuring aggressive Zen kernel defaults, Btrfs snapshots by default, and distinct visual themes."
+    },
+    {
+      "id": "cachyos",
+      "name": "CachyOS",
+      "relation": "alternative",
+      "note": "An Arch-derived distribution emphasizing CPU microarchitecture optimizations (x86-64-v3/v4), custom kernel schedulers, and performance-tuned package builds."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "A leading fixed-release distribution with an independent packaging ecosystem, corporate engineering backing, and a six-month publication cadence."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "alternative",
+      "note": "A beginner-friendly desktop distribution built on LTS Ubuntu bases with a traditional interface, contrasting sharply with EndeavourOS's rolling Arch model."
+    }
+  ],
+  "variants": [
+    {
+      "name": "EndeavourOS Titan Nova (Current Release ISO 2026.08.15)",
+      "description": "The current official installation media announced on 28 August 2026. Includes Linux kernel 7.1.8, Calamares 26.03.2.3, Mesa 26.1.7, NVIDIA 610.54, and updated hardware detection."
+    },
+    {
+      "name": "EndeavourOS Titan & Titan Neo (Early 2026 ISO Milestones)",
+      "description": "Earlier ISO snapshots released in March and May 2026; introduced eos-hwtool, early GPU loading, and updated mirror ranking mechanisms."
+    },
+    {
+      "name": "Offline Installation Profile (KDE Plasma)",
+      "description": "Installation pathway executing locally without network requirements, deploying the live environment's KDE Plasma desktop directly to storage."
+    },
+    {
+      "name": "Online Netinstall Profile (Multi-Desktop Choice)",
+      "description": "Network-connected installation utilizing pacstrap to retrieve the latest Arch packages and allowing selection of GNOME, Plasma, Xfce, Cinnamon, MATE, i3, or Sway."
+    },
+    {
+      "name": "Upcoming Triton Development Milestone",
+      "description": "The next scheduled development milestone aiming to transition the Live ISO session to native Wayland compositor support."
+    },
+    {
+      "name": "Community ARM Automated Deployment Scripts",
+      "description": "Community-maintained installation scripts supporting aarch64 single-board computers (Raspberry Pi 4/5, Odroid N2, Pinebook Pro) on top of Arch Linux ARM."
+    }
+  ],
+  "links": {
+    "homepage": "https://endeavouros.com/",
+    "forum": "https://forum.endeavouros.com/",
+    "announcements": "https://endeavouros.com/c/announcements/19",
+    "latest_release": "https://endeavouros.com/t/titan-nova-is-available/81179",
+    "download_links": "https://endeavouros.com/t/endeavouros-download-links/81632",
+    "development": "https://endeavouros-team.github.io/EndeavourOS-Development/",
+    "github": "https://github.com/endeavouros-team",
+    "packages_repo": "https://github.com/endeavouros-team/PKGBUILDS",
+    "iso_source": "https://github.com/endeavouros-team/EndeavourOS-ISO",
+    "welcome_source": "https://github.com/endeavouros-team/welcome",
+    "opencollective": "https://opencollective.com/endeavouros"
+  },
+  "sources": [
+    {
+      "title": "EndeavourOS Announcements — Titan Nova is available",
+      "url": "https://endeavouros.com/t/titan-nova-is-available/81179",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS development team",
+      "note": "Official release announcement for Titan Nova: Calamares 26.03.2.3, Linux 7.1.8, Mesa 26.1.7, NVIDIA drivers, temporary removal of Budgie desktop, and confirmation that installed systems do not need to upgrade."
+    },
+    {
+      "title": "EndeavourOS Announcements — Download Links",
+      "url": "https://endeavouros.com/t/endeavouros-download-links/81632",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS team",
+      "note": "Official mirror directory published 2026-09-24 providing direct HTTPS links, SHA-512 checksums (.sha512sum), GPG signatures (.sig), and torrent files for EndeavourOS_Titan-Nova-2026.08.15.iso."
+    },
+    {
+      "title": "EndeavourOS Announcements — What's new In EndeavourOS Titan release",
+      "url": "https://endeavouros.com/t/whats-new-in-endeavouros-titan-release/78542",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS development team",
+      "note": "Announcement detailing the introduction of eos-hwtool, early GPU driver loading, mirror ranking improvements, and official statement affirming the total absence of user telemetry and tracking."
+    },
+    {
+      "title": "EndeavourOS Announcements — Incident notice regarding website compromise",
+      "url": "https://endeavouros.com/t/the-main-website-and-discovery-are-down-due-to-severe-compromise/81317",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS team",
+      "note": "Incident notice from September 2026 explaining the WordPress compromise, temporary shutdown of Discovery wiki, migration to Astro static frontend, and integrity of Discourse and repositories."
+    },
+    {
+      "title": "EndeavourOS Forum — What to expect on the first release",
+      "url": "https://endeavouros.com/t/what-to-expect-on-the-first-release/182",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS founders",
+      "note": "Historical document from July 2019 by Bryanpwo outlining the succession of Antergos, adoption of Calamares, reduction of custom repository size, and close-to-Arch philosophy."
+    },
+    {
+      "title": "EndeavourOS Development Portal — Information about development and architecture",
+      "url": "https://endeavouros-team.github.io/EndeavourOS-Development/",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS development team",
+      "note": "Comprehensive development documentation explaining the adoption of dracut over mkinitcpio, Calamares online/offline install stages, pacstrap module, and minimal theming philosophy."
+    },
+    {
+      "title": "EndeavourOS-ISO repository — pacman.conf configuration",
+      "url": "https://raw.githubusercontent.com/endeavouros-team/EndeavourOS-ISO/main/airootfs/etc/pacman.conf",
+      "type": "infrastructure",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS development team",
+      "note": "Configuration file demonstrating repository priority order ([endeavouros] before Arch repositories), SigLevel settings, ParallelDownloads=5, and HoldPkg list."
+    },
+    {
+      "title": "EndeavourOS PKGBUILDS — endeavouros-keyring package specification",
+      "url": "https://raw.githubusercontent.com/endeavouros-team/PKGBUILDS/master/endeavouros-keyring/PKGBUILD",
+      "type": "code",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS development team",
+      "note": "Specification containing authorized developer PGP fingerprints (joekamprad, bryanpwo, dalto, manuel, Pudge, sradjoker) used for package verification."
+    },
+    {
+      "title": "EndeavourOS Welcome application — source code",
+      "url": "https://raw.githubusercontent.com/endeavouros-team/welcome/master/welcome",
+      "type": "code",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS development team",
+      "note": "Source code of the Welcome assistant demonstrating tabbed structure (Install, After Install, Assistant, Personal Commands) and Calamares launcher invocation."
+    },
+    {
+      "title": "EndeavourOS PKGBUILDS — eos-apps-info package specification",
+      "url": "https://raw.githubusercontent.com/endeavouros-team/PKGBUILDS/master/eos-apps-info/PKGBUILD",
+      "type": "code",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS development team",
+      "note": "Package definition and script enumerating official EndeavourOS helper applications, maintenance scripts, and documentation pages."
+    },
+    {
+      "title": "EndeavourOS Discourse API — about.json metadata",
+      "url": "https://endeavouros.com/about.json",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "EndeavourOS community",
+      "note": "Official project description, team roster, administrator and moderator profiles, and Discourse categorization."
+    },
+    {
+      "title": "EndeavourOS Community — BTRFS available for EnOS supported ARM devices",
+      "url": "https://endeavouros.com/t/btrfs-available-for-enos-supported-arm-devices/64095",
+      "type": "community",
+      "accessed": "2026-09-24",
+      "publisher": "Pudge (EndeavourOS ARM developer)",
+      "note": "Documentation by community developer Pudge regarding ARM script support for Raspberry Pi 4/5, Odroid N2, and Pinebook Pro, and experimental Btrfs integration."
+    },
+    {
+      "title": "ArchWiki — Arch-based distributions documentation",
+      "url": "https://wiki.archlinux.org/title/Arch-based_distributions",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "Arch Linux Wiki",
+      "note": "Official Arch Linux catalog listing EndeavourOS as an active Arch-based distribution since 2019, clarifying independent support channels."
+    },
+    {
+      "title": "Arch Linux Security Tracker",
+      "url": "https://security.archlinux.org/",
+      "type": "infrastructure",
+      "accessed": "2026-09-24",
+      "publisher": "Arch Linux Security Team",
+      "note": "Official tracking portal for security advisories (ASA) and vulnerability groups (AVG) affecting core and extra packages consumed by EndeavourOS."
+    }
+  ],
+  "last_verified": "2026-09-24"
+}

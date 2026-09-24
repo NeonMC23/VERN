@@ -1,0 +1,416 @@
+{
+  "id": "opensuse-leap",
+  "name": "openSUSE Leap",
+  "type": "operating_system",
+  "summary": "A regular, fixed-release Linux distribution produced by the openSUSE project that combines core packages and binaries from SUSE Linux Enterprise (SLE 16 / SLFO) with desktop environments and applications maintained by the openSUSE community. Starting with Leap 16.0, released on 1 October 2025, each minor release follows an annual cadence with a 24-month maintenance lifecycle, requiring a 64-bit x86-64-v2 microarchitecture level on AMD64/Intel systems, using Btrfs and Snapper for automated root rollback, Agama as the new installer, and Cockpit for web-based system administration.",
+  "tags": [
+    "linux",
+    "open-source",
+    "distribution",
+    "fixed-release",
+    "enterprise-base",
+    "zypper-and-cockpit",
+    "btrfs-and-snapper",
+    "community-governed"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64",
+    "ppc64le",
+    "s390x"
+  ],
+  "content": {
+    "introduction": "openSUSE Leap is the regular, fixed-release distribution developed by the international openSUSE project, engineered for users, software developers, and system administrators who require long-term predictability, binary consistency, and enterprise-grade stability rather than a fast-moving rolling release.\n\nUnlike community distributions that assemble their entire software archive from independent upstream development trees, Leap employs a hybrid construction model. The foundational operating system core — including the Linux kernel, systemd init system, glibc runtime, storage management subsystem, and low-level system libraries — is built directly from SUSE Linux Enterprise (SLE) sources and shared binaries. On top of this industrial foundation, openSUSE contributors package and maintain modern graphical desktop environments, scientific toolkits, productivity applications, and server workloads through the Open Build Service (OBS).\n\nBeginning with openSUSE Leap 16.0, published on 1 October 2025, the distribution has aligned its lifecycle with the SLE 16 generation (developed within the SUSE Linux Framework One / SLFO architecture). Leap 16 introduces an extended 24-month support window per minor release, enforces a strict 64-bit baseline requiring the x86-64-v2 microarchitecture level on AMD64 and Intel hardware, replaces the historic YaST installer with the modern Agama installation framework, and shifts manual system administration toward Cockpit.",
+    "what_is_it": "In practical terms, openSUSE Leap is a general-purpose Linux operating system suitable for physical workstations, laptops, virtual machines, edge computing appliances, and physical servers. It offers an alternative to rolling distributions by grouping software into discrete, extensively tested version milestones that remain stable throughout their support lifecycle.\n\nWhen deploying Leap, users obtain an operating system whose central components do not change unexpectedly between updates. Software updates delivered during the lifetime of a minor version are restricted to security patches and critical bug fixes, avoiding backward-incompatible interface changes, library breaks, or spontaneous application rewrites. This approach makes Leap particularly appealing to environments where operational predictability is essential, such as software development workstations, academic research laboratories, and server infrastructure that cannot tolerate unexpected downtime caused by rolling library upgrades.\n\nAt the same time, Leap is not a proprietary product. It is published free of charge without commercial license keys, mandatory registration accounts, or upsell prompts. Users who later determine that their deployments require commercial Level 3 engineering support and multi-year service contracts can migrate their installed Leap systems directly to SUSE Linux Enterprise Server without reformatting or reinstalling their machines.",
+    "origin_and_history": "The openSUSE project traces its lineage to S.u.S.E. Linux, founded in Germany in 1992. For more than two decades, the project published numbered community releases (such as openSUSE 11.x, 12.x, and 13.x) built independently from Factory, while SUSE developed its commercial enterprise products separately.\n\nIn 2014 and 2015, the openSUSE community and SUSE engineering rethought this division. Maintaining an entirely separate distribution core consumed substantial volunteer energy, while users were torn between those seeking cutting-edge versions and those needing rock-solid stability. The project split its release model into two complementary paths: Tumbleweed became the pure rolling release assembled from Factory, while openSUSE Leap 42.1, released on 4 November 2015, established the hybrid model by inheriting its operating system core directly from SUSE Linux Enterprise 12 Service Pack 1.\n\nThe Leap 15 series arrived in May 2018 based on SLE 15, progressing through annual minor service releases up to Leap 15.6 in June 2024. Through the Closing the Leap Gap initiative in Leap 15.3, openSUSE moved from rebuilding SLE source code to consuming identical binary RPMs from SLE, achieving complete binary parity. In late 2025, the project launched Leap 16.0, marking a major generational transition. Leap 16 reflects SUSE's Adaptable Linux Platform (ALP) initiatives, modernises the installer and administration toolchain, and expands support horizons for the modern data centre.",
+    "governance": "openSUSE Leap operates under the overarching governance of the openSUSE project, a collaborative initiative combining individual volunteer contributors and corporate sponsorship from SUSE LLC.\n\nStrategic decisions, community guidelines, and conflict resolution are overseen by the openSUSE Board. The Board consists of members elected by registered openSUSE community members, alongside a chairperson appointed directly by SUSE. Project policy stipulates that the Board does not micromanage technical development; instead, development and package decisions are driven by community consensus, package maintainers, and the openSUSE Release Team.\n\nSUSE provides extensive infrastructure backing, including the hosting and operation of the Open Build Service (OBS), the global MirrorCache network, openQA automated test clusters, and the engineering resources that maintain the SLE base. Community contributors maintain software packages in the pool repository on src.opensuse.org, submit pull requests, manage desktop translations via Weblate, and participate in weekly public feature review meetings.",
+    "release_model": "openSUSE Leap follows a predictable, fixed-release publication model structured into major generations and annual minor releases.\n\nA major release generation (such as Leap 16) is defined by its shared architecture with the corresponding SUSE Linux Enterprise generation. Within this major cycle, minor versions (such as Leap 16.0, 16.1, and 16.2) are published roughly every 12 months, typically in the autumn.\n\nStarting with Leap 16.0, each minor release receives an extended maintenance lifecycle of 24 months. This lifecycle is structured as 18 months of regular updates followed by a 6-month overlap period after the subsequent minor version is published. Because a new minor version arrives every 12 months, users have a full 12-month transition window to upgrade to the next release while remaining completely covered by official security updates and critical fixes. Current roadmap projections anticipate that the Leap 16 series will continue through minor release 16.6 in autumn 2031, with updates sustained until Leap 17.1 arrives two years later.",
+    "releases_and_support": "Understanding the status of individual Leap versions requires consulting the project's official lifetime records and roadmap:\n\nLeap 16.0 was released on 1 October 2025 and represents the current active stable release. It is officially supported with security and maintenance patches until at least 31 October 2027. It features Linux kernel 6.14, systemd cgroup v2 by default, PipeWire audio, and contemporary desktop environments.\n\nLeap 15.6, published on 12 June 2024 with kernel 6.4 and YaST, reached its official end of life on 30 April 2026. Users still running Leap 15.6 are urged by project documentation to upgrade to Leap 16.0 using opensuse-migration-tool to remain secure.\n\nLeap 16.1 is the upcoming minor release, with Alpha availability achieved in January 2026, Public Beta in May 2026, Release Candidate builds in September 2026, and general availability scheduled for 3 November 2026. Its support lifecycle will extend until October 2028.\n\nProject documentation records an explicit distinction between community maintenance and commercial support: community maintenance is provided without fee for 24 months per minor release, whereas commercial customers holding SUSE contracts can extend support up to 2034 and 2037 under Long Term Service Pack Support (LTSS).",
+    "base_and_enterprise_relationship": "The technical relationship between openSUSE Leap and SUSE Linux Enterprise (SLE) is fundamental to Leap's identity.\n\nIn Leap 16, this relationship is organised under the SLFO (SUSE Linux Framework One) architecture. When SUSE engineers build packages for SLES 16, the identical source code and binary packages are incorporated into Leap's repositories via the slfo-main and slfo-x.y branches on src.opensuse.org/pool. Approximately one third of all packages in a Leap installation — specifically the core runtime, compiler toolchains, cryptographic libraries, and server daemons — come directly from SLE.\n\nThe remaining two thirds of packages, including graphical desktop shells (KDE Plasma, GNOME, Xfce), office productivity software, multimedia libraries, and developer tools, are imported from openSUSE Factory or maintained directly by openSUSE contributors. Because core binaries are identical to SLE, Leap systems exhibit high binary compatibility with enterprise server environments, allowing software vendors to certify applications on Leap with confidence that they will behave identically on SLES.\n\nThis shared core also explains why Leap's kernel version changes more conservatively than rolling distributions. SLE undergoes rigorous hardware and Independent Software Vendor (ISV) certifications that require months of testing on partner platforms. Once a kernel baseline is established, SUSE engineers backport hardware drivers and security patches continuously rather than introducing disruptive kernel branch leaps.",
+    "package_manager": "openSUSE Leap uses zypper as its command-line package management tool, built upon the underlying libzypp library. Software is packaged in the standard RPM (RPM Package Manager) format.\n\nlibzypp distinguishes itself through the use of a SAT-based boolean satisfiability solver to resolve package dependencies. When package conflicts or architecture mismatches occur, zypper provides interactive conflict resolutions that explain the precise dependency chains and allow the user to select among valid solutions, rather than failing silently.\n\nzypper natively supports package patterns, which represent cohesive software selections (such as a complete desktop environment, a web server stack, or developer tools). It also implements repository priorities (integers from 1 to 99, where lower numbers indicate higher priority) and vendor stickiness. By default, zypper refuses to replace a package with a version from a different repository vendor unless explicitly permitted by the user with the --allow-vendor-change switch.",
+    "repositories": "A standard openSUSE Leap installation is configured with several official repository endpoints hosted on the global MirrorCache network:\n\nThe oss repository contains the base operating system and all open-source packages licensed under free software terms. The non-oss repository provides redistributable software that carries proprietary or restricted licenses, such as proprietary hardware firmwares and specific device drivers. Corresponding update repositories (update/oss and update/non-oss) deliver tested security advisories and maintenance updates.\n\nIn Leap 16, repository access is further harmonised through the SLFO channels that synchronize enterprise maintenance updates. Repository metadata is cryptographically signed, and packages are checked against the project's trusted GPG keyrings during download.\n\nFor proprietary multimedia codecs (such as H.264 and patented audio algorithms) that cannot be included in official openSUSE repositories due to legal patent restrictions in certain jurisdictions, the community directs users to the Packman repository. Packman is an independent, third-party community repository infrastructure. Official openSUSE documentation provides instructions for adding Packman with an elevated priority (such as priority 90) and executing a vendor switch to enable full multimedia playback, while consistently emphasizing that Packman is not an official openSUSE project service.",
+    "cockpit_and_administration": "One of the most consequential architectural changes in openSUSE Leap 16.0 is the transition from YaST to Cockpit for manual system administration.\n\nHistorically, SUSE and openSUSE distributions were defined by YaST (Yet another Setup Tool), an extensive administration suite providing ncurses text-mode and Qt graphical modules for configuring network interfaces, storage partitions, user accounts, and system services. In Leap 16.0, Cockpit — a browser-based, lightweight system administration interface that communicates directly with systemd, DBus, and standard Linux APIs — has become the primary administration tool.\n\nTo support this shift, openSUSE developers created and enhanced dedicated Cockpit modules:\n\ncockpit-subscriptions manages registration with SUSE Linux Enterprise for systems transitioning to commercial support;\ncockpit-repositories allows administrators to view, add, modify, and refresh package sources directly from the browser;\ncockpit-packages provides package search and software installation without requiring terminal execution;\ncockpit-packagekit offers selective update management, allowing individual package updates to be selected or deferred.\n\nThese custom modules join upstream Cockpit modules for network management, storage volume configuration, virtual machine oversight, and container orchestration. The release notes acknowledge that this transition is evolving, with certain advanced YaST modules still maintained for specialised setups.",
+    "installation": "Installation of openSUSE Leap 16 is conducted using Agama, the project's next-generation installer that replaces the traditional YaST-based installation screens.\n\nAgama is structured as an independent backend service coupled with a modern web interface. It can run locally on the target hardware during boot or be accessed remotely over the local network via a web browser, facilitating headless, remote, and automated deployments. Agama supports declarative installation profiles, streamlining automated server provisioning.\n\nopenSUSE publishes two primary installation ISOs for Leap 16.0: an Offline Image (approximately 4.2 GiB on x86_64) containing a complete set of core packages and desktop environments for disconnected deployment, and a Network Image (around 712 MiB) that boots a minimal environment and retrieves required packages dynamically from mirrors. In addition, the project provides preconfigured Minimal Virtual Machine images (for KVM/Xen, Hyper-V, VMware, and cloud environments) and OEM self-install images tailored for hardware manufacturers.",
+    "hardware_and_architectures": "openSUSE Leap 16.0 officially supports four computing architectures: AMD64/Intel 64 (x86_64), 64-bit Arm (aarch64), IBM Power Little-Endian (ppc64le), and IBM Z / LinuxONE (s390x).\n\nOn x86_64, Leap 16.0 establishes an explicit baseline requirement: the CPU must support the x86-64-v2 microarchitecture level (incorporating SSE3, SSSE3, CMPXCHG16B, LAHF-SAHF, and POPCNT instructions). Processors manufactured before approximately 2007–2008 (such as older Pentium 4 or early Core models) cannot run Leap 16.0. In software design, Leap supports up to 8192 logical CPUs on x86_64 and 256 CPUs on aarch64.\n\nAdditionally, Leap 16.0 has completely removed support for 32-bit binaries by default, including 32-bit container images and static binaries. On aarch64, 32-bit syscalls remain enabled, and on x86_64 they can be selectively enabled via the ia32_emulation kernel parameter, but standard multilib runtime packages are no longer provided.\n\nTo optimize performance on modern hardware, Leap enables the glibc-HWCAPS mechanism, which automatically loads architecture-specific optimized versions of computational libraries (such as libgcrypt, boost, brotli, and flac) when running on newer CPU generations.\n\nMinimum system requirements specify a 2 GHz dual-core processor, 1024 MB of RAM for minimal text installations (2 GB or more recommended for desktop usage), and hard drive space ranging from 2.5 GB for minimal configurations to 16 GB minimum (32 GB recommended) when Btrfs system snapshots are enabled.",
+    "file_system_and_snapshots": "The storage architecture of openSUSE Leap centres on Btrfs as the default root filesystem, paired with Snapper for automated system snapshot management.\n\nWhen packages are installed, updated, or removed using zypper, libzypp invokes Snapper plugins to create pre-transaction and post-transaction snapshots of the root filesystem subvolumes. If a system update introduces an incompatible configuration or causes software instability, the administrator can inspect differences using the snapper utility or revert the system to an earlier working state using snapper rollback.\n\nBecause Snapper integrates directly with GRUB, users can also boot into a read-only snapshot directly from the bootloader menu if a faulty kernel or driver prevents the system from starting normally. Once booted into the functional snapshot, running snapper rollback restores that state as the default boot target. For user directories, the installer defaults to the XFS filesystem on /home, keeping personal data separate from root snapshot rollbacks.",
+    "security": "Security in openSUSE Leap 16.0 incorporates significant structural evolutions inherited from the SLE 16 platform:\n\nLinux Security Modules (LSM): In Leap 16.0, AppArmor is no longer selected or enabled by default on fresh installations. Because SUSE Linux Enterprise 16 shifted its default LSM orientation toward SELinux, new Leap 16.0 installations default to SELinux. However, AppArmor 4.1 remains fully packaged in official repositories and can be activated post-installation by administrators who prefer it. Systems upgraded from Leap 15.6 preserve their existing AppArmor configurations.\n\nAuthentication and Network Hardening: On new Leap 16.0 installations, remote root login over SSH using password authentication is disabled by default, requiring cryptographic SSH key pairs. Remote password login can be restored if necessary by installing the openssh-server-config-rootlogin package. firewalld is configured and active by default to filter incoming network traffic.\n\nCryptographic Standards: In compliance with FIPS 140-3 certification requirements, the SHA-1 cryptographic algorithm is disabled or marked unapproved when running in FIPS mode.\n\nTrust Infrastructure: Package integrity is protected by GPG signatures verified by zypper during installation. Official ISO downloads are verified using the openSUSE release team's public key (fingerprint AD48 5664 E901 B867 051A B15F 35A2 F86E 29B7 00A4), and security patches are tracked by the openSUSE Security Team in coordination with SUSE security engineers.",
+    "privacy": "openSUSE Leap does not include invasive operating system telemetry, background usage trackers, or mandatory cloud accounts.\n\nThe project's guiding principles and web notices emphasize that openSUSE is free to use without commercial upsells, mandatory registrations, or embedded advertising. Operating system installations do not send desktop activity telemetry or personal telemetry dossiers back to openSUSE or SUSE servers.\n\nNetwork interactions are limited to functional requirements: package downloads, repository metadata refreshes, and NTP clock synchronisation. These network transactions communicate with openSUSE mirror infrastructure governed by the openSUSE Privacy Policy. The MirrorCache distribution system logs standard server connection metadata (such as IP addresses and requested files) strictly as necessary for network routing, load balancing, and infrastructure security.",
+    "desktop": "openSUSE Leap 16.0 provides contemporary desktop environments built by the community on top of the SLE base, with an installation policy that adopts Wayland by default.\n\nDuring installation, the Agama installer offers Wayland sessions for its supported desktop environments. KDE Plasma 6.4 is available with its KWin Wayland compositor, customizable desktop tiling, and enhanced accessibility tools. GNOME 48 ('Bengaluru') is provided with notification stacking, dynamic triple buffering for interface fluidity, and digital wellbeing integrations. For lighter workloads, Xfce 4.20 is included with an experimental Wayland session utilizing gtkgreet and greetd in place of LightDM, while LXQt Wayland sessions can be added post-installation. Legacy X11/Xorg sessions remain available for manual installation from repositories.\n\nOn supported systems equipped with NVIDIA GPUs, Leap 16.0 automatically sets up the NVIDIA graphics driver repository and installs both the open kernel driver and matching user-space acceleration libraries out of the box.\n\nAudio handling is managed uniformly by PipeWire and WirePlumber, replacing PulseAudio. The first login experience is greeted by opensuse-welcome-launcher, which delegates to desktop-native greeters (plasma-welcome or gnome-tour).",
+    "updates_and_maintenance": "Routine maintenance and system upgrades in openSUSE Leap follow distinct, documented command pathways:\n\nFor routine daily or weekly maintenance, official documentation recommends executing zypper patch as root. Unlike a general package update, zypper patch specifically queries patchinfo metadata in official update repositories and installs only vetted security advisories and critical bug fixes. To update all installed packages across all configured repositories (including third-party sources), administrators run zypper update.\n\nWhen moving between minor Leap versions (such as upgrading from 15.6 to 16.0), the project provides opensuse-migration-tool. This utility automates the reconfiguration of repository URLs, executes necessary pre-flight dependency checks, guides the user through security module transitions (AppArmor to SELinux), and executes the migration transaction safely.\n\nIn enterprise environments requiring commercial contracts, the same migration tool allows Leap 16 installations to transition in-place into fully supported SUSE Linux Enterprise Server 16 instances without rebuilding the machine.",
+    "opensuse_family": "openSUSE Leap exists as a foundational pillar within a broader family of related openSUSE distributions and technologies:\n\nopenSUSE Tumbleweed: The rolling-release sibling distribution that receives constant software versions from Factory. Tumbleweed serves as the development and testing ground from which Leap's desktop and community packages are derived.\n\nopenSUSE Leap Micro: An immutable, lightweight operating system built for edge computing, container hosts, and virtualised appliances. Derived from SLE Micro, Leap Micro follows the same 24-month maintenance cycle as Leap starting with Leap Micro 6.2.\n\nopenSUSE MicroOS: The rolling-release counterpart to Leap Micro, featuring read-only root filesystems and transactional updates based on Tumbleweed.\n\nAeon and Kalpa: Desktop-oriented immutable distributions utilizing transactional updates, Flatpaks, and containerized runtimes (Aeon with GNOME, Kalpa with KDE Plasma).\n\nSUSE Linux Enterprise (SLE): The upstream commercial parent product from which Leap derives its foundational system packages, enterprise kernel, and long-term security engineering.",
+    "advantages": [
+      "Enterprise code base",
+      "Twenty four month support",
+      "Btrfs snapper rollback",
+      "Direct path to SLE",
+      "Cockpit administration",
+      "Agama installer support",
+      "Modern Wayland desktops",
+      "Free of mandatory accounts"
+    ],
+    "disadvantages": [
+      "Hardware x86 64 v2 required",
+      "Thirty two bit dropped",
+      "Packman needed for codecs",
+      "AppArmor inactive by default",
+      "Twelve month upgrade window",
+      "Cockpit transition in progress",
+      "Sixteen gigabytes disk needed",
+      "No commercial SLA by default"
+    ],
+    "who_is_it_for": [
+      "Workstation developers",
+      "System administrators",
+      "Stable desktop users",
+      "Enterprise testing labs",
+      "Virtual machine hosts",
+      "Hardware appliance builders",
+      "Users wanting Btrfs rollbacks",
+      "Teams evaluating SLE"
+    ],
+    "who_is_it_not_for": [
+      "Pre 2008 CPU owners",
+      "Thirty two bit users",
+      "Bleeding edge package seekers",
+      "Pure rolling release fans",
+      "Users wanting default YaST GUI",
+      "Zero disk overhead systems",
+      "Commercial contract seekers",
+      "Non x86 64 v2 hardware"
+    ],
+    "verdict": "openSUSE Leap 16.0 successfully bridges the gap between enterprise-grade operational stability and modern open-source desktop technology. By anchoring its core in SUSE Linux Enterprise 16 and extending minor release maintenance to 24 months, it offers a predictable foundation for development workstations, server infrastructure, and computing laboratories. The transition to the Agama installer and Cockpit web administration modernises the distribution's administrative experience, while Btrfs and Snapper provide reliable recovery from unintended configuration errors. However, the requirement for x86-64-v2 microarchitecture, the complete removal of 32-bit execution, and the necessity of third-party repositories for proprietary media playback represent clear architectural boundaries that prospective users must consider."
+  },
+  "components": [
+    {
+      "id": "rpm",
+      "name": "RPM",
+      "role": "package_format",
+      "note": "Standard package format used by openSUSE Leap; provides cryptographically signed software archives with dependency metadata and file verification."
+    },
+    {
+      "id": "zypper",
+      "name": "zypper",
+      "role": "package_manager",
+      "note": "The official command-line package manager for Leap, supporting repository prioritization, vendor locking, pattern management, and distinct patch/update operations."
+    },
+    {
+      "id": "libzypp",
+      "name": "libzypp",
+      "role": "package_manager",
+      "note": "The underlying package management library featuring a SAT-based boolean solver for dependency resolution, repository metadata caching, and vendor change policies."
+    },
+    {
+      "id": "agama",
+      "name": "Agama",
+      "role": "installer",
+      "note": "The modern web-architected installation framework introduced in Leap 16, replacing the legacy YaST installer for local and unattended deployments."
+    },
+    {
+      "id": "cockpit",
+      "name": "Cockpit",
+      "role": "configuration_tool",
+      "note": "The primary web-based administration suite in Leap 16.0, augmented with openSUSE-developed modules for package, repository, and SLE subscription management."
+    },
+    {
+      "id": "yast",
+      "name": "YaST",
+      "role": "configuration_tool",
+      "note": "The historic setup and configuration suite of openSUSE; retained for specific administration modules and upgrades from the Leap 15 series."
+    },
+    {
+      "id": "snapper",
+      "name": "snapper",
+      "role": "system_tool",
+      "note": "Snapshot management utility integrated with libzypp and GRUB, enabling automatic pre/post transaction snapshots and system rollback."
+    },
+    {
+      "id": "btrfs",
+      "name": "Btrfs",
+      "role": "filesystem",
+      "note": "The default root filesystem for Leap, providing copy-on-write subvolumes and snapshots required for system rollbacks."
+    },
+    {
+      "id": "obs",
+      "name": "Open Build Service",
+      "role": "build_system",
+      "note": "The shared packaging and automated build infrastructure where community packages for openSUSE Leap are developed and compiled."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_server",
+      "note": "The default multimedia audio server and routing daemon in Leap 16.0, coupled with WirePlumber, replacing legacy PulseAudio."
+    },
+    {
+      "id": "plasma-desktop",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "Shipped as Plasma 6.4 with native Wayland session, customizable window tiling, and HDR calibration tools."
+    },
+    {
+      "id": "gnome-shell",
+      "name": "GNOME",
+      "role": "desktop_environment",
+      "note": "Shipped as GNOME 48 ('Bengaluru') with notification stacking, dynamic triple buffering, and digital wellbeing integrations."
+    }
+  ],
+  "relations": [
+    {
+      "id": "opensuse-tumbleweed",
+      "name": "openSUSE Tumbleweed",
+      "relation": "alternative",
+      "note": "The rolling-release counterpart from the openSUSE project; delivers bleeding-edge snapshots tested with openQA, contrasting with Leap's 24-month fixed support cycles."
+    },
+    {
+      "id": "suse-linux-enterprise",
+      "name": "SUSE Linux Enterprise",
+      "relation": "upstream_of",
+      "note": "The commercial parent platform (SLES 16 / SLFO) from which Leap derives its foundational system binaries, kernel, and enterprise security maintenance."
+    },
+    {
+      "id": "openSUSE:Factory",
+      "name": "openSUSE Factory",
+      "relation": "related",
+      "note": "The continuous integration development codebase from which community packages and desktop environments are staged and built for Leap."
+    },
+    {
+      "id": "openSUSE:LeapMicro",
+      "name": "openSUSE Leap Micro",
+      "relation": "related",
+      "note": "The container and edge-focused lightweight distribution sharing Leap's enterprise stability and 24-month maintenance lifecycle."
+    },
+    {
+      "id": "openSUSE:MicroOS",
+      "name": "openSUSE MicroOS",
+      "relation": "related",
+      "note": "The rolling immutable server distribution that utilizes transactional updates and read-only root filesystems."
+    },
+    {
+      "id": "packman",
+      "name": "Packman",
+      "relation": "related",
+      "note": "The third-party community repository providing proprietary multimedia codecs and patented media libraries not shipped in official openSUSE repositories."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "An independent RPM-based distribution with a shorter 13-month release lifecycle, upstream-focused defaults, and separate community governance."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "A community-governed stable distribution with multi-year release cycles, using the dpkg/APT packaging system and supporting wider legacy architectures."
+    }
+  ],
+  "variants": [
+    {
+      "name": "openSUSE Leap 16.0 (Active Stable Release)",
+      "description": "Released on 1 October 2025 based on SLE 16 / SLFO; supported with maintenance and security updates until 31 October 2027. Features Linux kernel 6.14, Wayland defaults, Agama installer, and Cockpit administration."
+    },
+    {
+      "name": "openSUSE Leap 15.6 (Previous Stable Release - EOL)",
+      "description": "Released on 12 June 2024 based on SLE 15 SP6 with Linux kernel 6.4 and YaST installer; reached end of life on 30 April 2026. Users are advised to upgrade to Leap 16.0 using opensuse-migration-tool."
+    },
+    {
+      "name": "openSUSE Leap 16.1 (Upcoming Minor Release)",
+      "description": "In active development (Beta released May 2026, GA scheduled for 3 November 2026); aligns with SLES 16.1 and extends support for the 16 series through October 2028."
+    },
+    {
+      "name": "Offline Installation Media (4.2 GiB x86_64)",
+      "description": "Full standalone DVD image containing the core operating system, Agama installer, and primary desktop environments (KDE Plasma, GNOME, Xfce) for air-gapped or disconnected deployments."
+    },
+    {
+      "name": "Network Installation Media (712 MiB x86_64)",
+      "description": "Compact boot image providing the Agama installer; retrieves necessary software packages dynamically from the worldwide openSUSE mirror network during installation."
+    },
+    {
+      "name": "Minimal Virtual Machine Appliances",
+      "description": "Prebuilt, specialized lightweight system images for virtualisation and cloud hypervisors (KVM/Xen, Hyper-V, VMware, and OpenStack/Cloud-Init), matching SLES minimal server profiles."
+    },
+    {
+      "name": "OEM Hardware Deployment Images",
+      "description": "Self-installing ISOs and preconfigured raw disk images containing pre-installed KDE Plasma or GNOME desktops, optimized for hardware vendors and rapid system provisioning."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.opensuse.org/",
+    "download": "https://get.opensuse.org/leap/16.0/",
+    "documentation": "https://doc.opensuse.org/",
+    "release_notes": "https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/16.0/",
+    "news": "https://news.opensuse.org/",
+    "wiki": "https://en.opensuse.org/Portal:Leap",
+    "roadmap": "https://en.opensuse.org/openSUSE:Roadmap",
+    "lifetime": "https://en.opensuse.org/Lifetime",
+    "hardware_requirements": "https://en.opensuse.org/Hardware_requirements_16.0",
+    "packaging": "https://en.opensuse.org/openSUSE:Packaging_for_Leap",
+    "build_service": "https://build.opensuse.org/",
+    "security": "https://en.opensuse.org/Portal:Security",
+    "forums": "https://forums.opensuse.org/"
+  },
+  "sources": [
+    {
+      "title": "openSUSE Leap 16.0 official download portal and specifications",
+      "url": "https://get.opensuse.org/leap/16.0/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE project",
+      "note": "Documentation of 24-month lifecycle, x86-64-v2 baseline requirement, SHA256 checksums, GPG signing key fingerprint, Agama installer announcement, and image sizes."
+    },
+    {
+      "title": "openSUSE Leap 16.0 Release Notes — technical changes and additions",
+      "url": "https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/16.0/",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE documentation team",
+      "note": "Official release notes documenting switch from YaST to Cockpit (3.9.1), AppArmor status (2.6.2), Wayland defaults (2.3), PipeWire transition (2.11), 32-bit removal (3.5.12), and hardware requirements (3.5.1)."
+    },
+    {
+      "title": "openSUSE Wiki — Lifetime (lifecycle and support horizons)",
+      "url": "https://en.opensuse.org/Lifetime",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 209412 of 2026-08-08: documentation of 24-month maintenance cycle per minor release, Leap 16.0 support to October 2027, Leap 15.6 EOL on 30 April 2026, and Leap Micro alignment."
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Roadmap",
+      "url": "https://en.opensuse.org/openSUSE:Roadmap",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 209688 of 2026-08-31: schedule milestones for Leap 16.1 (GA 3 November 2026), Leap 16.0 EOL date (31 October 2027), and active Leap Micro releases."
+    },
+    {
+      "title": "openSUSE Wiki — Hardware_requirements_16.0",
+      "url": "https://en.opensuse.org/Hardware_requirements_16.0",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 200172 of 2025-10-16: detailed hardware requirements specifying x86-64-v2 microarchitecture level (SSE3, SSSE3, CMPXCHG16B, LAHF-SAHF, POPCNT), RAM limits, and disk space with Btrfs snapshots (16 GB min, 32 GB rec)."
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Packaging for Leap (SLFO and SLE alignment)",
+      "url": "https://en.opensuse.org/openSUSE:Packaging_for_Leap",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 209358 of 2026-08-04: Git packaging workflow for Leap 16, combining SLE 16 (SLFO) packages with community packages from src.opensuse.org/pool."
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Leap/Intro",
+      "url": "https://en.opensuse.org/Portal:Leap/Intro",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 200563 of 2025-11-12: first release history (Leap 42.1 on 4 November 2015), 16.0 release date, 24-month maintenance lifecycle, and projected Leap 16 series horizon to 2031."
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Leap/Topics",
+      "url": "https://en.opensuse.org/Portal:Leap/Topics",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 208161 of 2026-07-01: maintenance update procedures (zypper patch vs zypper update), upgrade instructions, and complementary positioning relative to Tumbleweed."
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Leap/Leap_kernel_version",
+      "url": "https://en.opensuse.org/Portal:Leap/Leap_kernel_version",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 208152 of 2026-07-01: explanation of kernel and core package sharing with SLE, package ratio (one third from SLE, two thirds from Tumbleweed/community)."
+    },
+    {
+      "title": "openSUSE Wiki — Portal:16.0/Features",
+      "url": "https://en.opensuse.org/Portal:16.0/Features",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 200163 of 2025-10-16: feature highlights of Leap 16.0 including Plasma 6.4, GNOME 48, Xfce 4.20, edge AI support, Weblate localization, and SLE migration."
+    },
+    {
+      "title": "openSUSE Wiki — Features_16.0",
+      "url": "https://en.opensuse.org/Features_16.0",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 205551 of 2026-06-28: FAQ on Leap 16, confirmation of classic non-immutable installation option, Adaptable Linux Platform (ALP) foundation, and Leap Micro 6."
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Distribution/Releases",
+      "url": "https://en.opensuse.org/Portal:Distribution/Releases",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 201415 of 2025-12-24: categorization of openSUSE releases (rolling, slowroll, immutable server, immutable desktop, regular stable release)."
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Zypper",
+      "url": "https://en.opensuse.org/Portal:Zypper",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 176483 of 2023-06-24: zypper command syntax, libzypp features, repository management, pattern commands, and package locking."
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Snapper",
+      "url": "https://en.opensuse.org/Portal:Snapper",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 150366 of 2020-12-20: Snapper filesystem snapshot utility, pre/post transaction logging, timeline snapshots, and rollback mechanisms."
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Privacy_policy",
+      "url": "https://en.opensuse.org/openSUSE:Privacy_policy",
+      "type": "legal",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE project",
+      "note": "Revision 204441 of 2026-05-08: openSUSE project privacy terms, data processing practices on infrastructure, log retention, and absence of desktop user profiling."
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Board",
+      "url": "https://en.opensuse.org/openSUSE:Board",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 209163 of 2026-07-17: openSUSE Board structure, election rules, chairperson appointment by SUSE, and non-intervention in technical development."
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Security_Notices",
+      "url": "https://en.opensuse.org/openSUSE:Security_Notices",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 193768 of 2025-02-25: openSUSE security advisory workflow, vulnerability disclosure, and mailing list notifications."
+    },
+    {
+      "title": "openSUSE Wiki — SDB:System_upgrade",
+      "url": "https://en.opensuse.org/SDB:System_upgrade",
+      "type": "documentation",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 204137 of 2026-04-21: official upgrade procedures between Leap releases, repository adjustments, and opensuse-migration-tool usage."
+    },
+    {
+      "title": "openSUSE News RSS Feed — project updates and announcements",
+      "url": "https://news.opensuse.org/feed.xml",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE project",
+      "note": "Official project announcement feed providing continuous reporting on Agama versions, KDE Plasma betas, ARM updates, and event roundups."
+    },
+    {
+      "title": "openSUSE Project main portal — community positioning and principles",
+      "url": "https://www.opensuse.org/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "publisher": "openSUSE project",
+      "note": "Statement of principles: free of charge, no ads, no mandatory user accounts, installer features (Btrfs, encryption, Secure Boot), and distribution flavours."
+    }
+  ],
+  "last_verified": "2026-09-24"
+}
