@@ -23,6 +23,9 @@ var LIBRARY_RESOURCES = [
   "endeavouros",
   "linux-mint",
   "opensuse-leap",
+  "arch-linux",
+  "debian",
+  "linux-mint",
   "opensuse-tumbleweed",
   "ubuntu",
   // Development test fixtures — not real technologies. Safe to remove.
