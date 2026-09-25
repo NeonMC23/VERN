@@ -18,6 +18,15 @@
 
 var LIBRARY_RESOURCES = [
   "fedora",
+  "debian",
+  "ubuntu",
+  "arch-linux",
+  "linux-mint",
+  "opensuse-tumbleweed",
+  "opensuse-leap",
+  "endeavouros",
+  "manjaro",
+  "nixos",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
