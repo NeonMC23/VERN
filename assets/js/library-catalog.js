@@ -29,6 +29,8 @@ var LIBRARY_RESOURCES = [
   "nixos",
   "gentoo",
   "void-linux",
+  "alpine-linux",
+  "slackware",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",

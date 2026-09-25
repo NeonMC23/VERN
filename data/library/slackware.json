@@ -1,0 +1,298 @@
+{
+  "id": "slackware",
+  "name": "Slackware",
+  "type": "operating_system",
+  "summary": "The oldest continually maintained Linux distribution, emphasizing Unix-like simplicity, unmodified upstream software, BSD-style init scripts, and manual package management without automatic dependency resolution.",
+  "tags": [
+    "linux",
+    "operating-system",
+    "slackware",
+    "pkgtools",
+    "bsd-init",
+    "sysvinit",
+    "slackbuilds",
+    "vanilla",
+    "independent",
+    "multilib"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "x86",
+    "aarch64",
+    "armv7"
+  ],
+  "license": "GPL-2.0-or-later",
+  "content": {
+    "introduction": "Slackware Linux is an independent computer operating system created in 1993 by Patrick Volkerding. As the oldest actively maintained Linux distribution in existence, it is designed around the technical principles of traditional Unix systems: architectural transparency, plain-text configuration, minimal distribution-specific abstraction layers, and stability. Slackware avoids automated package dependency resolution, relying instead on comprehensive software series and direct administrator control.",
+    "what_is_it": "Slackware is a general-purpose Unix-like operating system delivering software in compressed .txz binary archives managed through the pkgtools suite and the slackpkg maintenance utility. System initialization is governed by BSD-style shell scripts located in /etc/rc.d/ running under sysvinit. Software packages ship with minimal modifications to preserve original upstream behavior. The distribution supports 64-bit x86_64, legacy 32-bit x86 (i586/i686), and official ARM architectures.",
+    "origin_and_history": "Slackware was created in April 1993 by Patrick J. Volkerding as an effort to clean up and stabilize SLS Linux (Softlanding Linux System). Volkerding published the first official release announcement on the Usenet comp.os.linux newsgroup on July 16, 1993. Throughout the 1990s and early 2000s, Slackware established many standard Linux deployment conventions. It introduced official 64-bit support with Slackware64 13.0 in 2009 and released version 15.0 in February 2022, marking nearly three decades of continuous development under the same lead developer.",
+    "governance_and_organization": "The project is directed by Patrick Volkerding serving as the project's lead developer and coordinator. Volkerding personalmente evaluates software, builds and signs official packages, and maintains the core system. He works alongside a small group of trusted core contributors, including Stuart Winter (maintainer of the Slackware ARM port) and Eric Hameleers (Alien BOB, multilib maintainer). Slackware operates independently of commercial corporate boards, funded through user subscriptions, sponsorships, and store merchandise.",
+    "release_model_and_current": "Slackware employs a milestone-based release model for stable versions, publishing major updates only when software stability criteria are fully satisfied (historically described as 'when it is ready'). In parallel, the distribution maintains the -current development branch (slackware-current and slackware64-current), where package upgrades, toolchain transitions, and kernel updates are tested continuously before forming the next stable release. Stable releases receive long-term maintenance via official security patches distributed in the patches/ directory.",
+    "package_management_and_pkgtools": "The native package management system is pkgtools, a set of shell scripts and C utilities that manipulate .txz archives (tar archives compressed with LZMA2/XZ). Core utilities include installpkg (extracts packages to the root filesystem), upgradepkg (replaces existing files and removes deleted assets), removepkg (deletes package files and empty directories), makepkg (generates .txz archives from staged file trees), and explodepkg (unpacks archives for inspection). Package manifests and file registries are tracked in plain text under /var/lib/pkgtools/packages/.",
+    "absence_of_automatic_dependencies": "By design, pkgtools does not implement automatic dependency resolution. When installing a package, the tool extracts files directly without querying remote package indices or calculating prerequisite software trees. Slackware addresses dependencies through its recommended installation method: performing a full installation of official package series (A, AP, D, L, N, X, XAP, KDE) provides a self-contained, fully linked base system in which all core dependencies are satisfied.",
+    "slackpkg_and_system_updates": "The slackpkg utility is included in the base system to automate mirror synchronization and package upgrades for official Slackware repositories. It provides commands such as slackpkg update (refreshes package lists), slackpkg upgrade-all (applies security patches and official upgrades), slackpkg install (fetches and installs official packages), and slackpkg clean-system (identifies third-party or unlisted packages). Security and integrity are enforced by verifying OpenPGP GPG signatures against official project keys prior to unpacking.",
+    "slackbuilds_and_slackbuilds_org": "Software not included in the official Slackware distribution is built from source using SlackBuild scripts. A SlackBuild is a shell script that automates downloading source tarballs, applying patches, executing build systems (such as CMake, Meson, or Autotools), and assembling compliant .txz packages. The community-maintained repository SlackBuilds.org (SBo) hosts thousands of peer-reviewed build scripts with .info metadata files specifying build prerequisites. Community tools such as sbopkg, sbotools, and slpkg automate the retrieval and compilation of SBo packages.",
+    "bsd_style_init_and_services": "Slackware implements a BSD-style init system configured in /etc/rc.d/. While PID 1 is standard sysvinit (/sbin/init) reading /etc/inittab, system startup is driven by human-readable shell scripts: rc.S (hardware initialization, virtual filesystems, and module loading), rc.M (multi-user service initialization, networking via rc.inet1, and background daemons), and rc.K (single-user maintenance). Daemon activation is controlled directly by file execution permissions: setting a script executable (chmod +x /etc/rc.d/rc.httpd) enables the service at boot, while clearing execution rights (chmod -x) disables it.",
+    "kernel_architecture_huge_and_generic": "Slackware distributes two standard kernel packages: kernel-huge and kernel-generic. The Huge kernel compiles almost all storage controllers (SATA, NVMe, SCSI, USB) and filesystem drivers directly into the monolithic kernel binary, allowing systems to boot immediately without an initial ramdisk. The Generic kernel builds drivers as modular components (kernel-modules) and requires an initramfs (/boot/initrd.gz) generated with mkinitrd. Bootloader configurations support ELILO for UEFI hardware, standard GRUB 2, and legacy LILO.",
+    "installation_procedure_and_disk_sets": "Installation is performed through the curses-based setup utility loaded from official boot media. Software packages are categorized into lettered disk series: A (core base system), AP (applications), D (development compilers and tools), E (GNU Emacs), F (documentation), K (kernel source), KDE (KDE Plasma desktop and libraries), L (shared libraries), N (networking servers and utilities), T (TeX/LaTeX), TCL (Tcl/Tk scripting), X (X.Org window system), XAP (X11 graphical applications and Xfce), and Y (classic BSD games).",
+    "toolchain_and_vanilla_software": "Slackware ships a complete GNU toolchain comprising the GNU Compiler Collection (GCC), GNU Binutils, and glibc, supplemented by LLVM/Clang and Rust. Patrick Volkerding maintains a strict packaging policy of shipping unpatched upstream code whenever technically feasible. The distribution avoids invasive distribution-specific modifications or non-standard directory structures, delivering software that closely reflects the developer's original design.",
+    "desktop_environments_and_multimedia": "Slackware 15.0 includes two complete desktop environments: KDE Plasma (KDE Plasma 5.23 with KDE Gear suites) and Xfce (Xfce 4.16), alongside lightweight window managers such as Fluxbox, Window Maker, and FVWM2. Display management supports X.Org and Wayland sessions, with unprivileged session access coordinated by elogind and D-Bus. Multimedia audio routing is handled by PipeWire alongside PulseAudio.",
+    "multilib_architecture": "Slackware64 is a pure 64-bit distribution by default, placing 64-bit libraries in /lib64 and /usr/lib64 without 32-bit runtime binaries. To execute 32-bit software (such as Wine or proprietary game binaries), multilib support is maintained through the compat32 package collection curated by Eric Hameleers (Alien BOB). In August 2024, multilib capabilities were merged directly into Slackware's official GCC and glibc packages in the -current development branch.",
+    "configuration_management_and_boot": "When package upgrades modify existing configuration files in /etc, pkgtools leaves existing customized files untouched, creating new files with a .new extension (such as rc.inet1.conf.new). Administrators review differences and merge updates using the slackpkg new-config or dotnew utilities. System events are recorded in plain text under /var/log/messages by the traditional sysklogd daemon (syslogd and klogd) and managed by logrotate.",
+    "security_and_advisories": "Security vulnerabilities are tracked by the Slackware Security Team and communicated through Slackware Security Advisories (SSA) on the official mailing list and web portal. Corrective packages are published immediately in the patches/ directory of supported releases. Package archives and patch sets are signed with Patrick Volkerding's OpenPGP GPG key, allowing automated verification via slackpkg update gpg.",
+    "privacy_and_telemetry": "The Slackware operating system, its installation tools, and package managers contain no telemetry services, tracking agents, or automated usage statistics reporting. The system does not initiate network connections without direct user invocation (such as executing slackpkg). Official web and FTP/HTTP mirror servers record standard HTTP connection access logs for maintenance and operational stability without tracking individual users.",
+    "advantages": [
+      "Architectural stability: conservative release cadence and unmodified upstream software deliver predictable, stable operations.",
+      "Unix-like transparency: system initialization and administration are governed by human-readable shell scripts in /etc/rc.d/.",
+      "Absence of dependency lock-in: pkgtools extracts packages directly without complex automated dependency cascades or conflicts.",
+      "Dual kernel options: kernel-huge boots on almost any hardware without initrd, while kernel-generic provides modular efficiency.",
+      "Extensive build automation: SlackBuilds.org provides peer-reviewed shell scripts for compiling thousands of third-party software packages.",
+      "Zero background telemetry: operating system components include no analytics daemons or network reporting mechanisms.",
+      "Dual architecture support: active maintenance for both 64-bit x86_64 and 32-bit x86 hardware platforms.",
+      "Configuration safety: upgrades do not overwrite customized system settings, writing updates as .new files for administrator review."
+    ],
+    "disadvantages": [
+      "Manual dependency management: pkgtools does not automatically calculate or download missing runtime libraries for third-party packages.",
+      "Long gaps between stable releases: official major version releases occur several years apart, requiring -current for newer software.",
+      "Lack of unified graphical administration: all configuration tasks require text file editing and command-line execution.",
+      "Multilib requires extra setup: 64-bit installations require adding compat32 packages to run 32-bit legacy binaries on stable releases.",
+      "No official desktop editions: installation media includes all software series, requiring manual package selection or full installation.",
+      "Smaller third-party binary repository ecosystem: prebuilt binary repositories from commercial software vendors rarely target Slackware directly."
+    ],
+    "who_is_it_for": [
+      "Experienced Linux users and system administrators seeking a transparent, BSD-style system governed by readable shell scripts.",
+      "Users who value unpatched, vanilla upstream software that functions exactly as its original authors designed.",
+      "Administrators who prefer manual dependency control and understand the exact library linkage requirements of their applications.",
+      "Users running legacy 32-bit x86 hardware or specialized ARM single-board computers.",
+      "Learners and engineers who wish to understand Linux fundamentals without layered distribution abstraction frameworks."
+    ],
+    "who_is_it_not_for": [
+      "Beginners expecting a graphical software center that automatically resolves and installs library dependencies.",
+      "Users requiring rapid, rolling access to bleeding-edge software versions on official stable releases.",
+      "Organizations whose administrative workflows depend strictly on systemd unit files and timer management.",
+      "Environments requiring commercial vendor support contracts and strict enterprise SLAs."
+    ],
+    "verdict": "Slackware Linux is a foundational, independent operating system that preserves the clarity and technical elegance of traditional Unix. By avoiding automatic dependency engines, systemd monoliths, and invasive distribution patches, it gives administrators complete authority over their machines. With its BSD-style init scripts, pkgtools framework, and robust SlackBuilds ecosystem, Slackware remains an enduring benchmark of stability, simplicity, and user control."
+  },
+  "components": [
+    {
+      "id": "pkgtools",
+      "name": "pkgtools",
+      "role": "package_manager",
+      "note": "Native shell-based package manager managing .txz archives without automated dependency resolution."
+    },
+    {
+      "id": "slackpkg",
+      "name": "slackpkg",
+      "role": "update_tool",
+      "note": "Automated mirror synchronization and package upgrade utility for official Slackware repositories."
+    },
+    {
+      "id": "sysvinit",
+      "name": "SysVinit",
+      "role": "init_system",
+      "note": "Traditional init daemon executing BSD-style initialization scripts in /etc/rc.d/."
+    },
+    {
+      "id": "glibc",
+      "name": "glibc",
+      "role": "library",
+      "note": "Standard GNU C Library utilized across 32-bit and 64-bit architectures."
+    },
+    {
+      "id": "gcc",
+      "name": "GCC",
+      "role": "build_system",
+      "note": "GNU Compiler Collection provided in the D series for compiling software and SlackBuilds."
+    },
+    {
+      "id": "linux-kernel",
+      "name": "Linux Kernel",
+      "role": "kernel",
+      "note": "Kernel provided in monolithic Huge and modular Generic packages."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_server",
+      "note": "Modern multimedia audio and video routing server included in Slackware 15.0."
+    },
+    {
+      "id": "wayland",
+      "name": "Wayland",
+      "role": "display_protocol",
+      "note": "Display protocol libraries supported in Slackware 15.0 for modern graphical sessions."
+    },
+    {
+      "id": "grub",
+      "name": "GRUB",
+      "role": "boot_loader",
+      "note": "Bootloader supported alongside ELILO and legacy LILO."
+    },
+    {
+      "id": "elogind",
+      "name": "elogind",
+      "role": "service",
+      "note": "Standalone seat and power management daemon coordinating user sessions without systemd."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "Contemporary early 1993 distribution featuring automated APT dependency resolution and systemd."
+    },
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Rolling-release distribution whose initial KISS design was inspired by Slackware."
+    },
+    {
+      "id": "gentoo",
+      "name": "Gentoo",
+      "relation": "alternative",
+      "note": "Source-based distribution sharing plain-text configuration philosophy and OpenRC init."
+    },
+    {
+      "id": "void-linux",
+      "name": "Void Linux",
+      "relation": "alternative",
+      "note": "Independent systemd-free distribution utilizing runit and the XBPS package manager."
+    },
+    {
+      "id": "alpine-linux",
+      "name": "Alpine Linux",
+      "relation": "alternative",
+      "note": "Minimalist independent distribution utilizing musl libc, BusyBox, and apk-tools."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Slackware64 15.0 (x86_64)",
+      "title": "Slackware64 15.0 (x86_64)",
+      "description": "Standard 64-bit release providing complete KDE Plasma, Xfce, and development series for x86_64 processors."
+    },
+    {
+      "name": "Slackware 15.0 (x86 32-bit)",
+      "title": "Slackware 15.0 (x86 32-bit)",
+      "description": "Native 32-bit release supporting legacy x86 hardware (i586 and i686 processors)."
+    },
+    {
+      "name": "Slackware -current (Development Branch)",
+      "title": "Slackware -current (Development Branch)",
+      "description": "Continuous development rolling branch where upstream packages and toolchain updates are staged."
+    },
+    {
+      "name": "Slackware64 Multilib",
+      "title": "Slackware64 Multilib",
+      "description": "64-bit Slackware installation extended with compat32 packages to execute 32-bit binary applications."
+    },
+    {
+      "name": "Slackware ARM",
+      "title": "Slackware ARM",
+      "description": "Official port supporting 32-bit ARM (armv7) and 64-bit ARM (AArch64) hardware platforms."
+    }
+  ],
+  "links": [
+    {
+      "title": "Official Portal",
+      "url": "http://www.slackware.com/",
+      "note": "Official website and news portal for the Slackware Linux Project."
+    },
+    {
+      "title": "SlackDocs Documentation Project",
+      "url": "https://docs.slackware.com/",
+      "note": "Community documentation wiki covering package management, multilib, and system setup."
+    },
+    {
+      "title": "SlackBuilds.org Repository",
+      "url": "https://slackbuilds.org/",
+      "note": "Official repository of build scripts for third-party software packages."
+    },
+    {
+      "title": "Slackware ARM Project",
+      "url": "https://arm.slackware.com/",
+      "note": "Official website of the Slackware ARM and AArch64 port."
+    },
+    {
+      "title": "Slackware Security Advisories",
+      "url": "http://www.slackware.com/security/",
+      "note": "Archive of official Slackware Security Advisories (SSA)."
+    },
+    {
+      "title": "Official Mirror Directory",
+      "url": "http://mirrors.slackware.com/",
+      "note": "Worldwide network of official HTTP and FTP package download mirrors."
+    }
+  ],
+  "sources": [
+    {
+      "title": "The Slackware Linux Project Official Portal",
+      "url": "http://www.slackware.com/",
+      "type": "official_documentation",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Patrick J. Volkerding"
+    },
+    {
+      "title": "Slackware 15.0 Release Announcement",
+      "url": "http://www.slackware.com/",
+      "type": "project_announcement",
+      "date": "2022-02-02",
+      "accessed": "2026-09-25",
+      "author": "Patrick J. Volkerding"
+    },
+    {
+      "title": "SlackDocs — Package Management: Traditional Tools and slackpkg",
+      "url": "https://docs.slackware.com/slackware:package_management",
+      "type": "technical_manual",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Slackware Documentation Project"
+    },
+    {
+      "title": "SlackDocs — Multilib on Slackware64",
+      "url": "https://docs.slackware.com/slackware:multilib",
+      "type": "technical_manual",
+      "date": "2024-08-30",
+      "accessed": "2026-09-25",
+      "author": "Eric Hameleers (Alien BOB)"
+    },
+    {
+      "title": "SlackBuilds.org FAQ and Guidelines",
+      "url": "https://slackbuilds.org/faq/",
+      "type": "project_guidelines",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "SlackBuilds.org Admin Team"
+    },
+    {
+      "title": "Slackware Installation Guide and Package Sets",
+      "url": "http://www.slackware.com/install/",
+      "type": "installation_guide",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Patrick J. Volkerding"
+    },
+    {
+      "title": "Slackware ARM / AArch64 Releases and Architecture History",
+      "url": "https://arm.slackware.com/releases/",
+      "type": "project_documentation",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Stuart Winter"
+    },
+    {
+      "title": "Slackware Security Advisories Archive",
+      "url": "http://www.slackware.com/security/",
+      "type": "security_advisories",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Slackware Security Team"
+    }
+  ],
+  "last_verified": "2026-09-25"
+}
