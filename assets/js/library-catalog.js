@@ -27,6 +27,8 @@ var LIBRARY_RESOURCES = [
   "endeavouros",
   "manjaro",
   "nixos",
+  "gentoo",
+  "void-linux",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
