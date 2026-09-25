@@ -1,0 +1,324 @@
+{
+  "id": "gentoo",
+  "name": "Gentoo",
+  "type": "operating_system",
+  "summary": "A source-based Linux distribution utilizing the Portage package manager, configurable USE flags, multiple init systems, and optional precompiled binary package hosts.",
+  "tags": [
+    "linux",
+    "operating-system",
+    "source-based",
+    "portage",
+    "use-flags",
+    "openrc",
+    "systemd",
+    "rolling-release",
+    "multi-architecture",
+    "binary-packages"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "arm64",
+    "ppc64",
+    "riscv",
+    "x86",
+    "arm",
+    "sparc",
+    "alpha",
+    "mips"
+  ],
+  "license": "GPL-2.0-only",
+  "content": {
+    "introduction": "Gentoo is an independent, community-driven Linux distribution organized around source code compilation and fine-grained system configuration. Its central tool, Portage, manages dependency resolution, compilation parameters, and package tracking through declarative ebuild scripts. While historically focused almost exclusively on local compilation, the distribution officially provides precompiled binary packages for major architectures alongside traditional source builds.",
+    "what_is_it": "Gentoo is a general-purpose Unix-like operating system that builds software packages directly on the target machine from upstream source code by default. Users specify global and per-package configuration flags (USE flags) that include or omit specific software features, libraries, and optional sub-systems prior to compilation. The distribution does not impose a fixed software stack, offering official support for both OpenRC and systemd, multiple C standard libraries (glibc and musl), and alternative compiler toolchains (GCC and LLVM/Clang).",
+    "origin_and_history": "Gentoo was founded in 1999 by Daniel Robbins under the initial name Enoch Linux, with the goal of creating a distribution tailored to local hardware that eliminated unneeded binary code. It was renamed Gentoo Linux in 2000, drawing its name from the fast-swimming Gentoo penguin (Pygoscelis papua), and released version 1.0 in March 2002. Robbins designed Portage by taking inspiration from the FreeBSD Ports collection, adapting ports concepts to a dynamic dependency engine and Python-driven framework. The governance of the project transitioned to a community model in the mid-2000s, establishing the Gentoo Foundation and the Gentoo Council.",
+    "governance_and_organization": "The project operates through a dual governance model defined by Gentoo Linux Enhancement Proposal 39 (GLEP 39). Legal and financial affairs are managed by the Gentoo Foundation, Inc., a non-profit entity registered in New Mexico, USA, directed by a five-member Board of Trustees elected using Condorcet voting. Technical leadership and architecture decisions are overseen by the Gentoo Council, consisting of seven elected developers who meet publicly each month to evaluate proposals, review architecture status, and set distribution policies. In April 2024, the Council adopted a binding policy prohibiting the submission of contributions generated with generative artificial intelligence tools.",
+    "release_model_and_stages": "Gentoo follows a rolling release model without discrete version milestones or mandatory full-system reinstallation cycles. Software updates are continuously committed to the main repository (repo/gentoo.git). Installation proceeds from a stage3 tarball, a compressed archive containing a minimal bootable userland (compiler, core utilities, Python, and Portage) deployed into a target root directory and configured via chroot. Historical stage1 and stage2 archives were deprecated for general installation in 2005 due to the maintenance overhead of circular bootstrap dependencies.",
+    "portage_and_ebuild_ecosystem": "Portage is the distribution's core package management system, implemented in Python and Bash in compliance with the Package Manager Specification (PMS). Software packages are described in ebuild files, shell scripts specifying metadata, source archive locations, build instructions, patches, and dependencies. The package tree is organized into categories and package names under the main repository. Portage is operated through the emerge command-line tool, which calculates dependency graphs, schedules build phases, and records installed package files in /var/db/pkg. Additional repositories and community overlays are configured via eselect repository and managed under /etc/portage/repos.conf.",
+    "use_flags_and_system_configuration": "USE flags are keyword variables that control conditional compilation options and software dependencies across the operating system. When a flag such as wayland, ssl, or dbus is enabled, Portage compiles the corresponding feature into the target software and automatically pulls in the necessary development libraries; when disabled (prefixed with a hyphen, such as -systemd), the feature and its dependencies are omitted from the build. Flags can be set globally in /etc/portage/make.conf, inherited from system profiles, or overridden on a per-package basis in /etc/portage/package.use.",
+    "compilation_toolchain_and_profiles_23": "The default Gentoo toolchain consists of the GNU Compiler Collection (GCC), GNU Binutils, and the GNU C Library (glibc), with official alternative support for LLVM/Clang and musl libc. Compiler flags are configured via CFLAGS, CXXFLAGS, and LDFLAGS in make.conf, typically defaulting to -O2 -pipe with hardware-specific instruction set flags. The distribution transitioned to profile version 23.0 as its stable default, which superseded the legacy 17.1 profiles. The 23.0 profile series integrates default toolchain hardening, including Intel Control-flow Enforcement Technology (CET) support on amd64 and non-lazy runtime symbol binding.",
+    "init_systems_openrc_and_systemd": "Gentoo officially supports two primary init and service management systems without elevating one over the other. OpenRC is a dependency-based init system written in C and POSIX shell scripts that manages service runlevels (sysinit, boot, default, shutdown) via rc-service and rc-update commands. Systemd provides unified service supervision, journal logging, and seat management controlled via systemctl. The choice between OpenRC and systemd is determined by the selected profile (such as default/linux/amd64/23.0 vs default/linux/amd64/23.0/systemd), allowing administrators to run either model natively.",
+    "kernel_methods_and_distribution_kernels": "Gentoo provides multiple mechanisms for kernel deployment and configuration. Distribution Kernels (sys-kernel/gentoo-kernel and sys-kernel/gentoo-kernel-bin) automate the build, initramfs generation, and bootloader update process directly through emerge, functioning like standard system packages. Users desiring manual customization can install sys-kernel/gentoo-sources or sys-kernel/vanilla-kernel, configure kernel options via menuconfig, and compile drivers tailored to their specific hardware, optionally utilizing the sys-kernel/installkernel framework and dracut for initramfs creation.",
+    "binary_packages_and_official_binhost": "In December 2023, Gentoo launched an official public binary package hosting service for amd64 and arm64 architectures on distfiles.gentoo.org, offering over 20 gigabytes of precompiled packages updated daily. In February 2024, the service added an additional package set optimized for the x86-64-v3 microarchitecture level. Portage supports hybrid operation: administrators can configure /etc/portage/binrepos.conf to download prebuilt binaries with emerge -g, falling back to local source compilation whenever local USE flags differ from the binhost presets.",
+    "security_and_system_hardening": "System security is coordinated by the Gentoo Security team, which issues Gentoo Linux Security Advisories (GLSA). Administrators scan for unpatched vulnerabilities and apply security upgrades using the glsa-check tool included with Portage. During compilation, Portage executes ebuild scripts within an isolated sandbox environment that intercepts file write operations to prevent direct modification of files outside the temporary build directory. Official Git commits and rsync trees are cryptographically signed with OpenPGP keys, and optional Hardened profiles enforce compiler-level protections such as Stack Smashing Protection, Position Independent Executables, and Full RELRO.",
+    "privacy_and_telemetry": "The Gentoo base system, Portage package manager, and core installation stages contain no telemetry daemons, tracking agents, or automatic usage reporting mechanisms. Network activity in a standard installation is limited to explicit repository synchronizations, source file downloads, and binary package retrieval. Gentoo maintains a global telemetry USE flag across its package tree, which is disabled by default in standard profiles and used to patch out or disable upstream telemetry in third-party applications. The Gentoo Foundation Privacy Policy governs official web services, collecting standard HTTP access logs for operational purposes without selling personal data.",
+    "desktops_and_multimedia": "Gentoo packages major desktop environments including KDE Plasma, GNOME, and Xfce, alongside standalone window managers such as Sway, i3, and Hyprland. Dedicated desktop profiles pre-enable relevant USE flags for graphical environments. Display protocols include native support for both Wayland and X11 via global flags. Multimedia audio routing is managed by PipeWire and WirePlumber, which provide replacement layers for PulseAudio, JACK, and ALSA.",
+    "advantages": [
+      "Granular build control: USE flags allow fine-tuning software dependencies and compiling out unused functionality.",
+      "Hardware-specific optimization: compiler flags can be tailored to the exact instruction set extensions of the host processor.",
+      "Dual source and binary model: official binhosts provide fast precompiled package downloads with seamless source fallback.",
+      "Init system flexibility: official first-class support for both OpenRC and systemd across standard profiles.",
+      "Rolling release maintenance: continuous package updates eliminate periodic distribution reinstallation cycles.",
+      "Automated security auditing: glsa-check scans installed packages against published Gentoo Linux Security Advisories.",
+      "Build isolation: Portage sandbox restricts compilation scripts from modifying files outside temporary working directories.",
+      "Extensive architecture catalog: active support across x86_64, AArch64, PowerPC, RISC-V, and legacy CPU architectures."
+    ],
+    "disadvantages": [
+      "Compilation time overhead: building large software packages (such as web browsers or desktop suites) from source consumes extensive CPU and memory resources.",
+      "Configuration complexity: administering Portage, USE flags, keywords, and unmasking requires thorough manual text file configuration.",
+      "Circular dependency resolution: complex dependency graphs with conflicting USE flag constraints can require manual intervention.",
+      "Rebuild requirements on ABI updates: major toolchain or profile upgrades (such as 17.1 to 23.0) can necessitate rebuilding the entire world package set.",
+      "Absence of unified graphical administration: system configuration and package management lack an official end-to-end graphical control center.",
+      "Storage space required for build trees: maintaining Portage trees, distfiles caches, and build directories requires substantial disk space."
+    ],
+    "who_is_it_for": [
+      "System administrators and developers requiring fine-grained control over compiler flags, dependencies, and enabled software features.",
+      "Users running non-standard hardware architectures needing tailored kernels and toolchain customization.",
+      "Users seeking an independent rolling-release system with native choice between OpenRC and systemd.",
+      "Engineers who want to experiment with alternative C standard libraries (musl) or compiler toolchains (LLVM/Clang).",
+      "Advanced Linux users comfortable with command-line configuration, manual kernel setup, and chroot environments."
+    ],
+    "who_is_it_not_for": [
+      "Users seeking an out-of-the-box pre-configured desktop with a graphical point-and-click installer.",
+      "Systems with severely limited CPU cores or thermal constraints where prolonged source compilation is impractical.",
+      "Environments requiring immediate software deployment without evaluating package dependencies or compile flags.",
+      "Users unfamiliar with text-based partition configuration, bootloader management, and terminal administration."
+    ],
+    "verdict": "Gentoo is a mature source-based Linux distribution engineered for deep customization, architectural transparency, and hardware adaptability. Through the Portage engine, declarative USE flags, and versioned profiles, it gives administrators precise control over software composition and system dependencies. The addition of official public binary package repositories has modernized its installation workflows, providing precompiled packages while retaining the full capability of source compilation."
+  },
+  "components": [
+    {
+      "id": "portage",
+      "name": "Portage",
+      "role": "package_manager",
+      "note": "Package management engine implementing PMS specifications with ebuild scripts and dependency resolution."
+    },
+    {
+      "id": "openrc",
+      "name": "OpenRC",
+      "role": "init_system",
+      "note": "Dependency-based service and init supervisor written in C and shell scripts."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "Alternative system and service manager officially supported in dedicated Gentoo profiles."
+    },
+    {
+      "id": "gcc",
+      "name": "GCC",
+      "role": "build_system",
+      "note": "GNU Compiler Collection serving as the primary system compiler."
+    },
+    {
+      "id": "glibc",
+      "name": "glibc",
+      "role": "library",
+      "note": "Standard GNU C Library utilized across standard profiles."
+    },
+    {
+      "id": "linux-kernel",
+      "name": "Linux Kernel",
+      "role": "kernel",
+      "note": "Kernel deployed via Distribution Kernels or custom manual configuration."
+    },
+    {
+      "id": "dracut",
+      "name": "Dracut",
+      "role": "image_update_tool",
+      "note": "Default initramfs generation tool integrated with sys-kernel/installkernel."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_server",
+      "note": "Modern multimedia routing daemon and session manager."
+    },
+    {
+      "id": "wayland",
+      "name": "Wayland",
+      "role": "display_protocol",
+      "note": "Default display protocol for modern desktop profiles."
+    },
+    {
+      "id": "grub",
+      "name": "GRUB",
+      "role": "boot_loader",
+      "note": "Primary multiboot bootloader supporting BIOS and UEFI."
+    },
+    {
+      "id": "eselect",
+      "name": "eselect",
+      "role": "configuration_tool",
+      "note": "Modular administrative tool for profile, repository, and toolchain selection."
+    },
+    {
+      "id": "gentoo-keys",
+      "name": "Gentoo Keys",
+      "role": "keyring",
+      "note": "OpenPGP key management and repository verification framework."
+    }
+  ],
+  "relations": [
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Independent rolling-release distribution emphasizing precompiled binary packages and pacman."
+    },
+    {
+      "id": "void-linux",
+      "name": "Void Linux",
+      "relation": "alternative",
+      "note": "Independent rolling-release distribution featuring the XBPS package manager and runit init system."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "Universal binary distribution using APT and dpkg with scheduled point releases."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "alternative",
+      "note": "Binary RPM-based distribution featuring automated graphical installation and systemd."
+    },
+    {
+      "id": "nixos",
+      "name": "NixOS",
+      "relation": "alternative",
+      "note": "Functional declarative distribution utilizing the isolated /nix/store model."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Gentoo OpenRC Profile 23.0",
+      "title": "Gentoo OpenRC Profile 23.0",
+      "description": "Standard Gentoo configuration utilizing the OpenRC service supervisor, multilib 64-bit userland, and profile 23.0 toolchain hardening."
+    },
+    {
+      "name": "Gentoo systemd Profile 23.0",
+      "title": "Gentoo systemd Profile 23.0",
+      "description": "Native systemd configuration providing unified journald logging, logind seat management, and systemctl unit orchestration."
+    },
+    {
+      "name": "Gentoo Hardened Profile 23.0",
+      "title": "Gentoo Hardened Profile 23.0",
+      "description": "Security-enhanced profile applying compiler stack protection, position-independent code, and mandatory access control policies."
+    },
+    {
+      "name": "Gentoo Musl Profile",
+      "title": "Gentoo Musl Profile",
+      "description": "Alternative lightweight profile replacing glibc with the standards-compliant musl C library for embedded and minimalist deployments."
+    },
+    {
+      "name": "Gentoo Official Binhost",
+      "title": "Gentoo Official Binhost",
+      "description": "Official binary package repository mirror providing precompiled packages for amd64, x86-64-v3, and arm64."
+    }
+  ],
+  "links": [
+    {
+      "title": "Official Portal",
+      "url": "https://www.gentoo.org/",
+      "note": "Official website of the Gentoo Linux project."
+    },
+    {
+      "title": "AMD64 Handbook",
+      "url": "https://wiki.gentoo.org/wiki/Handbook:AMD64",
+      "note": "Official installation and system administration guide for amd64."
+    },
+    {
+      "title": "Gentoo Foundation",
+      "url": "https://wiki.gentoo.org/wiki/Foundation:Main_Page",
+      "note": "Legal, financial, and governance charter of the Gentoo Foundation, Inc."
+    },
+    {
+      "title": "Gentoo Packages Database",
+      "url": "https://packages.gentoo.org/",
+      "note": "Online catalog of official ebuilds, USE flags, and package versions."
+    },
+    {
+      "title": "Distribution Kernel Guide",
+      "url": "https://wiki.gentoo.org/wiki/Distribution_Kernel",
+      "note": "Documentation for automated kernel builds and precompiled kernel packages."
+    },
+    {
+      "title": "Security Advisories (GLSA)",
+      "url": "https://wiki.gentoo.org/wiki/Security_Handbook/Staying_up-to-date",
+      "note": "Security procedures and glsa-check vulnerability scanning documentation."
+    },
+    {
+      "title": "Binary Package Repository",
+      "url": "https://distfiles.gentoo.org/releases/amd64/binpackages/",
+      "note": "Official mirror index for precompiled binary packages."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Gentoo Linux Official Portal",
+      "url": "https://www.gentoo.org/",
+      "type": "official_documentation",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Authors"
+    },
+    {
+      "title": "Gentoo AMD64 Handbook",
+      "url": "https://wiki.gentoo.org/wiki/Handbook:AMD64",
+      "type": "official_documentation",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Documentation Team"
+    },
+    {
+      "title": "Gentoo Foundation Bylaws and Main Page",
+      "url": "https://wiki.gentoo.org/wiki/Foundation:Main_Page",
+      "type": "legal_charter",
+      "date": "2025-08-03",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Foundation, Inc."
+    },
+    {
+      "title": "Gentoo Foundation Privacy Policy",
+      "url": "https://wiki.gentoo.org/wiki/Foundation:Privacy_Policy",
+      "type": "privacy_policy",
+      "date": "2023-11-18",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Foundation, Inc."
+    },
+    {
+      "title": "Project:Council Charter and AI Policy",
+      "url": "https://wiki.gentoo.org/wiki/Project:Council",
+      "type": "governance_policy",
+      "date": "2024-04-14",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Council"
+    },
+    {
+      "title": "Gentoo Distribution Kernel Documentation",
+      "url": "https://wiki.gentoo.org/wiki/Distribution_Kernel",
+      "type": "technical_manual",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Kernel Project"
+    },
+    {
+      "title": "Gentoo goes Binary! Official Announcement",
+      "url": "https://www.gentoo.org/news/2023/12/29/Gentoo-binary.html",
+      "type": "project_announcement",
+      "date": "2023-12-29",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Release Engineering Team"
+    },
+    {
+      "title": "Gentoo x86-64-v3 Binary Packages Available",
+      "url": "https://www.gentoo.org/news/2024/02/04/x86-64-v3.html",
+      "type": "project_announcement",
+      "date": "2024-02-04",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Release Engineering Team"
+    },
+    {
+      "title": "Gentoo Packages USE Flag Directory: Telemetry",
+      "url": "https://packages.gentoo.org/useflags/telemetry",
+      "type": "package_metadata",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Gentoo Portage Project"
+    }
+  ],
+  "last_verified": "2026-09-25"
+}

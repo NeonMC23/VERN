@@ -1,0 +1,262 @@
+{
+  "id": "nixos",
+  "name": "NixOS",
+  "type": "operating_system",
+  "summary": "An independent Linux operating system built around the purely functional Nix package manager, providing declarative system configuration, isolated store paths, and atomic generation switching.",
+  "tags": [
+    "declarative",
+    "reproducible",
+    "functional",
+    "nix",
+    "nixpkgs",
+    "linux",
+    "immutable",
+    "devops"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "content": {
+    "introduction": "NixOS is an independent Linux operating system built around the purely functional software deployment model implemented by the Nix package manager. Unlike distributions where software packages imperatively modify global filesystem paths like /usr or /bin, NixOS evaluates a centralized declarative specification written in the Nix expression language to construct its kernel, system services, and user packages. This architecture enables isolated package paths, atomic configuration switching, and generational rollbacks.",
+    "what_is_it": "At its technical core, NixOS is a declarative Linux distribution where system state is defined by evaluating functional expressions. Configuration modules specify services, networking, filesystems, and desktop environments. Invoking the nixos-rebuild command evaluates these definitions, realizes or downloads derivations into the immutable /nix/store, links a new system generation in /nix/var/nix/profiles/system, and adjusts running systemd services without requiring a system reboot for most configuration changes.",
+    "origin_and_academic_foundations": "Nix was developed beginning in 2003 by Eelco Dolstra as part of research at Utrecht University, published in the PhD thesis \"The Purely Functional Software Deployment Model\". The research investigated formal techniques to address Unix package deployment issues such as undeclared dependencies, non-atomic upgrades, and library version conflicts. In 2006, Eelco Dolstra and Armijn Hemel introduced NixOS, extending this functional package model to the complete Linux operating system.",
+    "the_three_pillars_nix_nixpkgs_nixos": "The architecture divides into three distinct entities: 1. Nix is the purely functional package manager and domain-specific language (DSL). It evaluates derivations (.drv) into immutable paths under /nix/store and handles sandboxed builds, user profiles, and garbage collection. Nix can run on non-NixOS Linux distributions and macOS. 2. Nixpkgs is the open-source repository containing over 100,000 package expressions, build recipes (stdenv), and the NixOS module system. 3. NixOS is the operating system itself, integrating the Linux kernel, systemd, bootloaders, and userland entirely through Nixpkgs modules evaluated by Nix.",
+    "the_nix_store_and_immutability": "The core storage component of NixOS is the Nix store, located at /nix/store. Every package, library, script, and configuration file resides in its own isolated directory named /nix/store/<hash>-<name>-<version>. The cryptographic hash prefix is calculated from build inputs, including source tarballs, patch files, compiler flags, and the hashes of all dependencies. Files in /nix/store are mounted read-only (permissions 0444 or 0555). Multiple distinct versions of any library (such as OpenSSL, Python, or glibc) coexist simultaneously without path collisions.",
+    "declarative_configuration_and_rebuild": "System administration in NixOS is conducted by editing declarative module files, typically /etc/nixos/configuration.nix. Administrators declare desired states (such as services.openssh.enable = true;). Executing \"nixos-rebuild switch\" triggers an evaluation of the system configuration, realizes required derivations, constructs a new system generation symlink under /nix/var/nix/profiles/system, updates the bootloader menu (GRUB or systemd-boot), and restarts or reloads changed systemd services. If a configuration introduces an error, executing \"nixos-rebuild switch --rollback\" or selecting an earlier generation at boot time activates the prior system state.",
+    "channels_vs_flakes_and_system_nix": "NixOS supports multiple mechanisms for tracking and pinning software versions: 1. Channels (nix-channel) are the default mechanism in standard installations. Channels point to rolling Git branches of Nixpkgs (e.g. nixos-26.05 or nixos-unstable) tested and built by Hydra, updated via \"nix-channel --update\". 2. Flakes are an optional, experimental feature (experimental-features = nix-command flakes) providing self-contained project definitions via flake.nix and pinned dependency lockfiles (flake.lock), operating independently of mutable channels. Flakes are widely used but remain optional and not enabled by default in a base install. 3. NixOS 26.05 introduces system.nix as an official alternative entry point, enabling channel-free system configuration by pinning Nixpkgs tarballs directly with explicit SHA-256 hashes without requiring experimental flake flags.",
+    "non_fhs_architecture_and_binaries": "NixOS does not adhere to the Linux Filesystem Hierarchy Standard (FHS). Directories such as /bin, /sbin, /lib, /usr/lib, and /usr/include do not exist or are empty, with only /bin/sh and /usr/bin/env provided as symlinks to ensure script execution. Executables built in NixOS encode exact /nix/store library paths directly into their ELF binaries via RPATH and RUNPATH headers. Consequently, conventional precompiled Linux binaries fail to launch with \"No such file or directory\" errors because the standard dynamic linker (/lib64/ld-linux-x86-64.so.2) is not present at that path. Users run these binaries using patchelf, dynamic linker shims like nix-ld, or containerized user environments via buildFHSEnv and steam-run.",
+    "binary_cache_and_hydra": "Although packages are defined as source derivations, precompiled binaries are available through official infrastructure. The binary cache at https://cache.nixos.org serves precompiled binary archives (NAR files accompanied by signed .narinfo metadata). The continuous integration farm Hydra (hydra.nixos.org) evaluates Nixpkgs commits, builds packages across supported architectures, executes automated VM integration tests, and publishes signed binary substitutes. When a local derivation hash matches a build in cache.nixos.org, Nix downloads and unpacks the binary substitute rather than compiling locally.",
+    "reproducibility_and_limits": "While Nix derivation modeling tracks all declared build inputs, bit-for-bit reproducibility is not guaranteed unconditionally across all software in Nixpkgs. Factors such as embedded timestamps, non-deterministic compiler outputs, filesystem ordering, and hardware architecture differences can produce differing output binaries from identical derivation expressions. The NixOS project participates in the Reproducible Builds initiative to measure and improve package reproducibility across the Nixpkgs collection, while sandboxed build environments prevent undeclared network access and hidden host dependencies during package realization.",
+    "components_and_release_2605": "The current stable release of NixOS is version 26.05 (code-named \"Yarara\", released May 30, 2026, with latest verified release build 26.05.10529.c508844df6c2 from September 24, 2026). Key components in this release include Nix 2.35.2, default Linux kernel 6.18.53 (with simultaneous LTS options 6.12, 6.6, and 6.1), systemd 260.4, Calamares 3.4.2 installer, KDE Plasma 6.6.6, and GNOME 50.4. A critical architectural evolution in 26.05 is the default migration of Stage 1 (initrd) to systemd (boot.initrd.systemd.enable = true), deprecating the historic scripted stage 1 implementation.",
+    "installation_and_deployment": "NixOS provides graphical and minimal installation ISO images. Graphical ISOs feature either GNOME or KDE Plasma alongside the Calamares installer, enabling disk partitioning, user creation, and desktop installation. Minimal ISOs provide a terminal environment where users run \"nixos-generate-config --root /mnt\" to inspect hardware, adjust /mnt/etc/nixos/configuration.nix, and run \"nixos-install\" to realize the system closure. NixOS configurations can also be deployed headlessly over SSH to remote physical servers or cloud virtual machines using tools such as nixops, colmena, or deploy-rs.",
+    "governance_and_foundation": "NixOS is governed under the auspices of the Stichting NixOS Foundation, an independent non-profit foundation incorporated in the Netherlands (KvK number 63520583, VAT ID NL855271851B01) based in Amsterdam. The foundation owns trademarks, protects assets, manages financial contributions from community sponsors, and ensures the continuous operation of cache.nixos.org and Hydra build clusters. Technical stewardship is distributed among specialized community teams (Release, Security, Infrastructure, Documentation) following RFC processes to guide system evolution.",
+    "privacy_and_telemetry": "The base NixOS operating system and the Nix package manager do not include background telemetry daemons, tracking agents, or automated crash reporting services in their codebase. Network requests initiated by system tools are limited to explicit administrative operations, such as channel updates from channels.nixos.org, binary cache substitutes from cache.nixos.org, and source tarball downloads during derivation builds. This baseline applies strictly to core system components; applications installed by the user (such as web browsers or desktop software) may implement their own telemetry or network communication. Web properties operated by the Stichting NixOS Foundation (nixos.org) are hosted on Netlify and record standard web access logs (IP address, user agent, timestamp) for operational and security purposes under European GDPR regulations.",
+    "advantages": [
+      "Declarative system specification: entire system state is defined in modular configuration files, facilitating automated replication across machines.",
+      "Generational rollbacks: configuration rebuilds create discrete numbered generations in /nix/var/nix/profiles/system that can be selected at boot.",
+      "Isolated library paths: packages reside in unique /nix/store directories, allowing different versions of the same library to coexist without path collisions.",
+      "Ephemeral development environments: nix-shell instantiates temporary environments containing specific compilers and libraries without modifying the system profile.",
+      "Extensive package collection: Nixpkgs contains over 100,000 package expressions evaluated and cached by official build infrastructure.",
+      "Sandboxed build execution: build processes run in isolated network-restricted environments to enforce declared dependency inputs.",
+      "Typed module framework: system services and options are validated against typed schemas with assertions and default definitions.",
+      "Automated continuous integration: Hydra evaluates commits, runs VM integration tests, and signs binary substitutes prior to channel advancement."
+    ],
+    "disadvantages": [
+      "Nix language prerequisite: configuring the operating system requires learning the syntax and evaluation semantics of the functional Nix language.",
+      "FHS filesystem divergence: executables compiled for standard Linux distributions fail without dynamic linker shims (nix-ld) or container wrappers.",
+      "Storage consumption from generation history: retaining multiple system closures in /nix/store requires routine garbage collection to recover disk space.",
+      "Multiple configuration paradigms: coexistence of channels, flakes, and system.nix introduces disparate documentation and usage patterns.",
+      "Memory requirements during evaluation: evaluating complex Nixpkgs configurations can require significant RAM during nixos-rebuild operations.",
+      "Absence of imperative installation: packages cannot be installed on the fly globally without modifying configuration files or using ephemeral shells.",
+      "Build fallback overhead: custom package overrides that miss the binary cache require local compilation from source.",
+      "Terminal-centric administration: system configuration and maintenance lack official unified graphical administrative interfaces."
+    ],
+    "who_is_it_for": [
+      "DevOps engineers, sysadmins, and infrastructure teams requiring version-controlled, declarative machine provisioning.",
+      "Software developers needing isolated build environments and reproducible toolchain management across development systems.",
+      "Users seeking generational system state tracking with immediate bootloader rollback options for recovery.",
+      "Server operators managing clusters where configuration drift across machines must be programmatically avoided.",
+      "Users managing multiple workstations or servers who want to synchronize system configuration modules via Git.",
+      "Organizations requiring transparent source derivation tracking and sandboxed build verification."
+    ],
+    "who_is_it_not_for": [
+      "Users expecting a standard FHS filesystem where conventional Linux binaries run directly without shims or containers.",
+      "Users preferring graphical package management applications and one-click imperative software installation without text files.",
+      "Systems with severely constrained disk storage that cannot accommodate /nix/store generation retention and build artifacts.",
+      "Users who rely on imperative package manager commands (such as apt install or dnf install) for ad-hoc global software installation.",
+      "Organizations requiring traditional long-term support guarantees backed by a single commercial enterprise vendor."
+    ],
+    "verdict": "NixOS implements a declarative and purely functional approach to Linux system deployment. By treating package builds as derivations stored in isolated, read-only store paths (/nix/store), it provides atomic generation switching, bootable rollbacks, and concurrent library versioning. Its non-FHS filesystem layout and functional configuration language require specific tooling (such as patchelf or nix-ld) and workflows distinct from conventional imperative distributions, making it particularly suited for environments where configuration reproducibility and rollback capabilities are prioritized."
+  },
+  "components": [
+    {
+      "id": "nix",
+      "name": "Nix",
+      "role": "package_manager",
+      "note": "Purely functional package manager and domain-specific language (version 2.35.2) evaluating derivations and populating the immutable /nix/store."
+    },
+    {
+      "id": "nixpkgs",
+      "name": "Nixpkgs",
+      "role": "repository",
+      "note": "Primary open-source monorepo collection providing over 100,000 package expressions, stdenv build tools, and the NixOS declarative module system."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "Core system and service manager (version 260.4); in NixOS 26.05, systemd also serves as the default Stage 1 initrd implementation."
+    },
+    {
+      "id": "linux-kernel",
+      "name": "Linux Kernel",
+      "role": "kernel",
+      "note": "Default monolithic kernel 6.18.53 (linux-6.18.53), with declarative configuration options for LTS branches (6.12, 6.6, 6.1) and custom kernel trees."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares",
+      "role": "installer",
+      "note": "Graphical installer framework (version 3.4.2) bundled on live desktop ISO images to configure partitioning and generate base configuration files."
+    },
+    {
+      "id": "systemd-boot",
+      "name": "systemd-boot",
+      "role": "boot_loader",
+      "note": "Default UEFI boot loader module in NixOS, generating clean boot entries for each historical system generation."
+    },
+    {
+      "id": "grub",
+      "name": "GRUB",
+      "role": "boot_loader",
+      "note": "Alternative boot loader supporting legacy BIOS and advanced multi-boot configurations with generational menu sub-entries."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_server",
+      "note": "Default modern audio and video routing framework configured declaratively via services.pipewire options."
+    },
+    {
+      "id": "wayland",
+      "name": "Wayland",
+      "role": "display_protocol",
+      "note": "Standard modern display server protocol configured by default across desktop modules including KDE Plasma and GNOME."
+    },
+    {
+      "id": "patchelf",
+      "name": "patchelf",
+      "role": "system_tool",
+      "note": "Utility developed by the NixOS project to modify ELF executables, rewriting dynamic linker paths and RPATH entries for Nix store compatibility."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Mainstream corporate-backed distribution using traditional imperative RPM/DNF packaging, contrasting with NixOS's declarative functional model."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "Universal operating system based on fixed-release deb packages and FHS conventions, standing as a philosophical contrast to Nix store immutability."
+    },
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Imperative rolling-release distribution providing minimal user-assembled systems, contrasting with NixOS's declarative reproducibility."
+    },
+    {
+      "id": "opensuse-tumbleweed",
+      "name": "openSUSE Tumbleweed",
+      "relation": "alternative",
+      "note": "Rolling distribution providing filesystem snapshot rollbacks via Btrfs/Snapper, contrasting with NixOS's language-level system generation rollbacks."
+    },
+    {
+      "id": "guix",
+      "name": "GNU Guix System",
+      "relation": "alternative",
+      "note": "Independent purely functional operating system derived from early Nix concepts, utilizing GNU Guile Scheme for declarative configuration instead of the Nix DSL."
+    }
+  ],
+  "variants": [
+    {
+      "name": "NixOS Graphical Installation Image (GNOME)",
+      "description": "Official live desktop ISO (version 26.05) featuring GNOME 50.4, Wayland, and the Calamares graphical installer for x86_64 and AArch64 architectures."
+    },
+    {
+      "name": "NixOS Graphical Installation Image (Plasma)",
+      "description": "Official live desktop ISO (version 26.05) featuring KDE Plasma 6.6.6 and Calamares for users preferring the KDE software ecosystem."
+    },
+    {
+      "name": "NixOS Minimal Installation Image (x86_64)",
+      "description": "Lightweight terminal installation media (1.75 GB, SHA-256: b73414ec...) providing nixos-generate-config and nixos-install for CLI deployments."
+    },
+    {
+      "name": "NixOS Minimal Installation Image (AArch64)",
+      "description": "Console installation media (1.82 GB, SHA-256: 27fdea08...) optimized for ARM64 servers, development boards, and virtual machines."
+    },
+    {
+      "name": "NixOS Cloud and Virtual Machine Images",
+      "description": "Prebuilt appliance images for Amazon EC2 (AMI), OpenStack, Google Cloud Platform, Microsoft Azure, and local hypervisors (QCOW2, OVA)."
+    },
+    {
+      "name": "NixOS Docker Container Base Image",
+      "description": "Minimal container image containing the Nix package manager and Nix store base, designed for reproducible containerized build environments."
+    }
+  ],
+  "links": {
+    "homepage": "https://nixos.org/",
+    "download": "https://nixos.org/download/",
+    "manual": "https://nixos.org/manual/nixos/stable/",
+    "packages": "https://search.nixos.org/packages",
+    "options": "https://search.nixos.org/options",
+    "cache": "https://cache.nixos.org/",
+    "hydra": "https://hydra.nixos.org/",
+    "privacy": "https://nixos.org/privacy/"
+  },
+  "sources": [
+    {
+      "title": "Nix & NixOS Official Portal",
+      "url": "https://nixos.org/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Primary project portal providing architectural overview, mission statement, and governance resources."
+    },
+    {
+      "title": "NixOS Official Downloads and Checksums",
+      "url": "https://nixos.org/download/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Official direct links for NixOS 26.05 graphical and minimal ISO images with verified SHA-256 checksums."
+    },
+    {
+      "title": "NixOS Stable Manual (Version 26.05)",
+      "url": "https://nixos.org/manual/nixos/stable/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Definitive administrative guide covering installation, configuration.nix, rebuild procedures, and Nix store architecture."
+    },
+    {
+      "title": "NixOS 26.05 Release Notes (Yarara)",
+      "url": "https://nixos.org/manual/nixos/stable/release-notes.html",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Official changelog documenting systemd Stage 1 initrd migration, system.nix entry points, and component deprecations."
+    },
+    {
+      "title": "NixOS Stable Release Metadata and Store Paths (26.05.10529)",
+      "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.10529.c508844df6c2",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Direct inspection of release closure verifying 208,880 store paths including Nix 2.35.2, Linux 6.18.53, and systemd 260.4."
+    },
+    {
+      "title": "NixOS Channel Status and Hydra Evaluation",
+      "url": "https://channels.nixos.org/nixos-26.05",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Live channel tracking verifying current evaluation 1829450 and Git commit c508844df6c2."
+    },
+    {
+      "title": "Stichting NixOS Foundation Imprint and Legal Register",
+      "url": "https://nixos.org/imprint/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Non-profit foundation details: KvK 63520583, VAT NL855271851B01, registered in Amsterdam, Netherlands."
+    },
+    {
+      "title": "Stichting NixOS Foundation Privacy Policy",
+      "url": "https://nixos.org/privacy/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "GDPR privacy notice detailing hosting under Netlify, access log handling, and zero-telemetry policy."
+    }
+  ],
+  "last_verified": "2026-09-24"
+}

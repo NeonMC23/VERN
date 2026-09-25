@@ -1,0 +1,272 @@
+{
+  "id": "manjaro",
+  "name": "Manjaro",
+  "type": "operating_system",
+  "summary": "A rolling-release Linux distribution derived from Arch Linux technologies, featuring independent package repositories staged across three branches, hardware detection tools (MHWD), and graphical administration interfaces.",
+  "tags": [
+    "rolling-release",
+    "desktop",
+    "arch-based",
+    "pacman",
+    "pamac",
+    "mhwd",
+    "kde-plasma",
+    "xfce",
+    "gnome"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "content": {
+    "introduction": "Manjaro is a Linux distribution built upon the foundational package management and building mechanisms of Arch Linux, providing preconfigured desktop environments, automated hardware detection, and independent package repositories. First released in July 2011, Manjaro uses the pacman package manager and libalpm while hosting its own package infrastructure, separate from Arch Linux mirrors.",
+    "what_is_it": "Manjaro is a rolling-release operating system built using the pacman package manager, the Calamares installer, an in-house hardware configuration tool (MHWD), and the Pamac package management suite. It maintains separate package repositories and stages updates through Unstable, Testing, and Stable branches before distribution to end systems.",
+    "origin_and_history": "The Manjaro project was initiated in July 2011 by Roland Singer, Guillaume Benoit, and Philip Müller. Early iterations were designed around a customized Xfce environment and utilized a fork of the Antergos installer. As the distribution matured, the development team engineered its own system configuration tools, notably MHWD in 2012 and the Pamac package manager in 2013. In September 2019, the leadership established Manjaro GmbH & Co. KG, a registered commercial entity in Germany, to handle hardware vendor partnerships, trademark governance, and commercial contracts, while maintaining open community participation for package maintenance and international support forums.",
+    "corporate_and_community_governance": "The governance of Manjaro combines a commercial enterprise and a volunteer community. Manjaro GmbH & Co. KG, based in Germany and led by Philip Müller and Bernhard Landauer, manages commercial engagements, pre-installation agreements with computer manufacturers (including Star Labs, Tuxedo Computers, and Minisforum), sponsorship intake, and professional software development contracts. Parallel to the company, community developers and volunteers contribute through bug tracking on GitLab, documentation maintenance, forum moderation, and community editions packaging (such as Cinnamon and i3).",
+    "release_model_and_branches": "Manjaro employs a rolling-release publication schedule structured across three staged repository branches: Unstable, Testing, and Stable. The Unstable branch syncs several times a day against Arch Linux testing and stable repositories and incorporates Manjaro-specific package builds. The Testing branch acts as a staging ground where package sets are tested by volunteer users to identify dependency conflicts and regressions. The Stable branch is the default for all official installation images; packages here are published in grouped bundles called Update Packs typically every one to three weeks. Each major update is accompanied by an announcement thread on forum.manjaro.org detailing changelogs, known issues, and manual remediation steps.",
+    "relation_to_arch_linux": "Manjaro uses the Arch Linux packaging format (PKGBUILD) and the pacman package manager, but maintains independent repository infrastructure (core, extra, multilib). Packages imported from Arch Linux are delayed in Testing and Stable branches, resulting in library version differences between the two distributions. Manjaro packages are cryptographically signed with Manjaro project keys (manjaro-keyring) rather than Arch Linux keys. Due to this branch staging delay, shared system libraries (such as glibc, icu, openssl, and python) are rarely at identical version numbers between Arch Linux and Manjaro Stable at any given time, making the repositories mutually incompatible.",
+    "installation_and_calamares": "Official Manjaro installation media provide a live graphical session powered by a customized implementation of the Calamares framework (version 3.4.2 in the current stable branch). The installer offers automatic and manual partitioning, optional full-disk encryption via LUKS, swap partition or swap file setup, and file system selection among Ext4, Btrfs, XFS, and F2FS. On Btrfs installations, Manjaro configures structured subvolumes (@ and @home) and integrates with Timeshift for snapshot generation prior to system updates. The live environment also permits users to boot with either open-source graphics drivers or proprietary Nvidia drivers detected at startup.",
+    "package_management_and_pamac": "Package management in Manjaro operates on two layers: the low-level pacman command-line utility (version 7.1.0 linked to libalpm.so.16) and the Pamac suite developed by the project. Pamac comprises the libpamac shared library (11.7.4), the pamac-cli command-line tool, and the pamac-gtk graphical store (11.7.5). Pamac provides dependency resolution, transaction simulation, mirror health monitoring, and system tray update notifications. It also features optional plugins for universal application packages via Flatpak (libpamac-flatpak-plugin) and Snap (libpamac-snap-plugin). Mirror lists are managed and ranked using the custom pacman-mirrors utility (5.3), which queries the status service on repo.manjaro.org.",
+    "status_and_risks_of_aur": "The Arch User Repository (AUR) is an uncurated, community-maintained collection of build scripts (PKGBUILD) hosted by the Arch Linux project. Pamac includes optional toggles to search, download, and build packages from the AUR. However, the Manjaro project documents that the AUR is third-party and unsupported. Because AUR build recipes are authored specifically for current Arch Linux library versions, building an AUR package on Manjaro Stable can result in compilation failures or dynamic linker errors when an AUR package expects newer runtime libraries than those currently frozen in Manjaro Stable. Users activating the AUR bear responsibility for inspecting build scripts and resolving resulting dependency issues.",
+    "hardware_detection_and_mhwd": "Manjaro Hardware Detection (MHWD, version 0.6.6 backed by mhwd-db) is an internal system tool and daemon designed to automate driver management. During boot or on-demand execution, MHWD queries system buses via hwinfo, identifies graphics processing units (GPU) and network adapters, and resolves the required driver stack. For graphics hardware, MHWD installs and configures open-source stacks (Mesa, Nouveau, amdgpu) or proprietary vendor packages (such as mhwd-nvidia-610, mhwd-nvidia-580xx, or legacy 470xx/390xx branches). On dual-GPU laptops, MHWD configures dynamic power switching mechanisms such as PRIME render offloading.",
+    "multi_kernel_management": "Manjaro provides simultaneous multi-kernel support managed through the Manjaro Settings Manager (version 0.6.0 Qt6) or the mhwd-kernel utility. The project builds, packages, and maintains multiple distinct Linux kernel branches simultaneously in its stable repositories. Users can install multiple kernels in parallel—ranging from long-term support releases (Linux 6.1 LTS, 6.6 LTS, 6.12 LTS, 6.18) to modern stable releases (Linux 7.1), release candidates (Linux 7.2, 7.3-rc), and real-time audio kernels (linux-rt). During system boot, users select their desired kernel from the GRUB or systemd-boot menu, while out-of-tree kernel modules (such as Nvidia drivers, ZFS, and VirtualBox guest additions) are packaged separately for each supported kernel branch.",
+    "editions_and_desktops": "Manjaro publishes three official x86_64 desktop editions (version 26.1.0, build 260812 with Linux 7.1): KDE Plasma (featuring Plasma 6.7.4 with native Wayland sessions), Xfce (featuring Xfce 4.20.4 on X11), and GNOME (featuring GNOME 50.4 with custom extensions such as Dash-to-Dock and the Manjaro Layout Switcher). In addition, community teams maintain derivative ISOs (version 25.0.3 with Linux 6.12 LTS) featuring Cinnamon and the i3 tiling window manager. The Manjaro ARM project extends the distribution to single-board computers and mobile devices such as the Raspberry Pi 4/5, PinePhone, and Rockchip platforms.",
+    "security_and_keyrings": "Software security in Manjaro relies on Zstandard-compressed packages accompanied by detached OpenPGP signatures. The package manager validates signatures using the official manjaro-keyring (version 20251003-1) alongside archlinux-keyring (20260902-1). Historically, Manjaro experienced operational oversights, including SSL certificate expirations on official domains between 2015 and 2018, as well as an incident where Pamac search routines generated excessive requests to the Arch User Repository API. These incidents led to automated certificate management and redesigned query caching in subsequent releases.",
+    "privacy_and_telemetry": "Default installations of Manjaro do not include dedicated background hardware telemetry daemons. NetworkManager includes an automated connectivity check configured to query ping.manjaro.org, logging standard web server access records (IP address and timestamp). In late 2024, a development package called Manjaro Data Donor (MDD) was tested to gather hardware specifications; following community discussions regarding privacy and consent models, it was specified as opt-in and is not included in the standard stable repositories (core and extra). Web services operated by Manjaro GmbH & Co. KG are governed by its privacy policy under European GDPR regulations.",
+    "advantages": [
+      "Preconfigured desktop environments: installation images provide functional desktop sessions (Plasma, Xfce, GNOME) with default applications.",
+      "Automated driver configuration: MHWD identifies graphics controllers and installs matching open-source or proprietary driver packages.",
+      "Simultaneous multi-kernel packaging: multiple Linux kernel branches (LTS, current stable, real-time) can be installed concurrently and selected at boot.",
+      "Staged package branches: software updates pass through Unstable and Testing repositories before deployment to the Stable branch.",
+      "Graphical package management: Pamac provides GUI and CLI interfaces managing pacman packages, with optional plugins for Flatpak and Snap.",
+      "Documented update announcements: Stable Update releases are accompanied by dedicated forum threads detailing package changes and manual intervention steps.",
+      "Hardware vendor integration: available preinstalled on hardware from partner manufacturers including Star Labs and Tuxedo Computers.",
+      "Multiple desktop editions: official builds provide KDE Plasma, Xfce, and GNOME, supplemented by community-maintained editions."
+    ],
+    "disadvantages": [
+      "AUR shared library divergence: staging delays in the Stable branch can lead to compilation errors or missing shared objects when AUR packages expect newer upstream Arch libraries.",
+      "Batched update size: Stable Update Packs aggregate multiple weeks of changes, resulting in download sizes frequently exceeding 1 GB.",
+      "Forum tracking requirement: certain bundled updates require manual command-line intervention documented on the community forum to resolve package conflicts.",
+      "Distinction from upstream Arch: packages and configurations diverge from standard Arch Linux, meaning upstream Arch documentation does not always apply directly.",
+      "Pamac background service footprint: background update checking and cache operations utilize memory and CPU cycles on constrained systems.",
+      "Historical infrastructure incidents: past operational issues included SSL certificate expirations and API rate-limiting by third-party services.",
+      "Community edition version disparity: community-maintained ISOs (Cinnamon, i3) follow independent schedules and may lag behind official flagship releases.",
+      "Third-party repository support boundary: the distribution provides no official support or validation for software built from the Arch User Repository."
+    ],
+    "who_is_it_for": [
+      "Desktop users seeking a rolling-release distribution with preconfigured desktop environments and graphical tools.",
+      "Users requiring automated detection and installation of proprietary graphics drivers (such as Nvidia) without manual configuration.",
+      "Developers and testers needing to install and switch between multiple Linux kernel branches on a single installation.",
+      "Users preferring graphical package stores (Pamac) with unified support for repository packages, Flatpaks, and Snaps.",
+      "Owners of pre-built Linux hardware from Manjaro partner vendors looking for certified system images.",
+      "Users looking for a staged rolling-release model where upstream packages undergo testing before general release."
+    ],
+    "who_is_it_not_for": [
+      "Users seeking a minimal base system configured strictly from the ground up via command-line installation.",
+      "Server environments requiring multi-year fixed-lifecycle stability guarantees and enterprise support contracts.",
+      "Users heavily reliant on bleeding-edge AUR packages that require immediate synchronization with upstream Arch Linux libraries.",
+      "Systems with severely limited internet bandwidth unable to download large batched rolling update packs.",
+      "Environments requiring formally certified immutable root filesystems or deterministic build trees."
+    ],
+    "verdict": "Manjaro combines the Arch Linux packaging format and pacman package manager with independent repository hosting, automated driver detection (MHWD), and dedicated management utilities (Pamac, Manjaro Settings Manager). Its three-stage branch model introduces a stabilization delay for core packages, which simultaneously provides pre-release testing for system packages and creates version divergence with bleeding-edge build scripts in the Arch User Repository. The system functions as a distinct rolling-release distribution with its own operational procedures, update cadence, and governance structure."
+  },
+  "components": [
+    {
+      "id": "pacman",
+      "name": "pacman",
+      "role": "package_manager",
+      "note": "Core command-line package manager (version 7.1.0) linked to libalpm.so.16, executing package installation, removal, and database synchronisation."
+    },
+    {
+      "id": "libpamac",
+      "name": "Pamac",
+      "role": "package_manager",
+      "note": "Manjaro's dedicated package management framework (libpamac 11.7.4, pamac-cli, and pamac-gtk 11.7.5) with integrated Flatpak and Snap support."
+    },
+    {
+      "id": "mhwd",
+      "name": "MHWD",
+      "role": "configuration_tool",
+      "note": "Manjaro Hardware Detection (version 0.6.6) library and CLI application automating the identification and installation of free and proprietary GPU drivers."
+    },
+    {
+      "id": "manjaro-settings-manager",
+      "name": "Manjaro Settings Manager",
+      "role": "configuration_tool",
+      "note": "Central Qt6/GTK administrative suite (version 0.6.0) providing graphical multi-kernel management, language pack installation, and hardware configuration."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares",
+      "role": "installer",
+      "note": "Graphical system installer framework (version 3.4.2) customized with Manjaro OEM modules for automated partitioning, LUKS encryption, and Btrfs setup."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "Default init system and service manager coordinating system startup, logging via journald, and session lifecycle."
+    },
+    {
+      "id": "linux-kernel",
+      "name": "Linux Kernel",
+      "role": "kernel",
+      "note": "Default standard monolithic kernel 7.1 (linux71), maintained alongside simultaneous LTS branches (6.12, 6.6, 6.1), 6.18, and real-time variants."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_server",
+      "note": "Default multimedia and audio server framework paired with WirePlumber for low-latency audio routing and PulseAudio/JACK emulation."
+    },
+    {
+      "id": "wayland",
+      "name": "Wayland",
+      "role": "display_protocol",
+      "note": "Primary display server protocol used by default in official KDE Plasma and GNOME editions, with X11 fallback preserved for Xfce and i3."
+    },
+    {
+      "id": "btrfs",
+      "name": "Btrfs",
+      "role": "filesystem",
+      "note": "Supported copy-on-write filesystem configured with subvolumes (@ and @home) and automated pre-update snapshot integration via Timeshift."
+    },
+    {
+      "id": "manjaro-keyring",
+      "name": "manjaro-keyring",
+      "role": "keyring",
+      "note": "Official OpenPGP keyring package (version 20251003-1) containing public keys of Manjaro packagers for repository and package verification."
+    },
+    {
+      "id": "pacman-mirrors",
+      "name": "pacman-mirrors",
+      "role": "configuration_tool",
+      "note": "Internal utility (version 5.3) generating optimized pacman mirror lists based on geographic latency and branch synchronisation status."
+    }
+  ],
+  "relations": [
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "based_on",
+      "note": "Upstream technical ancestor providing the pacman package manager, PKGBUILD specification, and base software recipes; Manjaro maintains separate repositories and staging delays."
+    },
+    {
+      "id": "endeavouros",
+      "name": "EndeavourOS",
+      "relation": "alternative",
+      "note": "Close Arch-based desktop alternative that consumes pure Arch Linux binary repositories directly without staging delays or custom graphical package managers."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Leading enterprise-backed fixed-release distribution utilizing DNF and RPM packages, contrasting with Manjaro's rolling Arch-based model."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "Universal operating system prioritizing multi-year stability and conservative software freezes, serving as the opposite philosophy to rolling releases."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "alternative",
+      "note": "Popular user-friendly desktop distribution based on Ubuntu/Debian LTS packages, providing a fixed-point stability contrast to Manjaro's rolling environment."
+    },
+    {
+      "id": "opensuse-tumbleweed",
+      "name": "openSUSE Tumbleweed",
+      "relation": "alternative",
+      "note": "Independent rolling-release distribution backed by openQA automated snapshot testing and the Zypper package manager."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Manjaro KDE Plasma Edition",
+      "description": "Flagship edition (version 26.1.0, build 260812, Linux 7.1) featuring KDE Plasma 6.7.4 on Wayland, customizable desktop themes, and comprehensive Qt application integration."
+    },
+    {
+      "name": "Manjaro Xfce Edition",
+      "description": "Historic core edition (version 26.1.0, build 260812, Linux 7.1) featuring Xfce 4.20.4, delivering low memory overhead, high responsiveness, and classic desktop workflows."
+    },
+    {
+      "name": "Manjaro GNOME Edition",
+      "description": "Official desktop edition (version 26.1.0, build 260812, Linux 7.1) featuring GNOME 50.4, dynamic workspaces, Wayland display server, and custom Manjaro layout presets."
+    },
+    {
+      "name": "Manjaro Cinnamon Community Edition",
+      "description": "Community-maintained image (version 25.0.3, Linux 6.12 LTS) providing the traditional Cinnamon desktop environment originally designed by Linux Mint."
+    },
+    {
+      "name": "Manjaro i3 Community Edition",
+      "description": "Community-maintained minimalist edition (version 25.0.3, Linux 6.12 LTS) built around the i3 tiling window manager, optimized for lightweight, keyboard-driven navigation."
+    },
+    {
+      "name": "Manjaro ARM Images",
+      "description": "Specialized ARM64 installation images targeting single-board computers and mobile hardware including Raspberry Pi 4/5, PinePhone, and Rockchip development boards."
+    }
+  ],
+  "links": {
+    "homepage": "https://manjaro.org/",
+    "download": "https://manjaro.org/products/download/x86/",
+    "forum": "https://forum.manjaro.org/",
+    "gitlab": "https://gitlab.manjaro.org/",
+    "repo": "https://repo.manjaro.org/",
+    "privacy": "https://manjaro.org/privacy-policy/"
+  },
+  "sources": [
+    {
+      "title": "Manjaro Official Portal and Downloads",
+      "url": "https://manjaro.org/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Primary project portal documenting release announcements, supported architectures, and hardware partnerships."
+    },
+    {
+      "title": "Manjaro x86_64 Download Page",
+      "url": "https://manjaro.org/products/download/x86/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Official direct ISO downloads, checksums, and torrent links for Manjaro 26.1.0 official and 25.0.3 community editions."
+    },
+    {
+      "title": "Manjaro Official Mirrors Real-Time Status",
+      "url": "https://repo.manjaro.org/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Mirror network dashboard verifying global synchronization across Stable, Testing, and Unstable repository branches."
+    },
+    {
+      "title": "Manjaro GitLab Code Repositories",
+      "url": "https://gitlab.manjaro.org/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Source code hosting for core Manjaro applications including pamac, mhwd, pacman-mirrors, and manjaro-settings-manager."
+    },
+    {
+      "title": "Manjaro Community and Support Forum",
+      "url": "https://forum.manjaro.org/",
+      "type": "community",
+      "accessed": "2026-09-24",
+      "note": "Official announcements for Stable Updates, known issues, troubleshooting guides, and development discussions."
+    },
+    {
+      "title": "Manjaro GmbH & Co. KG Privacy Policy",
+      "url": "https://manjaro.org/privacy-policy/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Legal privacy disclosure covering server hosting, web data processing, and compliance under German and European law."
+    },
+    {
+      "title": "Manjaro Stable Package Repositories (Alwyzon Mirror)",
+      "url": "https://mirror.alwyzon.net/manjaro/stable/",
+      "type": "official",
+      "accessed": "2026-09-24",
+      "note": "Primary mirror database inspection verifying package versions for core and extra repositories (Linux 7.1, Pamac 11.7, MHWD 0.6.6)."
+    }
+  ],
+  "last_verified": "2026-09-24"
+}

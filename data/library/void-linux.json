@@ -1,0 +1,309 @@
+{
+  "id": "void-linux",
+  "name": "Void Linux",
+  "type": "operating_system",
+  "summary": "An independent, rolling-release Linux distribution developed from scratch, featuring the XBPS package manager, the runit init supervisor, and native dual libc support (glibc and musl).",
+  "tags": [
+    "linux",
+    "operating-system",
+    "independent",
+    "xbps",
+    "runit",
+    "glibc",
+    "musl",
+    "rolling-release",
+    "minimalist",
+    "cross-compilation"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64",
+    "i686",
+    "armv7l",
+    "armv6l"
+  ],
+  "license": "BSD-2-Clause",
+  "content": {
+    "introduction": "Void Linux is an independent general-purpose computer operating system built entirely from scratch without deriving from existing distributions. It is organized around a fast in-house package manager (XBPS), the runit process supervisor as its default init system, and native first-class binary repositories for both glibc and musl standard C libraries across multiple processor architectures.",
+    "what_is_it": "Void Linux provides a minimalist Unix-like operating environment governed by a continuous development model. The system delivers precompiled binary packages via XBPS and allows source compilation through the xbps-src framework. Instead of the systemd software suite, Void integrates runit for stage initialization and daemon supervision, paired with elogind and D-Bus for unprivileged desktop session management. It supports x86_64, 32-bit x86 (i686 with SSE2), and various ARM platforms.",
+    "origin_and_history": "Void Linux was initiated in 2008 by Juan Romero Pardines (xtraeme), a former NetBSD operating system developer. Rather than forking an existing Linux distribution, Pardines wrote the XBPS package manager from scratch under a 2-clause BSD license to combine binary package convenience with BSD-inspired port modularity. The void-packages repository received its initial Git commit in September 2008, followed by XBPS in August 2009. The distribution originally experimented with systemd before transitioning permanently to runit in July 2014 to maintain a lightweight codebase and enable native musl support. In 2018, project leadership transitioned to a collegial core team of community maintainers.",
+    "governance_and_organization": "Void Linux is maintained by a self-organized volunteer core team (Void Linux Core Team) that oversees software packaging, repository signing, security advisories, and mirror infrastructure. The project operates without commercial parent companies or paid development staff, utilizing public GitHub repositories under the void-linux organization for package templates, bug tracking, and code reviews. Infrastructure servers and worldwide download mirrors are sponsored by academic institutions, internet service providers, and community donations.",
+    "release_model_and_snapshots": "Void Linux operates on a rolling release cadence. Software packages are continuously built, validated, and published to official repositories without fixed milestone version releases. The operating system does not require periodic clean reinstallations to maintain software currency. The project periodically generates installable live ISO snapshots and rootfs tarballs, which allow bootstrapping the system using local packages without requiring an immediate network download during installation.",
+    "xbps_package_manager": "The X Binary Package System (XBPS) is the native package management framework designed and implemented in C specifically for Void Linux. It performs dependency resolution, enforces file transaction integrity, and verifies shared library soname compatibility prior to package upgrades. The tool suite includes xbps-install for repository synchronization and software installation, xbps-remove for uninstallation and orphan cleanup, xbps-query for local and remote metadata queries, xbps-reconfigure for post-install triggers, xbps-pkgdb for database health validation, and xbps-alternatives for switching default application symlinks.",
+    "xbps_src_and_void_packages": "The xbps-src utility is the official source packaging and build system of Void Linux. It reads build recipes (templates) from the void-packages git repository to compile software in an isolated chroot environment called the masterdir, producing reproducible .xbps binary packages. The system provides native cross-compilation support, allowing an x86_64 build host to generate packages for ARM64 or musl targets without full machine emulation. Restricted packages (such as proprietary drivers or unredistributable software) can be built locally using xbps-src by setting XBPS_ALLOW_RESTRICTED=yes.",
+    "runit_init_and_supervision": "Void Linux utilizes runit, created by Gerrit Pape, as its primary init system (PID 1) and continuous service supervisor. System startup is organized into three distinct stages: Stage 1 (/etc/runit/1) handles one-time hardware initialization, virtual filesystem mounting, and cgroup setup; Stage 2 (/etc/runit/2) spawns the runsvdir daemon to supervise services; Stage 3 (/etc/runit/3) coordinates clean process shutdown and unmounting. Services are managed through symlinks in /var/service/ pointing to definitions in /etc/sv/, with runtime control exercised via the sv command (sv status, sv up, sv down). Unresponsive or crashed supervised processes are automatically restarted.",
+    "dual_libc_architecture": "Void Linux is distinctive among general-purpose desktop and server distributions for providing tier-1 binary support for both the GNU C Library (glibc) and the musl C library across all target architectures (with the exception of i686, which is glibc-only). Separate binary repository branches are maintained for each libc variant, enabling users to install a system completely linked against musl for lightweight memory usage and strict standards compliance.",
+    "musl_boundaries_and_compatibility": "The musl library adheres strictly to POSIX and C standards, intentionally omitting proprietary GNU non-standard extensions. Consequently, binary executables compiled against glibc cannot execute directly on a musl-based installation without emulation or containerization. Proprietary third-party commercial software—such as official NVIDIA graphics drivers, the Steam gaming runtime, and Widevine DRM modules—does not support musl. Furthermore, musl handles text encoding directly in UTF-8 and does not include the localized locale databases found in glibc, and multilib (32-bit execution on 64-bit systems) is not supported on musl installations.",
+    "installation_and_tooling": "Void Linux provides official live images containing the ncurses-based void-installer utility, which automates disk partitioning, timezone and locale selection, root password configuration, and bootloader deployment using either on-media packages or remote repositories. Alternatively, advanced administrators can perform manual installations via the chroot method by extracting a rootfs archive or executing xbps-install -S -r /mnt base-system onto prepared filesystems, followed by chroot configuration with xchroot (from the xtools package) and dracut initramfs generation.",
+    "session_management_and_desktops": "In the absence of systemd, Void Linux coordinates graphical seat management, power actions (suspend, shutdown), and unprivileged hardware access through the standalone elogind daemon alongside D-Bus. Void distributes official live installation images featuring the XFCE desktop environment, while complete packaging is maintained in the repositories for GNOME, KDE Plasma, Cinnamon, MATE, LXQt, and Wayland compositors (such as Sway and River). Modern audio routing is handled by PipeWire and WirePlumber, running as user-level session services.",
+    "security_and_repository_signing": "All official remote Void Linux binary package repositories are cryptographically signed using 4096-bit RSA keys via xbps-rindex. The xbps-install utility verifies these digital signatures against local public keys in /var/db/xbps/keys/ before unpacking software. Security vulnerabilities identified upstream are addressed through continuous package updates in void-packages. The vkpurge utility allows administrators to remove retired Linux kernel images and initramfs files from /boot to prevent partition exhaustion.",
+    "privacy_and_tor_mirrors": "The Void Linux operating system and its core tooling contain no telemetry services, hardware identification beacons, or background usage logging. Network interactions are strictly user-initiated for repository indexing and package retrieval. Void Linux officially documents and supports package management over the Tor anonymization network, maintaining official .onion mirror endpoints and native SOCKS5 proxy support within XBPS (via the SOCKS_PROXY environment variable), enabling completely anonymous system installations and updates.",
+    "advantages": [
+      "Independent distribution: built from scratch without inherited upstream distribution baggage or design lock-in.",
+      "Dual libc support: first-class precompiled binary repositories available for both glibc and musl.",
+      "Lightweight init system: runit provides fast deterministic startup and reliable process supervision without monoliths.",
+      "High-speed package management: XBPS delivers fast dependency resolution, library soname checks, and transactional integrity.",
+      "Integrated source compilation: xbps-src enables automated, sandboxed package builds and cross-compilation from source templates.",
+      "Anonymous updating capability: native SOCKS5 support in XBPS and official Tor .onion mirror endpoints.",
+      "Rolling release maintenance: continuous package delivery without disruptive version migration cycles.",
+      "Multi-architecture support: official repositories for x86_64, i686, and multiple ARM hardware platforms."
+    ],
+    "disadvantages": [
+      "musl software incompatibility: proprietary software and glibc-linked binaries cannot execute natively on musl installations.",
+      "Absence of official graphical control center: system administration, service configuration, and package operations require CLI tools.",
+      "Smaller package repository size: the package collection in void-packages is smaller than the repositories of Debian or Fedora.",
+      "Absence of systemd unit compatibility: third-party software shipping only systemd service units requires writing custom runit run scripts.",
+      "Smaller maintainer base: community volunteer structure results in occasional review backlogs for specialized package templates.",
+      "No multilib on musl: 32-bit legacy software cannot be executed on 64-bit musl systems without chroots or virtual machines."
+    ],
+    "who_is_it_for": [
+      "Users and administrators seeking an independent, non-systemd Linux distribution with reliable process supervision.",
+      "Developers interested in deploying and evaluating software on the lightweight musl C library.",
+      "Users looking for a minimalist rolling-release system with fast package operations and low background memory consumption.",
+      "Cross-compilation practitioners compiling packages for ARM and embedded architectures using xbps-src.",
+      "Privacy-conscious users who want to perform all operating system package transactions over the Tor network."
+    ],
+    "who_is_it_not_for": [
+      "Users requiring proprietary binary commercial applications (such as Steam or proprietary CAD/NVIDIA tools on musl).",
+      "Beginners expecting a point-and-click graphical software center and automated desktop administration wizards.",
+      "Enterprise organizations requiring commercial support contracts and multi-year fixed-lifecycle releases.",
+      "Users whose primary software ecosystem relies strictly on pre-packaged systemd service units and timers."
+    ],
+    "verdict": "Void Linux is an independent, minimalist operating system that pairs the speed of the C-based XBPS package manager with the simplicity of the runit process supervisor. Its native dual libc support (glibc and musl) and robust xbps-src cross-compilation framework make it a technically distinctive distribution in the Linux landscape. It delivers a lean, transparent rolling-release environment for users and developers who value architectural independence and minimal background abstraction."
+  },
+  "components": [
+    {
+      "id": "xbps",
+      "name": "XBPS",
+      "role": "package_manager",
+      "note": "Native fast package manager written in C featuring transactional operations and soname verification."
+    },
+    {
+      "id": "runit",
+      "name": "runit",
+      "role": "init_system",
+      "note": "UNIX init scheme and process supervisor providing stage execution and service restart monitoring."
+    },
+    {
+      "id": "glibc",
+      "name": "glibc",
+      "role": "library",
+      "note": "Standard GNU C Library tier supporting broad software compatibility and multilib."
+    },
+    {
+      "id": "musl",
+      "name": "musl",
+      "role": "library",
+      "note": "Lightweight, standards-compliant C library tier available as a primary system variant."
+    },
+    {
+      "id": "linux-kernel",
+      "name": "Linux Kernel",
+      "role": "kernel",
+      "note": "Upstream stable Linux kernel packaged and updated continuously via XBPS."
+    },
+    {
+      "id": "dracut",
+      "name": "Dracut",
+      "role": "image_update_tool",
+      "note": "Default initramfs generation utility triggered automatically by kernel updates."
+    },
+    {
+      "id": "elogind",
+      "name": "elogind",
+      "role": "service",
+      "note": "Standalone seat and power management daemon providing user session control without systemd."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_server",
+      "note": "Multimedia audio and video routing daemon handling user session sound."
+    },
+    {
+      "id": "wayland",
+      "name": "Wayland",
+      "role": "display_protocol",
+      "note": "Display server protocol supported across modern desktop environments and compositors."
+    },
+    {
+      "id": "grub",
+      "name": "GRUB",
+      "role": "boot_loader",
+      "note": "Primary bootloader deployed by void-installer for BIOS and UEFI hardware."
+    },
+    {
+      "id": "xbps-src",
+      "name": "xbps-src",
+      "role": "build_system",
+      "note": "Source package compilation tool operating inside isolated chroot masterdirs."
+    },
+    {
+      "id": "socklog",
+      "name": "socklog",
+      "role": "service",
+      "note": "Lightweight syslog replacement operating under runit supervision for plain-text logging."
+    }
+  ],
+  "relations": [
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Independent rolling-release distribution using pacman and systemd."
+    },
+    {
+      "id": "gentoo",
+      "name": "Gentoo",
+      "relation": "alternative",
+      "note": "Independent source-focused distribution using Portage with configurable USE flags."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "Established binary distribution with scheduled point releases and systemd."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "alternative",
+      "note": "Binary RPM distribution backed by commercial enterprise engineering."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Void Linux x86_64 (glibc)",
+      "title": "Void Linux x86_64 (glibc)",
+      "description": "Standard 64-bit x86 configuration using the GNU C Library with full software ecosystem compatibility and multilib support."
+    },
+    {
+      "name": "Void Linux x86_64 (musl)",
+      "title": "Void Linux x86_64 (musl)",
+      "description": "Minimalist 64-bit x86 configuration linked against the lightweight musl C library for strict standards compliance."
+    },
+    {
+      "name": "Void Linux XFCE Live",
+      "title": "Void Linux XFCE Live",
+      "description": "Official graphical live image featuring the XFCE desktop environment, network configuration tools, and the void-installer utility."
+    },
+    {
+      "name": "Void Linux aarch64 (glibc / musl)",
+      "title": "Void Linux aarch64 (glibc / musl)",
+      "description": "ARM 64-bit edition supporting standard UEFI single-board computers and Apple Silicon hardware."
+    },
+    {
+      "name": "Void Linux i686 (glibc)",
+      "title": "Void Linux i686 (glibc)",
+      "description": "Legacy 32-bit x86 configuration requiring SSE2 processor instructions, available with glibc."
+    }
+  ],
+  "links": [
+    {
+      "title": "Official Portal",
+      "url": "https://voidlinux.org/",
+      "note": "Official website and news portal for the Void Linux project."
+    },
+    {
+      "title": "The Void Linux Handbook",
+      "url": "https://docs.voidlinux.org/",
+      "note": "Comprehensive official documentation covering installation, XBPS, and runit configuration."
+    },
+    {
+      "title": "Downloads & Live Images",
+      "url": "https://voidlinux.org/download/",
+      "note": "Official repository mirrors and bootable live ISO snapshot downloads."
+    },
+    {
+      "title": "XBPS Package Manager Guide",
+      "url": "https://docs.voidlinux.org/xbps/index.html",
+      "note": "Detailed usage documentation for the XBPS package management utility suite."
+    },
+    {
+      "title": "Manual Pages",
+      "url": "https://man.voidlinux.org/",
+      "note": "Online manual pages for native Void Linux commands and services."
+    },
+    {
+      "title": "Tor Mirrors Guide",
+      "url": "https://docs.voidlinux.org/xbps/repositories/mirrors/tor.html",
+      "note": "Official instructions for routing XBPS package traffic over the Tor anonymization network."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Void Linux Official Portal",
+      "url": "https://voidlinux.org/",
+      "type": "official_documentation",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Core Team"
+    },
+    {
+      "title": "The Void Linux Handbook — History",
+      "url": "https://docs.voidlinux.org/about/history.html",
+      "type": "official_documentation",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Documentation Team"
+    },
+    {
+      "title": "The Void Linux Handbook — XBPS Package Manager",
+      "url": "https://docs.voidlinux.org/xbps/index.html",
+      "type": "official_documentation",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Documentation Team"
+    },
+    {
+      "title": "The Void Linux Handbook — Services and Daemons (runit)",
+      "url": "https://docs.voidlinux.org/config/services/index.html",
+      "type": "technical_manual",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Documentation Team"
+    },
+    {
+      "title": "The Void Linux Handbook — musl Support and Incompatible Software",
+      "url": "https://docs.voidlinux.org/installation/musl.html",
+      "type": "technical_manual",
+      "date": "2021-01-18",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Documentation Team"
+    },
+    {
+      "title": "The Void Linux Handbook — Installation via chroot",
+      "url": "https://docs.voidlinux.org/installation/guides/chroot.html",
+      "type": "installation_guide",
+      "date": "2023-02-11",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Documentation Team"
+    },
+    {
+      "title": "The Void Linux Handbook — Session and Seat Management",
+      "url": "https://docs.voidlinux.org/config/session-management.html",
+      "type": "technical_manual",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Documentation Team"
+    },
+    {
+      "title": "The Void Linux Handbook — PipeWire Audio Setup",
+      "url": "https://docs.voidlinux.org/config/media/pipewire.html",
+      "type": "technical_manual",
+      "date": "2023-05-30",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Documentation Team"
+    },
+    {
+      "title": "The Void Linux Handbook — Using Tor Mirrors with XBPS",
+      "url": "https://docs.voidlinux.org/xbps/repositories/mirrors/tor.html",
+      "type": "official_documentation",
+      "date": "2026-09-25",
+      "accessed": "2026-09-25",
+      "author": "Void Linux Documentation Team"
+    }
+  ],
+  "last_verified": "2026-09-25"
+}
