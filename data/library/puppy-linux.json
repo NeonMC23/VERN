@@ -1,0 +1,258 @@
+{
+  "id": "puppy-linux",
+  "name": "Puppy Linux",
+  "type": "operating_system",
+  "summary": "A lightweight, modular family of Linux distributions created in 2003 by Barry Kauler and developed by the community through the Woof-CE build engine. Puppy Linux loads and runs entirely in RAM from boot media, utilizing SquashFS (.sfs) layered modules mounted with overlayfs/aufs. It offers frugal installation to any existing filesystem without repartitioning, Pupsave session persistence (via file or folder), native .pet packages alongside the Puppy Package Manager (PPM) and native APT/Synaptic on Debian builds, Joe's Window Manager (JWM) with ROX-Filer, and official builds based on Debian (BookwormPup64), Ubuntu (NoblePup64), and Slackware (S15Pup64).",
+  "tags": [
+    "linux",
+    "desktop",
+    "portable",
+    "live-ram",
+    "woof-ce",
+    "sfs",
+    "overlayfs",
+    "pupsave",
+    "frugal-install",
+    "jwm",
+    "rox-filer",
+    "lightweight",
+    "pet"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "i386"
+  ],
+  "license": "CC0-1.0 (website/documentation), GPL-2.0-or-later, GPL-3.0-or-later, MIT, and redistributable upstream binaries",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "Puppy Linux is an open-source, portable family of lightweight Linux operating systems engineered to run with exceptional speed and minimal storage overhead on personal computers. Conceived in June 2003 by Australian developer Barry Kauler, Puppy Linux is designed around the concept of loading the entire operating system into computer memory (RAM) from boot media (USB flash drive, optical disc, or internal storage). This in-RAM execution enables blistering responsiveness, leaves host storage untouched unless explicitly instructed, and allows the boot media to be removed during operation. Rather than maintaining a single monolithic codebase, modern Puppy Linux is a collection of modular distributions built using the Woof-CE assembly system across varied binary bases including Debian, Ubuntu, and Slackware.",
+    "what_is_it": "Technically, Puppy Linux is an operating system constructed from read-only SquashFS (.sfs) filesystem layers merged with a writable Copy-on-Write (CoW) memory layer using `overlayfs` or `aufs`. It operates primarily through frugal installation, runs an ultra-compact desktop based on Joe's Window Manager (JWM) and ROX-Filer, manages applications via its native `.pet` package format and the Puppy Package Manager (PPM) alongside native upstream package managers, and preserves user sessions through loopback file or folder persistence known as `pupsave`.",
+    "origin_and_history": "Barry Kauler created Puppy Linux in 2003 as a compact, self-contained desktop system inspired by early minimalist distributions like Vector Linux. Series 0.x established the core live concept, followed by Series 1.x (which introduced UnionFS and dynamic remastering) and Series 2.x (which introduced the T2-based build tool Puppy Unleashed). With Series 4.x, Kauler introduced `Woof`, an innovative build tool capable of taking foreign binary packages and constructing a fully functional Puppy. In 2013, following Series 5.x (which produced widely popular releases such as Lucid Puppy and Precise Puppy), Kauler transitioned official project governance to the community, who established the `Woof-CE` project on GitHub. Prominent contemporary community releases include BookwormPup64 (based on Debian 12), NoblePup64 (based on Ubuntu 24.04 LTS), and S15Pup64 (based on Slackware 15.0).",
+    "governance_and_organization": "Puppy Linux is stewarded by the Puppy Linux Team, an international, decentralized community of volunteer developers, maintainers, and forum administrators. Project development and build automation are centered on the open GitHub repository `puppylinux-woof-CE/woof-CE`. The project has no commercial parent company, sells no licenses, and operates under non-commercial open-source principles. Documentation and official web resources are explicitly released under Creative Commons CC0 (Public Domain). Mirror hosting and bandwidth are generously provided by public institutions including Ibiblio, NLUUG, and AARNet.",
+    "the_woof_ce_build_engine": "Modern Puppy Linux distributions are fundamentally defined by the Woof-CE build engine ('If it is not built from Woof-CE, it is not a Puppy'). Woof-CE is a comprehensive suite of automated shell scripts that assembles a complete Puppy operating system from scratch. An administrator chooses the target CPU architecture (x86, x86_64, or ARM), selects the binary-compatible host distribution (Debian, Ubuntu, Slackware, Void, or pure PET), downloads official upstream binary packages, strips out unneeded documentation, injects the Puppy userland scripts and configuration utilities, and outputs a ready-to-boot ISO image in a matter of minutes.",
+    "in_ram_architecture_and_overlayfs": "At system boot, Puppy Linux copies its compressed SquashFS system images into the computer's RAM (`copy2ram`). The system constructs the visible root filesystem (`/`) using a layered union mount. Historically utilizing UnionFS and AUFS, modern Woof-CE distributions standardize on `overlayfs`, the Linux kernel's native layered filesystem. A lower, immutable layer contains the read-only operating system files, while an upper, read-write layer resides entirely in RAM (tmpfs). All filesystem writes, temporary files, and application caches take place in RAM, ensuring that removing power or rebooting without saving leaves the system in a pristine, unmodified state.",
+    "modular_squashfs_layers": "The Puppy Linux root filesystem is modularized into discrete SquashFS archives (`.sfs`):\n\n- `puppy_*.sfs`: The core base system containing standard desktop utilities and libraries.\n- `zdrv_*.sfs`: Linux kernel modules and compiled drivers.\n- `fdrv_*.sfs`: Firmware blobs required for network cards, Wi-Fi chips, and graphics adapters.\n- `bdrv_*.sfs`: Package manager integration layers (such as APT and Synaptic for Debian bases).\n- `adrv_*.sfs` / `ydrv_*.sfs`: Curated application bundles (such as web browsers or office suites).\n- `devx_*.sfs`: Complete GNU C/C++ development environment with GCC, make, and development headers.\n\nThe included `sfs_load` utility enables users to load or unload extra SFS modules on the fly without rebooting the system.",
+    "persistence_and_pupsave_subsystem": "Puppy Linux preserves user modifications between sessions through its versatile `pupsave` subsystem:\n\n- Pupsave File: A single loopback filesystem container (ext2, ext3, or ext4) stored on any partition type, including FAT32 and NTFS Windows partitions. This allows persistent Linux usage on shared machines without repartitioning.\n- Pupsave Folder: A native directory structure created on Linux filesystems (ext4, f2fs, btrfs), which expands dynamically to use all available disk space without artificial size constraints.\n- Flash Protection (PUPMODE 13): When booting from USB flash media, modifications are cached in RAM by the `pup_event` daemon and flushed to the storage drive only at specified intervals or upon clean shutdown, preventing flash memory cell degradation.",
+    "frugal_installation_method": "The standard, officially recommended installation method for Puppy Linux is the 'frugal install'. Unlike traditional Linux installations that require dedicated disk partitions and uncompress hundreds of thousands of files, a frugal install simply copies 4 to 6 core files (vmlinuz, initrd.gz, and the `.sfs` archives) into a subfolder on an existing drive. The computer's bootloader (GRUB2, GRUB4DOS, or Limine) is configured to point to that directory. This architecture enables multiple distinct Puppy versions to coexist harmoniously on a single hard drive alongside Windows or other distributions.",
+    "package_management_pet_and_ppm": "Puppy Linux provides a dual package management architecture:\n\n- PET Packages: The native packaging format is `.pet` (Puppy's Extra Treatment), a tarball archive (`.tar.gz`) appended with an MD5 checksum trailer and pre/post-install scripts. Installing a PET package requires only a single click in the file manager.\n- Puppy Package Manager (PPM): A graphical GTK application that searches and installs PET packages as well as downloading and resolving dependencies directly from upstream distribution repositories (`.deb` packages from Debian/Ubuntu or `.txz` from Slackware).\n- Native APT/Synaptic: In modern Debian-based builds such as BookwormPup64, the full APT command-line suite (`apt`, `apt-get`) and the graphical Synaptic manager are fully functional via the `bdrv` layer.",
+    "desktop_interface_jwm_and_rox_filer": "The signature user interface of Puppy Linux pairs Joe's Window Manager (JWM) with ROX-Filer. JWM, written in highly optimized C, delivers a standard desktop taskbar, start menu, pager, and window borders with minimal memory usage (typically under 10 MB RAM). ROX-Filer handles the desktop icon pinboard, wallpaper management, and spatial file browsing. Alternative editions provide Openbox, Tint2, or LXDE desktops, while experimental Woof-CE builds explore Wayland compositors (such as Labwc).",
+    "hardware_support_and_architectures": "Puppy Linux is renowned for its ability to operate on modest or aging computer hardware. Minimum hardware specifications include:\n\n- 32-bit x86: Intel Pentium II/III/4 or AMD K6/Athlon processors with 256 MB to 512 MB of RAM.\n- 64-bit x86_64: Any modern 64-bit CPU with 1 GB to 2 GB of RAM recommended for web browsing.\n- Storage: A 1 GB to 2 GB USB drive or partition space suffices for the complete operating system and save data.\n- Architecture Support: Official builds support x86_64 and 32-bit x86, with experimental Woof-CE recipes targeting ARM architectures (such as Raspberry Pi).",
+    "bootloader_and_uefi_secure_boot": "Puppy Linux supports booting from legacy BIOS systems via Syslinux or GRUB4DOS (`grub4dos-config`), as well as modern 64-bit UEFI systems via GRUB2. Recent Woof-CE 64-bit ISO releases include support for booting on systems with UEFI Secure Boot enabled, utilizing Machine Owner Key (MOK) enrollment or signed shims.",
+    "security_and_root_spot_model": "Puppy Linux historically pioneered a single-user `root` execution model, running by default with superuser permissions in RAM to simplify filesystem access and device mounting on personal hardware. To mitigate network security risks associated with running complex modern web browsers as root, contemporary Puppy builds incorporate the unprivileged user `spot`. Web browsers (Firefox, Chromium) and untrusted network clients execute in an isolated sandbox under the `spot` user account via `run-as-spot`, preventing malicious payloads from accessing the root filesystem.",
+    "privacy_and_telemetry": "Puppy Linux strictly adheres to a zero-telemetry policy. The operating system contains no telemetry collectors, usage tracking daemons, device fingerprinting beacons, or automated crash reporting services. Outbound network traffic is limited strictly to user-initiated actions such as web browsing, package downloads via PPM/APT, and manual network time synchronization.",
+    "advantages": [
+      "Ultra-fast performance achieved by running the entire operating system in computer RAM",
+      "Remarkable portability allowing a full desktop system to boot from any USB drive or CD/DVD",
+      "Non-destructive frugal installation coexisting on any partition format without repartitioning",
+      "Pupsave persistence with flash-wear mitigation caching changes in memory until shutdown",
+      "Dynamic application extension loading and unloading on the fly using modular SFS files",
+      "Access to massive upstream package repositories (Debian, Ubuntu, Slackware) via Woof-CE"
+    ],
+    "disadvantages": [
+      "Historical single-user root architecture requires deliberate containment (spot) for network security",
+      "Unique frugal and SFS operational concepts present a learning curve for traditional Linux users",
+      "Dispersed distribution family with multiple variant names can create initial confusion for newcomers",
+      "Minimalist window managers (JWM) lack the visual polish and compositor effects of heavy desktop environments",
+      "Full traditional Linux installations are officially deprecated and lose SFS dynamic loading features"
+    ],
+    "who_is_it_for": "Puppy Linux is ideally suited for users seeking an ultra-portable live desktop operating system on a USB key, enthusiasts reviving older or resource-constrained PCs, technicians requiring a versatile recovery and diagnostic environment, and users who prioritize instant in-memory application responsiveness without permanent disk modifications.",
+    "who_is_it_not_for": "It is not suited for multi-user enterprise workstations requiring strict POSIX user permission boundaries, server deployments mandating standard daemon management services, or users seeking resource-intensive modern desktop environments like GNOME or KDE Plasma out of the box.",
+    "verdict": "Puppy Linux is a triumph of modular minimalist systems architecture. By leveraging the Woof-CE build engine to marry upstream binary compatibility with in-RAM execution, SquashFS layering, and flexible Pupsave persistence, it delivers an exceptionally agile, portable operating system that remains uniquely practical across decades of evolving PC hardware."
+  },
+  "components": [
+    {
+      "id": "woof-ce",
+      "name": "Woof-CE",
+      "role": "build_engine",
+      "note": "Automated build system generating complete Puppy Linux distributions from foreign binary packages."
+    },
+    {
+      "id": "jwm",
+      "name": "Joe's Window Manager (JWM)",
+      "role": "window_manager",
+      "note": "Ultra-lightweight, C-based stackable window manager providing the taskbar, menu, and system tray."
+    },
+    {
+      "id": "rox-filer",
+      "name": "ROX-Filer",
+      "role": "file_and_pinboard_manager",
+      "note": "Spatial file manager and desktop icon pinboard providing desktop wallpaper and drive icons."
+    },
+    {
+      "id": "overlayfs",
+      "name": "OverlayFS",
+      "role": "union_filesystem",
+      "note": "In-kernel layered union filesystem merging read-only SFS system layers with writable RAM layers."
+    },
+    {
+      "id": "pupsave",
+      "name": "Pupsave",
+      "role": "persistence_subsystem",
+      "note": "Session persistence framework supporting loopback files or native Linux directories with flash write caching."
+    },
+    {
+      "id": "ppm",
+      "name": "Puppy Package Manager (PPM)",
+      "role": "package_manager",
+      "note": "Graphical package manager managing PET packages and converting upstream distribution binaries."
+    },
+    {
+      "id": "sfs-load",
+      "name": "sfs_load",
+      "role": "modular_layer_loader",
+      "note": "Dynamic utility enabling on-the-fly mounting and unmounting of SquashFS (.sfs) application modules."
+    },
+    {
+      "id": "remasterpup",
+      "name": "remasterpup2",
+      "role": "remastering_tool",
+      "note": "Live system remastering wizard allowing users to generate custom bootable Puppy ISOs."
+    },
+    {
+      "id": "spot",
+      "name": "Spot Sandbox (run-as-spot)",
+      "role": "security_containment",
+      "note": "Unprivileged user account and wrapper script isolating web browsers from root privileges."
+    },
+    {
+      "id": "grub4dos-config",
+      "name": "grub4dos-config",
+      "role": "bootloader_configurator",
+      "note": "Automated graphical utility for configuring GRUB4DOS bootloaders on frugal installations."
+    },
+    {
+      "id": "sns",
+      "name": "Simple Network Setup (SNS)",
+      "role": "network_utility",
+      "note": "Lightweight connection wizard for rapid configuration of Ethernet and wireless interfaces."
+    },
+    {
+      "id": "retrovol",
+      "name": "Retrovol",
+      "role": "audio_mixer",
+      "note": "Lightweight system tray audio mixer interfacing directly with ALSA without background daemons."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_package_source",
+      "note": "Primary upstream binary package source for BookwormPup64, BookwormPup32, and Dpup distributions."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "upstream_package_source",
+      "note": "Upstream binary package source for the Upup line of distributions (FossaPup64, JammyPup64, NoblePup64)."
+    },
+    {
+      "id": "slackware",
+      "name": "Slackware",
+      "relation": "upstream_package_source",
+      "note": "Historical and active binary package source for Slacko Puppy and S15Pup distributions."
+    },
+    {
+      "id": "void-linux",
+      "name": "Void Linux",
+      "relation": "upstream_package_source",
+      "note": "Upstream package source for experimental VoidPup builds utilizing the XBPS packaging ecosystem."
+    },
+    {
+      "id": "antix",
+      "name": "antiX",
+      "relation": "alternative",
+      "note": "Peer lightweight, live-centric distribution, contrasting antiX's traditional multi-init Debian install with Puppy's in-RAM frugal SFS architecture."
+    }
+  ],
+  "variants": [
+    {
+      "name": "BookwormPup64 (Debian 12 Base)",
+      "description": "Primary Woof-CE 64-bit release based on Debian 12 Bookworm binaries, featuring Linux kernel 6.1 LTS, OverlayFS, and native APT/Synaptic integration."
+    },
+    {
+      "name": "NoblePup64 (Ubuntu 24.04 Base)",
+      "description": "Woof-CE 64-bit release built from Ubuntu 24.04 LTS binary packages, pairing Ubuntu package compatibility with Puppy's lightweight userland."
+    },
+    {
+      "name": "S15Pup64 (Slackware 15.0 Base)",
+      "description": "Lightweight 64-bit release built from Slackware 15.0 packages, maintaining the classic Slacko tradition of low resource usage and high speed."
+    },
+    {
+      "name": "BookwormPup32 (Debian 32-bit Base)",
+      "description": "32-bit x86 release built from Debian 12 binaries, providing modern software support for older 32-bit personal computers."
+    },
+    {
+      "name": "VoidPup64 (Void Linux Base)",
+      "description": "Experimental Woof-CE release utilizing Void Linux binary packages, exploring runit and rolling software delivery within Puppy architecture."
+    }
+  ],
+  "links": {
+    "homepage": "https://puppylinux-woof-ce.github.io/",
+    "history": "https://puppylinux-woof-ce.github.io/history.html",
+    "woof_ce_guide": "https://puppylinux-woof-ce.github.io/woof-ce.html",
+    "install_guide": "https://puppylinux-woof-ce.github.io/install.html",
+    "repository": "https://github.com/puppylinux-woof-CE/woof-CE",
+    "mirror_ibiblio": "http://distro.ibiblio.org/puppylinux/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=puppy"
+  },
+  "sources": [
+    {
+      "title": "Puppy Linux Official Website — Home Portal and Overview",
+      "url": "https://puppylinux-woof-ce.github.io/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Puppy Linux Team",
+      "note": "Official home portal outlining distribution family principles, memory execution, and ISO download mirrors."
+    },
+    {
+      "title": "Puppy Linux Official Website — Comprehensive Project History",
+      "url": "https://puppylinux-woof-ce.github.io/history.html",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Puppy Linux Team",
+      "note": "Detailed chronicle of Barry Kauler's founding in 2003, version series 0.x through 6.x, and community transition."
+    },
+    {
+      "title": "Puppy Linux Official Website — Woof-CE Build Engine Documentation",
+      "url": "https://puppylinux-woof-ce.github.io/woof-ce.html",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Puppy Linux Team",
+      "note": "Technical guide explaining Woof-CE scripts, compatible distribution bases, and ISO assembly procedures."
+    },
+    {
+      "title": "Puppy Linux Official Website — Installation and Usage Guide",
+      "url": "https://puppylinux-woof-ce.github.io/install.html",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Puppy Linux Team",
+      "note": "Comprehensive guide to frugal installation, USB deployment, Pupsave files and folders, and SFS modules."
+    },
+    {
+      "title": "GitHub — Woof-CE Official Source Code Repository",
+      "url": "https://github.com/puppylinux-woof-CE/woof-CE",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "Puppy Linux Woof-CE Stewards",
+      "note": "Core open-source repository containing build recipes, kernel configurations, and Puppy system scripts."
+    },
+    {
+      "title": "Ibiblio Public Repository — Puppy Linux Distribution Archive",
+      "url": "http://distro.ibiblio.org/puppylinux/",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "Ibiblio / UNC",
+      "note": "Primary distribution archive hosting official Puppy Linux ISO releases, PET packages, and SFS extensions."
+    },
+    {
+      "title": "DistroWatch — Puppy Linux Distribution Profile and Version Records",
+      "url": "https://distrowatch.com/table.php?distribution=puppy",
+      "type": "secondary",
+      "accessed": "2026-10-01",
+      "publisher": "DistroWatch",
+      "note": "Independent technical summary documenting release chronologies, compatible bases, and memory architectures."
+    }
+  ]
+}

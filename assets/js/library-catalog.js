@@ -36,6 +36,9 @@ var LIBRARY_RESOURCES = [
   "zorin-os",
   "pop-os",
   "kde-neon",
+  "pclinuxos",
+  "antix",
+  "puppy-linux",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",

@@ -1,0 +1,251 @@
+{
+  "id": "antix",
+  "name": "antiX",
+  "type": "operating_system",
+  "summary": "A fast, lightweight, and systemd-free Linux distribution based on Debian Stable (Debian 13 Trixie for antiX 26 / 26.1; Debian 12 Bookworm for antiX 23). Originally created in 2007 by anticapitalista as a lightweight spin of MEPIS, antiX features multi-init support (runit by default, sysVinit, dinit, s6-rc, s6-66), lightweight window managers (IceWM, Fluxbox, JWM, herbstluftwm), persistent Live USB execution, the minstall system installer with LUKS encryption, and simultaneous support for 64-bit and 32-bit (non-PAE/PAE) x86 hardware.",
+  "tags": [
+    "linux",
+    "desktop",
+    "debian-based",
+    "systemd-free",
+    "runit",
+    "sysvinit",
+    "icewm",
+    "fluxbox",
+    "jwm",
+    "live-usb",
+    "persistence",
+    "i386",
+    "lightweight"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "i386"
+  ],
+  "license": "GPL-2.0-or-later, GPL-3.0-or-later, MIT, BSD, and redistributable firmware",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "antiX is an open-source, systemd-free Linux distribution designed to deliver a responsive, flexible computing experience on both older hardware and modern personal computers. Initiated in 2007 by the developer known as anticapitalista, antiX originated as an ultra-lightweight spin of SimplyMEPIS designed for systems with constrained resources. Over time, antiX evolved into a standalone distribution directly coupled to Debian Stable, renowned for its modular multi-init architecture ('Init Diversity'), its lightweight window manager stack (IceWM, Fluxbox, JWM, herbstluftwm), its versatile Live USB persistence mechanisms, and its continued production of 32-bit x86 installation media alongside 64-bit images.",
+    "what_is_it": "Technically, antiX is a downstream derivative of Debian Stable engineered without systemd and without elogind. It provides a choice of five alternative init systems (runit by default, sysVinit, dinit, s6-rc, and s6-66), uses the lightweight `seatd` daemon and `turnstile` for user session handling, and deploys window managers rather than full desktop environment suites. System administration is centralized in the antiX Control Centre (`antix-cc`), while system installation and remastering are handled by `minstall` (inherited from MEPIS) and `iso-snapshot`.",
+    "origin_and_history": "antiX began in 2007 when anticapitalista created an experimental lightweight remaster of MEPIS 3.4.3 called 'flepis' (Fluxbox-MEPIS) to run on legacy personal computers unable to support KDE. The first official release, antiX-M6.5 'Spartacus', was published in July 2007 as an officially sanctioned MEPIS respin. As MEPIS alternated between Ubuntu and Debian bases, antiX progressively severed its MEPIS desktop dependencies to align directly on Debian Stable. In 2013-2014, antiX developers partnered with MEPIS community members to launch MX Linux. Recent milestones include antiX-23 ('Arditi del Popolo', Debian 12 Bookworm) and antiX-26 / 26.1 ('Stephen Kapos', released in March and September 2026, based on Debian 13 Trixie with five systemd-free init systems).",
+    "governance_and_organization": "antiX is developed and governed by an informal, non-commercial community led by its founder anticapitalista, with key technical contributions from developers such as ProwlerGR (who architected the multi-init framework and Turnstile integration). The distribution operates with no commercial parent entity, no enterprise sales tier, and no venture capital. Infrastructure costs for domain hosting and package build servers are sustained through community contributions and donations.",
+    "release_model_and_debian_base": "antiX synchronizes its primary release cycles with Debian Stable releases, publishing point releases and maintenance snapshots at regular intervals. Major series antiX-23 tracks Debian 12 ('Bookworm'), while antiX-26 tracks Debian 13 ('Trixie'). System packages remain binary-compatible with Debian repositories, supplemented by the antiX repository (`repo.antixlinux.com`) for custom kernels, systemd-free shims, and system administration scripts.",
+    "systemd_free_architecture_and_multi_init": "A cornerstone of antiX is its total refusal of systemd and elogind. The system removes `libsystemd0` dependencies using custom shim packages from the `nosystemd` repository, handling seat management through `seatd` and user session orchestration via `turnstile`. In antiX-26, the distribution delivers native multi-init diversity across five systemd-free init systems:\n\n- runit: The default system init and service supervisor, offering deterministic parallel service startup and continuous daemon supervision under `/etc/runit/runsvdir/`.\n- sysVinit: Classical Unix init using `/etc/init.d/` runlevel scripts.\n- dinit: Modern dependency-based service management engine.\n- s6-rc / s6-66: Scalable supervision suites based on the s6 process supervisor.\n\nUsers can boot into different init systems directly from the Live GRUB boot menu or convert their installed system via metapackages.",
+    "desktop_interface_and_window_managers": "Rather than bundling resource-heavy desktop environments, antiX provides a suite of ultra-lightweight window managers selectable at the login screen or via desktop menu toggles:\n\n- IceWM: The default window manager, providing a traditional taskbar, start menu, workspace switcher, and low RAM consumption (typically under 150 MB at boot).\n- Fluxbox: Minimalist window manager featuring window tabs, slit dock, and right-click desktop root menus.\n- JWM (Joe's Window Manager): Ultra-compact C-based window manager with panel and system tray.\n- herbstluftwm: Manual tiling window manager for keyboard-driven, multi-frame window layout without overlapping windows.\n\nDesktop file management and desktop icons are handled by `zzzFM` (a lightweight fork of SpaceFM) or `ROX-Filer`.",
+    "live_system_and_persistence_modes": "antiX incorporates one of the most comprehensive Live USB persistence frameworks in the Linux ecosystem. When running from a Live USB, changes made to the system can be preserved across reboots using multiple persistence architectures:\n\n- Root Persistence: Stores modifications to system files, installed applications, and libraries.\n- Home Persistence: Preserves the user's `/home` directory, documents, and user-level settings.\n- Semi-automatic Persistence: Caches changes in RAM during operation and flushes them to flash storage only on shutdown or manual command, dramatically reducing flash memory wear.\n- toram Boot Mode: Copies the entire SquashFS system image into RAM during boot, allowing the physical USB drive or CD/DVD to be removed while the OS runs entirely in memory.",
+    "system_tools_and_control_centre": "antiX provides a comprehensive set of lightweight, modular system administration utilities unified within the antiX Control Centre (`antix-cc`):\n\n- minstall: Graphical and command-line system installer inherited from MEPIS, handling automated or custom disk partitioning, init selection, user account setup, and full-disk LUKS encryption.\n- iso-snapshot: Allows users to convert their running system (including installed packages, personal configurations, and customizations) into a redistributable, bootable ISO image.\n- live-usb-maker: Dedicated graphical and CLI tool for creating live bootable USB drives with configurable persistence partitions.\n- droopy: Python-based micro-web server enabling rapid local network file transfers without complex network sharing setups.\n- connectshares: Simple utility for mounting local SMB, NFS, and SSH network shares.",
+    "package_management_and_repositories": "Software package management relies on the Debian APT ecosystem (`apt`, `apt-get`, `dpkg`), augmented by the Synaptic Package Manager (`synaptic`) and the antiX `package-installer` utility. The distribution connects to Debian official repositories (main, contrib, non-free, non-free-firmware) alongside the dedicated antiX repository (`repo.antixlinux.com`). Repository pinning ensures that antiX custom packages (such as systemd-free alternatives and desktop configs) take precedence over upstream packages requiring systemd.",
+    "hardware_support_and_architectures": "antiX officially supports both 64-bit `x86_64` (amd64) and 32-bit `i386` (i686) architectures. It maintains tailored Linux kernels built in-house:\n\n- Modern Kernels: Linux 6.6 LTS branch for 64-bit modern computers.\n- Legacy Kernels: Linux 5.10 LTS branch for older systems, including specialized 32-bit non-PAE kernels capable of running on early Intel Pentium II/III, AMD K6, and VIA processors.\n\nThe minimal hardware requirements are among the lowest of any active desktop distribution: 256 MB RAM for antiX-core (CLI) and 512 MB to 1 GB RAM for antiX-full desktop operations.",
+    "firmware_and_bootloader_support": "antiX boots on legacy BIOS systems (using Syslinux / Isolinux) as well as 32-bit and 64-bit UEFI firmware tables (using GRUB2 EFI). UEFI Secure Boot is supported out of the box through the Debian-signed shim loader, enabling verified boot on contemporary commercial PCs without disabling firmware security settings.",
+    "security_and_privileges": "Security updates are inherited directly from the Debian Security team. System privileges follow the standard Unix model with a dedicated `root` superuser account and an unprivileged desktop user account enabled for `sudo` command execution. Disk security is provided via LUKS full-disk encryption configured directly during the `minstall` installation process.",
+    "privacy_and_telemetry": "antiX strictly enforces an absolute zero-telemetry policy. The distribution contains no analytics daemons, no background tracking processes, no crash data transmission services, and no device fingerprinting mechanisms. Outbound network communication is initiated solely by user actions (such as APT updates, web browsing, or NTP time synchronization).",
+    "advantages": [
+      "Completely systemd-free and elogind-free architecture with choice of 5 alternative inits (runit by default)",
+      "Outstanding resource efficiency running comfortably on hardware with as little as 512 MB of RAM",
+      "Robust, mature 32-bit (non-PAE/PAE) support alongside modern 64-bit x86_64 editions",
+      "Advanced Live USB persistence modes with flash-saving semi-automatic RAM cache writing",
+      "Powerful system snapshotting via iso-snapshot to create custom bootable ISO installations",
+      "Direct access to the vast Debian Stable software repository ecosystem"
+    ],
+    "disadvantages": [
+      "Window manager interfaces (IceWM, Fluxbox) lack the visual animations and automation of heavy desktop environments",
+      "Exclusion of systemd may require manual service script configuration for specialized enterprise software",
+      "Manual package pinning requires attention when adding third-party Debian repositories",
+      "No official ARM64 or RISC-V release images (focus remains strictly on x86 architectures)"
+    ],
+    "who_is_it_for": "antiX is ideal for owners of older or low-specification personal computers (netbooks, legacy laptops, vintage desktops), minimalist Linux users, privacy advocates, and administrators seeking a resilient, systemd-free Debian desktop with advanced Live USB persistence and remastering tools.",
+    "who_is_it_not_for": "It is not suitable for users seeking heavy desktop environments (such as GNOME or KDE Plasma out of the box), enterprise server setups mandating standard systemd unit files, or ARM-based single-board computers.",
+    "verdict": "antiX is an exemplary model of independent, lightweight Linux engineering. By combining Debian Stable's immense package repository with a principled systemd-free architecture, multi-init diversity led by runit, and class-leading Live persistence utilities, it keeps vintage and modern x86 hardware fully productive without corporate telemetry or resource bloat."
+  },
+  "components": [
+    {
+      "id": "runit",
+      "name": "runit",
+      "role": "init_system",
+      "note": "Default system initialization and service supervision engine providing parallel service management."
+    },
+    {
+      "id": "sysvinit",
+      "name": "SysVinit",
+      "role": "init_system",
+      "note": "Classical Unix runlevel initialization system available as an alternative init choice."
+    },
+    {
+      "id": "icewm",
+      "name": "IceWM",
+      "role": "window_manager",
+      "note": "Default stackable window manager providing the taskbar, menu, system tray, and desktop theme engine."
+    },
+    {
+      "id": "fluxbox",
+      "name": "Fluxbox",
+      "role": "window_manager",
+      "note": "Lightweight alternative window manager featuring window grouping tabs and configurable root menus."
+    },
+    {
+      "id": "jwm",
+      "name": "Joe's Window Manager (JWM)",
+      "role": "window_manager",
+      "note": "Ultra-lightweight C-based window manager designed for maximum memory efficiency."
+    },
+    {
+      "id": "herbstluftwm",
+      "name": "herbstluftwm",
+      "role": "window_manager",
+      "note": "Manual tiling window manager providing non-overlapping grid layout driven by keyboard shortcuts."
+    },
+    {
+      "id": "zzzfm",
+      "name": "zzzFM",
+      "role": "file_manager",
+      "note": "Fast, multi-tabbed file manager forked from SpaceFM, managing desktop icons and device automounting."
+    },
+    {
+      "id": "minstall",
+      "name": "antiX Installer (minstall)",
+      "role": "system_installer",
+      "note": "Graphical installation utility inherited from MEPIS supporting partition setup and LUKS encryption."
+    },
+    {
+      "id": "iso-snapshot",
+      "name": "iso-snapshot",
+      "role": "remastering_tool",
+      "note": "Live snapshot utility creating a bootable, redistributable ISO image of the running antiX installation."
+    },
+    {
+      "id": "live-usb-maker",
+      "name": "live-usb-maker",
+      "role": "usb_creation_tool",
+      "note": "CLI and GTK utility for formatting and burning Live antiX images with persistence support."
+    },
+    {
+      "id": "antix-control-centre",
+      "name": "antiX Control Centre (antix-cc)",
+      "role": "system_administration_suite",
+      "note": "Unified administration panel organizing system, desktop, network, and hardware configuration tools."
+    },
+    {
+      "id": "turnstile",
+      "name": "Turnstile",
+      "role": "session_tracker",
+      "note": "Systemd-free user session manager coordinating PAM sessions and seatd seat tracking."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_lineage",
+      "note": "Upstream binary package foundation providing the underlying software repositories and security errata."
+    },
+    {
+      "id": "mx-linux",
+      "name": "MX Linux",
+      "relation": "sister_project",
+      "note": "Co-developed sister distribution combining antiX system tools (minstall, iso-snapshot) with Xfce and mid-weight defaults."
+    },
+    {
+      "id": "void-linux",
+      "name": "Void Linux",
+      "relation": "shared_init_architecture",
+      "note": "Shares the adoption of runit as a lightweight, independent process supervisor free from systemd."
+    },
+    {
+      "id": "mepis",
+      "name": "SimplyMEPIS",
+      "relation": "historical_origin",
+      "note": "Historical parent distribution from which antiX originated in 2007 as a lightweight respin (antiX-M6.5 Spartacus)."
+    },
+    {
+      "id": "puppy-linux",
+      "name": "Puppy Linux",
+      "relation": "alternative",
+      "note": "Peer lightweight live distribution, contrasting antiX's Debian root and traditional multi-init install with Puppy's modular in-RAM frugal architecture."
+    }
+  ],
+  "variants": [
+    {
+      "name": "antiX Full (64-bit & 32-bit)",
+      "description": "Complete edition (~2.2 GB ISO) packaging IceWM, Fluxbox, JWM, herbstluftwm, LibreOffice, and Firefox ESR."
+    },
+    {
+      "name": "antiX Base (64-bit & 32-bit)",
+      "description": "Mid-weight edition (~1.4 GB ISO) packaging window managers and core tools without heavy productivity suites."
+    },
+    {
+      "name": "antiX Core (64-bit & 32-bit)",
+      "description": "Minimal CLI edition (~660 MB ISO) providing a systemd-free base system for custom terminal or desktop builds."
+    },
+    {
+      "name": "antiX Net (64-bit & 32-bit)",
+      "description": "Minimal netinstall image (~250 MB ISO) designed to bootstrap a fresh antiX installation directly across the network."
+    }
+  ],
+  "links": {
+    "homepage": "https://antixlinux.com/",
+    "about": "https://antixlinux.com/about/",
+    "releases": "https://antixlinux.com/category/releases/",
+    "news": "https://antixlinux.com/category/news/",
+    "forum_archive": "https://antixlinux.com/forum-archive/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=antix"
+  },
+  "sources": [
+    {
+      "title": "antiX Official Website \u2014 About antiX and System Architecture",
+      "url": "https://antixlinux.com/about/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "antiX Development Team",
+      "note": "Official portal documenting systemd-free architecture, hardware requirements, Live persistence, and editions."
+    },
+    {
+      "title": "antiX Releases \u2014 antiX-26.1 and antiX-26 Release Announcements",
+      "url": "https://antixlinux.com/category/releases/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "antiX Development Team (anticapitalista)",
+      "note": "Official release announcements for antiX-26 and 26.1 based on Debian 13 Trixie, detailing 5 init systems."
+    },
+    {
+      "title": "antiX Technical Documentation \u2014 antiX-23.2 Init-Diversity Architecture",
+      "url": "https://antixlinux.com/antix-23-2-init-diversity-2025-remaster-edition/",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "antiX Development Team (ProwlerGR & anticapitalista)",
+      "note": "Detailed architectural breakdown of runit, sysVinit, dinit, and s6 integration without systemd dependencies."
+    },
+    {
+      "title": "antiX News \u2014 Kernel Upgrades and Maintenance Advisory",
+      "url": "https://antixlinux.com/category/news/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "antiX Development Team",
+      "note": "Documentation on custom antiX kernel maintenance covering Linux 6.6 LTS and 5.10 Legacy branches."
+    },
+    {
+      "title": "antiX Historical Forum Archive \u2014 History of antiX and MEPIS Origins",
+      "url": "https://antixlinux.com/forum-archive/history-of-antix-t2412.html",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "antiX Historical Community Archive",
+      "note": "Primary historical account by anticapitalista detailing the 2007 creation of antiX-M6.5 Spartacus from MEPIS."
+    },
+    {
+      "title": "DistroWatch \u2014 antiX Distribution Profile and Technical Overview",
+      "url": "https://distrowatch.com/table.php?distribution=antix",
+      "type": "secondary",
+      "accessed": "2026-10-01",
+      "publisher": "DistroWatch",
+      "note": "Independent technical summary of antiX package versions, init systems, desktop environments, and 32-bit support."
+    },
+    {
+      "title": "SourceForge \u2014 antiX Linux ISO Files and Development Testing Archive",
+      "url": "https://sourceforge.net/projects/antix-linux/",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "antiX Linux Project on SourceForge",
+      "note": "Public distribution repository hosting official full, base, core, and net ISO images alongside MD5 and SHA256 checksums."
+    }
+  ]
+}
