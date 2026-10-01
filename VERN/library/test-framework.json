@@ -1,0 +1,29 @@
+{
+  "id": "test-framework",
+  "name": "Test Framework",
+  "type": "framework",
+  "summary": "Development fixture exercising several relation types (alternative, related, based_on, compatible_with) to verify that relation labels are rendered generically.",
+  "tags": ["test-fixture", "relations", "framework"],
+  "status": "active",
+  "license": "Apache-2.0",
+  "content": {
+    "introduction": "A development fixture whose purpose is to carry a varied set of relations to other Library entries.",
+    "what_is_it": "A fictional framework used to test relation rendering.",
+    "verdict": "Each relation below should display its type as a qualifier without any type-specific code in the builder."
+  },
+  "relations": [
+    { "id": "test-linux", "name": "Test Linux", "relation": "based_on" },
+    { "id": "test-tool", "name": "Test Tool", "relation": "alternative" },
+    { "id": "test-desktop", "name": "Test Desktop", "relation": "related" },
+    { "id": "test-network", "name": "Test Network", "relation": "compatible_with", "note": "Speaks the same fictional protocol." },
+    { "id": "fedora", "name": "Fedora", "relation": "related" }
+  ],
+  "links": {
+    "homepage": "https://example.org/test-framework",
+    "documentation": "https://example.org/test-framework/docs"
+  },
+  "sources": [
+    { "title": "Example Domain", "url": "https://example.org/", "type": "documentation" }
+  ],
+  "last_verified": "2026-09-04"
+}

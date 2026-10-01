@@ -1,0 +1,287 @@
+{
+  "id": "mx-linux",
+  "name": "MX Linux",
+  "type": "operating_system",
+  "summary": "A desktop-oriented Linux distribution built on Debian Stable through a cooperative venture between the antiX and MEPIS communities. MX Linux combines a Debian software foundation with custom desktop configurations, the MX Tools graphical administration suite, dual-init capability supporting both SysVinit and systemd, and an antiX-derived live boot environment with comprehensive root and home persistence modes.",
+  "tags": [
+    "linux",
+    "desktop",
+    "debian-based",
+    "sysvinit",
+    "systemd",
+    "xfce",
+    "kde-plasma",
+    "fluxbox",
+    "mx-tools",
+    "ahs"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "i386"
+  ],
+  "license": "GPL-2.0-or-later, GPL-3.0-or-later, MIT, and redistributable proprietary firmware/microcode",
+  "last_verified": "2026-09-25",
+  "content": {
+    "introduction": "MX Linux is an open-source, desktop-focused Linux distribution developed collaboratively by members of the former MEPIS community and developers from antiX. Originating in December 2013 and publishing its first release in March 2014, the distribution pairs a solid foundation derived directly from Debian Stable with an array of native graphical utilities known as MX Tools. Designed to deliver an operational out-of-the-box experience, MX Linux incorporates proprietary firmware, media codecs, and hardware enablement layers alongside standard free software packages.",
+    "what_is_it": "Technically, MX Linux is a downstream distribution built on Debian Stable that provides custom kernel options, a dedicated package repository (`mxrepo.com`), and an integrated administration layer. Unlike minimal or roll-your-own distributions, MX Linux configures a complete desktop environment upon installation. Its flagship edition features a customized Xfce desktop with a signature vertical panel layout, while official companion editions deliver KDE Plasma and Fluxbox. A key architectural distinction of MX Linux is its dual-init system architecture, permitting the system to run either SysVinit or systemd as PID 1 depending on boot selection.",
+    "origin_and_history": "The origin of MX Linux traces back to December 2013, when discussions between the antiX community and former developers and users of SimplyMEPIS led to a cooperative project to revive the desktop philosophy of MEPIS using antiX's build framework. The initial release, antiX MX-14, debuted in March 2014. With the release of MX-16 in November 2016, the distribution established an independent entry on DistroWatch, separating its identity from antiX while retaining shared development infrastructure. Successive major releases have mirrored the Debian Stable release cadence: MX-17 (Debian 9 Stretch), MX-19 (Debian 10 Buster), MX-21 'Wildflower' (Debian 11 Bullseye), MX-23 'Libretto' (Debian 12 Bookworm), and MX-25 'Infinity' (Debian 13 Trixie).",
+    "governance_and_organization": "MX Linux operates as an independent, community-directed volunteer project without corporate ownership or venture backing. Governance is distributed among core developers, package maintainers, forum moderators, and documentation writers across global regions. Operational expenses—such as mirror hosting, build infrastructure, domain registration, and bandwidth—are funded through user donations and non-profit fiscal sponsorships. Technical decisions, packaging standards, and release milestones are discussed openly on the official community forums and coordinated via the MX-Linux GitHub organization.",
+    "release_model_and_debian_base": "MX Linux follows a scheduled, point-release model directly tied to the lifecycle of Debian Stable. When Debian issues a new major version, MX Linux prepares a corresponding major release cycle. Within each series, regular point releases (such as MX-23.1 through MX-23.6) refresh the installation media with cumulative security errata, bug fixes, and updated hardware enablement kernels. Because the underlying package base is Debian Stable, existing installations do not require full reinstalls; they remain continuously updated by applying repository updates via APT.",
+    "desktop_environments_and_editions": "MX Linux officially distributes three desktop environments:\n\n1. Xfce Edition: The flagship desktop, featuring Xfce (4.18 in MX-23, 4.20 in MX-25). It defaults to a left-side vertical panel layout with Whisker Menu, system indicators, and Conky system monitoring, easily reconfigurable to horizontal panels via MX Tweak.\n2. KDE Plasma Edition: A modern, visually rich desktop built with Qt and KDE Plasma (5.27 LTS in MX-23, 6.3 in MX-25), providing advanced graphical effects and multi-monitor scaling.\n3. Fluxbox Edition: A lightweight, window-manager-driven environment utilizing Fluxbox 1.3.7 paired with the Rofi application finder and custom keybindings, designed for maximum responsiveness on hardware with constrained memory.",
+    "advanced_hardware_support_ahs": "To address hardware compatibility on newer microarchitectures while preserving Debian Stable's foundation, MX Linux provides the Advanced Hardware Support (AHS) flavor for 64-bit systems. AHS editions package more recent Linux kernels (such as the Liquorix performance-tuned kernel or official Debian backported kernels 6.6, 6.8, or 6.12+), newer Mesa graphics libraries for Vulkan and OpenGL acceleration, and refreshed firmware files for modern AMD Radeon, Intel Arc/Iris, and NVIDIA graphics controllers. Users can switch between standard Debian LTS kernels and AHS kernels through the MX Package Installer at any time.",
+    "mx_tools_administration_suite": "The core functional differentiator of MX Linux is the MX Tools suite, a collection of graphical administration utilities developed in C++ using the Qt toolkit (Qt5 in MX-23, ported to Qt6 in MX-25). These utilities encapsulate common system administration tasks behind intuitive interfaces using per-action PolicyKit privileges. Key utilities include:\n\n- `MX Snapshot`: remasters the running live or installed system into a bootable, installable ISO image.\n- `MX Package Installer`: provides categorized tabs for popular software, Debian Stable, MX Test, Debian Backports, and Flathub Flatpaks.\n- `MX Live USB Maker`: writes bootable live USB drives with configurable persistent storage overlays.\n- `MX Boot Options` and `MX Boot Repair`: configures GRUB boot parameters, default kernels, init systems, and restores corrupted boot loaders.\n- `MX Cleanup`: purges obsolete cached packages, temporary files, unused kernels, and orphaned DKMS modules.\n- `MX Repo Manager`: measures network latency across worldwide mirrors to select the fastest repository endpoints.\n- `MX Tweak`: centralizes desktop panel layout changes, compositor choices, and font rendering adjustments.",
+    "mx_snapshot_and_remastering": "MX Snapshot is a distinctive feature inherited and adapted from antiX tooling. It enables administrators and end users to capture the entire state of an operating MX Linux installation and compress it into a bootable SquashFS ISO image. Users can choose to create a personal backup image (preserving the contents of `/home` with user data) or a sanitized distribution image (stripping user accounts and credentials while retaining installed software, drivers, and system configurations). The resulting ISO can be booted in live mode or deployed onto other computers using the standard MX Installer.",
+    "package_management_and_repositories": "MX Linux utilizes the standard Debian packaging toolchain centered on `apt` and `dpkg`. Package sources are configured under `/etc/apt/sources.list.d/` across several discrete repositories:\n\n- Debian Stable: the official Debian archive providing the primary base of tens of thousands of tested binary packages.\n- Debian Backports: selective newer versions of software backported to run against Debian Stable libraries.\n- MX Main Repository (`mxrepo.com`): custom packages, the MX Tools suite, artwork, and distribution-specific scripts.\n- MX AHS Repository: updated kernels, Mesa drivers, and recent hardware firmware.\n- MX Test Repository: staging area for packages undergoing community validation.\n\nIn addition to APT repositories, `MX Package Installer` natively integrates Flathub, allowing sandbox containerized Flatpak applications to be searched, installed, and kept updated without command-line intervention.",
+    "dual_init_architecture_sysvinit_and_systemd": "A defining structural characteristic of MX Linux is its dual-init architecture. The distribution includes both classical `SysVinit` and modern `systemd`. In MX-21 and MX-23 releases, SysVinit functions as the default init system on booted systems, while systemd is fully installed and directly accessible by selecting the 'systemd' boot entry in the GRUB bootloader menu. To ensure compatibility with modern desktop applications and display managers that rely on systemd APIs, MX Linux deploys `elogind` (an independent extraction of systemd's logind daemon) and `systemd-shim` when running under SysVinit. Users can designate their preferred default init system permanently through `MX Boot Options`.",
+    "live_system_and_persistence_modes": "The MX Linux live USB environment incorporates the antiX live-boot system, allowing execution entirely from RAM or removable media. The live system offers multiple persistence mechanisms:\n\n- Root Persistence: saves system configurations, package installations, and system-level modifications across reboots into an encrypted or unencrypted overlay file.\n- Home Persistence: retains only user home directory documents and application settings.\n- Dynamic vs. Static Persistence: dynamic mode writes modifications to RAM during session runtime and syncs changes to persistent media only upon shutdown or explicit request, minimizing write wear on flash memory.\n- Toram Execution: copies the entire live SquashFS file into RAM during boot, freeing the physical USB drive to be unmounted while accelerating desktop execution.",
+    "installer_minstall_and_filesystems": "Disk installation is performed via `minstall` (MX Installer), a native Qt graphical installer. Minstall supports both automated full-disk installations and customized manual partitioning. Key installation capabilities include:\n\n- Filesystem support: Ext4 (default), Btrfs (with automated subvolume layout for snapshots), and XFS.\n- Swap configuration: automated installations since MX-23 configure a dynamic swapfile (`/swapfile`) rather than requiring a dedicated swap partition, simplifying future storage resizing.\n- Disk Encryption: full-disk encryption backed by LUKS/cryptsetup with passphrases configured during the partitioning step.\n- Firmware Boot Modes: supports UEFI (64-bit and 32-bit UEFI) with Secure Boot compatibility for Debian-signed kernels, as well as legacy BIOS/MBR systems.\n- OEM Installation Mode: pre-installs the base operating system and allows end users to create their own username and passwords upon initial power-on.",
+    "hardware_support_and_architectures": "MX Linux supports two primary PC hardware architectures:\n\n- `x86_64` (amd64): 64-bit PC architecture across all editions (Xfce, KDE Plasma, Fluxbox, AHS).\n- `i386` (32-bit x86): 32-bit PC architecture with PAE and non-PAE kernel variants available in Xfce and Fluxbox editions, extending hardware viability for legacy 32-bit computers.\n\nIn addition, community respins ('MX Raspberry Pi Respin') package MX Linux Fluxbox for ARM 64-bit (AArch64) single-board computers. Hardware assistance utilities like `MX Broadcom Manager`, `MX Nvidia Driver Installer`, and `MX Codecs Installer` automate proprietary firmware and driver detection.",
+    "security_and_apparmor": "Security updates are directly inherited from the upstream Debian Security team, delivering rapid vulnerability remediation for base packages. AppArmor is installed and enabled by default in the Linux kernel, enforcing mandatory access control policies on key applications. Network security is facilitated by the standard Uncomplicated Firewall (UFW), manageable through a graphical interface (`gufw` or MX Tools). Software repositories enforce cryptographic integrity verification using release-specific GPG keyrings (`mx23-archive-keyring`).",
+    "privacy_and_telemetry": "MX Linux maintains a strict zero-telemetry operational policy. The operating system, default desktop environments, and MX Tools do not transmit background telemetry, hardware fingerprints, application usage logs, or user analytics to any central server. Network activity is limited strictly to user-initiated operations, such as checking for package updates, running mirror speed tests, or establishing NTP time synchronization. The official project web properties (`mxlinux.org` and forums) operate under a privacy policy that prohibits commercial data monetization.",
+    "advantages": [
+      "Extensive hardware compatibility spanning modern systems (AHS) and legacy 32-bit x86 computers",
+      "Robust suite of native graphical administration tools (MX Tools) covering backup, kernel management, and package installation",
+      "MX Snapshot tool allows instant generation of customized, bootable live ISO images from the running installation",
+      "Flexible dual-init architecture allowing user choice between SysVinit and systemd",
+      "Advanced live USB persistence mechanisms with dynamic RAM-caching modes to preserve flash drive endurance",
+      "Direct derivation from Debian Stable provides proven software reliability and extensive binary package availability",
+      "Zero OS telemetry and community-driven, non-commercial governance"
+    ],
+    "disadvantages": [
+      "Base software in standard editions remains tied to Debian Stable, which may contain older application versions unless AHS or Flatpaks are utilized",
+      "Non-free firmware and proprietary codecs are bundled by default, requiring manual removal for users prioritizing strict free-software-only compliance",
+      "The default left-hand vertical panel layout and visual styling may require customization for users accustomed to traditional desktop paradigms",
+      "Dual-init configuration and hybrid sysvinit/elogind plumbing can introduce subtle complexities with third-party software that strictly mandates systemd units",
+      "Official website and forums employ strict Cloudflare anti-bot mitigation, occasionally impeding automated scripted tool access"
+    ],
+    "who_is_it_for": [
+      "Users seeking a stable, responsive desktop distribution built on Debian with immediate hardware enablement",
+      "System administrators needing custom ISO remastering, system cloning, and portable live USB environments with persistence",
+      "Owners of older or resource-constrained 32-bit and 64-bit computers requiring lightweight Xfce or Fluxbox desktops",
+      "Users who prefer SysVinit or desire an operating system that does not force systemd as PID 1 by default",
+      "Desktop users looking for intuitive graphical control over repositories, kernels, and system drivers without mandatory terminal use"
+    ],
+    "who_is_it_not_for": [
+      "Users requiring bleeding-edge rolling-release software versions across the entire core system stack",
+      "Purists committed to strictly 100% free software who reject distributions bundling proprietary firmware or microcode",
+      "Large enterprise environments requiring commercial vendor service-level agreements (SLAs) or certified vendor support contracts",
+      "Users whose workflows are hard-coded to expect standard GNOME Shell or immutable/atomic root filesystems"
+    ],
+    "verdict": "MX Linux represents a practical, pragmatic synthesis of Debian Stable's proven reliability and antiX's versatile live and portable system technologies. Distinguished by its native MX Tools administrative suite, complete live remastering features via MX Snapshot, dual SysVinit/systemd flexibility, and ongoing commitment to both modern (AHS) and legacy (32-bit) hardware architectures, MX Linux offers a stable, highly configurable desktop environment entirely free of proprietary vendor lock-in or telemetry."
+  },
+  "components": [
+    {
+      "id": "xfce",
+      "name": "Xfce Desktop Environment",
+      "role": "desktop_environment",
+      "note": "The flagship desktop environment of MX Linux, configured with a vertical panel, Whisker Menu, and native MX theme integrations."
+    },
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "Modern desktop edition providing advanced graphical effects, Wayland support in recent versions, and Qt6-integrated MX Tools."
+    },
+    {
+      "id": "fluxbox",
+      "name": "Fluxbox",
+      "role": "window_manager",
+      "note": "Ultra-lightweight stacking window manager edition featuring the Rofi application menu, Conky monitoring, and low memory consumption."
+    },
+    {
+      "id": "apt",
+      "name": "APT (Advanced Package Tool)",
+      "role": "package_manager",
+      "note": "High-level package management tool utilized for package installation, dependency resolution, and system upgrades from Debian and MX archives."
+    },
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "Core Debian binary package management mechanism responsible for low-level installation and tracking of .deb packages."
+    },
+    {
+      "id": "sysvinit",
+      "name": "SysVinit",
+      "role": "init_system",
+      "note": "Traditional Unix initialization system operating as the default PID 1 init on MX Linux installations."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "Modern service manager and init system installed alongside SysVinit, selectable via GRUB boot options."
+    },
+    {
+      "id": "mx-tools",
+      "name": "MX Tools Suite",
+      "role": "administration_suite",
+      "note": "Integrated collection of native C++/Qt graphical configuration and maintenance utilities developed by the MX Linux team."
+    },
+    {
+      "id": "mx-snapshot",
+      "name": "MX Snapshot",
+      "role": "backup_and_remastering_tool",
+      "note": "Administrative utility that builds a bootable, installable SquashFS ISO image of the running system for backup or customized redistribution."
+    },
+    {
+      "id": "mx-packageinstaller",
+      "name": "MX Package Installer",
+      "role": "package_installer",
+      "note": "Multi-repository software installation utility integrating Popular Apps, Debian Stable, Backports, MX Test, and Flathub Flatpaks."
+    },
+    {
+      "id": "minstall",
+      "name": "MX Installer (minstall)",
+      "role": "system_installer",
+      "note": "Graphical disk installation utility supporting Ext4, Btrfs subvolumes, LUKS encryption, dynamic swapfiles, and OEM setup modes."
+    },
+    {
+      "id": "elogind",
+      "name": "elogind",
+      "role": "session_management",
+      "note": "Standalone session and logind daemon allowing modern desktop environments to run power management and seat tracking under SysVinit."
+    },
+    {
+      "id": "apparmor",
+      "name": "AppArmor",
+      "role": "security_framework",
+      "note": "Linux security module providing mandatory access control (MAC) profile enforcement for system processes and services."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "based_on",
+      "note": "Upstream base distribution providing core binary packages (.deb), security advisories, and the APT repository framework upon which MX Linux is constructed."
+    },
+    {
+      "id": "anti-x",
+      "name": "antiX",
+      "relation": "related",
+      "note": "Co-founding partner distribution sharing live-boot architecture, ISO build tooling, persistence mechanisms, and core developer personnel."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "alternative",
+      "note": "Alternative desktop distribution prioritizing ease of use and out-of-the-box readiness, differentiating through an Ubuntu/Cinnamon foundation rather than Debian/Xfce."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "alternative",
+      "note": "General-purpose desktop and server distribution based on Debian, contrasting with MX Linux's volunteer governance, dual-init support, and absence of Snap packages."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Alternative desktop distribution leading with pure upstream software, Wayland defaults, and RPM packaging, compared to MX's Debian Stable and X11/SysVinit heritage."
+    }
+  ],
+  "variants": [
+    {
+      "name": "MX Linux Xfce Edition",
+      "description": "The flagship standard release featuring the Xfce desktop environment, the Debian Stable standard LTS kernel, and full 64-bit and 32-bit hardware support."
+    },
+    {
+      "name": "MX Linux Advanced Hardware Support (AHS)",
+      "description": "64-bit edition incorporating updated Linux kernels (Liquorix or Debian backports), modern Mesa graphics drivers, and refreshed firmware for recent hardware."
+    },
+    {
+      "name": "MX Linux KDE Plasma Edition",
+      "description": "Official 64-bit edition delivering the KDE Plasma desktop environment paired with Qt-based MX Tools and modern visual enhancements."
+    },
+    {
+      "name": "MX Linux Fluxbox Edition",
+      "description": "Lightweight edition built around the Fluxbox window manager and Rofi launcher, optimized for low memory usage and high-speed execution."
+    },
+    {
+      "name": "MX Linux 32-bit (i386)",
+      "description": "Dedicated 32-bit editions (available with Xfce and Fluxbox) shipping PAE and non-PAE kernels to support legacy x86 computer systems."
+    },
+    {
+      "name": "MX Raspberry Pi Respin",
+      "description": "Community-maintained ARM64 (AArch64) release bringing MX Linux Fluxbox and MX Tools to Raspberry Pi single-board computers."
+    }
+  ],
+  "links": {
+    "homepage": "https://mxlinux.org/",
+    "about": "https://mxlinux.org/about-us/",
+    "releases": "https://mxlinux.org/blog/",
+    "features": "https://mxlinux.org/current-release-features/",
+    "forum": "https://forum.mxlinux.org/",
+    "github": "https://github.com/MX-Linux",
+    "repository": "http://mxrepo.com/",
+    "privacy_policy": "https://mxlinux.org/privacy-policy/"
+  },
+  "sources": [
+    {
+      "title": "MX Linux Official Portal — About Us: History, MEPIS/antiX Origin, and Governance",
+      "url": "https://mxlinux.org/about-us/",
+      "type": "official",
+      "accessed": "2026-09-25",
+      "publisher": "MX Linux Community",
+      "note": "Documents the December 2013 founding, MEPIS and antiX collaboration, non-profit community governance, and philosophical stance on proprietary firmware."
+    },
+    {
+      "title": "MX Linux Official Portal — Current Release Features and Desktop Editions",
+      "url": "https://mxlinux.org/current-release-features/",
+      "type": "documentation",
+      "accessed": "2026-09-25",
+      "publisher": "MX Linux Community",
+      "note": "Comprehensive specification of Xfce, KDE Plasma, Fluxbox, AHS capabilities, dual-init architecture, and MX Tools components."
+    },
+    {
+      "title": "MX Linux Blog — MX-23 'Libretto' Release Announcement",
+      "url": "https://mxlinux.org/blog/mx-23-libretto-now-available/",
+      "type": "official",
+      "accessed": "2026-09-25",
+      "publisher": "MX Linux Community",
+      "note": "Details Debian 12 Bookworm foundation, kernel 6.1 LTS, Xfce 4.18, Fluxbox 1.3.7, KDE 5.27, PolicyKit configurations, and swapfile defaults."
+    },
+    {
+      "title": "MX Linux Blog — MX-25 'Infinity' Development and Qt6 Architecture",
+      "url": "https://mxlinux.org/blog/mx-25-infinity-isos-now-available/",
+      "type": "official",
+      "accessed": "2026-09-25",
+      "publisher": "MX Linux Community",
+      "note": "Details Debian 13 Trixie foundation, Qt6 tool migrations, Plasma 6.3 Wayland support, and UEFI 64-bit Secure Boot integrations."
+    },
+    {
+      "title": "MX-Linux GitHub Organization — Source Repositories",
+      "url": "https://github.com/MX-Linux",
+      "type": "repository",
+      "accessed": "2026-09-25",
+      "publisher": "MX Linux Project Maintainers",
+      "note": "Public Git repositories for mx-snapshot, minstall, mx-packageinstaller, mx-boot-options, mx-cleanup, and mx-tweak source code."
+    },
+    {
+      "title": "MX Linux Package Repository — Archive Architecture",
+      "url": "http://mxrepo.com/",
+      "type": "repository",
+      "accessed": "2026-09-25",
+      "publisher": "MX Linux Archive Team",
+      "note": "Official Debian-compatible package mirrors hosting mx/repo main, ahs, and test suites across amd64, i386, and arm64 architectures."
+    },
+    {
+      "title": "MX Linux Official Portal — Privacy Policy and Telemetry Assessment",
+      "url": "https://mxlinux.org/privacy-policy/",
+      "type": "official",
+      "accessed": "2026-09-25",
+      "publisher": "MX Linux Community",
+      "note": "Official declaration confirming zero telemetry within the operating system, absence of behavioral profiling, and data handling standards for web servers."
+    },
+    {
+      "title": "MX Linux User Manual — Live Persistence and Snapshot Management",
+      "url": "https://mxlinux.org/current-release-features/",
+      "type": "manual",
+      "accessed": "2026-09-25",
+      "publisher": "MX Linux Documentation Team",
+      "note": "Technical documentation covering root and home persistence overlays, dynamic RAM execution modes, and SquashFS remastering routines."
+    }
+  ]
+}

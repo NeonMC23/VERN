@@ -1,0 +1,69 @@
+{
+  "id": "test-project",
+  "name": "Test Project",
+  "type": "project",
+  "summary": "Development fixture with a deliberately rich document: multiple content sections, nested objects, arrays, advantages and disadvantages, audience guidance, a verdict, several links and several sources. It stress-tests the generic renderer.",
+  "tags": ["test-fixture", "rich-content", "nested", "stress-test", "project"],
+  "status": "active",
+  "platforms": ["Linux", "macOS", "Windows"],
+  "license": "AGPL-3.0-or-later",
+  "content": {
+    "introduction": "This development fixture exists to push the generic renderer harder than any other test document. It mixes prose, string arrays, nested objects and arrays of objects.\n\nIt deliberately contains a second paragraph so that paragraph splitting on blank lines can be verified.",
+    "what_is_it": "A fictional project used to verify that deeply structured JSON renders as readable documentation without any resource-specific code.",
+    "how_does_it_work": {
+      "overview": "Nested objects become sub-sections with their own headings.",
+      "pipeline": ["Read JSON", "Walk the tree", "Emit DOM nodes"],
+      "internals": {
+        "parser": "Standard JSON.parse, no custom syntax.",
+        "renderer": "Recursive, shape-based, never key-specific.",
+        "limits": ["No HTML injection", "No remote templates"]
+      }
+    },
+    "architecture": [
+      { "layer": "Data", "description": "JSON documents stored under data/library/." },
+      { "layer": "Builder", "description": "A single generic renderer shared by every resource." },
+      { "layer": "Route", "description": "Dynamic /library/{id}/ paths with no physical directory." }
+    ],
+    "advantages": [
+      "Content and presentation stay separated",
+      "No build step",
+      "Any valid document renders",
+      "Easy to review in a pull request"
+    ],
+    "disadvantages": [
+      "Requires JavaScript in the browser",
+      "Large documents load as a single file",
+      "Schema errors surface only at runtime"
+    ],
+    "who_is_it_for": [
+      "Contributors testing the renderer",
+      "Developers exploring the Library schema"
+    ],
+    "who_is_it_not_for": [
+      "Readers looking for real documentation",
+      "Anyone expecting a production resource"
+    ],
+    "verdict": "If every section on this page is readable, correctly nested and free of raw JSON, the generic renderer is behaving as intended."
+  },
+  "components": [
+    { "id": "test-tool", "name": "Test Tool", "role": "application" }
+  ],
+  "relations": [
+    { "id": "test-framework", "name": "Test Framework", "relation": "related" }
+  ],
+  "links": {
+    "homepage": "https://example.org/test-project",
+    "documentation": "https://example.org/test-project/docs",
+    "repository": "https://example.org/test-project/source"
+  },
+  "articles": [
+    { "title": "Rendering JSON as documentation", "url": "https://example.org/articles/rendering-json", "publisher": "Example", "date": "2026-01-15" },
+    { "title": "Designing a generic schema", "url": "https://example.org/articles/generic-schema", "publisher": "Example", "date": "2026-02-02" }
+  ],
+  "sources": [
+    { "title": "Example Domain", "url": "https://example.org/", "type": "documentation" },
+    { "title": "IANA Example Domains", "url": "https://www.iana.org/help/example-domains", "type": "specification", "publisher": "IANA" },
+    { "title": "RFC 2606 — Reserved Top Level DNS Names", "url": "https://www.rfc-editor.org/rfc/rfc2606", "type": "specification", "publisher": "RFC Editor" }
+  ],
+  "last_verified": "2026-09-04"
+}

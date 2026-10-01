@@ -1,0 +1,51 @@
+{
+  "id": "test-desktop",
+  "name": "Test Desktop",
+  "type": "desktop_environment",
+  "summary": "Development fixture exercising the optional fields: platforms, license, variants, links and articles. It verifies that optional sections appear when present without disturbing the layout.",
+  "tags": ["test-fixture", "optional-fields", "variants", "desktop"],
+  "status": "active",
+  "platforms": ["Linux", "FreeBSD", "OpenBSD"],
+  "license": "MIT",
+  "content": {
+    "introduction": "A development fixture used as both a component target for test-linux and as the resource that exercises every optional schema field.",
+    "what_is_it": "A fictional desktop environment shipped in several editions.",
+    "advantages": ["Predictable", "Small", "Easy to reason about"],
+    "disadvantages": ["Entirely fictional", "No real implementation"]
+  },
+  "variants": [
+    {
+      "name": "Test Desktop Standard",
+      "description": "The default edition, used as the baseline for rendering checks.",
+      "target": "General testing",
+      "features": ["Panel", "File manager", "Settings"]
+    },
+    {
+      "name": "Test Desktop Minimal",
+      "description": "A reduced edition used to confirm that variants with fewer fields still render.",
+      "target": "Low-resource testing"
+    },
+    {
+      "name": "Test Desktop Nightly",
+      "description": "An unstable edition.",
+      "target": "Regression testing",
+      "features": ["Experimental compositor"],
+      "notes": "Included so that a third variant exercises list wrapping."
+    }
+  ],
+  "relations": [
+    { "id": "test-linux", "name": "Test Linux", "relation": "compatible_with" }
+  ],
+  "links": {
+    "homepage": "https://example.org/test-desktop",
+    "documentation": "https://example.org/test-desktop/docs",
+    "downloads": "https://example.org/test-desktop/download"
+  },
+  "articles": [
+    { "title": "Choosing a test edition", "url": "https://example.org/articles/test-editions", "publisher": "Example" }
+  ],
+  "sources": [
+    { "title": "Example Domain", "url": "https://example.org/", "type": "documentation" }
+  ],
+  "last_verified": "2026-09-04"
+}

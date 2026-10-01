@@ -1,0 +1,273 @@
+{
+  "id": "kde-neon",
+  "name": "KDE neon",
+  "type": "operating_system",
+  "summary": "A technology showcase distribution produced by the KDE Community on an Ubuntu Long Term Support (LTS) base. KDE neon pairs a stable Ubuntu operating foundation with continuously updated, unpatched releases of KDE software—including Plasma 6, KDE Frameworks 6, KDE Gear, and Qt 6. It utilizes Wayland by default via KWin, installs via the Calamares installer, enforces atomic system upgrades via Discover or apt full-upgrade, and operates a strictly opt-in telemetry framework.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-based",
+    "kde",
+    "plasma-6",
+    "wayland",
+    "rolling-kde",
+    "calamares",
+    "snap",
+    "flatpak"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later, LGPL-2.1-or-later, BSD-3-Clause, and MIT",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "KDE neon is an open-source, desktop operating system created to deliver software from the KDE Community directly to users as soon as it is released. Founded in early 2016 by former Kubuntu release manager Jonathan Riddell, the project pairs a rock-solid, long-term support Ubuntu foundation with continuously deployed, vanilla KDE software stacks. It provides an unmediated experience of KDE Plasma and KDE applications without downstream vendor patching, distribution delays, or desktop configuration changes.",
+    "what_is_it": "Technically, KDE neon is a hybrid semi-rolling distribution built upon Ubuntu LTS. The base operating system components (Linux kernel, glibc, systemd, system drivers) are anchored to the latest Ubuntu LTS release, while the graphical desktop environment and user applications (Qt, KDE Frameworks, Plasma, and KDE Gear) follow a rolling continuous-deployment model from upstream KDE Git repositories. The system is maintained via dedicated archives (`archive.neon.kde.org`) and installs through the Calamares installer.",
+    "origin_and_history": "KDE neon was initiated in early 2016 following Jonathan Riddell's departure from Kubuntu release management. The goal was to establish a direct channel between KDE software authors and desktop users. Initial stable images debuted in June 2016 based on Ubuntu 16.04 LTS. Subsequent biannual rebasings transitioned the system onto Ubuntu 18.04, 20.04, 22.04, and, on October 10, 2024, Ubuntu 24.04 LTS ('Noble Numbat'). In February 2024, KDE neon spearheaded the rollout of the KDE MegaRelease 6, migrating its desktop stack to Qt 6, Frameworks 6, and Plasma 6.",
+    "governance_and_kde": "KDE neon is an official project of KDE e.V., the registered non-profit organization supporting the KDE Community based in Germany. Infrastructure, build pipelines, and continuous integration servers are managed by the KDE sysadmin team. KDE neon does not position itself as 'the single official KDE distribution', as the community maintains neutral partnerships with diverse distributions (including openSUSE, Fedora, Arch Linux, and Debian). Packaging policies and technical architectures are coordinated openly via KDE invent (`invent.kde.org/neon`) and discussed during Akademy conferences.",
+    "release_model_and_ubuntu_lts": "KDE neon employs an asymmetric update cadence:\n\n- The KDE desktop layer operates on a rolling release schedule: as soon as new point releases or major versions of Plasma, Frameworks, or Gear are tagged upstream, they are built, tested via automated QA, and deployed to users.\n- The underlying Ubuntu LTS platform is updated biannually: KDE neon specifically excludes intermediate non-LTS Ubuntu releases (such as 24.10) to avoid unnecessary churn, relying on Canonical's LTS security updates and Hardware Enablement (HWE) kernel updates.",
+    "kde_software_stack_and_plasma_6": "The desktop environment in KDE neon is KDE Plasma 6, featuring the Breeze visual theme. The software stack is composed of:\n\n- Qt 6: core application framework providing high-performance GUI rendering and Wayland integration.\n- KDE Frameworks 6 (KF6): modular system libraries extending Qt with hardware integration, file indexing, and network abstractions.\n- KDE Gear: comprehensive suite of native desktop applications including Dolphin (file manager), Konsole (terminal), Kate (advanced text editor), Gwenview (image viewer), and Okular (universal document viewer).",
+    "display_server_and_kwin_wayland": "Under Plasma 6, KDE neon defaults to the Wayland display server managed by the KWin window manager and compositor. Wayland operation delivers native support for per-monitor fractional scaling, high dynamic range (HDR) display pipelines, variable refresh rates (FreeSync/G-Sync), and client-to-client window sandboxing. A legacy X11 session remains installed and can be selected at the SDDM login screen.",
+    "package_management_and_repositories": "KDE neon utilizes APT and dpkg backed by dedicated repositories (`archive.neon.kde.org`). Neon packages take priority over Ubuntu's native archive via APT pinning rules. For general-purpose third-party applications outside the KDE ecosystem, Discover is configured to guide users toward sandbox container formats (Flatpak via Flathub and Canonical's Snap Store), because traditional APT packages in Ubuntu LTS archives may lag behind modern versions.",
+    "mandatory_apt_full_upgrade_and_pkcon": "Because KDE neon frequently transitions shared C++ libraries (`sonames`) across fast-moving desktop builds, running the standard `apt upgrade` command can break package dependencies or leave partial updates. Consequently, KDE neon actively blocks `apt upgrade` with an informative error message, requiring users to employ `sudo apt full-upgrade` or the PackageKit command `pkcon refresh && pkcon update` for terminal maintenance.",
+    "offline_updates_and_discover": "By default, graphical updates orchestrated through Plasma Discover implement offline updates. New package sets are downloaded during the active session and staged to be applied during system reboot inside a minimal environment prior to loading the full graphical shell. This design prevents running applications and libraries from experiencing memory faults or crashes while active binaries are replaced on disk.",
+    "editions_and_branches": "KDE neon publishes four distinct operational branches:\n\n- User Edition: stable release channel intended for everyday desktop use, featuring officially released KDE software validated by automated QA.\n- Testing Edition: built daily from KDE Git bugfix branches, providing early access to upcoming point release candidates.\n- Unstable Edition: built daily from Git master branches, incorporating experimental features without prior QA.\n- Developer Edition: unstable base packaged with development headers (`-dev`) and debugging symbols for KDE software engineering.\n\nIn addition, live installable images are distributed for specialized form factors: KDE neon Mobile and KDE neon Bigscreen.",
+    "installer_calamares_and_boot": "System installation is conducted using the independent `Calamares` graphical installer. Calamares supports automated full-disk installations, manual partitioning, LUKS full-disk encryption, and UEFI Secure Boot via Canonical's pre-signed `shim-signed` bootloader. Image downloads are cryptographically verified using OpenPGP detached signatures (`0x45F4C354638D1F29`) and SHA-256 checksums.",
+    "hardware_support_and_gpu_policy": "KDE neon officially targets the 64-bit `x86_64` (amd64) architecture exclusively. Hardware graphics acceleration (OpenGL 3.0+ or Vulkan) is required for smooth KWin compositing. For NVIDIA graphics hardware, KDE neon supports the open-source Nouveau driver out of the box; proprietary NVIDIA drivers can be installed via `ubuntu-drivers`, but the neon team explicitly states that proprietary driver issues must be addressed through upstream Ubuntu or NVIDIA support channels.",
+    "containers_and_docker_images": "For testing and continuous integration without host modification, KDE neon distributes official daily container images. Supported through Docker, Podman, and Distrobox (via the `neondocker` utility), these images allow developers to test unstable KDE builds, reproduce bug reports, or compile software inside isolated container environments.",
+    "telemetry_and_kde_user_feedback": "KDE neon integrates the open-source `KDE User Feedback` framework. Telemetry is strictly opt-in and disabled by default. If a user chooses to enable it within System Settings, granular sliders permit selecting the level of technical telemetry shared (such as Plasma version, CPU architecture, or screen count). Users can inspect the exact plain-text payload before transmission, and no personal identifying information is collected.",
+    "privacy_and_security": "KDE neon inherits security errata for base system components directly from Ubuntu security repositories. The operating system does not transmit background usage analytics, advertise commercial services, or harvest user telemetry. Network connections initiated by the OS are confined strictly to package repository checks, Discover catalog queries, and NTP time synchronization.",
+    "advantages": [
+      "Immediate, direct delivery of the latest KDE Plasma, Frameworks, and Gear releases from upstream developers",
+      "Pure, vanilla KDE desktop experience free of third-party modifications, custom themes, or intrusive defaults",
+      "Underlying stability and multi-year driver compatibility provided by the Ubuntu LTS operating system base",
+      "Seamless Wayland integration under Plasma 6 with fractional scaling, HDR, and variable refresh rate support",
+      "Robust offline update mechanism in Discover preventing library collision errors during runtime",
+      "Strictly opt-in telemetry via the KDE User Feedback framework and complete absence of background profiling"
+    ],
+    "disadvantages": [
+      "The rapid pace of rolling KDE releases can occasionally introduce regressions or unexpected upstream software bugs",
+      "Third-party desktop applications from Ubuntu LTS repositories may be outdated unless Flatpaks or Snaps are utilized",
+      "Installing alternative desktop environments (such as GNOME or Xfce) is unsupported and likely to trigger package conflicts",
+      "Terminal updates mandate using apt full-upgrade or pkcon, as standard apt upgrade is deliberately blocked",
+      "No official support or certification is provided for closed-source proprietary NVIDIA graphics drivers"
+    ],
+    "who_is_it_for": [
+      "KDE enthusiasts and power users wanting the absolute latest KDE Plasma and applications without compiling from source",
+      "Developers building Qt and KDE software requiring modern Frameworks libraries on a stable Ubuntu foundation",
+      "Linux users seeking a pure, unadulterated KDE desktop experience exactly as designed by upstream authors",
+      "Testers and contributors wishing to run daily bugfix or feature Git builds via Testing and Unstable editions"
+    ],
+    "who_is_it_not_for": [
+      "Users requiring rock-solid, completely frozen workstation stability across the entire software stack for production servers",
+      "Users who dislike or refuse to use containerized package formats (Flatpak/Snap) for non-KDE desktop software",
+      "Users who prefer desktop environments other than KDE Plasma",
+      "Users operating legacy 32-bit x86 computer hardware"
+    ],
+    "verdict": "KDE neon serves as the quintessential showcase and direct delivery platform for the KDE software ecosystem. By combining the rock-solid base of Ubuntu LTS with continuously deployed, unmodified Plasma 6 and KDE Gear releases, KDE neon delivers a bleeding-edge desktop experience coupled with predictable system plumbing, establishing an ideal platform for KDE enthusiasts and Qt developers."
+  },
+  "components": [
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma 6",
+      "role": "desktop_environment",
+      "note": "Modern desktop workspace delivering customizable panels, desktop widgets, Wayland support, and System Settings."
+    },
+    {
+      "id": "kwin",
+      "name": "KWin Compositor",
+      "role": "window_manager_and_compositor",
+      "note": "Hardware-accelerated window manager and Wayland compositor managing fractional scaling, VRR, and window animations."
+    },
+    {
+      "id": "kde-frameworks",
+      "name": "KDE Frameworks 6",
+      "role": "system_libraries",
+      "note": "Collection of over 80 modular addon libraries extending Qt 6 with desktop integration, file management, and hardware APIs."
+    },
+    {
+      "id": "kde-gear",
+      "name": "KDE Gear",
+      "role": "application_suite",
+      "note": "Official suite of desktop utility and productivity applications developed by the KDE Community (Dolphin, Konsole, Kate)."
+    },
+    {
+      "id": "discover",
+      "name": "Plasma Discover",
+      "role": "software_center",
+      "note": "Graphical package manager handling offline system updates, Flatpak applications, and Snap packages."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares Installer",
+      "role": "system_installer",
+      "note": "Independent graphical system installer configuring disk partitioning, LUKS encryption, and user credentials."
+    },
+    {
+      "id": "qt6",
+      "name": "Qt 6 Toolkit",
+      "role": "ui_toolkit_library",
+      "note": "Cross-platform C++ application framework providing the graphical rendering foundation for KDE software."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_multimedia_server",
+      "note": "Low-latency multimedia server handling audio routing, Bluetooth streaming, and Wayland desktop video capture."
+    },
+    {
+      "id": "pkcon",
+      "name": "pkcon (PackageKit)",
+      "role": "package_management_utility",
+      "note": "Command-line interface to PackageKit recommended by KDE neon for orchestrating atomic offline system updates."
+    },
+    {
+      "id": "apt",
+      "name": "APT (Advanced Package Tool)",
+      "role": "package_manager",
+      "note": "Underlying command-line package manager used with the full-upgrade command to maintain neon archives."
+    },
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "Core Debian binary package tool managing extraction, configuration, and tracking of low-level .deb packages."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "System and service manager supervising daemon initialization, hardware event handling, and login sessions."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "based_on",
+      "note": "Upstream operating system base providing the LTS Linux kernel, glibc runtime, hardware enablement stack, and core repositories."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_lineage",
+      "note": "Foundational upstream distribution establishing the underlying Debian .deb binary packaging standard."
+    },
+    {
+      "id": "kubuntu",
+      "name": "Kubuntu",
+      "relation": "related",
+      "note": "Official Ubuntu flavor featuring KDE Plasma, contrasting Kubuntu's frozen release cycles with KDE neon's continuous KDE delivery."
+    },
+    {
+      "id": "opensuse-tumbleweed",
+      "name": "openSUSE Tumbleweed",
+      "relation": "alternative",
+      "note": "Alternative rolling distribution delivering rapid KDE Plasma updates, differentiating via an entire rolling RPM system base rather than Ubuntu LTS."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Alternative distribution providing up-to-date KDE Plasma desktop spins, built on an independent RPM and DNF package ecosystem."
+    }
+  ],
+  "variants": [
+    {
+      "name": "KDE neon User Edition",
+      "description": "The primary stable desktop release channel featuring officially released KDE software validated by automated QA on an Ubuntu LTS base."
+    },
+    {
+      "name": "KDE neon Testing Edition",
+      "description": "Pre-release testing channel built daily from KDE Git bugfix branches to validate upcoming point release candidates."
+    },
+    {
+      "name": "KDE neon Unstable Edition",
+      "description": "Experimental development channel compiled daily from Git master branches with no quality assurance filtering."
+    },
+    {
+      "name": "KDE neon Developer Edition",
+      "description": "Unstable base pre-packaging C++ development libraries, header files, and debugging symbols for KDE software contributors."
+    },
+    {
+      "name": "KDE neon Mobile & Bigscreen",
+      "description": "Specialized image flavors tailored for smartphones (Plasma Mobile) and smart televisions/media center appliances."
+    }
+  ],
+  "links": {
+    "homepage": "https://neon.kde.org/",
+    "faq": "https://neon.kde.org/faq",
+    "downloads": "https://neon.kde.org/download",
+    "blog": "https://blog.neon.kde.org/",
+    "wiki": "https://community.kde.org/Neon",
+    "containers": "https://community.kde.org/Neon/Containers",
+    "gitlab": "https://invent.kde.org/neon"
+  },
+  "sources": [
+    {
+      "title": "KDE neon Official Portal — Overview and Desktop Presentation",
+      "url": "https://neon.kde.org/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "KDE Community",
+      "note": "Documents project mission, direct delivery of unpatched KDE software, and Plasma 6 desktop integrations."
+    },
+    {
+      "title": "KDE neon Official FAQ — Technical Architecture and Guidance",
+      "url": "https://neon.kde.org/faq",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "KDE Community",
+      "note": "Details Ubuntu LTS foundation, semi-rolling model, mandatory apt full-upgrade, Kubuntu incompatibility, and 64-bit scope."
+    },
+    {
+      "title": "KDE neon Downloads — Editions and Signature Verification",
+      "url": "https://neon.kde.org/download",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "KDE Community",
+      "note": "Specifications for User, Testing, Unstable, and Developer editions, GPG key verification (0x45F4C354638D1F29), and HTTP mirrors."
+    },
+    {
+      "title": "KDE neon Developers' Blog — KDE neon Rebased on Ubuntu 24.04 LTS",
+      "url": "https://blog.neon.kde.org/2024/10/10/kde-neon-rebased-on-ubuntu-24-04-lts/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "KDE Community",
+      "note": "Announcement detailing migration of the underlying base system from Ubuntu 22.04 LTS to Ubuntu 24.04 LTS Noble."
+    },
+    {
+      "title": "KDE neon Developers' Blog — KDE neon 6 Available Now",
+      "url": "https://blog.neon.kde.org/2024/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "KDE Community",
+      "note": "Details the KDE MegaRelease 6 transition, packaging Plasma 6, Frameworks 6, KDE Gear 24.02, and Qt 6."
+    },
+    {
+      "title": "KDE Community Wiki — KDE neon Architecture and Containers",
+      "url": "https://community.kde.org/Neon",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "KDE Community",
+      "note": "Technical documentation for Calamares installation, CI build systems, and daily Docker/Podman container images."
+    },
+    {
+      "title": "KDE neon Developers' Blog — Offline Updates Implementation",
+      "url": "https://blog.neon.kde.org/author/harald_sitter/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "KDE Community",
+      "note": "Explains the architectural rationale and implementation of offline updates in Discover to prevent runtime memory faults."
+    },
+    {
+      "title": "KDE neon Source Code Repositories — GitLab",
+      "url": "https://invent.kde.org/neon",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "KDE Community",
+      "note": "Official Git repositories hosting packaging definitions, seeds, and build recipes for the KDE neon distribution."
+    }
+  ]
+}

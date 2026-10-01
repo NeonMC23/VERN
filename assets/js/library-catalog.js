@@ -31,6 +31,11 @@ var LIBRARY_RESOURCES = [
   "void-linux",
   "alpine-linux",
   "slackware",
+  "mx-linux",
+  "elementary-os",
+  "zorin-os",
+  "pop-os",
+  "kde-neon",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
