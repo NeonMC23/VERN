@@ -1,0 +1,250 @@
+{
+  "id": "tiny-core-linux",
+  "name": "Tiny Core Linux",
+  "type": "operating_system",
+  "summary": "An ultra-minimalist, modular Linux operating system engineered by Robert Shingledecker to run entirely in RAM from boot media. Tiny Core unpacks an immutable base system into tmpfs, loads software packages as read-only SquashFS extensions (.tcz), and supports three distinct operational modes (Cloud, Mount, and Copy). It features frugal installation to any partition, selective configuration persistence via filetool.sh (mydata.tgz), bootcode parameterization through tc-config, a lightweight C++ graphical environment pairing FLWM and wbar atop FLTK, and official editions for 32-bit x86, 64-bit x86_64, and ARM (piCore).",
+  "tags": [
+    "linux",
+    "minimalist",
+    "modular",
+    "ram-based",
+    "tmpfs",
+    "squashfs",
+    "tcz",
+    "frugal-install",
+    "flwm",
+    "fltk",
+    "wbar",
+    "busybox",
+    "stateless"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "i386",
+    "armhf",
+    "aarch64"
+  ],
+  "license": "GPL-2.0-only (Linux kernel), GPL-2.0-or-later (BusyBox and base scripts), LGPL-2.0-or-later (FLTK), and varied FOSS licenses for individual .tcz extensions",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "Tiny Core Linux (TCL) is an independent, ultra-lightweight Linux distribution designed from the ground up to provide a minimal, modular base operating system executing entirely within computer memory (RAM). Created in 2008 by Robert Shingledecker, former lead architect of Damn Small Linux (DSL), the distribution departs from conventional desktop Linux deployment models. Instead of installing tens of gigabytes of scattered binaries across a permanent storage drive, Tiny Core packages the complete base operating system into a miniature kernel and root filesystem image, mounts or copies application extensions dynamically on demand, and restores user-specified configurations from a compressed backup archive at startup.",
+    "what_is_it": "Technically, Tiny Core Linux is a stateless, memory-resident operating system built on the Linux kernel, BusyBox userland utilities, and the Fast Light Toolkit (FLTK). It employs a frugal installation structure requiring only two core boot files (`vmlinuz` and `core.gz`), provisions applications through compressed SquashFS extension packages (`.tcz`) mounted on loop devices or copied into `tmpfs`, orchestrates system boot via the `tc-config` initialization script, and handles user session persistence through explicit file archiving (`filetool.sh`) or direct partition mounting.",
+    "origin_and_history": "Robert Shingledecker initiated The Core Project in late 2008 following philosophical and architectural disagreements within the Damn Small Linux project regarding package management, system size, and base design purity. While DSL had evolved into a fixed 50 MB live image with traditional Debian APT packaging adaptations, Shingledecker sought to create a strictly modular operating system capable of booting in less than 12 MB of RAM, leaving package selection entirely to the end user. Tiny Core Linux 1.0 was officially released in early 2009. Over subsequent release cycles, the project expanded to support 64-bit x86_64 hardware (`CorePure64` and `TinyCorePure64`), ARM-based single-board computers (`piCore`), and extended wireless installation media (`CorePlus`). The distribution maintained continuous development, publishing the 15.x series in 2024, the 16.x series in 2025, and the 17.x series in 2026.",
+    "governance_and_organization": "Tiny Core Linux is stewarded by Robert Shingledecker alongside a core maintenance team of volunteer developers (including Curaga for kernel and x86 maintenance, Juanito for x86_64 extensions, and dedicated community moderators). Governance operates informally through the project's official web forum (`forum.tinycorelinux.net`). Tiny Core Linux has no corporate owner, sells no commercial support subscriptions, and funds its server infrastructure, domain registration, and bandwidth purely through voluntary community donations via PayPal.",
+    "in_ram_architecture_and_tmpfs": "At system startup, the bootloader loads `vmlinuz` and uncompresses `core.gz` into the computer's physical memory (RAM). The entire root filesystem (`/`) is instantiated as a temporary in-memory filesystem (`tmpfs`). Because all core operating system binaries, system scripts, and working directories reside in volatile memory, execution speeds are constrained only by RAM and CPU throughput rather than storage I/O latency. Crucially, any runtime modifications, temporary files, or rogue modifications to root directories are held strictly in volatile RAM and vanish instantly upon machine power-off or reboot, providing inherent resistance to system degradation.",
+    "frugal_installation_model": "Tiny Core Linux rejects traditional 'scatter mode' disk installations, where system files are unpacked across thousands of disk sectors. Instead, it utilizes a frugal installation architecture. The complete operating system consists of only two files—the Linux kernel binary (`vmlinuz`) and the compressed initial root filesystem (`core.gz` or `rootfs.gz`). These files can be stored on any partition format recognized by the bootloader (including FAT16, FAT32, ext2, ext3, ext4, or NTFS) alongside existing operating systems without necessitating dedicated drive repartitioning. User applications and personal settings are stored separately in an external `tce` directory.",
+    "modular_extension_subsystem_tcz": "Functionality beyond the minimal base system is supplied through Tiny Core Extensions (`.tcz`). A `.tcz` package is a read-only SquashFS archive compressed with gzip or xz containing binaries, shared libraries, configuration templates, and desktop icons. Every `.tcz` extension in the repository is paired with standardized metadata files:\n\n- `.tcz.dep`: Plain-text dependency list specifying prerequisite extensions.\n- `.tcz.info`: Package metadata detailing maintainer, licensing, change log, and operational notes.\n- `.tcz.md5.txt`: Cryptographic MD5 checksum utilized for verification during download.\n\nExtensions are mounted as loopback devices under `/tmp/tcloop/<extension_name>/`, and their contents are symlinked into the standard system hierarchy (`/usr/local/bin`, `/usr/local/lib`, `/usr/local/share`).",
+    "operational_modes_cloud_mount_copy": "Tiny Core Linux implements three distinct operational architectures:\n\n- Cloud / Default Mode: Operates without permanent storage. The system boots entirely in RAM, applications are downloaded on demand from online mirrors into volatile memory, and all additions expire upon system shutdown.\n- Mount Mode (TCE / Install): The standard and recommended configuration. Extensions reside in a persistent `tce/optional` directory on local storage (USB drive, SSD, or hard disk). At boot, extensions specified in `onboot.lst` are loop-mounted into memory, minimizing RAM consumption.\n- Copy Mode (copy2fs): Extensions residing on storage are fully extracted into `tmpfs` RAM during boot rather than mounted via loop devices. This mode allows the boot media (such as a USB key) to be physically disconnected after boot, at the cost of higher RAM usage and longer startup time.",
+    "persistence_and_filetool_backup": "User data, system configurations, and customization scripts are preserved across reboots through the `filetool` subsystem (`filetool.sh`). Unlike conventional OS installations that write continuously to disk, Tiny Core maintains configurations in memory and flushes them to disk only when invoked by the user or upon clean desktop shutdown. Selected files are compressed into a single tar archive named `mydata.tgz` located in the `tce` directory. At subsequent boots, `filetool.sh -r` automatically unpacks `mydata.tgz` over the in-memory filesystem. Persistence scope is controlled by two configuration files under `/opt`:\n\n- `/opt/.filetool.lst`: Whitelist specifying absolute paths to back up (defaults include `/home` and `/opt`).\n- `/opt/.xfiletool.lst`: Blacklist specifying exclusions, cache paths, and temporary files.\n\nAlternatively, users can configure persistent storage directly by mounting partitions to `/home` or `/opt` via boot parameters (`home=sdXY`, `opt=sdXY`).",
+    "initialization_and_bootcodes": "System boot is coordinated by `/etc/init.d/tc-config`, an optimized shell script inside `core.gz`. `tc-config` configures system mounts, parses kernel command-line arguments (bootcodes), initializes network interfaces, detects storage volumes, and mounts configured extensions. Critical bootcodes include:\n\n- `tce=sdXY` or `tce=UUID=...`: Designates the disk partition containing the `tce/` extension repository.\n- `waitusb=X`: Pauses kernel initialization for specified seconds to accommodate slow USB controller enumeration.\n- `base`: Bypasses loading all extensions, providing an emergency clean recovery environment.\n- `nodhcp`: Inhibits automatic DHCP network configuration at boot.\n- `protect`: Prevents automated overwriting of the `mydata.tgz` backup archive.",
+    "extension_management_tooling": "Tiny Core provides dedicated command-line and graphical tools for extension lifecycle management:\n\n- `tce-load`: Primary CLI management tool (`tce-load -wi <ext>` downloads and marks an extension for onboot loading; `tce-load -i <ext>` loads a local extension; `tce-load -d <ext>` downloads without loading).\n- `tce-ab`: Interactive text-mode ncurses browser for searching, reading `.info` files, and installing extensions from the console.\n- `Apps` (Appbrowser): FLTK graphical package manager facilitating category browsing, dependency inspection, and loading management (OnBoot versus OnDemand).\n- `Appsaudit`: Diagnostic utility for identifying orphaned dependencies, verifying MD5 checksums, and maintaining clean extension sets.",
+    "desktop_environment_flwm_fltk_wbar": "The default graphical user interface of Tiny Core Linux combines lightweight, customized components:\n\n- FLWM (Fast Light Window Manager): An ultra-compact stacking window manager built with the FLTK toolkit. Tiny Core's custom FLWM build features vertical title bars aligned along the left border of windows and desktop menus accessible via right-click.\n- wbar: A compact animated icon dock pinned to the screen edge providing rapid access to installed applications and control utilities.\n- FLTK (Fast Light Toolkit): Standard GUI widget library utilized by Tiny Core's native configuration tools (Control Panel, FileTool, Mount Tool, Network Configuration).\n- Display Servers: Historically utilizing `Xvesa` for legacy VESA BIOS framebuffers, modern releases utilize `Xfbdev` or full `Xorg-7.7.tcz` for modern hardware acceleration and multi-monitor setups.",
+    "hardware_support_and_architectures": "Tiny Core Linux maintains minimal hardware prerequisites:\n\n- 32-bit x86: Compatible with Intel 80486 and Pentium processors, requiring a minimum of 48 MB RAM for CLI `Core` and 128 MB RAM for graphical `TinyCore`.\n- 64-bit x86_64: Supported through dedicated `CorePure64` and `TinyCorePure64` builds, requiring 64-bit CPU architecture and 256 MB RAM minimum.\n- ARM Architecture: Maintained through `piCore` images optimized for Raspberry Pi generations (ARMv6, ARMv7, and AArch64).\n- Storage Footprint: The base system requires between 17 MB and 44 MB of storage media space depending on architecture and graphical inclusion.",
+    "installer_and_deployment_options": "The project supplies `tc-install` (and its graphical equivalent `tc-install-GUI`) for creating bootable drives. The installer formats target drives (FAT32 or ext4), installs the Syslinux or Extlinux bootloader, copies `vmlinuz` and `core.gz`, creates the `tce` directory structure, and writes boot configuration files (`syslinux.cfg`). For UEFI-based hardware, GRUB2 EFI loaders are deployed.",
+    "security_and_privilege_model": "Tiny Core Linux boots into an unprivileged user session named `tc`. Administrative operations are conducted using passwordless `sudo` out of the box, as configured in `/etc/sudoers`. The `root` superuser account has no password assigned by default. System security derives primarily from its stateless architecture: because the core OS resides in volatile RAM, memory tampering, malicious payload execution, or compromised libraries do not survive a power cycle unless deliberately written into `mydata.tgz`.",
+    "privacy_and_telemetry": "Tiny Core Linux operates under a strict zero-telemetry design. It contains no background tracking daemons, device fingerprinting beacons, or automatic error reporting agents. Network activity occurs exclusively when initiated by the user (such as package retrieval via `tce-load` or NTP clock synchronization).",
+    "advantages": [
+      "Ultra-compact storage footprint with base ISO images ranging from 17 MB to 44 MB",
+      "Stateless in-RAM execution delivering maximum responsiveness and zero disk wear",
+      "Immunity from permanent filesystem corruption caused by unexpected power loss",
+      "Frugal installation architecture coexisting on existing partitions without repartitioning",
+      "Modular SquashFS extensions (.tcz) mounted on loop devices to conserve memory",
+      "Clean separation between immutable core system and persistent user data via filetool"
+    ],
+    "disadvantages": [
+      "Steep initial learning curve requiring manual comprehension of bootcodes and extension loading",
+      "Ephemeral root filesystem requires deliberate maintenance of .filetool.lst to retain system changes",
+      "Software repository is smaller and more curated than mainstream Debian or Fedora archives",
+      "FLWM and FLTK user interface lacks modern desktop compositor effects and complex desktop widgets",
+      "Out-of-the-box hardware detection requires manual loading of firmware and wireless extensions"
+    ],
+    "who_is_it_for": "Tiny Core Linux is built for advanced Linux users, system administrators, and embedded systems developers who require an ultra-minimalist, modular operating system capable of running from RAM, embedded flash, or kiosk appliances with rapid boot times and zero residual footprint.",
+    "who_is_it_not_for": "It is not designed for general desktop beginners seeking a turn-key out-of-the-box operating system with full office suites, automated proprietary driver managers, or traditional desktop environments like GNOME or KDE."
+  },
+  "components": [
+    {
+      "id": "linux-kernel",
+      "name": "Linux Kernel",
+      "role": "operating_system_kernel",
+      "note": "Custom-compiled monolithic Linux kernel configured with modular drivers and SquashFS support."
+    },
+    {
+      "id": "busybox",
+      "name": "BusyBox",
+      "role": "core_utilities",
+      "note": "Multi-call binary providing essential POSIX command-line utilities and shell environment."
+    },
+    {
+      "id": "tc-config",
+      "name": "tc-config",
+      "role": "init_orchestrator",
+      "note": "Primary initialization shell script executing from core.gz to configure mounts and parse bootcodes."
+    },
+    {
+      "id": "tce-load",
+      "name": "tce-load",
+      "role": "package_loader",
+      "note": "Command-line extension utility for downloading, verifying, and mounting .tcz packages."
+    },
+    {
+      "id": "filetool",
+      "name": "filetool.sh",
+      "role": "persistence_manager",
+      "note": "Shell utility managing backup and restoration of user configuration archives (mydata.tgz)."
+    },
+    {
+      "id": "flwm",
+      "name": "FLWM (Fast Light Window Manager)",
+      "role": "window_manager",
+      "note": "Customized lightweight window manager featuring vertical titlebars and root desktop menus."
+    },
+    {
+      "id": "fltk",
+      "name": "FLTK (Fast Light Toolkit)",
+      "role": "gui_toolkit",
+      "note": "Lightweight C++ graphical widget library underlying Tiny Core system administration utilities."
+    },
+    {
+      "id": "wbar",
+      "name": "wbar",
+      "role": "application_dock",
+      "note": "Ultra-lightweight animated launch bar displayed on desktop edges."
+    },
+    {
+      "id": "apps-browser",
+      "name": "Apps (Appbrowser)",
+      "role": "gui_package_browser",
+      "note": "FLTK graphical package browser for exploring and installing extensions from official mirrors."
+    },
+    {
+      "id": "tc-install",
+      "name": "tc-install",
+      "role": "system_installer",
+      "note": "Deployment utility configuring Syslinux/Extlinux bootloaders and creating frugal partitions."
+    }
+  ],
+  "relations": [
+    {
+      "id": "damnsmalllinux",
+      "name": "Damn Small Linux",
+      "relation": "ancestor_inspiration",
+      "note": "Historical antecedent where Robert Shingledecker was lead developer prior to founding The Core Project."
+    },
+    {
+      "id": "puppy-linux",
+      "name": "Puppy Linux",
+      "relation": "architectural_peer",
+      "note": "Peer distribution executing in RAM via SquashFS modules and frugal installations."
+    },
+    {
+      "id": "alpine-linux",
+      "name": "Alpine Linux",
+      "relation": "alternative",
+      "note": "Alternative lightweight distribution centered around BusyBox and minimal footprint for containers and edge devices."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Core (x86 CLI)",
+      "description": "Minimal base edition (~20 MB) providing Linux kernel and BusyBox command-line interface without graphical server."
+    },
+    {
+      "name": "TinyCore (x86 GUI)",
+      "description": "Standard desktop edition (~27 MB) pairing Core with Xfbdev, FLWM, wbar, and FLTK administration utilities."
+    },
+    {
+      "name": "CorePlus (x86 Installation)",
+      "description": "Comprehensive installation image (~289 MB) packaging Wi-Fi firmware, international keymaps, alternative window managers, and tc-install."
+    },
+    {
+      "name": "CorePure64 (x86_64 CLI)",
+      "description": "Native 64-bit command-line base image (~26 MB) for modern x86_64 architecture systems."
+    },
+    {
+      "name": "TinyCorePure64 (x86_64 GUI)",
+      "description": "Native 64-bit graphical edition (~44 MB) delivering FLWM desktop and 64-bit extension repository access."
+    },
+    {
+      "name": "piCore (ARM)",
+      "description": "Specialized architecture release tailored for Raspberry Pi hardware boards across ARMv6, ARMv7, and AArch64."
+    }
+  ],
+  "links": {
+    "homepage": "http://tinycorelinux.net/",
+    "welcome": "http://tinycorelinux.net/welcome.html",
+    "concepts": "http://tinycorelinux.net/concepts.html",
+    "install": "http://tinycorelinux.net/install.html",
+    "faq": "http://tinycorelinux.net/faq.html",
+    "forum": "http://forum.tinycorelinux.net/",
+    "release_x86": "http://www.tinycorelinux.net/17.x/x86/release/",
+    "release_x86_64": "http://www.tinycorelinux.net/17.x/x86_64/release/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=tinycore"
+  },
+  "sources": [
+    {
+      "title": "Tiny Core Linux Official Portal — Welcome to The Core Project",
+      "url": "http://tinycorelinux.net/welcome.html",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Tiny Core Linux Team",
+      "note": "Official portal describing core philosophy, modular architecture, and default GUI extension sets."
+    },
+    {
+      "title": "Tiny Core Linux Official Documentation — Core Concepts",
+      "url": "http://tinycorelinux.net/concepts.html",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Tiny Core Linux Team",
+      "note": "Primary technical guide detailing RAM operation, frugal installation, Cloud/Mount/Copy modes, and filetool persistence."
+    },
+    {
+      "title": "Tiny Core Linux Official Documentation — Installation Guide",
+      "url": "http://tinycorelinux.net/install.html",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Tiny Core Linux Team",
+      "note": "Deployment guide for installing Tiny Core Linux to USB keys, hard drives, and configuring Syslinux/Extlinux bootloaders."
+    },
+    {
+      "title": "Tiny Core Linux Official Documentation — Frequently Asked Questions (FAQ)",
+      "url": "http://tinycorelinux.net/faq.html",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Tiny Core Linux Team",
+      "note": "Reference document outlining bootcodes, partition identifiers, package installation commands, and backup procedures."
+    },
+    {
+      "title": "Tiny Core Linux Community — Official Forum",
+      "url": "http://forum.tinycorelinux.net/",
+      "type": "community",
+      "accessed": "2026-10-01",
+      "publisher": "Tiny Core Linux Community",
+      "note": "Primary community hub for release announcements, extension submissions, kernel development, and technical support."
+    },
+    {
+      "title": "Tiny Core Linux Official HTTP Mirror — 17.x x86 Release Tree",
+      "url": "http://www.tinycorelinux.net/17.x/x86/release/",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "Tiny Core Linux Team",
+      "note": "Distribution repository providing Core, TinyCore, and CorePlus 17.1 ISO images and checksum records."
+    },
+    {
+      "title": "Tiny Core Linux Official HTTP Mirror — 17.x x86_64 Release Tree",
+      "url": "http://www.tinycorelinux.net/17.x/x86_64/release/",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "Tiny Core Linux Team",
+      "note": "Distribution repository providing CorePure64 and TinyCorePure64 17.1 64-bit ISO images and checksum records."
+    },
+    {
+      "title": "DistroWatch — Tiny Core Linux Distribution Profile",
+      "url": "https://distrowatch.com/table.php?distribution=tinycore",
+      "type": "secondary",
+      "accessed": "2026-10-01",
+      "publisher": "DistroWatch",
+      "note": "Summary of package versions, release chronology, and architecture support."
+    }
+  ]
+}

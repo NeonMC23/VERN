@@ -1,0 +1,276 @@
+{
+  "id": "pop-os",
+  "name": "Pop!_OS",
+  "type": "operating_system",
+  "summary": "A desktop operating system engineered by computer manufacturer System76 on an Ubuntu Long Term Support (LTS) base. Pop!_OS features the native COSMIC desktop environment written in Rust with the cosmic-comp Wayland compositor, integrated auto-tiling and window stacking, dynamic hybrid GPU switching via system76-power, an automated recovery partition supporting non-destructive Refresh Installs, out-of-the-box Flatpak integration, and an explicit zero-telemetry policy.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-based",
+    "cosmic",
+    "rust",
+    "wayland",
+    "system76",
+    "hybrid-graphics",
+    "flatpak",
+    "recovery-partition"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "license": "GPL-3.0-or-later, MIT, and redistributable proprietary firmware/NVIDIA drivers",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "Pop!_OS is an open-source, desktop Linux operating system developed by American computer hardware manufacturer System76. Originating in October 2017 to power System76 laptops, desktops, and servers, Pop!_OS is engineered for software developers, engineers, and digital creators. While historically utilizing a customized GNOME desktop shell, Pop!_OS 24.04 LTS marks a fundamental architectural evolution by deploying the custom-built COSMIC desktop environment, written from the ground up in the memory-safe Rust programming language.",
+    "what_is_it": "Technically, Pop!_OS is an Ubuntu LTS downstream distribution combining core Ubuntu system packages with a custom-built desktop environment, specialized hardware daemons, and dedicated software archives (`apt.pop-os.org`). Key architectural components include the COSMIC Desktop Environment, the `cosmic-comp` Wayland compositor based on the Smithay library, the `system76-power` energy and hybrid GPU manager, `kernelstub` with `systemd-boot`, and an independent disk recovery partition allowing clean system refreshes without data loss.",
+    "origin_and_history": "System76, founded in 2005 in Denver, Colorado by Carl Richell, initially shipped standard Ubuntu on its computer hardware. In 2017, Canonical decided to end development of Unity 8 and the Ubuntu Phone platform, prompting System76 to create Pop!_OS to retain control over the operating experience of its hardware. Pop!_OS 17.10 debuted on October 19, 2017. Subsequent releases included 18.04 LTS, 20.04 LTS (introducing window auto-tiling via Pop Shell), and 22.04 LTS. In 2021, System76 began engineering the COSMIC desktop environment in Rust, culminating in the launch of Pop!_OS 24.04 LTS on March 3, 2026.",
+    "governance_and_system76": "Pop!_OS is developed, maintained, and financially supported by System76 Inc. The project is sustained commercially through sales of System76 hardware—including handcrafted Thelio desktop computers, Linux laptops, and Launch keyboards. Pop!_OS is distributed freely under open-source licenses (GPL-3.0 and MIT). Engineering decisions, roadmaps, and bug tracking are conducted publicly across GitHub repositories in the `pop-os` organization.",
+    "cosmic_desktop_and_rust_architecture": "Pop!_OS 24.04 LTS replaces the GNOME desktop stack with the COSMIC Desktop Environment. Built with the `libcosmic` widget toolkit and the `iced` declarative GUI library, COSMIC leverages Rust's compile-time memory safety and concurrency models. Core native applications include COSMIC Files (`cosmic-files`), COSMIC Settings (`cosmic-settings`), COSMIC Store (`cosmic-store`), COSMIC Terminal (`cosmic-term` with GPU acceleration), COSMIC Edit (`cosmic-edit`), and COSMIC Screenshot (`cosmic-screenshot`).",
+    "cosmic_comp_and_wayland": "Display management and composition in COSMIC are executed by `cosmic-comp`, a dedicated Wayland compositor built upon the `smithay` framework. `cosmic-comp` provides tear-free hardware composition, per-monitor fractional scaling, and variable refresh rate (VRR/FreeSync/G-Sync) support. Legacy X11 applications are supported transparently via the integrated XWayland compatibility subsystem.",
+    "auto_tiling_and_window_management": "A defining feature of Pop!_OS is its native window auto-tiling subsystem. Toggled via a dedicated switch on the panel, auto-tiling arranges new windows automatically in a dynamic non-overlapping binary tree grid. Windows can be rearranged using mouse drag-and-drop with visual drop indicators or via keyboard bindings (Super + Arrow keys). In addition, COSMIC introduces window stacking, allowing multiple application windows to be grouped into tabbed containers analogous to web browser tabs.",
+    "hybrid_graphics_and_power_management": "Pop!_OS integrates `system76-power`, a background daemon controlling thermal profiles, CPU clock states, and multi-GPU configurations. In Pop!_OS 24.04 LTS, hybrid GPU management operates dynamically without requiring system reboots: applications requiring discrete 3D acceleration launch automatically on the discrete NVIDIA or AMD GPU, while standard desktop workloads remain on the integrated GPU to preserve battery endurance. Users can also manually launch any application on the dedicated GPU via a context menu option.",
+    "package_management_and_flatpak": "Pop!_OS utilizes the APT package manager and `.deb` packaging for core system components, compiling custom kernel builds, graphics drivers, and COSMIC binaries on its `apt.pop-os.org` repositories. The COSMIC Store integrates the Flathub repository out of the box, presenting Flatpaks as the primary delivery mechanism for third-party desktop applications with granular sandbox permission indicators.",
+    "absence_of_snap_by_default": "In contrast to upstream Ubuntu, Pop!_OS deliberately excludes Canonical's `snapd` daemon from its default installation images. Standard applications that Ubuntu packages as Snap wrappers (such as the Mozilla Firefox web browser) are built and packaged natively as `.deb` binaries directly within System76 repositories, avoiding startup latency overhead and forced Snap container mounts.",
+    "installer_distinst_and_recovery_partition": "System installation is executed via `system76-installer`, a graphical frontend utilizing the Rust-based `distinst` backend, co-developed with elementary OS. The installer configures full-disk encryption backed by LUKS2 by default. A distinctive structural feature of Pop!_OS is the creation of a 4 GB dedicated 'Pop Recovery' partition on the primary drive. Bootable by holding the Space key during startup, this partition enables 'Refresh Install', reinstalling the operating system while completely preserving personal files in `/home`, user configurations, and installed Flatpaks.",
+    "kernelstub_and_systemd_boot": "On UEFI hardware, Pop!_OS deploys `systemd-boot` rather than GRUB 2. The kernel configuration is maintained by `kernelstub`, a Python/Rust utility that automatically copies newly installed Linux kernel images and initramfs files into the EFI System Partition (`/boot/efi`) and manages kernel boot arguments, accelerating boot times and eliminating GRUB script complexities.",
+    "system76_scheduler_and_performance": "Pop!_OS includes `system76-scheduler`, an active process management daemon. It dynamically monitors the Wayland compositor to detect the focused application window and adjusts Linux kernel Completely Fair Scheduler (CFS) priorities and I/O niceness to allocate maximum compute resources to the foreground task, mitigating latency spikes during heavy background compilations or rendering tasks.",
+    "hardware_support_and_arm64": "Pop!_OS officially supports two primary microarchitectures:\n\n- `x86_64` (amd64): covering modern Intel and AMD multi-core systems, with dedicated ISO flavors providing preloaded proprietary NVIDIA drivers.\n- `aarch64` (ARM 64-bit): officially supported on System76 Thelio Astra desktop workstations and community-enabled on third-party ARM hardware via Tow-Boot.\n\nIn addition, `system76-firmware` coordinates updates for open-source Coreboot BIOS and System76 EC firmware alongside LVFS device firmware updates.",
+    "security_and_encryption": "Pop!_OS enforces security through full-disk LUKS2 encryption enabled by default during installation, kernel-level AppArmor mandatory access control profiles, and sandboxed Flatpak application runtimes. Hardware-level security integrations on System76 laptops include disabled Intel Management Engine (ME) firmware where supported.",
+    "privacy_and_telemetry": "System76 enforces a strict zero-telemetry policy for Pop!_OS. The operating system does not collect, store, or transmit telemetry data, usage metrics, hardware identifiers, or automated error reports. Network activity is limited exclusively to user-initiated operations, such as repository index synchronization (System76, Ubuntu, Flathub), LVFS firmware queries, and NTP time synchronization, as formally stated in the System76 Privacy Policy.",
+    "advantages": [
+      "Modern, responsive COSMIC desktop environment written natively in memory-safe Rust",
+      "Intuitive automated window tiling (auto-tiling) and tabbed window stacking out of the box",
+      "Dynamic hybrid GPU switching allowing per-application discrete GPU acceleration without reboots",
+      "Automated Pop Recovery partition enabling non-destructive Refresh Installs to repair the OS",
+      "Full-disk encryption (LUKS2) enabled by default during installation setup",
+      "Decoupled from Snapd, prioritizing native .deb packages and Flathub Flatpaks",
+      "Explicit zero-telemetry operating policy with no background usage harvesting"
+    ],
+    "disadvantages": [
+      "The complete architectural shift from GNOME to COSMIC in 24.04 LTS breaks legacy GNOME Shell extension compatibility",
+      "Third-party PPA repositories are removed during major OS upgrades to ensure package tree stability",
+      "Official hardware optimizations and open-source Coreboot integration are primarily tailored to System76 hardware",
+      "Legacy 32-bit x86 systems are unsupported, with minimum requirements mandating 4 GB RAM and modern 64-bit CPUs",
+      "Use of systemd-boot on UEFI systems differs from standard GRUB configurations, requiring familiarity with kernelstub"
+    ],
+    "who_is_it_for": [
+      "Software developers, data scientists, and engineers seeking an efficient, tiling-capable workstation",
+      "Owners of gaming and workstation laptops equipped with hybrid NVIDIA and Intel/AMD graphics configurations",
+      "Users looking for a modern, independent desktop environment implemented in Rust without GNOME or KDE legacy code",
+      "Privacy-minded professionals demanding verifiable zero-telemetry and full-disk encryption defaults"
+    ],
+    "who_is_it_not_for": [
+      "Users whose workflows are strictly reliant on legacy GNOME Shell extensions or older GTK themes",
+      "Users requiring a long-standing, conservative desktop paradigm without window tiling or automatic layouts",
+      "Operators of legacy 32-bit PCs or specialized embedded microcontrollers without ARM64/x86_64 UEFI support",
+      "Enterprises requiring commercial third-party vendor SLAs on non-System76 hardware"
+    ],
+    "verdict": "Pop!_OS stands as an innovative, high-performance desktop Linux distribution that successfully bridges developer productivity and consumer ergonomics. Distinguished by its groundbreaking Rust-based COSMIC desktop environment, native auto-tiling, dynamic hybrid graphics management, robust recovery tooling, and unwavering commitment to user privacy, Pop!_OS delivers an exceptional workstation experience for modern computing hardware."
+  },
+  "components": [
+    {
+      "id": "cosmic-desktop",
+      "name": "COSMIC Desktop Environment",
+      "role": "desktop_environment",
+      "note": "Bespoke desktop environment developed in Rust by System76, featuring modular panel, applets, and launcher subsystems."
+    },
+    {
+      "id": "cosmic-comp",
+      "name": "cosmic-comp",
+      "role": "wayland_compositor",
+      "note": "High-performance Wayland compositor built upon Smithay, managing window auto-tiling, stacking, and fractional display scaling."
+    },
+    {
+      "id": "libcosmic",
+      "name": "libcosmic",
+      "role": "ui_toolkit_library",
+      "note": "Rust GUI toolkit based on Iced, providing standard widgets, styling, and text rendering for COSMIC applications."
+    },
+    {
+      "id": "system76-power",
+      "name": "system76-power",
+      "role": "power_and_gpu_management",
+      "note": "System daemon regulating CPU thermal profiles and dynamic hybrid graphics switching between integrated and discrete GPUs."
+    },
+    {
+      "id": "system76-scheduler",
+      "name": "system76-scheduler",
+      "role": "process_scheduler_optimization",
+      "note": "Active scheduler adjusting CFS process priorities dynamically to ensure responsive UI execution for the focused application."
+    },
+    {
+      "id": "cosmic-store",
+      "name": "COSMIC Store",
+      "role": "application_store",
+      "note": "Native application manager integrating APT binary packages and Flathub Flatpaks with fine-grained sandbox controls."
+    },
+    {
+      "id": "distinst",
+      "name": "distinst / system76-installer",
+      "role": "system_installer",
+      "note": "Rust-powered operating system installer handling disk partitioning, LUKS2 encryption, and OEM installation workflows."
+    },
+    {
+      "id": "kernelstub",
+      "name": "kernelstub",
+      "role": "boot_management_tool",
+      "note": "EFI boot configuration tool copying kernels and initramfs files into the ESP partition for systemd-boot."
+    },
+    {
+      "id": "systemd-boot",
+      "name": "systemd-boot",
+      "role": "bootloader",
+      "note": "Minimalist UEFI bootloader utilized by Pop!_OS in place of GRUB 2 on modern hardware."
+    },
+    {
+      "id": "flatpak",
+      "name": "Flatpak",
+      "role": "sandboxed_package_format",
+      "note": "Universal application packaging format integrated out of the box in the COSMIC Store via the Flathub repository."
+    },
+    {
+      "id": "apt",
+      "name": "APT (Advanced Package Tool)",
+      "role": "package_manager",
+      "note": "Command-line packaging system maintaining system libraries and packages from Ubuntu and System76 archives."
+    },
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "Low-level Debian binary package manager handling unpacking and tracking of .deb software components."
+    },
+    {
+      "id": "apparmor",
+      "name": "AppArmor",
+      "role": "security_framework",
+      "note": "Mandatory access control security framework restricting capabilities and resources accessible to system services."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "based_on",
+      "note": "Upstream distribution providing the LTS base packages, core glibc runtime, systemd init, and primary archive infrastructure."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_lineage",
+      "note": "Foundational upstream distribution establishing the Debian binary package architecture utilized by Ubuntu and Pop!_OS."
+    },
+    {
+      "id": "elementary-os",
+      "name": "elementary OS",
+      "relation": "collaborator",
+      "note": "Co-developer of the shared distinst installer framework, contrasting elementary's Vala/Pantheon stack with Pop's Rust/COSMIC desktop."
+    },
+    {
+      "id": "zorin-os",
+      "name": "Zorin OS",
+      "relation": "alternative",
+      "note": "Alternative desktop distribution based on Ubuntu LTS, contrasting Zorin's GNOME-based Windows-like interface with Pop's native Rust tiling desktop."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Developer-oriented distribution leading upstream technologies, contrasting Fedora's RPM and stock GNOME with Pop's Ubuntu LTS base and COSMIC."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Pop!_OS 24.04 LTS (Intel/AMD)",
+      "description": "Standard production ISO for 64-bit PC hardware equipped with integrated Intel graphics or AMD Radeon graphics processors."
+    },
+    {
+      "name": "Pop!_OS 24.04 LTS (NVIDIA)",
+      "description": "Specialized production ISO packaging proprietary NVIDIA graphics drivers to ensure immediate 3D acceleration on GeForce and RTX hardware."
+    },
+    {
+      "name": "Pop!_OS 24.04 LTS for ARM64",
+      "description": "Official 64-bit ARM release certified for the System76 Thelio Astra desktop and community-supported on ARM hardware via Tow-Boot."
+    },
+    {
+      "name": "Pop!_OS 22.04 LTS Series",
+      "description": "Previous long-term support release based on Ubuntu 22.04 LTS featuring the GNOME-based COSMIC desktop shell with Pop Shell."
+    }
+  ],
+  "links": {
+    "homepage": "https://system76.com/pop",
+    "blog": "https://blog.system76.com/",
+    "support": "https://support.system76.com/",
+    "github": "https://github.com/pop-os",
+    "cosmic_repo": "https://github.com/pop-os/cosmic-epoch",
+    "privacy_policy": "https://system76.com/privacy/"
+  },
+  "sources": [
+    {
+      "title": "System76 Official Portal — Pop!_OS Overview and Features",
+      "url": "https://system76.com/pop",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "System76 Inc.",
+      "note": "Documents system specifications, COSMIC desktop integration, auto-tiling workflows, and hardware enablement."
+    },
+    {
+      "title": "System76 Blog — The Pop!_OS 24.04 LTS Upgrade is Here!",
+      "url": "https://blog.system76.com/post/pop-24-04-lts-upgrade/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "System76 Inc.",
+      "note": "Comprehensive announcement detailing Ubuntu 24.04 LTS base, COSMIC Desktop Environment launch, ARM64 support, and hybrid graphics."
+    },
+    {
+      "title": "System76 Privacy Policy — Pop!_OS Operating System Section",
+      "url": "https://system76.com/privacy/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "System76 Inc.",
+      "note": "Explicit declaration affirming zero telemetry collection, zero usage tracking, and absence of error reporting in Pop!_OS."
+    },
+    {
+      "title": "System76 Support Documentation — Recovery Partition and Refresh Install",
+      "url": "https://support.system76.com/",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "System76 Technical Support",
+      "note": "Technical guide explaining the dedicated Pop Recovery partition, kernelstub EFI bootloader management, and non-destructive refresh."
+    },
+    {
+      "title": "GitHub — pop-os/cosmic-epoch: COSMIC Desktop Environment Umbrella",
+      "url": "https://github.com/pop-os/cosmic-epoch",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "System76 Engineers & Community",
+      "note": "Top-level repository tracking components of the Rust-based COSMIC desktop, libcosmic widget toolkit, and application modules."
+    },
+    {
+      "title": "GitHub — pop-os/cosmic-comp: Wayland Compositor for COSMIC",
+      "url": "https://github.com/pop-os",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "System76 Engineers & Community",
+      "note": "Source repository for the cosmic-comp Wayland compositor built with the Smithay Rust library."
+    },
+    {
+      "title": "GitHub — pop-os/system76-power: System Power and Graphics Daemon",
+      "url": "https://github.com/pop-os",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "System76 Engineers & Community",
+      "note": "Source code for system76-power managing thermal states, CPU profiles, and dynamic hybrid graphics switching."
+    },
+    {
+      "title": "System76 Blog — COSMIC DE: First Spring Update and Architecture",
+      "url": "https://blog.system76.com/post/cosmic-de-first-spring-update/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "System76 Inc.",
+      "note": "Details the architectural migration from GNOME Shell to the Rust-based desktop environment and auto-tiling paradigms."
+    }
+  ]
+}

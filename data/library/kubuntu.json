@@ -1,0 +1,236 @@
+{
+  "id": "kubuntu",
+  "name": "Kubuntu",
+  "type": "operating_system",
+  "summary": "An official Ubuntu flavor integrating the Ubuntu base system with the KDE Plasma desktop environment and KDE Gear application suite. Founded in 2005 alongside Ubuntu 5.04, Kubuntu delivers a modern, visually rich, and highly customizable desktop powered by Qt and the KWin window manager/compositor. It features the independent Calamares system installer with Minimal, Normal, and Full installation modes, standard Wayland session integration, native APT/dpkg packaging linked to official Ubuntu repositories, Snapd containerization, KDE Discover software center, KDE Connect device bridging, and PipeWire audio. Unlike KDE neon, which provides a rolling delivery of KDE software on an Ubuntu LTS base, Kubuntu follows Ubuntu's synchronized fixed point-release cycle with frozen component versions per release.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-flavor",
+    "kde-plasma",
+    "kwin",
+    "wayland",
+    "calamares",
+    "qt",
+    "kde-gear",
+    "snap"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later, LGPL-2.1-or-later (KDE and Qt components), and standard Ubuntu package licenses",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "Kubuntu is an official flavor of the Ubuntu operating system that combines Ubuntu's stable Linux foundation with the versatile KDE Plasma desktop environment. Created in April 2005 alongside Ubuntu 5.04 (Hoary Hedgehog) by Jonathan Riddell in collaboration with Canonical, Kubuntu provides users with a feature-rich, graphically refined computing environment built on the Qt framework. Kubuntu follows Canonical's structured engineering and release cadence, offering full access to Ubuntu's global archive of precompiled software while delivering KDE's extensive ecosystem of productivity and creative tools.",
+    "what_is_it": "Technically, Kubuntu is an official Ubuntu derivative that shares the common Ubuntu Linux kernel, GNU C library (`glibc`), `systemd` init daemon, and APT package repositories (`main`, `restricted`, `universe`, `multiverse`). It distinguishes itself by deploying the KDE Plasma desktop shell, the KWin window manager and Wayland compositor, the SDDM display manager, the universal Calamares installer, the KDE Gear application suite (including Dolphin, Konsole, and Kate), and KDE Discover software center, maintaining complete binary compatibility with standard Ubuntu packages.",
+    "origin_and_history": "Kubuntu was established in 2005 to offer an official alternative to Ubuntu's original GNOME desktop, catering to users and developers who favored the K Desktop Environment (KDE 3 at the time). Canonical sponsored the project directly until 2012, after which financial sponsorship was assumed by Blue Systems while governance transitioned to an elected community Kubuntu Council. Kubuntu navigated major desktop generational shifts, including KDE 4 and Plasma 5. In the 2024–2026 era, Kubuntu 24.04 LTS (Noble Numbat) prioritized long-term stability by shipping KDE Plasma 5.27 LTS alongside the switch to the Calamares installer. Subsequent releases, starting with Kubuntu 24.10 (Oracular Oriole) and continuing through Kubuntu 25.04, 25.10, and Kubuntu 26.04 LTS (Resolute Raccoon), standardized on KDE MegaRelease 6 (Plasma 6, Qt 6, KDE Frameworks 6) with default Wayland sessions.",
+    "governance_and_organization": "Kubuntu is governed by the Kubuntu Council, an elected body of community developers, maintainers, and documentation leads. The Council oversees release roadmaps, packaging policies, community events, and financial resource allocation, while technical policies are coordinated with the Ubuntu Community Council and Ubuntu Technical Board. As an official Ubuntu flavor, Kubuntu packages are hosted on Canonical's official archive servers (`archive.ubuntu.com`), compiled on Launchpad builders, and subject to Ubuntu archive quality assurance.",
+    "desktop_environment_kde_plasma": "The primary user interface is KDE Plasma, a modular desktop environment engineered in C++ and QtQuick/QML. Plasma offers extensive desktop configuration capabilities without requiring external tweaking utilities:\n\n- Configurable Panels and Desktops: Users can freely position panels, add widgets (plasmoids), configure multi-monitor workspaces, and customize system tray indicators.\n- KRunner: A unified search and command launcher accessible via Alt+Space, enabling file searches, calculations, currency conversions, process management, and shell execution.\n- Breeze Theming: A comprehensive visual design language providing coordinated light and dark themes across Qt and GTK applications, complete with high-DPI vector iconography.",
+    "kwin_compositor_and_wayland": "Window handling and compositing are managed by KWin, KDE's compositing window manager. In Kubuntu 24.04 LTS, both X11 and Wayland sessions were supported with X11 as the default for LTS conservatism. Beginning with Kubuntu 24.10 and continuing in modern releases (including Kubuntu 26.04 LTS), the Wayland session (`plasma-workspace-wayland`) is the default and fully supported session. KWin provides hardware-accelerated rendering via OpenGL and Vulkan, adaptive fractional scaling for mixed-DPI multi-monitor environments, per-screen refresh rate management, and window tiling. The legacy X11 session remains available via the optional `plasma-session-x11` package.",
+    "calamares_installer_and_profiles": "With the release of Kubuntu 24.04 LTS, the project phased out Canonical's legacy Ubiquity installer and adopted the independent, Qt-based Calamares installer by default, skipping Canonical's Flutter-based Desktop installer. Calamares offers three predefined installation profiles:\n\n- Minimal Installation: Deploys only the essential KDE Plasma desktop, basic settings tools, and core system utilities, leaving the machine free of extra productivity suites.\n- Normal Installation: The standard configuration, providing essential desktop tools, file managers, and a web browser.\n- Full Installation: Installs the complete suite of KDE applications, LibreOffice, and multimedia creation utilities.\n\nCalamares also provides graphical partitioning, Btrfs and ext4 filesystem support, swapfile automation, and LUKS whole-disk encryption.",
+    "package_management_and_snap": "Kubuntu manages software packages via Debian's native package format (`.deb`) and the APT toolchain (`apt`, `apt-get`, `dpkg`). Software packages originate from Ubuntu's central archives. Conforming to Ubuntu flavor standards, Kubuntu ships with `snapd` enabled by default, distributing the sandboxed Mozilla Firefox browser as a Snap package. The Discover software manager includes native backends for APT and Snap, with optional Flatpak integration available by installing `plasma-discover-backend-flatpak`.",
+    "kde_gear_applications": "Kubuntu includes the official KDE Gear suite of native applications, ensuring visual and functional coherence:\n\n- Dolphin: Advanced file manager supporting dynamic previews, tabbed views, split panels, and integrated terminal panels.\n- Konsole: Customizable terminal emulator with multi-tab support, profile switching, and shell integration.\n- Kate: Feature-complete text editor featuring syntax highlighting for hundreds of languages, code folding, and Git integration.\n- Gwenview & Okular: Lightweight image viewer and universal document viewer supporting PDF, ePub, and OpenDocument formats with annotation tools.\n- Spectacle: Screen capture utility featuring screenshot capturing, video recording, and integrated OCR text recognition in Plasma 6.6.",
+    "kde_connect_integration": "Kubuntu incorporates KDE Connect out of the box, facilitating encrypted local network communication between the PC and mobile devices (Android and iOS). It enables synchronized clipboard sharing, desktop SMS and notification display, bidirectional file transfers, remote multimedia playback control, and automatic audio pausing during telephone calls, without requiring third-party cloud intermediaries.",
+    "factual_contrast_with_kde_neon": "While both Kubuntu and KDE neon pair the KDE software stack with an Ubuntu foundation, they embody fundamentally distinct distribution models and operational goals:\n\n- Status and Governance: Kubuntu is an official Ubuntu flavor recognized by Canonical and the Ubuntu Technical Board, adhering to Ubuntu release rules and repository freezes. KDE neon is an independent software distribution created and maintained directly by KDE e.V. as a technical showcase for KDE software, and is not an official Ubuntu flavor.\n- Repositories and Sources: Kubuntu packages all KDE components within Ubuntu's official archive (`archive.ubuntu.com`, components `main` and `universe`). KDE neon maintains its own dedicated software archive (`archive.neon.kde.org`) layered over an Ubuntu LTS base.\n- Release Model and Component Cadence: Kubuntu adheres to a fixed point-release cycle (releasing every 6 months), with Plasma, Frameworks, and Gear versions frozen at each release and receiving only security and stability patches. KDE neon operates a semi-rolling model for KDE software, continuously updating Plasma, Frameworks, and Gear to the latest upstream releases as soon as they are published by KDE.\n- Update Mechanism and Restrictions: Kubuntu supports standard `apt upgrade` and `apt dist-upgrade` without restrictions. KDE neon explicitly blocks `apt upgrade` to prevent library dependency breakage, mandating `pkcon update`, `apt full-upgrade`, or Discover offline updates.\n- Target Audience: Kubuntu prioritizes a stable, predictable platform for general users and organizations aligned with Ubuntu release cycles. KDE neon prioritizes providing KDE developers, contributors, and enthusiasts with immediate access to the newest KDE software releases.",
+    "hardware_support_and_architectures": "Kubuntu targets exclusively 64-bit `x86_64` (amd64) processors, having discontinued 32-bit (i386) installation images in 2019:\n\n- Processor: 64-bit dual-core processor (2.0 GHz or higher recommended).\n- Memory (RAM): Minimum 2 GB RAM for basic desktop boot; 4 GB RAM recommended for standard desktop compositing; 8 GB recommended for multitasking and heavy web applications.\n- Storage: 25 GB of available disk space recommended.\n- Firmware: Full support for legacy BIOS and UEFI firmware, including out-of-the-box Secure Boot support via Canonical's signed `shim` loader.",
+    "security_and_apparmor": "Kubuntu benefits from Canonical's Ubuntu Security Team infrastructure. Kernel-level mandatory access control is enforced via AppArmor. System updates and CVE mitigations are delivered synchronously with Ubuntu Security Notices (USN). In Kubuntu 25.10 and later, memory-safe system privilege elevation is enhanced by the inclusion of `sudo-rs`, a Rust-based reimplementation of `sudo`.",
+    "privacy_and_telemetry": "Kubuntu enforces a user-centric privacy policy. The desktop environment contains no third-party advertisements or covert analytical daemons. Ubuntu's optional hardware reporting tool (`ubuntu-report`) is not active by default in Kubuntu desktop sessions. Any diagnostic data sharing remains strictly opt-in and under user control.",
+    "advantages": [
+      "Official Ubuntu flavor delivering seamless integration of the modern KDE Plasma desktop",
+      "Frozen point-release stability with thoroughly tested KDE component versions",
+      "Calamares installer offering customizable Minimal, Normal, and Full installation modes",
+      "Hardware-accelerated Wayland session providing smooth scaling and mixed-DPI handling",
+      "Native device integration with smartphones via preconfigured KDE Connect",
+      "Direct compatibility with Ubuntu's vast software repository and Canonical security updates"
+    ],
+    "disadvantages": [
+      "LTS releases receive 3 years of desktop flavor support from the community rather than Canonical's full 5 years",
+      "KDE software versions are frozen per release and do not track latest upstream releases unless using Backports PPA",
+      "Higher minimum RAM requirement (2 GB min, 4 GB rec) compared to ultra-lightweight flavors like Lubuntu",
+      "32-bit (i386) hardware architecture is unsupported since 2019",
+      "Default inclusion of Snap containerization may not align with preferences of all users"
+    ],
+    "who_is_it_for": "Kubuntu is designed for users, software developers, and organizations seeking a modern, visually customizable desktop operating system backed by the reliability, security, and expansive software ecosystem of Ubuntu.",
+    "who_is_it_not_for": "It is not designed for users seeking a continuous rolling release of the latest upstream KDE software (for which KDE neon or rolling distributions are tailored), or for legacy computers with less than 2 GB of RAM."
+  },
+  "components": [
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "Modular desktop shell providing panels, widgets (plasmoids), and system settings."
+    },
+    {
+      "id": "kwin",
+      "name": "KWin",
+      "role": "window_manager_compositor",
+      "note": "Hardware-accelerated window manager and Wayland compositor supporting fractional scaling and tiling."
+    },
+    {
+      "id": "sddm",
+      "name": "SDDM",
+      "role": "display_manager",
+      "note": "QML-based graphical login display manager themed with Kubuntu artwork."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares Installer",
+      "role": "system_installer",
+      "note": "Universal system installer offering Minimal, Normal, and Full installation modes."
+    },
+    {
+      "id": "plasma-discover",
+      "name": "KDE Discover",
+      "role": "software_center",
+      "note": "Graphical software management center supporting APT, Snap, Flatpak, and KDE Store addons."
+    },
+    {
+      "id": "dolphin",
+      "name": "Dolphin",
+      "role": "file_manager",
+      "note": "Advanced file manager featuring tabbed navigation, split views, and file previews."
+    },
+    {
+      "id": "konsole",
+      "name": "Konsole",
+      "role": "terminal_emulator",
+      "note": "Feature-rich terminal emulator supporting multi-tab workflows and profiles."
+    },
+    {
+      "id": "kde-connect",
+      "name": "KDE Connect",
+      "role": "device_integration",
+      "note": "Local network protocol synchronizing notifications, clipboards, and files with mobile devices."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire & WirePlumber",
+      "role": "audio_subsystem",
+      "note": "Modern multimedia processing server handling low-latency audio, Bluetooth codecs, and screen capture."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "parent_distribution",
+      "note": "Base distribution providing underlying kernel, shared libraries, and official package archives."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_ancestor",
+      "note": "Upstream source distribution providing Debian packaging formats and fundamental toolchains."
+    },
+    {
+      "id": "kde-neon",
+      "name": "KDE neon",
+      "relation": "technical_peer_alternative",
+      "note": "Independent KDE e.V. distribution pairing Ubuntu LTS with rolling upstream KDE packages, contrasting with Kubuntu's fixed point-release model."
+    },
+    {
+      "id": "lubuntu",
+      "name": "Lubuntu",
+      "relation": "sister_flavor",
+      "note": "Sister Ubuntu flavor sharing the Qt ecosystem, Calamares installer, and SDDM display management."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Kubuntu 24.04 LTS (Noble Numbat)",
+      "description": "Long-Term Support release featuring KDE Plasma 5.27 LTS, Linux kernel 6.8, and Calamares installer with 3-year support through April 2027."
+    },
+    {
+      "name": "Kubuntu 24.10 (Oracular Oriole)",
+      "description": "Interim release delivering KDE MegaRelease 6 (Plasma 6, Qt 6, Frameworks 6) with default Wayland sessions."
+    },
+    {
+      "name": "Kubuntu 25.04 (Plucky Puffin)",
+      "description": "Interim release featuring KDE Plasma 6.3 and updated KDE Gear suite."
+    },
+    {
+      "name": "Kubuntu 25.10 (Questing Quokka)",
+      "description": "Interim release featuring KDE Plasma 6.4.5, Linux kernel 6.17, and sudo-rs security enhancements."
+    },
+    {
+      "name": "Kubuntu 26.04 LTS (Resolute Raccoon)",
+      "description": "Long-Term Support release consolidating KDE Plasma 6.6, Qt 6.10, and KDE Frameworks 6.24 on Ubuntu 26.04 LTS base."
+    }
+  ],
+  "links": {
+    "homepage": "https://kubuntu.org/",
+    "news": "https://kubuntu.org/news/",
+    "release_24_10": "https://kubuntu.org/news/kubuntu-24-10-oracular-oriole-released/",
+    "release_25_10": "https://kubuntu.org/news/kubuntu-25-10-questing-quokka-released/",
+    "release_26_04": "https://kubuntu.org/news/kubuntu-26-04-release-notes/",
+    "ubuntu_flavours": "https://ubuntu.com/desktop/flavours",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=kubuntu"
+  },
+  "sources": [
+    {
+      "title": "Kubuntu Official Website — Portal and News",
+      "url": "https://kubuntu.org/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Kubuntu Team",
+      "note": "Primary distribution portal covering release announcements, governance charter, and community guidelines."
+    },
+    {
+      "title": "Kubuntu Official News — Release Archives",
+      "url": "https://kubuntu.org/news/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Kubuntu Team",
+      "note": "Official announcements detailing 24.04 LTS, Calamares installer adoption, and Plasma 5.27 LTS stability."
+    },
+    {
+      "title": "Kubuntu Official News — 24.10 Oracular Oriole Release Notes",
+      "url": "https://kubuntu.org/news/kubuntu-24-10-oracular-oriole-released/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Kubuntu Team",
+      "note": "Technical notes detailing the upgrade to KDE Plasma 6, Qt 6, and default Wayland session integration."
+    },
+    {
+      "title": "Kubuntu Official News — 25.10 Questing Quokka Release Notes",
+      "url": "https://kubuntu.org/news/kubuntu-25-10-questing-quokka-released/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Kubuntu Team",
+      "note": "Release announcement detailing KDE Plasma 6.4.5, Linux kernel 6.17, and sudo-rs security integration."
+    },
+    {
+      "title": "Kubuntu Official News — 26.04 LTS Resolute Raccoon Release Notes",
+      "url": "https://kubuntu.org/news/kubuntu-26-04-release-notes/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Kubuntu Team",
+      "note": "LTS release documentation highlighting Plasma 6.6, Qt 6.10, Frameworks 6.24, and Spectacle OCR features."
+    },
+    {
+      "title": "Ubuntu Official Portal — Recognized Ubuntu Desktop Flavours",
+      "url": "https://ubuntu.com/desktop/flavours",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Canonical Ltd.",
+      "note": "Canonical directory confirming Kubuntu's official flavor accreditation and archive integration."
+    },
+    {
+      "title": "KDE neon Official Documentation — Frequently Asked Questions (FAQ)",
+      "url": "https://neon.kde.org/faq",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "KDE e.V.",
+      "note": "Authoritative contrast between KDE neon's rolling showcase model and Kubuntu's frozen point-release flavor structure."
+    },
+    {
+      "title": "DistroWatch — Kubuntu Distribution Profile",
+      "url": "https://distrowatch.com/table.php?distribution=kubuntu",
+      "type": "secondary",
+      "accessed": "2026-10-01",
+      "publisher": "DistroWatch",
+      "note": "Independent summary documenting release histories, package versions, and system specifications."
+    }
+  ]
+}

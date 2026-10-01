@@ -1,0 +1,252 @@
+{
+  "id": "pclinuxos",
+  "name": "PCLinuxOS",
+  "type": "operating_system",
+  "summary": "An independent, rolling-release Linux distribution for x86_64 systems founded in 2003 by Bill Reynolds (Texstar). PCLinuxOS features an init system powered by SysVinit and elogind (free of systemd), an ongoing architectural transition from historical APT-RPM and Synaptic to DNF and the homegrown Python/GTK interface dnf-package-manager, official desktop editions featuring KDE Plasma 6, MATE, and Xfce, preinstalled multimedia codecs, the draklive-install installer, and the mylivecd remastering utility.",
+  "tags": [
+    "linux",
+    "desktop",
+    "rolling-release",
+    "independent",
+    "rpm",
+    "dnf",
+    "apt-rpm",
+    "sysvinit",
+    "systemd-free",
+    "kde-plasma",
+    "mate",
+    "xfce"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later, GPL-3.0-or-later, MIT, and redistributable proprietary firmware and codecs",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "PCLinuxOS is an independently maintained, desktop-oriented Linux distribution engineered to provide a self-contained, user-friendly computing environment with continuous software delivery. Founded in October 2003 by Bill Reynolds (widely known in the open-source community as Texstar), the distribution began as an enhanced set of RPM packages for Mandrake Linux 9.2 before branching into an autonomous operating system. Over more than two decades of community development, PCLinuxOS has distinguished itself through its rejection of systemd in favor of traditional SysVinit with elogind, its long-standing deployment of APT-RPM and Synaptic (now transitioning to DNF), its rolling release model, and its focus on out-of-the-box hardware enablement.",
+    "what_is_it": "Technically, PCLinuxOS is an autonomous Linux distribution utilizing the RPM packaging format, independent build servers, and dedicated software repositories. It integrates an init system based on SysVinit (runlevel 5), the elogind daemon for seat and session management, the X.Org display server with optional Wayland sessions, an in-house developed graphical package manager (`dnf-package-manager`), and the `draklive-install` system deployment utility derived from Mandrake DrakX. System administrators can also generate bootable, installable ISO backups of their live environment on demand using the native `mylivecd` tool.",
+    "origin_and_history": "The origin of PCLinuxOS dates to 2000, when Bill Reynolds began compiling and packaging popular third-party software for Mandrake Linux users under the Texstar repository. Frustrated by organizational politics and corporate management within commercial Linux companies, Reynolds forked Mandrake 9.2 on October 24, 2003, releasing PCLinuxOS Preview .4 (p9). In late 2006, the project rebased briefly on Mandriva 2006 to produce PCLinuxOS 2007 before completing a total decoupling into a fully independent project. PCLinuxOS subsequently transitioned to a pure 64-bit architecture in May 2016, retired KDE Plasma 5 in favor of Plasma 6 in 2025, and initiated the migration from legacy APT-RPM to DNF in late 2025.",
+    "governance_and_organization": "PCLinuxOS operates as an independent, volunteer-led open-source project under the technical direction of founder Bill Reynolds (Texstar). Texstar directly oversees kernel compilation, toolchain maintenance, and core RPM package generation, while an international team of volunteer packagers maintains desktop environments, application ports, and testing repositories. The project operates without commercial venture backing, corporate steering committees, or paid corporate licenses. Financial support is derived solely from voluntary community donations through PayPal and hardware contributions from university and public mirror sponsors.",
+    "release_model_and_rolling_updates": "PCLinuxOS follows a strict rolling release lifecycle. Once installed, the operating system does not require periodic version reinstallation or disruptive distro-upgrades; instead, binary packages are continually updated in the primary repositories. To facilitate fresh deployments and prevent newly installed machines from needing gigabytes of cumulative updates, the project regularly generates fresh installation ISO snapshots (including quarterly and monthly images such as the 2026.07.30 series).",
+    "init_system_and_elogind": "A defining structural characteristic of PCLinuxOS is its explicit exclusion of systemd as PID 1. The operating system boots using classical SysVinit (version 2.88 / 3.x), orchestrating system runlevels via procedural init scripts under `/etc/rc.d/init.d/`. To run modern desktop software and graphical display managers that expect logind APIs without introducing systemd, PCLinuxOS incorporates `elogind` (the standalone seat and session tracker extracted from systemd-logind). Power management, console access control, and user session multiplexing are handled through elogind over D-Bus.",
+    "package_management_and_dnf_transition": "Historically, PCLinuxOS achieved prominence as the primary distribution combining the RPM package format with Debian's Advanced Package Tool (APT-RPM) and the Synaptic graphical interface. However, because upstream APT-RPM development ceased and the codebase became unmaintained, PCLinuxOS initiated an official transition to DNF (incorporating DNF 5) starting with the 2025.08 release:\n\n- DNF Package Management: DNF provides modern SAT-based dependency resolution via `libsolv`, enhanced performance, and robust transaction rollbacks via command-line invocations (`dnf update`, `dnf install`).\n- dnf-package-manager GUI: Developed in Python 3 with GTK by developer Upgreyed and Texstar, this homegrown utility provides a clean graphical frontend for searching, filtering, and updating software.\n- Transitional Coexistence: Synaptic and APT-RPM remain accessible in the repositories during the multi-year transition, allowing users to adapt gradually, while repository metadata generators produce both `repodata/` (for DNF) and `base/pkglist.*` (for APT-RPM).",
+    "desktop_environments_and_editions": "PCLinuxOS provides three primary officially maintained desktop editions:\n\n- KDE Plasma 6: The flagship edition, featuring the modern Qt 6/KDE Frameworks 6 stack, Dolphin file manager, Konsole terminal, and full visual customization.\n- KDE Darkstar: A streamlined, minimal variant of the KDE Plasma edition stripped of heavy productivity suites, designed for users wanting to select their own application stack.\n- MATE Desktop: A traditional desktop environment derived from GNOME 2 under GTK 3, offering Caja file manager and modest memory consumption.\n- Xfce Desktop: A lightweight modular environment utilizing Thunar and Xfwm4, geared toward low-resource hardware efficiency.",
+    "display_server_and_multimedia": "The standard graphical display environment in PCLinuxOS is built upon the X.Org (X11) display server, ensuring broad compatibility with legacy proprietary graphics drivers, virtual machines, and screen capture tools. Experimental Wayland sessions are available under KDE Plasma 6. Audio infrastructure uses ALSA combined with PulseAudio or PipeWire, preconfigured with unrestricted multimedia codecs (MP3, AAC, H.264, H.265, VP9, and encrypted DVD playback via libdvdcss) preinstalled by default.",
+    "installation_and_draklive_install": "PCLinuxOS is installed to internal or external storage media via `draklive-install`, a graphical installation wizard derived from the legacy Mandrake DrakX Live installer. The installer supports automated disk partitioning, manual partitioning through integrated GParted, filesystem configuration, user creation, and GRUB2 bootloader deployment. Disk encryption is supported via the Linux Unified Key Setup (LUKS) specification.",
+    "backup_and_remastering_mylivecd": "One of the distribution's most distinguished system utilities is `mylivecd` (and its graphical front-end `MyLiveGTK`). Originally developed for PCLinuxOS, this script allows administrators to create a complete, bootable Live CD/DVD/USB ISO image of their currently running, configured operating system. Typing `mylivecd backup.iso` in a root terminal compresses the live filesystem into SquashFS, integrates the live bootloader, and yields a redistributable ISO that can be cloned to other machines or kept as a bare-metal disaster recovery image.",
+    "bootloader_and_firmware_support": "PCLinuxOS utilizes GRUB2 for system bootstrapping. It provides full support for legacy BIOS (MBR) and modern 64-bit UEFI firmware tables (GPT). However, PCLinuxOS does not ship a Microsoft-signed UEFI shim loader; consequently, UEFI Secure Boot must be disabled in system firmware settings prior to booting the installation media or the installed kernel.",
+    "hardware_support_and_gpu_drivers": "PCLinuxOS targets the 64-bit `x86_64` architecture exclusively, having dropped 32-bit x86 processor support in 2016. The kernel tree is curated directly by Texstar (`kernel-linus`, `kernel-longterm`, `kernel-current`), providing long-term support branches (6.1 LTS, 6.6 LTS) as well as modern tracks (up to 6.18+). Dedicated repository branches host proprietary NVIDIA graphics drivers categorized by hardware generation (`RPMS.nvidia340`, `RPMS.nvidia470`, `RPMS.nvidia525`), assisted by driver management scripts for DKMS kernel module compilation.",
+    "administration_and_pclos_control_center": "System administration is centralized through the PCLinuxOS Control Center (`drakconf`), inherited from Mandrake's MCC. From a single interface, administrators can configure network interfaces, firewall rules, display resolutions, disk mount points, hardware peripherals, and user authentication policies without manually editing configuration files in `/etc`.",
+    "security_and_privilege_model": "PCLinuxOS implements the standard Unix multi-user security architecture, configuring an independent root account with a distinct password alongside unprivileged user accounts. Software packages hosted in official repositories are cryptographically signed using the official PCLinuxOS GPG key, which is verified by DNF and APT-RPM prior to package installation. Network perimeter security is provided by an integrated firewall utility based on iptables/nftables.",
+    "privacy_and_telemetry": "PCLinuxOS enforces an absolute zero-telemetry policy. The operating system does not include usage metrics collection daemons, operating system telemetry agents, desktop analytics, crash report uploaders, or device fingerprinting services. The only outbound network connections initiated by the OS are direct user-invoked package management queries to public mirror servers and automated Network Time Protocol (NTP) clock synchronization.",
+    "advantages": [
+      "Pure rolling release distribution delivering continuous software updates without disruptive distro-upgrades",
+      "Robust systemd-free architecture based on traditional SysVinit and elogind session tracking",
+      "Modern package management via DNF 5 and the homegrown dnf-package-manager alongside legacy Synaptic support",
+      "Immediate out-of-the-box multimedia playback with proprietary codecs and firmware included",
+      "Exceptional bare-metal backup and system cloning capabilities via the built-in mylivecd utility",
+      "Strict zero-telemetry policy ensuring total user sovereignty and privacy on desktop hardware"
+    ],
+    "disadvantages": [
+      "Lack of Microsoft-signed UEFI shim requires disabling Secure Boot in firmware settings",
+      "Strict x86_64 exclusivity with no support for 32-bit x86 or ARM64 hardware architectures",
+      "Smaller package repository catalog compared to giant ecosystems like Debian, Arch, or Fedora",
+      "Package transition period requires caution to avoid mixing DNF and APT-RPM transactions",
+      "Volunteer-driven project infrastructure without enterprise-backed service level agreements (SLAs)"
+    ],
+    "who_is_it_for": "PCLinuxOS is designed for desktop Linux users, system administrators, and hobbyists who seek a stable rolling-release system free from systemd, who value classical Unix init workflows combined with modern desktop environments (KDE Plasma 6, MATE, Xfce), and who benefit from rapid bare-metal live ISO backup and cloning tools.",
+    "who_is_it_not_for": "It is not suitable for corporate environments requiring vendor enterprise SLAs, cloud or container infrastructures reliant on systemd unit semantics, devices requiring locked UEFI Secure Boot, or hardware based on ARM64, RISC-V, or 32-bit processors.",
+    "verdict": "PCLinuxOS represents one of the most durable independent distributions in Linux history. By coupling the simplicity of SysVinit and elogind with a modern transition to DNF, pre-configured multimedia codecs, and the standout mylivecd remastering utility, it delivers an approachable rolling-release computing experience unencumbered by corporate telemetry or systemd dependencies."
+  },
+  "components": [
+    {
+      "id": "sysvinit",
+      "name": "SysVinit",
+      "role": "init_system",
+      "note": "Classical Unix PID 1 process initialization system utilizing runlevel scripts under /etc/rc.d/init.d/."
+    },
+    {
+      "id": "elogind",
+      "name": "elogind",
+      "role": "session_tracker",
+      "note": "Standalone seat and session management daemon extracted from systemd-logind to enable modern desktop functionality."
+    },
+    {
+      "id": "dnf",
+      "name": "DNF / DNF 5",
+      "role": "package_manager",
+      "note": "Next-generation command-line RPM package management tool featuring SAT-based libsolv dependency resolution."
+    },
+    {
+      "id": "dnf-package-manager",
+      "name": "DNF Package Manager",
+      "role": "graphical_package_manager",
+      "note": "Homegrown Python 3 and GTK graphical user interface developed by PCLinuxOS for software repository browsing."
+    },
+    {
+      "id": "apt-rpm",
+      "name": "APT-RPM",
+      "role": "legacy_package_manager",
+      "note": "Historical port of Debian's Advanced Package Tool adapted to RPM packages, retained during the DNF transition."
+    },
+    {
+      "id": "synaptic",
+      "name": "Synaptic Package Manager",
+      "role": "legacy_graphical_package_manager",
+      "note": "Long-standing graphical frontend for APT-RPM providing package inspection, locking, and repository configuration."
+    },
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma 6",
+      "role": "desktop_environment",
+      "note": "Flagship desktop environment built on Qt 6, offering advanced visual configuration and the KDE suite."
+    },
+    {
+      "id": "mate-desktop",
+      "name": "MATE Desktop",
+      "role": "desktop_environment",
+      "note": "Traditional desktop environment providing a GNOME 2 workflow under GTK 3 with Caja file manager."
+    },
+    {
+      "id": "xfce",
+      "name": "Xfce 4",
+      "role": "desktop_environment",
+      "note": "Lightweight modular desktop environment using Thunar file manager and low memory footprint."
+    },
+    {
+      "id": "draklive-install",
+      "name": "draklive-install",
+      "role": "system_installer",
+      "note": "Graphical Live CD installer wizard inherited from Mandrake DrakX, managing disk partitioning and deployment."
+    },
+    {
+      "id": "mylivecd",
+      "name": "mylivecd",
+      "role": "remastering_backup_utility",
+      "note": "Command-line and graphical script creating a bootable, compressed SquashFS Live ISO image of the running system."
+    },
+    {
+      "id": "drakconf",
+      "name": "PCLOS Control Center (drakconf)",
+      "role": "system_administration_suite",
+      "note": "Unified administration console managing hardware detection, network interfaces, firewall, and storage."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "shared_package_ecosystem",
+      "note": "Shares the RPM packaging standard and adopts the DNF package management engine, though repositories remain independent."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "technological_heritage",
+      "note": "Historical heritage through the adoption of APT-RPM and Synaptic, porting Debian package management ergonomics to RPM."
+    },
+    {
+      "id": "opensuse-tumbleweed",
+      "name": "openSUSE Tumbleweed",
+      "relation": "alternative",
+      "note": "Alternative RPM-based rolling release distribution, contrasting Tumbleweed's systemd/Btrfs snapshots with PCLinuxOS's SysVinit/mylivecd architecture."
+    },
+    {
+      "id": "mandriva",
+      "name": "Mandriva Linux",
+      "relation": "historical_origin",
+      "note": "Original historical upstream base from which PCLinuxOS forked in 2003 (Mandrake 9.2) and 2006 (Mandriva 2006)."
+    },
+    {
+      "id": "mageia",
+      "name": "Mageia",
+      "relation": "sister_lineage",
+      "note": "Independent distribution also originating from the Mandriva codebase, sharing the DrakX system administration tool heritage."
+    }
+  ],
+  "variants": [
+    {
+      "name": "PCLinuxOS KDE Plasma 6",
+      "description": "Flagship 64-bit desktop edition featuring KDE Plasma 6, full KDE application suite, LibreOffice, and preinstalled multimedia codecs."
+    },
+    {
+      "name": "PCLinuxOS KDE Darkstar",
+      "description": "Minimal 64-bit KDE edition providing the base Plasma 6 desktop without bundled third-party application suites for custom system composition."
+    },
+    {
+      "name": "PCLinuxOS MATE",
+      "description": "Official 64-bit desktop edition featuring the traditional MATE desktop environment, Caja file manager, and dnf-package-manager."
+    },
+    {
+      "name": "PCLinuxOS Xfce",
+      "description": "Lightweight 64-bit desktop edition utilizing Xfce 4.x and Thunar for low-resource efficiency and maximum hardware responsiveness."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.pclinuxos.com/",
+    "magazine": "https://pclosmag.com/",
+    "forum": "https://www.pclinuxos.com/forum/",
+    "iso_mirror": "http://ftp.nluug.nl/pub/os/Linux/distr/pclinuxos/iso/",
+    "package_mirror": "http://ftp.nluug.nl/pub/os/Linux/distr/pclinuxos/apt/pclinuxos/64bit/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=pclinuxos"
+  },
+  "sources": [
+    {
+      "title": "PCLinuxOS Official Website — Home Portal",
+      "url": "https://www.pclinuxos.com/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "PCLinuxOS Development Team",
+      "note": "Official distribution home portal detailing rolling release philosophy, desktop editions, and community news."
+    },
+    {
+      "title": "The PCLinuxOS Magazine — Official Monthly Publication Archive",
+      "url": "https://pclosmag.com/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "The PCLinuxOS Magazine (Paul Arnote & Meemaw)",
+      "note": "Official community magazine published monthly since September 2006, documenting tutorials, release announcements, and system guides."
+    },
+    {
+      "title": "NLUUG Public Mirror Server — PCLinuxOS ISO Snapshots Archive",
+      "url": "http://ftp.nluug.nl/pub/os/Linux/distr/pclinuxos/iso/",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "NLUUG / Surfnet",
+      "note": "Primary European mirror hosting verified installation ISO images for KDE, Darkstar, MATE, and Xfce."
+    },
+    {
+      "title": "NLUUG Public Mirror Server — PCLinuxOS 64-bit Package Repositories",
+      "url": "http://ftp.nluug.nl/pub/os/Linux/distr/pclinuxos/apt/pclinuxos/64bit/",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "PCLinuxOS Packaging Team",
+      "note": "Mirror repository tree documenting RPM packages, DNF repodata, APT-RPM base metadata, kernels, and NVIDIA drivers."
+    },
+    {
+      "title": "PCLinuxOS Forum — PCLinuxOS Goes DNF Announcement and Discussion",
+      "url": "https://www.pclinuxos.com/forum/viewtopic.php?p=499",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "PCLinuxOS Development Team",
+      "note": "Official forum discussion detailing the technical rationale for migrating from APT-RPM to DNF and dnf-package-manager."
+    },
+    {
+      "title": "PCLinuxOS Forum — Hardware Installation and Live Operations",
+      "url": "https://www.pclinuxos.com/forum/index.php/topic,154227.0.html",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "PCLinuxOS Community",
+      "note": "Technical guide outlining live CD operations, draklive-install deployment, and mylivecd system remastering procedures."
+    },
+    {
+      "title": "DistroWatch — PCLinuxOS Distribution Profile and Version History",
+      "url": "https://distrowatch.com/table.php?distribution=pclinuxos",
+      "type": "secondary",
+      "accessed": "2026-10-01",
+      "publisher": "DistroWatch",
+      "note": "Independent technical summary of package versions, default desktops, systemd-free architecture, and release history."
+    }
+  ]
+}

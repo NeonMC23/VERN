@@ -1,0 +1,11 @@
+{
+  "id": "how-computers-work",
+  "title": "How Computers Work",
+  "description": "The basic loop every computer follows.",
+  "content": [
+    { "type": "heading", "text": "Input, process, output" },
+    { "type": "text", "text": "Nearly every computer follows the same loop: it takes input, processes it, and produces output. Everything else is detail layered on top." },
+    { "type": "list", "items": ["Input: keyboard, network, sensors", "Process: the CPU applies instructions", "Output: screen, file, network"] },
+    { "type": "code", "language": "text", "code": "input -> process -> output" }
+  ]
+}

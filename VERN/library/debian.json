@@ -1,0 +1,685 @@
+{
+  "id": "debian",
+  "name": "Debian",
+  "type": "operating_system",
+  "summary": "A Linux distribution developed by volunteers from a single signed package archive and organised into stable, testing and unstable branches. Debian 13 “trixie” is the current stable release; its support is carried by the project's security team, then by a volunteer LTS effort and a paid third-party ELTS service.",
+  "tags": [
+    "linux",
+    "open-source",
+    "distribution",
+    "community-governed",
+    "dpkg-and-apt",
+    "long-term-support",
+    "many-architectures",
+    "derivatives"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64",
+    "arm64",
+    "armel",
+    "armhf",
+    "ppc64el",
+    "riscv64",
+    "s390x"
+  ],
+  "content": {
+    "introduction": "Debian is developed by volunteers rather than by a company, under documents that fix what the project may ship: the Social Contract, at version 1.2 since 2022-10-01, whose first commitment is that Debian will remain 100 percent free software, and a constitution, version 1.9 ratified on 2022-03-26, which names the bodies that take decisions and protects the contract and its guidelines as Foundational Documents that only a 3:1 majority can replace. Ian Murdock started the project in August 1993 under the sponsorship of the GNU Project, and its introduction page still asks that the system be called Debian GNU/Linux. The Debian trademark is held by Software in the Public Interest, Inc., registered in the United States on 1999-12-21 for marks in use since 1993.",
+    "what_is_it": "The distribution is the set of packages in the main area of the Debian archive, together with the tools and policies that install them. The Policy Manual gives the definition: the main archive area forms the Debian distribution, while contrib, non-free and non-free-firmware “are not considered to be part of the Debian distribution, although we support their use and provide infrastructure for them”. The Debian 13 announcement reports over 69,830 packages, more than 14,100 of them new; the same archive counted on a later date gives other totals, so the figure here carries its release. The project describes the result as the universal operating system, on the strength of the number of packages and the number of architectures.",
+    "philosophy": {
+      "social_contract": "Ten commitments, phrased as duties: Debian stays free; what the project produces returns to the free-software community; problems are not hidden, the bug database being open at all times; the priorities of users and of free software lead, and nothing is charged for derived works; non-free works are permitted on the archive but are not part of the system. The fifth point was amended by a general resolution in 2022 so that installation media may include non-free firmware.",
+      "archive_areas": "main is closed in a precise sense: a package there may not depend on, recommend or build-depend on anything outside main unless the non-free option is not the default one. contrib holds DFSG-free software that needs something outside the distribution to build or run; non-free holds software that fails the guidelines or cannot be redistributed; non-free-firmware holds hardware firmware, which may not meet the whole Policy because source is absent. Only main is covered by the project's release and security policies."
+    },
+    "governance": {
+      "decision_bodies": "The constitution assigns decisions to the Developers, by general resolution or election; the Project Leader; the Technical Committee and its chair; individual developers; the Leader's delegates; and the Project Secretary. No one is obliged to carry out a given piece of work. Amending the constitution or replacing a Foundational Document needs a 3:1 majority, overturning a Technical Committee decision needs 2:1, and a general resolution can make or break a decision of the Leader or of a delegate.",
+      "project_leader": "The Leader is elected by the developers for a one-year term through nominations, a campaign and a fourteen-day vote counted with the Condorcet method named in the constitution. In 2026 a single candidate stood and won with 289 votes against 50 for no confidence in any candidate, out of 1039 developers entitled to vote. The mechanism is the durable fact; the name changes annually.",
+      "technical_committee_and_teams": "The Technical Committee is the body that makes the final decision on technical disputes in the project, reached by filing a bug against the pseudo-package tech-ctte; its remit is technical only, conduct being the Leader's. Day-to-day work sits with teams appointed through the Leader's delegates (archive operations, Release, Security, LTS, Backports, Installer, Live, Cloud, Documentation), and the Security Team co-opts its members.",
+      "membership": "Contributors join as Debian Maintainers and then Debian Developers through a documented process: a mentor, a sponsor who uploads the applicant's packages, acceptance of the Social Contract, and an OpenPGP key signed by an existing developer after identity checks. A delegate may refuse admission or expel a member, and that can be taken to a general resolution."
+    },
+    "release_model": {
+      "branches": "New upstream versions enter unstable, permanently named sid; they reach testing after an age delay and once release-critical bugs are resolved; stable is the released version and oldstable the one before it. On the archive, stable and testing are symbolic links to the current codename, so a configuration naming a codename keeps pointing at the same content after the next release, while one naming stable changes meaning. experimental and backports are not releases. Codenames run in the order of Toy Story characters: 13 is trixie, 14 is forky, and the name announced for Debian 15 is Duke.",
+      "freeze_and_criteria": "A release happens when the Release Team declares a freeze and the suite meets the published release criteria, which are written as an absence: a bug is release-critical if it breaks other software, causes data loss, opens a security hole or makes a package uninstallable, putting it in the critical, grave or serious severity. During a freeze only the release manager lifts the block, and a package can be marked to be ignored and carried into the next release.",
+      "point_releases": "A point release adds the corrections the stable release manager accepts into proposed-updates, package by package; what is refused there does not appear in it. Debian 13 was published as 13.0 on 2025-08-09 and stands at 13.7.0 of 2026-09-12, Debian 12 at 12.15 of 2026-07-11. Dates for coming point releases are published and stated to be subject to change; there is no calendar guarantee for a major release."
+    },
+    "releases_and_support": {
+      "current": "The current stable release is Debian 13 “trixie”, at point release 13.7.0. The releases page gives its end of life as 2028-08-09, the end of its LTS window as 2030-06-30 and the end of ELTS coverage as 2035-06-30.",
+      "previous_and_next": "Debian 12 “bookworm”, released 2023-06-10, is oldstable, with the end of regular support dated 2026-07-11 and the end of LTS 2028-06-30. Debian 11 “bullseye” left LTS on 2026-08-31, five years after its 2021-08-14 release, and is covered by ELTS until 2031-06-30. Debian 14 “forky” is testing, and for it the releases page states that no release date has been set, leaving every support date open.",
+      "support_layers": "Support is layered and each layer has its own owner: three years by the Security Team, which states that covering two releases at once is already difficult enough; then Debian LTS, run by a group of volunteers and companies and explicitly not by the Security or Release teams, extending life to at least five years and publishing its own advisories, DLAs, for a defined architecture set; then Extended LTS, a commercial offering by Freexian that the wiki says is not an official Debian project and does not involve Debian's build infrastructure, taking the total to ten years. The releases page labels those releases as archived, under third-party paid extended LTS support.",
+      "published_dates_differ": "The handover of bookworm from the Security Team to the LTS team carries three published dates: 2026-07-11 as its end of life in the releases table, 2026-07-12 for the handover announcement, and 2026-06-11 as the start of the bookworm LTS window in the LTS schedule. All three come from Debian pages, so they are reported as published rather than reconciled here."
+    },
+    "hardware": {
+      "architectures": "Debian 13 supports seven release architectures: amd64, arm64, armel, armhf, ppc64el, riscv64, which is officially supported for the first time, and s390x. A partial 32-bit i386 userland is built alongside them. loong64 is being added for forky and is not part of the current release, and architectures outside the release set, including m68k and the non-Linux kernels, are carried as ports.",
+      "instruction_baseline": "The amd64 baseline is the x86-64 psABI baseline with no optional extensions: MMX, SSE and SSE2 are guaranteed, SSE3 and later are not, and binaries are built for -march=x86-64 rather than for x86-64-v2 or later. Debian therefore has no x86-64-v2 requirement; the requirement sometimes attributed to it belongs to Red Hat Enterprise Linux. Optimised library variants can still be chosen at runtime through the glibc hardware-capability directories.",
+      "retired_architectures": "i386 ceased to be a regular architecture in trixie: no official kernel, no installer, fewer packages, an SSE2 requirement, and a documented sole remaining purpose of running legacy code through multiarch or a chroot on amd64, the recommendation being to reinstall as amd64 rather than upgrade. armel has no installer and is released for the last time in trixie, with a recommendation to move to armhf or arm64; mips, mipsel and mips64el were removed.",
+      "system_requirements": "The installation guide gives 512 MB of RAM minimum and 1 GB recommended with 4 GB of disk without a desktop, and 1 GB, 2 GB and 10 GB with one, assuming swap and the text installer, with a 1 GHz Pentium 4 as the recommended floor for a desktop; the same chapter adds 350 MB with swap, at least 780 MB for the graphical installer, 200 MB for /var, and the statement that server requirements are practically impossible to give in general. The trixie release notes ask that /boot have at least 768 MB with about 300 MB free before an upgrade.",
+      "firmware_and_boot": "Most firmware is not free in the Debian sense and cannot sit in main, so redistributable firmware ships as packages in non-free-firmware; the installer detects what a machine needs from kernel logs and modalias, installs it from the medium and configures APT with non-free-firmware so those packages keep receiving security updates, with firmware=never turning the detection off. GRUB is the default bootloader of choice, and from trixie an installation can instead use systemd-boot with shim. Kernel images are signed by default, with unsigned variants for a local signing setup."
+    },
+    "installation": {
+      "media": "The recommended image for a connected machine is the netinst image, published for six architectures at 13.7.0, with smaller tiny images for netboot and USB and PXE/TFTP documented for advanced users. Full DVD sets exist per architecture, but only a limited number of their images can be downloaded directly and the rest are assembled with jigdo, which the project explains as saving space on the mirrors and as a way to upgrade an existing image. A complete installation image carries the packages of every desktop environment so that installation needs no network, and the release announcement lists Blu-ray among the media it supports.",
+      "verification": "Release images are published with SHA256 and SHA512 checksum lists carrying a matching OpenPGP signature, and the verification page separates the two jobs: the checksum detects corruption, the signature attests that the image came from Debian, checked against the project keyring. Archive signing follows a published key policy, with a per-release key next to the automatic one for a stable release and the FTP master key for the security archive, and the replacement and revocation procedure is documented on the same page.",
+      "automation_and_documentation": "Unattended installation runs on preconfiguration files read by the Debian Installer from the network or removable media, or through FAI, which can also produce a custom ISO with chosen desktop, language, release and extra packages. Each architecture has its own Installation Guide in HTML, PDF and text, in 21 languages for amd64, and the Debian 13 announcement says installation is offered in 78 languages, which is a different measure from the number of languages the website is translated into."
+    },
+    "package_system": {
+      "layers": "The reference documents three layers: the archive, replicated over HTTP and FTP mirrors and also carried on disc; APT, which uses those resources; and dpkg, the low-level file-oriented infrastructure that installs and removes packages. dpkg and APT are developed inside the project and ship in trixie as 1.22.22, marked essential, and 3.0.3. apt is documented as the command for interactive use whose behaviour may change between versions, apt-get and apt-cache as the tools to use in scripts, aptitude as the full-screen interface, and tasksel, synaptic, gnome-software, apt-listchanges and unattended-upgrades as further tools in the archive. The three layers are one system, not competing editions of Debian.",
+      "package_format": "Software is distributed as .deb files whose control member carries the metadata the Policy requires, including dependencies, conflicts, Section and Priority. dpkg also supplies update-alternatives, dpkg-divert and dpkg-statoverride for the cases where files or settings compete for the same path.",
+      "repositories_and_signature": "A new installation points at deb.debian.org, the project's APT CDN service, which selects a nearby server, and the release notes advise older installations pinned to one mirror to move to it. Integrity runs from a signed Release file to the checksums in the Packages files to the checksums of the package files; individual .deb files are not signed separately. security.debian.org is deliberately not mirrored by third parties, only by official mirrors reachable through DNS aliases, so that fixes spread quickly.",
+      "source_lists": "Source lists exist in two formats: the traditional one-line style, understood by every APT version but documented as deprecated and marked as possibly removed, but not before 2029, and the deb822 style, supported since APT 1.1 and intended to become the default. A fresh trixie installation writes one deb822 file, with the CDN URI, the suites trixie and trixie-updates, the components main and non-free-firmware, and Signed-By pointing at the archive keyring.",
+      "pinning_and_priorities": "APT's default priorities are 990 for versions of the target release, 500 for other versions, 100 for the installed version and for archives such as backports, and 1 for archives that must never be used by default such as experimental; nothing is downgraded unless a priority above 1000 is involved. Separate from that, the package Priority field classifies software as required, important, standard or optional, and the Policy says this is what controls which packages enter a standard or minimal installation: required alone leaves enough to boot and install more software, and optional has been the default since dpkg 1.22.13."
+    },
+    "suites_and_components": {
+      "suites": "The archive is addressed by suite and component. A release has its codename, its updates areas and its backports; the rolling suites are unstable, testing and their proposed-updates areas. experimental is described as a place for packages in development that may break the system, and the FAQ states that users should not be using packages from there because they can be dangerous even for experienced people.",
+      "updates_and_backports": "proposed-updates collects the corrections that become the next point release, and the release notes tell administrators to remove it before a major upgrade. stable-updates carries urgent non-security fixes, appears in the default source list as trixie-updates, and was how the OpenSSH problem was handled before the release; the page stating its rules was not reviewed for this entry. Backports rebuilds newer packages for a stable release from testing at best effort, is not tested as a whole, sits at priority 100 until asked for, and is supported on a mailing list rather than in the bug system."
+    },
+    "init_and_system": {
+      "init_system": "systemd has been the default init system for the Linux architectures since Debian 8 “jessie”, following a Technical Committee decision of 2014-02-11, and the wiki is explicit about what followed: only systemd is fully supported, sysvinit is mostly supported and packages are not required to support it, OpenRC was added in buster, and runit as PID 1 is still documented as experimental. Moving away from systemd means removing essential packages, which trixie permits with an explicit APT option, and leaves support with the administrator.",
+      "journald_and_filesystem": "The journald shipped in trixie defaults to Storage=auto: logs go to /var/log/journal only when /var is mounted and writable, and are otherwise volatile in /run, with compression, per-user files and a disk quota capped at 4 G. The root filesystem is merged-/usr, with /bin, /sbin and /lib as symbolic links into /usr, required since bookworm; Debian's build daemons were converted on 2023-10-09.",
+      "boot_and_recovery": "GRUB is the default, with shim and a per-architecture set of signed packages for the kernel, the bootloader and fwupd; Secure Boot has been supported since buster, was dropped and restored on arm64 by bookworm 12.0, and costs kernel lockdown, which forbids unsigned modules and therefore out-of-tree DKMS drivers by default, unsigned kexec, hibernation, access to physical memory and I/O ports, and custom ACPI tables. For a system that will not start, the documented paths are the installer's rescue mode, a debug shell in the initramfs, the systemd rescue and emergency targets, and a live image to chroot from."
+    },
+    "desktops": {
+      "environments": "The versions published for Debian 13 are GNOME 48, KDE Plasma 6.3, LXDE 13, LXQt 2.1.0 and Xfce 4.20, with MATE and Cinnamon also shipped. trixie is the first Debian release to deliver Plasma 6, with Qt 6.8.2 and KDE Frameworks 6.13, while Qt 5.15.15 and KDE Frameworks 5.116 remain for software not yet ported. A desktop in Debian is a task selected during installation and a set of packages in one archive, not a separate edition.",
+      "images_and_display_protocol": "The live images, published for amd64 and using Calamares beside the Debian Installer, come in flavours: the images page lists GNOME, KDE, LXDE, Xfce, Cinnamon and MATE, while the release announcement lists seven environments including LXQt plus a standard image without a graphical interface. Both lists are published, so the set is reported as documented rather than settled. The wiki's Wayland page documents which environments support Wayland sessions, listing MATE and Xfce as not supported, and neither it nor the release notes state which protocol a Debian session uses by default."
+    },
+    "security": {
+      "model_and_patches": "Fixing a stable release means changing as little as possible: fixes are backported rather than taken from a new upstream version, API and ABI are not changed, which is why versions in stable look old next to upstream, and maintainers cannot upload security fixes directly into the archive. An advisory appears when the fixed packages are available, and the announcement list is filtered to accept only messages correctly signed by a team member.",
+      "advisories_and_cves": "Advisories are collected on the security pages with machine-readable OVAL data and a public tracker. Every CVE is recorded, mapped to packages and assessed in Debian terms: a CVE does not imply a serious threat, no advisory is issued for every CVE, and low-impact problems may be fixed in a point release or in a broader advisory. Debian publishes no CVSS scores, does not use external ones for triage, is itself a CVE Numbering Authority and has a disclosure policy.",
+      "access_control": "Four statements about AppArmor are kept apart in the documentation: it has been available in Debian since wheezy; on buster and newer the kernel's LSM support for it is enabled by default; the userspace tools are installed separately; and packages that ship profiles into /etc/apparmor.d have them enabled automatically in complain mode, with a warning that many profiles are not up to date and will break functionality in enforce mode. SELinux is compiled into the packaged Linux kernels but disabled by default, with setup notes and a list of known issues, and Tomoyo is named as the other option.",
+      "not_covered": "Asked whether contrib, non-free and non-free-firmware are security-supported, the FAQ answers that they are not, those areas being outside the distribution and some non-free packages being unfixable without source or licence, though a usable third-party patch is normally processed and published. Packages that a maintainer rather than the security team placed in proposed-updates are not supported by the security team, and for testing the release pages say security updates are irregular and unreliable. unattended-upgrades is recommended for automatic updates; nothing states that it is installed or enabled by default."
+    },
+    "privacy": {
+      "overview": "The project's privacy policy states that there is no requirement for anyone who wishes to use Debian to provide the project with any personal information, the system being freely downloadable without registration or identification. Read narrowly, as the basis for this page: no advertising and no mandatory system-wide telemetry service were identified in the Debian documentation reviewed here.",
+      "documented_mechanisms": [
+        "Opt-in popularity contest",
+        "Public bug database",
+        "Mailing-list archives",
+        "Website privacy policy"
+      ],
+      "what_this_means": "The one documented usage-statistics mechanism is the popularity contest: its package sends the list of installed packages and the access times of relevant files by email each week, the server anonymises the results and publishes them daily, per architecture and per reporting distribution. Beyond that, the traffic documented for a base system is package management, keyring lookups where image signatures are checked, and automatic updates only where that package was installed. This is a conclusion about the project's documentation and its own services, not a guarantee about software added afterwards or about services on other domains."
+    },
+    "updates_and_upgrades": {
+      "routine": "Ordinary maintenance is refreshing the package lists and upgrading, with unattended-upgrades recommended on the security page for machines that should update themselves. A point release adds no new features: a released codename receives only the corrections accepted into it.",
+      "major_upgrade": "For trixie the release notes state that only upgrades from Debian 12 bookworm are supported, older systems being taken through bookworm first. The preparation they list is a clean package database checked with dpkg --audit, holds on essential packages removed, obsolete packages and leftover configuration deleted, proposed-updates removed from the sources, pinning disabled where needed and third-party sources removed or adapted, the tools for finding non-Debian packages being documented as not fully reliable. The upgrade is then mostly automatic and meant to be recorded against the upgrade-reports package; one documented trap is an upgrade interrupted over SSH on bookworm, fixed in 12.12, with updating openssh beforehand the workaround.",
+      "rollback": "No atomic rollback is documented as supported; the published material covers recovering a system that will not boot and preventing the need by taking backups. snapshot.debian.org keeps past states of the archive, which makes a previous version of a package installable again but is not a downgrade path."
+    },
+    "specialised_uses": {
+      "cloud_and_containers": "The Cloud team publishes images for Amazon EC2, Microsoft Azure, OpenStack, PlainVM, GenericCloud and NoCloud in qcow2 and raw formats, with cloud-init and kernel and bootloader packages tuned for fast boot. Multi-architecture container images appear on Docker Hub with a slim variant shipping fewer packages. Xen, KVM, libvirt, Incus, LXC, Docker and Podman are packaged in the archive, which is a statement about availability in Debian, not about Debian being built from them.",
+      "blends": "Debian Pure Blends are the project's internal mechanism for a community with specific needs: meta-packages and configuration presets rather than a fork, with twelve listed as released, among them Debian Edu, Med, Science, Games, Astro, Chemistry, Accessibility, Junior, GIS, Multimedia, Hamradio and FreedomBox, “released” being defined cautiously as having meta-packages or an installer in a stable release. The derivatives page points anyone who only wants a particular package set towards a blend instead of a new distribution."
+    },
+    "reproducibility": {
+      "goal_and_status": "The published goal is that every build of every package in Debian should be reproducible byte for byte. The status sentence on the same page is as direct: reproducible builds of Debian as a whole are still not a reality, individual reproducible builds of packages are done, and it is a stretch to say that Debian is reproducible. The documented tooling is .buildinfo files carrying build environments and checksums, rebuilders comparing results, and debian-repro-status for checking installed packages.",
+      "measurement": "The test platform reports, for forky on amd64, 37,556 of 39,387 source packages reproducible, that is 95.4 percent, with 1,130 unreproducible, 467 build failures and 111 timeouts; forky arm64 measures 94.8 percent and unstable amd64 94.1 percent. These are continuous measurements of development suites, not of a published stable release, and they cover that platform's test set rather than the whole archive."
+    },
+    "advantages": [
+      "Five-year release life cycle",
+      "Seven release architectures",
+      "Closed main archive area",
+      "Signed archive and images",
+      "Elected leadership",
+      "Public security tracker",
+      "Opt-in usage statistics",
+      "Reproducible builds tooling"
+    ],
+    "disadvantages": [
+      "No fixed release date",
+      "Software versions frozen",
+      "No documented rollback path",
+      "Irregular testing security",
+      "Non-main areas unsupported",
+      "i386 and armel retired",
+      "LTS depends on volunteers",
+      "ELTS is a paid third party"
+    ],
+    "who_is_it_for": [
+      "Administrators who want one package archive covering several architectures and device classes, from s390x mainframes to armhf boards, with the same tools on each.",
+      "Systems that must stay on one version of software for years and take only backported fixes, on the documented understanding that versions in stable look old next to upstream.",
+      "Operators who will run their own policy, since pinning, backports, automatic updates and AppArmor profiles are all documented as available and all configured by the administrator.",
+      "Projects building a downstream distribution, which the project documents as an expected use with published criteria for being listed as a derivative, and points towards blends when a package set is all that is wanted."
+    ],
+    "who_is_it_not_for": [
+      "Anyone who needs the newest upstream release of an application on the current stable system without rebuilding it: backports cover a defined subset at best effort, and experimental is documented as unsafe for ordinary use.",
+      "Setups that require an announced date for the next release: the documentation publishes freeze criteria and provisional point-release dates, and says no release date has been set for the next major version.",
+      "Environments that need a supported path back to the previous release, since no rollback procedure is published and major upgrades are documented one release at a time.",
+      "Hardware whose only driver is out-of-tree and unsigned while Secure Boot is enabled, given the documented lockdown behaviour, or an i386 machine expected to be upgraded rather than reinstalled as amd64."
+    ],
+    "verdict": "Debian is one archive of .deb packages, addressed by suite and component, maintained by teams whose powers are written in a constitution and whose quality bar is a policy manual. Its unit of maintenance is the package, its unit of publication is the suite, and its unit of support is a layered sequence of three years by the Security Team, a volunteer LTS effort to at least five years, and a paid third-party extension to ten. Installation media, security coverage, upgrade paths and the boundary between the distribution and the areas next to it are specified in public documents that name the team responsible for each."
+  },
+  "components": [
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "The low-level, file-oriented layer that installs and removes .deb packages; version 1.22.22 in trixie, marked essential, maintained as a Debian project with its own team page. Also provides update-alternatives, dpkg-divert and dpkg-statoverride."
+    },
+    {
+      "id": "apt",
+      "name": "APT",
+      "role": "package_manager",
+      "note": "Fetches package lists and files from the configured archives and resolves what to install; version 3.0.3 in trixie. apt is documented as the interactive command whose behaviour may change, apt-get and apt-cache as the script-facing tools. Developed inside the project."
+    },
+    {
+      "id": "debian-installer",
+      "name": "Debian Installer",
+      "role": "installer",
+      "note": "The installer built and released by the project's Installer team, with daily images for testing, per-architecture manuals and preconfiguration files. Live images use Calamares alongside it."
+    },
+    {
+      "id": "linux",
+      "name": "Linux",
+      "role": "kernel",
+      "note": "A kernel built and packaged by Debian from upstream sources, with signed image packages by default on the architectures using Secure Boot and unsigned variants for local signing. Upstream project, not a Debian component in the ownership sense."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "Default init system for the Linux architectures since jessie by a 2014 Technical Committee decision, and the only one the project documents as fully supported; sysvinit, OpenRC and runit are packaged, with runit as PID 1 experimental. Upstream project."
+    },
+    {
+      "id": "grub",
+      "name": "GRUB",
+      "role": "boot_loader",
+      "note": "Named in the documentation as the default bootloader of choice; the signed grub-efi packages are part of the Secure Boot chain, and a systemd-boot installation is an alternative selectable from trixie."
+    },
+    {
+      "id": "apparmor",
+      "name": "AppArmor",
+      "role": "security_module",
+      "note": "Available since wheezy; the kernel LSM is enabled by default from buster, the userspace tools are installed separately, and packaged profiles are enabled in complain mode rather than enforce."
+    },
+    {
+      "id": "selinux",
+      "name": "SELinux",
+      "role": "security_module",
+      "note": "Compiled into the packaged Linux kernels but disabled by default, with setup notes, a list of known issues and a proposed release goal that is not documented as achieved."
+    },
+    {
+      "id": "gnome",
+      "name": "GNOME",
+      "role": "desktop_environment",
+      "note": "GNOME 48 in Debian 13, offered as an installation task and as a live flavour; the display manager gdm3 depends on libpam-systemd, which the wiki documents as separable since bookworm via gnome-core."
+    },
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "Plasma 6.3 in Debian 13, the first Debian release with Plasma 6, shipped alongside Qt 5 and KDE Frameworks 5 for software that has not been ported."
+    },
+    {
+      "id": "wayland",
+      "name": "Wayland",
+      "role": "display_protocol",
+      "note": "Support is documented per desktop environment; the pages reviewed state which sessions exist, not which protocol a session uses by default in Debian."
+    },
+    {
+      "id": "x-org",
+      "name": "X.org",
+      "role": "display_protocol",
+      "note": "The X11 server Debian packages for the environments that the Wayland page does not list as supported, including MATE and Xfce, and for the X server compatibility layer under Wayland."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Another distribution built around its own package management and governance rather than Debian's archive; listed as a comparison of approach, not of suitability."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "downstream_derivative",
+      "note": "Highlighted on Debian's derivatives page and described in the project's census as a Debian derivative sponsored by Canonical that rebuilds Debian source packages, with LTS releases based on Debian testing and the others on unstable. The census entry is dated 2016 with sources.list examples from 2023, so the relation is taken from it and Ubuntu's current state is not."
+    },
+    {
+      "id": "kali",
+      "name": "Kali Linux",
+      "relation": "downstream_derivative",
+      "note": "One of the five derivatives Debian chooses to highlight, for security auditing; the census describes it as based on Debian testing, using Debian binaries with its own modifications and additions, and declaring its own dpkg vendor."
+    },
+    {
+      "id": "tails",
+      "name": "Tails",
+      "relation": "downstream_derivative",
+      "note": "Listed among the derivatives Debian highlights, meeting the published criteria of active maintenance, Debian membership in its team and registration in the census."
+    },
+    {
+      "id": "grml",
+      "name": "Grml",
+      "relation": "downstream_derivative",
+      "note": "Listed among the derivatives Debian highlights; a live system for system administrators."
+    },
+    {
+      "id": "purism-pureos",
+      "name": "PureOS",
+      "relation": "downstream_derivative",
+      "note": "Listed among the derivatives Debian highlights, as the distribution of a hardware vendor that keeps to DFSG-free software."
+    },
+    {
+      "id": "devuan",
+      "name": "Devuan",
+      "relation": "downstream_derivative",
+      "note": "Described in the census as a derivative providing a Debian-like system without systemd, supporting sysvinit and OpenRC, using Debian binaries with modifications and its own dpkg vendor field. The entry was last updated in 2019."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "related",
+      "note": "Named by the Debian FAQ as one of the distributions that are Debian-based rather than Debian, and by the FAQ's own caution as one whose packages are not interchangeable with Debian's. Its base release line was not established from a primary source in this pass, so no derivative relation is asserted here."
+    },
+    {
+      "id": "raspberry-pi-os",
+      "name": "Raspberry Pi OS",
+      "relation": "downstream_of",
+      "note": "The manufacturer's official, supported operating system, documented by that manufacturer as a port of Debian trixie with its own desktop, published images and a stated Debian version. It is not a Debian image: Debian publishes netinst and installer support for the boards instead."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Debian 13 trixie (stable)",
+      "description": "The current release, at point release 13.7.0 of 2026-09-12, supported by the Security Team until 2028-08-09 and by LTS until 2030-06-30. Software keeps the versions frozen at release."
+    },
+    {
+      "name": "Debian 12 bookworm (oldstable)",
+      "description": "The previous release, at 12.15 of 2026-07-11, the only one from which an upgrade to trixie is supported, with LTS until 2028-06-30 and backports updated until 2026-08-09."
+    },
+    {
+      "name": "Debian 11 bullseye (archived)",
+      "description": "Out of LTS since 2026-08-31 and covered only by the paid third-party ELTS service until 2031-06-30; listed here because the archive still publishes it."
+    },
+    {
+      "name": "Debian 14 forky (testing)",
+      "description": "The next release in preparation, receiving updates from unstable four times a day, with no release date set and security updates documented as irregular."
+    },
+    {
+      "name": "sid (unstable)",
+      "description": "The permanent development suite where new upstream versions arrive first, never released, and where security fixes are the package maintainer's responsibility."
+    },
+    {
+      "name": "experimental",
+      "description": "A transit archive for packages that may break the system, signed only by the automatic archive key, held at APT priority 1 so it is never installed by default."
+    },
+    {
+      "name": "backports",
+      "description": "Newer packages rebuilt for a stable release, disabled by default at priority 100, supported on a best-effort basis, with -sloppy variants explicitly without official support."
+    },
+    {
+      "name": "Debian Live images",
+      "description": "amd64-only images that run a desktop before installing and use Calamares as well as the Debian Installer, in the flavours listed on the live images page."
+    },
+    {
+      "name": "Debian cloud images",
+      "description": "Images for EC2, Azure, OpenStack, PlainVM, GenericCloud and NoCloud in qcow2 and raw, with cloud-init and boot-tuned kernel packages."
+    },
+    {
+      "name": "Debian container images",
+      "description": "Multi-architecture images published on Docker Hub, including a slim variant that ships fewer packages to reduce disk use."
+    },
+    {
+      "name": "Debian Ports",
+      "description": "Architectures outside the release set, maintained by their own teams, including loong64 on its way into forky and the m68k, x32 and RISC-V variants that are not part of a release, together with the non-Linux kernels."
+    },
+    {
+      "name": "Debian Pure Blends",
+      "description": "Meta-packages and configuration presets for a community of users, such as Debian Edu, Med, Science or Games, released inside the distribution rather than as a separate one."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.debian.org/",
+    "documentation": "https://www.debian.org/doc/",
+    "releases": "https://www.debian.org/releases/",
+    "downloads": "https://www.debian.org/distrib/",
+    "security": "https://www.debian.org/security/",
+    "wiki": "https://wiki.debian.org/",
+    "installer": "https://www.debian.org/devel/debian-installer/"
+  },
+  "sources": [
+    {
+      "title": "Debian releases: current, oldstable, testing and archived releases",
+      "url": "https://www.debian.org/releases/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Release, point-release and end-of-life dates, and the statement that no release date has been set for forky"
+    },
+    {
+      "title": "Debian 13 “trixie” released",
+      "url": "https://www.debian.org/News/2025/20250809",
+      "type": "official",
+      "date": "2025-08-09",
+      "accessed": "2026-09-19",
+      "note": "Architecture list, package count, desktop versions, live flavours, cloud and container images, installation languages"
+    },
+    {
+      "title": "Debian 11 Long Term Support reaches end-of-life",
+      "url": "https://www.debian.org/News/2026/20260831",
+      "type": "official",
+      "date": "2026-08-31",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian 13 release notes: what's new",
+      "url": "https://www.debian.org/releases/trixie/release-notes/whats-new.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian 13 release notes: issues to be aware of",
+      "url": "https://www.debian.org/releases/trixie/release-notes/issues.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Last release for armel, /boot sizing before an upgrade, i386 demotion"
+    },
+    {
+      "title": "Debian 13 release notes: upgrading from Debian 12",
+      "url": "https://www.debian.org/releases/trixie/release-notes/upgrading.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Supported upgrade path, preparation steps, default deb822 source list, OpenSSH warning"
+    },
+    {
+      "title": "Installation Guide for amd64: hardware requirements",
+      "url": "https://www.debian.org/releases/stable/amd64/ch03s04.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Installation Guide for amd64: devices requiring firmware",
+      "url": "https://www.debian.org/releases/stable/amd64/ch02s02.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Netinst and minimal installation images",
+      "url": "https://www.debian.org/distrib/netinst",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Live install images",
+      "url": "https://www.debian.org/CD/live/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Verifying authenticity of Debian images",
+      "url": "https://www.debian.org/CD/verify",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Ports",
+      "url": "https://www.debian.org/ports/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Pure Blends",
+      "url": "https://www.debian.org/blends/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Policy Manual: distribution definitions and archive areas",
+      "url": "https://www.debian.org/doc/debian-policy/ch-archive.html",
+      "type": "documentation",
+      "date": "v4.7.4.1",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Social Contract",
+      "url": "https://www.debian.org/social_contract",
+      "type": "official",
+      "date": "v1.2, 2022-10-01",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Constitution",
+      "url": "https://www.debian.org/devel/constitution",
+      "type": "official",
+      "date": "v1.9, 2022-03-26",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Technical Committee",
+      "url": "https://www.debian.org/devel/tech-ctte",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Project Leader election 2026",
+      "url": "https://www.debian.org/vote/2026/vote_001",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "General Resolution on non-free firmware in the installation images",
+      "url": "https://www.debian.org/vote/2022/vote_003",
+      "type": "official",
+      "date": "2022",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian FAQ: choosing Debian",
+      "url": "https://www.debian.org/doc/manuals/debian-faq/choosing.en.html",
+      "type": "documentation",
+      "date": "v12.1, October 2024",
+      "accessed": "2026-09-19",
+      "note": "Suites, derivatives, and the warning that .deb files from another distribution are not interchangeable"
+    },
+    {
+      "title": "Debian Reference: the Debian system and its tools",
+      "url": "https://www.debian.org/doc/manuals/debian-reference/ch02.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "The archive, APT and dpkg layers and the table of package management tools"
+    },
+    {
+      "title": "Debian security information",
+      "url": "https://www.debian.org/security/",
+      "type": "documentation",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Security FAQ",
+      "url": "https://www.debian.org/security/faq",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Support period, backport policy, CVE handling, absence of CVSS, coverage of contrib and non-free, mirroring of security.debian.org"
+    },
+    {
+      "title": "Debian privacy policy",
+      "url": "https://www.debian.org/legal/privacy",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian trademarks",
+      "url": "https://www.debian.org/trademark",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Ownership by Software in the Public Interest, Inc., registered 1999-12-21 for marks in use since 1993"
+    },
+    {
+      "title": "Debian derivatives",
+      "url": "https://www.debian.org/derivatives/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Criteria for a derivative, the five distributions Debian highlights, and blends as the internal alternative"
+    },
+    {
+      "title": "Release Team: suite update policy and release criteria",
+      "url": "https://release.debian.org/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Per-suite behaviour, freeze criteria and the point-release schedule"
+    },
+    {
+      "title": "Archive signing keys",
+      "url": "https://ftp-master.debian.org/keys.html",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Which key signs which suite, and the replacement and revocation procedure"
+    },
+    {
+      "title": "APT sources.list(5), trixie",
+      "url": "https://manpages.debian.org/trixie/apt/sources.list.5.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "One-line and deb822 formats, with removal of the former not before 2029"
+    },
+    {
+      "title": "APT apt_preferences(5), trixie",
+      "url": "https://manpages.debian.org/trixie/apt/apt_preferences.5.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "note": "Default priorities 1, 100, 500 and 990 and the selection rules"
+    },
+    {
+      "title": "dpkg in the trixie archive",
+      "url": "https://packages.debian.org/trixie/dpkg",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: supported architectures",
+      "url": "https://wiki.debian.org/SupportedArchitectures",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: architecture specific memo",
+      "url": "https://wiki.debian.org/ArchitectureSpecificsMemo",
+      "type": "official",
+      "date": "2026-08-13",
+      "accessed": "2026-09-19",
+      "note": "amd64 baseline: psABI baseline, no x86-64-v2 requirement"
+    },
+    {
+      "title": "Debian wiki: Long Term Support",
+      "url": "https://wiki.debian.org/LTS",
+      "type": "official",
+      "date": "last updated 2026-08-31",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: Extended Long Term Support",
+      "url": "https://wiki.debian.org/LTS/Extended",
+      "type": "official",
+      "date": "last updated 2026-08-31",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: init systems",
+      "url": "https://wiki.debian.org/Init",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: systemd",
+      "url": "https://wiki.debian.org/systemd",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: UsrMerge",
+      "url": "https://wiki.debian.org/UsrMerge",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: SecureBoot",
+      "url": "https://wiki.debian.org/SecureBoot",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: AppArmor HowToUse",
+      "url": "https://wiki.debian.org/AppArmor/HowToUse",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: SELinux",
+      "url": "https://wiki.debian.org/SELinux",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: Wayland",
+      "url": "https://wiki.debian.org/Wayland",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian wiki: system virtualisation and containers",
+      "url": "https://wiki.debian.org/SystemVirtualization",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "Which hypervisors, managers and container tools are packaged in the archive"
+    },
+    {
+      "title": "Debian wiki: ReproducibleBuilds",
+      "url": "https://wiki.debian.org/ReproducibleBuilds",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "note": "The goal and the statement that reproducible builds of Debian as a whole are not yet a reality"
+    },
+    {
+      "title": "Debian wiki: derivatives census, Ubuntu",
+      "url": "https://wiki.debian.org/Derivatives/Census/Ubuntu",
+      "type": "official",
+      "date": "status active 2016-05-07",
+      "accessed": "2026-09-19",
+      "note": "Community-maintained census entry; the relation to Debian is taken from it, the current state of Ubuntu is not"
+    },
+    {
+      "title": "Debian wiki: derivatives census, Devuan",
+      "url": "https://wiki.debian.org/Derivatives/Census/Devuan",
+      "type": "official",
+      "date": "last updated 2019-07-08",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian popularity contest statistics",
+      "url": "https://popcon.debian.org/",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian snapshot archive",
+      "url": "https://snapshot.debian.org/",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Debian Backports: instructions",
+      "url": "https://backports.debian.org/Instructions/",
+      "type": "official",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Reproducible builds test statistics for Debian",
+      "url": "https://tests.reproducible-builds.org/debian/reproducible.html",
+      "type": "third-party",
+      "publisher": "Reproducible Builds project",
+      "accessed": "2026-09-19",
+      "note": "Continuously recomputed measurements for forky, unstable and experimental, not for a published stable release"
+    },
+    {
+      "title": "Raspberry Pi OS downloads",
+      "url": "https://www.raspberrypi.com/software/operating-systems/",
+      "type": "third-party",
+      "publisher": "Raspberry Pi Ltd",
+      "date": "images dated 2026-09-15",
+      "accessed": "2026-09-19",
+      "note": "The vendor's own description of the system as a port of Debian trixie"
+    },
+    {
+      "title": "Linux Mint FAQ",
+      "url": "https://linuxmint.com/faq.php",
+      "type": "third-party",
+      "publisher": "Linux Mint project",
+      "accessed": "2026-09-19",
+      "note": "Does not state its upstream base, which is why Mint is described as related rather than as a derivative here"
+    }
+  ],
+  "last_verified": "2026-09-19"
+}

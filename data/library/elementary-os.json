@@ -1,0 +1,279 @@
+{
+  "id": "elementary-os",
+  "name": "elementary OS",
+  "type": "operating_system",
+  "summary": "A desktop-centric Linux distribution developed by elementary, Inc. on an Ubuntu Long Term Support (LTS) foundation. elementary OS features the bespoke Pantheon desktop environment, written predominantly in Vala with GTK and the Granite companion library. It enforces rigorous Human Interface Guidelines (HIG), distributes desktop applications inside Flatpak sandboxes mediated by XDG Desktop Portals, operates an AppCenter software marketplace based on a voluntary 'Pay What You Can' model, and adheres to a strict zero-telemetry privacy policy.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-based",
+    "pantheon",
+    "gala",
+    "granite",
+    "vala",
+    "flatpak",
+    "appcenter",
+    "pay-what-you-can"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-3.0-or-later, LGPL-3.0-or-later, MIT, and redistributable proprietary firmware/microcode",
+  "last_verified": "2026-09-25",
+  "content": {
+    "introduction": "elementary OS is an open-source, desktop operating system engineered to provide a cohesive, visually harmonized computing environment. Built upon the LTS releases of Ubuntu, elementary OS replaces traditional desktop suites with its own Pantheon desktop environment. Emphasizing typography, consistent layout spacing, and deliberate interface minimalism, the distribution relies on its custom Granite UI toolkit and the Vala programming language, while enforcing strict sandboxing and user consent protocols across its native application stack.",
+    "what_is_it": "Technically, elementary OS is an Ubuntu LTS derivative that substitutes Canonical's GNOME desktop and Snap ecosystem with a custom userland and application framework. Its primary components include the Gala window manager (a Mutter-derived compositor), the Wingpanel top status bar, the Plank desktop dock, the Slingshot application launcher, and Switchboard modular settings. Desktop software is distributed predominantly via Flatpak packages hosted in its curated AppCenter alongside Flathub, running within containerized boundaries using XDG Desktop Portals for secure host resource access.",
+    "origin_and_history": "The elementary project originated in 2007 as a community design effort creating visual themes and an icon set for Ubuntu and GNOME. Concluding that existing desktop shells could not deliver full design consistency, founder Daniel Foré and initial contributors initiated development of a complete operating system. The inaugural version, elementary OS 0.1 'Jupiter', was published on March 31, 2011, based on Ubuntu 10.10. Subsequent releases established independent identity and custom technologies: 0.2 'Luna' (2012/2013, introducing Pantheon and Gala), 0.3 'Freya' (2015), 0.4 'Loki' (2016, dropping 32-bit x86), 5.0 'Juno' (2018), 6.0/6.1 'Odin'/'Jólnir' (2021, adopting Flatpak and dark style standards), 7.0/7.1 'Horus' (2023, based on Ubuntu 22.04 LTS), and elementary OS 8.0 (released November 26, 2024, based on Ubuntu 24.04 LTS with Wayland and GTK 4/Granite 7).",
+    "governance_and_organization": "The project is directed by elementary, Inc., a commercial legal entity founded to sustain software development, infrastructure, and community outreach. Danielle Foré serves as founder and lead developer. Development is conducted collaboratively with an international network of open-source contributors submitting pull requests across repositories on GitHub. Funding is generated through direct user donations on OS downloads, sales of merchandise, and revenue sharing from developer submissions in AppCenter. Design choices, API specifications, and architectural directions are guided by published Human Interface Guidelines rather than ad-hoc community polling.",
+    "human_interface_guidelines_and_design_philosophy": "elementary OS adheres to a strict set of Human Interface Guidelines (HIG) that define visual proportions, iconography, typography (using the Inter font family), and interaction paradigms. Distinctive design conventions include:\n\n- HeaderBars: combining window title bars and toolbars to conserve vertical screen space.\n- Window Control Layout: by default, a single close button on the upper left and a single maximize/toggle button on the upper right, omitting a dedicated minimize button.\n- Automatic State Saving: applications automatically save document state and window configurations continuously without prompting users with 'Save' or 'Do you want to exit without saving?' dialogs.\n- Single-Click Navigation: standard file management interfaces historically favored single-click folder navigation to minimize redundant clicks, configurable in settings.",
+    "pantheon_desktop_and_core_architecture": "Pantheon is the native desktop environment of elementary OS. Built with modularity in mind, it comprises several independent system services:\n\n- `Gala`: the window manager and compositor based on `libmutter`, providing hardware-accelerated animations, workspace transitions, dynamic tiling, and a bird's-eye Multitasking View.\n- `Wingpanel`: the slender top bar containing the Slingshot application menu trigger on the left, clock and calendar centrally, and unified system indicators (networking, audio, battery, user session) on the right.\n- `Plank`: the lightweight dock anchored at the bottom edge, providing application launching, window switching, running indicators, and context menus (Quicklists).\n- `Slingshot`: the keyboard-driven and categorized application launcher.\n- `Switchboard`: the modular control center executing individual dynamic modules ('plugs') for display, networking, sound, user accounts, and security.",
+    "vala_language_and_granite_toolkit": "elementary OS is one of the largest production deployments of the Vala programming language. Vala compiles directly into readable C code utilizing GNOME's GObject system, delivering high execution speeds and low memory consumption without requiring an interpreter or garbage collector runtime. To complement GTK, the project develops `Granite`, an extended companion widget library (Granite 6 for GTK 3, Granite 7 for GTK 4/libadwaita). Granite supplies specialized UI elements such as integrated search bars, status pages, time pickers, authentication prompts, and standard preference dialogues.",
+    "appcenter_and_pay_what_you_can_model": "AppCenter is the curated application portal of elementary OS. It introduces an ethical monetization model known as 'Pay What You Can'. Application developers specify a suggested purchase price or donation amount (which can be set to $0). Users can download any application without mandatory payment by typing '0' or contribute an arbitrary amount using credit cards processed securely via Stripe. Applications published in AppCenter undergo automated and human code review to verify HIG compliance, sandbox boundaries, and security standards.",
+    "sandboxing_flatpak_and_portals": "Starting with elementary OS 6, all AppCenter applications are packaged exclusively in the Flatpak container format. Each application runs inside an isolated bubble with restricted access to the underlying filesystem, network interfaces, and peripheral hardware. Host system interactions are mediated through XDG Desktop Portals (`xdg-desktop-portal-gtk` and Pantheon portals), requiring explicit user authorization for file selection, webcam access, microphone streaming, or location services. With elementary OS 8, the global Flathub repository is integrated natively into AppCenter, providing access to broad third-party software catalogs with clear sandbox permission badges.",
+    "display_servers_x11_and_wayland_transition": "Historically, elementary OS operated on the X11 display server via the Gala compositor. In elementary OS 8.0, the project initiated an architectural transition toward the Wayland protocol, introducing a dedicated Wayland session built on modern Mutter APIs alongside a 'Classic' X11 session. Wayland operation eliminates visual screen tearing, enforces client-to-client window isolation to mitigate keylogging vectors, and provides native support for per-monitor fractional scaling and mixed display refresh rates.",
+    "audio_architecture_and_pipewire": "elementary OS incorporates the modern PipeWire multimedia server alongside the WirePlumber session manager. Replacing legacy PulseAudio and JACK sound stacks, PipeWire delivers low-latency audio routing, per-application volume and stream redirection, and secure video capture routing for screen recording and videoconferencing applications under Wayland.",
+    "ubuntu_lts_foundation_and_kernel_hwe": "elementary OS is constructed directly upon Ubuntu Long Term Support (LTS) releases (elementary OS 7.1 on Ubuntu 22.04 LTS; elementary OS 8.0 on Ubuntu 24.04 LTS). Underneath the Pantheon desktop, the distribution utilizes Ubuntu's `glibc`, systemd init system, and APT/dpkg core repositories. The operating system participates in Ubuntu's Hardware Enablement (HWE) stack, receiving regular updates to the Linux kernel (such as Linux 6.8+ in OS 8) and Mesa 3D graphics drivers throughout the multi-year lifecycle of the LTS base.",
+    "installation_and_disk_encryption": "System installation is conducted through `io.elementary.installer`, a purpose-built graphical installer developed in collaboration with System76. The installer separates physical disk partitioning and imaging from user account creation, allowing hardware vendors to perform OEM installations. The installer defaults to recommending full-disk encryption backed by LUKS2, generating emergency recovery keys and ensuring data security in the event of hardware theft or loss.",
+    "hardware_support_and_architectures": "Official production images of elementary OS are compiled exclusively for the 64-bit `x86_64` (amd64) architecture. Support for legacy 32-bit x86 systems was discontinued with elementary OS 0.4. For development and exploratory platforms, elementary, Inc. maintains experimental build repositories targeting ARM 64-bit (AArch64) processors, including Raspberry Pi 4/5 single-board computers and Pinebook Pro laptops.",
+    "parental_controls_and_onboarding": "To streamline initial configuration, the system launches the `io.elementary.onboarding` wizard upon first boot, allowing users to configure Night Light display warmth, enable automatic maintenance (clearing cache and trash bins), and adjust privacy toggles. Integrated directly into Switchboard is a dedicated Screen Time and Parental Controls module, permitting system administrators to enforce daily compute quotas, restrict operating hours, and filter application and web access on individual user accounts.",
+    "security_and_permissions": "elementary OS leverages Ubuntu's AppArmor profiles and cryptographic repository signing. In the user environment, the Security & Privacy settings panel provides an exhaustive overview of runtime permissions granted to applications. Users can audit and revoke permissions for geolocation, camera, microphone, and filesystem access on a per-app basis. Visual indicators in Wingpanel notify users whenever hardware sensors (such as webcams or microphones) are active.",
+    "privacy_and_telemetry": "Privacy is an explicitly articulated core value of elementary OS. The operating system contains zero telemetry agents, no tracking scripts, and no persistent device identifiers transmitted to external servers. Searching within the application launcher or AppCenter operates purely locally or through non-profiling API calls. On web services (`elementary.io`), traffic analytics are gathered exclusively using open-source, cookie-free Plausible Analytics in compliance with GDPR. The official privacy policy explicitly affirms: 'We don't collect personal data through our operating system. Your data belongs to you, and only you.'",
+    "advantages": [
+      "Rigorous visual cohesion and design consistency enforced by published Human Interface Guidelines (HIG)",
+      "Bespoke Pantheon desktop environment developed in native Vala, offering low resource overhead and smooth animations",
+      "Comprehensive application sandboxing via Flatpak and XDG Desktop Portals protecting personal user data",
+      "Native AppCenter marketplace with ethical 'Pay What You Can' software monetization model supporting independent creators",
+      "Direct integration of Flathub in elementary OS 8 alongside curated native applications",
+      "Strict zero-telemetry policy with complete absence of operating system tracking or data monetization",
+      "Rock-solid long-term operating foundation derived from Ubuntu LTS with Hardware Enablement kernel updates"
+    ],
+    "disadvantages": [
+      "Strict adherence to HIG results in less visual configurability compared to highly modular desktops like KDE Plasma or Xfce",
+      "Non-standard window control layout (close left, maximize right, no minimize button) may disorient users accustomed to traditional paradigms",
+      "Legacy 32-bit x86 hardware is completely unsupported, and ARM64 images remain experimental",
+      "The curated AppCenter application catalog is smaller than general distribution repositories, though mitigated by Flathub integration",
+      "The ongoing architectural transition from X11 to Wayland in elementary OS 8 requires maintaining both sessions for edge-case software compatibility"
+    ],
+    "who_is_it_for": [
+      "Users seeking a meticulously designed, visually consistent Linux desktop with intuitive workflow ergonomics",
+      "Privacy-conscious desktop users requiring complete absence of OS telemetry and granular app permission controls",
+      "Developers interested in building clean, sandboxed GTK/Vala desktop applications with direct monetization through AppCenter",
+      "Students, family members, or non-technical users benefiting from a curated, stable workstation with integrated parental controls"
+    ],
+    "who_is_it_not_for": [
+      "Power users demanding infinite desktop customization, alternative panel docking engines, or heavy desktop theming hacks",
+      "Users operating legacy 32-bit PCs or specialized server architectures without graphical displays",
+      "Users who rely on non-sandboxed system tweaks or deep package tampering that bypasses Flatpak and Portals",
+      "Enterprise administrators requiring formal corporate vendor certifications or multi-year commercial RHEL-style enterprise SLAs"
+    ],
+    "verdict": "elementary OS delivers a focused, design-driven desktop experience that distinguishes itself within the Linux landscape through its adherence to Human Interface Guidelines, its custom Pantheon environment, and its pioneering AppCenter ecosystem. By grounding itself in Ubuntu LTS stability while championing Flatpak sandboxing, Wayland modernity, and an unwavering zero-telemetry privacy stance, elementary OS offers a compelling, distraction-free operating system for users and creators who prioritize craftsmanship, privacy, and simplicity."
+  },
+  "components": [
+    {
+      "id": "pantheon",
+      "name": "Pantheon Desktop",
+      "role": "desktop_environment",
+      "note": "The bespoke desktop shell developed for elementary OS, integrating Gala, Wingpanel, Plank, Slingshot, and Switchboard."
+    },
+    {
+      "id": "gala",
+      "name": "Gala Window Manager",
+      "role": "window_manager_and_compositor",
+      "note": "Hardware-accelerated window manager and compositor based on Mutter, providing workspace handling, animations, and tiling."
+    },
+    {
+      "id": "wingpanel",
+      "name": "Wingpanel",
+      "role": "top_panel",
+      "note": "Top status panel housing the Slingshot launcher trigger, dynamic date/clock display, and consolidated system indicators."
+    },
+    {
+      "id": "plank",
+      "name": "Plank Dock",
+      "role": "desktop_dock",
+      "note": "Bottom dock providing application launching, window switching, running indicators, and context menus."
+    },
+    {
+      "id": "slingshot",
+      "name": "Slingshot",
+      "role": "application_launcher",
+      "note": "Keyboard-driven application menu offering categorized and search-indexed access to installed applications."
+    },
+    {
+      "id": "switchboard",
+      "name": "Switchboard",
+      "role": "system_settings",
+      "note": "Modular system configuration center loading independent plug modules for displays, sound, security, and networking."
+    },
+    {
+      "id": "granite",
+      "name": "Granite Toolkit",
+      "role": "ui_toolkit_library",
+      "note": "Companion library extending GTK with specialized widgets, styling, and dialogues adhering to elementary HIG."
+    },
+    {
+      "id": "appcenter",
+      "name": "AppCenter",
+      "role": "application_store",
+      "note": "Application marketplace featuring sandboxed Flatpaks, Flathub integration, and the 'Pay What You Can' payment mechanism."
+    },
+    {
+      "id": "flatpak",
+      "name": "Flatpak",
+      "role": "sandboxed_package_format",
+      "note": "Universal application packaging and sandboxing technology providing isolated runtime environments for AppCenter applications."
+    },
+    {
+      "id": "xdg-desktop-portal",
+      "name": "XDG Desktop Portals",
+      "role": "desktop_integration_portals",
+      "note": "Secure inter-process portal framework handling file picking, camera access, and device permissions between sandboxed apps and the host."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_multimedia_server",
+      "note": "Low-latency multimedia server handling audio mixing, stream routing, and Wayland screen casting with WirePlumber session management."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "Core system and service manager managing bootstrap initialization, login sessions, and service supervision inherited from Ubuntu."
+    },
+    {
+      "id": "apt",
+      "name": "APT (Advanced Package Tool)",
+      "role": "package_manager",
+      "note": "Underlying command-line package management tool maintaining the base system libraries and OS packages from Ubuntu repositories."
+    },
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "Low-level Debian package manager handling extraction, configuration, and verification of binary `.deb` packages."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "based_on",
+      "note": "Immediate upstream distribution providing the LTS kernel, core libraries, security patches, and APT packaging infrastructure."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_lineage",
+      "note": "Foundational upstream distribution from which Ubuntu originates, defining the fundamental Debian binary package architecture."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "alternative",
+      "note": "Alternative desktop distribution based on Ubuntu LTS, contrasting elementary's strict HIG and Flatpak focus with Cinnamon's traditional desktop layout."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Upstream-focused distribution offering GNOME Workstation and Wayland defaults, contrasting with elementary's curated Pantheon and LTS cadence."
+    },
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Minimal, rolling-release distribution offering total user assembly, contrasted with elementary's curated out-of-the-box vertical integration."
+    }
+  ],
+  "variants": [
+    {
+      "name": "elementary OS 8.0",
+      "description": "The current production release based on Ubuntu 24.04 LTS, featuring Wayland display support, GTK 4, Granite 7, PipeWire, and native Flathub integration."
+    },
+    {
+      "name": "elementary OS 7.1 'Horus'",
+      "description": "The previous major stable release based on Ubuntu 22.04 LTS, shipping Gala on X11, Granite 6, and full Flatpak AppCenter integration."
+    },
+    {
+      "name": "elementary OS Early Access Builds (ARM64)",
+      "description": "Experimental development builds compiling Pantheon and core applications for 64-bit ARM hardware, including Raspberry Pi 4/5 and Pinebook Pro."
+    }
+  ],
+  "links": {
+    "homepage": "https://elementary.io/",
+    "blog": "https://blog.elementary.io/",
+    "developer_docs": "https://elementary.io/docs/code",
+    "human_interface_guidelines": "https://elementary.io/docs/human-interface-guidelines",
+    "github": "https://github.com/elementary",
+    "privacy_policy": "https://elementary.io/privacy",
+    "weblate": "https://l10n.elementary.io/"
+  },
+  "sources": [
+    {
+      "title": "elementary OS Official Portal — Operating System Overview and Philosophy",
+      "url": "https://elementary.io/",
+      "type": "official",
+      "accessed": "2026-09-25",
+      "publisher": "elementary, Inc.",
+      "note": "Documents desktop interface principles, AppCenter ecosystem, and the voluntary 'Pay What You Can' funding structure."
+    },
+    {
+      "title": "elementary Blog — elementary OS 8 Available Now",
+      "url": "https://blog.elementary.io/os-8-available-now/",
+      "type": "official",
+      "accessed": "2026-09-25",
+      "publisher": "elementary, Inc.",
+      "note": "Comprehensive announcement detailing Ubuntu 24.04 LTS base, Wayland transition, GTK 4/Granite 7 upgrades, PipeWire integration, and Flathub support."
+    },
+    {
+      "title": "elementary Blog — elementary OS 7.1 'Horus' Available Now",
+      "url": "https://blog.elementary.io/os-7-1-available-now/",
+      "type": "official",
+      "accessed": "2026-09-25",
+      "publisher": "elementary, Inc.",
+      "note": "Details Ubuntu 22.04 LTS foundation, Flatpak app sandbox protections, Screen Time controls, and Onboarding refinements."
+    },
+    {
+      "title": "elementary Official Portal — Privacy Policy",
+      "url": "https://elementary.io/privacy",
+      "type": "official",
+      "accessed": "2026-09-25",
+      "publisher": "elementary, Inc.",
+      "note": "Affirms zero personal data collection or telemetry within the operating system and specifies cookie-free Plausible analytics on web servers."
+    },
+    {
+      "title": "elementary Developer Documentation — Human Interface Guidelines (HIG)",
+      "url": "https://elementary.io/docs/human-interface-guidelines",
+      "type": "documentation",
+      "accessed": "2026-09-25",
+      "publisher": "elementary, Inc.",
+      "note": "Formal specifications for component padding, typography, HeaderBars, window control layout, and automatic state saving."
+    },
+    {
+      "title": "GitHub — elementary/gala: Window Manager and Compositor",
+      "url": "https://github.com/elementary/gala",
+      "type": "repository",
+      "accessed": "2026-09-25",
+      "publisher": "elementary Project Maintainers",
+      "note": "Source repository and technical documentation for Gala, detailing libmutter integration, animations, and Wayland architecture."
+    },
+    {
+      "title": "GitHub — elementary/granite: GTK Companion Library",
+      "url": "https://github.com/elementary/granite",
+      "type": "repository",
+      "accessed": "2026-09-25",
+      "publisher": "elementary Project Maintainers",
+      "note": "Source repository and API specifications for the Granite companion library extending GTK 3 and GTK 4."
+    },
+    {
+      "title": "GitHub — elementary/appcenter: Application Portal",
+      "url": "https://github.com/elementary/appcenter",
+      "type": "repository",
+      "accessed": "2026-09-25",
+      "publisher": "elementary Project Maintainers",
+      "note": "Source repository for AppCenter, implementing Flatpak integration, Flathub discovery, and Stripe payment processing."
+    }
+  ]
+}

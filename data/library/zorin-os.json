@@ -1,0 +1,269 @@
+{
+  "id": "zorin-os",
+  "name": "Zorin OS",
+  "type": "operating_system",
+  "summary": "A desktop-centric Linux distribution developed by Zorin OS Technologies Limited on an Ubuntu Long Term Support (LTS) base. Zorin OS features the customized Zorin Desktop environment based on GNOME with Wayland by default, switchable desktop layouts via Zorin Appearance, integrated Windows application compatibility powered by WINE, multi-source software distribution supporting APT, Flatpak, and Snap out of the box, and an explicit zero-telemetry operating system policy.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-based",
+    "gnome",
+    "wayland",
+    "zorin-appearance",
+    "wine",
+    "flatpak",
+    "snap",
+    "commercial-and-free"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later, GPL-3.0-or-later, MIT, and redistributable proprietary firmware/drivers",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "Zorin OS is an open-source, desktop operating system engineered to provide a familiar and accessible computing environment for users transitioning from Windows and macOS. Founded in 2008 in Dublin, Ireland, and publishing its first release in July 2009, the distribution combines an Ubuntu LTS software foundation with its customized Zorin Desktop suite. It emphasizes visual polish, automated workflow ergonomics, broad hardware enablement, and integrated compatibility layers for Windows software.",
+    "what_is_it": "Technically, Zorin OS is an Ubuntu LTS downstream derivative featuring a tailored userland and interface stack. Its core interface elements include Zorin Desktop (a customized GNOME Shell environment), Zorin Appearance (allowing one-click transitions between classic Windows, modern Windows, macOS, and GNOME layouts), a universal Software store combining DEB, Flatpak, and Snap formats, and the Windows App Support subsystem providing guided execution of Windows installers.",
+    "origin_and_history": "The Zorin OS project was initiated in 2008 by brothers Artyom and Kyrill Zorin to address what they identified as usability barriers preventing desktop Linux adoption among mainstream computer users. Zorin OS 1.0 launched on July 1, 2009. Successive releases adopted Ubuntu LTS bases: Zorin OS 9 (Ubuntu 14.04 LTS), Zorin OS 12 (Ubuntu 16.04 LTS, introducing the modern desktop architecture), Zorin OS 15 (Ubuntu 18.04 LTS), Zorin OS 16 (Ubuntu 20.04 LTS), Zorin OS 17 (Ubuntu 22.04 LTS, released December 2023), and Zorin OS 18 (Ubuntu 24.04 LTS, released October 14, 2025, with point update 18.1 in April 2026).",
+    "governance_and_organization": "The operating system is produced by Zorin OS Technologies Limited, an independent private company based in Dublin, Ireland (CRO number 591733). The project operates a sustainable hybrid business model: standard editions (Core and Education) are freely downloadable, while a premium edition (Zorin OS Pro) is sold directly to fund ongoing development and server infrastructure. The company also offers Zorin Grid, a centralized software-as-a-service solution for managing fleets of Zorin OS machines in enterprise, educational, and public-sector deployments.",
+    "release_model_and_ubuntu_base": "Zorin OS follows a scheduled release cadence coupled to Ubuntu LTS cycles. Each major series (such as Zorin OS 17 or 18) is supported with security advisories, bug fixes, and hardware enablement updates for at least 3.5 to 5 years (Zorin OS 17 supported until June 2027; Zorin OS 18 supported until June 2029). Point releases (18.1, 17.2) refresh installation media with updated Linux kernels from Ubuntu's HWE track (e.g. Linux kernel 6.17 in Zorin OS 18.1), Mesa graphics drivers, and bundled productivity suites.",
+    "desktop_environment_and_appearance": "The Zorin Desktop environment is constructed upon GNOME Shell, customized with extensions including an integrated taskbar derived from Dash to Panel and the Tiling Shell extension. Through the native `Zorin Appearance` application, users can modify desktop ergonomics instantly. The Core edition provides 4 desktop layouts (classic Windows taskbar, modern Windows, centered layout, and stock GNOME), while Zorin OS Pro provides 12 distinct layouts, including macOS, Linux Mint, and elementary OS aesthetics. The tool also centralizes dark/light theme switching, accent colors, and font rendering preferences.",
+    "window_management_and_tiling": "In Zorin OS 18, window management incorporates native advanced tiling functionality. Dragging any application window toward the top edge of the display invokes a layout HUD displaying predefined window splits (halves, thirds, quarters, and custom grid arrangements). In addition, users can configure auto-tiling, window snapping behaviors, and custom keyboard navigation shortcuts through Zorin Appearance without requiring third-party configuration files.",
+    "display_server_and_audio": "Zorin OS configures the Wayland display server by default on compatible graphics hardware, providing per-monitor fractional scaling, touchpad gesture navigation, visual tear-free rendering, and sandboxed window isolation. A fallback X11 (X.Org) session is preinstalled and selectable at the GDM login screen. Multimedia routing is managed by the PipeWire audio server and WirePlumber session manager, reducing Bluetooth audio latency and enabling low-latency professional audio workflows.",
+    "package_management_and_software_store": "Software management in Zorin OS operates through a unified Software store that consolidates multiple packaging formats:\n\n- APT and dpkg: native binary packages (.deb) drawn from Ubuntu LTS official repositories and custom Zorin PPAs (`ppa:zorinos/stable`, `ppa:zorinos/patches`, `ppa:zorinos/drivers`, `ppa:zorinos/apps`).\n- Flatpak: sandbox containerized packages with Flathub enabled by default.\n- Snap: containerized packages from Canonical's Snap Store enabled by default.\n\nWhen a program exists across multiple package formats, the Software store provides a dropdown selector allowing the user to choose their preferred packaging source.",
+    "windows_application_compatibility": "Zorin OS features native Windows application support through the `zorin-windows-app-support` package, powered by WINE 10. Users can launch `.exe` and `.msi` installers directly from the file manager. The system incorporates an integrated heuristics database covering over 170 popular Windows applications: upon launching a known Windows installer, Zorin OS suggests native Linux equivalents or web-app implementations (such as LibreOffice, Apostrophe, or official Linux packages) to minimize unnecessary emulation overhead.",
+    "web_apps_and_cloud_integration": "Zorin OS 18 introduces a dedicated `Web Apps` utility that converts any website or cloud service into a standalone desktop application with its own window, taskbar icon, and system integration. Supported through existing web browser backends, it facilitates seamless desktop access to cloud platforms such as Microsoft 365, Teams, Google Docs, and Adobe web services. Additionally, the system Settings panel integrates Microsoft 365 and OneDrive cloud storage accounts directly into the Files sidebar via GVFS.",
+    "mobile_integration_zorin_connect": "Zorin OS includes `Zorin Connect`, an end-to-end TLS-encrypted local networking utility based on GSConnect and KDE Connect. Paired with the open-source Zorin Connect Android application, it provides bidirectional notification synchronization, local file transfers, remote media playback control, and shared clipboard capabilities across PC and mobile devices without transmitting data to external third-party cloud servers.",
+    "installation_and_disk_encryption": "Operating system installation is performed using a graphical installer supporting automated side-by-side dual-boot configurations, clean full-disk installations, and manual partitioning. The installer natively supports full-disk encryption backed by LUKS2, generating an emergency recovery key upon setup to allow volume unlocking in the event of password loss. System boot utilizes `shim-signed` for seamless compatibility with UEFI Secure Boot firmware.",
+    "hardware_support_and_architectures": "Zorin OS officially targets the 64-bit `x86_64` (amd64) architecture across all current editions. Support for legacy 32-bit x86 hardware was discontinued following the end-of-life of Zorin OS 15 Lite. System installation media includes a dedicated boot menu option ('Try or Install Zorin OS (modern NVIDIA drivers)') preloading proprietary NVIDIA graphics drivers to ensure immediate 3D acceleration on GeForce and Quadro hardware.",
+    "security_and_system_hardening": "Security errata for the base operating system are inherited directly from Canonical's Ubuntu Security team. AppArmor mandatory access control profiles are enabled by default in the Linux kernel to sandbox vulnerable services. Network filtering is handled by the Uncomplicated Firewall (UFW), with graphical management available via GUFW. System-level upgrades between major releases are orchestrated in-place using the `Zorin OS Upgrader` utility.",
+    "privacy_and_telemetry": "Zorin OS maintains an operating system policy of zero telemetry. The desktop environment, system utilities, and default software stack do not collect user behavioral tracking data, transmit background analytics, or generate persistent hardware identifiers. Network connections are confined strictly to functional operations: package index synchronization via APT, Flatpak/Snap repository refreshes, and NTP network time synchronization. Website, forum, and store privacy practices comply with EU GDPR standards under Zorin's published privacy policy.",
+    "advantages": [
+      "Intuitive, polished desktop interface facilitating straightforward transition from Windows and macOS",
+      "Switchable desktop layouts in Zorin Appearance allowing dynamic adaptation between classic and modern desktop ergonomics",
+      "Out-of-the-box Windows application support via WINE 10 with tailored native software suggestions for over 170 applications",
+      "Universal Software store providing unified access to APT, Flathub Flatpaks, and Snap packages",
+      "Rock-solid long-term support based on Ubuntu LTS with modern HWE kernel releases and PipeWire audio",
+      "Zero telemetry policy within the operating system and compliance with European GDPR standards"
+    ],
+    "disadvantages": [
+      "Premium desktop layouts and curated creative software bundles are restricted to the paid Zorin OS Pro edition",
+      "Core operating system packages remain tied to the Ubuntu LTS base release cadence",
+      "Legacy 32-bit x86 hardware is no longer supported in modern Zorin OS releases (17 and 18)",
+      "Simultaneous inclusion of Flatpak, Snap, and APT package backends can confuse users regarding sandbox boundaries and storage footprints",
+      "The lightweight XFCE-based Lite edition has not been continued into the Zorin OS 18 series"
+    ],
+    "who_is_it_for": [
+      "Users migrating from Windows or macOS seeking a familiar, functional, and visually cohesive Linux desktop",
+      "Non-technical computer users, schools, and small businesses requiring a stable, low-maintenance workstation",
+      "Users who rely on a mix of native Linux applications, Windows compatibility software, and progressive web apps",
+      "Administrators managing fleets of client machines requiring long-term LTS support cycles through 2029"
+    ],
+    "who_is_it_not_for": [
+      "Users requiring a rolling-release distribution with cutting-edge system libraries across the entire core stack",
+      "Minimalist power users who reject desktop abstraction layers or prefer tiling window managers without GNOME Shell overhead",
+      "Users running legacy 32-bit computer hardware or non-x86 architectures",
+      "Software purists who strictly reject any proprietary drivers, firmware blobs, or commercial edition tiers"
+    ],
+    "verdict": "Zorin OS represents a refined, user-friendly implementation of the Linux desktop, distinguishing itself through its flexible desktop layout engine, guided Windows application compatibility, and thoughtful onboarding ergonomics. By grounding its platform in Ubuntu LTS stability while delivering modern Wayland, PipeWire, and multi-format package support, Zorin OS offers an accessible workstation for home, business, and educational environments."
+  },
+  "components": [
+    {
+      "id": "gnome-shell",
+      "name": "GNOME Shell (Zorin Desktop)",
+      "role": "desktop_environment",
+      "note": "Core display and window management shell customized with native extensions to deliver the Zorin Desktop experience."
+    },
+    {
+      "id": "zorin-appearance",
+      "name": "Zorin Appearance",
+      "role": "desktop_configuration_utility",
+      "note": "Centralized configuration tool managing switchable desktop layouts, theme accent colors, and window tiling behavior."
+    },
+    {
+      "id": "wine",
+      "name": "WINE (Windows App Support)",
+      "role": "compatibility_layer",
+      "note": "Windows API translation layer enabling execution of .exe and .msi binary applications within the Linux environment."
+    },
+    {
+      "id": "wayland",
+      "name": "Wayland Display Server",
+      "role": "display_server",
+      "note": "Default display server protocol handling window composition, fractional scaling, and graphical security boundaries."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "audio_multimedia_server",
+      "note": "Low-latency multimedia routing server managing system audio, Bluetooth device codecs, and Wayland screen capture."
+    },
+    {
+      "id": "apt",
+      "name": "APT (Advanced Package Tool)",
+      "role": "package_manager",
+      "note": "Command-line and backend package management system handling .deb packages from Ubuntu and Zorin repositories."
+    },
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "Low-level Debian binary package manager responsible for package unpacking, installation, and status tracking."
+    },
+    {
+      "id": "flatpak",
+      "name": "Flatpak",
+      "role": "sandboxed_package_format",
+      "note": "Containerized application deployment framework preconfigured with the Flathub repository in the Software store."
+    },
+    {
+      "id": "snapd",
+      "name": "Snapd",
+      "role": "sandboxed_package_format",
+      "note": "Canonical's containerized software deployment daemon providing access to packages from the Snap Store."
+    },
+    {
+      "id": "zorin-connect",
+      "name": "Zorin Connect",
+      "role": "mobile_integration_service",
+      "note": "TLS-encrypted local networking utility enabling notification sync and file transfers with mobile devices."
+    },
+    {
+      "id": "systemd",
+      "name": "systemd",
+      "role": "init_system",
+      "note": "System and service manager managing bootstrap initialization, service tracking, and login sessions."
+    },
+    {
+      "id": "apparmor",
+      "name": "AppArmor",
+      "role": "security_framework",
+      "note": "Linux security module enforcing mandatory access control policies on system applications and background services."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "based_on",
+      "note": "Immediate upstream distribution providing the LTS kernel, core glibc libraries, systemd init, and base APT package archive."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_lineage",
+      "note": "Foundational upstream distribution from which Ubuntu originates, defining the fundamental Debian binary packaging standards."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "alternative",
+      "note": "Alternative desktop distribution targeting user friendliness, contrasting Cinnamon's traditional desktop with Zorin's switchable layouts and WINE integration."
+    },
+    {
+      "id": "elementary-os",
+      "name": "elementary OS",
+      "relation": "alternative",
+      "note": "Design-focused desktop distribution based on Ubuntu LTS, contrasting strict Human Interface Guidelines and Flatpak exclusivity with Zorin's layout flexibility."
+    },
+    {
+      "id": "pop-os",
+      "name": "Pop!_OS",
+      "relation": "alternative",
+      "note": "Developer-oriented distribution derived from Ubuntu LTS, contrasting the Rust-based COSMIC desktop with Zorin's GNOME-based desktop and Windows transition focus."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Zorin OS 18 Core",
+      "description": "The standard free production edition for modern 64-bit PCs, featuring the Zorin Desktop, 4 switchable layouts, LibreOffice, and full Flatpak/Snap support."
+    },
+    {
+      "name": "Zorin OS 18 Pro",
+      "description": "Commercial edition bundled with 12 desktop layouts (macOS, Linux Mint, Windows 11), professional creative software suites, and direct installation support."
+    },
+    {
+      "name": "Zorin OS 18 Education",
+      "description": "Free educational edition tailored for schools and students, packaging educational applications (TurboWarp, Spedread, Gradebook) and classroom tools."
+    },
+    {
+      "name": "Zorin OS 17 Series (17.2)",
+      "description": "Previous stable series based on Ubuntu 22.04 LTS with Linux kernel 6.8, supported with software and security updates until June 2027."
+    }
+  ],
+  "links": {
+    "homepage": "https://zorin.com/os/",
+    "about": "https://zorin.com/about/",
+    "blog": "https://blog.zorin.com/",
+    "help": "https://help.zorin.com/",
+    "pro_edition": "https://zorin.com/os/pro/",
+    "privacy_policy": "https://zorin.com/legal/privacy/",
+    "source_code": "https://launchpad.net/~zorinos/+archive/ubuntu/stable"
+  },
+  "sources": [
+    {
+      "title": "Zorin OS Official Portal — Overview and Operating System Architecture",
+      "url": "https://zorin.com/os/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Zorin OS Technologies Limited",
+      "note": "Documents desktop ergonomics, edition comparisons, Zorin Appearance capabilities, and system specifications."
+    },
+    {
+      "title": "Zorin Official Portal — About Us, Company Details, and Funding",
+      "url": "https://zorin.com/about/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Zorin OS Technologies Limited",
+      "note": "Details corporate registration in Dublin (CRO 591733), 2008 founding, Launchpad repositories, and community funding model."
+    },
+    {
+      "title": "Zorin Blog — Zorin OS 18 Has Arrived",
+      "url": "https://blog.zorin.com/2025/10/14/zorin-os-18-has-arrived/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Zorin OS Technologies Limited",
+      "note": "Comprehensive announcement detailing Ubuntu 24.04 LTS base, support through June 2029, WINE 10, PipeWire, Web Apps, and window tiling."
+    },
+    {
+      "title": "Zorin Blog — Zorin OS 18.1 Is Released",
+      "url": "https://blog.zorin.com/2026/04/15/zorin-os-18.1-is-released/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Zorin OS Technologies Limited",
+      "note": "Release details for point update 18.1, featuring Linux kernel 6.17, refreshed hardware drivers, and updated LibreOffice."
+    },
+    {
+      "title": "Zorin Help — Windows App Support Documentation",
+      "url": "https://help.zorin.com/docs/apps-games/windows-app-support/",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Zorin OS Technologies Limited",
+      "note": "Technical documentation for the Windows App Support compatibility layer, .exe/.msi handling, and native alternative heuristics."
+    },
+    {
+      "title": "Zorin Official Portal — Legal and Privacy Policy",
+      "url": "https://zorin.com/legal/privacy/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Zorin OS Technologies Limited",
+      "note": "Official legal privacy policy affirming GDPR compliance, data retention limits, and absence of personal data selling."
+    },
+    {
+      "title": "Zorin Help — Installing Apps and Software Store Sources",
+      "url": "https://help.zorin.com/docs/apps-games/install-apps/",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Zorin OS Technologies Limited",
+      "note": "Explains multi-source packaging integration covering APT repositories, Flathub Flatpaks, and the Snap Store."
+    },
+    {
+      "title": "Launchpad — Zorin OS Stable Package Archive",
+      "url": "https://launchpad.net/~zorinos/+archive/ubuntu/stable",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "Zorin OS Packaging Team",
+      "note": "Official package repository containing source code and binary packages for the Zorin Desktop and system utilities."
+    }
+  ]
+}
