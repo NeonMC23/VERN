@@ -39,6 +39,9 @@ var LIBRARY_RESOURCES = [
   "pclinuxos",
   "antix",
   "puppy-linux",
+  "tiny-core-linux",
+  "lubuntu",
+  "kubuntu",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",

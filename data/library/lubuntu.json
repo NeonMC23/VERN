@@ -1,0 +1,217 @@
+{
+  "id": "lubuntu",
+  "name": "Lubuntu",
+  "type": "operating_system",
+  "summary": "An official Ubuntu flavor combining a complete Ubuntu package base with the lightweight Qt-based LXQt desktop environment. Founded in 2009 and officially accredited by Canonical in 2011, Lubuntu transitioned from LXDE to LXQt in 2018 (Lubuntu 18.10) to deliver a modern, modular, and responsive desktop experience. It features the independent Calamares graphical installer with customizable Minimal, Normal, and Full installation modes, Openbox window management under X11 alongside progressive Wayland integration (LXQt 2.x), native APT/dpkg packaging linked to Ubuntu archives, optional Snap application confinement, and the dedicated Lubuntu Update management utility.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-flavor",
+    "lxqt",
+    "openbox",
+    "qt",
+    "calamares",
+    "sddm",
+    "lightweight",
+    "modular"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later, LGPL-2.1-or-later (LXQt components), and standard Ubuntu package licenses",
+  "last_verified": "2026-10-01",
+  "content": {
+    "introduction": "Lubuntu is an official flavor of the Ubuntu operating system providing a lean, responsive desktop environment powered by LXQt (Lightweight Qt Desktop Environment). Conceived in 2009 by Mario Behling and Julien Lavergne, Lubuntu aims to deliver a modern computing environment that consumes modest system resources without sacrificing contemporary graphical standards. Unlike distributions that heavily brand or alter standard application workflows, Lubuntu's design principle emphasizes functional minimalism and system agility, allowing users to focus entirely on their work.",
+    "what_is_it": "Technically, Lubuntu is an Ubuntu derivative sharing identical base system libraries, Linux kernel builds, and package archives (`main`, `restricted`, `universe`, `multiverse`) with standard Ubuntu. It differentiates itself through its distinct desktop stack: the modular LXQt desktop environment, the Openbox stacking window manager for X11 sessions, the SDDM display manager, the universal Calamares installer, the PCManFM-Qt file manager, and QTerminal, maintaining full binary compatibility with Ubuntu while achieving significantly lower memory and CPU overhead.",
+    "origin_and_history": "Lubuntu began development in 2009 as a community-driven initiative to marry the Ubuntu system foundation with LXDE (Lightweight X11 Desktop Environment), which was built on the GTK+ 2 toolkit. In May 2011, Canonical and the Ubuntu Community Council officially recognized Lubuntu as an official Ubuntu flavor, launching its first synchronized release with Lubuntu 11.10. By 2014, with GTK+ 2 nearing upstream end-of-life, the LXDE project merged with Razor-qt to form LXQt. Recognizing that GTK+ 3 would significantly inflate memory consumption, Lubuntu planned a comprehensive transition to the Qt framework. This migration culminated in Lubuntu 18.10 (October 2018), which established LXQt as the standard desktop. Contemporaneous releases include Lubuntu 24.04 LTS (Noble Numbat) supported through April 2027, Lubuntu 24.10 (introducing LXQt 2.0 and Qt 6), Lubuntu 25.04, and Lubuntu 26.04 LTS.",
+    "governance_and_organization": "Lubuntu is governed democratically by the Lubuntu Council, a self-organizing body of volunteer developers, packagers, and QA testers within the Ubuntu community. The Council coordinates with the Ubuntu Technical Board regarding archive maintenance, release freeze schedules, and infrastructure usage. As an official flavor, Lubuntu builds its install media and package repository atop Canonical's Launchpad build farm and distributes images through official Ubuntu mirror networks worldwide. The project relies on volunteer contributions and community donations to sustain development.",
+    "desktop_environment_lxqt": "The core user interface is powered by LXQt, an independent desktop environment written in C++ on the Qt framework (Qt 5 in the 24.04 LTS series, transitioning to Qt 6 from 24.10 onwards). LXQt is constructed from independent, modular daemons that operate cohesively:\n\n- `lxqt-panel`: Highly configurable taskbar supporting application menus, desktop switchers, quick launch icons, volume controls, and System Tray notification items.\n- `pcmanfm-qt`: High-performance Qt file manager handling desktop icons, wallpaper rendering, removable media automounting, and multi-tab directory navigation.\n- `qterminal`: Advanced Qt terminal emulator supporting split view panes, tabbed sessions, custom keybindings, and drop-down quake-style console modes.\n- `lxqt-session` & `lxqt-powermanagement`: Standalone session initialization and power conservation management utilities.\n- Kvantum Theming Engine: Integrated in contemporary releases to provide polished SVG-based theming across Qt 5 and Qt 6 applications without relying on KDE Plasma dependencies.",
+    "window_management_openbox": "For X11 graphical sessions, Lubuntu utilizes Openbox as its primary window manager. Openbox is an established, standards-compliant (ICCCM and EWMH) stacking window manager renowned for its minimal resource footprint, predictable window placement, and fast rendering. Window decorations, desktop margins, and workspace bindings are configured via XML files (`~/.config/openbox/lxqt-rc.xml`) or graphically through the `obconf-qt` interface.",
+    "wayland_transition": "While Lubuntu 24.04 LTS standardizes on X11 and Openbox for long-term production stability, the project is actively executing a phased transition to the Wayland protocol in alignment with upstream LXQt developments. Starting with LXQt 2.0/2.1 in non-LTS releases, Lubuntu integrates the `labwc` (Lab Wayland Compositor) stacking compositor, which mirrors Openbox configuration syntax and design patterns. To prevent user workflow disruption, the Lubuntu team maintains the X11 session as an officially supported opt-in option through at least Lubuntu 26.04 LTS.",
+    "calamares_installer_and_profiles": "Lubuntu was the first Ubuntu flavor to replace Canonical's legacy Ubiquity installer with the independent, Qt-based Calamares installer (introduced in Lubuntu 18.10). Calamares offers comprehensive manual partitioning, Btrfs subvolume layout options, swapfile automation, and LUKS disk encryption. Lubuntu's custom Calamares implementation features three distinct installation profiles:\n\n- Minimal Installation: Installs only the base LXQt desktop, core utilities, and system configuration tools, omitting office suites, media players, and completely excluding `snapd`.\n- Normal Installation: Deploys a standard productivity environment including a web browser, standard utilities, and Snap support.\n- Full Installation: Packages the complete LibreOffice suite, advanced graphics editors, and multimedia applications for immediate offline productivity.\n\nAdditionally, Lubuntu includes a dedicated OEM installation mode for computer refurbishers and hardware vendors.",
+    "package_management_and_snap": "Software management in Lubuntu leverages standard Debian/Ubuntu package tools (`apt`, `apt-get`, `dpkg`) connected directly to Ubuntu's repositories containing over 60,000 packages. Following Ubuntu distribution policies, Lubuntu includes `snapd` by default in Normal and Full installations, providing the sandboxed Mozilla Firefox browser as a Snap package. Users desiring an entirely Snap-free installation can select the Minimal Installation profile during Calamares setup. Flatpak is also fully supported and can be enabled by installing the `flatpak` package.",
+    "system_updates_and_lubuntu_update": "Introduced in the 24.04 LTS cycle, the `Lubuntu Update` utility provides an intuitive, integrated graphical updater. Written in Qt, it resides in the system tray, notifies users of pending security and feature updates, and allows one-click upgrades across both native APT repositories and installed Snap applications, avoiding terminal complexity while ensuring transparent package review.",
+    "hardware_support_and_architectures": "Lubuntu targets exclusively the 64-bit `x86_64` (amd64) architecture, having dropped 32-bit (i386) installation media in 2019 (Lubuntu 19.04). System requirements remain modest:\n\n- Processor: 64-bit dual-core x86_64 CPU (1.5 GHz or higher).\n- Memory (RAM): Minimum 1 GB RAM for basic OS boot; 2 GB recommended for lightweight desktop tasks; 4 GB recommended for modern web browsing.\n- Storage: 15 GB of disk space (25 GB recommended for Full Installation and application caches).\n- Firmware: Full support for legacy BIOS and modern UEFI systems with out-of-the-box Secure Boot support via Canonical's signed `shim` loader.",
+    "security_and_apparmor": "Lubuntu inherits Ubuntu's enterprise-grade security infrastructure. Software patches and CVE resolutions are managed and distributed by Canonical's Ubuntu Security Team. The Linux kernel enforces mandatory access controls via AppArmor profiles enabled by default for network daemons and web browsers. Lubuntu releases receive security updates synchronized with official Ubuntu USN advisories.",
+    "privacy_and_telemetry": "Lubuntu enforces a strict user privacy policy. Unlike standard Ubuntu Desktop, which prompts users to submit anonymous hardware metrics via `ubuntu-report`, Lubuntu omits telemetry collection daemons from its default desktop session. No telemetry beacons, advertising trackers, or covert analytical services are deployed.",
+    "advantages": [
+      "Official Ubuntu flavor combining long-term archive stability with the lightweight LXQt desktop",
+      "Remarkably low memory and CPU footprint compared to heavier environments like GNOME or Plasma",
+      "Calamares installer offering customizable Minimal, Normal, and Full installation profiles",
+      "Ability to install an entirely Snap-free system via the Calamares Minimal profile",
+      "High modularity allowing easy component replacement (window managers, panels, terminals)",
+      "Direct binary compatibility with the entire ecosystem of Ubuntu and Debian software packages"
+    ],
+    "disadvantages": [
+      "LTS releases receive 3 years of desktop flavor support rather than Canonical's full 5 years",
+      "Wayland support remains in a transitional phase compared to GNOME-based Ubuntu editions",
+      "Default appearance and styling are basic and may require manual theming adjustments",
+      "32-bit (i386) hardware is no longer supported since 2019",
+      "Qt application base contrasts with GTK ecosystem applications, occasionally requiring theme synchronization"
+    ],
+    "who_is_it_for": "Lubuntu is suited for users who desire the stability and expansive package ecosystem of Ubuntu paired with a fast, lightweight, and clutter-free Qt desktop that maximizes system responsiveness on both modest and high-end hardware.",
+    "who_is_it_not_for": "It is not suited for users seeking heavily animated desktop interfaces with extensive 3D compositor effects, or enterprise administrators requiring a full 5-year flavor support cycle without periodic desktop upgrades."
+  },
+  "components": [
+    {
+      "id": "lxqt-panel",
+      "name": "lxqt-panel",
+      "role": "desktop_taskbar",
+      "note": "Modular panel hosting menus, task lists, system tray indicators, and status applets."
+    },
+    {
+      "id": "openbox",
+      "name": "Openbox",
+      "role": "window_manager",
+      "note": "Standards-compliant stacking window manager providing rapid window handling under X11."
+    },
+    {
+      "id": "pcmanfm-qt",
+      "name": "PCManFM-Qt",
+      "role": "file_manager",
+      "note": "Qt-based file manager and desktop icon manager providing multi-tab browsing."
+    },
+    {
+      "id": "qterminal",
+      "name": "QTerminal",
+      "role": "terminal_emulator",
+      "note": "Feature-rich Qt terminal emulator supporting split tabs and drop-down console mode."
+    },
+    {
+      "id": "sddm",
+      "name": "SDDM",
+      "role": "display_manager",
+      "note": "QML-based graphical login screen manager handling user authentication and session startup."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares Installer",
+      "role": "system_installer",
+      "note": "Universal system installer offering Minimal, Normal, and Full deployment modes."
+    },
+    {
+      "id": "lubuntu-update",
+      "name": "Lubuntu Update",
+      "role": "update_utility",
+      "note": "System tray updater coordinating APT repository packages and Snap application refreshes."
+    },
+    {
+      "id": "kvantum",
+      "name": "Kvantum Theme Engine",
+      "role": "theme_engine",
+      "note": "SVG-based theme engine providing consistent appearance across Qt 5 and Qt 6 applications."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "parent_distribution",
+      "note": "Base distribution providing underlying kernel, system libraries, and official package archives."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_ancestor",
+      "note": "Upstream source distribution providing foundational packaging standards and binary archives."
+    },
+    {
+      "id": "kubuntu",
+      "name": "Kubuntu",
+      "relation": "sister_flavor",
+      "note": "Sister Ubuntu flavor sharing Qt desktop technologies, Calamares installer, and SDDM display management."
+    },
+    {
+      "id": "xubuntu",
+      "name": "Xubuntu",
+      "relation": "alternative_flavor",
+      "note": "Sister Ubuntu flavor offering a lightweight desktop based on XFCE and GTK toolkits."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Lubuntu 24.04 LTS (Noble Numbat)",
+      "description": "Long-Term Support release featuring LXQt 1.4, Linux kernel 6.8, and 3-year support through April 2027."
+    },
+    {
+      "name": "Lubuntu 24.10 (Oracular Oriole)",
+      "description": "Interim release delivering the upgrade to LXQt 2.0 and Qt 6 alongside Kvantum theming."
+    },
+    {
+      "name": "Lubuntu 25.04 (Plucky Puffin)",
+      "description": "Interim release integrating LXQt 2.1 with advanced Wayland (labwc) session support."
+    },
+    {
+      "name": "Lubuntu 26.04 LTS (Resolute Raccoon)",
+      "description": "Long-Term Support release consolidating the Qt 6 stack and Wayland compositor ecosystem."
+    }
+  ],
+  "links": {
+    "homepage": "https://lubuntu.me/",
+    "manual": "https://manual.lubuntu.me/",
+    "downloads": "https://lubuntu.me/downloads/",
+    "release_archive": "https://lubuntu.me/category/release/final/",
+    "github": "https://github.com/lubuntu-team",
+    "ubuntu_flavours": "https://ubuntu.com/desktop/flavours",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=lubuntu"
+  },
+  "sources": [
+    {
+      "title": "Lubuntu Official Website — Home Portal and Announcements",
+      "url": "https://lubuntu.me/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Lubuntu Team",
+      "note": "Primary distribution portal detailing release announcements, governance, and community mission."
+    },
+    {
+      "title": "Lubuntu Official Website — Final Release Notes Archive",
+      "url": "https://lubuntu.me/category/release/final/",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Lubuntu Team",
+      "note": "Comprehensive release announcements documenting 24.04 LTS, 24.10, and subsequent cycles."
+    },
+    {
+      "title": "Lubuntu Official Website — 24.10 Architecture and Qt 6 Transition",
+      "url": "https://lubuntu.me/tag/24-10/",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Lubuntu Team",
+      "note": "Technical notes detailing the switch to LXQt 2.0, Qt 6, Kvantum theming, and Calamares modules."
+    },
+    {
+      "title": "Lubuntu Official Documentation — Lubuntu Manual",
+      "url": "https://manual.lubuntu.me/",
+      "type": "documentation",
+      "accessed": "2026-10-01",
+      "publisher": "Lubuntu Documentation Team",
+      "note": "Complete user manual covering system administration, desktop components, and package management."
+    },
+    {
+      "title": "Ubuntu Official Portal — Recognized Ubuntu Desktop Flavours",
+      "url": "https://ubuntu.com/desktop/flavours",
+      "type": "official",
+      "accessed": "2026-10-01",
+      "publisher": "Canonical Ltd.",
+      "note": "Canonical directory confirming Lubuntu's accredited status as an official Ubuntu flavor."
+    },
+    {
+      "title": "GitHub — Lubuntu Team Official Organization",
+      "url": "https://github.com/lubuntu-team",
+      "type": "repository",
+      "accessed": "2026-10-01",
+      "publisher": "Lubuntu Development Team",
+      "note": "Source code repository for Lubuntu-specific packaging, Calamares configurations, and update utilities."
+    },
+    {
+      "title": "DistroWatch — Lubuntu Distribution Profile",
+      "url": "https://distrowatch.com/table.php?distribution=lubuntu",
+      "type": "secondary",
+      "accessed": "2026-10-01",
+      "publisher": "DistroWatch",
+      "note": "Independent summary documenting release histories, package versions, and system specifications."
+    }
+  ]
+}
