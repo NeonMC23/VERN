@@ -42,6 +42,9 @@ var LIBRARY_RESOURCES = [
   "tiny-core-linux",
   "lubuntu",
   "kubuntu",
+  "ubuntu-mate",
+  "xubuntu",
+  "nobara-linux",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",

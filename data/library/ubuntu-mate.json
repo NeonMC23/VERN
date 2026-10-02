@@ -1,0 +1,224 @@
+{
+  "id": "ubuntu-mate",
+  "name": "Ubuntu MATE",
+  "type": "operating_system",
+  "summary": "An official Ubuntu flavor integrating the Ubuntu base system with the MATE Desktop Environment, a modern continuation of the classic GNOME 2 desktop metaphor. Created in 2014 by Martin Wimpress and Alan Pope and recognized as an official flavor in 2015, Ubuntu MATE delivers a highly customizable, traditional desktop experience powered by GTK 3, the Marco window manager (with optional Compiz compositing), the Caja file manager, and the MATE Tweak utility offering one-click panel layout switching. It uses Canonical's modern Flutter-based desktop installer, native APT/dpkg packaging linked to official Ubuntu archives, Snap containerization, and PipeWire audio.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-flavor",
+    "mate",
+    "marco",
+    "caja",
+    "gtk3",
+    "classic-desktop",
+    "subiquity"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "arm64",
+    "armhf"
+  ],
+  "license": "GPL-2.0-or-later, LGPL-2.0-or-later, and standard Ubuntu package licenses",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Ubuntu MATE is an official flavor of the Ubuntu operating system that pairs Ubuntu's stable Linux foundation with the MATE Desktop Environment. Created in 2014 by Martin Wimpress and Alan Pope, the distribution was conceived to preserve the traditional desktop metaphor established by GNOME 2—characterized by customizable panels, hierarchical menus, desktop icons, and clear window lists—while modernizing the underlying codebase with GTK 3 technologies. Officially accredited by Canonical's Ubuntu Technical Board in March 2015, Ubuntu MATE provides users with a mature, resource-efficient computing environment that balances traditional usability with modern system plumbing.",
+    "what_is_it": "Technically, Ubuntu MATE is an official Ubuntu derivative sharing identical Linux kernel builds, GNU C libraries (`glibc`), `systemd` init services, and APT package repositories (`main`, `restricted`, `universe`, `multiverse`) with standard Ubuntu Desktop. It differentiates itself through its curated userland stack: the MATE Desktop Environment (version 1.26/1.28), the Marco compositing window manager, the Caja spatial file manager, the LightDM display manager with Slick Greeter, Canonical's Flutter-based Desktop Bootstrap installer, and the proprietary MATE Tweak customization utility.",
+    "origin_and_history": "Following the transition of Ubuntu Desktop to the Unity interface and GNOME's shift to GNOME Shell in 2011, open-source developer Perberos created the MATE project by forking GNOME 2.32. In mid-2014, Martin Wimpress and Alan Pope initiated Ubuntu MATE Remix to bring this desktop back into the Ubuntu ecosystem. The first release, Ubuntu MATE Remix 14.10, debuted in October 2014. In March 2015, the Ubuntu Technical Board granted Ubuntu MATE official flavor status, culminating in the release of Ubuntu MATE 15.04. Over subsequent cycles, Wimpress and the team ported the entire MATE desktop from GTK 2 to GTK 3, developed MATE Tweak and Brisk Menu, and maintained synchronized releases alongside Ubuntu, including Ubuntu MATE 24.04 LTS (Noble Numbat) supported through April 2027, Ubuntu MATE 24.10, Ubuntu MATE 25.04 (celebrating 10 years as an official flavor), and Ubuntu MATE 26.04 LTS.",
+    "governance_and_organization": "Ubuntu MATE is led by Martin Wimpress alongside a team of volunteer packagers, artwork designers, and quality assurance testers. The project operates within the democratic structures of the Ubuntu Community Council and Ubuntu Technical Board. Its software packages are built on Canonical's Launchpad build farm, signed with official keys, and distributed through Ubuntu's worldwide mirror network. The project sustains itself through community contributions and sponsorships, remaining free and open-source.",
+    "desktop_environment_mate": "The core user interface is the MATE Desktop Environment, built in C and GTK 3. MATE preserves classic desktop paradigms while incorporating modern capabilities:\n\n- `mate-panel`: Modular taskbars capable of hosting application menus, window selectors, status notification applets (StatusNotifierItem and AppIndicator), clocks, and system monitors.\n- Brisk Menu & MATE Menu: Modern search-driven application launchers featuring keyboard-driven search, pinned favorite applications, and clean category filtering.\n- Theming and Aesthetics: Ships with the Yaru-MATE theme suite, adapting Ubuntu's official Yaru styling with MATE's signature green accents across light and dark variants.",
+    "window_manager_marco_and_compiz": "Window management is handled by default by Marco, MATE's native window manager forked from Metacity. Marco offers flexible compositing engines:\n\n- Software rendering without compositing for minimal resource usage;\n- Integrated software compositing via XRender;\n- Hardware-accelerated compositing utilizing OpenGL and XPresent to prevent screen tearing during video playback and desktop navigation.\n\nFor advanced visual effects, Ubuntu MATE retains native integration with Compiz, enabling users to enable 3D desktop cube workspaces and fluid window animations via MATE Tweak.",
+    "mate_tweak_and_desktop_layouts": "A distinctive hallmark of Ubuntu MATE is `MATE Tweak`, a specialized administrative utility that allows instantaneous switching between preset desktop workflows:\n\n- Traditional: The classic two-panel GNOME 2 layout with Applications/Places/System menus;\n- Cupertino: A macOS-styled layout with a top global bar and bottom dock;\n- Mutiny: A left-docked vertical panel reminiscent of Ubuntu's Unity desktop;\n- Redmond: A single bottom taskbar with start menu similar to classic Windows;\n- Contemporary & Pantheon: Modern, streamlined layouts optimized for widescreen displays.\n\nMATE Tweak also controls window titlebar button placement (left or right) and desktop icon visibility.",
+    "file_manager_caja_and_core_tools": "System file navigation is provided by Caja (fork of Nautilus 2). Caja features tabbed browsing, split-view vertical pane mode (F3), folder color emblems, and network share mounting (SSH, FTP, WebDAV, Samba). The default desktop utilities include:\n\n- Pluma: Flexible text editor with syntax highlighting and plugin architecture;\n- Atril: Universal document viewer supporting PDF, PostScript, DJVU, and EPUB formats;\n- Eye of MATE (eom): Fast image viewer with image metadata inspection;\n- Engrampa: Archive manager supporting tar, zip, 7z, and rar formats;\n- MATE Terminal: Tabbed terminal emulator with color profile support.",
+    "installer_and_deployment": "Beginning with Ubuntu MATE 24.04 LTS, the distribution transitioned from the legacy Ubiquity installer to Canonical's modern Flutter-based Ubuntu Desktop Bootstrap installer (`subiquity`). The installer features automated partitioning, LUKS whole-disk encryption, seamless dual-boot setup alongside existing BitLocker-encrypted Windows installations, and OEM deployment modes.",
+    "package_management_and_snap": "Software management utilizes Debian's standard package architecture (`dpkg`) and the APT toolchain (`apt`, `apt-get`) connecting to official Ubuntu archives. Conforming to Ubuntu flavor standards, Ubuntu MATE includes `snapd` enabled by default, delivering the Mozilla Firefox web browser and the App Center software store as sandboxed Snap packages. Flatpak integration is fully supported by installing the `flatpak` package.",
+    "hardware_support_and_architectures": "Ubuntu MATE targets the 64-bit `x86_64` (amd64) architecture for its desktop PC installation media, having retired 32-bit (i386) ISOs in 2019. System hardware requirements include:\n\n- Processor: 64-bit dual-core CPU (2.0 GHz or faster recommended);\n- Memory (RAM): Minimum 2 GB RAM (4 GB recommended for modern web multitasking);\n- Storage: 15 GB of available disk space (25 GB recommended);\n- Display: 1024x768 resolution minimum.\n\nIn addition to x86_64 PC hardware, Ubuntu MATE maintains dedicated official images tailored for Raspberry Pi single-board computers (ARM architectures `armhf` and `arm64`).",
+    "security_and_apparmor": "Ubuntu MATE inherits Ubuntu's enterprise security architecture. The Linux kernel enforces mandatory access control through AppArmor profiles preconfigured for network-facing software. Security updates, kernel errata, and vulnerability mitigations are distributed synchronously with Ubuntu Security Notices (USN). UEFI Secure Boot is supported out of the box via Canonical's signed `shim` bootloader.",
+    "privacy_and_telemetry": "Ubuntu MATE adheres to a transparent, privacy-respecting policy. The desktop environment incorporates no third-party advertisements or covert tracking beacons. Canonical's optional diagnostic hardware survey tool (`ubuntu-report`) is strictly opt-in and does not transmit data without user authorization. Outbound network traffic is limited strictly to user-initiated software transactions and network time protocol (NTP) synchronization.",
+    "advantages": [
+      "Official Ubuntu flavor combining long-term archive stability with the classic GNOME 2 desktop metaphor",
+      "MATE Tweak utility allowing one-click switching between traditional, Cupertino, Mutiny, and Redmond layouts",
+      "Marco window manager offering tear-free XPresent compositing and optional Compiz 3D effects",
+      "Extensive file management capabilities in Caja, including two-pane split views and remote protocol mounting",
+      "Modern Flutter-based system installer supporting full-disk encryption and BitLocker co-existence",
+      "Full binary compatibility with the extensive repository of Ubuntu deb packages and security errata"
+    ],
+    "disadvantages": [
+      "LTS releases receive 3 years of desktop flavor support from the community rather than Canonical's full 5 years",
+      "Production session remains tied to X11, with Wayland support still in upstream development in MATE 1.28",
+      "Default inclusion of Snap containerization for Firefox and App Center may not suit all user preferences",
+      "32-bit (i386) PC hardware is unsupported since 2019",
+      "Traditional desktop aesthetic may appear dated to users accustomed to modern dynamic mobile-inspired interfaces"
+    ],
+    "who_is_it_for": "Ubuntu MATE is designed for users who appreciate the functional clarity, high responsiveness, and configurable panel layouts of the classic GNOME 2 desktop paradigm, backed by the stability, hardware support, and expansive software library of Ubuntu.",
+    "who_is_it_not_for": "It is not intended for users requiring an out-of-the-box Wayland compositor session for production work, or those seeking touch-first, gesture-driven mobile desktop paradigms like GNOME Shell."
+  },
+  "components": [
+    {
+      "id": "mate-desktop",
+      "name": "MATE Desktop Environment",
+      "role": "desktop_environment",
+      "note": "GTK 3 desktop environment preserving the traditional GNOME 2 workflow and panel metaphor."
+    },
+    {
+      "id": "marco",
+      "name": "Marco",
+      "role": "window_manager",
+      "note": "Standards-compliant window manager offering software and hardware-accelerated XPresent compositing."
+    },
+    {
+      "id": "caja",
+      "name": "Caja",
+      "role": "file_manager",
+      "note": "Spatial file manager supporting split-view navigation, folder emblems, and network share mounting."
+    },
+    {
+      "id": "mate-panel",
+      "name": "mate-panel",
+      "role": "desktop_panel",
+      "note": "Modular taskbar hosting application menus, task lists, notification applets, and system monitors."
+    },
+    {
+      "id": "mate-tweak",
+      "name": "MATE Tweak",
+      "role": "customization_utility",
+      "note": "System configuration tool enabling one-click switching between desktop panel layouts and window managers."
+    },
+    {
+      "id": "pluma",
+      "name": "Pluma",
+      "role": "text_editor",
+      "note": "Standard text editor featuring syntax highlighting, document tabs, and plugin architecture."
+    },
+    {
+      "id": "atril",
+      "name": "Atril",
+      "role": "document_viewer",
+      "note": "Universal document viewer supporting PDF, PostScript, DJVU, and EPUB formats."
+    },
+    {
+      "id": "lightdm",
+      "name": "LightDM & Slick Greeter",
+      "role": "display_manager",
+      "note": "Lightweight display manager providing graphical user authentication and session startup."
+    },
+    {
+      "id": "brisk-menu",
+      "name": "Brisk Menu",
+      "role": "application_launcher",
+      "note": "Modern application menu applet providing instant search and favorite application pinning."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "parent_distribution",
+      "note": "Base distribution providing underlying kernel, core libraries, and official package archives."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_ancestor",
+      "note": "Upstream source distribution providing foundational packaging standards and binary archives."
+    },
+    {
+      "id": "xubuntu",
+      "name": "Xubuntu",
+      "relation": "sister_flavor",
+      "note": "Sister lightweight GTK-based Ubuntu flavor utilizing the Xfce desktop environment."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "desktop_collaborator",
+      "note": "Major distribution partner collaborating actively on MATE desktop upstream maintenance and Slick Greeter."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Ubuntu MATE 24.04 LTS (Noble Numbat)",
+      "description": "Long-Term Support release featuring MATE 1.26.2, Flutter installer, Linux kernel 6.8, and 3-year support through April 2027."
+    },
+    {
+      "name": "Ubuntu MATE 24.10 (Oracular Oriole)",
+      "description": "Interim release delivering Slick Greeter restoration, ISO size reduction to 3.3 GB, and updated packages."
+    },
+    {
+      "name": "Ubuntu MATE 25.04 (Plucky Puffin)",
+      "description": "Interim release celebrating 10 years as an official flavor with Linux kernel 6.14 and enhanced disk encryption."
+    },
+    {
+      "name": "Ubuntu MATE 26.04 LTS (Resolute Raccoon)",
+      "description": "Long-Term Support release built on the Ubuntu 26.04 LTS enterprise base."
+    }
+  ],
+  "links": {
+    "homepage": "https://ubuntu-mate.org/",
+    "blog": "https://ubuntu-mate.org/blog/",
+    "release_24_04": "https://ubuntu-mate.org/blog/ubuntu-mate-noble-numbat-release-notes/",
+    "release_24_10": "https://ubuntu-mate.org/blog/ubuntu-mate-oracular-oriole-release-notes/",
+    "release_25_04": "https://ubuntu-mate.org/blog/ubuntu-mate-plucky-puffin-release-notes/",
+    "ubuntu_flavours": "https://ubuntu.com/desktop/flavours",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=ubuntumate"
+  },
+  "sources": [
+    {
+      "title": "Ubuntu MATE Official Website — Portal and Overview",
+      "url": "https://ubuntu-mate.org/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Ubuntu MATE Team",
+      "note": "Primary project portal detailing features, desktop philosophy, and installation resources."
+    },
+    {
+      "title": "Ubuntu MATE Official Blog — Release Announcements",
+      "url": "https://ubuntu-mate.org/blog/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Ubuntu MATE Team",
+      "note": "Chronological archive of official release announcements and development sprints."
+    },
+    {
+      "title": "Ubuntu MATE Official Blog — 24.04 LTS Noble Numbat Release Notes",
+      "url": "https://ubuntu-mate.org/blog/ubuntu-mate-noble-numbat-release-notes/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Martin Wimpress / Ubuntu MATE Team",
+      "note": "Technical notes detailing MATE 1.26.2, Flutter installer adoption, and package updates."
+    },
+    {
+      "title": "Ubuntu MATE Official Blog — 24.10 Oracular Oriole Release Notes",
+      "url": "https://ubuntu-mate.org/blog/ubuntu-mate-oracular-oriole-release-notes/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Martin Wimpress / Ubuntu MATE Team",
+      "note": "Release announcement documenting the return to Slick Greeter and ISO footprint reduction."
+    },
+    {
+      "title": "Ubuntu MATE Official Blog — 25.04 Plucky Puffin Release Notes",
+      "url": "https://ubuntu-mate.org/blog/ubuntu-mate-plucky-puffin-release-notes/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Martin Wimpress / Ubuntu MATE Team",
+      "note": "Release announcement marking the 10th anniversary of official Ubuntu flavor accreditation."
+    },
+    {
+      "title": "Ubuntu Official Portal — Recognized Ubuntu Desktop Flavours",
+      "url": "https://ubuntu.com/desktop/flavours",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Canonical Ltd.",
+      "note": "Canonical directory confirming Ubuntu MATE's accredited status as an official flavor."
+    },
+    {
+      "title": "DistroWatch — Ubuntu MATE Distribution Profile",
+      "url": "https://distrowatch.com/table.php?distribution=ubuntumate",
+      "type": "secondary",
+      "accessed": "2026-10-02",
+      "publisher": "DistroWatch",
+      "note": "Independent summary documenting release histories, package versions, and system specifications."
+    }
+  ]
+}
