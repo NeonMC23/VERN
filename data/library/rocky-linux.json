@@ -1,0 +1,194 @@
+{
+  "id": "rocky-linux",
+  "name": "Rocky Linux",
+  "type": "operating_system",
+  "summary": "An open-source, downstream enterprise operating system designed to be 100% bug-for-bug compatible with Red Hat Enterprise Linux, governed by the Rocky Enterprise Software Foundation (RESF).",
+  "tags": [
+    "linux",
+    "enterprise",
+    "server",
+    "rhel-compatible",
+    "rpm",
+    "dnf",
+    "selinux",
+    "kvm",
+    "cloud"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64",
+    "ppc64le",
+    "s390x"
+  ],
+  "license": "BSD-3-Clause",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Rocky Linux is an open-source enterprise operating system designed to deliver 100% bug-for-bug binary compatibility with Red Hat Enterprise Linux (RHEL). Established under the stewardship of the Rocky Enterprise Software Foundation (RESF), Rocky Linux serves as a production-grade downstream rebuild of Enterprise Linux for mission-critical enterprise environments.",
+    "what_is_it": "Rocky Linux provides a stable, enterprise-class computing platform across bare-metal servers, virtual machines, cloud instances, and high-performance computing clusters. It mirrors upstream Enterprise Linux package versions, application binary interfaces (ABI), and operational behaviors without commercial licensing costs.",
+    "origin_and_history": "Rocky Linux was founded in December 2020 by Gregory Kurtzer, co-founder of the original CentOS project, following Red Hat's decision to sunset CentOS Linux in favor of CentOS Stream. Kurtzer named the project in honor of late CentOS co-founder Rocky McGaugh. The initial stable release, Rocky Linux 8.4 (Green Obsidian), was published on June 21, 2021.",
+    "governance_and_resf": "The operating system is owned and governed by the Rocky Enterprise Software Foundation (RESF), structured as a Public Benefit Corporation (PBC). The RESF charter ensures community-driven longevity and protects the project against acquisition, privatization, or unilateral policy shifts, supported by sponsors including CIQ, Google Cloud, AWS, and 45Drives.",
+    "rhel_compatibility_and_sourcing": "Rocky Linux strictly adheres to 1:1 bug-for-bug binary compatibility with upstream RHEL. Following Red Hat's June 2023 source code access modifications, the RESF established legitimate sourcing pipelines utilizing Universal Base Image (UBI) container images and cloud instances, and co-founded the Open Enterprise Linux Association (OpenELA) alongside SUSE and Oracle to ensure access to Enterprise Linux source code.",
+    "peridot_build_system": "To guarantee independence and reproducibility, the project developed Peridot, an open-source cloud-native build system. Peridot automates package compilation from source RPMs across all supported architectures, allowing organizations to independently audit and rebuild the operating system from scratch.",
+    "package_management_and_repositories": "Software packages follow the RPM format and are managed through DNF. Official repositories are partitioned into BaseOS (core operating system components) and AppStream (applications, runtime environments, and databases). Developer packages are published in CRB (CodeReady Builder), with extended community software available via Fedora EPEL.",
+    "installation_and_storage": "Deployments utilize the Anaconda installer, supporting graphical, text, and automated Kickstart routines. The default storage layout employs XFS for root and data filesystems, Ext4 for `/boot`, and VFAT for the EFI system partition, configured over the Logical Volume Manager (LVM) with optional LUKS block encryption.",
+    "security_selinux_and_compliance": "Security controls enforce SELinux in Enforcing mode by default across all images. Network filtering is handled dynamically by firewalld atop nftables. Centralized system crypto policies enforce cryptographic baseline standards, and OpenSCAP integration allows automated compliance validation against DISA STIG, CIS Benchmark, and PCI-DSS profiles.",
+    "virtualization_and_container_ecosystem": "Virtualization is delivered natively via the KVM hypervisor and libvirt toolchain. Container operations utilize daemonless OCI container utilities—Podman, Buildah, and Skopeo—enabling secure, rootless container execution without a persistent root daemon. The Cockpit web console provides browser-based server administration.",
+    "cloud_wsl_and_architectures": "Official Rocky Linux images are published across primary cloud providers including AWS, Azure, Google Cloud, and Oracle Cloud Infrastructure. Official images are also published for Windows Subsystem for Linux (WSL) via the Microsoft Store. Four hardware architectures are officially supported: x86_64, AArch64 (ARM64), ppc64le (IBM Power), and s390x (IBM Z).",
+    "workstation_and_desktop_support": "For workstation and client deployments, Rocky Linux packages the GNOME desktop environment (GNOME 40 in Rocky Linux 9). Workstation installations operate under Wayland by default, maintaining fallback compatibility with X11 for legacy graphical software.",
+    "privacy_and_telemetry": "Rocky Linux implements no background telemetry, usage tracking, or user monitoring services. Network activity is limited strictly to package repository checks and mirror synchronization via MirrorManager.",
+    "advantages": [
+      "100% bug-for-bug binary compatibility with Red Hat Enterprise Linux.",
+      "10-year enterprise lifecycle with predictable minor releases and security advisories.",
+      "Open-source cloud-native Peridot build system ensuring complete reproducibility.",
+      "Broad multi-architecture support across x86_64, ARM64, ppc64le, and s390x.",
+      "Community stewardship under the Rocky Enterprise Software Foundation (RESF).",
+      "Native availability on AWS, Azure, Google Cloud, Docker Hub, and Microsoft Store (WSL)."
+    ],
+    "disadvantages": [
+      "Conservative enterprise package update cadence prioritized for stability over newest software versions.",
+      "Excludes proprietary consumer multimedia codecs and gaming packages from core repositories.",
+      "Rocky Linux 10 removes support for older x86-64-v2 processors, requiring x86-64-v3 hardware."
+    ],
+    "who_is_it_for": "Rocky Linux is designed for enterprise systems engineers, cloud architects, researchers in high-performance computing, and IT organizations seeking a free, community-backed 1:1 binary replacement for CentOS Linux and RHEL.",
+    "who_is_it_not_for": "Rocky Linux is not intended for desktop users requiring fast-moving rolling software updates, cutting-edge consumer graphics drivers, or bleeding-edge desktop environments."
+  },
+  "components": [
+    {
+      "id": "kernel-enterprise",
+      "name": "Enterprise Linux Kernel",
+      "role": "operating_system_kernel",
+      "note": "Hardened, enterprise-grade Linux kernel maintaining driver stability and backported security fixes."
+    },
+    {
+      "id": "dnf",
+      "name": "DNF Package Manager",
+      "role": "package_manager",
+      "note": "RPM package manager handling dependency calculation, metadata synchronization, and package transactions."
+    },
+    {
+      "id": "peridot",
+      "name": "Peridot Build System",
+      "role": "build_automation_system",
+      "note": "Cloud-native open-source build platform developed by the RESF for reproducible package compilation."
+    },
+    {
+      "id": "anaconda",
+      "name": "Anaconda Installer",
+      "role": "system_installer",
+      "note": "Enterprise operating system installer supporting interactive, text, and Kickstart automated installations."
+    },
+    {
+      "id": "selinux",
+      "name": "Security-Enhanced Linux (SELinux)",
+      "role": "security_subsystem",
+      "note": "Mandatory Access Control architecture enabled in Enforcing mode by default."
+    },
+    {
+      "id": "podman",
+      "name": "Podman Container Engine",
+      "role": "container_engine",
+      "note": "Rootless and daemonless container runtime compliant with Open Container Initiative (OCI) standards."
+    },
+    {
+      "id": "cockpit",
+      "name": "Cockpit Administration Console",
+      "role": "administration_interface",
+      "note": "Browser-based management interface for monitoring performance, storage, and containerized services."
+    },
+    {
+      "id": "firewalld",
+      "name": "firewalld",
+      "role": "network_firewall",
+      "note": "Dynamic firewall management utility administering packet filtering rules atop netfilter/nftables."
+    },
+    {
+      "id": "openscap",
+      "name": "OpenSCAP",
+      "role": "security_auditing_tool",
+      "note": "Security compliance scanner evaluating system configurations against DISA STIG and CIS benchmarks."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "upstream_ancestor",
+      "note": "Upstream community distribution providing core software packages and innovations upstream of Enterprise Linux."
+    },
+    {
+      "id": "almalinux",
+      "name": "AlmaLinux",
+      "relation": "peer_distribution",
+      "note": "Peer community enterprise Linux distribution founded concurrently to provide an open alternative to CentOS Linux."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Rocky Linux 8 (Green Obsidian)",
+      "description": "Initial enterprise release series (released June 2021) supported through 2029, featuring kernel 4.18 and DNF 4."
+    },
+    {
+      "name": "Rocky Linux 9 (Blue Onyx)",
+      "description": "Enterprise release series (released July 2022) supported through 2032, requiring x86-64-v2 microarchitecture."
+    },
+    {
+      "name": "Rocky Linux 10",
+      "description": "Modern enterprise generation requiring x86-64-v3 microarchitecture, featuring updated toolchains and Koji build pipelines."
+    },
+    {
+      "name": "Rocky Linux Cloud & Container Images",
+      "description": "Minimal cloud images optimized for AWS, Azure, GCP, and Docker/Podman container environments."
+    },
+    {
+      "name": "Rocky Linux for WSL",
+      "description": "Official Windows Subsystem for Linux application distributed through the Microsoft Store for Windows environments."
+    }
+  ],
+  "links": {
+    "homepage": "https://rockylinux.org/",
+    "documentation": "https://docs.rockylinux.org/",
+    "wiki": "https://wiki.rockylinux.org/",
+    "news": "https://rockylinux.org/news",
+    "repository": "https://github.com/rocky-linux",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=rocky"
+  },
+  "sources": [
+    {
+      "title": "Rocky Linux Official Project Portal",
+      "url": "https://rockylinux.org/",
+      "type": "official",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "Rocky Linux Official Documentation",
+      "url": "https://docs.rockylinux.org/",
+      "type": "documentation",
+      "date": "2026-02-15"
+    },
+    {
+      "title": "Rocky Linux Community Knowledge Base Wiki",
+      "url": "https://wiki.rockylinux.org/",
+      "type": "documentation",
+      "date": "2025-10-10"
+    },
+    {
+      "title": "Rocky Linux Project News and Release Announcements",
+      "url": "https://rockylinux.org/news",
+      "type": "official",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "Rocky Linux GitHub Organization",
+      "url": "https://github.com/rocky-linux",
+      "type": "repository",
+      "date": "2026-09-30"
+    },
+    {
+      "title": "DistroWatch Page for Rocky Linux",
+      "url": "https://distrowatch.com/table.php?distribution=rocky",
+      "type": "metadata",
+      "date": "2026-10-02"
+    }
+  ]
+}

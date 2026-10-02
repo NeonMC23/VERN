@@ -1,0 +1,201 @@
+{
+  "id": "almalinux",
+  "name": "AlmaLinux",
+  "type": "operating_system",
+  "summary": "An open-source, community-governed enterprise Linux operating system providing Application Binary Interface (ABI) compatibility with Red Hat Enterprise Linux, governed by the 501(c)(6) AlmaLinux OS Foundation.",
+  "tags": [
+    "linux",
+    "enterprise",
+    "server",
+    "rhel-compatible",
+    "rpm",
+    "dnf",
+    "selinux",
+    "kvm",
+    "cloud"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64",
+    "ppc64le",
+    "s390x"
+  ],
+  "license": "GPL-2.0-or-later",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "AlmaLinux OS is an open-source, production-grade enterprise Linux distribution established to provide a stable, community-owned foundation for servers, cloud computing, and enterprise workloads. Built to maintain Application Binary Interface (ABI) compatibility with Red Hat Enterprise Linux (RHEL), AlmaLinux is stewarded by the non-profit AlmaLinux OS Foundation.",
+    "what_is_it": "AlmaLinux is a drop-in enterprise operating system designed for deployment across physical servers, virtual machines, cloud instances, and edge devices. It packages enterprise-tested software stacks, long-term security maintenance, and standard management toolchains without licensing fees or vendor lock-in.",
+    "origin_and_history": "AlmaLinux was initiated in late 2020 by Igor Seletskiy, CEO of CloudLinux, in response to Red Hat's decision to shift CentOS Linux to CentOS Stream. Initially called Project Lenix, the first stable release (AlmaLinux 8.3) debuted on March 30, 2021. To guarantee community stewardship and prevent single-corporate control, assets and trademarks were transferred to the newly formed 501(c)(6) AlmaLinux OS Foundation.",
+    "governance_and_organization": "The distribution is owned and governed by the AlmaLinux OS Foundation, a 501(c)(6) non-profit membership organization. The Foundation is directed by an elected Board of Directors representing community contributors, mirror providers, and corporate sponsors. Bylaws cap corporate representation to preserve community independence.",
+    "rhel_compatibility_and_abi_alignment": "Following Red Hat's 2023 source code distribution changes, AlmaLinux updated its charter from a 1:1 bug-for-bug rebuild to maintaining 100% Application Binary Interface (ABI) compatibility with RHEL. This allows AlmaLinux to pull sources from CentOS Stream, upstream Git repositories, and partner patches, ensuring software and kernel modules certified for RHEL execute without modification while permitting faster security remediations.",
+    "build_system_albs_and_elevate": "The distribution is compiled using ALBS (AlmaLinux Build System), an open-source, automated continuous delivery build platform allowing public auditing and reproduction of binary packages. AlmaLinux also maintains the ELevate project, an open-source migration framework based on Leapp enabling in-place upgrades between major enterprise Linux releases.",
+    "package_management_and_repositories": "Software delivery relies on RPM packages managed via DNF. Repositories are split into BaseOS (core operating system components) and AppStream (applications, development runtimes, and database engines). Additional software development headers are provided via CRB (CodeReady Linux Builder), while extended community packages are supported through Fedora EPEL (Extra Packages for Enterprise Linux).",
+    "installation_and_storage_layout": "System installation is handled by the Anaconda installer, supporting graphical, text-mode, and automated Kickstart installations. Storage defaults to XFS for root and data partitions, Ext4 for `/boot`, and VFAT for UEFI system partitions, structured atop the Logical Volume Manager (LVM) with optional LUKS volume encryption.",
+    "security_selinux_and_compliance": "Security architecture enforces SELinux in Enforcing mode by default. Network traffic is managed by firewalld atop nftables. Centralized system-wide crypto policies enforce cryptographic standards, and the distribution supports OpenSCAP for automated compliance verification against DISA STIG, PCI-DSS, and CIS benchmarks. UEFI Secure Boot is supported via an AlmaLinux-owned EV certificate and signed shim.",
+    "virtualization_and_container_stack": "Virtualization is delivered via the Linux Kernel-based Virtual Machine (KVM) and libvirt suite. Containerized workloads utilize daemonless OCI tooling including Podman, Buildah, and Skopeo, enabling rootless container execution. The web-based Cockpit console provides graphical management of storage, networking, virtual machines, and containers.",
+    "cloud_images_and_architectures": "Official AlmaLinux images are published across primary cloud providers including Amazon Web Services (AWS AMI), Microsoft Azure, Google Cloud Platform (GCP), and Oracle Cloud Infrastructure. AlmaLinux officially supports four hardware architectures: x86_64, AArch64 (ARM64), ppc64le (IBM Power), and s390x (IBM Z), alongside specialized community images for Raspberry Pi.",
+    "desktop_and_workstation_support": "For workstations and administrative environments requiring graphical displays, AlmaLinux provides the GNOME desktop environment (GNOME 40 under AlmaLinux 9). Alternative desktop interfaces including KDE Plasma and Xfce are accessible via Special Interest Groups (SIGs) and EPEL.",
+    "privacy_and_telemetry": "AlmaLinux does not collect telemetry or user analytics by default. Network communication is strictly confined to mirror negotiation and package download queries initiated by DNF and package managers.",
+    "advantages": [
+      "100% Application Binary Interface (ABI) compatibility with Red Hat Enterprise Linux.",
+      "10-year enterprise lifecycle with predictable minor releases and security updates.",
+      "Non-profit 501(c)(6) foundation governance preventing corporate takeover or abrupt licensing shifts.",
+      "Comprehensive multi-architecture support covering x86_64, ARM64, ppc64le, and s390x.",
+      "ELevate migration project facilitating seamless in-place upgrades from CentOS and related distributions.",
+      "Turnkey cloud images and container images published across all major platforms."
+    ],
+    "disadvantages": [
+      "Conservative package update cadence compared to rolling-release and fast-moving desktop distributions.",
+      "Enterprise focus results in fewer bleeding-edge multimedia codecs and gaming packages in core repositories.",
+      "Does not claim 1:1 bug-for-bug identical package builds with RHEL since the July 2023 ABI charter adjustment."
+    ],
+    "who_is_it_for": "AlmaLinux is suited for enterprise system administrators, web hosting providers, cloud architects, and organizations requiring a reliable, free, long-term enterprise Linux platform with RHEL application compatibility.",
+    "who_is_it_not_for": "AlmaLinux is not intended for desktop users seeking the newest desktop environments, bleeding-edge consumer graphics drivers, or fast-track rolling software releases."
+  },
+  "components": [
+    {
+      "id": "kernel-enterprise",
+      "name": "Enterprise Linux Kernel",
+      "role": "operating_system_kernel",
+      "note": "Hardened Linux kernel maintained for long-term stability with backported hardware drivers and security fixes."
+    },
+    {
+      "id": "dnf",
+      "name": "DNF Package Manager",
+      "role": "package_manager",
+      "note": "Next-generation RPM package manager handling repository metadata, dependency resolution, and modularity."
+    },
+    {
+      "id": "albs",
+      "name": "AlmaLinux Build System (ALBS)",
+      "role": "build_automation_system",
+      "note": "Open-source continuous compilation platform for automated, reproducible RPM package builds."
+    },
+    {
+      "id": "elevate",
+      "name": "ELevate Migration Project",
+      "role": "migration_framework",
+      "note": "In-place major version migration tool based on Leapp enabling cross-version enterprise Linux upgrades."
+    },
+    {
+      "id": "anaconda",
+      "name": "Anaconda Installer",
+      "role": "system_installer",
+      "note": "Standard enterprise installer supporting graphical, text, and Kickstart automated installations."
+    },
+    {
+      "id": "selinux",
+      "name": "Security-Enhanced Linux (SELinux)",
+      "role": "security_subsystem",
+      "note": "Mandatory Access Control (MAC) architecture enabled in Enforcing mode by default."
+    },
+    {
+      "id": "podman",
+      "name": "Podman Container Engine",
+      "role": "container_engine",
+      "note": "Daemonless, rootless container manager compliant with Open Container Initiative (OCI) standards."
+    },
+    {
+      "id": "cockpit",
+      "name": "Cockpit Administration Console",
+      "role": "administration_interface",
+      "note": "Web-based graphical management interface for storage, services, virtual machines, and logs."
+    },
+    {
+      "id": "firewalld",
+      "name": "firewalld",
+      "role": "network_firewall",
+      "note": "Dynamic firewall daemon managing network zones and filtering rules atop nftables."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "upstream_ancestor",
+      "note": "Upstream community distribution providing foundational code, toolchains, and innovations upstream of RHEL and AlmaLinux."
+    },
+    {
+      "id": "rocky-linux",
+      "name": "Rocky Linux",
+      "relation": "peer_distribution",
+      "note": "Peer community enterprise Linux distribution founded concurrently to provide an open alternative to CentOS Linux."
+    }
+  ],
+  "variants": [
+    {
+      "name": "AlmaLinux 8",
+      "description": "Initial enterprise release series (released March 2021) supported through 2029, featuring kernel 4.18 and DNF 4."
+    },
+    {
+      "name": "AlmaLinux 9",
+      "description": "Flagship enterprise release series (released May 2022) supported through 2032, featuring kernel 5.14, GCC 11, and GNOME 40."
+    },
+    {
+      "name": "AlmaLinux 10",
+      "description": "Next-generation enterprise generation tracking CentOS Stream 10, featuring DNF 5 and modernized toolchains."
+    },
+    {
+      "name": "AlmaLinux Cloud & Container Images",
+      "description": "Optimized minimal images tailored for AWS, Azure, GCP, OCI, and Docker/Podman container runtimes."
+    },
+    {
+      "name": "AlmaLinux Raspberry Pi",
+      "description": "Dedicated community port maintained by the Raspberry Pi SIG for AArch64 single-board computers."
+    }
+  ],
+  "links": {
+    "homepage": "https://almalinux.org/",
+    "wiki": "https://wiki.almalinux.org/",
+    "faq": "https://wiki.almalinux.org/FAQ.html",
+    "governance": "https://wiki.almalinux.org/Transparency",
+    "blog": "https://almalinux.org/blog/",
+    "repository": "https://github.com/AlmaLinux",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=almalinux"
+  },
+  "sources": [
+    {
+      "title": "AlmaLinux Official Project Portal",
+      "url": "https://almalinux.org/",
+      "type": "official",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "AlmaLinux Documentation and Knowledge Base Wiki",
+      "url": "https://wiki.almalinux.org/",
+      "type": "documentation",
+      "date": "2026-02-25"
+    },
+    {
+      "title": "AlmaLinux Wiki — Frequently Asked Questions and ABI Compatibility",
+      "url": "https://wiki.almalinux.org/FAQ.html",
+      "type": "documentation",
+      "date": "2025-12-01"
+    },
+    {
+      "title": "AlmaLinux Wiki — Transparency, Governance and Foundation Bylaws",
+      "url": "https://wiki.almalinux.org/Transparency",
+      "type": "governance_policy",
+      "date": "2026-05-12"
+    },
+    {
+      "title": "AlmaLinux Official Project Blog",
+      "url": "https://almalinux.org/blog/",
+      "type": "official",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "AlmaLinux GitHub Source Organization",
+      "url": "https://github.com/AlmaLinux",
+      "type": "repository",
+      "date": "2026-09-30"
+    },
+    {
+      "title": "DistroWatch Page for AlmaLinux",
+      "url": "https://distrowatch.com/table.php?distribution=almalinux",
+      "type": "metadata",
+      "date": "2026-10-02"
+    }
+  ]
+}

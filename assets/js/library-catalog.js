@@ -48,6 +48,9 @@ var LIBRARY_RESOURCES = [
   "bazzite",
   "vanilla-os",
   "universal-blue",
+  "almalinux",
+  "rocky-linux",
+  "clear-linux",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",

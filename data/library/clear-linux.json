@@ -1,0 +1,185 @@
+{
+  "id": "clear-linux",
+  "name": "Clear Linux",
+  "type": "operating_system",
+  "summary": "A discontinued, high-performance rolling-release Linux operating system engineered by Intel Corporation, featuring stateless architecture, binary delta updates via swupd, and aggressive compiler optimizations for x86_64 architectures.",
+  "tags": [
+    "linux",
+    "intel",
+    "performance",
+    "stateless",
+    "swupd",
+    "bundles",
+    "rolling-release",
+    "x86_64",
+    "discontinued"
+  ],
+  "status": "discontinued",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-only",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Clear Linux OS was an open-source, rolling-release Linux operating system created and developed by Intel Corporation's Open Source Technology Center. Designed to demonstrate the performance potential of the Linux kernel and user space on modern x86_64 microprocessors, Clear Linux pioneered stateless filesystem architecture, bundle-based software delivery, and compiler auto-optimization across cloud, container, and server workloads.",
+    "what_is_it": "Clear Linux operated as an independent operating system that omitted traditional package managers like RPM or APT at runtime, delivering software in cohesive, pre-resolved functional bundles managed by `swupd`. It separated vendor configurations from user modifications, allowing seamless system updates, instant rollbacks, and automated integrity validation.",
+    "origin_and_history": "Clear Linux was launched by Intel on February 6, 2015, initially serving as a high-efficiency platform for cloud workloads, micro-virtual machines (Intel Clear Containers), and high-performance computing. Over its ten-year lifespan, the project expanded to support developer workstations and cloud appliances, introducing pioneering compiler optimizations that influenced upstream Linux standards.",
+    "intel_development_and_discontinuation": "On July 18, 2025, Intel announced the end of life of Clear Linux OS, halting security advisories, bug fixes, and development releases. On August 7, 2025, Intel archived all repositories under the `clearlinux` GitHub organization in read-only status. The public website and update mirrors were subsequently sunset in early 2026, transitioning the operating system into a historical open-source archive.",
+    "stateless_architecture": "Clear Linux pioneered a strict stateless design. The operating system stored default configurations and system binaries entirely within `/usr/share/defaults/` and `/usr`, keeping `/etc` clean of vendor defaults. User-defined modifications in `/etc` and persistent data in `/var` overrode vendor defaults without risking configuration drift or update collisions.",
+    "swupd_package_and_bundle_system": "Software management was governed by the Software Update Tool (`swupd`). Rather than individual packages, applications were distributed as 'bundles' (such as `os-core`, `c-basic`, or `containers-basic`) containing all required libraries and dependencies. System updates were assigned sequential version integers, with `swupd` downloading binary diffs atomically and offering automated self-healing via `swupd verify --fix`.",
+    "compiler_optimizations_and_fmv": "Clear Linux compiled its entire software tree using aggressive optimization flags, including GCC `-O3`, Profile-Guided Optimization (PGO), Link-Time Optimization (LTO), and AutoFDO. It implemented Function Multi-Versioning (FMV), packaging multiple optimized execution paths within core libraries (such as glibc) for AVX2 and AVX-512, dynamically executing the fastest instruction path supported by the host CPU.",
+    "kernel_variants_and_hardware_targeting": "The distribution targeted 64-bit x86_64 hardware with modern instruction set extensions (x86-64-v2 and v3), supporting both Intel and AMD processors. It shipped multiple tailored kernel flavors, including `linux-native` (default high-performance host kernel), `linux-kvm` (optimized for guest hypervisors), and `linux-lts` (long-term stability).",
+    "containers_and_cloud_deployment": "Containerization was a primary architectural target. Clear Linux offered the `containers-basic` bundle integrating Docker, Podman, and containerd, alongside official minimal container base images on Docker Hub (`clearlinux:latest`). Official cloud images were maintained for AWS, Microsoft Azure, and Google Cloud Platform.",
+    "mixer_tools_and_autospec": "For custom distribution building, Intel developed `mixer-tools`, enabling developers to compose custom OS images combining upstream Clear Linux bundles with proprietary software RPMs. Software packaging was automated by `autospec`, an engine that tracked upstream source tarballs, generated RPM spec files, applied Intel performance patches, and verified compilation without human intervention.",
+    "clr_installer_and_storage": "System installations were performed via `clr-installer`, an independent Go-based tool providing an interactive text user interface (TUI), graphical installer, and automated YAML/JSON installation scripts. Clear Linux required UEFI firmware and GPT partition tables, utilizing `systemd-boot` as default bootloader and Ext4 or Btrfs as root filesystem.",
+    "security_model_and_secure_boot": "Security architecture relied on cryptographically signed update manifests verified by `swupd`, strict stateless path isolation, and UEFI Secure Boot validation. Clear Linux did not enforce SELinux or AppArmor by default, relying instead on container sandboxing and stateless system separation.",
+    "telemetry_and_privacy": "Clear Linux included `telemetrics-client`, an opt-out telemetry service designed to record software crash dumps and hardware capability metrics for Intel engineering. Users could disable telemetry at any time via `telemctl opt-out`.",
+    "advantages": [
+      "Demonstrated industry-leading x86_64 CPU execution speeds through compiler optimizations and FMV.",
+      "Stateless architecture separating system defaults from user configuration.",
+      "Atomic, binary delta system updates and instant rollback capabilities via swupd.",
+      "Automated system integrity verification and self-healing with swupd verify --fix.",
+      "Innovative developer tooling including mixer-tools and autospec."
+    ],
+    "disadvantages": [
+      "Officially discontinued by Intel Corporation in July 2025; no further updates or security patches provided.",
+      "Public CDN and update mirrors sunset in 2026, preventing online swupd package installations on new deployments.",
+      "Bundle architecture lacked fine-grained package dependency control, resulting in larger bundle sizes.",
+      "Lack of default Mandatory Access Control (no default SELinux or AppArmor policy enforcement).",
+      "Strict x86_64 microarchitecture requirements excluding older processors and non-x86 architectures (ARM/Power)."
+    ],
+    "who_is_it_for": "Clear Linux is preserved as an educational and historical reference for systems architects, compiler researchers, and Linux performance engineers studying stateless system design and aggressive compiler optimizations.",
+    "who_is_it_not_for": "Clear Linux is not suitable for production deployments, everyday desktop use, or environments requiring ongoing security maintenance and vendor support."
+  },
+  "components": [
+    {
+      "id": "swupd",
+      "name": "Software Update Tool (swupd)",
+      "role": "software_update_tool",
+      "note": "File-based and bundle-based update manager performing atomic binary delta updates and rollbacks."
+    },
+    {
+      "id": "mixer",
+      "name": "Mixer Tools",
+      "role": "distro_composition_tool",
+      "note": "Custom distribution builder composing custom OS bundles and generating swupd update manifests."
+    },
+    {
+      "id": "autospec",
+      "name": "Autospec",
+      "role": "package_automation_engine",
+      "note": "Automated RPM spec generator and package build pipeline monitoring upstream software releases."
+    },
+    {
+      "id": "clr-installer",
+      "name": "Clear Linux Installer",
+      "role": "system_installer",
+      "note": "Independent system installer written in Go supporting TUI, GUI, and automated YAML/JSON deployments."
+    },
+    {
+      "id": "kernel-native",
+      "name": "Linux Native Kernel",
+      "role": "operating_system_kernel",
+      "note": "Tailored Linux kernel featuring aggressive performance tuning, intel_pstate drivers, and low-latency scheduling."
+    },
+    {
+      "id": "systemd-boot",
+      "name": "systemd-boot",
+      "role": "uefi_bootloader",
+      "note": "Simple, lightweight UEFI bootloader managing kernel entries without complex configuration files."
+    },
+    {
+      "id": "telemetrics",
+      "name": "Telemetrics Client",
+      "role": "telemetry_client",
+      "note": "Telemetry and crash reporting daemon transmitting anonymous diagnostic crash data to Intel."
+    },
+    {
+      "id": "gnome",
+      "name": "GNOME Desktop",
+      "role": "desktop_environment",
+      "note": "Graphical workstation desktop provided via the desktop bundle, running under Wayland."
+    },
+    {
+      "id": "docker-podman",
+      "name": "Container Runtimes",
+      "role": "container_runtimes",
+      "note": "Hardware-accelerated container runtimes integrated into the containers-basic bundle."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "peer_distribution",
+      "note": "Peer modern distribution and community Linux platform sharing RPM packaging origins and microarchitecture baselines."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Clear Linux Server (Base)",
+      "description": "Minimalist server installation containing os-core and essential networking bundles for cloud and server deployments."
+    },
+    {
+      "name": "Clear Linux Desktop",
+      "description": "Workstation edition featuring the GNOME desktop environment running atop the Wayland display server."
+    },
+    {
+      "name": "Clear Linux Cloud & Container Images",
+      "description": "Minimal container base images and optimized cloud instances tailored for AWS, Azure, GCP, and Docker Hub."
+    }
+  ],
+  "links": {
+    "repository": "https://github.com/clearlinux/distribution",
+    "organization": "https://github.com/clearlinux",
+    "swupd_repo": "https://github.com/clearlinux/swupd-client",
+    "installer_repo": "https://github.com/clearlinux/clr-installer",
+    "mixer_repo": "https://github.com/clearlinux/mixer-tools",
+    "docs_repo": "https://github.com/clearlinux/clear-linux-documentation",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=clear"
+  },
+  "sources": [
+    {
+      "title": "Clear Linux OS GitHub Distribution Repository Archive",
+      "url": "https://github.com/clearlinux/distribution",
+      "type": "repository",
+      "date": "2025-08-07"
+    },
+    {
+      "title": "Clear Linux OS GitHub Organization",
+      "url": "https://github.com/clearlinux",
+      "type": "repository",
+      "date": "2026-09-30"
+    },
+    {
+      "title": "Clear Linux Documentation Archive and Discontinuation Notice",
+      "url": "https://github.com/clearlinux/clear-linux-documentation",
+      "type": "documentation",
+      "date": "2025-08-07"
+    },
+    {
+      "title": "Software Update Tool (swupd) Client Source Repository",
+      "url": "https://github.com/clearlinux/swupd-client",
+      "type": "repository",
+      "date": "2025-08-07"
+    },
+    {
+      "title": "Clear Linux Installer (clr-installer) Source Repository",
+      "url": "https://github.com/clearlinux/clr-installer",
+      "type": "repository",
+      "date": "2025-08-07"
+    },
+    {
+      "title": "Clear Linux Mixer Tools Source Repository",
+      "url": "https://github.com/clearlinux/mixer-tools",
+      "type": "repository",
+      "date": "2025-08-07"
+    },
+    {
+      "title": "DistroWatch Page for Clear Linux",
+      "url": "https://distrowatch.com/table.php?distribution=clear",
+      "type": "metadata",
+      "date": "2026-10-02"
+    }
+  ]
+}
