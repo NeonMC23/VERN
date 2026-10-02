@@ -51,6 +51,9 @@ var LIBRARY_RESOURCES = [
   "almalinux",
   "rocky-linux",
   "clear-linux",
+  "tuxedo-os",
+  "linux-from-scratch",
+  "tails",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
