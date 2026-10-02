@@ -1,0 +1,210 @@
+{
+  "id": "universal-blue",
+  "name": "Universal Blue",
+  "type": "operating_system",
+  "summary": "An open-source operating system image factory and cloud-native client framework built on Fedora Atomic Desktops, distributing immutable, bootable OCI container images with automated CI/CD and atomic rollback capabilities.",
+  "tags": [
+    "linux",
+    "atomic",
+    "immutable",
+    "fedora",
+    "bootc",
+    "oci",
+    "containers",
+    "rpm-ostree",
+    "cloud-native",
+    "flatpak"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "license": "Apache-2.0",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Universal Blue (ublue) is an open-source project and software manufacturing framework that constructs and delivers bootable Linux operating system images built upon Fedora Atomic Desktops. Rather than operating as a conventional monolithic Linux distribution, Universal Blue applies cloud-native site reliability engineering (SRE) patterns, OCI container standards, and automated continuous delivery to desktop and edge client operating systems.",
+    "what_is_it": "Universal Blue serves as an image framework and collection of bootable container images designed to combine the reliability of a stateless operating system with the flexibility of a traditional Linux workstation. The system root (`/usr`) is immutable and mounted read-only, while system updates, driver layers, and kernel configurations are assembled upstream in GitHub Actions, published to GitHub Container Registry, and deployed atomically to client machines via `bootc` and `rpm-ostree`.",
+    "origin_and_history": "Universal Blue was founded in early 2023 by Jorge Castro, Kyle Gospodnetich (KyleGospo), Benjamin Sherman, and Colin Walters. The project was created to address the maintenance burden, driver compilation overhead, and configuration drift common in desktop Linux environments. By leveraging bootable OCI containers, the project enabled community members to maintain production-ready client operating systems using standard container tooling.",
+    "governance_and_organization": "The project operates under a decentralized, community-driven governance model under the Apache-2.0 open-source license. An administrative owner group oversees cloud infrastructure expenses and administrative operations, while technical decisions and image maintenance are distributed openly across public GitHub repositories, Discourse forums, and community meetings.",
+    "cloud_native_paradigm_and_mission": "Universal Blue's stated mission is to accelerate operating system development by integrating client devices into the cloud-native ecosystem. The project follows a 'distroless' ethos, deliberately avoiding the creation of custom installers, proprietary disk partitioners, or fragmented package ecosystems. Instead, it concentrates engineering effort on upstream contributions to Fedora, Flathub, and Homebrew.",
+    "relationship_with_fedora": "Universal Blue is not an independent derivative distribution or a downstream fork; it is a specialized layer of customization constructed directly on top of official Fedora Atomic Desktops (Silverblue, Kinoite, Sericea, and CoreOS). Universal Blue consumes official Fedora RPM packages, applying kernel module caching, multimedia codecs, and configuration refinements during the container build process.",
+    "bootc_and_rpm_ostree_architecture": "The operating system operates on a bootable container architecture governed by the CNCF project `bootc` alongside `rpm-ostree`. Operating system images are packaged according to standard Open Container Initiative (OCI) specifications. The client machine pulls the container image, stages it into an ostree deployment, and switches to the new deployment upon reboot without runtime state mutation.",
+    "continuous_delivery_and_oci_images": "Images are built automatically using Containerfiles in GitHub Actions and published to GitHub Container Registry (ghcr.io/ublue-os). The project retains a rolling 90-day archive of daily image builds, allowing users to pin specific builds or revert to known-good historical milestones when upstream regressions occur.",
+    "image_catalog_and_specialized_derivatives": "Universal Blue maintains a modular hierarchy of images. At the foundation are `base-main` and `base-nvidia`, providing minimal Fedora bases with akmods and codecs. From these base layers, specialized community images are built: `Bluefin` (GNOME workstation for developers), `Aurora` (KDE Plasma workstation for developers), `Bazzite` (gaming and handheld PC platform), and `uCore` (minimal container host for servers based on Fedora CoreOS).",
+    "akmods_caching_layer_and_nvidia": "To eliminate client-side kernel module compilation, Universal Blue maintains an automated caching layer (`ublue-os/akmods`). Out-of-tree kernel modules—including proprietary NVIDIA display drivers, v4l2loopback, ZFS, and OpenRGB—are precompiled in GitHub Actions against target Fedora kernels and embedded into pre-built images (`-nvidia` and `-nvidia-open`).",
+    "updates_rollbacks_and_rebasing": "System maintenance is non-destructive. If an image update causes regressions, users can immediately roll back using `rpm-ostree rollback` or select the prior deployment in the GRUB boot menu. Furthermore, users can rebase between different desktop environments, GPU variants, or back to stock Fedora Silverblue without reinstalling via `rpm-ostree rebase`.",
+    "application_ecosystem_and_homebrew": "Desktop software is managed through Flatpak, with Flathub configured as the primary software repository. For command-line tools and utilities, Universal Blue includes Homebrew (`brew`) in user space (`/home/linuxbrew/.linuxbrew`), enabling developers to install modern CLI tooling without requiring host administrative privileges or polluting the root filesystem.",
+    "containerized_development_environments": "Developer workflows that require traditional mutable package managers are decoupled from the host operating system using Distrobox and Toolbx. Developers can spawn isolated container environments running Arch Linux, Debian, Ubuntu, or Alpine with transparent access to user home directories and hardware acceleration.",
+    "security_and_sigstore_signatures": "Security architecture enforces SELinux in Enforcing mode by default. All published OCI images are signed cryptographically using Sigstore Cosign, providing cryptographic verification of image provenance from the build pipeline to the client device. Secure Boot is supported through user enrollment of the Universal Blue Machine Owner Key (MOK).",
+    "privacy_and_telemetry": "Universal Blue implements no custom telemetry daemons, user tracking, or advertising identifiers. All build recipes and container layers are publicly auditable on GitHub, and network communications are confined to standard repository synchronization and image pulls from GitHub Container Registry.",
+    "advantages": [
+      "Reliable, atomic operating system updates with instant rollback capabilities.",
+      "Precompiled NVIDIA drivers and out-of-tree kernel modules eliminating client-side compilation delays.",
+      "Standard OCI container images allowing users to build custom operating system images using Containerfiles.",
+      "90-day image retention on GitHub Container Registry providing long-term rollback flexibility.",
+      "Seamless rebasing between desktop variants (Bluefin, Aurora, Bazzite) and official Fedora without reinstallation.",
+      "Cryptographically signed container images using Sigstore Cosign for supply chain integrity."
+    ],
+    "disadvantages": [
+      "Stateless read-only `/usr` prevents traditional ad-hoc package installation on the host filesystem.",
+      "Higher local storage requirements due to multiple active and backup ostree deployments.",
+      "Requires UEFI firmware; legacy BIOS/CSM installations are unsupported.",
+      "Relies on external container registries (GitHub Container Registry) for system update delivery."
+    ],
+    "who_is_it_for": "Universal Blue is designed for developers, cloud-native engineers, system administrators, and Linux enthusiasts seeking an appliance-like, maintenance-free workstation with modern drivers and reproducible container workflows.",
+    "who_is_it_not_for": "Universal Blue is not intended for legacy BIOS machines, low-bandwidth environments with restricted container registry access, or users whose workflows depend strictly on mutable host packages without containerization."
+  },
+  "components": [
+    {
+      "id": "bootc",
+      "name": "bootc",
+      "role": "bootable_container_engine",
+      "note": "CNCF bootable container tool enabling transactional operating system updates via standard OCI images."
+    },
+    {
+      "id": "rpm-ostree",
+      "name": "rpm-ostree",
+      "role": "package_deployment_engine",
+      "note": "Hybrid image and package deployment engine managing ostree trees, rebasing, and local package layering."
+    },
+    {
+      "id": "akmods",
+      "name": "akmods Caching Layer",
+      "role": "kernel_module_builder",
+      "note": "Upstream CI pipeline precompiling out-of-tree kernel modules including NVIDIA and v4l2loopback."
+    },
+    {
+      "id": "cosign",
+      "name": "Sigstore Cosign",
+      "role": "image_signature_validator",
+      "note": "Cryptographic signing and verification utility validating image provenance before deployment."
+    },
+    {
+      "id": "flatpak",
+      "name": "Flatpak",
+      "role": "application_sandboxing_framework",
+      "note": "Primary graphical application distribution format integrated with Flathub."
+    },
+    {
+      "id": "distrobox",
+      "name": "Distrobox",
+      "role": "container_environment_manager",
+      "note": "Container orchestration tool providing mutable user development environments on top of immutable roots."
+    },
+    {
+      "id": "homebrew",
+      "name": "Homebrew on Linux",
+      "role": "user_space_package_manager",
+      "note": "Non-root package manager delivering command-line utilities into user space."
+    },
+    {
+      "id": "ujust",
+      "name": "ujust",
+      "role": "command_line_task_runner",
+      "note": "CLI task runner based on Just automating system maintenance, driver configuration, and tweaks."
+    },
+    {
+      "id": "yafti",
+      "name": "yafti",
+      "role": "first_time_setup_wizard",
+      "note": "First-boot graphical onboarding wizard allowing interactive installation of optional software."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "base_distribution",
+      "note": "Upstream base distribution providing Fedora Atomic Desktops RPM packages and core platform infrastructure."
+    },
+    {
+      "id": "bazzite",
+      "name": "Bazzite",
+      "relation": "downstream_image",
+      "note": "Downstream gaming-focused image built upon Universal Blue base images and infrastructure."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Universal Blue Base (main)",
+      "description": "Foundational lightweight desktop image built upon Fedora Atomic Desktops with preconfigured akmods and codecs."
+    },
+    {
+      "name": "Universal Blue NVIDIA",
+      "description": "Specialized base image incorporating precompiled proprietary NVIDIA kernel drivers and CUDA runtimes."
+    },
+    {
+      "name": "Bluefin",
+      "description": "Workstation image tailored for software developers, featuring the GNOME desktop with Ubuntu-like ergonomic workflows."
+    },
+    {
+      "name": "Aurora",
+      "description": "Workstation image tailored for software developers, featuring the KDE Plasma desktop with developer toolchains."
+    },
+    {
+      "name": "uCore",
+      "description": "Minimal server appliance image built upon Fedora CoreOS for edge computing and container orchestration."
+    }
+  ],
+  "links": {
+    "homepage": "https://universal-blue.org/",
+    "mission": "https://universal-blue.org/mission.html",
+    "membership": "https://universal-blue.org/membership.html",
+    "values": "https://universal-blue.org/values.html",
+    "contributing": "https://universal-blue.org/contributing.html",
+    "community_forum": "https://universal-blue.discourse.group/",
+    "repository": "https://github.com/ublue-os",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=universalblue"
+  },
+  "sources": [
+    {
+      "title": "Universal Blue Official Portal",
+      "url": "https://universal-blue.org/",
+      "type": "official",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "Universal Blue Mission and Non-goals",
+      "url": "https://universal-blue.org/mission.html",
+      "type": "governance_policy",
+      "date": "2024-05-12"
+    },
+    {
+      "title": "Universal Blue Membership and Ownership Structure",
+      "url": "https://universal-blue.org/membership.html",
+      "type": "governance_policy",
+      "date": "2024-05-12"
+    },
+    {
+      "title": "Universal Blue Project Values and Principles",
+      "url": "https://universal-blue.org/values.html",
+      "type": "governance_policy",
+      "date": "2024-05-12"
+    },
+    {
+      "title": "Universal Blue Contributing Guidelines",
+      "url": "https://universal-blue.org/contributing.html",
+      "type": "project_guidelines",
+      "date": "2024-05-12"
+    },
+    {
+      "title": "Universal Blue Base Image Installation Guide (Discourse)",
+      "url": "https://universal-blue.discourse.group/t/how-to-install-universal-blues-base-images/868",
+      "type": "documentation",
+      "date": "2024-04-18"
+    },
+    {
+      "title": "Universal Blue GitHub Organization",
+      "url": "https://github.com/ublue-os",
+      "type": "repository",
+      "date": "2026-09-30"
+    },
+    {
+      "title": "DistroWatch Page for Universal Blue",
+      "url": "https://distrowatch.com/table.php?distribution=universalblue",
+      "type": "metadata",
+      "date": "2026-10-02"
+    }
+  ]
+}

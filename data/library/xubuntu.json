@@ -1,0 +1,219 @@
+{
+  "id": "xubuntu",
+  "name": "Xubuntu",
+  "type": "operating_system",
+  "summary": "An official Ubuntu flavor combining a complete Ubuntu base system with the lightweight, modular Xfce desktop environment. Founded in 2005 and debuting with Xubuntu 6.06 LTS in 2006, Xubuntu delivers a responsive, resource-efficient computing environment built on GTK 3, the xfwm4 compositing window manager, the Thunar file manager, and the Whisker Menu application launcher. It offers both standard Desktop and official Minimal installation media, uses Canonical's modern Flutter-based desktop installer, native APT/dpkg packaging linked to Ubuntu archives, Snap containerization for Firefox and Thunderbird, and PipeWire audio.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-flavor",
+    "xfce",
+    "xfwm4",
+    "thunar",
+    "gtk3",
+    "lightweight",
+    "whisker-menu"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later, LGPL-2.0-or-later, and standard Ubuntu package licenses",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Xubuntu is an official flavor of the Ubuntu operating system engineered to deliver a lightweight, stable, and highly configurable desktop experience powered by the Xfce desktop environment. Founded in 2005 and officially launched with Xubuntu 6.06 LTS in June 2006, Xubuntu is one of the oldest official Ubuntu flavors. It aims to provide personal computer users with a responsive graphical interface that consumes modest CPU and memory resources while maintaining complete binary compatibility with the extensive Ubuntu software ecosystem.",
+    "what_is_it": "Technically, Xubuntu is an official Ubuntu derivative that shares the common Ubuntu Linux kernel, GNU C library (`glibc`), `systemd` init daemon, and APT package repositories (`main`, `restricted`, `universe`, `multiverse`). It distinguishes itself by deploying the modular Xfce desktop stack (version 4.18/4.20), the `xfwm4` compositing window manager, the Thunar file manager, the LightDM display manager with `lightdm-gtk-greeter`, Canonical's Flutter-based Ubuntu Desktop Bootstrap installer, and the Whisker Menu panel plugin, delivering low latency and predictable system performance.",
+    "origin_and_history": "Development of Xubuntu began in late 2005 under the leadership of Jani Monoses to offer a lightweight alternative to Ubuntu's default GNOME 2 environment. Xubuntu achieved official flavor status in 2006 with the release of Xubuntu 6.06 LTS (Dapper Drake). Over two decades of continuous development, Xubuntu established the Greybird GTK theme, transitioned from GTK 2 to GTK 3 in Xfce 4.14/4.16, and standardized on the Whisker Menu. Contemporary releases include Xubuntu 24.04 LTS (Noble Numbat) supported through April 2027, Xubuntu 24.10 (introducing early Wayland previews in Xfce 4.19), Xubuntu 25.04, Xubuntu 25.10, and Xubuntu 26.04 LTS.",
+    "governance_and_organization": "Xubuntu is governed democratically by the Xubuntu Council, an elected body of community developers, release engineers, and documentation leads. The project functions within the governance framework of the Ubuntu Community Council and Ubuntu Technical Board. Xubuntu packages are built on Canonical's Launchpad build farm, signed with official Canonical keys, and distributed across global Ubuntu mirror networks. The project is maintained purely by volunteer contributors without commercial backing.",
+    "desktop_environment_xfce": "The desktop environment is Xfce, built in C and GTK 3. Xfce adheres to the Unix philosophy of modularity, ensuring that desktop components run as lightweight, cooperating processes:\n\n- `xfce4-panel`: Highly configurable taskbar supporting multiple panel bars, applets, application launchers, window lists, and system notification areas.\n- Whisker Menu (`xfce4-whiskermenu-plugin`): Default application launcher providing instant search-as-you-type, categorized application trees, recent application history, and favorite pinning.\n- Greybird & elementary-xfce: Official theme suite delivering compact, elegant window borders and high-resolution icons optimized to maximize screen real estate.",
+    "window_manager_xfwm4": "Window management and compositing are handled by `xfwm4`, Xfce's native window manager. Conforming strictly to ICCCM and EWMH specifications, `xfwm4` incorporates an integrated compositing engine featuring OpenGL acceleration and XPresent synchronization to eliminate screen tearing during video playback. It supports full drag-and-drop customization of titlebar buttons, half-screen and corner-screen window tiling, and configurable workspace shortcuts.",
+    "file_manager_thunar": "System file management is provided by Thunar, known for its fast directory indexing and clean GTK 3 interface. Key features include:\n\n- Tabbed navigation and dual-pane split view browsing;\n- Built-in bulk file renamer utility (`thunar-bulk-rename`) supporting regular expression search-and-replace and date formatting;\n- Custom user actions enabling arbitrary shell command integration in context menus;\n- Seamless remote volume mounting (Samba, SFTP, WebDAV) managed by the GVFS daemon.",
+    "whisker_menu_and_panel": "The primary user navigation interface pairs `xfce4-panel` with the Whisker Menu. Users can reposition panels along any display edge, adjust panel opacity, enable intelligent autohiding, and customize system tray indicators (compatible with StatusNotifierItem and AppIndicator standards).",
+    "iso_editions_desktop_and_minimal": "Xubuntu publishes two distinct official ISO images for each release cycle:\n\n- Xubuntu Desktop: The comprehensive full image (~3.5–4 GB) preinstalling LibreOffice, Thunderbird, multimedia players, and graphics utilities for complete offline productivity.\n- Xubuntu Minimal: A streamlined, compact ISO image (~1.7 GB) providing only the essential Xfce desktop, Thunar file manager, and system settings, omitting office suites and large media software to let users construct tailored installations without manual debloating.",
+    "installer_and_deployment": "Starting with Xubuntu 24.04 LTS, the project replaced the legacy Ubiquity installer with the modern Flutter-based Ubuntu Desktop Bootstrap installer (`subiquity`). The installer features an intuitive multi-step setup, LUKS full-disk encryption, automated partition resizing, and OEM installation mode for computer refurbishers.",
+    "package_management_and_snap": "Software management relies on the Debian package format (`.deb`) and the APT toolchain (`apt`, `apt-get`, `dpkg`) connected directly to Ubuntu's central repositories. Following Ubuntu distribution policies, Xubuntu includes `snapd` enabled by default, distributing Mozilla Firefox and Mozilla Thunderbird as confined Snap packages. Flatpak is fully compatible and can be added via the `flatpak` package.",
+    "wayland_transition": "Xubuntu 24.04 LTS standardizes on the proven X11 display server for maximum stability on long-term deployments. Beginning with Xubuntu 24.10, the project packaged Xfce 4.19 (the development series leading to Xfce 4.20), introducing experimental Wayland support across core panel and desktop components using `wlroots`-based compositors such as `labwc`. Production environments are maintained on X11 until full Wayland feature parity is verified across all plugins.",
+    "hardware_support_and_architectures": "Xubuntu targets the 64-bit `x86_64` (amd64) architecture, having dropped 32-bit (i386) installation media in 2019 (Xubuntu 19.04). System requirements remain modest:\n\n- Processor: 64-bit dual-core CPU (1.5 GHz or higher);\n- Memory (RAM): Minimum 1.5 GB RAM; 2 GB recommended for general office tasks; 4 GB recommended for modern web browsing;\n- Storage: 10 GB for Xubuntu Minimal; 20 GB recommended for Xubuntu Desktop;\n- Firmware: Full support for legacy BIOS and UEFI firmware, with out-of-the-box Secure Boot via Canonical's signed `shim` loader.",
+    "security_and_apparmor": "Xubuntu inherits Ubuntu's enterprise-grade security infrastructure. Software patches and CVE resolutions are managed and distributed by Canonical's Ubuntu Security Team. The Linux kernel enforces mandatory access controls via AppArmor profiles enabled by default for network daemons and web browsers. Security updates are synchronized with official Ubuntu Security Notices (USN).",
+    "privacy_and_telemetry": "Xubuntu operates under a strict user privacy policy. The desktop environment contains no third-party advertisements or covert analytical daemons. Canonical's optional diagnostic hardware survey tool (`ubuntu-report`) is strictly opt-in and does not transmit data without user authorization. Outbound network traffic is limited strictly to user-initiated software transactions and network time protocol (NTP) synchronization.",
+    "advantages": [
+      "Official Ubuntu flavor delivering a fast, responsive GTK 3 desktop backed by Ubuntu's LTS archive",
+      "Xfce modularity providing exceptionally low CPU and RAM consumption compared to GNOME or Plasma",
+      "xfwm4 window manager featuring tear-free OpenGL/XPresent compositing and flexible button customization",
+      "Thunar file manager offering integrated bulk file renaming, split-pane browsing, and custom actions",
+      "Availability of both full Xubuntu Desktop and official lightweight Xubuntu Minimal ISO images",
+      "Direct binary compatibility with the entire ecosystem of Ubuntu and Debian software packages"
+    ],
+    "disadvantages": [
+      "LTS releases receive 3 years of desktop flavor support from the community rather than Canonical's full 5 years",
+      "Wayland support remains in an experimental transition phase in Xfce 4.19/4.20",
+      "Default inclusion of Snap containerization for Firefox and Thunderbird may not suit all user preferences",
+      "32-bit (i386) hardware architecture is unsupported since 2019",
+      "Traditional desktop layout may feel conventional compared to gesture-driven mobile desktop interfaces"
+    ],
+    "who_is_it_for": "Xubuntu is designed for users seeking a fast, stable, and highly responsive Linux desktop operating system that maximizes hardware efficiency while retaining full access to Ubuntu's software repository and Canonical security updates.",
+    "who_is_it_not_for": "It is not intended for users requiring an out-of-the-box Wayland session for production use, or those seeking resource-heavy desktop environments with complex 3D animations and deep cloud integrations out of the box."
+  },
+  "components": [
+    {
+      "id": "xfce",
+      "name": "Xfce Desktop Environment",
+      "role": "desktop_environment",
+      "note": "Lightweight, modular desktop environment built with GTK 3 adhering to Unix standards."
+    },
+    {
+      "id": "xfwm4",
+      "name": "xfwm4",
+      "role": "window_manager",
+      "note": "Standards-compliant window manager offering integrated OpenGL and XPresent compositing."
+    },
+    {
+      "id": "thunar",
+      "name": "Thunar",
+      "role": "file_manager",
+      "note": "Fast GTK file manager featuring tabbed navigation, split views, and bulk renaming."
+    },
+    {
+      "id": "xfce4-panel",
+      "name": "xfce4-panel",
+      "role": "desktop_panel",
+      "note": "Modular panel system supporting application launchers, status applets, and system monitors."
+    },
+    {
+      "id": "whisker-menu",
+      "name": "Whisker Menu",
+      "role": "application_launcher",
+      "note": "Search-driven application launcher applet supporting favorite application pinning."
+    },
+    {
+      "id": "mousepad",
+      "name": "Mousepad",
+      "role": "text_editor",
+      "note": "Fast text editor providing syntax highlighting, tabbed editing, and line numbering."
+    },
+    {
+      "id": "parole",
+      "name": "Parole",
+      "role": "media_player",
+      "note": "GStreamer-based media player optimized for low resource audio and video playback."
+    },
+    {
+      "id": "lightdm",
+      "name": "LightDM",
+      "role": "display_manager",
+      "note": "Lightweight display manager providing graphical user login and session startup."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire & WirePlumber",
+      "role": "audio_subsystem",
+      "note": "Modern multimedia processing server handling low-latency audio and Bluetooth devices."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "parent_distribution",
+      "note": "Base distribution providing underlying kernel, shared libraries, and official package archives."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_ancestor",
+      "note": "Upstream source distribution providing foundational packaging standards and binary archives."
+    },
+    {
+      "id": "ubuntu-mate",
+      "name": "Ubuntu MATE",
+      "relation": "sister_flavor",
+      "note": "Sister lightweight GTK-based Ubuntu flavor utilizing the MATE desktop environment."
+    },
+    {
+      "id": "lubuntu",
+      "name": "Lubuntu",
+      "relation": "sister_flavor",
+      "note": "Sister lightweight Ubuntu flavor offering a Qt-based desktop powered by LXQt."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Xubuntu 24.04 LTS (Noble Numbat)",
+      "description": "Long-Term Support release featuring Xfce 4.18, Flutter installer, Linux kernel 6.8, and 3-year support through April 2027."
+    },
+    {
+      "name": "Xubuntu 24.10 (Oracular Oriole)",
+      "description": "Interim release delivering Xfce 4.19 development preview with early Wayland support."
+    },
+    {
+      "name": "Xubuntu 25.04 (Plucky Puffin)",
+      "description": "Interim release updating core applications and refining PipeWire audio integration."
+    },
+    {
+      "name": "Xubuntu 25.10 (Questing Quokka)",
+      "description": "Interim release advancing Xfce 4.20 components and Linux kernel updates."
+    },
+    {
+      "name": "Xubuntu 26.04 LTS (Resolute Raccoon)",
+      "description": "Long-Term Support release consolidating Xfce 4.20 on the Ubuntu 26.04 LTS enterprise base."
+    }
+  ],
+  "links": {
+    "homepage": "https://xubuntu.org/",
+    "releasedocs": "https://xubuntu.org/releasedocs/",
+    "news_24_10": "https://xubuntu.org/news/xubuntu-24-10-released/",
+    "news_24_04": "https://xubuntu.org/news/page/2/",
+    "ubuntu_flavours": "https://ubuntu.com/desktop/flavours",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=xubuntu"
+  },
+  "sources": [
+    {
+      "title": "Xubuntu Official Website — Portal and News",
+      "url": "https://xubuntu.org/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Xubuntu Team",
+      "note": "Primary project portal detailing features, desktop philosophy, and installation resources."
+    },
+    {
+      "title": "Xubuntu Official Documentation — Releasedocs Archive",
+      "url": "https://xubuntu.org/releasedocs/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Xubuntu Team",
+      "note": "Comprehensive chronicle documenting release series from 24.04 LTS through 26.04 LTS."
+    },
+    {
+      "title": "Xubuntu Official News — 24.10 Oracular Oriole Release Announcement",
+      "url": "https://xubuntu.org/news/xubuntu-24-10-released/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Xubuntu Team",
+      "note": "Technical notes detailing the inclusion of Xfce 4.19 and early Wayland session support."
+    },
+    {
+      "title": "Xubuntu Official News — 24.04 LTS Noble Numbat Release Announcement",
+      "url": "https://xubuntu.org/news/page/2/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Xubuntu Team",
+      "note": "Release announcement documenting Xfce 4.18, Flutter installer adoption, and Minimal ISO images."
+    },
+    {
+      "title": "Ubuntu Official Portal — Recognized Ubuntu Desktop Flavours",
+      "url": "https://ubuntu.com/desktop/flavours",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Canonical Ltd.",
+      "note": "Canonical directory confirming Xubuntu's accredited status as an official flavor."
+    },
+    {
+      "title": "DistroWatch — Xubuntu Distribution Profile",
+      "url": "https://distrowatch.com/table.php?distribution=xubuntu",
+      "type": "secondary",
+      "accessed": "2026-10-02",
+      "publisher": "DistroWatch",
+      "note": "Independent summary documenting release histories, package versions, and system specifications."
+    }
+  ]
+}

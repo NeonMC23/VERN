@@ -1,0 +1,204 @@
+{
+  "id": "bazzite",
+  "name": "Bazzite",
+  "type": "operating_system",
+  "summary": "An image-based, gaming-focused operating system built upon Fedora Atomic Desktops and Universal Blue, delivering immutable root filesystems, OCI container images, and tailored handheld and desktop configurations.",
+  "tags": [
+    "linux",
+    "gaming",
+    "atomic",
+    "immutable",
+    "fedora",
+    "handheld",
+    "steamos-alternative",
+    "kde",
+    "gnome",
+    "flatpak"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "Apache-2.0",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Bazzite is an open-source, image-based Linux operating system tailored for personal computer gaming and handheld consoles. Originating as a project within the Universal Blue collective, Bazzite packages Fedora Atomic Desktops into bootable Open Container Initiative (OCI) images, combining an immutable system root with modern graphics stacks, Valve Gamescope integration, and gaming runtimes.",
+    "what_is_it": "Bazzite provides a turnkey Linux gaming environment designed for desktop computers, laptops, home theater PCs (HTPC), and handheld gaming devices such as the Valve Steam Deck, ASUS ROG Ally, and Lenovo Legion Go. Unlike traditional mutable distributions where packages are individually modified on disk, Bazzite distributes its entire base operating system as a versioned, bootable container image that is atomically deployed and updated.",
+    "origin_and_history": "Bazzite was initiated in August 2023 under the leadership of Kyle Gospodnetich (KyleGospo) along with Jorge Castro, Benjamin Sherman, and contributors from the Universal Blue community. The project was conceived to address the maintenance overhead and configuration drift common on mutable gaming setups, providing an experience comparable to Valve SteamOS but built on a standardized Fedora base with faster kernel and driver cadence.",
+    "governance_and_organization": "The project is governed collaboratively within the Universal Blue open-source collective. Bazzite is published under the Apache-2.0 license, with primary source code, Containerfiles, and orchestration recipes maintained openly on GitHub. Decisions are made through public pull requests and discussions across GitHub, Discourse, and community channels.",
+    "relationship_with_fedora_and_universal_blue": "Bazzite is not an official Fedora spin nor a downstream fork in the traditional sense; rather, it is a specialized downstream image built on Universal Blue's container manufacturing pipeline. It consumes official Fedora Atomic Desktops (Silverblue and Kinoite) RPM packages as upstream building blocks, augmenting them with hardware drivers, kernel patches, and custom configuration layers.",
+    "atomic_image_architecture_and_bootc": "The host operating system mounts the `/usr` hierarchy as read-only, preventing runtime modifications to system binaries and libraries. System updates are delivered as complete OCI container images via GitHub Container Registry (ghcr.io) and managed using `rpm-ostree` alongside emerging `bootc` tooling. Transactions are atomic: a new deployment is staged in the background and becomes active only upon reboot, leaving the running system unaffected.",
+    "desktop_environments_kde_and_gnome": "Bazzite provides two primary desktop interfaces: KDE Plasma and GNOME. KDE Plasma serves as the default desktop environment, offering an interface structure familiar to users of standard desktop operating systems and SteamOS Desktop Mode. Alternatively, GNOME editions (`-gnome`) offer an interface optimized for touch displays and gesture navigation.",
+    "steam_gaming_mode_and_gamescope": "For handheld consoles and living room setups, Bazzite integrates Steam Gaming Mode using Valve's micro-compositor Gamescope. This architecture allows the device to boot directly into the Steam Big Picture user interface with HDR support, resolution scaling, and direct controller input handling, matching the user experience of dedicated gaming consoles while permitting switching to full desktop sessions.",
+    "handheld_hardware_support": "Bazzite incorporates deep hardware enablement for PC gaming handhelds, including the Steam Deck (LCD and OLED), ASUS ROG Ally (Z1 and Z1 Extreme), Lenovo Legion Go, and various models from Ayaneo, GPD, and OneXPlayer. Integration relies on `handheld-daemon` (HHD) to manage controller emulation, gyroscopes, back buttons, and power profiles (TDP).",
+    "graphics_drivers_and_nvidia": "For AMD and Intel graphics processing units, Bazzite utilizes the open-source Mesa graphics stack (including RADV and ANV Vulkan drivers) integrated directly with the Linux kernel. For NVIDIA hardware, Bazzite builds dedicated images: `-nvidia` for legacy architectures (Pascal, Maxwell, Volta) and `-nvidia-open` for modern architectures (Turing and newer), ensuring optimal driver compatibility.",
+    "installer_and_storage": "Installation is executed through an adapted Fedora Anaconda installer that unpacks the OCI container image directly onto target drives. The default and recommended filesystem is Btrfs with transparent zstd compression. Secondary storage volumes for Steam libraries must be formatted as Btrfs or Ext4; legacy filesystems such as FAT32, exFAT, and NTFS are unsupported for game libraries due to the absence of POSIX symbolic links required by Proton prefixes.",
+    "updates_rollbacks_and_rebasing": "System maintenance is designed around non-destructive operations. If an update introduces an incompatibility, users can instantly revert to the previous working deployment via `rpm-ostree rollback` or by selecting the earlier deployment in the GRUB bootloader menu. Users can also change variants or update branches (stable, testing, unstable) without reinstalling via `rpm-ostree rebase`.",
+    "application_ecosystem_and_containers": "Desktop applications are isolated from the immutable base through Flatpak, with Flathub configured out of the box through Discover or GNOME Software. Command-line development tools and non-native dependencies are containerized using Distrobox, Toolbx, or Boxkit, allowing users to run Debian, Ubuntu, Arch Linux, or Fedora development environments without layering packages onto the host root filesystem.",
+    "security_and_secure_boot": "Bazzite operates with SELinux enabled in Enforcing mode by default. System container images published to GitHub Container Registry are cryptographically signed using Sigstore Cosign. UEFI Secure Boot is supported through the enrollment of Universal Blue's Machine Owner Key (MOK), requiring password verification during post-installation configuration.",
+    "privacy_and_telemetry": "Bazzite does not implement custom telemetry tracking or data harvesting daemons. Network traffic is restricted to user-initiated tasks, package synchronization via Flathub, and OCI image update checks against GitHub Container Registry. Privacy parameters inherit upstream Fedora and Flatpak policies.",
+    "advantages": [
+      "Atomic image-based system updates eliminating partial update states and system breakage.",
+      "Instant rollback to previous deployments via GRUB or command-line invocation.",
+      "Out-of-the-box support for handheld PC gaming devices including Steam Deck, ROG Ally, and Legion Go.",
+      "Preconfigured gaming stack including Gamescope, Steam, Proton-GE, and low-latency audio.",
+      "Native Flatpak and Distrobox integration keeping the host filesystem clean and pristine.",
+      "Dedicated, pre-built images with proprietary NVIDIA drivers and Secure Boot signing."
+    ],
+    "disadvantages": [
+      "Host filesystem immutability restricts traditional package management workflows (such as raw dnf install on root).",
+      "Layering packages via rpm-ostree increases deployment compose times and is officially discouraged.",
+      "Game libraries on secondary drives require Btrfs or Ext4, excluding NTFS and exFAT partitions.",
+      "Higher initial disk space consumption compared to minimal desktop installations due to dual ostree deployments."
+    ],
+    "who_is_it_for": "Bazzite is designed for PC gamers, handheld console owners (Steam Deck, ROG Ally, Legion Go), and users seeking a maintenance-free, appliance-like Linux desktop experience with modern hardware driver support.",
+    "who_is_it_not_for": "Bazzite is not suitable for users requiring frequent host-level kernel patching, legacy systems lacking UEFI support, or administrators who rely on mutable system-wide package managers for legacy workstation setups."
+  },
+  "components": [
+    {
+      "id": "kernel-bazzite",
+      "name": "Custom Linux Kernel",
+      "role": "operating_system_kernel",
+      "note": "Custom-patched Linux kernel featuring Fsync, Zen low-latency scheduling, and handheld hardware support."
+    },
+    {
+      "id": "gamescope",
+      "name": "Gamescope",
+      "role": "gaming_compositor",
+      "note": "Micro-compositor developed by Valve providing Steam Gaming Mode, HDR, and resolution scaling."
+    },
+    {
+      "id": "rpm-ostree",
+      "name": "rpm-ostree",
+      "role": "package_deployment_engine",
+      "note": "Hybrid image and package deployment engine managing atomic updates, rollback, and rebasing."
+    },
+    {
+      "id": "bootc",
+      "name": "bootc",
+      "role": "bootable_container_system",
+      "note": "Cloud-native bootable container tooling for image-based client operating system deployment."
+    },
+    {
+      "id": "handheld-daemon",
+      "name": "Handheld Daemon (HHD)",
+      "role": "hardware_controller_service",
+      "note": "Controller emulation and hardware management utility for PC gaming handheld devices."
+    },
+    {
+      "id": "mesa",
+      "name": "Mesa 3D Graphics",
+      "role": "graphics_drivers",
+      "note": "Open-source graphics drivers offering RADV and ANV Vulkan implementations and VA-API acceleration."
+    },
+    {
+      "id": "steam",
+      "name": "Valve Steam Client",
+      "role": "digital_distribution_client",
+      "note": "Primary digital distribution and runtime platform for Linux gaming."
+    },
+    {
+      "id": "ujust",
+      "name": "ujust",
+      "role": "command_line_task_runner",
+      "note": "Convenience CLI utility based on Just for executing system administration and configuration recipes."
+    },
+    {
+      "id": "bazaar",
+      "name": "Bazaar",
+      "role": "onboarding_application_portal",
+      "note": "Graphical onboarding and software discovery portal for gaming utilities and streaming software."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "base_distribution",
+      "note": "Upstream operating system providing the underlying RPM packages and Fedora Atomic Desktops infrastructure."
+    },
+    {
+      "id": "universal-blue",
+      "name": "Universal Blue",
+      "relation": "parent_project",
+      "note": "Upstream image manufacturing collective providing automated container build pipelines and base images."
+    },
+    {
+      "id": "nobara-linux",
+      "name": "Nobara Linux",
+      "relation": "alternative",
+      "note": "Peer Fedora-based gaming operating system utilizing a traditional mutable package architecture."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Bazzite Desktop (KDE Plasma)",
+      "description": "Default desktop edition featuring the KDE Plasma desktop environment for general-purpose PC gaming and multitasking."
+    },
+    {
+      "name": "Bazzite Desktop (GNOME)",
+      "description": "Alternative desktop edition featuring the GNOME desktop environment with gaming and touch enhancements."
+    },
+    {
+      "name": "Bazzite Deck (Handheld Edition)",
+      "description": "Console-oriented edition booting directly into Valve's Steam Gaming Mode via Gamescope for handhelds and HTPCs."
+    },
+    {
+      "name": "Bazzite NVIDIA Editions",
+      "description": "Dedicated images packaging preconfigured proprietary NVIDIA drivers for legacy and modern Turing/Ada GPUs."
+    }
+  ],
+  "links": {
+    "homepage": "https://bazzite.gg/",
+    "documentation": "https://docs.bazzite.gg/",
+    "install_guide": "https://docs.bazzite.gg/General/Installation_Guide/install-guide/",
+    "rebase_guide": "https://docs.bazzite.gg/Installing_and_Managing_Software/Updates_Rollbacks_and_Rebasing/rebase_guide/",
+    "faq": "https://docs.bazzite.gg/General/FAQ/",
+    "repository": "https://github.com/ublue-os/bazzite",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=bazzite"
+  },
+  "sources": [
+    {
+      "title": "Bazzite Official Project Portal",
+      "url": "https://bazzite.gg/",
+      "type": "official",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "Bazzite Documentation — Frequently Asked Questions",
+      "url": "https://docs.bazzite.gg/General/FAQ/",
+      "type": "documentation",
+      "date": "2024-08-21"
+    },
+    {
+      "title": "Bazzite Documentation — Installation and Hardware Guide",
+      "url": "https://docs.bazzite.gg/General/Installation_Guide/install-guide/",
+      "type": "installation_guide",
+      "date": "2026-05-03"
+    },
+    {
+      "title": "Bazzite Documentation — Updates, Rollbacks and Rebase Guide",
+      "url": "https://docs.bazzite.gg/Installing_and_Managing_Software/Updates_Rollbacks_and_Rebasing/rebase_guide/",
+      "type": "documentation",
+      "date": "2024-08-21"
+    },
+    {
+      "title": "Bazzite Documentation — Dictionary and Terminology",
+      "url": "https://docs.bazzite.gg/General/terms/",
+      "type": "documentation",
+      "date": "2025-01-06"
+    },
+    {
+      "title": "Bazzite GitHub Source Repository and Issue Tracker",
+      "url": "https://github.com/ublue-os/bazzite",
+      "type": "repository",
+      "date": "2026-09-30"
+    },
+    {
+      "title": "DistroWatch Page for Bazzite",
+      "url": "https://distrowatch.com/table.php?distribution=bazzite",
+      "type": "metadata",
+      "date": "2026-10-02"
+    }
+  ]
+}

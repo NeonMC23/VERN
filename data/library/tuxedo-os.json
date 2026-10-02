@@ -1,0 +1,208 @@
+{
+  "id": "tuxedo-os",
+  "name": "TUXEDO OS",
+  "type": "operating_system",
+  "summary": "A desktop Linux operating system engineered by German computer manufacturer TUXEDO Computers GmbH, pairing an Ubuntu Long Term Support base with updated KDE Plasma desktop packages from KDE Neon, the custom linux-tuxedo kernel, specialized hardware integration daemons, and an out-of-the-box Flatpak workflow without Snap.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-based",
+    "kde-plasma",
+    "wayland",
+    "hardware-enablement",
+    "flatpak",
+    "tuxedo",
+    "calamares"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later, GPL-3.0-or-later, and upstream open-source licenses",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "TUXEDO OS is an open-source, desktop Linux operating system designed and maintained by the German computer manufacturer TUXEDO Computers GmbH. Developed to power the company's bespoke laptops, mini PCs, and desktop workstations, TUXEDO OS is also distributed freely as a standalone operating system for standard 64-bit x86 personal computers. It blends an Ubuntu Long Term Support (LTS) core with modern KDE Plasma desktop releases, an updated kernel track, and proprietary device integration daemons.",
+    "what_is_it": "Technically, TUXEDO OS is an Ubuntu LTS-derived operating system that replaces Canonical's default desktop stack and packaging choices with curated components. The system combines the tested library foundations of Ubuntu LTS with current KDE Plasma, KDE Frameworks, and KDE Gear builds sourced from KDE Neon User Edition repositories. In addition, it integrates the custom `linux-tuxedo` kernel tree, the TUXEDO Control Center (TCC) hardware daemon, the Tuxedo Tomte automated driver configuration service, the Calamares graphical system installer, and native Flatpak integration via Flathub while disabling Snap by default.",
+    "origin_and_history": "TUXEDO Computers, established in Königsbrunn, Bavaria, historically shipped customer systems pre-configured with either openSUSE or Ubuntu. To improve direct hardware driver support, thermal profile regulation, and user experience consistency across diverse Clevo and Tongfang laptop chassis, the engineering team began publishing custom driver packages and repositories in the late 2010s. In 2022, TUXEDO Computers formalized these enhancements into an independent distribution release, TUXEDO OS 1, followed by TUXEDO OS 2 in early 2023, and TUXEDO OS 3 in 2024 featuring KDE Plasma 6 on an Ubuntu 24.04 LTS core.",
+    "governance_and_corporate_backing": "The distribution is engineered, maintained, and funded by TUXEDO Computers GmbH. Operating as a commercial hardware vendor specializing in Linux-compatible hardware, TUXEDO finances operating system development through computer sales and enterprise support contracts. Development is organized publicly across GitLab under the `tuxedocomputers` group, where source code for kernel drivers, management utilities, and packaging scripts is published under open-source licenses, primarily GNU General Public License versions 2 and 3.",
+    "base_system_and_kde_neon_integration": "Rather than relying on Kubuntu's point-release package schedule, TUXEDO OS adopts an architectural hybrid approach. The underlying system—including Glibc, systemd, compiler runtimes, and core server utilities—is synchronized with Ubuntu LTS. The graphical user interface and desktop toolchains are continuously synchronized with KDE Neon User Edition, providing end users with timely releases of KDE Plasma and Qt libraries without compromising base operating system stability.",
+    "linux_tuxedo_kernel_concept": "TUXEDO OS diverges from standard Ubuntu Hardware Enablement (HWE) kernel cadences through its documented 'Kernel Concept for TUXEDO OS'. Instead of waiting for six-month Ubuntu HWE cycles, the project maintains the `linux-tuxedo` package line, tracking upstream stable Linux kernels and Debian Testing branches. These kernel builds incorporate vendor patches for modern Wi-Fi 6E/7 chipsets, recent Intel and AMD integrated and discrete graphics architectures, and ACPI hotkey event mappings for laptop platforms.",
+    "tuxedo_control_center_and_hardware_drivers": "System hardware management is centered on the TUXEDO Control Center (TCC) and the `tuxedo-drivers` DKMS suite. The kernel modules (`tuxedo_keyboard`, `tuxedo_compatibility_check`, `clevo_wmi`, `clevo_acpi`) interface with embedded controllers (EC) to manage keyboard backlighting, fan curve profiles, and battery charging thresholds (such as limiting charging to 80% to preserve chemical battery longevity). TCC pairs a root daemon (`tccd`) with an Electron/Vue graphical frontend, giving users fine-grained control over acoustic profiles, power states, and CPU core limits.",
+    "tuxedo_tomte_automated_configuration": "Tuxedo Tomte is a dedicated background hardware configuration daemon. Operating at boot or upon hardware detection, Tomte identifies the host machine's specific motherboard, CPU, GPU, and peripheral configuration via DMI and PCI identifiers. It automatically retrieves, configures, or removes required kernel modules, microcode packages, and ACPI workarounds without requiring manual terminal configuration from the user. Tomte can be configured or deactivated via configuration files if administrators prefer manual control.",
+    "webfai_and_deployment_infrastructure": "For hardware provisioning and recovery, TUXEDO maintains WebFAI (Web-based Fully Automated Installation). Built on the open-source FAI (Fully Automated Installation) framework, WebFAI enables automated network installation of TUXEDO OS or partner distributions across local networks or via USB boot media. The utility downloads pre-tested system images directly from TUXEDO deployment servers, partitions internal storage, and installs the operating system to factory specifications.",
+    "uefi_secure_boot_policy": "On TUXEDO computer hardware and standalone TUXEDO OS installations, UEFI Secure Boot is disabled by default. The rationale documented by TUXEDO Computers is that custom `linux-tuxedo` kernels and DKMS modules compiled on target machines (`tuxedo-drivers`, third-party NVIDIA drivers, VirtualBox modules) lack Microsoft-signed third-party UEFI certificates out of the box. Enabling Secure Boot requires manual Machine Owner Key (MOK) enrollment, prompting the vendor to leave Secure Boot disabled by default to prevent driver loading failures and system unbootability.",
+    "package_management_and_snap_exclusion": "Package management in TUXEDO OS is executed via APT (Advanced Package Tool) and Debian `.deb` packages hosted on `deb.tuxedocomputers.com` and upstream Ubuntu mirrors. TUXEDO OS explicitly deactivates and removes Canonical's Snap packaging framework by default. Desktop software such as the Mozilla Firefox web browser is delivered as a native `.deb` package rather than a Snap container. For third-party sandboxed desktop applications, TUXEDO OS pre-configures Flatpak with the Flathub catalog integrated into the KDE Discover software center.",
+    "display_stack_and_multimedia": "The display stack is anchored on KDE Plasma, defaulting to a Wayland session on hardware configurations with compatible drivers, while preserving a fall-back X11 session within the SDDM display manager. Graphics drivers for Vulkan and OpenGL (Mesa, `libdrm`, `intel-media-driver`) are updated continuously through dedicated TUXEDO repositories. Audio processing is handled by the modern PipeWire sound server accompanied by the WirePlumber session manager, providing low-latency audio routing and robust screen-sharing portals.",
+    "hardware_compatibility_and_generic_pcs": "While engineered and validated against TUXEDO's proprietary laptops and workstations, TUXEDO OS functions as a general-purpose Linux distribution on generic 64-bit x86 PC hardware from vendors such as Lenovo, Dell, HP, and ASUS. Standard components—including the updated kernel, KDE Plasma desktop, PipeWire, and Mesa drivers—operate without restriction on third-party computers. Specific hardware features reliant on TUXEDO-specific embedded controllers (such as proprietary fan curves or chassis lighting) remain inactive on unsupported third-party motherboards.",
+    "privacy_and_telemetry": "TUXEDO OS enforces an explicit zero-telemetry policy. Standard Ubuntu telemetry and tracking utilities—including `popularity-contest` and `ubuntu-report`—are excised from the default software manifest. System network traffic is strictly confined to user-initiated tasks, such as APT repository updates, Flathub downloads, and network time synchronization. No diagnostic telemetry, tracking tokens, or behavioral profiles are transmitted to TUXEDO Computers or third-party servers.",
+    "advantages": [
+      "Modern KDE Plasma desktop interface paired with the foundational stability of an Ubuntu LTS base",
+      "Continuously updated `linux-tuxedo` kernel providing fast hardware support for contemporary CPU, GPU, and Wi-Fi chipsets",
+      "Integrated TUXEDO Control Center delivering fine-grained power profile, thermal fan curve, and battery threshold regulation",
+      "Automated hardware detection and driver configuration via the Tuxedo Tomte daemon",
+      "Decoupled from Snap by default, offering native DEB packages and integrated Flathub Flatpak application delivery",
+      "Zero telemetry policy with Ubuntu diagnostic reporting agents removed by default",
+      "Freely downloadable and functional on both vendor hardware and standard third-party x86_64 PCs"
+    ],
+    "disadvantages": [
+      "Secure Boot is disabled by default, requiring manual MOK key management for users mandating UEFI verification",
+      "Vendor-specific features (fan curves, keyboard RGB control, charging thresholds) require TUXEDO-compatible embedded controllers",
+      "Hybrid repository model mixing Ubuntu LTS with KDE Neon and TUXEDO repositories requires care when adding third-party PPAs",
+      "Official distribution images are restricted to the 64-bit x86 architecture, without production ARM64 ISO releases",
+      "Corporate commercial support agreements are tied to TUXEDO-purchased hardware, relying on community forums for third-party systems"
+    ],
+    "who_is_it_for": [
+      "Owners of TUXEDO Computers laptops and workstations requiring tailored hardware, power, and thermal management",
+      "Desktop users seeking an up-to-date KDE Plasma desktop environment on an Ubuntu base without Canonical's Snap framework",
+      "Users requiring a modern Linux kernel and current Mesa graphics drivers for contemporary mobile PC hardware",
+      "Enthusiasts desiring battery charging threshold management and acoustic fan curve configuration"
+    ],
+    "who_is_it_not_for": [
+      "Enterprises requiring mandatory UEFI Secure Boot enabled out of the box without manual certificate enrollment",
+      "Users seeking non-KDE desktop environments (such as GNOME or Xfce) as a primary vendor-supported default",
+      "Systems running legacy 32-bit x86 processors or single-board ARM computers (e.g. Raspberry Pi)",
+      "System administrators requiring strict 1:1 binary alignment with upstream enterprise distributions"
+    ]
+  },
+  "components": [
+    {
+      "id": "linux-tuxedo",
+      "name": "linux-tuxedo Kernel",
+      "role": "operating_system_kernel",
+      "note": "Updated Linux kernel branch tracking upstream stable and Debian Testing with vendor hardware patches."
+    },
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma Desktop",
+      "role": "desktop_environment",
+      "note": "Primary graphical desktop interface and Wayland compositor sourced from KDE Neon User Edition."
+    },
+    {
+      "id": "tuxedo-control-center",
+      "name": "TUXEDO Control Center (TCC)",
+      "role": "hardware_daemon",
+      "note": "Graphical utility and root daemon managing power profiles, fan curves, battery charging thresholds, and keyboard RGB."
+    },
+    {
+      "id": "tuxedo-drivers",
+      "name": "TUXEDO DKMS Drivers",
+      "role": "kernel_modules",
+      "note": "DKMS modules interfacing with laptop embedded controllers for keyboard backlights, hotkeys, and thermal sensors."
+    },
+    {
+      "id": "tuxedo-tomte",
+      "name": "Tuxedo Tomte",
+      "role": "configuration_service",
+      "note": "Automated background hardware detection daemon applying driver configurations and hardware workarounds."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire Audio & Video",
+      "role": "multimedia_server",
+      "note": "Low-latency multimedia server handling audio streams and Wayland screen-sharing portals."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares Installer",
+      "role": "installer",
+      "note": "Modular graphical system installer configuring partitions, encryption, and user accounts during live USB deployment."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "upstream_base",
+      "note": "Foundational operating system providing core Glibc runtime, systemd, and base package archives."
+    },
+    {
+      "id": "kde-neon",
+      "name": "KDE neon",
+      "relation": "desktop_packaging_source",
+      "note": "Upstream source for continuous packaging of current KDE Plasma, Frameworks, and Gear desktop software."
+    },
+    {
+      "id": "kubuntu",
+      "name": "Kubuntu",
+      "relation": "peer_distribution",
+      "note": "Official Ubuntu KDE flavour, differing from TUXEDO OS through conservative Plasma updates and standard Snap integration."
+    },
+    {
+      "id": "pop-os",
+      "name": "Pop!_OS",
+      "relation": "peer_vendor_distribution",
+      "note": "Peer Linux hardware vendor distribution (System76) also built on Ubuntu LTS with independent desktop and driver stacks."
+    }
+  ],
+  "variants": [
+    {
+      "name": "TUXEDO OS 1",
+      "description": "Initial formalized release generation (2022) built upon Ubuntu 22.04 LTS and KDE Plasma 5."
+    },
+    {
+      "name": "TUXEDO OS 2",
+      "description": "Second generation release (2023) featuring PipeWire audio, refined Calamares installation, and modern Mesa drivers."
+    },
+    {
+      "name": "TUXEDO OS 3",
+      "description": "Current flagship generation (2024–2026) based on Ubuntu 24.04 LTS, featuring KDE Plasma 6 and updated kernel frameworks."
+    },
+    {
+      "name": "TUXEDO WebFAI Netboot Image",
+      "description": "Network-bootable deployment image allowing automated factory restoration and unattended hardware provisioning."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.tuxedocomputers.com/en/TUXEDO-OS_1.tuxedo",
+    "differences": "https://www.tuxedocomputers.com/en/Differences-between-TUXEDO-OS-Kubuntu-and-KDE-Neon.tuxedo",
+    "kernel_concept": "https://www.tuxedocomputers.com/en/The-Kernel-Concept-for-TUXEDO-OS-Based-on-Debian-Testing.tuxedo",
+    "release_history": "https://www.tuxedocomputers.com/en/Tailor-made-operating-system-TUXEDO-OS-2-finished-and-ready-for-use-.tuxedo",
+    "repository": "https://gitlab.com/tuxedocomputers",
+    "packages": "https://deb.tuxedocomputers.com/debian/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=tuxedo"
+  },
+  "sources": [
+    {
+      "title": "TUXEDO Computers — Official TUXEDO OS Portal",
+      "url": "https://www.tuxedocomputers.com/en/TUXEDO-OS_1.tuxedo",
+      "type": "official",
+      "date": "2024-05-15"
+    },
+    {
+      "title": "TUXEDO Documentation — Differences between TUXEDO OS, Kubuntu and KDE Neon",
+      "url": "https://www.tuxedocomputers.com/en/Differences-between-TUXEDO-OS-Kubuntu-and-KDE-Neon.tuxedo",
+      "type": "documentation",
+      "date": "2024-06-20"
+    },
+    {
+      "title": "TUXEDO Documentation — The Kernel Concept for TUXEDO OS Based on Debian Testing",
+      "url": "https://www.tuxedocomputers.com/en/The-Kernel-Concept-for-TUXEDO-OS-Based-on-Debian-Testing.tuxedo",
+      "type": "technical_specification",
+      "date": "2024-04-12"
+    },
+    {
+      "title": "TUXEDO Documentation — Tailor-Made Operating System TUXEDO OS 2 Finished and Ready for Use",
+      "url": "https://www.tuxedocomputers.com/en/Tailor-made-operating-system-TUXEDO-OS-2-finished-and-ready-for-use-.tuxedo",
+      "type": "documentation",
+      "date": "2023-03-01"
+    },
+    {
+      "title": "TUXEDO Package Repository Mirror",
+      "url": "https://deb.tuxedocomputers.com/debian/",
+      "type": "repository",
+      "date": "2026-09-15"
+    },
+    {
+      "title": "TUXEDO Computers Official GitLab Group",
+      "url": "https://gitlab.com/tuxedocomputers",
+      "type": "repository",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "DistroWatch Page for TUXEDO OS",
+      "url": "https://distrowatch.com/table.php?distribution=tuxedo",
+      "type": "metadata",
+      "date": "2026-10-02"
+    }
+  ]
+}

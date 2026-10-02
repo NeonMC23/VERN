@@ -1,0 +1,221 @@
+{
+  "id": "nobara-linux",
+  "name": "Nobara Linux",
+  "type": "operating_system",
+  "summary": "An independent, modified Linux distribution based on Fedora Linux, created by Thomas Crider (GloriousEggroll) and optimized for PC gaming, streaming, and multimedia content creation. Nobara is not an official Fedora spin; it overlays Fedora's core package repositories with custom Nobara repositories, a custom Linux kernel (kernel-nobara) incorporating Zen/Liquorix and Fsync patches, Mesa drivers with enabled hardware video codecs, automated NVIDIA GPU driver configuration, pre-integrated Steam and Proton-GE, OBS Studio with Wayland capture, the Calamares installer configuring Btrfs Timeshift subvolumes, and a permissive SELinux configuration.",
+  "tags": [
+    "linux",
+    "desktop",
+    "gaming",
+    "streaming",
+    "fedora-based",
+    "kernel-nobara",
+    "kde-plasma",
+    "calamares",
+    "btrfs",
+    "steam"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later, MIT, and redistributable upstream and third-party RPM licenses",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Nobara Linux is an independent desktop Linux distribution engineered to provide an out-of-the-box computing environment tailored specifically for video gaming, live streaming, and multimedia content production. Founded in 2022 by Thomas Crider—a Red Hat software maintenance engineer widely recognized in the open-source gaming community under the pseudonym GloriousEggroll (author of Proton-GE and Wine-GE)—Nobara addresses the friction points commonly encountered on mainstream Linux distributions regarding proprietary hardware drivers, video codecs, anti-cheat compatibility, and gaming latency.",
+    "what_is_it": "Technically, Nobara Linux is an independent downstream derivative based on the Fedora Linux package ecosystem. It combines Fedora's stable core libraries and GNU toolchain with custom-built package repositories (`nobara-baseos`, `nobara-appstream`, `nobara-rocm-official`), an extensively patched Linux kernel (`kernel-nobara`), patched Mesa graphics drivers with restored hardware codec support, the Calamares system installer, a preconfigured Btrfs snapshot layout, and dedicated graphical system maintenance utilities.",
+    "origin_and_history": "Thomas Crider established Nobara Linux in 2022 to streamline desktop Linux setup for gamers and content creators who appreciated Fedora's package currency and stability but struggled with manual configuration of RPM Fusion, proprietary NVIDIA drivers, multimedia codecs, and Wine dependencies. Initially built with a customized GNOME desktop in Nobara 36, the project replaced Fedora's Anaconda installer with Calamares in December 2022. Beginning with Nobara 39 in late 2023, the project shifted its flagship 'Official Edition' to KDE Plasma to better support Wayland fractional scaling, variable refresh rate (VRR), and HDR. Subsequent releases, including Nobara 40 (July 2024), Nobara 41, 42, and the 44 series, unified installation images for AMD, Intel, and NVIDIA hardware.",
+    "governance_and_organization": "Nobara Linux is maintained as an open-source community hobby project led by Thomas Crider with international volunteer contributors. Source code for package modifications, kernel patches, and build scripts is publicly hosted on GitHub under the `Nobara-Project` organization. The project is non-commercial and financed through community micro-donations via Ko-fi to support mirror bandwidth and build infrastructure.",
+    "relationship_with_fedora": "Nobara Linux maintains a clear and documented boundary with Fedora: it is explicitly **not** an official Fedora spin, nor is it endorsed, affiliated with, or supported by Red Hat or the Fedora Project. Nobara uses Fedora's binary packages and DNF repository infrastructure as a base, but modifies packages, kernel flags, and security policies in ways that depart from Fedora's strict legal guidelines regarding patent-encumbered codecs and third-party proprietary drivers.",
+    "custom_kernel_and_graphics_stack": "The operating system incorporates a customized Linux kernel (`kernel-nobara`) built with specialized patches:\n\n- Low-latency scheduling optimizations derived from the Zen and Liquorix kernel projects;\n- Fsync (`futex2`) system call synchronization patches designed to reduce CPU overhead in Wine and Proton;\n- Hardware drivers for ASUS ROG gaming laptops and OpenRGB lighting controllers;\n- Mesa graphics drivers compiled with hardware-accelerated video decoding/encoding (H.264, H.265, VC-1) enabled via VA-API/VDPAU;\n- Out-of-the-box proprietary NVIDIA driver installation with Wayland explicit synchronization support.",
+    "desktop_editions_kde_and_gnome": "Nobara offers multiple desktop experiences across dedicated ISO images:\n\n- Official Edition: The flagship desktop featuring a customized KDE Plasma 6 environment configured with an ergonomic bottom taskbar, system monitor widgets, and gaming presets;\n- GNOME Edition: An alternative edition featuring GNOME with curated extensions (AppIndicator, Dash to Panel) for users who prefer GNOME workflows;\n- KDE Edition: A standard, uncustomized ('stock') KDE Plasma desktop;\n- Steam-Handheld & Steam-HTPC Editions: Specialized images tailored for handheld PC gaming devices (Steam Deck, ASUS ROG Ally, Lenovo Legion Go) and living room PCs, booting directly into Valve's Gamescope session ('Deck Mode').",
+    "gaming_and_streaming_integration": "Nobara provides a preconfigured gaming and streaming stack upon first boot:\n\n- Steam preinstalled with complete 32-bit multilib dependency resolution;\n- Pre-integrated Proton-GE, Wine-GE, and the ProtonUp-Qt management tool;\n- Lutris, Heroic Games Launcher, and GOverlay preconfigured for third-party game libraries;\n- MangoHud overlay for real-time monitoring of frame rates, frame times, GPU/CPU thermals, and power consumption;\n- OBS Studio preconfigured with Wayland PipeWire screen capture, NVENC/VA-API hardware encoding, and GStreamer plugins;\n- DaVinci Resolve compatibility libraries pre-bundled for professional video editing.",
+    "nobara_updater_and_welcome": "To prevent package manager conflicts resulting from manual DNF upgrades across mixed repositories, Nobara provides dedicated maintenance applications:\n\n- `Update System` (`nobara-updater`): A specialized graphical utility that synchronizes GPG keys, coordinates system RPM updates, updates Flatpak runtimes, and applies automated post-update migration scripts;\n- `Nobara Welcome`: A first-run wizard guiding users through the one-click installation of proprietary codecs, graphics drivers, and optional gaming software.",
+    "calamares_installer_and_btrfs": "Nobara replaced Fedora's Anaconda installer with the universal Calamares installer. Calamares partitions storage drives using the Btrfs filesystem by default, automatically generating separated `@` (root) and `@home` (user files) subvolumes. This layout enables seamless integration with Timeshift, permitting instant system snapshot creation and restoration without risking personal user data.",
+    "security_selinux_and_secure_boot": "Nobara adjusts security configurations to prioritize game compatibility:\n\n- SELinux Permissive Mode: Unlike Fedora which enforces strict SELinux policies (`Enforcing`), Nobara sets SELinux to `Permissive` by default. This prevents game anti-cheat modules, custom Wine runtime injects, and mod loaders from being blocked by access-control denials;\n- Secure Boot Requirement: Nobara does **not** support UEFI Secure Boot out of the box. Users are required to disable Secure Boot in their motherboard UEFI settings before installation, as the custom Nobara kernel and akmods drivers are not signed by Microsoft's 3rd Party UEFI Certificate Authority.",
+    "hardware_support_and_handhelds": "Nobara targets 64-bit `x86_64` (amd64) hardware architectures exclusively. Recommended specifications include:\n\n- Processor: Quad-core 64-bit CPU (Intel Core i5/i7 or AMD Ryzen);\n- Memory (RAM): Minimum 8 GB RAM (16 GB recommended for modern 3D gaming and content creation);\n- Storage: Minimum 50 GB of disk space (SSD recommended for fast game loading);\n- GPU: Dedicated AMD Radeon, NVIDIA GeForce, or Intel Arc GPU supporting Vulkan 1.3.",
+    "privacy_and_telemetry": "Nobara Linux enforces an open-source privacy model. It contains no commercial advertising, device fingerprinting, or user behavioral tracking. Network communications are restricted to user-directed package downloads, automated repository metadata refreshes via `nobara-updater`, and NTP clock synchronization.",
+    "advantages": [
+      "Gaming-optimized Fedora derivative eliminating manual codec, driver, and Wine configuration hurdles",
+      "Custom kernel-nobara integrating Fsync and Zen scheduling patches for reduced gaming stutter",
+      "Mesa drivers compiled with full hardware video acceleration (H.264/H.265) enabled out of the box",
+      "Calamares installer configuring Btrfs with dedicated @ and @home subvolumes for Timeshift snapshots",
+      "Native integration of Proton-GE, MangoHud, OBS Studio, and handheld device controller profiles",
+      "Dedicated Update System utility preventing broken package dependencies during repository upgrades"
+    ],
+    "disadvantages": [
+      "SELinux configured in Permissive mode by default, reducing enterprise security hardening compared to Fedora",
+      "Requires disabling UEFI Secure Boot in motherboard firmware due to unsigned custom kernel modules",
+      "Hobby community project without official corporate support or formal enterprise SLAs",
+      "Software updates may be temporarily held back while waiting for upstream graphics stack stabilization",
+      "Exclusive support for 64-bit x86_64, with no official ARM builds for single-board computers"
+    ],
+    "who_is_it_for": "Nobara Linux is designed for PC gamers, live streamers, content creators, and handheld PC enthusiasts who want the modern package currency and stability of Fedora combined with preconfigured gaming drivers, low-latency kernels, and multimedia codecs without manual terminal tweaking.",
+    "who_is_it_not_for": "It is not intended for mission-critical enterprise servers requiring strict SELinux enforcement, corporate workstations mandating UEFI Secure Boot compliance, or users seeking a pure, unmodified upstream Fedora experience."
+  },
+  "components": [
+    {
+      "id": "kernel-nobara",
+      "name": "kernel-nobara",
+      "role": "operating_system_kernel",
+      "note": "Custom-compiled Linux kernel with Fsync, Zen low-latency scheduling, and hardware controller patches."
+    },
+    {
+      "id": "mesa-nobara",
+      "name": "Mesa (Freeworld)",
+      "role": "graphics_drivers",
+      "note": "Mesa 3D graphics drivers compiled with hardware-accelerated H.264/H.265 VA-API codecs enabled."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares Installer",
+      "role": "system_installer",
+      "note": "Independent system installer replacing Anaconda and configuring Btrfs subvolume layouts."
+    },
+    {
+      "id": "nobara-updater",
+      "name": "Update System (nobara-updater)",
+      "role": "update_utility",
+      "note": "Specialized update utility coordinating RPM, Flatpak, and repository GPG key synchronizations."
+    },
+    {
+      "id": "nobara-welcome",
+      "name": "Nobara Welcome",
+      "role": "onboarding_wizard",
+      "note": "First-boot graphical setup wizard for driver configuration, codecs, and gaming utilities."
+    },
+    {
+      "id": "steam-proton-ge",
+      "name": "Steam & Proton-GE",
+      "role": "gaming_compatibility",
+      "note": "Gaming runtime environment bundling 32-bit libraries, Proton-GE, and Wine-GE layers."
+    },
+    {
+      "id": "obs-studio",
+      "name": "OBS Studio (Nobara Build)",
+      "role": "streaming_capture",
+      "note": "Video recording and broadcasting suite configured with Wayland PipeWire capture and NVENC plugins."
+    },
+    {
+      "id": "gamescope",
+      "name": "Gamescope",
+      "role": "gaming_compositor",
+      "note": "Micro-compositor developed by Valve enabling resolution scaling and isolated display containers."
+    },
+    {
+      "id": "mangohud",
+      "name": "MangoHud & GOverlay",
+      "role": "telemetry_overlay",
+      "note": "On-screen display layer for real-time monitoring of gaming frame rates, thermals, and power."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "base_distribution",
+      "note": "Base distribution providing underlying binary packages, GNU toolchain, and RPM repository infrastructure."
+    },
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Peer enthusiast distribution frequently utilized for gaming and cutting-edge kernel deployments."
+    },
+    {
+      "id": "pop-os",
+      "name": "Pop!_OS",
+      "relation": "alternative",
+      "note": "Peer distribution featuring gaming-focused defaults and out-of-the-box proprietary graphics support."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Official Edition (Custom KDE Plasma)",
+      "description": "Flagship edition featuring a customized KDE Plasma desktop configured for gaming, multitasking, and streaming."
+    },
+    {
+      "name": "GNOME Edition",
+      "description": "Alternative desktop edition featuring GNOME configured with system tray and panel extensions."
+    },
+    {
+      "name": "KDE Edition (Stock)",
+      "description": "Standard edition featuring unmodified upstream KDE Plasma desktop layout and settings."
+    },
+    {
+      "name": "Steam-Handheld Edition",
+      "description": "Specialized edition for handheld PC consoles (Steam Deck, ROG Ally) booting directly into Gamescope Deck Mode."
+    },
+    {
+      "name": "Steam-HTPC Edition",
+      "description": "Specialized edition configured for home theater gaming PCs connected to living room television displays."
+    }
+  ],
+  "links": {
+    "homepage": "https://nobaraproject.org/",
+    "download": "https://nobaraproject.org/download.html",
+    "wiki": "https://wiki.nobaraproject.org",
+    "faq": "https://wiki.nobaraproject.org/FAQ/FAQ",
+    "new_user_guide": "https://wiki.nobaraproject.org/new-user-guide-general-guidelines",
+    "github": "https://github.com/Nobara-Project",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=nobara"
+  },
+  "sources": [
+    {
+      "title": "Nobara Linux Official Portal — Overview and Features",
+      "url": "https://nobaraproject.org/",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Nobara Project / Thomas Crider",
+      "note": "Primary distribution portal describing gaming architecture, modified kernel, and independence from Fedora."
+    },
+    {
+      "title": "Nobara Linux Official Portal — Download ISO Images",
+      "url": "https://nobaraproject.org/download.html",
+      "type": "official",
+      "accessed": "2026-10-02",
+      "publisher": "Nobara Project / Thomas Crider",
+      "note": "Official image repository documenting Official, GNOME, KDE, and Steam-Handheld editions and Secure Boot advisory."
+    },
+    {
+      "title": "Nobara Linux Official Wiki — Knowledge Base and Documentation",
+      "url": "https://wiki.nobaraproject.org",
+      "type": "documentation",
+      "accessed": "2026-10-02",
+      "publisher": "Nobara Project Documentation Team",
+      "note": "Official wiki covering installation procedures, Timeshift backups, and driver troubleshooting."
+    },
+    {
+      "title": "Nobara Linux Official Wiki — Frequently Asked Questions (FAQ)",
+      "url": "https://wiki.nobaraproject.org/FAQ/FAQ",
+      "type": "documentation",
+      "accessed": "2026-10-02",
+      "publisher": "Nobara Project Documentation Team",
+      "note": "Authoritative answers addressing third-party repositories, controller firmware, and SELinux permissive status."
+    },
+    {
+      "title": "Nobara Linux Official Wiki — New User Guidelines and General Usage",
+      "url": "https://wiki.nobaraproject.org/new-user-guide-general-guidelines",
+      "type": "documentation",
+      "accessed": "2026-10-02",
+      "publisher": "Nobara Project Documentation Team",
+      "note": "Comprehensive guide for system upgrades, nobara-updater usage, and gaming overlay configuration."
+    },
+    {
+      "title": "GitHub — Nobara Project Official Source Code Organization",
+      "url": "https://github.com/Nobara-Project",
+      "type": "repository",
+      "accessed": "2026-10-02",
+      "publisher": "Nobara Project Development Team",
+      "note": "Central open-source repository containing kernel patches, packaging specs, and system maintenance utilities."
+    },
+    {
+      "title": "DistroWatch — Nobara Linux Distribution Profile",
+      "url": "https://distrowatch.com/table.php?distribution=nobara",
+      "type": "secondary",
+      "accessed": "2026-10-02",
+      "publisher": "DistroWatch",
+      "note": "Independent summary documenting release histories, package versions, and system specifications."
+    }
+  ]
+}

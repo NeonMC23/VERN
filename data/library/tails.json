@@ -1,0 +1,209 @@
+{
+  "id": "tails",
+  "name": "Tails",
+  "type": "operating_system",
+  "summary": "A portable, live Linux operating system based on Debian, engineered to preserve privacy and anonymity by routing all outgoing connections through the Tor network, operating amnesically in RAM by default, and offering optional LUKS-encrypted persistent storage.",
+  "tags": [
+    "linux",
+    "live-system",
+    "privacy",
+    "anonymity",
+    "tor",
+    "amnesic",
+    "debian-based",
+    "security",
+    "luks",
+    "apparmor"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-3.0-or-later and upstream Debian open-source licenses",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Tails (The Amnesic Incognito Live System) is an open-source, portable live operating system derived from Debian GNU/Linux. Specifically engineered to safeguard user privacy, circumvent network censorship, and prevent passive online surveillance, Tails boots directly from a USB flash drive or DVD. By strictly channeling all outgoing Internet communications through the Tor anonymity network and executing entirely in temporary computer memory (RAM), Tails provides an isolated computing environment designed to leave no physical traces on host hardware.",
+    "what_is_it": "Technically, Tails is an immutable live operating system built upon Debian Stable, augmented with customized privacy configurations, kernel hardening, and security tooling. Tails is architecturally distinct from the Tor network itself: while Tor is a decentralized onion routing protocol and network of distributed relays, Tails is an integrated operating system that configures its local firewall (`nftables`/`iptables`) to enforce that every application communicates exclusively through Tor, while running under a strict amnesic RAM lifecycle with optional LUKS-encrypted Persistent Storage.",
+    "origin_and_history": "Tails originated in 2009 as the conceptual and technical successor to earlier privacy-focused live distributions, specifically Incognito OS (based on Gentoo) and the Amnesia project (based on Debian). The primary developers unified these efforts to establish a standardized, Debian-based live environment with robust hardware compatibility and turnkey Tor routing. Initially released under the name 'Amnesic Incognito Live System', the project was formally abbreviated to Tails. In September 2024, the Tails project and The Tor Project announced an organizational merger, uniting development resources and long-term infrastructure.",
+    "governance_and_tor_project_partnership": "Tails is governed as a non-profit, community-driven free software project. The development community coordinates engineering, translation, release cycles, and user documentation on an independent GitLab instance hosted at `gitlab.tails.net`. The project is financially sustained by individual donations, philanthropic grants, and digital rights foundations (including the Freedom of the Press Foundation). Following the 2024 organizational alliance with The Tor Project, development and security audits are coordinated jointly to synchronize Tor Browser releases directly with Tails system updates.",
+    "amnesic_architecture_and_ram_erasure": "By default, Tails operates under an uncompromising amnesic security model. The operating system unpacks its compressed squashfs filesystem directly into system RAM upon boot, treating internal computer hard drives, solid-state drives, and the bootable USB media as read-only. No session history, temporary files, downloaded documents, or web cookies are written to non-volatile storage. Upon system shutdown, restart, or abrupt removal of the USB drive, Tails executes an automated cryptographic RAM erasure routine, overwriting physical memory cells with zeros to mitigate cold-boot memory remanence attacks.",
+    "tor_routing_and_firewall_isolation": "All network traffic in Tails is subject to mandatory confinement. The system firewall is configured with a default-drop policy for all outgoing connections that do not originate from the local Tor daemon or dedicated proxy wrappers. This structural firewall enforcement prevents DNS query leaks, IPv6 address leaks, and accidental plaintext communication caused by malfunctioning or compromised applications. All TCP traffic is routed through three successive encrypted Tor relays (guard node, middle relay, and exit node), concealing the user's geographic IP address from remote destinations.",
+    "encrypted_persistent_storage_luks": "For workflows requiring long-term data retention, Tails provides Persistent Storage, an optional encrypted partition created on the remaining storage space of the USB drive using LUKS (Linux Unified Key Setup). Access to the persistent partition is unlocked only by entering a passphrase in the Tails Greeter at startup. Persistent Storage enforces fine-grained compartmentalization: users selectively enable specific directories and settings to persist (e.g., Tor Browser personal bookmarks, Thunderbird email accounts, GnuPG keyrings, KeePassXC databases, network connections, or additional APT packages). Any data outside designated persistent categories is erased upon shutdown.",
+    "unsafe_browser_and_captive_portals": "To resolve the chicken-and-egg problem of authenticating with public Wi-Fi captive portals (such as in hotels, libraries, and airports) before Tor connectivity is available, Tails includes the 'Unsafe Browser'. Running in an isolated network namespace under a restricted `clearnet` user account, the Unsafe Browser communicates directly over the local network outside of Tor. It features prominent visual warning banners and disabled persistent profiles, reminding users that it must only be used to accept captive portal terms and never for confidential browsing.",
+    "application_isolation_and_apparmor": "Tails deploys the Linux kernel's AppArmor security module in enforcing mode across critical internet-facing applications, including Tor Browser, Mozilla Thunderbird, the Evince PDF document viewer, and GIMP. AppArmor confinement profiles restrict the file paths, network sockets, and system calls each application can access. If a remote attacker compromises the web browser via a zero-day exploit, AppArmor restricts the compromised process from reading personal files stored in other persistent folders or escalating privileges on the underlying live system.",
+    "bundled_software_and_metadata_cleaner": "The distribution pre-installs a curated suite of privacy and cryptography tools:\n\n- Tor Browser: hardened Firefox ESR build configured with NoScript and anti-fingerprinting patches\n- Metadata Cleaner: desktop utility utilizing the `mat2` library to strip EXIF, author, and location tags from images, PDFs, and office files\n- OnionShare: peer-to-peer file transfer utility creating temporary Tor onion services for anonymous file exchange\n- KeePassXC: offline password vault for encrypted credential storage\n- Mozilla Thunderbird: email client pre-configured with OpenPGP end-to-end encryption\n- Electrum: Bitcoin wallet operating over Tor for private financial transactions\n- GnuPG and Kleopatra/Seahorse: comprehensive OpenPGP key management and file encryption utilities",
+    "threat_model_and_security_limits": "Tails provides rigorous anonymity against passive network eavesdroppers, local network observers, and post-session physical forensic analysis of storage drives. However, the project documents explicit security limits:\n\n- Host Hardware and Firmware: Tails cannot protect users against pre-existing firmware rootkits, compromised UEFI BIOS, or hardware keyloggers installed on the physical machine.\n- Behavioral De-anonymization: Logging into personal social media, webmail, or banking accounts containing real identity credentials instantly de-anonymizes the user to those service providers.\n- Traffic Correlation Attacks: Sophisticated adversaries capable of simultaneously monitoring ingress traffic to Tor guard nodes and egress traffic from exit nodes can perform statistical traffic correlation analysis.\n- In-Session Exploitation: A high-severity zero-day browser or kernel exploit executed during an active session can inspect volatile memory before the system is powered down.",
+    "installation_and_automatic_upgrades": "Tails is primarily distributed as a raw disk image (`.img`) designed for direct block-level writing to USB flash drives using tools such as GNOME Disks, Etcher, or `dd`. An ISO image is also maintained for DVD burning and virtual machine testing. Tails features an automated incremental upgrade system: when a new release is published, Tails downloads cryptographically signed update packages over Tor and applies changes directly to the USB drive, eliminating the need to reflash the device manually between minor versions. The bootloader leverages Microsoft-signed UEFI shim loaders, supporting out-of-the-box boot on modern PC systems with UEFI Secure Boot enabled.",
+    "privacy_and_zero_telemetry": "Tails adheres to an uncompromising zero-telemetry doctrine. No analytics beacons, usage metrics, operating system serial numbers, or automated error reporting mechanisms exist within the distribution. Time synchronization is executed anonymously over Tor to prevent cleartext NTP queries that could reveal local network timing or public IP addresses. Bluetooth hardware is disabled by default to eliminate local wireless attack vectors.",
+    "advantages": [
+      "Strict amnesic computing model executing entirely in RAM, leaving zero digital footprints on host storage drives",
+      "Automated cryptographic RAM memory wiping upon shutdown or sudden USB drive unplugging",
+      "Universal Tor network enforcement managed by system-level firewall rules, preventing DNS and IPv6 leaks",
+      "Granular LUKS-encrypted Persistent Storage allowing selective preservation of keys, bookmarks, and configs",
+      "Hardened application confinement enforced by AppArmor across all major internet-facing software",
+      "Curated privacy toolchain including Tor Browser, Metadata Cleaner (mat2), OnionShare, KeePassXC, and OpenPGP",
+      "UEFI Secure Boot compatibility out of the box via signed shim bootloaders on standard x86_64 PCs"
+    ],
+    "disadvantages": [
+      "Network throughput and latency overhead inherent to the multi-hop Tor onion routing topology",
+      "Certain websites, web applications, and content delivery networks block or challenge connections from known Tor exit nodes",
+      "Cannot defend against compromised host machine hardware, UEFI firmware rootkits, or physical keyloggers",
+      "Live USB architecture restricts permanent desktop personalization compared to standard daily-driver distributions",
+      "Official distribution builds are restricted to 64-bit x86 architecture, without support for ARM (Apple Silicon or Raspberry Pi)"
+    ],
+    "who_is_it_for": [
+      "Journalists, investigators, and sources communicating in hostile surveillance environments",
+      "Activists, dissidents, and human rights defenders evading state-sponsored censorship and digital tracking",
+      "Security professionals, researchers, and penetration testers requiring clean, untraceable operational environments",
+      "Privacy-conscious individuals needing to access sensitive websites or documents without leaving traces on physical drives"
+    ],
+    "who_is_it_not_for": [
+      "Gamers, streaming media creators, and latency-sensitive users requiring high-bandwidth connections and proprietary GPU acceleration",
+      "Users seeking a permanent daily desktop workstation with traditional unrestricted local disk storage",
+      "Organizations expecting central Active Directory management, remote fleet telemetry, or MDM supervision",
+      "Users on unsupported hardware architectures such as ARM64 laptops or single-board microcomputers"
+    ]
+  },
+  "components": [
+    {
+      "id": "tor-daemon",
+      "name": "Tor Onion Router Daemon",
+      "role": "anonymity_network_router",
+      "note": "Local onion routing daemon establishing encrypted circuits and handling all outbound TCP traffic."
+    },
+    {
+      "id": "tor-browser",
+      "name": "Tor Browser",
+      "role": "web_browser",
+      "note": "Hardened Firefox ESR web browser pre-configured with NoScript, anti-fingerprinting, and Tor proxy routing."
+    },
+    {
+      "id": "apparmor",
+      "name": "AppArmor Mandatory Access Control",
+      "role": "security_framework",
+      "note": "Kernel security framework enforcing mandatory access restriction profiles on untrusted software."
+    },
+    {
+      "id": "persistent-storage-luks",
+      "name": "LUKS Encrypted Persistent Storage",
+      "role": "storage_subsystem",
+      "note": "Granular encrypted partition subsystem preserving selected user keys, documents, and settings."
+    },
+    {
+      "id": "metadata-cleaner",
+      "name": "Metadata Cleaner (mat2)",
+      "role": "privacy_utility",
+      "note": "Desktop utility removing identifying metadata from images, documents, and multimedia files before sharing."
+    },
+    {
+      "id": "onionshare",
+      "name": "OnionShare",
+      "role": "peer_to_peer_sharing",
+      "note": "Tool creating temporary Tor onion services for anonymous, direct peer-to-peer file transfer."
+    },
+    {
+      "id": "keepassxc",
+      "name": "KeePassXC Password Manager",
+      "role": "credential_vault",
+      "note": "Offline local credential vault storing encrypted passwords within the persistent storage container."
+    },
+    {
+      "id": "thunderbird-openpgp",
+      "name": "Mozilla Thunderbird with OpenPGP",
+      "role": "encrypted_email_client",
+      "note": "Desktop email communication client configured with OpenPGP end-to-end encryption routed through Tor."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_base",
+      "note": "Foundational operating system providing core Debian Stable packages, security patches, and package architectures."
+    },
+    {
+      "id": "antix",
+      "name": "antiX",
+      "relation": "peer_live_distribution",
+      "note": "Peer Debian-derived live system offering persistent USB workflows, differing through traditional non-Tor networking."
+    },
+    {
+      "id": "alpine-linux",
+      "name": "Alpine Linux",
+      "relation": "peer_security_distribution",
+      "note": "Security-oriented minimalist Linux distribution employing musl libc and PaX/grsecurity hardening."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Tails USB Image (.img)",
+      "description": "Primary raw disk image designed for direct block writing to USB flash drives with automatic upgrade support."
+    },
+    {
+      "name": "Tails ISO Image (.iso)",
+      "description": "Standard optical disc image designed for DVD burning and execution inside virtual machine hypervisors."
+    },
+    {
+      "name": "Tails 6.x Series",
+      "description": "Stable generation based on Debian 12 (Bookworm) introducing redesigned Persistent Storage and modern GNOME Shell."
+    },
+    {
+      "name": "Tails 7.x Series",
+      "description": "Next-generation series integrating updated Tor daemon releases, Wayland refinements, and refreshed kernel baselines."
+    }
+  ],
+  "links": {
+    "homepage": "https://tails.net/",
+    "documentation": "https://tails.net/doc/",
+    "features": "https://tails.net/doc/about/features/",
+    "warnings": "https://tails.net/doc/about/warnings",
+    "contribute": "https://tails.net/contribute/",
+    "news": "https://tails.net/news/",
+    "repository": "https://gitlab.tails.net/tails/tails",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=tails"
+  },
+  "sources": [
+    {
+      "title": "Tails Official Portal — The Amnesic Incognito Live System",
+      "url": "https://tails.net/",
+      "type": "official",
+      "date": "2026-03-15"
+    },
+    {
+      "title": "Tails Documentation — About Tails and Architecture Overview",
+      "url": "https://tails.net/doc/about/",
+      "type": "documentation",
+      "date": "2026-03-15"
+    },
+    {
+      "title": "Tails Documentation — Core Features and Security Specifications",
+      "url": "https://tails.net/doc/about/features/",
+      "type": "technical_specification",
+      "date": "2026-03-15"
+    },
+    {
+      "title": "Tails Documentation — Security Warnings and Threat Model Limitations",
+      "url": "https://tails.net/doc/about/warnings",
+      "type": "security_policy",
+      "date": "2026-03-15"
+    },
+    {
+      "title": "Tails Official Project News & Release Bulletins",
+      "url": "https://tails.net/news/",
+      "type": "official",
+      "date": "2026-03-15"
+    },
+    {
+      "title": "Tails Project Official GitLab Source Repository",
+      "url": "https://gitlab.tails.net/tails/tails",
+      "type": "repository",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "DistroWatch Page for Tails",
+      "url": "https://distrowatch.com/table.php?distribution=tails",
+      "type": "metadata",
+      "date": "2026-10-02"
+    }
+  ]
+}
