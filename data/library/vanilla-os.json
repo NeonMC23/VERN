@@ -1,0 +1,200 @@
+{
+  "id": "vanilla-os",
+  "name": "Vanilla OS",
+  "type": "operating_system",
+  "summary": "An immutable, atomic desktop Linux operating system delivering an unmodified GNOME experience, dual-partition A/B root updates via ABRoot v2, OCI container image deployment, and containerized development workflows via Apx.",
+  "tags": [
+    "linux",
+    "atomic",
+    "immutable",
+    "debian",
+    "gnome",
+    "flatpak",
+    "containers",
+    "apx",
+    "wayland"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "license": "GPL-3.0-or-later",
+  "last_verified": "2026-10-02",
+  "content": {
+    "introduction": "Vanilla OS is an open-source, immutable desktop Linux operating system built around an appliance-like architectural model. Designed to provide a pristine, unmodified GNOME desktop experience, Vanilla OS separates the core operating system from user data and applications through a dual-root A/B partition layout, Open Container Initiative (OCI) image deployments, and containerized development subsystems.",
+    "what_is_it": "Vanilla OS delivers a secure, tamper-resistant computing platform where the root filesystem is mounted strictly read-only during runtime. System updates and modifications are executed atomically in the background on an alternate partition, while user applications run in Flatpak sandboxes and developer environments operate in isolated OCI containers, preventing dependency conflicts from impacting operating system stability.",
+    "origin_and_history": "Vanilla OS was founded in 2022 by Mirko Brombin (creator of Bottles) and Luca Di Maio. The initial release, Vanilla OS 22.10 Kinetic, debuted in December 2022 based on Ubuntu 22.10 and ABRoot v1. To overcome release cycle friction and package modifications imposed by downstream forks, the team executed an architectural rewrite for Vanilla OS 2 Orchid (released July 2024), transitioning to Debian Sid and OCI image deployment. Vanilla OS 3 Reunion (released August 2026) subsequently introduced official ARM64 support and reproducible image builds.",
+    "governance_and_organization": "The project is maintained as an independent open-source initiative under the GNU General Public License v3 (GPL-3.0-or-later). Development is hosted openly within the Vanilla-OS GitHub organization, guided by project leads Mirko Brombin, Luca Di Maio, and community subsystem maintainers.",
+    "upstream_base_and_debian_transition": "While Vanilla OS 1 was derived from Ubuntu, current releases (Vanilla OS 2 Orchid and Vanilla OS 3 Reunion) utilize Debian Sid (Unstable) as upstream base. Debian Sid provides a continuous stream of modern packages that Vanilla OS freezes and stabilizes through its custom repository management tool, Eratosthenes, before packaging into minimal OCI container images.",
+    "immutable_architecture_and_abroot_v2": "System immutability is governed by ABRoot v2. The system provisions two mirror root partitions (A and B). When the machine boots from partition A, that filesystem is locked in read-only mode. When updates are performed, complete OCI images are downloaded and applied to partition B in a single atomic transaction. At reboot, the master bootloader switches default boot flags to partition B. If an issue occurs, instant rollback to partition A is available from the boot menu.",
+    "smart_updates_and_vso": "System maintenance is automated by the Vanilla System Operator (VSO). VSO monitors hardware states and network availability, applying system updates silently when the machine is idle and connected to AC power, avoiding disruption during interactive user tasks such as gaming or video editing.",
+    "apx_subsystems_and_stacks": "Command-line tools and development software are managed through Apx v2, a container abstraction tool with both CLI and graphical interfaces (Apx GUI). Rather than modifying the host filesystem, Apx provisions isolated subsystems based on Debian, Ubuntu, Fedora, Arch Linux (with AUR support), or Alpine Linux. Configurations are formalized as Stacks, allowing reproducible and portable developer setups.",
+    "application_ecosystem_and_flatpak": "Desktop applications are deployed exclusively through Flatpak, with Flathub configured as the primary repository in GNOME Software. Application runtimes operate in isolated sandboxes, ensuring that desktop applications cannot alter host libraries or compromise system integrity.",
+    "android_compatibility_via_waydroid": "Vanilla OS integrates Waydroid, managed under the hood by VSO, allowing users to run Android applications seamlessly alongside desktop Linux applications under Wayland without configuring virtual machine hypervisors manually.",
+    "desktop_environment_vanilla_gnome": "Vanilla OS adheres strictly to upstream GNOME design philosophy, shipping a stock, unbranded GNOME desktop (GNOME 46 in Orchid) running on Wayland. The project avoids third-party themes, docks, or intrusive extensions, delivering the clean aesthetic intended by the GNOME Foundation.",
+    "prime_profiles_and_graphics": "For laptops and workstations with hybrid graphics (Intel/NVIDIA or AMD/NVIDIA), Vanilla OS provides PRIME Profiles and management utilities (`cur-gpu`, `nrun`, `prime-switch`), allowing on-demand GPU switching between power-saving integrated graphics and high-performance discrete acceleration.",
+    "albius_installer_and_storage": "System deployment is driven by Albius, an independent installer backend developed to replace distinst. Albius enforces UEFI boot mode and requires at least 50 GB of disk space to accommodate dual A/B root partitions and user volumes. The user data partition (`/var`) is protected by LUKS2 encryption by default.",
+    "security_luks2_and_privilege_model": "Security architecture combines read-only root filesystems, full disk encryption with LUKS2, and the FsGuard boot-time filesystem integrity validator. Administrative privilege escalation via standard `sudo` is removed by default in favor of structured PolicyKit (PolKit) authorization and isolated container workflows.",
+    "privacy_and_telemetry": "Vanilla OS does not collect telemetry by default. The First Setup onboarding wizard allows users to explicitly configure software choices without mandatory tracking. Project web portals employ Google Tag Manager with Consent Mode strictly disabled unless authorized by the user.",
+    "advantages": [
+      "Atomic, deterministic updates via OCI container images avoiding partial upgrade states.",
+      "Instant, reliable rollback to the alternate root partition in case of update failure.",
+      "Pristine, unmodified GNOME desktop adhering strictly to upstream design standards.",
+      "Multi-distribution package management through Apx v2 subsystems (Debian, Ubuntu, Fedora, Arch, Alpine).",
+      "Automated smart updates during system idle states managed by VSO.",
+      "Default LUKS2 encryption and boot-time integrity validation via FsGuard."
+    ],
+    "disadvantages": [
+      "Requires at least 50 GB of disk storage due to dual A/B partition provisioning.",
+      "Absence of traditional host package managers (no direct mutable apt install on root).",
+      "Requires UEFI firmware; legacy BIOS/CSM hardware is unsupported.",
+      "Host-level driver or kernel module additions require explicit ABRoot compilation and reboot."
+    ],
+    "who_is_it_for": "Vanilla OS is suited for developers, designers, and general desktop users seeking a secure, low-maintenance Linux workstation with an authentic GNOME experience and flexible multi-distribution container environments.",
+    "who_is_it_not_for": "Vanilla OS is not suitable for legacy BIOS computers, low-capacity storage drives (under 50 GB), or users whose workflows depend on directly mutating host operating system libraries without containerization."
+  },
+  "components": [
+    {
+      "id": "abroot",
+      "name": "ABRoot v2",
+      "role": "system_transaction_manager",
+      "note": "Dual-root A/B transaction manager deploying OCI system images atomically across system partitions."
+    },
+    {
+      "id": "apx",
+      "name": "Apx v2",
+      "role": "container_subsystem_manager",
+      "note": "Package and container management tool provisioning isolated subsystems with Stacks and Apx GUI."
+    },
+    {
+      "id": "vso",
+      "name": "Vanilla System Operator (VSO)",
+      "role": "system_operator_service",
+      "note": "Background maintenance daemon orchestrating smart updates and Waydroid integration."
+    },
+    {
+      "id": "albius",
+      "name": "Albius Installer",
+      "role": "system_installer",
+      "note": "Custom graphical system installer providing UEFI A/B partition setup and LUKS2 encryption."
+    },
+    {
+      "id": "gnome",
+      "name": "GNOME Desktop",
+      "role": "desktop_environment",
+      "note": "Stock, unmodified GNOME desktop environment running natively on Wayland."
+    },
+    {
+      "id": "flatpak",
+      "name": "Flatpak",
+      "role": "application_sandboxing_framework",
+      "note": "Default application packaging format integrated with Flathub and GNOME Software."
+    },
+    {
+      "id": "waydroid",
+      "name": "Waydroid Integration",
+      "role": "android_compatibility_layer",
+      "note": "Container-based Android execution environment integrated into the Wayland desktop."
+    },
+    {
+      "id": "vib",
+      "name": "Vanilla Image Builder (Vib)",
+      "role": "image_build_tool",
+      "note": "Declarative build tool constructing reproducible OCI system images from YAML recipes."
+    },
+    {
+      "id": "prime-profiles",
+      "name": "PRIME Profiles",
+      "role": "graphics_switch_utility",
+      "note": "Hybrid GPU configuration suite providing runtime switching between integrated and discrete GPUs."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_base",
+      "note": "Upstream operating system providing base packages (Debian Sid) packaged into OCI container images."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "historical_base",
+      "note": "Historical base distribution used for the initial Vanilla OS 22.10 Kinetic release."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "alternative",
+      "note": "Peer modern distribution and atomic desktop ecosystem supported in Apx container subsystems."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Vanilla OS 2 Orchid",
+      "description": "Landmark major release introducing the Debian Sid base, ABRoot v2 OCI images, Apx v2, and GNOME 46."
+    },
+    {
+      "name": "Vanilla OS 3 Reunion",
+      "description": "Successor major release introducing official ARM64 support, reproducible system images, and updated desktop components."
+    },
+    {
+      "name": "Vanilla OS VM Image",
+      "description": "Specialized rebase target incorporating preconfigured virtualization guest drivers for KVM, VMware, and VirtualBox."
+    }
+  ],
+  "links": {
+    "homepage": "https://vanillaos.org/",
+    "documentation": "https://docs.vanillaos.org/",
+    "apx_docs": "https://docs.vanillaos.org/apx/en/introduction",
+    "release_orchid": "https://vanillaos.org/blog/article/2024-07-28/vanilla-os-2-orchid---stable-release",
+    "immutability_interview": "https://vanillaos.org/blog/article/2024-07-22/interview-with-luca-di-maio-and-mirko-brombin-exploring-immutability-in-vanilla-os-2-orchid",
+    "repository": "https://github.com/Vanilla-OS",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=vanilla"
+  },
+  "sources": [
+    {
+      "title": "Vanilla OS Official Portal",
+      "url": "https://vanillaos.org/",
+      "type": "official",
+      "date": "2026-10-02"
+    },
+    {
+      "title": "Vanilla OS Documentation — General Handbook",
+      "url": "https://docs.vanillaos.org/",
+      "type": "documentation",
+      "date": "2024-07-28"
+    },
+    {
+      "title": "Vanilla OS Documentation — Apx Introduction",
+      "url": "https://docs.vanillaos.org/apx/en/introduction",
+      "type": "documentation",
+      "date": "2024-07-28"
+    },
+    {
+      "title": "Vanilla OS Blog — Vanilla OS 2 Orchid Stable Release",
+      "url": "https://vanillaos.org/blog/article/2024-07-28/vanilla-os-2-orchid---stable-release",
+      "type": "official",
+      "date": "2024-07-28"
+    },
+    {
+      "title": "Vanilla OS Blog — Exploring Immutability in Vanilla OS 2 Orchid",
+      "url": "https://vanillaos.org/blog/article/2024-07-22/interview-with-luca-di-maio-and-mirko-brombin-exploring-immutability-in-vanilla-os-2-orchid",
+      "type": "official",
+      "date": "2024-07-22"
+    },
+    {
+      "title": "Vanilla-OS GitHub Source Organization",
+      "url": "https://github.com/Vanilla-OS",
+      "type": "repository",
+      "date": "2026-09-30"
+    },
+    {
+      "title": "DistroWatch Page for Vanilla OS",
+      "url": "https://distrowatch.com/table.php?distribution=vanilla",
+      "type": "metadata",
+      "date": "2026-10-02"
+    }
+  ]
+}

@@ -45,6 +45,9 @@ var LIBRARY_RESOURCES = [
   "ubuntu-mate",
   "xubuntu",
   "nobara-linux",
+  "bazzite",
+  "vanilla-os",
+  "universal-blue",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
