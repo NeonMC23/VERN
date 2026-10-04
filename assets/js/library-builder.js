@@ -190,6 +190,24 @@
     return field;
   }
 
+  // Conventional field names carry an editorial role. Giving them distinct,
+  // low-saturation tones stops a resource reading as 25 identical cards.
+  // Purely presentational and entirely generic: driven by the key, never the id.
+  var TONES = {
+    positive: ["advantages", "pros", "strengths", "benefits", "who_is_it_for"],
+    negative: ["disadvantages", "cons", "weaknesses", "drawbacks", "limitations", "who_is_it_not_for"],
+    lead: ["introduction", "what_is_it", "overview"],
+    verdict: ["verdict", "conclusion", "bottom_line"]
+  };
+  function toneFor(key) {
+    if (typeof key !== "string") return null;
+    var k = key.toLowerCase();
+    for (var tone in TONES) {
+      if (Object.prototype.hasOwnProperty.call(TONES, tone) && TONES[tone].indexOf(k) !== -1) return tone;
+    }
+    return null;
+  }
+
   // `content` root: each top-level entry becomes a block; simple text entries
   // and structured objects are laid out in a responsive grid where useful.
   function renderContent(content) {
@@ -214,6 +232,12 @@
       var value = content[k];
       var node = renderNode(k, value, 0);
       if (!node) return;
+      // Field-name driven, schema-level tone. Applies to any resource that
+      // happens to carry these conventional keys; no per-resource branching.
+      var tone = toneFor(k);
+      if (tone && node.classList && node.classList.contains("block")) {
+        node.setAttribute("data-tone", tone);
+      }
       // Short string arrays pair nicely side by side (e.g. pros / cons lists).
       var pairable = isStrArray(value) && value.length <= 8;
       if (pairable) {

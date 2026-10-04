@@ -17,50 +17,7 @@
  */
 
 var LIBRARY_RESOURCES = [
-  "fedora",
-  "debian",
-  "ubuntu",
-  "arch-linux",
-  "linux-mint",
-  "opensuse-tumbleweed",
-  "opensuse-leap",
-  "endeavouros",
-  "manjaro",
-  "nixos",
-  "gentoo",
-  "void-linux",
-  "alpine-linux",
-  "slackware",
-  "mx-linux",
-  "elementary-os",
-  "zorin-os",
-  "pop-os",
-  "kde-neon",
-  "pclinuxos",
-  "antix",
-  "puppy-linux",
-  "tiny-core-linux",
-  "lubuntu",
-  "kubuntu",
-  "ubuntu-mate",
-  "xubuntu",
-  "nobara-linux",
-  "bazzite",
-  "vanilla-os",
-  "universal-blue",
-  "almalinux",
-  "rocky-linux",
-  "clear-linux",
-  "tuxedo-os",
-  "linux-from-scratch",
-  "tails",
-  // Development test fixtures — not real technologies. Safe to remove.
-  "test-linux",
-  "test-desktop",
-  "test-network",
-  "test-tool",
-  "test-project",
-  "test-framework"
+  "fedora"
 ];
 
 (function () {
@@ -271,11 +228,8 @@ var LIBRARY_RESOURCES = [
       ]
     }));
 
-    if (isStr(entry.data.summary)) {
-      a.appendChild(el("p", { className: "card__text", text: entry.data.summary }));
-    }
-
-    var meta = el("ul", { className: "pill-row card__meta" });
+    // Compact identity row: type + status, directly under the title.
+    var meta = el("ul", { className: "pill-row card__ident" });
     if (entry.type) {
       meta.appendChild(el("li", {
         children: [el("span", { className: "badge badge--type", text: humanize(entry.type) })]
@@ -285,6 +239,40 @@ var LIBRARY_RESOURCES = [
       meta.appendChild(el("li", { children: [el("span", { className: "badge", text: entry.status })] }));
     }
     if (meta.childNodes.length) a.appendChild(meta);
+
+    // Summary is line-clamped in CSS so every card keeps the same geometry.
+    // The full text stays available, unmodified, on the resource page.
+    if (isStr(entry.data.summary)) {
+      a.appendChild(el("p", { className: "card__text", text: entry.data.summary }));
+    }
+
+    // Tags: a bounded number of chips, with a count for the remainder.
+    // Resources carry 8-13 tags; rendering them all destroys the card rhythm.
+    var tags = Array.isArray(entry.data.tags) ? entry.data.tags.filter(isStr) : [];
+    if (tags.length) {
+      var TAG_LIMIT = 3;
+      var row = el("ul", { className: "pill-row card__tags" });
+      tags.slice(0, TAG_LIMIT).forEach(function (t) {
+        row.appendChild(el("li", { children: [el("span", { className: "tag", text: t })] }));
+      });
+      if (tags.length > TAG_LIMIT) {
+        row.appendChild(el("li", {
+          children: [el("span", {
+            className: "tag tag--more",
+            text: "+" + (tags.length - TAG_LIMIT),
+            attrs: { title: tags.slice(TAG_LIMIT).join(", ") }
+          })]
+        }));
+      }
+      a.appendChild(row);
+    }
+
+    // Explicit, consistent interaction affordance pinned to the card foot.
+    a.appendChild(el("span", {
+      className: "card__go",
+      attrs: { "aria-hidden": "true" },
+      text: "Read documentation \u2192"
+    }));
 
     return el("li", { children: [a] });
   }
