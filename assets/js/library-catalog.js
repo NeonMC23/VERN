@@ -17,8 +17,43 @@
  */
 
 var LIBRARY_RESOURCES = [
-  "fedora"
+  "fedora",
+  "debian",
+  "ubuntu",
+  "arch-linux",
+  "linux-mint",
+  "opensuse-tumbleweed",
+  "opensuse-leap",
+  "endeavouros",
+  "manjaro",
+  "nixos",
+  "gentoo",
+  "void-linux",
+  "alpine-linux",
+  "slackware",
+  "mx-linux",
+  "elementary-os",
+  "zorin-os",
+  "pop-os",
+  "kde-neon",
+  "pclinuxos",
+  "antix",
+  "puppy-linux",
+  "tiny-core-linux",
+  "lubuntu",
+  "kubuntu",
+  "ubuntu-mate",
+  "xubuntu",
+  "nobara-linux",
+  // Development test fixtures — not real technologies. Safe to remove.
+  "test-linux",
+  "test-desktop",
+  "test-network",
+  "test-tool",
+  "test-project",
+  "test-framework"
 ];
+
 
 (function () {
   "use strict";
