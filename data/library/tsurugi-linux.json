@@ -1,0 +1,184 @@
+{
+  "id": "tsurugi-linux",
+  "name": "Tsurugi Linux",
+  "type": "operating_system",
+  "summary": "A specialized GNU/Linux distribution based on Ubuntu LTS, engineered for digital forensics, incident response (DFIR), open-source intelligence (OSINT), malware analysis, and computer vision forensics, featuring kernel-level write-blocking.",
+  "tags": [
+    "linux",
+    "ubuntu-based",
+    "forensics",
+    "dfir",
+    "incident-response",
+    "osint",
+    "malware-analysis",
+    "write-blocker",
+    "mate",
+    "computer-vision"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-3.0-or-later and upstream open-source forensic tool licenses",
+  "last_verified": "2026-10-11",
+  "content": {
+    "introduction": "Tsurugi Linux is an open-source, specialized Linux distribution engineered for digital forensics and incident response (DFIR), cyber threat intelligence, open-source intelligence (OSINT), and malware reverse engineering. Named after the ancient Japanese double-edged broadsword, Tsurugi was created in 2018 by Italian digital forensics practitioner Giovanni 'H3ndr1k' and an international team of security investigators. Built to serve law enforcement agencies, corporate incident response teams, and academic researchers, Tsurugi Linux packages hundreds of forensic utilities into a cohesive environment designed to preserve the evidentiary integrity of digital media.",
+    "what_is_it": "Technically, Tsurugi Linux is built upon Ubuntu 24.04.3 LTS (Noble Numbat) 64-bit and features a customized Linux kernel (branch 6.19.10) patched with an operating-system-level software write-blocker. This kernel modification prevents connected external storage drives and forensic target media from mounting in read-write mode, safeguarding chain of custody. The system pairs the lightweight MATE desktop environment with a specialized menu hierarchy categorized by investigative disciplines, including physical evidence acquisition, memory analysis, network forensics, mobile device extraction, and multimedia authentication.",
+    "origin_and_history": "The Tsurugi Linux project was publicly unveiled in 2018 at European cybersecurity conferences including RomHack and Hackers Hotel. Conceived to address the limitations and commercial licensing constraints of proprietary forensic platforms, Tsurugi offered a free, transparent alternative incorporating modern open-source DFIR tools. Subsequent release milestones integrated live acquisition tools, portable multi-platform toolkits, and computer vision forensic modules. The modern 2026.x release series (exemplified by Tsurugi Linux 26.03 [LAB]) standardized on Ubuntu 24.04 LTS, updated memory analysis pipelines to Volatility 3, modernized Ghidra decompilation environments, and expanded containerized analysis options.",
+    "governance_and_community": "Tsurugi Linux is maintained as an independent, community-driven project coordinated by founder Giovanni 'H3ndr1k' and an advisory core of forensic analysts, reverse engineers, and university educators. Development activities, packaging scripts, and bug tracking are conducted openly through project repositories and security workshops. The project sustains its operations through community sponsorships, academic partnerships, and educational training sessions conducted at international cybersecurity conferences. All software images and utility scripts are released under open-source licenses without licensing fees.",
+    "kernel_write_blocking_and_evidence_integrity": "A cornerstone of Tsurugi Linux's forensic methodology is its kernel-level write-blocking subsystem. In digital forensic investigations, connecting an evidence drive to a standard operating system risks contaminating timestamps, access metadata (atime), or filesystem journals. Tsurugi incorporates downstream kernel patches that disable automatic read-write mounting for all non-root block devices. A graphical status applet on the MATE panel allows investigators to verify the write-blocker's operational state and selectively authorize write operations only to designated forensic target drives.",
+    "editions_and_portable_toolkits": "The Tsurugi Project delivers its software suite across three primary deployment profiles:\n\n- Tsurugi Linux [LAB]: The flagship full-featured forensic workstation image, equipped with complete graphical suites, compilers, decompilers, and container frameworks for deep laboratory analysis.\n- Tsurugi Acquire: A streamlined, lightweight bootable live image designed specifically for forensic imaging in the field. It boots into a fast, low-overhead environment optimized for bit-stream disk cloning (dd, dc3dd, dcfldd) and write-blocked hardware acquisition.\n- Bento: A portable DFIR collection packaged on a bootable USB drive, engineered to execute live response and artifact extraction scripts on running Windows, macOS, or Linux target machines without prior installation.",
+    "digital_forensics_and_disk_analysis": "Tsurugi Linux provides an extensive inventory of forensic analysis frameworks:\n\n- File System Examination: Autopsy and The Sleuth Kit (TSK) for partition parsing, timeline analysis, and deleted file recovery across NTFS, FAT, ext4, APFS, and Btrfs filesystems.\n- Forensic Imaging: Guymager for creating verified raw (dd) and Expert Witness Format (E01) disk images with integrated SHA-256 hash generation.\n- Memory Forensics: Volatility 3 and Rekall for analyzing physical RAM dumps, recovering process listings, injected DLLs, network sockets, and kernel rootkits.\n- Data Carving: Specialized tools including Foremost, Scalpel, PhotoRec, and bulk_extractor for identifying and extracting fragmented file formats directly from unallocated disk space.",
+    "malware_analysis_and_reverse_engineering": "For incident responders dissecting malicious payloads, Tsurugi includes advanced reverse engineering suites:\n\n- Binary Disassembly: NSA Ghidra and radare2/Cutter for decompilation, control flow analysis, and cross-architecture disassembly.\n- Static Triage: YARA for pattern matching and malware signature scanning, FLARE-FLOSS for obfuscated string extraction, and oletools for analyzing weaponized Microsoft Office macros.\n- Document Analysis: Specialized scripts such as pdfid, pdf-parser, and peepdf for safely analyzing malicious PDF documents without executing active content.",
+    "osint_and_threat_intelligence": "The integrated Open Source Intelligence (OSINT) suite aggregates reconnaissance and entity-mapping tools:\n\n- Entity Mapping: Maltego Community for visual link analysis and relationship graphing across internet entities.\n- Intelligence Gathering: Spiderfoot, theHarvester, and recon-ng for automated domain enumeration, email discovery, and DNS footprinting.\n- Identity Reconnaissance: Sherlock, Maigret, and PhoneInfoga for tracking digital usernames and telecommunications records across hundreds of social networks and public repositories.",
+    "computer_vision_and_media_forensics": "Tsurugi distinguishes itself from conventional penetration testing distributions by incorporating a dedicated Computer Vision and Multimedia Forensics section. This module features tools for detecting digital image manipulation, performing Error Level Analysis (ELA), inspecting EXIF and ICC color profiles via ExifTool, parsing steganographic payloads with Stegsolve, and automating visual media triage using Ghiro and OpenCV bindings.",
+    "deployment_modes_live_and_installer": "Tsurugi Linux is distributed as a hybrid ISO supporting both legacy BIOS and 64-bit UEFI boot architectures. It can be run in ephemeral live mode directly from RAM (default user `tsurugi` with password `tsurugi` and sudo access) or installed permanently on forensic lab workstations via a customized graphical installer. Permanent lab installations are recommended for multi-terabyte evidence indexing and intensive Ghidra decompilation tasks.",
+    "threat_model_and_operational_limits": "Tsurugi Linux is engineered as a defensive investigation workstation, and its documentation highlights clear operational boundaries:\n\n- Absence of Amnesic Anonymity: Tsurugi does not route system traffic through Tor by default. OSINT investigators conducting online reconnaissance must manually configure proxy chains or VPNs to avoid revealing their source IP addresses.\n- Monolithic Kernel Sandbox: Dynamic execution of untrusted malware samples directly on the host operating system risks environment contamination. Malware analysis must be conducted within isolated virtual machines or air-gapped sandboxes.\n- Chain of Custody Responsibility: While Tsurugi provides write-blocking, legal chain of custody compliance requires documented physical handling, calibrated hardware blockers where legally required, and verified cryptographic hashing.",
+    "privacy_and_telemetry": "Tsurugi Linux adheres to an open-source, non-telemetry philosophy. The distribution contains no commercial tracking modules, advertising frameworks, or automated usage metrics phoning home to central servers. Package updates and repository interactions occur directly over standard HTTP/HTTPS connections through official Ubuntu and Tsurugi mirror repositories without transmitting user identifiers.",
+    "advantages": [
+      "Custom Linux kernel with built-in operating-system-level write-blocking to preserve digital evidence integrity",
+      "Comprehensive DFIR toolset combining Autopsy, The Sleuth Kit, Guymager, and Volatility 3",
+      "Advanced reverse engineering suite featuring NSA Ghidra, Cutter, radare2, and YARA",
+      "Dedicated Computer Vision section for multimedia forensics, image manipulation detection, and ELA analysis",
+      "Extensive OSINT tool suite including Maltego, Spiderfoot, Sherlock, and theHarvester",
+      "Multiple specialized deployment options: Tsurugi [LAB], Tsurugi Acquire (live imaging), and Bento (portable USB toolkit)",
+      "Stable foundation based on Ubuntu 24.04 LTS Noble Numbat ensuring long-term driver and hardware support"
+    ],
+    "disadvantages": [
+      "Substantial hardware resource requirements, recommending 16 GB of RAM and multi-core processors for heavy indexing",
+      "Does not provide automated network anonymization or Tor routing by default for OSINT reconnaissance",
+      "Dynamic malware execution directly on the base host is unsafe without dedicated hypervisor isolation",
+      "Large installation footprint requiring substantial disk space for complete laboratory toolchains",
+      "Steep learning curve requiring professional training in digital forensics and forensic jurisprudence"
+    ],
+    "who_is_it_for": [
+      "Digital forensics and incident response (DFIR) specialists and corporate computer emergency response teams (CERT/CSIRT)",
+      "Law enforcement officers, judicial investigators, and forensic examiners processing physical digital evidence",
+      "Malware analysts and reverse engineers triaging suspicious executables and weaponized office documents",
+      "OSINT researchers and cyber threat intelligence analysts conducting authorized internet investigations"
+    ],
+    "who_is_it_not_for": [
+      "Offensive penetration testers seeking automated exploitation and wireless attack suites (better suited to Kali Linux or Parrot OS)",
+      "Users seeking an amnesic, anonymous web browsing system for sensitive whistleblowing (better suited to Tails or Whonix)",
+      "Casual desktop users seeking a general everyday operating system for gaming or office productivity",
+      "Resource-constrained legacy systems with less than 8 GB of RAM"
+    ]
+  },
+  "components": [
+    {
+      "id": "tsurugi-kernel",
+      "name": "Write-Blocker Linux Kernel",
+      "role": "operating_system_kernel",
+      "note": "Custom-compiled Linux kernel with downstream patches blocking automatic read-write mounting of block devices."
+    },
+    {
+      "id": "tsurugi-bento",
+      "name": "Bento DFIR Portable Toolkit",
+      "role": "portable_forensic_suite",
+      "note": "Cross-platform portable tool collection executable from USB on Windows, macOS, and Linux live systems."
+    },
+    {
+      "id": "tsurugi-acquire",
+      "name": "Tsurugi Acquire Imaging Module",
+      "role": "data_acquisition_engine",
+      "note": "Streamlined live acquisition image optimized for bit-stream disk cloning and write-blocked drive imaging."
+    },
+    {
+      "id": "autopsy-forensics",
+      "name": "Autopsy & Sleuth Kit Suite",
+      "role": "forensic_analysis_platform",
+      "note": "Graphical digital forensics platform providing automated disk parsing, timeline analysis, and artifact indexing."
+    },
+    {
+      "id": "ghidra-reversing",
+      "name": "NSA Ghidra Reversing Suite",
+      "role": "binary_decompiler",
+      "note": "Software reverse engineering framework for decompiling and analyzing suspected malicious executable binaries."
+    },
+    {
+      "id": "volatility-memory",
+      "name": "Volatility 3 Framework",
+      "role": "memory_forensics_engine",
+      "note": "Advanced memory analysis framework for extracting runtime process states, injected code, and rootkits from RAM dumps."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "upstream_base",
+      "note": "Upstream operating system foundation; Tsurugi Linux is built upon Ubuntu 24.04.3 LTS (Noble Numbat)."
+    },
+    {
+      "id": "kali-linux",
+      "name": "Kali Linux",
+      "relation": "peer_security_distribution",
+      "note": "Complementary security distribution focused primarily on offensive penetration testing and vulnerability auditing."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Tsurugi Linux [LAB]",
+      "description": "Comprehensive digital forensics workstation image equipped with full DFIR, malware analysis, OSINT, and computer vision suites."
+    },
+    {
+      "name": "Tsurugi Acquire",
+      "description": "Minimalist bootable live acquisition image designed for fast, write-blocked field imaging and bit-stream drive cloning."
+    },
+    {
+      "name": "Tsurugi Bento Suite",
+      "description": "Portable cross-platform forensic utility collection executable from USB on running Windows, macOS, and Linux hosts."
+    }
+  ],
+  "links": {
+    "homepage": "https://tsurugi-linux.org/",
+    "documentation": "https://tsurugi-linux.org/documentation_tsurugi_linux_1.php",
+    "download": "https://tsurugi-linux.org/downloads.php",
+    "bento": "https://tsurugi-linux.org/bento.php",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=tsurugi"
+  },
+  "sources": [
+    {
+      "title": "Tsurugi Linux Official Project Portal",
+      "url": "https://tsurugi-linux.org/",
+      "type": "official",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "Tsurugi Linux Documentation and System Specifications",
+      "url": "https://tsurugi-linux.org/documentation_tsurugi_linux_1.php",
+      "type": "documentation",
+      "date": "2026-06-20"
+    },
+    {
+      "title": "Tsurugi Acquire Live System Specifications",
+      "url": "https://tsurugi-linux.org/tsurugi_acquire.php",
+      "type": "technical_specification",
+      "date": "2026-06-20"
+    },
+    {
+      "title": "Tsurugi Bento Portable DFIR Toolkit Specifications",
+      "url": "https://tsurugi-linux.org/bento.php",
+      "type": "technical_specification",
+      "date": "2026-09-14"
+    },
+    {
+      "title": "Tsurugi Linux Project Overview and Academic Governance",
+      "url": "https://tsurugi-linux.org/about_us.php",
+      "type": "official",
+      "date": "2026-06-20"
+    },
+    {
+      "title": "Tsurugi Linux Downloads and Cryptographic Hash Signatures",
+      "url": "https://tsurugi-linux.org/downloads.php",
+      "type": "distribution_artifact",
+      "date": "2026-09-14"
+    },
+    {
+      "title": "DistroWatch Page for Tsurugi Linux",
+      "url": "https://distrowatch.com/table.php?distribution=tsurugi",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}

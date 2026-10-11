@@ -57,6 +57,9 @@ var LIBRARY_RESOURCES = [
   "qubes-os",
   "whonix",
   "kali-linux",
+  "parrot-os",
+  "linux-kodachi",
+  "tsurugi-linux",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
