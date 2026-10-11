@@ -1,0 +1,226 @@
+{
+  "id": "whonix",
+  "name": "Whonix",
+  "type": "operating_system",
+  "summary": "A privacy and anonymity-focused operating system built upon Debian and Kicksecure, implementing a two-virtual-machine architecture (Whonix-Gateway and Whonix-Workstation) to force all network traffic through Tor and eliminate IP and DNS leaks.",
+  "tags": [
+    "linux",
+    "privacy",
+    "anonymity",
+    "tor",
+    "security",
+    "virtualization",
+    "debian-based",
+    "kicksecure",
+    "anti-fingerprinting"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-3.0-or-later and upstream Debian/Tor licenses",
+  "last_verified": "2026-10-11",
+  "content": {
+    "introduction": "Whonix is an open-source, security-focused operating system engineered to preserve privacy and online anonymity by routing all Internet communications through the Tor anonymity network. Founded in 2012 by Patrick Schleizer under the original name TorBOX, Whonix utilizes a two-virtual-machine design termed 'security by isolation'. By decoupling the gateway executing the Tor routing daemon from the workstation running user applications, Whonix prevents accidental IP address exposure, DNS leakage, and network profiling even in scenarios where an application or user account is compromised.",
+    "what_is_it": "Technically, Whonix is not an operating system installed directly on bare-metal hardware as a primary host OS; rather, it is designed as a pair of specialized Debian-based virtual machines operating on top of a hypervisor. The first virtual machine, Whonix-Gateway, functions exclusively as a Tor proxy and firewall. The second virtual machine, Whonix-Workstation, runs all desktop software on an isolated internal network without direct access to the Internet. The Workstation is unaware of the host machine's external IP address, making it technically impossible for misbehaving software to reveal the user's real location.",
+    "origin_and_history": "The project emerged in early 2012 out of developer Patrick Schleizer's research into overcoming protocol leaks and malicious application exploits that affect traditional proxy configurations and single-system live environments. Initially dubbed TorBOX, the project was officially renamed Whonix in 2012. Over its evolution, Whonix transitioned from early VirtualBox images to officially supporting KVM/libvirt and establishing an integral partnership with Qubes OS (Qubes-Whonix). In parallel, the development team created Kicksecure, a dedicated Debian-hardening baseline that powers modern Whonix releases (Whonix 17 and Whonix 18).",
+    "governance_and_patrick_schleizer": "Whonix is developed and governed as an independent, community-driven free software project coordinated by founder Patrick Schleizer and an international team of contributors. The project maintains an explicit policy of financial independence, funded through donations from individuals and digital rights foundations without commercial advertising, paid search engine deals, or sponsored application bundles. Development, bug tracking, and code repositories are published publicly on GitHub under the `Whonix` and `Kicksecure` organizations.",
+    "two_vm_split_architecture": "The defining structural characteristic of Whonix is the strict separation between two interconnected virtual environments:\n\n- Whonix-Gateway: Connects externally to the host network (NAT or bridged) to communicate with Tor relays and establishes an isolated virtual internal network for client machines.\n- Whonix-Workstation: Connects only to the isolated internal virtual network, treating Whonix-Gateway as its sole network router and gateway.\n\nAll TCP traffic generated inside the Workstation is intercepted by the Gateway's firewall (`iptables`/`nftables`) and transparently redirected through Tor, while non-Tor protocols that cannot be safely proxied (such as raw UDP or ICMP ping packets) are dropped at the gateway interface.",
+    "whonix_gateway_and_tor_enforcement": "Whonix-Gateway acts as a dedicated network guard. It executes the standard Debian-packaged Tor daemon alongside strict packet-filtering rules. The Gateway contains no personal user data, web browsers, or user productivity software. Its sole function is managing cryptographic Tor circuits, applying traffic isolation, and monitoring connection status via utilities like Nyx. Because the Gateway does not execute user-provided code, its attack surface is minimized.",
+    "whonix_workstation_and_leak_prevention": "Whonix-Workstation is the dedicated interactive environment for the user. It comes equipped with Tor Browser, Thunderbird email with OpenPGP, HexChat, and other communication tools. Even if a remote attacker executes a remote code execution exploit against an application or obtains root privileges inside Whonix-Workstation, the compromised system has no direct physical network interface and no route to the Internet except through Whonix-Gateway. The attacker cannot discover the user's public IP address, local Wi-Fi MAC addresses, or hardware serial numbers.",
+    "stream_isolation_and_circuit_separation": "To prevent identity correlation caused by multiple applications sharing the same Tor circuit, Whonix implements Tor Stream Isolation. Whonix-Gateway configures multiple distinct Tor SOCKS ports. Applications running inside Whonix-Workstation (such as Tor Browser, `sdwdate`, and APT package management) are pre-configured to communicate through separate SOCKS ports. Consequently, Tor generates separate, independent three-node circuits for each application, preventing a website from linking a user's web browsing session with their email communications.",
+    "anti_profiling_tools_sdwdate_and_kloak": "Whonix integrates bespoke utilities engineered to address subtle fingerprinting vectors:\n\n- `sdwdate` (Secure Distributed Web Date): A secure time synchronization daemon that queries random HTTP servers over Tor using TLS timestamps, completely replacing the insecure NTP protocol which leaks real IP addresses and is vulnerable to clock-skew attacks.\n- `kloak`: A keystroke obfuscation daemon that injects random micro-delays into keyboard input events, disrupting typing biometrics and stylometric profiling attacks that attempt to deanonymize users based on keystroke rhythm.\n- `tb-starter` and `tb-updater`: Custom wrappers that verify OpenPGP signatures before downloading and launching official Tor Browser builds.",
+    "supported_virtualization_platforms": "Whonix officially targets three primary virtualization environments:\n\n1. Qubes OS (Qubes-Whonix): Deploys Whonix-Gateway as a ProxyVM (`sys-whonix`) and Whonix-Workstation as AppVMs (`anon-whonix`) or DisposableVMs atop the Xen Type-1 hypervisor.\n2. KVM (Kernel-based Virtual Machine): Linux native Type-2 hypervisor deployment managed via libvirt/virt-manager, providing high-performance open-source virtualization.\n3. Oracle VM VirtualBox: Cross-platform virtualization environment commonly used for beginner testing on Linux, macOS, and Windows hosts.",
+    "qubes_whonix_integration": "Under Qubes-Whonix, the two-VM model synergizes with Qubes OS's hardware-isolated architecture. Whonix-Gateway runs inside a lightweight, non-networked Xen domain while routing traffic for multiple independent Whonix-Workstation AppVMs and DispVMs. This setup allows users to run multiple concurrent anonymous identities on separate Tor circuits with zero risk of cross-qube contamination.",
+    "physical_isolation_mode": "For environments where hypervisor vulnerabilities represent an unacceptable risk, Whonix documents Physical Isolation. In this setup, Whonix-Gateway is installed on a dedicated physical computer (or hardware router appliance), and Whonix-Workstation runs on a second physical computer, connected solely via a point-to-point Ethernet cable. This architecture completely eliminates software VM escape vectors from the security equation.",
+    "live_mode_and_anti_forensics": "While Whonix stores state persistently on virtual disks by default, the project provides an optional Live Mode (`grub-live`). When selected at boot, all disk write operations are redirected to volatile RAM using overlayfs. Upon shutdown, all modifications made during the session vanish. However, Whonix explicitly notes that host-level swap files, memory dumps, or hypervisor caches on the host OS can still retain forensic artifacts unless the host itself is run in live mode.",
+    "threat_model_and_limitations": "Whonix explicitly documents the boundaries of its security model in its official 'Warning' documentation:\n\n- Whonix is not Tor: Whonix relies on Tor for traffic routing; any theoretical or practical vulnerability in Tor's cryptography or consensus mechanism directly affects Whonix users.\n- End-to-End Traffic Correlation: An adversary with global surveillance capabilities observing both the ingress to the user's Tor guard node and the egress from the Tor exit node can correlate connection timings.\n- Host OS and Hardware Compromise: If the host operating system, hypervisor, BIOS/UEFI firmware, or physical hardware (such as a hardware keylogger) is compromised, all Whonix VMs are compromised.\n- Operational Security (OPSEC): Technical isolation cannot protect users who log into personal accounts, reveal identifying details, or succumb to linguistic stylometry analysis.",
+    "privacy_and_zero_telemetry": "Whonix adheres to an absolute zero-telemetry policy. No user identifiers, hardware serial numbers, usage analytics, or crash telemetry are transmitted to Whonix or third-party servers. All repository updates, time synchronization queries, and version checks travel exclusively through Tor. Software packages are delivered via `deb.whonix.org` and verified using GnuPG cryptographic signatures.",
+    "advantages": [
+      "Robust two-VM split architecture eliminating IP, DNS, UDP, and ICMP leaks by design",
+      "Tor routing enforced at the network topology level rather than by application proxy settings",
+      "Stream isolation preventing identity correlation between different desktop applications",
+      "Comprehensive anti-fingerprinting tooling including sdwdate for secure time sync and kloak for keystroke obfuscation",
+      "First-class integration with Qubes OS (Qubes-Whonix) and native support for KVM and VirtualBox",
+      "Hardened operating system base derived from Kicksecure and Debian GNU/Linux",
+      "Absolute zero-telemetry policy with verified cryptographic software delivery"
+    ],
+    "disadvantages": [
+      "Substantial RAM and CPU overhead required to run two concurrent virtual machines simultaneously",
+      "Network throughput constraints and increased latency inherent to Tor multi-hop onion routing",
+      "Inability to run protocols unsupported by Tor (e.g. raw UDP audio/video or ICMP ping) without custom tunneling",
+      "Does not operate amnesically in RAM by default, requiring explicit Live Mode configuration to prevent disk persistence",
+      "Complete reliance on the integrity of the host operating system and hypervisor in non-physical deployment models"
+    ],
+    "who_is_it_for": [
+      "Journalists, whistleblowers, and human rights defenders communicating under hostile surveillance environments",
+      "Security researchers, penetration testers, and investigators conducting anonymous threat intelligence gathering",
+      "Users requiring leak-proof Tor routing for arbitrary desktop applications that lack native proxy support",
+      "Qubes OS users seeking seamless, multi-identity Tor compartmentalization via Qubes-Whonix"
+    ],
+    "who_is_it_not_for": [
+      "Users seeking a simple live USB operating system with zero on-disk footprint (where Tails is better suited)",
+      "High-bandwidth, low-latency users engaged in competitive online gaming, video streaming, or peer-to-peer file sharing",
+      "Users with low-specification hardware incapable of supporting concurrent virtualization",
+      "Users seeking a standard daily desktop distribution with unrestricted clearnet Internet access"
+    ]
+  },
+  "components": [
+    {
+      "id": "whonix-gateway",
+      "name": "Whonix-Gateway Virtual Machine",
+      "role": "anonymity_network_gateway",
+      "note": "Dedicated gateway VM running Tor and enforcing iptables/nftables packet filtering rules."
+    },
+    {
+      "id": "whonix-workstation",
+      "name": "Whonix-Workstation Virtual Machine",
+      "role": "application_workspace",
+      "note": "Isolated client VM running user desktop software without direct external network knowledge."
+    },
+    {
+      "id": "tor-daemon",
+      "name": "Tor Onion Routing Daemon",
+      "role": "onion_routing_engine",
+      "note": "Local onion routing daemon managing encrypted circuits and stream isolation SOCKS ports."
+    },
+    {
+      "id": "tor-browser-whonix",
+      "name": "Tor Browser for Whonix",
+      "role": "web_browser",
+      "note": "Hardened Firefox ESR web browser pre-configured with stream isolation and anti-fingerprinting patches."
+    },
+    {
+      "id": "sdwdate",
+      "name": "Secure Distributed Web Date (sdwdate)",
+      "role": "time_synchronization_daemon",
+      "note": "Secure time synchronization utility querying TLS HTTP timestamps over Tor to replace insecure NTP."
+    },
+    {
+      "id": "kloak",
+      "name": "Kloak Keystroke Obfuscation Daemon",
+      "role": "anti_biometrics_utility",
+      "note": "Keystroke anonymization daemon adding random micro-delays to protect against typing rhythm profiling."
+    },
+    {
+      "id": "anon-connection-wizard",
+      "name": "Anon-Connection-Wizard",
+      "role": "network_assistant",
+      "note": "Graphical setup wizard for configuring Tor bridges and pluggable transports in censored network environments."
+    },
+    {
+      "id": "kicksecure-hardening",
+      "name": "Kicksecure Hardening Stack",
+      "role": "security_framework",
+      "note": "Security hardening baseline providing kernel parameters, process restrictions, and AppArmor profiles."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_base",
+      "note": "Foundational operating system providing core software repositories and stable runtime libraries."
+    },
+    {
+      "id": "qubes-os",
+      "name": "Qubes OS",
+      "relation": "primary_virtualization_platform",
+      "note": "Xen-based bare-metal platform providing the flagship Qubes-Whonix compartmentalized deployment model."
+    },
+    {
+      "id": "tails",
+      "name": "Tails",
+      "relation": "peer_privacy_distribution",
+      "note": "Peer Tor-focused privacy distribution operating via live amnesic RAM rather than a two-VM split architecture."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Whonix for VirtualBox",
+      "description": "Turnkey pre-configured OVA virtual appliance images designed for cross-platform deployment on Oracle VM VirtualBox."
+    },
+    {
+      "name": "Whonix for KVM",
+      "description": "High-performance open-source virtual machine images optimized for Linux KVM and virt-manager with SPICE integration."
+    },
+    {
+      "name": "Qubes-Whonix Templates",
+      "description": "Specialized RPM template packages (whonix-gateway and whonix-workstation) designed for seamless Qubes OS integration."
+    },
+    {
+      "name": "Whonix 17 Series",
+      "description": "Stable generation built upon Debian 12 (Bookworm) and Kicksecure 17 baseline."
+    },
+    {
+      "name": "Whonix 18 Series",
+      "description": "Next-generation series integrating updated upstream Debian baselines and modernized Tor Browser integration."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.whonix.org/",
+    "about": "https://www.whonix.org/wiki/About",
+    "technical_intro": "https://www.whonix.org/wiki/Dev/Technical_Introduction",
+    "workstation_doc": "https://www.whonix.org/wiki/Whonix-Workstation",
+    "qubes_doc": "https://www.whonix.org/wiki/Qubes",
+    "warnings": "https://www.whonix.org/wiki/Warning",
+    "repository": "https://github.com/Whonix",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=whonix"
+  },
+  "sources": [
+    {
+      "title": "Whonix Official Project Portal",
+      "url": "https://www.whonix.org/",
+      "type": "official",
+      "date": "2026-09-19"
+    },
+    {
+      "title": "Whonix Documentation — Architecture and Overview",
+      "url": "https://www.whonix.org/wiki/About",
+      "type": "documentation",
+      "date": "2026-09-19"
+    },
+    {
+      "title": "Whonix Technical Introduction and Design Specification",
+      "url": "https://www.whonix.org/wiki/Dev/Technical_Introduction",
+      "type": "technical_specification",
+      "date": "2026-05-13"
+    },
+    {
+      "title": "Whonix Documentation — Whonix-Workstation Overview",
+      "url": "https://www.whonix.org/wiki/Whonix-Workstation",
+      "type": "documentation",
+      "date": "2026-05-13"
+    },
+    {
+      "title": "Whonix Documentation — Qubes-Whonix Integration Guide",
+      "url": "https://www.whonix.org/wiki/Qubes",
+      "type": "documentation",
+      "date": "2026-05-13"
+    },
+    {
+      "title": "Whonix Documentation — Security Warnings and Threat Model Limitations",
+      "url": "https://www.whonix.org/wiki/Warning",
+      "type": "security_policy",
+      "date": "2026-05-15"
+    },
+    {
+      "title": "Whonix Documentation — Anonymity Networks Evaluation",
+      "url": "https://www.whonix.org/wiki/Dev/Anonymity_Network",
+      "type": "technical_specification",
+      "date": "2025-08-03"
+    },
+    {
+      "title": "Whonix GitHub Source Organization",
+      "url": "https://github.com/Whonix",
+      "type": "repository",
+      "date": "2026-10-11"
+    },
+    {
+      "title": "DistroWatch Page for Whonix",
+      "url": "https://distrowatch.com/table.php?distribution=whonix",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}

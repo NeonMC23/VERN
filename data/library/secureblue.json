@@ -1,0 +1,188 @@
+{
+  "id": "secureblue",
+  "name": "secureblue",
+  "type": "operating_system",
+  "summary": "A security-focused desktop and server operating system distributed as bootable OCI container images based on Fedora Atomic Desktops, featuring hardened_malloc, a hardened kernel, systemd run0, and the Trivalent browser.",
+  "tags": [
+    "linux",
+    "fedora-atomic",
+    "security",
+    "hardening",
+    "container-images",
+    "hardened-malloc",
+    "selinux",
+    "wayland",
+    "trivalent",
+    "bootc"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "Apache-2.0 and upstream open-source licenses",
+  "last_verified": "2026-10-11",
+  "content": {
+    "introduction": "secureblue is an open-source, security-focused desktop and server Linux operating system distributed as bootable Open Container Initiative (OCI) images. Built on top of Fedora Atomic Desktops (Silverblue, Kinoite, Sway Atomic) via the BlueBuild automation framework, secureblue aims to provide a maximally hardened Linux experience. Rather than maintaining an independent distribution from scratch, secureblue layers advanced exploit mitigations, memory safety enhancements, privilege stripping, and mandatory access controls directly onto Fedora's atomic foundation.",
+    "what_is_it": "Technically, secureblue operates as an image-based, atomic operating system utilizing `bootc` and `rpm-ostree`. The core system tree (`/usr`) is mounted read-only, with system mutations occurring atomically across immutable image deployments. Key technical features include global injection of GrapheneOS's `hardened_malloc`, a custom-compiled hardened Linux kernel, complete elimination of legacy SUID executables (`sudo`, `su`, `pkexec`) in favor of systemd's `run0`, pure Wayland display servers with Xwayland disabled by default, disabling of background file thumbnailers, and an integrated hardened Chromium fork named Trivalent confined under SELinux.",
+    "origin_and_history": "The secureblue project was initiated around 2023–2024 by an international collective of security researchers and open-source contributors seeking to address systemic security deficits in desktop Linux. While enterprise distributions offered SELinux, standard desktop configurations routinely exposed broad attack surfaces through SUID binaries, permissive Flatpak defaults, and memory corruption vulnerabilities. Leveraging containerization advancements from Fedora Atomic and BlueBuild, secureblue emerged as a reproducible, automated platform delivering proactive exploit mitigation without requiring manual system reconfiguration from the user.",
+    "governance_and_community": "secureblue is developed as an independent community project hosted on GitHub (`github.com/secureblue`). Operating without corporate commercialization or advertising monetization, the project coordinates feature development, security audits, and issue tracking transparently via public pull requests and community discussions. Build automation is fully public, utilizing GitHub Actions CI/CD pipelines to assemble, test, and publish container images signed cryptographically with Cosign and Sigstore infrastructure.",
+    "memory_safety_and_hardened_malloc": "A foundational defense in secureblue is the system-wide integration of `hardened_malloc`, the security-focused memory allocator originally developed by Daniel Micay for GrapheneOS. Injected globally across userspace processes and within Flatpak application sandboxes, `hardened_malloc` provides aggressive mitigations against heap memory corruptions. It detects and neutralizes use-after-free flaws, heap buffer overflows, double frees, and metadata tampering. For legacy applications that conflict with hardened allocation constraints (such as certain Electron binaries), secureblue provides user-configurable fallback toggles via the `ujust` management tool.",
+    "privilege_reduction_and_run0": "secureblue takes a decisive architectural stance against local privilege escalation by completely removing `sudo`, `su`, and `pkexec`, alongside stripping SUID/SGID bits from numerous standard system binaries. Administrative commands are executed exclusively via systemd's `run0`. Operating through polkit authorization and systemd service management, `run0` executes administrative tasks as transient systemd services without relying on SUID binaries, eliminating the entire class of vulnerabilities associated with environment variable sanitization in legacy privilege grantors.",
+    "hardened_kernel_and_selinux_policies": "The operating system deploys a custom-compiled Linux kernel based on Fedora's kernel tree, augmented with stringent security parameters. It enforces Kernel Self Protection Project (KSPP) sysctl settings, blacklists high-risk kernel modules (FireWire, obsolete networking protocols, legacy filesystems), and disables unprivileged user namespaces for unconfined SELinux domains (while preserving namespaces for Flatpaks and Trivalent). Furthermore, secureblue enforces Yama LSM restrictions to prohibit ptrace attachment between processes, preventing malware in user sessions from inspecting the memory of adjacent applications.",
+    "pure_wayland_and_attack_surface_reduction": "To eliminate the pervasive architectural risks of X11, secureblue disables Xwayland by default across all graphical images (GNOME, KDE Plasma, Sway). Applications execute strictly within native Wayland compositors, enforcing absolute window isolation and keystroke privacy. Additionally, background thumbnail generation is disabled across desktop environments to neutralize remote code execution vulnerabilities in multimedia parsers. GNOME user extensions and KDE Get Hot New Stuff (GHNS) are blocked by default to prevent arbitrary third-party code injection into display compositors.",
+    "trivalent_browser_and_web_security": "secureblue ships with Trivalent, an in-house hardened web browser developed from Chromium and inspired by GrapheneOS's Vanadium. Trivalent strips proprietary Google telemetry, hardens internal sandbox flags, enforces HTTPS by default, and operates within a dedicated SELinux domain (`trivalent.te`). By providing an optimized Chromium-based browser with hardened memory allocation, secureblue provides modern site compatibility while preserving rigorous sandbox isolation.",
+    "desktop_matrix_and_atomic_rebasing": "secureblue provides a diverse deployment matrix spanning GNOME, KDE Plasma, Sway, and headless server environments. For each desktop variant, specialized images accommodate different hardware setups: `main` (Intel/AMD/Nouveau graphics), `nvidia` (proprietary Nvidia drivers), `nvidia-open` (open-source kernel modules), and `-zfs` (pre-configured OpenZFS storage). Users can switch seamlessly between different desktop environments without system reinstallation by executing an atomic rebase command (`ujust rebase-secureblue`), which downloads the new OCI container image and stages it for the next boot while preserving user data in `/var/home`.",
+    "threat_model_and_operational_limits": "secureblue's technical documentation defines its threat model with precision: it is designed for users whose first priority is Linux and second priority is security. The project acknowledges that desktop Linux architecture cannot achieve the hardware-enforced Xen domain isolation of Qubes OS. Furthermore, secureblue does not route general network traffic through Tor, focusing instead on local endpoint exploit mitigation, attack surface reduction, and containerized immutability.",
+    "privacy_and_telemetry": "secureblue enforces a zero-telemetry policy with complete absence of behavioral analytics or user tracking. Default firewalld configurations reject all unsolicited incoming connections. Outgoing network privacy is reinforced by per-network MAC address randomization, Network Time Security (NTS) authenticated time synchronization via chronyd, encrypted DNS-over-TLS with local Unbound validation, and automatic coredump disabling to prevent memory credential dumps on disk.",
+    "advantages": [
+      "Modern atomic architecture based on bootable OCI container images with immutable read-only /usr filesystem",
+      "Global hardened_malloc integration across userspace and Flatpaks mitigating heap exploitation",
+      "Complete elimination of sudo, su, and pkexec in favor of capability-based systemd run0",
+      "Pure Wayland desktop environment with Xwayland disabled by default to eliminate X11 snooping",
+      "Native Trivalent browser providing hardened Chromium browsing confined under dedicated SELinux policies",
+      "Kernel hardening via KSPP sysctl parameters, Yama ptrace restrictions, and module blacklisting",
+      "Signed container supply chain using Cosign and Sigstore with Secure Boot MOK key support"
+    ],
+    "disadvantages": [
+      "Monolithic Linux kernel architecture lacking the bare-metal virtualization compartmentalization of Qubes OS",
+      "Strict hardened_malloc allocation can cause crashes with certain non-standard Electron applications",
+      "Does not route general internet traffic through Tor by default for online anonymity",
+      "Disabling Xwayland prevents execution of legacy X11-only applications without manual user override",
+      "Large atomic container image downloads during major system upgrades and desktop rebases"
+    ],
+    "who_is_it_for": [
+      "Linux users seeking the highest achievable level of defensive hardening on contemporary desktop hardware",
+      "Developers, system administrators, and security professionals requiring an immutable, reproducible Fedora-based workstation",
+      "Users seeking strong exploit mitigation and modern Wayland isolation without the hardware overhead of Qubes OS",
+      "Organizations deploying standardized, tamper-resistant Linux desktop workstations via bootable OCI containers"
+    ],
+    "who_is_it_not_for": [
+      "Whistleblowers and activists requiring amnesic, system-wide Tor routing for all network traffic (better suited to Tails or Whonix)",
+      "Users requiring Xen hypervisor hardware isolation for executing active, untrusted malware samples (better suited to Qubes OS)",
+      "Users heavily dependent on legacy X11 applications, complex gaming anti-cheat engines, or unconfined desktop extensions",
+      "Legacy 32-bit hardware architectures"
+    ]
+  },
+  "components": [
+    {
+      "id": "secureblue-hardened-malloc",
+      "name": "Global hardened_malloc Allocator",
+      "role": "memory_safety_allocator",
+      "note": "Hardened memory allocator from GrapheneOS protecting userspace processes and Flatpaks from heap corruption."
+    },
+    {
+      "id": "secureblue-trivalent",
+      "name": "Trivalent Hardened Browser",
+      "role": "web_browser",
+      "note": "Custom Chromium-based privacy browser confined within a dedicated SELinux domain without Google telemetry."
+    },
+    {
+      "id": "secureblue-kernel",
+      "name": "Hardened Linux Kernel & Policy",
+      "role": "operating_system_kernel",
+      "note": "Custom Fedora-derived kernel implementing KSPP settings, module blacklists, and Yama ptrace restrictions."
+    },
+    {
+      "id": "secureblue-run0",
+      "name": "systemd run0 Privilege Subsystem",
+      "role": "privilege_broker",
+      "note": "Capability-based administrative execution utility replacing traditional SUID binaries (sudo, su, pkexec)."
+    },
+    {
+      "id": "secureblue-bootc",
+      "name": "bootc & OCI Container Engine",
+      "role": "system_deployment_engine",
+      "note": "Transactional, image-based operating system deployment engine staging updates atomically via rpm-ostree."
+    },
+    {
+      "id": "secureblue-ujust",
+      "name": "ujust Management & Toggle Suite",
+      "role": "configuration_utility",
+      "note": "Interactive command-line tool providing toggles for hardware drivers, DNS settings, and desktop rebasing."
+    }
+  ],
+  "relations": [
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "upstream_base",
+      "note": "Foundational operating system; secureblue builds upon Fedora Atomic Desktop base container images."
+    },
+    {
+      "id": "qubes-os",
+      "name": "Qubes OS",
+      "relation": "peer_security_desktop",
+      "note": "Alternative security-focused desktop operating system implementing Xen-based hardware compartmentalization."
+    },
+    {
+      "id": "tails",
+      "name": "Tails",
+      "relation": "peer_privacy_distribution",
+      "note": "Alternative security distribution focusing on amnesic live operation and universal Tor network routing."
+    }
+  ],
+  "variants": [
+    {
+      "name": "secureblue GNOME Edition",
+      "description": "Hardened workstation image based on Fedora Silverblue featuring GNOME on Wayland with extensions disabled."
+    },
+    {
+      "name": "secureblue KDE Plasma Edition",
+      "description": "Hardened desktop image based on Fedora Kinoite featuring KDE Plasma on pure Wayland with GHNS disabled."
+    },
+    {
+      "name": "secureblue Sway Edition",
+      "description": "Hardened tiling window manager image based on Fedora Sway Atomic for keyboard-driven workflows."
+    },
+    {
+      "name": "secureblue Server Edition",
+      "description": "Headless minimal server image equipped with container runtimes and optional OpenZFS filesystem support."
+    }
+  ],
+  "links": {
+    "homepage": "https://secureblue.dev/",
+    "features": "https://secureblue.dev/features",
+    "faq": "https://secureblue.dev/faq",
+    "images": "https://secureblue.dev/images",
+    "verification": "https://secureblue.dev/verification",
+    "repository": "https://github.com/secureblue/secureblue"
+  },
+  "sources": [
+    {
+      "title": "secureblue Official Project Portal",
+      "url": "https://secureblue.dev/",
+      "type": "official",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "secureblue Technical Features and Hardening Overview",
+      "url": "https://secureblue.dev/features",
+      "type": "technical_specification",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "secureblue Frequently Asked Questions (FAQ)",
+      "url": "https://secureblue.dev/faq",
+      "type": "documentation",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "secureblue Container Images Directory",
+      "url": "https://secureblue.dev/images",
+      "type": "distribution_artifact",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "secureblue Cryptographic Verification and Signatures",
+      "url": "https://secureblue.dev/verification",
+      "type": "technical_specification",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "secureblue GitHub Source Organization",
+      "url": "https://github.com/secureblue/secureblue",
+      "type": "repository",
+      "date": "2026-10-09"
+    }
+  ]
+}

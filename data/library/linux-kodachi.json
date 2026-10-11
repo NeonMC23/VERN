@@ -1,0 +1,180 @@
+{
+  "id": "linux-kodachi",
+  "name": "Linux Kodachi",
+  "type": "operating_system",
+  "summary": "An anti-forensic live operating system based on Debian, engineered for anonymous web browsing, encrypted communications, multi-layer VPN and Tor tunneling, and emergency data destruction.",
+  "tags": [
+    "linux",
+    "debian-based",
+    "privacy",
+    "anonymity",
+    "anti-forensics",
+    "tor",
+    "vpn",
+    "xfce",
+    "amnesic",
+    "conky"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-3.0-or-later, MIT, and proprietary Kodachi utilities",
+  "last_verified": "2026-10-11",
+  "content": {
+    "introduction": "Linux Kodachi (officially branded as Kodachi OS) is an anti-forensic, security-focused live operating system engineered to preserve user anonymity, circumvent network censorship, and prevent digital forensic recovery on host hardware. Conceived and maintained by cybersecurity specialist Warith Al Maawali under Eagle Eye Digital Solutions, Kodachi provides an amnesic, plug-and-play desktop environment executable from USB flash drives or DVD media. By default, the system routes outbound network traffic through layered VPN connections and the Tor anonymizing network while displaying real-time connection telemetry on a persistent desktop dashboard.",
+    "what_is_it": "Technically, Kodachi OS is a specialized live distribution based on Debian 64-bit (tracking Debian 13 Trixie in the 10.x 'Dragon' release cycle) paired with the Xfce 4 desktop environment and the Linux 6.12 LTS kernel. It integrates custom orchestration binaries written in Rust, a Conky-driven status HUD, DNSCrypt encrypted resolution, automated MAC address spoofing, and system shutdown scripts that overwrite volatile RAM to neutralize cold-boot forensic attacks. While sharing amnesic principles with distributions like Tails, Kodachi distinguishes itself through a multi-hop networking architecture that chains commercial or private VPNs, Tor nodes, and proxy protocols.",
+    "origin_and_history": "Warith Al Maawali introduced the initial version of Kodachi in 2013, initially building the distribution upon Ubuntu and Xubuntu LTS bases. Early versions (Kodachi 1.x through 6.x) focused on integrating pre-configured VPN clients, Tor gateways, and privacy-hardened web browsers into a single bootable image. With the release of Kodachi 7 and 8, the system migrated its package foundation toward pure Debian, refining its forensic countermeasure suite. The modern Kodachi OS 10 series ('Dragon', culminating in the 10.0.3 release) standardized on Debian 13 (Trixie), overhauled the internal toolsuite with 29 signed Rust binaries in `/opt/kodachi/dashboard/hooks/`, integrated the Calamares installer, and enhanced hardware compatibility across modern UEFI and Secure Boot systems.",
+    "governance_and_eagle_eye": "Kodachi OS is developed and directed by Warith Al Maawali through Eagle Eye Digital Solutions (based in Oman, operating via digi77.com and kodachi.cloud). Project infrastructure, VPN exit servers, and documentation portals are maintained through a hybrid model combining voluntary community donations, commercial support contracts, and sponsored enterprise security configurations. While the underlying Debian operating system and open-source applications adhere to GPL and MIT licenses, specific Kodachi dashboard hooks, telemetry checkers, and server orchestration modules are distributed as pre-compiled, cryptographically signed proprietary binaries.",
+    "network_routing_and_tunnel_architecture": "A defining technical characteristic of Kodachi OS is its flexible, multi-layered network routing pipeline supporting up to 14 distinct tunneling protocols and privacy services. Outbound traffic can be routed through multiple topologies:\n\n- VPN-to-Tor Chaining: Encapsulating Tor traffic within an initial VPN tunnel to conceal Tor usage from local Internet Service Providers (ISPs) and local Wi-Fi monitors.\n- Tor-to-VPN Chaining: Exiting the Tor network into a trusted VPN endpoint to access services that routinely block public Tor exit relay addresses.\n- DNSCrypt and DoH: Forcing all domain name resolutions through encrypted DNSCrypt or DNS-over-HTTPS resolvers to neutralize DNS spoofing, filtering, and logging.\n- Multi-Proxy Support: Integrated support for WireGuard, I2P, Shadowsocks, and SSH SOCKS5 tunneling selectable via graphical desktop applets.",
+    "ip_fetch_and_leak_prevention": "To verify that outgoing connections do not leak identifying network attributes, Kodachi incorporates `ip-fetch`, a custom utility that queries multiple independent geolocation and IP lookup services. `ip-fetch` validates apparent external IPv4 and IPv6 addresses, checks for WebRTC leakage, and cross-references active DNS resolver IPs against expected tunnel configurations. If an unexpected disconnect occurs, automated iptables killswitch rules block direct outbound packets to prevent cleartext exposure.",
+    "desktop_environment_and_conky_dashboard": "Kodachi OS deploys a customized Xfce 4 desktop configured with a dark material theme and a comprehensive Conky system monitor overlaid on the right side of the screen. This dashboard supplies persistent, real-time telemetry on system vitals: public IP address, apparent geographical country, ISP attribution, active VPN provider, Tor gateway health, DNS server status, network adapter MAC addresses, and memory consumption. An 'AutoShield' status widget evaluates running defenses and presents a color-coded security posture rating.",
+    "browser_stack_and_web_security": "Web browsing in Kodachi OS is handled by two specialized browsers pre-configured for adversarial network environments:\n\n- LibreWolf: The primary hardened browser, built from Firefox source code with upstream telemetry, Google Safe Browsing phoning, and tracking mechanisms removed. Configured with strict privacy policies, first-party cookie isolation, and WebRTC disabling.\n- Tor Browser: The official onion routing browser for accessing hidden services (.onion domains) and browsing the public web through 3-hop circuit isolation.\n\nBoth browsers run with aggressive content blocking, fingerprinting mitigations, and ephemeral session profiles that discard cache and browsing histories upon closing.",
+    "panic_room_and_emergency_self_destruction": "For scenarios involving imminent physical seizure or coercive hardware access, Kodachi features a multi-tiered emergency data erasure system known as the 'Panic Room':\n\n- Tier 1 (Session Panic): Instantly terminates all active user processes, unmounts mounted volumes, and drops graphical sessions.\n- Tier 2 (Cryptographic Nuke): Securely shreds active encryption keys, session cookies, and temporary credentials stored in RAM and ephemeral storage.\n- Tier 3 (Storage Self-Destruction): Executes recursive shredding and overwriting of connected persistent storage partitions with pseudorandom data streams before powering down.\n\nAdditionally, standard system shutdowns execute an automated RAM wiping script that overwrites system memory blocks to neutralize cold-boot cryptographic recovery.",
+    "security_and_encryption_utilities": "Kodachi OS integrates a comprehensive catalog of digital defense and file sanitization tools:\n\n- Metadata Anonymisation Toolkit (MAT): Strips EXIF metadata, author tags, and GPS coordinates from documents, PDFs, and images.\n- Cryptographic Key Management: Integrated KeePassXC password manager, OpenPGP key management via GnuPG/GPA, and VeraCrypt/cryptsetup for managing on-the-fly encrypted disk containers.\n- System Sanitization: BleachBit for scrubbing lingering filesystem caches and unallocated inode structures.\n- Cryptocurrency Wallets: Offline, Tor-routed cryptocurrency wallet applications (Electrum and Monero GUI/CLI) for sovereign financial transactions.",
+    "boot_modes_and_installation": "Kodachi OS is distributed as a hybrid ISO image compatible with legacy BIOS and UEFI firmware architectures (including Secure Boot via signed loaders). The live session runs under user `kodachi` with default password `Security4All` and passwordless `sudo` elevation. While primarily engineered for ephemeral live execution in system RAM, Kodachi includes the Calamares installer, allowing permanent installation on internal SSDs, secondary drives, or encrypted portable USB installations with LUKS disk encryption.",
+    "threat_model_and_operational_limits": "Kodachi OS documents precise boundaries regarding its anonymity and anti-forensic claims:\n\n- VPN Infrastructure Trust: Chaining VPN tunnels introduces dependence on the logging policies, infrastructure security, and jurisdiction of external VPN service operators.\n- Traffic Correlation Attacks: Sophisticated state-level adversaries monitoring both ingress network links and global egress points can perform statistical traffic correlation regardless of tunnel depth.\n- Proprietary Binary Components: Certain orchestration hooks in `/opt/kodachi/dashboard/hooks/` are compiled binaries rather than transparent shell scripts, requiring users to trust the maintainer's build pipeline.\n- Operational Hygiene: Logging into personal social media accounts, email accounts tied to legal identities, or providing identifying payment details negates operating system privacy protections.",
+    "privacy_and_telemetry": "Kodachi OS enforces an anti-telemetry policy regarding third-party behavioral profiling, advertising trackers, and diagnostic reporting. The base operating system does not phone home to commercial tracking endpoints. However, during initialization, the system issues network queries to Kodachi Cloud servers to fetch updated VPN node lists, proxy configurations, and release validation tokens. Users seeking an environment with zero outbound network calls prior to user consent must manually review or disable these startup check routines.",
+    "advantages": [
+      "Turnkey multi-layer tunneling combining VPN, Tor, DNSCrypt, WireGuard, and Shadowsocks protocols",
+      "Real-time Conky desktop telemetry displaying visible external IP, country location, and tunnel status",
+      "Automated RAM wiping at shutdown to prevent cold-boot memory forensic analysis",
+      "Three-tier Panic Room emergency triggers for rapid session termination and data destruction",
+      "Pre-configured privacy browsers including LibreWolf and Tor Browser with strict anti-fingerprinting rules",
+      "Automated MAC address spoofing and dynamic timezone synchronization matching the exit node location",
+      "Calamares installer supporting permanent encrypted installations on internal and external drives"
+    ],
+    "disadvantages": [
+      "Inclusion of closed-source, pre-compiled proprietary binary hooks alongside open-source Debian packages",
+      "Reliance on project-operated or third-party VPN servers requires operational trust in VPN providers",
+      "High memory consumption with active tunnels and desktop monitors (minimum 4 GB RAM recommended)",
+      "Initial network calls to Kodachi Cloud servers upon boot to sync proxy and node configurations",
+      "Monolithic Linux kernel architecture without Xen-based hardware compartmentalization"
+    ],
+    "who_is_it_for": [
+      "Investigative journalists, whistleblowers, and activists operating on untrusted public networks or in hostile territories",
+      "Privacy-conscious individuals seeking an out-of-the-box live desktop with automated VPN and Tor routing",
+      "Security researchers auditing network filtering, censorship circumvention, and geolocation tracking",
+      "Users requiring a portable anti-forensic live USB with rapid data-wiping and panic triggers"
+    ],
+    "who_is_it_not_for": [
+      "Purists requiring a 100% free software ecosystem audited entirely from source (better suited to Tails or Debian)",
+      "Users needing strict virtualized isolation between distinct untrusted applications (better suited to Qubes OS)",
+      "General non-technical users seeking a simple daily multimedia workstation without complex network tunneling",
+      "Resource-constrained legacy systems with less than 4 GB of RAM"
+    ]
+  },
+  "components": [
+    {
+      "id": "kodachi-dashboard-hooks",
+      "name": "Kodachi Binary Hooks & Orchestration",
+      "role": "system_orchestrator",
+      "note": "Suite of 29 signed Rust binaries managing network tunnels, IP verification, and system controls."
+    },
+    {
+      "id": "kodachi-conky",
+      "name": "Conky Telemetry Dashboard",
+      "role": "status_monitor",
+      "note": "Persistent desktop overlay displaying real-time public IP, country, VPN status, Tor state, and AutoShield rating."
+    },
+    {
+      "id": "kodachi-panic-room",
+      "name": "Panic Room Destruction Subsystem",
+      "role": "emergency_data_erasure",
+      "note": "Three-tier emergency self-destruction framework supporting session killing, key wiping, and partition shredding."
+    },
+    {
+      "id": "kodachi-ip-fetch",
+      "name": "ip-fetch Verification Utility",
+      "role": "leak_detection_engine",
+      "note": "Multi-source IP verification and geolocation tool detecting IPv4/IPv6, DNS, and WebRTC connection leaks."
+    },
+    {
+      "id": "kodachi-ram-wipe",
+      "name": "RAM Sanitization Module",
+      "role": "anti_forensic_cleaner",
+      "note": "Shutdown script overwriting volatile system memory with random bytes to prevent cold-boot key extraction."
+    },
+    {
+      "id": "librewolf-browser",
+      "name": "LibreWolf Hardened Browser",
+      "role": "web_browser",
+      "note": "Customized privacy-hardened browser configured with strict anti-tracking and anti-fingerprinting policies."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_base",
+      "note": "Upstream operating system; Kodachi OS 10 'Dragon' is built upon Debian 13 (Trixie) 64-bit."
+    },
+    {
+      "id": "tails",
+      "name": "Tails",
+      "relation": "peer_privacy_distribution",
+      "note": "Alternative amnesic live operating system enforcing strict Tor-only routing without multi-VPN chaining."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Kodachi OS Desktop Edition",
+      "description": "Full-featured Xfce live desktop image (~4.2 GB) equipped with security tools, LibreWolf, Tor Browser, and Conky HUD."
+    },
+    {
+      "name": "Kodachi OS Terminal Server Edition",
+      "description": "Headless command-line server image (~3.0 GB) without X11, designed for remote instances, VPS hosting, and proxy nodes."
+    }
+  ],
+  "links": {
+    "homepage": "https://kodachi.cloud/",
+    "documentation": "https://kodachi.cloud/docs/desktop-debian.html",
+    "whitepaper": "https://kodachi.cloud/tools/whitepaper.html",
+    "download": "https://kodachi.cloud/downloads/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=kodachi"
+  },
+  "sources": [
+    {
+      "title": "Kodachi OS Official Portal",
+      "url": "https://kodachi.cloud/",
+      "type": "official",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "Kodachi OS Desktop Edition Technical Specifications",
+      "url": "https://kodachi.cloud/docs/desktop-debian.html",
+      "type": "technical_specification",
+      "date": "2026-07-03"
+    },
+    {
+      "title": "Kodachi OS Technical Whitepaper — Architecture and Threat Model",
+      "url": "https://kodachi.cloud/tools/whitepaper.html",
+      "type": "technical_specification",
+      "date": "2026-08-28"
+    },
+    {
+      "title": "Kodachi OS ip-fetch Binary Guide and Verification Protocol",
+      "url": "https://kodachi.cloud/docs/binaries/ip-fetch.html",
+      "type": "documentation",
+      "date": "2026-07-02"
+    },
+    {
+      "title": "Kodachi OS Terminal Server Edition Specifications",
+      "url": "https://kodachi.cloud/docs/terminal-version.html",
+      "type": "technical_specification",
+      "date": "2026-07-03"
+    },
+    {
+      "title": "Kodachi OS Official Downloads and Hash Signatures",
+      "url": "https://kodachi.cloud/downloads/",
+      "type": "distribution_artifact",
+      "date": "2026-10-08"
+    },
+    {
+      "title": "DistroWatch Page for Kodachi OS",
+      "url": "https://distrowatch.com/table.php?distribution=kodachi",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}

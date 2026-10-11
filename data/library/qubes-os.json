@@ -1,0 +1,209 @@
+{
+  "id": "qubes-os",
+  "name": "Qubes OS",
+  "type": "operating_system",
+  "summary": "A security-oriented desktop operating system implementing security-by-compartmentalization via the Xen Type-1 bare-metal hypervisor, isolating applications, hardware drivers, and network connections into distinct virtualized domains (qubes).",
+  "tags": [
+    "linux",
+    "xen",
+    "hypervisor",
+    "security",
+    "compartmentalization",
+    "virtualization",
+    "desktop",
+    "isolation",
+    "qrexec"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later and upstream component licenses",
+  "last_verified": "2026-10-11",
+  "content": {
+    "introduction": "Qubes OS is an open-source, security-focused desktop operating system built upon the core philosophy of 'security by compartmentalization'. Founded in 2010 by security researchers Joanna Rutkowska and Rafal Wojtczuk at Invisible Things Lab, Qubes OS operates on the premise that complex monolithic desktop operating systems and endpoint detection mechanisms cannot prevent software compromise. Instead, Qubes OS uses hardware-enforced virtualization to isolate distinct user workflows, applications, network controllers, and device drivers into isolated domains termed 'qubes'.",
+    "what_is_it": "Technically, Qubes OS is a specialized Xen distribution rather than a standard monolithic Linux distribution. It utilizes the Xen Type-1 bare-metal hypervisor to partition the physical computer into isolated virtual machines. The architecture separates the administrative interface (dom0), untrusted physical networking (`sys-net`), virtual firewalls (`sys-firewall`), untrusted USB controllers (`sys-usb`), and user work environments (AppVMs and DisposableVMs). Applications running inside individual qubes display their graphical windows seamlessly on a single desktop, with color-coded window borders denoting the security domain and trust level of each window.",
+    "origin_and_history": "Invisible Things Lab publicly introduced Qubes OS Architecture version 0.3 in January 2010, releasing Qubes OS 1.0 in September 2012. Early releases established the core concepts of TemplateVMs, AppVMs, and the `qrexec` inter-VM remote procedure call protocol. Subsequent releases introduced Qubes 3.x (with hypervisor abstraction) and Qubes 4.x (rearchitecting the core stack around Xen PVH virtualization, memory isolation via Intel VT-d / AMD-Vi, and Qrexec v2 security policies). The modern Qubes 4.2 and 4.3 release series integrate updated Xen branches, improved template management, and modern desktop integration.",
+    "governance_and_invisible_things_lab": "The project is developed as an open-source initiative coordinated by the Qubes OS core development team and Invisible Things Lab. Financial support is maintained through non-profit donations, grants from digital freedom and privacy foundations, hardware certification partnerships, and enterprise consulting. Code development, architecture design proposals, and vulnerability disclosures (Qubes Security Bulletins - QSBs) are published openly on the project's official website and GitHub organization under `QubesOS`.",
+    "xen_hypervisor_and_dom0_architecture": "At the base of Qubes OS is the Xen Type-1 bare-metal hypervisor, which executes directly on the physical processor and coordinates hardware resource allocation. The administrative domain, known as `dom0`, has direct access to the graphics processor and user input hardware (keyboard and mouse) but is architecturally stripped of any direct network connection. `dom0` runs an Xfce desktop environment alongside the Qubes GUI daemon, XenStore, and the Qubes core management tools. Because `dom0` has no network interfaces, it cannot be directly targeted by network attacks.",
+    "vm_types_templates_appvms_and_disposables": "Qubes OS structures user environments into distinct functional categories:\n\n- TemplateVMs: Central root templates (typically based on Fedora or Debian) whose root filesystems (`/`) are mounted read-only for derived qubes. Software installation and repository updates are performed exclusively in the TemplateVM.\n- AppVMs (Application Qubes): Persistent user workspaces derived from a TemplateVM. The root filesystem is reset to the template state on every reboot, preserving only the user's home directory (`/rw/home`) and specific configuration files.\n- DisposableVMs (DispVMs): Ephemeral qubes instantiated from a disposable template (DvmTemplate). When a DisposableVM is shut down or the application inside it closes, the entire VM and all its data are destroyed.\n- StandaloneVMs: Independent virtual machines with dedicated, writable root filesystems, used for specialized Linux configurations or proprietary operating systems like Microsoft Windows.",
+    "virtual_networking_and_firewall_qubes": "Network connectivity is segmented into dedicated driver and proxy domains. Physical network adapters (Ethernet and Wi-Fi) are isolated into `sys-net`, an untrusted domain assigned direct PCI control via IOMMU (Intel VT-d or AMD-Vi). Traffic passes through `sys-firewall`, a virtual firewall domain that enforces per-qube packet filtering rules configured from `dom0`. Qubes can also be routed through `sys-whonix` to anonymize all outbound traffic via the Tor network, preventing applications from communicating directly with the local network.",
+    "qrexec_framework_and_split_gpg": "Inter-VM communication is managed by `qrexec`, a secure cross-domain remote procedure call framework governed by granular policy files stored in `/etc/qubes/policy.d/` within `dom0`. This enables secure inter-qube services such as:\n\n- Split GPG: Storing secret OpenPGP keys in an isolated, offline qube that signs or decrypts data on behalf of an email qube only after explicit user confirmation in `dom0`.\n- Trusted Converters: Converting untrusted PDF files and images into safe flat pixel representations within a transient DisposableVM before returning sanitized files to the original qube.\n- Inter-VM File Transfers and Clipboard: Requiring deliberate keyboard shortcuts (Ctrl+Shift+C and Ctrl+Shift+V) to pass data through `dom0`'s intermediary buffer.",
+    "usb_isolation_and_sys_usb": "To mitigate BadUSB attacks and firmware vulnerabilities in the USB stack, physical USB host controllers are isolated within the `sys-usb` domain. USB peripherals (mass storage drives, smart cards, microphones, webcams) are exposed only to `sys-usb`. The user selectively attaches individual USB devices to specific application qubes using the `qvm-usb` command or the graphical tray interface, preventing malicious USB controllers from directly accessing system memory.",
+    "hardware_requirements_and_iommu": "Qubes OS enforces rigorous hardware requirements:\n\n- CPU: 64-bit Intel or AMD processor with hardware virtualization (Intel VT-x with EPT or AMD-V with RVI) and IOMMU virtualization (Intel VT-d or AMD-Vi).\n- Memory: 16 GB of RAM strongly recommended (8 GB absolute minimum for basic qubes).\n- Storage: 128 GB or more of high-speed SSD storage.\n- Graphics: Intel integrated graphics (IGP) strongly recommended; discrete Nvidia GPUs often require significant manual troubleshooting.\n- TPM: Trusted Platform Module supported for measured boot features like Anti Evil Maid (AEM).",
+    "uefi_and_secure_boot_policy": "Qubes OS does not support UEFI Secure Boot out of the box. The official installation guide instructs users to disable Secure Boot in their computer's UEFI configuration. The Xen hypervisor binary (`xen.efi`) and the Qubes Linux kernel images are not signed with a standard Microsoft-approved third-party UEFI shim certificate, necessitating that Secure Boot remain disabled for standard operation.",
+    "threat_model_and_security_limits": "Qubes OS provides strong defense against application vulnerabilities and network attacks by containing compromises within individual qubes. However, the project explicitly documents the boundaries of its threat model:\n\n- Hypervisor Vulnerabilities: A zero-day privilege escalation or VM escape exploit in the Xen hypervisor can break isolation and compromise `dom0`.\n- Microarchitectural Side-Channels: Hardware CPU speculative execution vulnerabilities (Spectre, Meltdown, Rowhammer) can allow cross-VM information leakage if not mitigated by microcode.\n- Pre-Boot and Hardware Compromise: Malicious firmware rootkits, hardware keyloggers, or physical tampering prior to installation circumvent software virtualization guarantees.\n- User Operational Errors: Placing sensitive banking credentials and untrusted web browsing within the same AppVM eliminates the benefits of compartmentalization.",
+    "privacy_and_telemetry": "Qubes OS enforces an absolute zero-telemetry policy. The administrative domain `dom0` contains no networking drivers or active TCP/IP stacks, making background telemetry technically impossible from the core system. Package updates for `dom0` are routed through a dedicated update proxy qube, downloaded into a temporary staging area, and cryptographically verified against Qubes master GPG signing keys before installation.",
+    "advantages": [
+      "Robust compartmentalization isolating applications, device drivers, and networks into separate Xen virtual domains",
+      "TemplateVM architecture allowing centralized, immutable software updates across all derived AppVMs",
+      "DisposableVMs enabling instant, throwaway environments for handling untrusted documents and web links",
+      "Isolated driver domains (sys-net, sys-usb) protecting the system kernel from physical hardware attacks and network driver bugs",
+      "Seamless GUI virtualization displaying isolated windows with color-coded trust borders on a unified desktop",
+      "Built-in advanced security workflows including Split GPG and trusted PDF/image sanitization tools",
+      "Zero telemetry policy with complete absence of network interfaces in the privileged dom0 domain"
+    ],
+    "disadvantages": [
+      "Substantial hardware overhead requiring a multi-core 64-bit CPU, IOMMU support, and 16 GB or more of RAM",
+      "Lack of out-of-the-box UEFI Secure Boot support, requiring Secure Boot to be disabled in system firmware",
+      "Steep learning curve requiring active user discipline to categorize files and workflows across different qubes",
+      "Absence of hardware GPU acceleration for guest qubes, making heavy 3D gaming and video editing impractical",
+      "Potential hardware compatibility issues with unsupported Wi-Fi cards, Nvidia discrete GPUs, and proprietary suspend/resume ACPI sleep states"
+    ],
+    "who_is_it_for": [
+      "Security researchers, penetration testers, and malware analysts handling untrusted code and hostile network traffic",
+      "Journalists, investigators, and civil society activists operating in high-threat adversarial environments",
+      "System administrators and developers requiring strict separation between client production environments and personal browsing",
+      "Privacy-conscious computer users with compatible x86_64 hardware seeking maximum isolation between digital activities"
+    ],
+    "who_is_it_not_for": [
+      "Gamers, 3D animators, and digital artists requiring direct bare-metal GPU acceleration and high-frame-rate rendering",
+      "Users running lightweight hardware (4 GB RAM, slow spinning hard drives, or unsupported budget processors)",
+      "Beginners seeking a traditional turnkey desktop operating system without manual domain management",
+      "Users on non-x86 hardware platforms such as ARM64 laptops or Apple Silicon devices"
+    ]
+  },
+  "components": [
+    {
+      "id": "xen-hypervisor",
+      "name": "Xen Type-1 Hypervisor",
+      "role": "bare_metal_hypervisor",
+      "note": "Underlying bare-metal virtualization engine enforcing hardware isolation between domains."
+    },
+    {
+      "id": "qubes-dom0",
+      "name": "dom0 Administrative Domain",
+      "role": "system_coordinator",
+      "note": "Privileged non-networked domain managing VM lifecycles, Xfce desktop, and the Qubes GUI daemon."
+    },
+    {
+      "id": "qubes-qrexec",
+      "name": "Qubes Qrexec Framework",
+      "role": "inter_vm_communication",
+      "note": "Inter-domain RPC framework enforcing granular security policies for data sharing and service execution."
+    },
+    {
+      "id": "qubes-sys-net",
+      "name": "sys-net Network Domain",
+      "role": "driver_domain",
+      "note": "Isolated driver domain managing physical Ethernet and Wi-Fi adapters via IOMMU PCI passthrough."
+    },
+    {
+      "id": "qubes-sys-firewall",
+      "name": "sys-firewall Proxy Domain",
+      "role": "firewall_filter",
+      "note": "Proxy virtual machine enforcing per-qube packet filtering rules between sys-net and user domains."
+    },
+    {
+      "id": "qubes-sys-usb",
+      "name": "sys-usb USB Domain",
+      "role": "driver_domain",
+      "note": "Isolated domain containing physical USB controllers to protect the system against BadUSB attacks."
+    },
+    {
+      "id": "qubes-gui-daemon",
+      "name": "Qubes GUI Virtualization Daemon",
+      "role": "display_compositor",
+      "note": "Display subsystem in dom0 rendering application windows with color-coded security borders."
+    }
+  ],
+  "relations": [
+    {
+      "id": "whonix",
+      "name": "Whonix",
+      "relation": "integrated_privacy_suite",
+      "note": "Officially integrated two-VM Tor routing suite providing pre-configured sys-whonix and anon-whonix templates."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "relation": "default_management_and_template_base",
+      "note": "Upstream distribution providing the base userland for the dom0 management domain and default TemplateVMs."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "supported_template_base",
+      "note": "Officially maintained alternative TemplateVM environment for user applications and system services."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Qubes OS 4.2 Series",
+      "description": "Stable generation introducing Qrexec v2 policy management, updated Fedora dom0, and refreshed default templates."
+    },
+    {
+      "name": "Qubes OS 4.3 Series",
+      "description": "Refined release series integrating Xen 4.19, enhanced template management tools, and updated guest kernels."
+    },
+    {
+      "name": "Qubes-Whonix Configuration",
+      "description": "Integrated configuration deploying Whonix-Gateway (sys-whonix) and Whonix-Workstation (anon-whonix) templates for Tor routing."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.qubes-os.org/",
+    "documentation": "https://www.qubes-os.org/doc/",
+    "architecture": "https://doc.qubes-os.org/en/latest/developer/system/architecture.html",
+    "faq": "https://doc.qubes-os.org/en/latest/introduction/faq.html",
+    "system_requirements": "https://doc.qubes-os.org/en/latest/user/hardware/system-requirements.html",
+    "repository": "https://github.com/QubesOS",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=qubes"
+  },
+  "sources": [
+    {
+      "title": "Qubes OS Official Project Portal",
+      "url": "https://www.qubes-os.org/",
+      "type": "official",
+      "date": "2026-04-19"
+    },
+    {
+      "title": "Qubes OS Architecture Specification Document",
+      "url": "https://www.qubes-os.org/attachment/doc/arch-spec-0.3.pdf",
+      "type": "technical_specification",
+      "date": "2010-01-15"
+    },
+    {
+      "title": "Qubes OS Documentation — Architecture Overview",
+      "url": "https://doc.qubes-os.org/en/latest/developer/system/architecture.html",
+      "type": "documentation",
+      "date": "2026-04-19"
+    },
+    {
+      "title": "Qubes OS Frequently Asked Questions (FAQ)",
+      "url": "https://doc.qubes-os.org/en/latest/introduction/faq.html",
+      "type": "documentation",
+      "date": "2026-04-20"
+    },
+    {
+      "title": "Qubes OS Hardware System Requirements Documentation",
+      "url": "https://doc.qubes-os.org/en/latest/user/hardware/system-requirements.html",
+      "type": "technical_specification",
+      "date": "2026-03-16"
+    },
+    {
+      "title": "Qubes OS Official Installation Guide",
+      "url": "https://doc.qubes-os.org/en/latest/user/downloading-installing-upgrading/installation-guide.html",
+      "type": "documentation",
+      "date": "2026-05-04"
+    },
+    {
+      "title": "Qubes OS Release Notes 4.3",
+      "url": "https://doc.qubes-os.org/en/r4.3/developer/releases/4_3/release-notes.html",
+      "type": "project_announcement",
+      "date": "2026-04-19"
+    },
+    {
+      "title": "Qubes OS GitHub Source Organization",
+      "url": "https://github.com/QubesOS",
+      "type": "repository",
+      "date": "2026-10-11"
+    },
+    {
+      "title": "DistroWatch Page for Qubes OS",
+      "url": "https://distrowatch.com/table.php?distribution=qubes",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}
