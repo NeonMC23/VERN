@@ -60,6 +60,9 @@ var LIBRARY_RESOURCES = [
   "parrot-os",
   "linux-kodachi",
   "tsurugi-linux",
+  "kicksecure",
+  "pureos",
+  "secureblue",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",

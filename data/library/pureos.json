@@ -1,0 +1,181 @@
+{
+  "id": "pureos",
+  "name": "PureOS",
+  "type": "operating_system",
+  "summary": "A privacy and security-oriented GNU/Linux distribution endorsed by the Free Software Foundation (FSF), built on Debian without proprietary firmware blobs, supporting convergence across desktop and mobile devices.",
+  "tags": [
+    "linux",
+    "debian-based",
+    "privacy",
+    "fsf-endorsed",
+    "free-software",
+    "phosh",
+    "gnome",
+    "mobile",
+    "convergence",
+    "pureboot"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "arm64"
+  ],
+  "license": "GPL-3.0-or-later and compatible free software licenses",
+  "last_verified": "2026-10-11",
+  "content": {
+    "introduction": "PureOS is a user-friendly, security and privacy-focused GNU/Linux operating system developed and maintained by Purism, PBC. Designed to empower users with verifiable digital privacy, PureOS is strictly composed of free and open-source software, completely omitting proprietary drivers and binary firmware blobs. Formally endorsed by the Free Software Foundation (FSF), PureOS provides a unified software experience across desktop workstations, laptops (Librem 14 and 16), tablets (Librem 11), and smartphones (Librem 5 and Liberty Phone), featuring adaptive interface convergence between handheld and desktop form factors.",
+    "what_is_it": "Technically, PureOS is derived from the Debian GNU/Linux package ecosystem, harmonizing its release lifecycles with Debian branches (including Byzantium on Debian 11, Crimson on Debian 12, and Dawn based on Debian 13 Trixie). PureOS replaces non-free upstream components with strictly audited, 100% free software packages. It incorporates a blob-free Linux kernel, native Wayland display servers (Mutter for GNOME Desktop and phoc for Phosh mobile), AppArmor access control, default Full Disk Encryption via LUKS, and the Laniakea repository migration pipeline.",
+    "origin_and_history": "Purism was founded in 2014 by Todd Weaver as a Public Benefit Corporation committed to manufacturing hardware respecting digital freedom and privacy. PureOS was launched alongside the initial Librem laptops to provide an out-of-the-box operating system free of proprietary binary drivers. In 2017, PureOS achieved formal endorsement by the Free Software Foundation under the Free System Distribution Guidelines (FSDG). In 2018, Purism initiated the development of Phosh (Phone Shell) to support the crowd-funded Librem 5 smartphone, creating a native mobile Linux desktop stack that has since been integrated into upstream Debian and GNOME.",
+    "governance_and_purism": "PureOS is directed and sponsored by Purism, PBC (Social Purpose Corporation). Unlike conventional corporations driven solely by shareholder profit, Purism's corporate charter mandates prioritizing digital privacy, user rights, and software freedom. Project engineering, package maintenance, and bug tracking are coordinated transparently on Purism's public infrastructure (`source.puri.sm` and `tracker.pureos.net`). Software updates, patches, and upstream contributions flow bidirectionally between the PureOS development pipeline and the Debian project.",
+    "fsf_endorsement_and_pure_freedom": "PureOS is one of the few Linux distributions officially endorsed by the Free Software Foundation. Compliance with FSDG criteria requires: (1) distributing strictly 100% free software in all official repositories; (2) rejecting all proprietary binary blobs in the kernel and userspace; (3) refraining from recommending non-free software, documentation, or proprietary third-party repositories. This strict standard ensures that users can inspect, modify, and verify all code executing on their hardware.",
+    "desktop_and_phosh_mobile_environments": "PureOS provides tailored desktop environments depending on hardware architecture:\n\n- GNOME Desktop: Deployed on 64-bit x86_64 laptops, desktops, and mini-PCs. It provides a clean GNOME Shell experience on Wayland, excluding commercial plugins or third-party tracking extensions.\n- Phosh Mobile Shell: Deployed on ARM64 handhelds and tablets. Developed natively by Purism using GTK and the `phoc` Wayland compositor, Phosh delivers mobile touch navigation, responsive virtual keyboards, lock screen notifications, and cellular power management.",
+    "convergence_architecture_and_libhandy": "A defining technical achievement of PureOS is convergence. Built upon the adaptive UI principles pioneered by Purism's `libhandy` and `libadwaita` libraries, applications dynamically adapt their user interfaces to the available screen size. When a Librem 5 smartphone or Librem 11 tablet running PureOS is connected to an external monitor, mouse, and keyboard, mobile applications automatically reformat into full-featured desktop windows without restarting or requiring separate mobile codebases.",
+    "pureboot_ecosystem_and_tamper_detection": "On Purism Librem hardware, PureOS integrates with PureBoot, a defensive firmware and boot security architecture. PureBoot replaces proprietary UEFI implementations with open-source coreboot firmware paired with the Heads payload. It utilizes the hardware Trusted Platform Module (TPM) and a physical cryptographic USB token (Librem Key) to perform measured boots. If any component of the BIOS, bootloader, or operating system kernel is altered, the Librem Key blinks red to warn the user of potential physical tampering (Anti-Evil-Maid defense).",
+    "software_repository_and_laniakea_workflow": "Software distribution in PureOS is managed by Laniakea, an automated repository orchestrator. Package promotion traverses three structured staging rings:\n\n- Octarine: Fast-paced development and experimental package builds.\n- Landing: Stabilization staging area synchronizing updates from Debian and validating dependency graphs.\n- Dawn / Stable: Production release tier delivering tested, conflict-free updates to end users.\n\nThe graphical PureOS Store (based on GNOME Software) exposes only curated free software packages and sandboxed Flatpaks.",
+    "privacy_web_stack_and_gnome_web": "PureOS ships with GNOME Web (Epiphany) as its default internet browser. Configured with DuckDuckGo as its default search engine, Epiphany enforces tracker prevention and anti-fingerprinting protections while eliminating the background telemetry and telemetry beacons common in commercial browsers. Users requiring alternative browsing stacks can install vetted open-source browsers directly via the PureOS Store.",
+    "hardware_kill_switches_and_driver_limits": "PureOS operates in synergy with Purism hardware features, including physical hardware kill switches that mechanically sever electrical circuits to the camera, microphone, Wi-Fi, Bluetooth, and cellular modems. However, the strict FSF policy against proprietary binary blobs creates hardware constraints: on standard off-the-shelf third-party PCs, internal Wi-Fi cards (such as modern Intel, Broadcom, or Realtek chips) and discrete Nvidia graphics cards requiring closed-source firmware will not operate unless users supply free hardware adapters (such as Atheros AR9271 USB Wi-Fi dongles).",
+    "threat_model_and_operational_limits": "PureOS documents clear operational boundaries regarding its defensive scope:\n\n- Monolithic Kernel Sandbox: While AppArmor and Wayland provide process confinement, PureOS does not enforce the hypervisor-level domain compartmentalization of Qubes OS.\n- Network Privacy Limits: PureOS does not route internet traffic through Tor by default. Online activity is visible to ISPs unless the user configures a trusted VPN or launches Tor Browser.\n- Hardware Dependency: The highest security guarantees of PureOS (PureBoot tamper detection and hardware kill switches) depend on Purism's proprietary-free hardware platforms and cannot be fully replicated on standard generic PC hardware.",
+    "privacy_and_telemetry": "PureOS enforces an uncompromising zero-telemetry policy. No telemetry agents, user analytics engines, or behavioral profiling trackers are packaged within the operating system. Repository interactions through APT occur via standard HTTP/HTTPS channels without transmitting unique hardware serial numbers, advertising tokens, or telemetry identifiers to remote servers.",
+    "advantages": [
+      "Officially endorsed by the Free Software Foundation as a 100% Free GNU/Linux distribution (FSDG compliant)",
+      "True mobile-to-desktop convergence allowing responsive applications to scale from smartphone to workstation monitors",
+      "Native mobile Linux platform powered by Phosh and phoc on modern Wayland graphics",
+      "Deep integration with PureBoot (coreboot, Heads, TPM, Librem Key) offering robust Anti-Evil-Maid physical tamper detection",
+      "Stable and predictable software foundation synchronized with Debian package repositories",
+      "Default Full Disk Encryption via LUKS and clean Wayland-only display architecture",
+      "Complete absence of advertising telemetry, user tracking, and proprietary software dependencies"
+    ],
+    "disadvantages": [
+      "Strict free-software policy creates hardware incompatibility with third-party PCs requiring proprietary Wi-Fi or GPU firmware blobs",
+      "Does not route general internet traffic through the Tor anonymity network by default",
+      "Monolithic Linux kernel architecture lacking the bare-metal virtualization compartmentalization of Qubes OS",
+      "Smaller catalog of pre-packaged software compared to distributions that include non-free repositories",
+      "Performance on mobile hardware requires optimized battery management and specific driver tuning"
+    ],
+    "who_is_it_for": [
+      "Free software advocates requiring an operating system strictly audited and compliant with FSF free distribution guidelines",
+      "Owners of Purism Librem laptops, mini-PCs, Librem 5 smartphones, and Librem 11 tablets seeking seamless hardware integration",
+      "Privacy-conscious computer users seeking a transparent, non-corporate Debian-based workstation without commercial telemetry",
+      "Developers creating adaptive, convergent Linux applications for mobile and desktop environments"
+    ],
+    "who_is_it_not_for": [
+      "Users running off-the-shelf laptops requiring proprietary Wi-Fi firmware blobs (Broadcom, Intel Wireless) without external adapters",
+      "Gamers and 3D animators requiring proprietary Nvidia GPU drivers and closed-source gaming software",
+      "Whistleblowers requiring amnesic, system-wide Tor routing for all network communication (better suited to Tails or Whonix)",
+      "Users requiring Xen hypervisor hardware domain isolation for untrusted malware execution (better suited to Qubes OS)"
+    ]
+  },
+  "components": [
+    {
+      "id": "pureos-phosh",
+      "name": "Phosh Mobile Wayland Shell",
+      "role": "mobile_desktop_environment",
+      "note": "Touch-friendly Wayland mobile shell developed by Purism for smartphones and convergent tablets."
+    },
+    {
+      "id": "pureos-pureboot",
+      "name": "PureBoot Firmware Ecosystem",
+      "role": "tamper_detection_firmware",
+      "note": "Open-source boot security architecture combining coreboot, Heads, TPM, and Librem Key hardware verification."
+    },
+    {
+      "id": "pureos-laniakea",
+      "name": "Laniakea Repository Orchestrator",
+      "role": "package_migration_engine",
+      "note": "Automated repository manager governing package transitions across Octarine, Landing, and Dawn branches."
+    },
+    {
+      "id": "pureos-store",
+      "name": "PureOS Curated Software Store",
+      "role": "software_center",
+      "note": "Graphical application center delivering strictly audited 100% free software packages and sandboxed Flatpaks."
+    },
+    {
+      "id": "pureos-linux-libre",
+      "name": "Blob-Free Linux Kernel",
+      "role": "operating_system_kernel",
+      "note": "Upstream-derived Linux kernel stripped of all proprietary binary firmware blobs in compliance with FSF standards."
+    },
+    {
+      "id": "pureos-convergence",
+      "name": "Convergence Application Framework",
+      "role": "adaptive_ui_framework",
+      "note": "Libraries (libhandy, libadwaita) enabling applications to scale dynamically between phone and desktop screens."
+    }
+  ],
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_base",
+      "note": "Upstream operating system; PureOS tracks Debian Stable and Testing branches while removing non-free components."
+    },
+    {
+      "id": "tails",
+      "name": "Tails",
+      "relation": "peer_privacy_distribution",
+      "note": "Alternative Debian-based privacy distribution focusing on amnesic live operation and global Tor routing."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "peer_debian_derivative",
+      "note": "Commercial Debian derivative operating with proprietary firmware inclusion, contrasting with PureOS's free software policy."
+    }
+  ],
+  "variants": [
+    {
+      "name": "PureOS Desktop Edition",
+      "description": "Standard GNOME desktop edition optimized for 64-bit x86_64 laptops, Librem Mini, and compatible workstations."
+    },
+    {
+      "name": "PureOS Mobile Edition",
+      "description": "Convergent Phosh edition engineered for ARM64 mobile hardware including the Librem 5 smartphone and Librem 11 tablet."
+    }
+  ],
+  "links": {
+    "homepage": "https://puri.sm/",
+    "documentation": "https://tracker.pureos.net/",
+    "source": "https://source.puri.sm/",
+    "blog": "https://puri.sm/posts/pureos-development-report-june-2026/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=pureos"
+  },
+  "sources": [
+    {
+      "title": "Purism Official Project Portal",
+      "url": "https://puri.sm/",
+      "type": "official",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "Purism Announcement — Free Software Foundation Endorses PureOS",
+      "url": "https://puri.sm/posts/fsf-endorses-pureos/",
+      "type": "project_announcement",
+      "date": "2017-12-21"
+    },
+    {
+      "title": "PureOS Development Report: June 2026 — Phosh and Dawn Updates",
+      "url": "https://puri.sm/posts/pureos-development-report-june-2026/",
+      "type": "project_announcement",
+      "date": "2026-07-31"
+    },
+    {
+      "title": "PureOS Phabricator Bug Tracker and Development Portal",
+      "url": "https://tracker.pureos.net/",
+      "type": "official",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "Purism GitLab Source Code Repositories",
+      "url": "https://source.puri.sm/",
+      "type": "repository",
+      "date": "2026-10-09"
+    },
+    {
+      "title": "DistroWatch Page for PureOS",
+      "url": "https://distrowatch.com/table.php?distribution=pureos",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}
