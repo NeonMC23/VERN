@@ -1,0 +1,1542 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>VERN Library — preview</title>
+<style>/* ==========================================================================
+   VΞRN — design system
+   Dark by default, optional light theme. Minimal, technical, restrained.
+   ========================================================================== */
+
+/* ---------- tokens ---------- */
+:root {
+  color-scheme: dark;
+
+  --bg:            #1C1C1C;
+  --bg-sunken:     #171717;
+  --surface:       #212121;
+  --surface-2:     #262626;
+  --surface-hover: #2A2A2A;
+
+  --border:        #303030;
+  --border-strong: #3D3D3D;
+
+  --text:          #FFFFFF;
+  --text-muted:    #A8A8A8;
+  --text-faint:    #7A7A7A;
+
+  --accent:        #FF66C4;
+  --accent-ink:    #1C1C1C;          /* text on accent surfaces */
+  --accent-hover:  #FF7FCE;
+  --accent-soft:   rgba(255, 102, 196, .12);
+  --accent-line:   rgba(255, 102, 196, .38);
+
+
+  /* ---- type accents ----------------------------------------------------
+     Secondary, low-saturation hues used ONLY on the type badge and a hairline
+     card edge, so a large Library is easier to scan. Deliberately desaturated
+     and always subordinate to --accent (VΞRN pink), which stays the single
+     brand/interaction colour. Referenced via [data-type-accent] tokens. */
+  --t-neutral: #9A9AA2;
+  --t-blue:    #7C9CC4;
+  --t-violet:  #9B8CC4;
+  --t-teal:    #6FA8A0;
+  --t-green:   #86AE84;
+  --t-amber:   #C2A16A;
+  --t-orange:  #C08E6E;
+  --t-cyan:    #74A3B5;
+  --t-slate:   #8993A6;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --radius:      12px;
+  --radius-sm:   8px;
+  --radius-xs:   6px;
+  --radius-pill: 999px;
+
+  --maxw: 1080px;
+  --maxw-prose: 72ch;
+
+  /* spacing scale — one coherent rhythm, used everywhere */
+  --sp-1: .375rem;
+  --sp-2: .625rem;
+  --sp-3: 1rem;
+  --sp-4: 1.5rem;
+  --sp-5: 2rem;
+  --sp-6: clamp(2.25rem, 5vw, 3rem);   /* between sections */
+  --sp-7: clamp(3rem, 7vw, 4.5rem);    /* page rhythm */
+
+  --gutter: clamp(1.125rem, 4vw, 2rem);
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, .28);
+  --ring: 0 0 0 1px var(--accent-line);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg:            #FFFFFF;
+  --bg-sunken:     #F5F5F6;
+  --surface:       #FAFAFA;
+  --surface-2:     #F2F2F3;
+  --surface-hover: #EFEFF1;
+
+  --border:        #E3E3E6;
+  --border-strong: #CFCFD4;
+
+  --text:          #17171A;
+  --text-muted:    #57575F;
+  --text-faint:    #76767F;
+
+  --accent:        #C8007E;
+  --accent-ink:    #FFFFFF;
+  --accent-hover:  #A80069;
+  --accent-soft:   rgba(200, 0, 126, .08);
+  --accent-line:   rgba(200, 0, 126, .32);
+
+
+  /* Type accents, darkened for contrast on a light background. */
+  --t-neutral: #6B6B73;
+  --t-blue:    #45699A;
+  --t-violet:  #6A5B96;
+  --t-teal:    #3F7A72;
+  --t-green:   #4F7A4D;
+  --t-amber:   #8A6A2E;
+  --t-orange:  #8C5A38;
+  --t-cyan:    #3E7286;
+  --t-slate:   #56607A;
+
+  --shadow-soft: 0 1px 2px rgba(16, 16, 20, .06);
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { line-height: 1.22; margin: 0; font-weight: 600; letter-spacing: -0.015em; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+code, .mono { font-family: var(--font-mono); font-size: .875em; }
+
+/* ---------- layout ---------- */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+main { flex: 1 0 auto; }
+
+.page { padding-block: clamp(2.25rem, 6vw, 3.5rem) var(--sp-7); }
+
+.stack > * + * { margin-top: var(--sp-5); }
+
+/* Available to assistive tech, removed from the visual layout. */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link { position: absolute; left: -9999px; z-index: 100; }
+.skip-link:focus {
+  left: var(--gutter);
+  top: .75rem;
+  background: var(--surface);
+  color: var(--text);
+  padding: .55rem .9rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- brand ---------- */
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .5rem;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--text);
+  line-height: 1;
+}
+.brand__mark {
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+/* The cursor blinks between ">_" and ">". Reserving its width with an
+   inline-block keeps the brand from shifting a single pixel. */
+.brand__cursor {
+  display: inline-block;
+  width: .58ch;
+  animation: vern-caret 1.2s steps(1, end) infinite;
+}
+@keyframes vern-caret {
+  0%, 50%   { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+.brand__name { letter-spacing: .07em; }
+.brand:hover .brand__mark,
+.brand:focus-visible .brand__mark { color: var(--accent-hover); }
+
+/* ---------- ">" interaction marker ----------
+   Reveals a chevron on hover/focus/current state. The glyph always occupies
+   its space, so nothing reflows. Applied only to navigation links, link
+   cards and primary buttons. */
+.has-marker { position: relative; }
+.marker {
+  display: inline-block;
+  width: 1ch;
+  margin-right: .35ch;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-.2ch);
+}
+.has-marker:hover > .marker,
+.has-marker:focus-visible > .marker,
+.has-marker[aria-current="page"] > .marker,
+a:hover .card__title > .marker,
+a:focus-visible .card__title > .marker {
+  opacity: 1;
+  transform: translateX(0);
+}
+.card__title > .marker { width: 1ch; margin-right: .35ch; }
+
+/* Inside a flex button the parent's `gap` already spaces the children, so the
+   marker must not add its own margin (that produced a compounded offset). */
+.btn > .marker {
+  margin-right: 0;
+  width: auto;
+  transform: none;
+  line-height: 1;
+  opacity: .55;
+}
+.btn:hover > .marker,
+.btn:focus-visible > .marker { transform: none; }
+/* On the accent CTA the marker must read against pink, not disappear into it. */
+.btn--accent > .marker { color: var(--accent-ink); opacity: .6; }
+/* letter-spacing also renders after the final glyph, nudging the flex group
+   off-centre; reclaim that trailing sliver on the label. */
+.btn > span:last-child { margin-right: -.1em; }
+.btn--accent:hover > .marker,
+.btn--accent:focus-visible > .marker { opacity: 1; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  height: 34px;
+  padding: 0 .95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn--accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.btn--accent:hover,
+.btn--accent:focus-visible { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn--accent:active { transform: translateY(1px); }
+
+/* Inline brand glyph inside a button: sized in em so it tracks the label. */
+.btn__icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.icon-btn:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface-hover); }
+
+/* ---------- header / nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: saturate(150%) blur(10px);
+  border-bottom: 1px solid transparent;
+}
+.site-header[data-scrolled="true"] {
+  border-bottom-color: var(--border);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, .18);
+}
+[data-theme="light"] .site-header[data-scrolled="true"] {
+  box-shadow: 0 1px 12px rgba(16, 16, 20, .06);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 62px;
+}
+
+.nav-cluster {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: .15rem;
+  list-style: none;
+}
+.site-nav__list a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 .65rem;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.site-nav__list a:hover { color: var(--text); background: var(--surface-hover); }
+.site-nav__list a[aria-current="page"] { color: var(--text); }
+/* Current page: a short accent underline rather than a filled pill. */
+.site-nav__list a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: .65rem;
+  right: .65rem;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.site-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding-left: var(--sp-3);
+  margin-left: .25rem;
+  border-left: 1px solid var(--border);
+}
+
+.nav-toggle { display: none; }
+
+@media (max-width: 800px) {
+  .nav-toggle { display: inline-flex; }
+  .site-nav {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-3);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: var(--sp-3) var(--gutter) var(--sp-4);
+    box-shadow: var(--shadow-soft);
+  }
+  .site-nav[data-open="true"] { display: flex; }
+  .site-nav__list { flex-direction: column; align-items: stretch; gap: .125rem; }
+  .site-nav__list a { height: 44px; padding-inline: .75rem; font-size: .78rem; }
+  .site-nav__list a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); }
+  .site-nav__list a[aria-current="page"]::after { display: none; }
+  .site-nav__actions {
+    padding-top: var(--sp-3);
+    padding-left: 0;
+    margin-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+  .site-nav__actions .btn { width: 100%; height: 42px; }
+}
+
+/* ---------- footer ---------- */
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  background: var(--bg-sunken);
+  padding-block: var(--sp-6) var(--sp-4);
+}
+
+.site-footer__main {
+  display: grid;
+  gap: var(--sp-5) var(--sp-6);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: start;
+  padding-bottom: var(--sp-5);
+}
+
+.site-footer__identity .brand { font-size: 1.125rem; }
+.site-footer__tagline {
+  margin-top: .6rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: .8125rem;
+  letter-spacing: .04em;
+}
+.site-footer__desc {
+  margin-top: var(--sp-3);
+  max-width: 46ch;
+  color: var(--text-faint);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+.site-footer__nav {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.footer-col h2 {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+  margin-bottom: var(--sp-2);
+}
+.footer-col ul { list-style: none; display: grid; gap: .5rem; }
+.footer-col a {
+  display: inline-block;
+  color: var(--text-muted);
+  font-size: .9375rem;
+}
+.footer-col a:hover,
+.footer-col a:focus-visible { color: var(--accent); transform: translateX(2px); }
+
+.site-footer__base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .04em;
+}
+.site-footer__note { color: var(--text-faint); }
+
+@media (max-width: 720px) {
+  .site-footer__main { grid-template-columns: 1fr; gap: var(--sp-5); }
+}
+
+/* ---------- page headings ---------- */
+.page-title { font-size: clamp(2rem, 5vw, 2.75rem); }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .55rem;
+}
+.lede {
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  max-width: var(--maxw-prose);
+  margin-top: var(--sp-2);
+}
+.note {
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  padding: var(--sp-4);
+  color: var(--text-muted);
+  background: var(--surface);
+  max-width: var(--maxw-prose);
+}
+
+/* ---------- cards ---------- */
+.cards {
+  list-style: none;
+  display: grid;
+  gap: var(--sp-3);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 258px), 1fr));
+}
+.cards > li { display: flex; }
+
+/* A card that is a link is the <a> itself: the whole surface is clickable. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-soft);
+}
+a.card { color: inherit; }
+a.card:hover,
+a.card:focus-visible {
+  border-color: var(--accent-line);
+  background: var(--surface-hover);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .18), var(--ring);
+  transform: translateY(-2px);
+}
+a.card:hover .card__title,
+a.card:focus-visible .card__title { color: var(--accent); }
+.card__title { font-size: 1.0625rem; }
+.card__text { color: var(--text-muted); font-size: .9375rem; }
+
+/* Library catalogue cards: predictable geometry so the grid scans cleanly.
+   Summaries in the data range from ~120 to ~810 characters; left unbounded
+   they produce cards 3 to 20 lines tall. The clamp fixes the rhythm while
+   the untouched full text remains on the resource page. */
+.card__ident { margin-top: -.05rem; }
+#library-catalog .card__text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+.card__tags { margin-top: auto; padding-top: .55rem; }
+.card__text + .card__go { margin-top: auto; }
+.tag {
+  display: inline-block;
+  max-width: 14ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+  border-radius: var(--radius-pill);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  padding: .1rem .5rem;
+  font-family: var(--font-mono);
+  font-size: .685rem;
+  color: var(--text-faint);
+}
+.tag--more { max-width: none; color: var(--text-muted); }
+.card__go {
+  font-family: var(--font-mono);
+  font-size: .715rem;
+  letter-spacing: .04em;
+  color: var(--text-faint);
+  padding-top: .5rem;
+  transition: color .15s ease;
+}
+.card__tags + .card__go { padding-top: .45rem; }
+a.card:hover .card__go,
+a.card:focus-visible .card__go { color: var(--accent); }
+.card__meta { margin-top: auto; padding-top: .35rem; }
+
+/* ---------- badges & pills ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  border-radius: var(--radius-pill);
+  padding: .18rem .68rem;
+  font-family: var(--font-mono);
+  font-size: .715rem;
+  letter-spacing: .05em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.badge--accent {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.badge__key { color: var(--text-faint); }
+
+.pill-row { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; }
+
+/* ==========================================================================
+   Tracks — dynamic views built by assets/js/tracks/* from data/tracks/*.json
+   Reuses the existing tokens, cards, badges and focus states.
+   ========================================================================== */
+
+/* The view heading receives focus after a hash change; the outline is the
+   standard focus ring, never suppressed. */
+.tracks-app .page-title:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--radius-xs);
+}
+
+.tracks-back {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+}
+.tracks-back:hover,
+.tracks-back:focus-visible { color: var(--accent); }
+
+/* ---- lesson list (Track view) ---- */
+.lesson-list { list-style: none; display: grid; gap: .6rem; counter-reset: none; }
+
+.lesson-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+}
+.lesson-item:hover,
+.lesson-item:focus-visible {
+  border-color: var(--accent-line);
+  background: var(--surface-hover);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .18), var(--ring);
+  transform: translateY(-2px);
+}
+.lesson-item__index {
+  flex: 0 0 auto;
+  min-width: 1.6rem;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--text-faint);
+  padding-top: .15rem;
+}
+.lesson-item__body { display: grid; gap: .2rem; }
+.lesson-item__title { font-weight: 600; }
+.lesson-item:hover .lesson-item__title,
+.lesson-item:focus-visible .lesson-item__title { color: var(--accent); }
+.lesson-item__desc { color: var(--text-muted); font-size: .9rem; }
+.lesson-item__go {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-.2ch);
+}
+.lesson-item:hover .lesson-item__go,
+.lesson-item:focus-visible .lesson-item__go { opacity: 1; transform: translateX(0); }
+
+/* ---- lesson body ---- */
+.lesson { max-width: var(--maxw-prose); }
+.lesson > * + * { margin-top: var(--sp-4); }
+.lesson .block__title { margin-bottom: 0; }
+.lesson .prose { color: var(--text-muted); }
+
+.codeblock {
+  margin: 0;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-sunken);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre;
+  tab-size: 2;
+}
+.codeblock:focus-visible { outline: none; border-color: var(--accent-line); box-shadow: var(--ring); }
+.codeblock code { font-size: inherit; }
+
+@media (max-width: 640px) {
+  .lesson-item { padding: var(--sp-3); }
+  .lesson-item__go { display: none; }
+  .codeblock { font-size: .8rem; padding: var(--sp-3); }
+}
+
+/* ==========================================================================
+   Library catalog — search, filters, type accents (library-catalog.js)
+   ========================================================================== */
+
+.catalog__controls { margin-bottom: var(--sp-4); }
+
+.catalog__search { position: relative; display: block; }
+.catalog__search .field-icon {
+  position: absolute;
+  left: .85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  pointer-events: none;
+}
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 .9rem 0 2.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: .95rem;
+}
+.input::placeholder { color: var(--text-faint); }
+.input:hover { border-color: var(--border-strong); }
+.input:focus-visible {
+  outline: none;
+  border-color: var(--accent-line);
+  box-shadow: var(--ring);
+}
+
+/* closed state stays compact: one small button + the live count */
+.catalog__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: var(--sp-2);
+}
+.catalog__count {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .04em;
+}
+.catalog__count b { color: var(--text); font-weight: 500; }
+
+.btn--ghost {
+  height: 34px;
+  padding: 0 .8rem;
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+.btn--ghost:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface-2); }
+.btn--ghost[aria-expanded="true"] {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+.btn__caret { font-size: .6em; opacity: .75; }
+.btn--ghost[aria-expanded="true"] .btn__caret { transform: rotate(180deg); }
+
+.filter-count {
+  min-width: 1.25rem;
+  padding: 0 .3rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: .68rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.filters {
+  margin-top: var(--sp-3);
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-sunken);
+}
+.filters[hidden] { display: none; }
+.filters__grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+.filters__group > h3,
+.filters__group > legend {
+  padding: 0;
+  margin-bottom: .6rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+.filters__group { border: 0; margin: 0; }
+.filters__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  max-height: 9.5rem;
+  overflow-y: auto;
+}
+
+/* checkable chip: a real <input> + <label>, never a clickable div */
+.chip { position: relative; display: inline-flex; }
+.chip input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  min-height: 30px;
+  padding: .2rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: .715rem;
+  cursor: pointer;
+}
+.chip input:hover + span { border-color: var(--border-strong); color: var(--text); }
+.chip input:checked + span {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.chip input:focus-visible + span { outline: none; box-shadow: var(--ring); border-color: var(--accent-line); }
+
+.select {
+  width: 100%;
+  height: 34px;
+  padding: 0 .6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .74rem;
+}
+.select:focus-visible { outline: none; border-color: var(--accent-line); box-shadow: var(--ring); }
+
+.filters__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+}
+
+.catalog__empty {
+  padding: var(--sp-6) var(--sp-4);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text-muted);
+}
+.catalog__empty p { margin-bottom: var(--sp-3); }
+
+/* ---- type accents: a hairline edge + the type badge only ---- */
+.card[data-type-accent] { border-left: 2px solid var(--type-accent, var(--border)); }
+.badge--type {
+  border-color: color-mix(in srgb, var(--type-accent, var(--text-faint)) 38%, transparent);
+  background: color-mix(in srgb, var(--type-accent, var(--text-faint)) 12%, transparent);
+  color: var(--type-accent, var(--text-muted));
+  text-transform: none;
+}
+
+[data-type-accent="neutral"] { --type-accent: var(--t-neutral); }
+[data-type-accent="blue"]    { --type-accent: var(--t-blue); }
+[data-type-accent="violet"]  { --type-accent: var(--t-violet); }
+[data-type-accent="teal"]    { --type-accent: var(--t-teal); }
+[data-type-accent="green"]   { --type-accent: var(--t-green); }
+[data-type-accent="amber"]   { --type-accent: var(--t-amber); }
+[data-type-accent="orange"]  { --type-accent: var(--t-orange); }
+[data-type-accent="cyan"]    { --type-accent: var(--t-cyan); }
+[data-type-accent="slate"]   { --type-accent: var(--t-slate); }
+
+@media (max-width: 640px) {
+  .catalog__bar { flex-direction: column; align-items: stretch; gap: .6rem; }
+  .catalog__bar .btn { width: 100%; height: 44px; }
+  .catalog__count { text-align: center; }
+  .filters__grid { grid-template-columns: 1fr; }
+  .chip span { min-height: 36px; padding-inline: .85rem; }
+}
+
+/* ==========================================================================
+   Library — rendered by the generic builder from JSON
+   ========================================================================== */
+
+.resource__header { padding-bottom: var(--sp-5); border-bottom: 1px solid var(--border); }
+.resource__kicker {
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .6rem;
+}
+.resource__title { font-size: clamp(2.15rem, 6vw, 3rem); letter-spacing: -0.03em; }
+.resource__summary {
+  margin-top: var(--sp-3);
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  max-width: var(--maxw-prose);
+}
+.resource__meta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin-top: var(--sp-4);
+}
+.resource__tags { margin-top: .55rem; }
+
+.resource__section { margin-top: var(--sp-6); }
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: var(--sp-4);
+}
+.section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+/* documentation blocks */
+.block {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: var(--sp-4) var(--sp-4) calc(var(--sp-4) + .1rem);
+  box-shadow: var(--shadow-soft);
+}
+.block + .block,
+.block + .block-grid,
+.block-grid + .block,
+.block-grid + .block-grid { margin-top: var(--sp-3); }
+
+.block__title { font-size: 1.0625rem; margin-bottom: var(--sp-2); }
+.block__title--sub {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+  margin-bottom: .5rem;
+}
+
+.block-grid {
+  display: grid;
+  gap: var(--sp-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+.block-grid > .block { margin-top: 0; }
+
+.prose { max-width: var(--maxw-prose); color: var(--text); }
+.prose p + p { margin-top: var(--sp-2); }
+.block .prose { color: var(--text-muted); }
+
+/* Editorial tone, keyed off conventional field names by the generic builder.
+   A 2px edge only — no new palette, no fills; pink stays the sole accent. */
+.block[data-tone] { border-left-width: 2px; }
+.block[data-tone="positive"] { border-left-color: var(--t-green); }
+.block[data-tone="negative"] { border-left-color: var(--t-amber); }
+.block[data-tone="verdict"]  { border-left-color: var(--accent-line); }
+
+/* The lead section reads as prose, not as one more card in the stack. */
+.block[data-tone="lead"] {
+  border: 0;
+  border-left: 2px solid var(--border-strong);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  padding: .1rem 0 .1rem var(--sp-4);
+}
+.block[data-tone="lead"] .prose { color: var(--text); font-size: 1.0125rem; }
+
+/* Long unbroken strings (URLs, package names, paths) must wrap rather than
+   force horizontal overflow — without hiding overflow on the container. */
+.block .prose p,
+.bullets li,
+.field__inline { overflow-wrap: anywhere; }
+
+.field + .field { margin-top: var(--sp-3); }
+.field__inline { color: var(--text-muted); font-size: .9375rem; }
+.field__inline strong { color: var(--text); font-weight: 600; }
+
+.stack-tight > * + * { margin-top: var(--sp-3); }
+
+/* bulleted lists from arrays */
+.bullets { list-style: none; display: grid; gap: .45rem; color: var(--text-muted); }
+.bullets > li { position: relative; padding-left: 1.15rem; }
+.bullets > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .7;
+}
+
+/* reference cards — components / relations, entirely clickable when linked */
+.ref-grid {
+  list-style: none;
+  display: grid;
+  gap: var(--sp-3);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+}
+.ref-grid > li { display: flex; }
+
+.ref {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  width: 100%;
+  min-height: 84px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: var(--sp-3) var(--sp-3) var(--sp-3);
+  box-shadow: var(--shadow-soft);
+}
+.ref__name { font-weight: 600; font-size: .9875rem; }
+.ref__role {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: auto;
+}
+a.ref:hover,
+a.ref:focus-visible {
+  border-color: var(--accent-line);
+  background: var(--surface-hover);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .18), var(--ring);
+  transform: translateY(-2px);
+}
+a.ref:hover .ref__name,
+a.ref:focus-visible .ref__name { color: var(--accent); }
+a.ref:hover .marker,
+a.ref:focus-visible .marker { opacity: 1; transform: translateX(0); }
+.ref--inert .marker { display: none; }
+
+.ref--inert {
+  opacity: .68;
+  border-style: dashed;
+  background: transparent;
+  box-shadow: none;
+}
+.ref--inert .ref__name { color: var(--text-muted); font-weight: 500; }
+
+/* link lists — links / articles / sources */
+.linklist {
+  list-style: none;
+  display: grid;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.linklist > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .35rem .75rem;
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+.linklist > li:last-child { border-bottom: 0; }
+.linklist a { color: var(--accent); text-underline-offset: 3px; }
+.linklist a:hover { text-decoration: underline; }
+.linklist .muted,
+.linklist .url {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  word-break: break-all;
+}
+
+.muted { color: var(--text-muted); }
+
+/* states */
+.status { color: var(--text-faint); font-family: var(--font-mono); font-size: .875rem; }
+.error {
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+  padding: var(--sp-5);
+  max-width: var(--maxw-prose);
+}
+.error h1 { font-size: 1.35rem; margin-bottom: var(--sp-2); }
+.error p { color: var(--text-muted); margin-bottom: var(--sp-2); }
+.error a { color: var(--accent); }
+
+/* motion */
+/* ---------------------------------------------------------------------------
+   Tracks — MTrack2-B1 content & structure widgets.
+   Existing tokens only. No gradients, no new palette, no animation.
+   --------------------------------------------------------------------------- */
+
+/* callout — variant is carried by a visible text label, never colour alone. */
+.callout {
+  margin: var(--sp-4) 0;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--t-slate);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.callout__title {
+  margin: 0 0 var(--sp-2);
+  font-weight: 600;
+  font-size: .9rem;
+  letter-spacing: .01em;
+  color: var(--text);
+}
+.callout__body > *:first-child { margin-top: 0; }
+.callout__body > *:last-child { margin-bottom: 0; }
+.callout--note      { border-left-color: var(--t-slate); }
+.callout--tip       { border-left-color: var(--t-green); }
+.callout--warning   { border-left-color: var(--t-amber); }
+.callout--key-points{ border-left-color: var(--accent); }
+
+/* definition — native <dl>. */
+.deflist { margin: var(--sp-4) 0; }
+.deflist dt {
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .9rem;
+}
+.deflist dd {
+  margin: var(--sp-1) 0 var(--sp-3);
+  padding-left: var(--sp-3);
+  border-left: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.deflist dd:last-child { margin-bottom: 0; }
+
+/* table — horizontally scrollable, never collapsed into cards. */
+.table-wrap {
+  margin: var(--sp-4) 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.table-wrap:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .92rem;
+}
+.data-table caption {
+  padding: var(--sp-2) var(--sp-3);
+  text-align: left;
+  color: var(--text-muted);
+  font-size: .85rem;
+  border-bottom: 1px solid var(--border);
+}
+.data-table th,
+.data-table td {
+  padding: var(--sp-2) var(--sp-3);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.data-table th {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--bg-sunken);
+}
+.data-table tbody tr:last-child td { border-bottom: 0; }
+.data-table code { font-size: .85em; }
+
+/* image — secondary support, deliberately plain. */
+.figure { margin: var(--sp-4) 0; }
+.figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-sunken);
+}
+.figure figcaption {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+.figure__credit { display: block; color: var(--text-faint); font-size: .8rem; }
+
+/* accordion — native <details>/<summary>, no animation. */
+.accordion { margin: var(--sp-4) 0; }
+.accordion details {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  margin-bottom: var(--sp-2);
+}
+.accordion details:last-child { margin-bottom: 0; }
+.accordion summary {
+  padding: var(--sp-3) var(--sp-4);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--text);
+  list-style-position: inside;
+}
+.accordion summary:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+.accordion summary:hover { background: var(--surface-hover); }
+.accordion__body { padding: 0 var(--sp-4) var(--sp-3); }
+.accordion__body > *:first-child { margin-top: 0; }
+.accordion__body > *:last-child { margin-bottom: 0; }
+
+/* steps — numbering comes from the native <ol>. */
+.steps {
+  margin: var(--sp-4) 0;
+  padding-left: var(--sp-5);
+}
+.steps__item { margin-bottom: var(--sp-4); padding-left: var(--sp-2); }
+.steps__item::marker { color: var(--accent); font-weight: 600; }
+.steps__item:last-child { margin-bottom: 0; }
+.steps__title { margin: 0 0 var(--sp-2); font-weight: 600; color: var(--text); }
+.steps__body > *:first-child { margin-top: 0; }
+.steps__body > *:last-child { margin-bottom: 0; }
+
+/* Inline (D1) inside lesson prose. */
+.lesson :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: .88em;
+  padding: .1em .35em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--bg-sunken);
+}
+
+/* ---------------------------------------------------------------------------
+   Tracks — MTrack2-B2 exercises. Existing tokens only.
+   Correct / incorrect / unanswered are always carried by TEXT (a mark plus a
+   word), never by colour alone.
+   --------------------------------------------------------------------------- */
+
+.exercise {
+  margin: var(--sp-5) 0;
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.exercise__stem { margin-bottom: var(--sp-3); }
+.exercise__stem > *:first-child { margin-top: 0; }
+.exercise__prompt {
+  display: block;
+  margin: 0 0 var(--sp-3);
+  font-weight: 600;
+  color: var(--text);
+}
+.exercise__body { margin-bottom: var(--sp-3); }
+.exercise__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin: 0 0 var(--sp-2);
+}
+
+/* choice */
+.choice { border: 0; padding: 0; margin: 0; }
+.choice__note {
+  margin: 0 0 var(--sp-2);
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+.choice__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  padding: var(--sp-2) 0;
+}
+.choice__row input { margin-top: .25rem; flex: none; }
+.choice__option { cursor: pointer; color: var(--text); }
+.choice__row input:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* text_input */
+.exercise__input,
+.fill-blank__input {
+  font-family: var(--font-mono);
+  font-size: .92rem;
+  padding: var(--sp-2);
+  color: var(--text);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+}
+.exercise__input { width: 100%; max-width: 24rem; }
+.exercise__input:focus-visible,
+.fill-blank__input:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+
+/* fill_blank */
+.fill-blank__pre { white-space: pre-wrap; }
+.fill-blank__flow { line-height: 2.2; }
+.fill-blank__input { display: inline-block; width: 8rem; padding: .1rem .35rem; }
+.fill-blank__input.is-correct { border-color: var(--t-green); }
+.fill-blank__input.is-incorrect { border-color: var(--t-orange); }
+.fill-blank__badge {
+  margin-left: .4rem;
+  font-family: var(--font-sans);
+  font-size: .75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* hint / result */
+.exercise__hint {
+  margin: 0 0 var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 2px solid var(--t-slate);
+  background: var(--bg-sunken);
+  color: var(--text-muted);
+  font-size: .9rem;
+}
+.exercise__result:empty { display: none; }
+.exercise__result {
+  margin-top: var(--sp-2);
+  padding: var(--sp-3);
+  border-radius: var(--radius-xs);
+  background: var(--bg-sunken);
+  border-left: 2px solid var(--border-strong);
+}
+.exercise__result.is-correct { border-left-color: var(--t-green); }
+.exercise__result.is-incorrect { border-left-color: var(--t-orange); }
+.exercise__result.is-notice { border-left-color: var(--t-slate); }
+.exercise__verdict { margin: 0; font-weight: 600; color: var(--text); }
+.exercise__mark { margin-right: .4rem; }
+.exercise__feedback,
+.exercise__explanation p {
+  margin: var(--sp-2) 0 0;
+  color: var(--text-muted);
+  font-size: .92rem;
+}
+.exercise__explanation {
+  margin-top: var(--sp-2);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 40rem) {
+  .exercise { padding: var(--sp-3); }
+  .exercise__input { max-width: 100%; }
+  .fill-blank__input { width: 6rem; }
+}
+
+/* ---------------------------------------------------------------------------
+   Tracks — MTrack2-B3: tabs, quote, matching, ordering.
+   Existing tokens only. States never rely on colour alone.
+   --------------------------------------------------------------------------- */
+
+/* tabs */
+.tabs { margin: var(--sp-4) 0; }
+.tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  border-bottom: 1px solid var(--border);
+}
+.tabs__tab {
+  padding: var(--sp-2) var(--sp-3);
+  font: inherit;
+  font-size: .92rem;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+.tabs__tab:hover { color: var(--text); background: var(--surface-hover); }
+.tabs__tab:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+/* Active state carries weight + underline, not colour alone. */
+.tabs__tab.is-active {
+  color: var(--text);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+  background: var(--surface);
+}
+.tabs__panel { padding: var(--sp-3) 0 0; }
+.tabs__panel:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.tabs__panel-body > *:first-child { margin-top: 0; }
+.tabs__panel-body > *:last-child { margin-bottom: 0; }
+
+/* quote */
+.quote {
+  margin: var(--sp-4) 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 3px solid var(--border-strong);
+  background: var(--bg-sunken);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.quote__text { margin: 0; color: var(--text); }
+.quote__attrib {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+.quote__attrib::before { content: "\2014\00a0"; }
+.quote__source { font-style: normal; }
+
+/* matching */
+.matching { display: flex; flex-direction: column; gap: var(--sp-2); }
+.matching__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.matching__left {
+  flex: 0 0 9rem;
+  font-family: var(--font-mono);
+  font-size: .9rem;
+  color: var(--text);
+}
+.matching__select {
+  flex: 1 1 12rem;
+  font: inherit;
+  font-size: .9rem;
+  padding: var(--sp-2);
+  color: var(--text);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+}
+.matching__select:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+.matching__badge {
+  font-size: .78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ordering */
+.ordering { margin: 0; padding: 0; list-style: none; counter-reset: ord; }
+.ordering__item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2);
+  margin-bottom: var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+  counter-increment: ord;
+}
+.ordering__item:last-child { margin-bottom: 0; }
+.ordering__item::before {
+  content: counter(ord);
+  flex: none;
+  min-width: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: var(--text-faint);
+}
+.ordering__controls { display: flex; gap: var(--sp-1); flex: none; }
+.ordering__btn { padding: .15rem .5rem; font-size: .9rem; line-height: 1.2; }
+.ordering__btn[disabled] { opacity: .4; cursor: not-allowed; }
+.ordering__btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.ordering__text { color: var(--text); }
+
+@media (max-width: 40rem) {
+  .matching__left { flex-basis: 100%; }
+  .matching__select { flex-basis: 100%; }
+  .tabs__tab { flex: 1 1 auto; text-align: left; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a, .card, .ref, .btn, .icon-btn, .site-nav__list a, .footer-col a, .marker {
+    transition: color .14s ease, background-color .14s ease,
+                border-color .14s ease, box-shadow .14s ease,
+                opacity .14s ease, transform .14s ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* The terminal cursor stops blinking and stays visible: ">_". */
+  .brand__cursor { animation: none !important; opacity: 1; }
+  a.card:hover, a.card:focus-visible,
+  a.ref:hover, a.ref:focus-visible,
+  .lesson-item:hover, .lesson-item:focus-visible,
+  .footer-col a:hover, .footer-col a:focus-visible { transform: none; }
+}
+</style><style>
+body{padding:0}.pv{max-width:1080px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.pv h2.pvh{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:2.5rem 0 1rem;border-bottom:1px solid var(--border);padding-bottom:.6rem}
+</style></head><body><div class="pv">
+<h2 class="pvh">Catalogue — 12 of 37 real resources</h2><ul class="cards"></ul>
+<h2 class="pvh">Resource page — NixOS (header + first section)</h2><header class="resource__header"><p class="resource__kicker">Operating system</p><h1 class="resource__title">NixOS</h1><p class="resource__summary">An independent Linux operating system built around the purely functional Nix package manager, providing declarative system configuration, isolated store paths, and atomic generation switching.</p><ul class="resource__meta" aria-label="Metadata"><li><span class="badge badge--accent"><span class="badge__key">status</span>active</span></li><li><span class="badge"><span class="badge__key">platforms</span>x86_64, aarch64</span></li><li><span class="badge"><span class="badge__key">id</span>nixos</span></li><li><span class="badge"><span class="badge__key">verified</span>2026-09-24</span></li></ul><ul class="pill-row resource__tags" aria-label="Tags"><li><span class="badge">declarative</span></li><li><span class="badge">reproducible</span></li><li><span class="badge">functional</span></li><li><span class="badge">nix</span></li><li><span class="badge">nixpkgs</span></li><li><span class="badge">linux</span></li><li><span class="badge">immutable</span></li><li><span class="badge">devops</span></li></ul></header><section class="resource__section" aria-labelledby="sec-content"><h2 class="section-title" id="sec-content">Documentation</h2><div><section class="block" data-tone="lead"><h3 class="block__title">Introduction</h3><div class="prose"><p>NixOS is an independent Linux operating system built around the purely functional software deployment model implemented by the Nix package manager. Unlike distributions where software packages imperatively modify global filesystem paths like /usr or /bin, NixOS evaluates a centralized declarative specification written in the Nix expression language to construct its kernel, system services, and user packages. This architecture enables isolated package paths, atomic configuration switching, and generational rollbacks.</p></div></section><section class="block" data-tone="lead"><h3 class="block__title">What is it?</h3><div class="prose"><p>At its technical core, NixOS is a declarative Linux distribution where system state is defined by evaluating functional expressions. Configuration modules specify services, networking, filesystems, and desktop environments. Invoking the nixos-rebuild command evaluates these definitions, realizes or downloads derivations into the immutable /nix/store, links a new system generation in /nix/var/nix/profiles/system, and adjusts running systemd services without requiring a system reboot for most configuration changes.</p></div></section><section class="block"><h3 class="block__title">Origin and academic foundations</h3><div class="prose"><p>Nix was developed beginning in 2003 by Eelco Dolstra as part of research at Utrecht University, published in the PhD thesis "The Purely Functional Software Deployment Model". The research investigated formal techniques to address Unix package deployment issues such as undeclared dependencies, non-atomic upgrades, and library version conflicts. In 2006, Eelco Dolstra and Armijn Hemel introduced NixOS, extending this functional package model to the complete Linux operating system.</p></div></section><section class="block"><h3 class="block__title">The three pillars nix nixpkgs nixos</h3><div class="prose"><p>The architecture divides into three distinct entities: 1. Nix is the purely functional package manager and domain-specific language (DSL). It evaluates derivations (.drv) into immutable paths under /nix/store and handles sandboxed builds, user profiles, and garbage collection. Nix can run on non-NixOS Linux distributions and macOS. 2. Nixpkgs is the open-source repository containing over 100,000 package expressions, build recipes (stdenv), and the NixOS module system. 3. NixOS is the operating system itself, integrating the Linux kernel, systemd, bootloaders, and userland entirely through Nixpkgs modules evaluated by Nix.</p></div></section><section class="block"><h3 class="block__title">The nix store and immutability</h3><div class="prose"><p>The core storage component of NixOS is the Nix store, located at /nix/store. Every package, library, script, and configuration file resides in its own isolated directory named /nix/store/&lt;hash&gt;-&lt;name&gt;-&lt;version&gt;. The cryptographic hash prefix is calculated from build inputs, including source tarballs, patch files, compiler flags, and the hashes of all dependencies. Files in /nix/store are mounted read-only (permissions 0444 or 0555). Multiple distinct versions of any library (such as OpenSSL, Python, or glibc) coexist simultaneously without path collisions.</p></div></section><section class="block"><h3 class="block__title">Declarative configuration and rebuild</h3><div class="prose"><p>System administration in NixOS is conducted by editing declarative module files, typically /etc/nixos/configuration.nix. Administrators declare desired states (such as services.openssh.enable = true;). Executing "nixos-rebuild switch" triggers an evaluation of the system configuration, realizes required derivations, constructs a new system generation symlink under /nix/var/nix/profiles/system, updates the bootloader menu (GRUB or systemd-boot), and restarts or reloads changed systemd services. If a configuration introduces an error, executing "nixos-rebuild switch --rollback" or selecting an earlier generation at boot time activates the prior system state.</p></div></section><section class="block"><h3 class="block__title">Channels vs flakes and system nix</h3><div class="prose"><p>NixOS supports multiple mechanisms for tracking and pinning software versions: 1. Channels (nix-channel) are the default mechanism in standard installations. Channels point to rolling Git branches of Nixpkgs (e.g. nixos-26.05 or nixos-unstable) tested and built by Hydra, updated via "nix-channel --update". 2. Flakes are an optional, experimental feature (experimental-features = nix-command flakes) providing self-contained project definitions via flake.nix and pinned dependency lockfiles (flake.lock), operating independently of mutable channels. Flakes are widely used but remain optional and not enabled by default in a base install. 3. NixOS 26.05 introduces system.nix as an official alternative entry point, enabling channel-free system configuration by pinning Nixpkgs tarballs directly with explicit SHA-256 hashes without requiring experimental flake flags.</p></div></section><section class="block"><h3 class="block__title">Non fhs architecture and binaries</h3><div class="prose"><p>NixOS does not adhere to the Linux Filesystem Hierarchy Standard (FHS). Directories such as /bin, /sbin, /lib, /usr/lib, and /usr/include do not exist or are empty, with only /bin/sh and /usr/bin/env provided as symlinks to ensure script execution. Executables built in NixOS encode exact /nix/store library paths directly into their ELF binaries via RPATH and RUNPATH headers. Consequently, conventional precompiled Linux binaries fail to launch with "No such file or directory" errors because the standard dynamic linker (/lib64/ld-linux-x86-64.so.2) is not present at that path. Users run these binaries using patchelf, dynamic linker shims like nix-ld, or containerized user environments via buildFHSEnv and steam-run.</p></div></section><section class="block"><h3 class="block__title">Binary cache and hydra</h3><div class="prose"><p>Although packages are defined as source derivations, precompiled binaries are available through official infrastructure. The binary cache at https://cache.nixos.org serves precompiled binary archives (NAR files accompanied by signed .narinfo metadata). The continuous integration farm Hydra (hydra.nixos.org) evaluates Nixpkgs commits, builds packages across supported architectures, executes automated VM integration tests, and publishes signed binary substitutes. When a local derivation hash matches a build in cache.nixos.org, Nix downloads and unpacks the binary substitute rather than compiling locally.</p></div></section><section class="block"><h3 class="block__title">Reproducibility and limits</h3><div class="prose"><p>While Nix derivation modeling tracks all declared build inputs, bit-for-bit reproducibility is not guaranteed unconditionally across all software in Nixpkgs. Factors such as embedded timestamps, non-deterministic compiler outputs, filesystem ordering, and hardware architecture differences can produce differing output binaries from identical derivation expressions. The NixOS project participates in the Reproducible Builds initiative to measure and improve package reproducibility across the Nixpkgs collection, while sandboxed build environments prevent undeclared network access and hidden host dependencies during package realization.</p></div></section><section class="block"><h3 class="block__title">Components and release 2605</h3><div class="prose"><p>The current stable release of NixOS is version 26.05 (code-named "Yarara", released May 30, 2026, with latest verified release build 26.05.10529.c508844df6c2 from September 24, 2026). Key components in this release include Nix 2.35.2, default Linux kernel 6.18.53 (with simultaneous LTS options 6.12, 6.6, and 6.1), systemd 260.4, Calamares 3.4.2 installer, KDE Plasma 6.6.6, and GNOME 50.4. A critical architectural evolution in 26.05 is the default migration of Stage 1 (initrd) to systemd (boot.initrd.systemd.enable = true), deprecating the historic scripted stage 1 implementation.</p></div></section><section class="block"><h3 class="block__title">Installation and deployment</h3><div class="prose"><p>NixOS provides graphical and minimal installation ISO images. Graphical ISOs feature either GNOME or KDE Plasma alongside the Calamares installer, enabling disk partitioning, user creation, and desktop installation. Minimal ISOs provide a terminal environment where users run "nixos-generate-config --root /mnt" to inspect hardware, adjust /mnt/etc/nixos/configuration.nix, and run "nixos-install" to realize the system closure. NixOS configurations can also be deployed headlessly over SSH to remote physical servers or cloud virtual machines using tools such as nixops, colmena, or deploy-rs.</p></div></section><section class="block"><h3 class="block__title">Governance and foundation</h3><div class="prose"><p>NixOS is governed under the auspices of the Stichting NixOS Foundation, an independent non-profit foundation incorporated in the Netherlands (KvK number 63520583, VAT ID NL855271851B01) based in Amsterdam. The foundation owns trademarks, protects assets, manages financial contributions from community sponsors, and ensures the continuous operation of cache.nixos.org and Hydra build clusters. Technical stewardship is distributed among specialized community teams (Release, Security, Infrastructure, Documentation) following RFC processes to guide system evolution.</p></div></section><section class="block"><h3 class="block__title">Privacy and telemetry</h3><div class="prose"><p>The base NixOS operating system and the Nix package manager do not include background telemetry daemons, tracking agents, or automated crash reporting services in their codebase. Network requests initiated by system tools are limited to explicit administrative operations, such as channel updates from channels.nixos.org, binary cache substitutes from cache.nixos.org, and source tarball downloads during derivation builds. This baseline applies strictly to core system components; applications installed by the user (such as web browsers or desktop software) may implement their own telemetry or network communication. Web properties operated by the Stichting NixOS Foundation (nixos.org) are hosted on Netlify and record standard web access logs (IP address, user agent, timestamp) for operational and security purposes under European GDPR regulations.</p></div></section><div class="block-grid"><section class="block" data-tone="positive"><h3 class="block__title">Advantages</h3><ul class="bullets"><li>Declarative system specification: entire system state is defined in modular configuration files, facilitating automated replication across machines.</li><li>Generational rollbacks: configuration rebuilds create discrete numbered generations in /nix/var/nix/profiles/system that can be selected at boot.</li><li>Isolated library paths: packages reside in unique /nix/store directories, allowing different versions of the same library to coexist without path collisions.</li><li>Ephemeral development environments: nix-shell instantiates temporary environments containing specific compilers and libraries without modifying the system profile.</li><li>Extensive package collection: Nixpkgs contains over 100,000 package expressions evaluated and cached by official build infrastructure.</li><li>Sandboxed build execution: build processes run in isolated network-restricted environments to enforce declared dependency inputs.</li><li>Typed module framework: system services and options are validated against typed schemas with assertions and default definitions.</li><li>Automated continuous integration: Hydra evaluates commits, runs VM integration tests, and signs binary substitutes prior to channel advancement.</li></ul></section><section class="block" data-tone="negative"><h3 class="block__title">Disadvantages</h3><ul class="bullets"><li>Nix language prerequisite: configuring the operating system requires learning the syntax and evaluation semantics of the functional Nix language.</li><li>FHS filesystem divergence: executables compiled for standard Linux distributions fail without dynamic linker shims (nix-ld) or container wrappers.</li><li>Storage consumption from generation history: retaining multiple system closures in /nix/store requires routine garbage collection to recover disk space.</li><li>Multiple configuration paradigms: coexistence of channels, flakes, and system.nix introduces disparate documentation and usage patterns.</li><li>Memory requirements during evaluation: evaluating complex Nixpkgs configurations can require significant RAM during nixos-rebuild operations.</li><li>Absence of imperative installation: packages cannot be installed on the fly globally without modifying configuration files or using ephemeral shells.</li><li>Build fallback overhead: custom package overrides that miss the binary cache require local compilation from source.</li><li>Terminal-centric administration: system configuration and maintenance lack official unified graphical administrative interfaces.</li></ul></section></div><div class="block-grid"><section class="block" data-tone="positive"><h3 class="block__title">Who is it for?</h3><ul class="bullets"><li>DevOps engineers, sysadmins, and infrastructure teams requiring version-controlled, declarative machine provisioning.</li><li>Software developers needing isolated build environments and reproducible toolchain management across development systems.</li><li>Users seeking generational system state tracking with immediate bootloader rollback options for recovery.</li><li>Server operators managing clusters where configuration drift across machines must be programmatically avoided.</li><li>Users managing multiple workstations or servers who want to synchronize system configuration modules via Git.</li><li>Organizations requiring transparent source derivation tracking and sandboxed build verification.</li></ul></section><section class="block" data-tone="negative"><h3 class="block__title">Who is it not for?</h3><ul class="bullets"><li>Users expecting a standard FHS filesystem where conventional Linux binaries run directly without shims or containers.</li><li>Users preferring graphical package management applications and one-click imperative software installation without text files.</li><li>Systems with severely constrained disk storage that cannot accommodate /nix/store generation retention and build artifacts.</li><li>Users who rely on imperative package manager commands (such as apt install or dnf install) for ad-hoc global software installation.</li><li>Organizations requiring traditional long-term support guarantees backed by a single commercial enterprise vendor.</li></ul></section></div><section class="block" data-tone="verdict"><h3 class="block__title">Verdict</h3><div class="prose"><p>NixOS implements a declarative and purely functional approach to Linux system deployment. By treating package builds as derivations stored in isolated, read-only store paths (/nix/store), it provides atomic generation switching, bootable rollbacks, and concurrent library versioning. Its non-FHS filesystem layout and functional configuration language require specific tooling (such as patchelf or nix-ld) and workflows distinct from conventional imperative distributions, making it particularly suited for environments where configuration reproducibility and rollback capabilities are prioritized.</p></div></section></div></section>
+</div></body></html>
