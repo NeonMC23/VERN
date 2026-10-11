@@ -54,6 +54,9 @@ var LIBRARY_RESOURCES = [
   "tuxedo-os",
   "linux-from-scratch",
   "tails",
+  "qubes-os",
+  "whonix",
+  "kali-linux",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
