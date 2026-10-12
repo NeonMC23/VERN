@@ -230,7 +230,7 @@
       "note": "Highlighted on Debian's derivatives page and described in the project's census as a Debian derivative sponsored by Canonical that rebuilds Debian source packages, with LTS releases based on Debian testing and the others on unstable. The census entry is dated 2016 with sources.list examples from 2023, so the relation is taken from it and Ubuntu's current state is not."
     },
     {
-      "id": "kali",
+      "id": "kali-linux",
       "name": "Kali Linux",
       "relation": "downstream_derivative",
       "note": "One of the five derivatives Debian chooses to highlight, for security auditing; the census describes it as based on Debian testing, using Debian binaries with its own modifications and additions, and declaring its own dpkg vendor."
@@ -248,7 +248,7 @@
       "note": "Listed among the derivatives Debian highlights; a live system for system administrators."
     },
     {
-      "id": "purism-pureos",
+      "id": "pureos",
       "name": "PureOS",
       "relation": "downstream_derivative",
       "note": "Listed among the derivatives Debian highlights, as the distribution of a hardware vendor that keeps to DFSG-free software."
