@@ -237,7 +237,7 @@
       "note": "Sits between Fedora and RHEL and carries ongoing work on released RHEL versions."
     },
     {
-      "id": "nobara",
+      "id": "nobara-linux",
       "name": "Nobara Linux",
       "relation": "downstream_derivative",
       "note": "Independent gaming distribution based on Fedora with its own patch set."

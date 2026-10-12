@@ -158,7 +158,7 @@
       "note": "Upstream base distribution providing core binary packages (.deb), security advisories, and the APT repository framework upon which MX Linux is constructed."
     },
     {
-      "id": "anti-x",
+      "id": "antix",
       "name": "antiX",
       "relation": "related",
       "note": "Co-founding partner distribution sharing live-boot architecture, ISO build tooling, persistence mechanisms, and core developer personnel."

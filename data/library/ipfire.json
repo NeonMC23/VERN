@@ -1,0 +1,167 @@
+{
+  "id": "ipfire",
+  "name": "IPFire",
+  "type": "operating_system",
+  "summary": "An independent, hardened Linux distribution engineered as a stateful firewall and secure routing gateway, featuring intuitive color-coded network zoning, Suricata intrusion prevention, the Pakfire package manager, and IPFire Location.",
+  "tags": [
+    "linux",
+    "independent",
+    "firewall",
+    "network-security",
+    "routing",
+    "suricata",
+    "pakfire",
+    "stateful-packet-inspection",
+    "vpn",
+    "dnssec"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "license": "GPL-3.0-or-later",
+  "last_verified": "2026-10-12",
+  "content": {
+    "introduction": "IPFire is an open-source, hardened Linux distribution designed specifically to operate as an enterprise-grade stateful packet inspection (SPI) firewall, network router, and secure edge gateway. Initiated in 2005 by Michael Tremer and Florian Manstein as an independent project derived from Linux From Scratch (LFS), IPFire provides high-throughput perimeter defense without vendor lock-in. Supported commercially by Lightning Wire Labs for certified appliance hardware and enterprise support, IPFire delivers robust modular security through an intuitive, color-coded administrative web console.",
+    "what_is_it": "Technically, IPFire is a specialized standalone operating system powered by a custom-hardened Linux kernel and the Netfilter packet filtering subsystem. The distribution organizes all network traffic into distinct color-coded trust zones: Green (protected local LAN), Red (untrusted WAN/Internet), Orange (demilitarized zone - DMZ), and Blue (isolated wireless LAN). IPFire integrates Suricata for real-time intrusion prevention (IPS/IDS), Unbound for recursive DNSSEC-validating DNS resolution, Squid for web caching and URL content filtering, strongSwan/WireGuard for encrypted VPN tunnels, and its proprietary package manager, Pakfire, for cryptographically verified system updates.",
+    "origin_and_history": "IPFire was originally established in 2005 as a fork of the legacy IPCop firewall project to modernise firewall architecture and enhance throughput on commodity PC hardware. Recognizing the architectural limitations of IPCop, the developers executed a complete rewrite based on Linux From Scratch, creating a dedicated source-based distribution. Over two decades of continuous development, IPFire evolved through its 2.x branch, introducing the 'Pakfire' package manager, transitioning from Snort to Suricata for high-speed multi-threaded intrusion prevention, developing the independent 'IPFire Location' IP geolocation database, and delivering over 200 cumulative 'Core Updates' in the IPFire 2.29 series.",
+    "governance_and_support": "IPFire is developed and maintained by the international IPFire-Team under the leadership of co-founder Michael Tremer. Governed strictly under the open-source GNU General Public License (GPLv3), all core software, build recipes, and updates remain free and auditable. Lightning Wire Labs provides commercial backing through purpose-built hardware appliances, custom firmware engineering, and 24/7 enterprise support agreements. The community coordinates bug tracking via Bugzilla (`bugzilla.ipfire.org`), source code via Git (`git.ipfire.org`), and community support across active discourse forums and Matrix channels.",
+    "network_segmentation_and_zoning": "The defining architectural paradigm of IPFire is its color-coded network security zoning:\n\n- Green Zone (Local Network): High-trust internal LAN where client workstations and trusted servers operate.\n- Red Zone (External WAN): Untrusted external network (Internet connection) with default-deny inbound filtering.\n- Orange Zone (DMZ): Semi-trusted segment isolating publicly accessible services (web, mail) from the Green LAN.\n- Blue Zone (Wireless Network): Isolated segment dedicated to Wi-Fi access points and untrusted guest devices.\n\nBy default, no network traffic is permitted to traverse between zones unless governed by explicit administrator firewall rules.",
+    "intrusion_prevention_and_inspection": "IPFire incorporates Suricata as its native Intrusion Detection and Prevention System (IDS/IPS). Operating in real-time inline mode, Suricata performs Deep Packet Inspection (DPI) across TCP, UDP, TLS, DNS, and HTTP streams against rule catalogs from Emerging Threats and community feeds. IPFire pairs this engine with 'IPFire DBL' (Domain Blocklist), a community-curated blocklist that neutralizes malware beacons, phishing endpoints, and aggressive tracking across all network ports, closing the gap between traditional DNS filtering and full payload inspection.",
+    "pakfire_and_package_management": "System updates and optional add-ons are managed through `Pakfire`, IPFire's custom package management framework. Pakfire enforces cryptographic GPG signatures and hash verification on all binary packages to prevent supply-chain tampering. Administrators can expand core firewall capabilities by installing certified add-ons with a single click, including ClamAV for proxy antivirus scanning, HAProxy for load balancing, Tor for onion routing, Samba for local file sharing, and Net-SNMP for remote monitoring.",
+    "vpn_connectivity_and_routing": "IPFire delivers comprehensive virtual private networking capabilities supporting site-to-site and remote-access architectures:\n\n- IPsec (strongSwan): Enterprise VPN connectivity supporting modern IKEv2 cryptography, elliptic curve algorithms, and experimental hybrid post-quantum key exchanges.\n- OpenVPN: Robust SSL/TLS client-to-gateway VPN with automated client configuration and certificate generation.\n- WireGuard: Modern, high-performance, lightweight encrypted tunnels implemented directly in the kernel space.\n- Quality of Service (QoS): Traffic-shaping scheduler preventing network congestion and prioritizing latency-sensitive flows such as VoIP and video conferencing.",
+    "web_console_and_reporting": "IPFire is administered entirely through a secure HTTPS web management interface accessible on port 444. The console displays real-time traffic graphs, connection state tables, and DHCP lease allocations. IPFire provides automated security reporting, compiling daily, weekly, or monthly scheduled PDF reports detailing blocked intrusion events, bandwidth distribution, and VPN tunnel uptimes. System events can be continuously mirrored to external syslog servers for centralized security incident compliance.",
+    "threat_model_and_operational_limits": "IPFire documents clear operational parameters regarding its defensive mission:\n\n- Perimeter Defense Focus: IPFire is an infrastructure routing and perimeter firewall; it secures traffic traversing its interfaces but cannot sanitize host endpoints compromised by local malware.\n- Hardware Requirements: Dedicated dual-NIC or multi-NIC hardware is required to separate physical network segments (minimum one WAN port and one LAN port).\n- No Automatic Anonymity: IPFire does not route network client traffic through the Tor network by default; it functions as an authentic, high-speed routing gateway preserving real IP routing headers unless explicit proxy rules are applied.\n- Dedicated Appliance Model: IPFire is designed to run as a dedicated operating system on physical or virtual appliances, not as a general-purpose multitasking desktop.",
+    "privacy_and_telemetry": "IPFire enforces an absolute zero-telemetry policy. The distribution contains no commercial tracking frameworks, usage analytics beacons, or proprietary telemetry daemons. System logs, packet captures, and routing tables remain strictly confined to the local appliance storage, ensuring absolute confidentiality for enterprise and governmental networks.",
+    "advantages": [
+      "Hardened Linux operating system baseline designed from scratch specifically for high-throughput firewall routing",
+      "Intuitive, color-coded security zone model (Green, Red, Orange, Blue) enforcing strict segmentation",
+      "Integrated Suricata Intrusion Prevention System with automated rule compilation and Deep Packet Inspection",
+      "Proprietary Pakfire package manager delivering cryptographically verified Core Updates and certified add-ons",
+      "Native IPFire Location database providing microsecond-speed IP and ASN geolocation filtering without proprietary APIs",
+      "Comprehensive VPN support spanning WireGuard, OpenVPN, and strongSwan IPsec with post-quantum cryptography",
+      "Zero telemetry policy with public Git repositories, open community governance, and regular security audits"
+    ],
+    "disadvantages": [
+      "Requires dedicated hardware with multiple physical network interfaces for proper physical network zoning",
+      "Web interface styling follows a traditional administrative utility design without reactive SPA frameworks",
+      "Source-based LFS architectural lineage requires familiarity with Pakfire conventions rather than standard apt or rpm",
+      "Does not route general client traffic through Tor by default for internet anonymity",
+      "ReiserFS filesystem support has been deprecated in recent core updates, requiring ext4 or modern filesystems"
+    ],
+    "who_is_it_for": [
+      "Network engineers, system administrators, and security teams requiring an open-source, auditable perimeter firewall",
+      "Small-to-medium businesses and educational institutions seeking enterprise network protection without recurring license fees",
+      "Privacy-conscious home lab enthusiasts building dedicated multi-zone router hardware on x86_64 or ARM mini-PCs",
+      "Organizations deploying secure virtual edge firewalls and VPN concentrators in AWS, Hetzner, or Exoscale clouds"
+    ],
+    "who_is_it_not_for": [
+      "Casual desktop users seeking a general everyday workstation operating system for office productivity or gaming",
+      "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
+      "Users with single-NIC computers unable to configure VLANs or add secondary network interfaces",
+      "Offensive penetration testers seeking automated exploit execution and payload crafting tools"
+    ]
+  },
+  "components": [
+    {
+      "id": "ipfire-spi-firewall",
+      "name": "IPFire Stateful Inspection Firewall",
+      "role": "packet_filtering_engine",
+      "note": "Netfilter-based stateful packet inspection engine enforcing multi-zone color-coded security rules."
+    },
+    {
+      "id": "ipfire-suricata-ips",
+      "name": "Suricata Intrusion Prevention System",
+      "role": "intrusion_prevention_engine",
+      "note": "Multi-threaded deep packet inspection engine analyzing network flows against signature rulebases."
+    },
+    {
+      "id": "ipfire-pakfire",
+      "name": "Pakfire Package Management Subsystem",
+      "role": "package_manager",
+      "note": "Cryptographically verified package management framework automating Core Updates and add-on installations."
+    },
+    {
+      "id": "ipfire-location-db",
+      "name": "IPFire Location Geolocation Engine",
+      "role": "geolocation_database",
+      "note": "High-performance, open-source IP geolocation database providing country and ASN-level traffic blocking."
+    },
+    {
+      "id": "ipfire-unbound",
+      "name": "Unbound Recursive DNSSEC Resolver",
+      "role": "dns_resolver",
+      "note": "Local validating recursive DNS daemon supporting DNS-over-TLS and automated domain blocklists (DBL)."
+    },
+    {
+      "id": "ipfire-wui",
+      "name": "IPFire Web User Interface",
+      "role": "web_management_console",
+      "note": "HTTPS administrative management console providing real-time status graphs, VPN setups, and PDF reporting."
+    }
+  ],
+  "relations": [
+    {
+      "id": "security-onion",
+      "name": "Security Onion",
+      "relation": "peer_network_security_platform",
+      "note": "Defensive security monitoring and NSM platform frequently paired with perimeter firewalls like IPFire."
+    },
+    {
+      "id": "network-security-toolkit",
+      "name": "Network Security Toolkit",
+      "relation": "peer_network_security_platform",
+      "note": "Fedora-based network security auditing platform sharing packet analysis and traffic diagnostic capabilities."
+    }
+  ],
+  "variants": [
+    {
+      "name": "IPFire ISO Installation Media",
+      "description": "Standard bootable x86_64 installation image for bare-metal PC hardware and enterprise server appliances."
+    },
+    {
+      "name": "IPFire ARM / Cloud Image",
+      "description": "Optimized flashable images and cloud machine images for AArch64 hardware, AWS, Hetzner, and Exoscale."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.ipfire.org/",
+    "documentation": "https://www.ipfire.org/docs",
+    "location": "https://www.ipfire.org/location",
+    "repository": "https://git.ipfire.org/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=ipfire"
+  },
+  "sources": [
+    {
+      "title": "IPFire Official Project Portal",
+      "url": "https://www.ipfire.org/",
+      "type": "official",
+      "date": "2026-07-20"
+    },
+    {
+      "title": "IPFire Documentation Directory",
+      "url": "https://www.ipfire.org/docs",
+      "type": "official_documentation",
+      "date": "2026-07-20"
+    },
+    {
+      "title": "IPFire Location Open Geolocation Project",
+      "url": "https://www.ipfire.org/location",
+      "type": "technical_specification",
+      "date": "2026-07-20"
+    },
+    {
+      "title": "IPFire Git Source Repositories",
+      "url": "https://git.ipfire.org/",
+      "type": "repository",
+      "date": "2026-10-12"
+    },
+    {
+      "title": "DistroWatch Page for IPFire",
+      "url": "https://distrowatch.com/table.php?distribution=ipfire",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}

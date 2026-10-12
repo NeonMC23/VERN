@@ -63,15 +63,16 @@ var LIBRARY_RESOURCES = [
   "kicksecure",
   "pureos",
   "secureblue",
-  // Development test fixtures — not real technologies. Safe to remove.
-  "test-linux",
-  "test-desktop",
-  "test-network",
-  "test-tool",
-  "test-project",
-  "test-framework"
+  "network-security-toolkit",
+  "pentoo",
+  "caine",
+  "blackarch",
+  "security-onion",
+  "remnux",
+  "ipfire",
+  "opnsense",
+  "pfsense"
 ];
-
 
 (function () {
   "use strict";
@@ -535,7 +536,7 @@ var LIBRARY_RESOURCES = [
     if (!mount) return;
 
     var ids = (Array.isArray(LIBRARY_RESOURCES) ? LIBRARY_RESOURCES : [])
-      .filter(function (id) { return typeof id === "string" && ID_PATTERN.test(id); });
+      .filter(function (id) { return typeof id === "string" && ID_PATTERN.test(id) && !id.startsWith("test-"); });
 
     if (!ids.length) {
       mount.appendChild(el("p", { className: "status", text: "No resources yet." }));
@@ -554,7 +555,7 @@ var LIBRARY_RESOURCES = [
     })).then(function (entries) {
       clear(mount);
       ALL = entries
-        .filter(function (e) { return e.data && typeof e.data === "object"; })
+        .filter(function (e) { return e.data && typeof e.data === "object" && !e.id.startsWith("test-"); })
         .map(function (e) { return buildEntry(e.id, e.data); });
 
       if (!ALL.length) {

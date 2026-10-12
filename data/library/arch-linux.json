@@ -239,7 +239,7 @@
       "note": "Listed among active Arch-based distributions since 2022; the microarchitecture-level optimisations it advertises are its own decision, not an Arch baseline change."
     },
     {
-      "id": "blackarch-linux",
+      "id": "blackarch",
       "name": "BlackArch Linux",
       "relation": "downstream_derivative",
       "note": "Listed since 2014 as an Arch-based distribution with its own repository, an example of the custom-repository mechanism the project documents as open to anyone."

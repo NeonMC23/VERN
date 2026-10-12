@@ -1,0 +1,167 @@
+{
+  "id": "opnsense",
+  "name": "OPNsense",
+  "type": "operating_system",
+  "summary": "An open-source, FreeBSD-based firewall and routing platform featuring stateful packet filtering via pf, a modern Phalcon MVC architecture, built-in Suricata IDS/IPS, CARP high availability, and two-factor authentication.",
+  "tags": [
+    "freebsd-based",
+    "firewall",
+    "routing",
+    "pf",
+    "suricata",
+    "mvc",
+    "carp",
+    "vpn",
+    "wireguard",
+    "unbound"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "license": "BSD-2-Clause",
+  "last_verified": "2026-10-12",
+  "content": {
+    "introduction": "OPNsense is an open-source, security-hardened firewall and routing platform built upon the FreeBSD operating system. Established in January 2015 by Dutch technology company Deciso B.V. as an independent fork of pfSense and the historical m0n0wall project, OPNsense was created to deliver an entirely open, modern, and transparent network security solution. Licensed under the permissive 2-clause BSD license, OPNsense combines enterprise-grade packet inspection, high availability, and intrusion prevention with an intuitive, modular web interface exposing a comprehensive REST API for automated infrastructure management.",
+    "what_is_it": "Technically, OPNsense is a specialized network operating system utilizing FreeBSD's native `pf` (Packet Filter) subsystem for stateful traffic inspection, address translation (NAT), and traffic normalization. It stands out in the open-source firewall landscape by implementing a Model-View-Controller (MVC) architecture based on the Phalcon PHP framework, enabling complete programmatic control via RESTful APIs. OPNsense integrates Suricata for inline intrusion prevention, Unbound DNS for validating recursive resolution with ad-blocking lists, OpenZFS for filesystem resilience, WireGuard/OpenVPN/IPsec for encrypted connectivity, and a pkg-based plugin repository managing hundreds of enterprise services.",
+    "origin_and_history": "Deciso B.V. launched OPNsense in 2015 to overcome architectural stagnation in legacy open-source firewalls and to establish a strictly open-source codebase devoid of proprietary licensing encumbrances. The project pioneered the transition to an MVC web framework, integrated WireGuard directly as an in-tree kernel module, standardized on OpenZFS with automated pre-upgrade snapshots, and introduced post-quantum cryptographic key exchanges for IPsec. Operating on a predictable bi-annual major release cadence (January .1 releases and July .7 releases, such as OPNsense 26.7 'Pungent Puffin' in 2026), OPNsense has emerged as a premier firewall platform worldwide.",
+    "governance_and_support": "OPNsense is developed by Deciso B.V. in close collaboration with a global community of open-source contributors and security researchers. All source code, build toolchains, and plugin definitions are published transparently on GitHub (`github.com/opnsense`). Deciso manufactures official rackmount and desktop hardware appliances, provides commercial support subscriptions, and offers 'OPNsense Business Edition' for enterprise organizations requiring a stabilized semi-annual release cadence and central management tools (OPNcentral). The community coordinates bug reports and feature requests through an active international forum (`forum.opnsense.org`) and Reddit (`r/OPNsenseFirewall`).",
+    "packet_filtering_and_pf_engine": "Perimeter network defense in OPNsense is governed by FreeBSD's high-performance `pf` engine:\n\n- Stateful Packet Inspection: Inspects and tracks TCP, UDP, and ICMP connection states, ensuring that inbound reply packets match legitimate outbound requests.\n- Granular Rule Policies: Supports interface grouping, floating rules, schedule-based filtering, and dynamic IP/domain aliases with automatic threat intelligence feed synchronization.\n- Network Address Translation: Advanced outbound NAT, port forwarding, and 1:1 NAT mapping for multi-subnet architectures.\n- Scrubbing and Normalization: Defragments IP packets and strips illegal TCP flag combinations to prevent firewall evasion attacks.",
+    "mvc_architecture_and_rest_api": "A major technological innovation of OPNsense is its modern web architecture built upon Phalcon PHP and Volt templates. Departing from legacy monolithic procedural PHP scripts, OPNsense separates business logic into strict Model-View-Controller abstractions. This modular structure exposes full RESTful API endpoints across all system modules, enabling DevOps and SecOps teams to automate rule provisioning, backup generation, and user management through tools such as Ansible, Terraform, and custom Python scripts.",
+    "intrusion_detection_and_prevention": "OPNsense incorporates Suricata as a native service to deliver deep packet inspection and intrusion prevention (IDS/IPS). Operating in inline mode using FreeBSD netmap drivers, Suricata inspects full payload contents at multi-gigabit wire speeds without significant throughput degradation. Administrators can schedule automated rule updates from Emerging Threats, Abuse.ch, and community blacklists, categorizing alerts and automatically dropping malicious flows attempting exploit executions, malware downloads, or botnet command-and-control communication.",
+    "vpn_and_cryptographic_capabilities": "OPNsense provides robust multi-protocol virtual private networking for site-to-site tunnels and road-warrior remote access:\n\n- WireGuard: High-speed, lightweight modern VPN implemented directly in the FreeBSD kernel for low latency and minimal CPU overhead.\n- IPsec (strongSwan): Enterprise VPN framework supporting IKEv2, robust ciphers, and hybrid post-quantum key exchange algorithms (ML-DSA) to mitigate future quantum threats.\n- OpenVPN: SSL/TLS client and server connectivity with automated client export utilities, certificate management, and TOTP two-factor authentication.\n- Multi-WAN and Traffic Shaping: Dynamic gateway group routing with failover and load balancing, coupled with FQ-CoDel traffic shaping to eliminate Bufferbloat on congested links.",
+    "high_availability_and_redundancy": "For mission-critical enterprise environments, OPNsense delivers seamless high availability (HA) clustering:\n\n- CARP (Common Address Redundancy Protocol): Allows two or more physical firewall nodes to share virtual IP addresses, ensuring instantaneous hardware failover.\n- pfsync: Replicates firewall state tables across dedicated sync interfaces in real time, preserving active TCP connections and VPN sessions during node transitions.\n- XMLRPC Synchronization: Automatically propagates configuration changes, aliases, and firewall rules from the primary node to standby nodes.",
+    "threat_model_and_operational_limits": "OPNsense defines precise operational parameters for network administrators:\n\n- Infrastructure Gateway Role: OPNsense is a perimeter routing firewall; it inspects and filters network traffic traversing its boundaries but does not provide endpoint endpoint protection on connected client PCs.\n- Dedicated Appliance Focus: OPNsense is an appliance operating system designed to run on physical mini-PCs, enterprise rack servers, or hypervisors, not as an interactive desktop workstation.\n- No Automatic Anonymity: OPNsense does not route local LAN traffic through Tor by default; it functions as a transparent network gateway preserving standard routing headers.\n- Hardware Compatibility: High-throughput deployments (10G/40G+) benefit from Intel network controllers (igb, ix, ice) supported by FreeBSD netmap drivers.",
+    "privacy_and_telemetry": "OPNsense enforces an absolute zero-telemetry policy. The distribution contains no commercial tracking frameworks, usage analytics daemons, or background data collection agents. System logs, NetFlow statistics, and diagnostic reports remain strictly confined to the local storage, ensuring that confidential corporate traffic patterns and credentials are never exposed to external telemetry services.",
+    "advantages": [
+      "Robust FreeBSD foundation leveraging native pf stateful inspection and OpenZFS filesystem resilience",
+      "Modern Phalcon MVC architecture exposing complete REST APIs for infrastructure automation (Ansible, Terraform)",
+      "Built-in Suricata Intrusion Detection and Prevention System operating in inline mode via FreeBSD netmap",
+      "Enterprise High Availability clustering via CARP, pfsync state synchronization, and XMLRPC configuration replication",
+      "Comprehensive multi-protocol VPN capabilities including in-kernel WireGuard, OpenVPN, and post-quantum IPsec",
+      "Native Unbound DNSSEC-validating resolver with automated ad-blocking, malware filtering, and DNS-over-TLS",
+      "Strict 2-clause BSD open-source license with transparent public GitHub development and zero telemetry"
+    ],
+    "disadvantages": [
+      "FreeBSD hardware driver ecosystem can have narrower support for cutting-edge consumer Wi-Fi cards compared to Linux",
+      "Initial configuration requires professional networking and firewall administration knowledge",
+      "Inline Suricata IPS on high-bandwidth links requires substantial multi-core CPU and memory allocations",
+      "Does not route general internet traffic through the Tor network by default for online anonymity",
+      "Business Edition features (central management) require commercial subscriptions for large multi-site deployments"
+    ],
+    "who_is_it_for": [
+      "Enterprise network engineers, system administrators, and MSPs requiring an auditable, high-performance edge firewall",
+      "Organizations deploying high-availability active-passive firewall clusters with CARP and pfsync synchronization",
+      "DevOps and infrastructure teams managing firewall configurations programmatically via REST APIs and Ansible",
+      "Privacy-conscious network administrators seeking multi-gigabit WireGuard and post-quantum IPsec gateways"
+    ],
+    "who_is_it_not_for": [
+      "Casual desktop users seeking a general everyday workstation for web browsing and office productivity",
+      "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
+      "Users seeking a simple consumer router without any firewall configuration or network segmentation knowledge",
+      "Offensive penetration testers seeking automated exploitation and payload crafting suites"
+    ]
+  },
+  "components": [
+    {
+      "id": "opnsense-pf-core",
+      "name": "FreeBSD pf Packet Filtering Engine",
+      "role": "packet_filtering_engine",
+      "note": "Stateful packet inspection engine managing connection tables, NAT, and normalization rules."
+    },
+    {
+      "id": "opnsense-mvc-api",
+      "name": "Phalcon MVC Framework & REST API",
+      "role": "web_management_console",
+      "note": "Modular web interface and RESTful API backend enabling programmatic configuration automation."
+    },
+    {
+      "id": "opnsense-suricata",
+      "name": "Suricata Inline IDS/IPS Subsystem",
+      "role": "intrusion_prevention_engine",
+      "note": "Deep packet inspection engine analyzing network flows at wire speed via FreeBSD netmap."
+    },
+    {
+      "id": "opnsense-unbound",
+      "name": "Unbound DNSSEC & Blocklist Resolver",
+      "role": "dns_resolver",
+      "note": "Recursive validating DNS server supporting DNS-over-TLS and automated threat blocklists."
+    },
+    {
+      "id": "opnsense-vpn-suite",
+      "name": "Multi-Protocol VPN Framework",
+      "role": "vpn_gateway",
+      "note": "Integrated virtual private networking supporting kernel WireGuard, OpenVPN, and post-quantum IPsec."
+    },
+    {
+      "id": "opnsense-carp-ha",
+      "name": "CARP & pfsync High Availability",
+      "role": "high_availability_cluster",
+      "note": "Redundant failover clustering protocol synchronizing states and virtual IPs across nodes."
+    }
+  ],
+  "relations": [
+    {
+      "id": "pfsense",
+      "name": "pfSense",
+      "relation": "fork_origin",
+      "note": "Historical upstream ancestor; OPNsense was forked in 2015 from pfSense and m0n0wall to create an entirely open-source platform."
+    },
+    {
+      "id": "security-onion",
+      "name": "Security Onion",
+      "relation": "peer_network_security_platform",
+      "note": "Defensive threat monitoring and NSM platform frequently ingesting firewall syslog and NetFlow feeds from OPNsense."
+    }
+  ],
+  "variants": [
+    {
+      "name": "OPNsense Community Edition",
+      "description": "Standard free, fully featured open-source firewall distribution with bi-annual major releases and weekly updates."
+    },
+    {
+      "name": "OPNsense Business Edition",
+      "description": "Commercially supported enterprise release providing a stabilized semi-annual cycle and centralized management plugins."
+    }
+  ],
+  "links": {
+    "homepage": "https://opnsense.org/",
+    "documentation": "https://docs.opnsense.org/",
+    "forum": "https://forum.opnsense.org/",
+    "repository": "https://github.com/opnsense",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=opnsense"
+  },
+  "sources": [
+    {
+      "title": "OPNsense Official Project Website",
+      "url": "https://opnsense.org/",
+      "type": "official",
+      "date": "2026-10-08"
+    },
+    {
+      "title": "OPNsense Official Documentation Portal",
+      "url": "https://docs.opnsense.org/",
+      "type": "official_documentation",
+      "date": "2026-10-08"
+    },
+    {
+      "title": "OPNsense Release Information and Roadmap",
+      "url": "https://docs.opnsense.org/releases.html",
+      "type": "technical_specification",
+      "date": "2026-10-08"
+    },
+    {
+      "title": "OPNsense GitHub Organization",
+      "url": "https://github.com/opnsense",
+      "type": "repository",
+      "date": "2026-10-12"
+    },
+    {
+      "title": "DistroWatch Page for OPNsense",
+      "url": "https://distrowatch.com/table.php?distribution=opnsense",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}
