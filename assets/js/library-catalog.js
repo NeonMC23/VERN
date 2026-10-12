@@ -69,6 +69,9 @@ var LIBRARY_RESOURCES = [
   "blackarch",
   "security-onion",
   "remnux",
+  "ipfire",
+  "opnsense",
+  "pfsense",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",
