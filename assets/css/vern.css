@@ -548,48 +548,6 @@ a.card:hover .card__title,
 a.card:focus-visible .card__title { color: var(--accent); }
 .card__title { font-size: 1.0625rem; }
 .card__text { color: var(--text-muted); font-size: .9375rem; }
-
-/* Library catalogue cards: predictable geometry so the grid scans cleanly.
-   Summaries in the data range from ~120 to ~810 characters; left unbounded
-   they produce cards 3 to 20 lines tall. The clamp fixes the rhythm while
-   the untouched full text remains on the resource page. */
-.card__ident { margin-top: -.05rem; }
-#library-catalog .card__text {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  overflow: hidden;
-}
-.card__tags { margin-top: auto; padding-top: .55rem; }
-.card__text + .card__go { margin-top: auto; }
-.tag {
-  display: inline-block;
-  max-width: 14ch;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  vertical-align: bottom;
-  border-radius: var(--radius-pill);
-  background: var(--bg-sunken);
-  border: 1px solid var(--border);
-  padding: .1rem .5rem;
-  font-family: var(--font-mono);
-  font-size: .685rem;
-  color: var(--text-faint);
-}
-.tag--more { max-width: none; color: var(--text-muted); }
-.card__go {
-  font-family: var(--font-mono);
-  font-size: .715rem;
-  letter-spacing: .04em;
-  color: var(--text-faint);
-  padding-top: .5rem;
-  transition: color .15s ease;
-}
-.card__tags + .card__go { padding-top: .45rem; }
-a.card:hover .card__go,
-a.card:focus-visible .card__go { color: var(--accent); }
 .card__meta { margin-top: auto; padding-top: .35rem; }
 
 /* ---------- badges & pills ---------- */
@@ -993,30 +951,6 @@ a.card:focus-visible .card__go { color: var(--accent); }
 .prose { max-width: var(--maxw-prose); color: var(--text); }
 .prose p + p { margin-top: var(--sp-2); }
 .block .prose { color: var(--text-muted); }
-
-/* Editorial tone, keyed off conventional field names by the generic builder.
-   A 2px edge only — no new palette, no fills; pink stays the sole accent. */
-.block[data-tone] { border-left-width: 2px; }
-.block[data-tone="positive"] { border-left-color: var(--t-green); }
-.block[data-tone="negative"] { border-left-color: var(--t-amber); }
-.block[data-tone="verdict"]  { border-left-color: var(--accent-line); }
-
-/* The lead section reads as prose, not as one more card in the stack. */
-.block[data-tone="lead"] {
-  border: 0;
-  border-left: 2px solid var(--border-strong);
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-  padding: .1rem 0 .1rem var(--sp-4);
-}
-.block[data-tone="lead"] .prose { color: var(--text); font-size: 1.0125rem; }
-
-/* Long unbroken strings (URLs, package names, paths) must wrap rather than
-   force horizontal overflow — without hiding overflow on the container. */
-.block .prose p,
-.bullets li,
-.field__inline { overflow-wrap: anywhere; }
 
 .field + .field { margin-top: var(--sp-3); }
 .field__inline { color: var(--text-muted); font-size: .9375rem; }

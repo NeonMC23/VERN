@@ -1,0 +1,178 @@
+{
+  "id": "security-onion",
+  "name": "Security Onion",
+  "type": "operating_system",
+  "summary": "A specialized Linux distribution, platform, and appliance for threat hunting, enterprise security monitoring, and log management, integrating Suricata, Zeek, Elastic Agent, and the Security Onion Console (SOC).",
+  "tags": [
+    "linux",
+    "security-monitoring",
+    "nsm",
+    "threat-hunting",
+    "suricata",
+    "zeek",
+    "elasticsearch",
+    "soc",
+    "incident-response",
+    "appliance"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0, AGPL-3.0, and upstream open-source tool licenses",
+  "last_verified": "2026-10-12",
+  "content": {
+    "introduction": "Security Onion is an open-source Linux distribution and enterprise security monitoring platform designed for threat hunting, network security monitoring (NSM), intrusion detection, and centralized log management. Created in 2008 by Doug Burks, Security Onion integrates industry-standard defensive security tools into a unified operating environment. Supported commercially by Security Onion Solutions, LLC, the platform provides security operations centers (SOCs) and computer security incident response teams (CSIRTs) with comprehensive visibility across network traffic, host endpoints, and system logs.",
+    "what_is_it": "Technically, Security Onion is distributed as a specialized operating system appliance based on Oracle Linux 9 (with support for network-based installations on Rocky Linux 9, AlmaLinux 9, and RHEL 9). It unifies core defensive technologies into a cohesive architecture: Suricata for signature-based network intrusion detection (NIDS) and full packet capture (PCAP), Zeek for protocol metadata extraction and file analysis, Elastic Agent with Osquery for host-level telemetry, and an Elasticsearch cluster for distributed log indexing. The entire ecosystem is managed through a browser-based administrative interface named the Security Onion Console (SOC).",
+    "origin_and_history": "Doug Burks initiated the Security Onion project in 2008 to simplify the deployment of complex open-source network monitoring architectures. Originally built on Ubuntu 9.04, early iterations bundled legacy tools such as Sguil, Squert, and Snort. In 2014, Burks founded Security Onion Solutions, LLC to provide certified hardware appliances, professional training, and commercial enterprise support. Major architectural evolutions saw the project transition in Security Onion 2.x and 3.x toward containerized microservices orchestrated by SaltStack, the phase-out of Ubuntu in favor of Enterprise Linux (Oracle Linux 9), and the consolidation of all analytical workflows into the custom-built Security Onion Console (SOC).",
+    "governance_and_support": "Security Onion is maintained under a dual-tier model led by Security Onion Solutions, LLC alongside an active global open-source community. The core distribution is published freely under open-source licenses, with source code, Docker images, Salt state formulas, and documentation hosted publicly on GitHub (`github.com/Security-Onion-Solutions`). Security Onion Solutions offers commercial hardware appliances, enterprise support contracts, cloud deployments, and training courses. An enterprise tier ('Security Onion Pro') adds specialized features for regulated environments, including managed LUKS encryption, STIG compliance, and Kafka event streaming.",
+    "network_visibility_and_packet_capture": "Security Onion provides deep network visibility through a multi-engine inspection pipeline:\n\n- Signature Detection: Suricata inspects network traffic from SPAN ports or hardware TAPs in real time, alerting on known malicious signatures and CVE exploit attempts.\n- Network Metadata: Zeek (formerly Bro) generates rich, structured transaction logs for application protocols (DNS queries, HTTP headers, SSL/TLS certificates, SSH sessions) and extracts files passing over the wire.\n- Full Packet Capture (PCAP): Suricata writes raw packet streams to disk, allowing analysts to retrieve, reconstruct, and inspect complete TCP sessions directly from the Web console.",
+    "host_visibility_and_telemetry": "For endpoint visibility, Security Onion deploys the Elastic Agent to Windows, macOS, and Linux endpoints across the enterprise. Managed centrally through Elastic Fleet, the agent streams endpoint event logs, process executions, network connections, and file modifications into the Security Onion grid. Furthermore, integrated Osquery capabilities enable SOC analysts to run ad-hoc SQL-style queries against live endpoints during active incident investigations. Devices that cannot run agents (such as switches and firewalls) forward standard syslog and NetFlow telemetry directly into the ingestion pipeline.",
+    "security_onion_console_and_soc_workflow": "The primary user interface is the Security Onion Console (SOC), a dedicated web dashboard accessible over HTTPS. Key integrated modules include:\n\n- Alerts: Aggregates and prioritizes NIDS alerts, enabling quick escalation and rule suppression.\n- Hunt: A threat hunting interface providing visual metrics, aggregated queries, and deep pivots across millions of logs.\n- Dashboards: Visual overviews tracking bandwidth, protocol distribution, and geolocation data.\n- Cases: A collaborative incident management module where analysts document investigative findings, attach artifacts, and record remediation steps.\n- Detections: Rule management interface allowing teams to tune Suricata rules, Sigma behavior rules, and YARA signatures.\n- CyberChef: Integrated data decoding utility for deobfuscating suspicious strings, base64 payloads, and URLs without leaving the browser.",
+    "distributed_grid_and_deployment_models": "Security Onion supports scalable deployment architectures adapting to organizational size:\n\n- Standalone / Evaluation: An all-in-one deployment running management, search, and sensor services on a single physical machine or virtual appliance.\n- Distributed Grid: An enterprise cluster separating responsibilities across dedicated nodes, including Manager nodes, Search nodes (Elasticsearch storage), Sensor nodes (high-throughput traffic sniffing), Receiver nodes (pipeline buffering), and Fleet nodes (agent management in DMZs).\n- Intrusion Detection Honeypot (IDH): Deception nodes based on OpenCanary deploying simulated services (SMB, RDP, SSH) to detect internal network reconnaissance.\n- Security Onion Desktop: A dedicated analyst workstation profile equipping a graphical desktop with Wireshark and NetworkMiner.",
+    "system_administration_and_saltstack": "Cluster configuration and operational health are managed through SaltStack. Salt formulas enforce consistent system policies, firewall rules (managed via `so-allow`), and software configurations across every node in the grid. Updates are automated through the `soup` (Security Onion Update Package) utility, which verifies grid status and tests dependencies before applying container and operating system patches, ensuring minimal monitoring downtime.",
+    "threat_model_and_operational_limits": "Security Onion documents critical operational parameters regarding its defensive mission:\n\n- Resource Intensity: A production standalone deployment requires substantial hardware resources (minimum 16 to 32 GB RAM and multi-core CPUs); distributed sensor nodes require dedicated high-performance network interfaces to prevent packet loss at multi-gigabit speeds.\n- Defensive Appliance Focus: Security Onion is an enterprise detection and incident response platform; it is not an anonymizing operating system and does not route network traffic through Tor.\n- Airgap Readiness: The system is engineered to operate in fully airgapped, classified networks, providing complete offline documentation and local repository support.\n- Access Control: Web interfaces and grid communication ports are protected by strict role-based access control (RBAC), multi-factor authentication (MFA), and Kratos identity management.",
+    "privacy_and_telemetry": "Security Onion enforces a strict operational privacy policy. The operating system contains no commercial third-party advertising frameworks, tracking cookies, or unauthorized telemetry daemons. All indexed logs, PCAP captures, and analyst notes remain stored locally on customer hardware or dedicated private cloud infrastructure without data leakage to external providers.",
+    "advantages": [
+      "Unified defensive platform combining NIDS (Suricata), protocol metadata (Zeek), and full packet capture (PCAP)",
+      "Centralized host visibility leveraging Elastic Agent, Osquery live queries, and Elastic Fleet management",
+      "Custom-built Security Onion Console (SOC) with Alerts, Dashboards, Hunt, Cases, and Detections workflows",
+      "Scalable distributed architecture spanning standalone evaluation to high-throughput multi-node enterprise grids",
+      "Built-in deception capabilities with OpenCanary-based Intrusion Detection Honeypots (IDH)",
+      "Enterprise Linux foundation based on Oracle Linux 9 with automated SaltStack orchestration and airgap support",
+      "Transparent open-source codebase with comprehensive offline documentation and active community backing"
+    ],
+    "disadvantages": [
+      "Substantial hardware requirements (16 to 32+ GB RAM and high-speed SSD storage) for production deployments",
+      "Steep operational learning curve requiring professional networking and SOC triage expertise to interpret alerts",
+      "Network installations on non-Oracle Enterprise Linux distributions receive community-only support",
+      "Does not provide automated internet anonymization or Tor routing by default",
+      "Requires active maintenance and rule tuning to minimize false-positive alerts on enterprise networks"
+    ],
+    "who_is_it_for": [
+      "Security Operations Center (SOC) analysts and incident response teams monitoring enterprise networks",
+      "Network security engineers deploying scalable threat detection, packet capture, and log aggregation pipelines",
+      "Threat hunters seeking deep correlation between network anomalies and host endpoint telemetry",
+      "Cybersecurity educators and laboratory researchers simulating enterprise network defense scenarios"
+    ],
+    "who_is_it_not_for": [
+      "Casual desktop users seeking a general everyday operating system for office productivity or gaming",
+      "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
+      "Offensive penetration testers seeking automated exploit execution and attack frameworks (better suited to Kali Linux or BlackArch)",
+      "Resource-constrained legacy systems with less than 16 GB of available RAM"
+    ]
+  },
+  "components": [
+    {
+      "id": "soc-console",
+      "name": "Security Onion Console (SOC)",
+      "role": "web_management_console",
+      "note": "Browser-based administrative interface providing Alerts, Dashboards, Hunt, Cases, and Detections modules."
+    },
+    {
+      "id": "so-suricata",
+      "name": "Suricata NIDS & PCAP Engine",
+      "role": "network_intrusion_detection",
+      "note": "Signature-based network intrusion detection system performing real-time inspection and full packet capture."
+    },
+    {
+      "id": "so-zeek",
+      "name": "Zeek Network Metadata Engine",
+      "role": "network_metadata_generator",
+      "note": "Network analysis framework generating structured protocol transaction logs and automated file extractions."
+    },
+    {
+      "id": "so-elastic-agent",
+      "name": "Elastic Agent & Fleet Subsystem",
+      "role": "host_telemetry_agent",
+      "note": "Centralized endpoint monitoring agent executing live Osquery queries and streaming host event logs."
+    },
+    {
+      "id": "so-saltstack",
+      "name": "SaltStack Configuration Grid",
+      "role": "configuration_orchestrator",
+      "note": "Configuration management engine synchronizing states, firewall policies, and packages across grid nodes."
+    },
+    {
+      "id": "so-idh",
+      "name": "Intrusion Detection Honeypot (IDH)",
+      "role": "deception_framework",
+      "note": "OpenCanary-based deception subsystem deploying simulated network services to detect internal lateral movement."
+    }
+  ],
+  "relations": [
+    {
+      "id": "network-security-toolkit",
+      "name": "Network Security Toolkit",
+      "relation": "peer_network_security_platform",
+      "note": "Fedora-based network security and diagnostic platform, sharing packet capture and network monitoring capabilities."
+    },
+    {
+      "id": "kali-linux",
+      "name": "Kali Linux",
+      "relation": "complementary_security_platform",
+      "note": "Offensive security distribution frequently paired with Security Onion for attack simulation and detection validation."
+    },
+    {
+      "id": "rocky-linux",
+      "name": "Rocky Linux",
+      "relation": "compatible_base_distribution",
+      "note": "Enterprise Linux distribution supported for manual network installations of the Security Onion software stack."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Security Onion Standalone ISO",
+      "description": "Standard bootable appliance ISO based on Oracle Linux 9 supporting standalone or distributed grid installation."
+    },
+    {
+      "name": "Security Onion Desktop",
+      "description": "Dedicated analyst workstation configuration equipped with a graphical desktop, Chromium, Wireshark, and NetworkMiner."
+    }
+  ],
+  "links": {
+    "homepage": "https://securityonionsolutions.com/",
+    "documentation": "https://docs.securityonion.net/",
+    "blog": "https://blog.securityonion.net/",
+    "repository": "https://github.com/Security-Onion-Solutions",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=securityonion"
+  },
+  "sources": [
+    {
+      "title": "Security Onion Solutions Official Portal",
+      "url": "https://securityonionsolutions.com/",
+      "type": "official",
+      "date": "2026-08-24"
+    },
+    {
+      "title": "Security Onion Official Documentation Portal",
+      "url": "https://docs.securityonion.net/",
+      "type": "official_documentation",
+      "date": "2026-08-24"
+    },
+    {
+      "title": "Security Onion Architecture and Introduction Documentation",
+      "url": "https://docs.securityonion.net/en/2.4/about.html",
+      "type": "technical_specification",
+      "date": "2026-08-24"
+    },
+    {
+      "title": "Security Onion Base OS Architecture Announcement",
+      "url": "https://blog.securityonion.net/2023/07/security-onion-24-base-os.html",
+      "type": "project_announcement",
+      "date": "2023-07-25"
+    },
+    {
+      "title": "Security Onion Solutions GitHub Organization",
+      "url": "https://github.com/Security-Onion-Solutions",
+      "type": "repository",
+      "date": "2026-10-12"
+    },
+    {
+      "title": "DistroWatch Page for Security Onion",
+      "url": "https://distrowatch.com/table.php?distribution=securityonion",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}

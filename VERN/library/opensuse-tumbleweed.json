@@ -1,0 +1,458 @@
+{
+  "id": "opensuse-tumbleweed",
+  "name": "openSUSE Tumbleweed",
+  "type": "operating_system",
+  "summary": "A rolling openSUSE distribution assembled from the Factory codebase and published as dated snapshots: packages flow into Factory without a freeze, automated openQA testing gates the release, and the result is synced to the mirrors as the next snapshot — 20260917 at the time of writing, with 23 snapshots delivered in August 2026 across 31 days. There is no fixed release to upgrade to and no published support term; updates are applied with zypper dup, with Btrfs and snapper documented as the recovery path.",
+  "tags": [
+    "linux",
+    "open-source",
+    "distribution",
+    "rolling-release",
+    "snapshots",
+    "zypper-and-yast",
+    "openqa-gated",
+    "community-governed"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64",
+    "i586",
+    "ppc64le"
+  ],
+  "content": {
+    "introduction": "openSUSE Tumbleweed is the rolling-release member of the openSUSE family. Its own portal defines it as “a pure rolling release version of openSUSE containing the latest “stable” versions of all software instead of relying on rigid periodic release cycles. The project does this for users who want the newest stable software.” The consequence is a different unit of identity: an installation is not a version to migrate but a snapshot to follow. The repository consulted on 2026-09-19 carried the tag “openSUSE Tumbleweed 20260917” with the CPE cpe:/o:opensuse:opensuse:20260917, and the published images were named openSUSE-Tumbleweed-{DVD,NET,…}-x86_64-Snapshot20260917-Media.iso. The release-notes package for the same product reports “Version: 84.87.20260110.3014fbe”, a product version rather than a distribution release.\n\nThe download page frames the promise in three parts: “Continuously Updated — You install it once and enjoy it forever. No longer do you have to worry every six months about massive system upgrades…”, “Leading-Edge — You get frequent updates that not only address vulnerabilities or squash bugs, but reflect latest features and developments”, and “Stable — Updates are thoroughly tested against industry-grade quality standards”. The last of those is not a slogan in isolation: it names the mechanism, and the mechanism is openQA.",
+    "what_is_it": "Tumbleweed is a publication target rather than a separate code base. “Tumbleweed is based on Factory, openSUSE's main development codebase. Tumbleweed is upgraded once Factory's bleeding edge software has been integrated, stabilized, and tested. Tumbleweed contains the latest stable applications and is ready and reliable for daily use.”\n\nWhat is being consumed is thus the same packages every openSUSE contributor submits to: “There is a constant flow of packages going into Factory.” The difference is the gate. The repository is not frozen and not offered to humans directly — “the Factory repository is not guaranteed to be fully stable and is not made available to download by humans” — while the tested result is published as Tumbleweed.\n\nThe tooling around the system is openSUSE's own and is presented as such: the package stack is libzypp with zypper on the command line and YaST as its graphical interface, the file system default is Btrfs with snapper for snapshots, the build infrastructure is the Open Build Service, and the test infrastructure is openQA. The project describes OBS and openQA as tools it creates, not merely tools it uses: “openSUSE creates one of the world's best Linux distributions, as well as a variety of tools, such as OBS, OpenQA…”.",
+    "origin_and_history": "The model has a named origin and a named end date. “This idea has been discussed in mailing lists for a long time and was conceived into action by Greg Kroah-Hartman, originally as an 'add-on' set of rolling updates that could be layered on top of a regular openSUSE release. On November 4th 2014 the Tumbleweed rolling release and Factory rolling release merged, leaving the single openSUSE Tumbleweed rolling release we have today.”\n\nSo the rolling line that ships today is the merger of two experiments: an add-on of newer packages over a fixed release, and a continuously published development code base. Nothing in the consulted pages documents a numbered first Tumbleweed release, and none is invented here.\n\nThe relationship to the enterprise line is documented as a difference of construction rather than of brand: “Building and distribution of openSUSE Leap is very different from the way how we build openSUSE Tumbleweed, as the distribution is based on inherited binaries from SUSE Linux Enterprise.” Leap inherits binaries from SLE; Tumbleweed is built from Factory. That single sentence is the extent of what the consulted pages assert about SUSE Linux Enterprise, and no claim of shared binaries for Tumbleweed is made here.",
+    "governance": "Tumbleweed is governed as part of the openSUSE project, whose portal states the principle plainly: “The project is controlled by its community and relies on the contributions of individuals, working as testers, writers, translators, usability experts, artists and ambassadors or developers.”\n\nThe philosophy is written down in a document the project calls its guiding principles: “a community that provides free and easy access to Free and Open Source Software. We innovate, integrate, polish, document, distribute, maintain and support one of the world's best Linux distributions”, with goals listed as “create the world's best Linux distribution”, “foster the success of Linux” and “make users happy”.\n\nThe board's remit is deliberately narrow: “The board should provide guidance and support existing governance structures, but shouldn't direct or control development, since community mechanisms exist to accomplish the goals of the project.” Its tasks are to act as a central point of contact, help resolve conflicts, communicate community interests to SUSE, facilitate communication and decision-making and initiate project-wide discussions. Members are elected and the chair is appointed by SUSE: “The board members are elected by the community and the chair person is appointed by SUSE.” The page lists five elected members plus the chair and one appointed, non-voting position — Treasurer — marked “vacant”.\n\nThe electorate is a defined group: “openSUSE Members are acknowledged contributors who have brought a continued and substantial contribution to the project. They elect the openSUSE Board and can give their vote on other matters.” The chair listed in July 2026, Jeff Mahoney, is described as employed by SUSE since 2000 and as having “maintained the Tumbleweed kernel for many years” — one illustration of how SUSE employment and community roles overlap in this project, without implying that the board directs development.\n\nDay-to-day releases sit with a named team, not with the board: “The openSUSE release team is taking care of building and releasing of all openSUSE distributions.” It watches the releases, the openSUSE:Factory project and submissions to it, the bugs for the next release in Bugzilla, and feature requests; it coordinates on the factory@ mailing list, in #opensuse-factory, on Bugzilla and in a weekly meeting with minutes.\n\nThe team's published roster shows two people carrying the Tumbleweed role at once — “Dimstar Tumbleweed Release Manager, Team Lead SUSE Labs Early Adopters” and “anag Tumbleweed Release Manager” — with other members dedicated to Arm and to s390x, a separate Slowroll release manager, a QA engineer and a coordinator. The names are wiki pseudonyms, which is how the project publishes them.",
+    "release_model": "Publication is conditional on testing, not on a calendar: “The core system packages receive automated testing via openQA. When automated testing is completed and the repo is in a consistent state, the repo is synced to the download mirrors and published as openSUSE Tumbleweed. That usually happens several times a week.”\n\nThe Tumbleweed portal itself widens that cadence in both directions: “New snapshots are released as often as they are ready and automatic QA has passed. This can be as often as daily but sometimes also takes a few weeks when bigger changes are integrated.” Both formulations are in the project's documentation and are reproduced without arbitration.\n\nA recent measurement published by the project: “There were several software package updates for openSUSE Tumbleweed during the month of August, which delivered 23 snapshots across 31 days.” The monthly updates that describe them are package-level reports (KDE Plasma 6.7.4 in August; kernel 7.0.12, OpenSSL 3, libxml2 2.15.3 and webkitgtk 2.52.1 in June 2026) with CVEs named per update.\n\nThe snapshot is the version. Repository metadata names it (distro tag and CPE), the images are named after it, and the mirrors receive it as it is published. Because there is no numbered release, there is also no published end-of-life schedule: nothing in the consulted pages states a support term for a snapshot, and none is inferred.\n\nTwo more numbers appear in the project's own release documentation. The roadmap table gives Tumbleweed the release cycle “Rolling” and “Continuously updated; always the latest packages”, while the slower variant beside it is listed with a cycle of “30 days”. The Lifetime page states the consequence for support: “openSUSE Tumbleweed is a rolling release which has a lifetime of 'forever', assuming you are running the latest updated packages.”\n\nThe same page frames the cost of not following a rolling line: for discontinued openSUSE versions, “package repositories… are removed from download servers as well as the build target list of the Build Service”, so “it will be increasingly difficult to install new software on such distributions”. That sentence is written about discontinued releases rather than about Tumbleweed itself, which by the same document has no end date — but it is the only published statement about the fate of an unmaintained openSUSE installation.",
+    "release_pipeline": "Factory is “the rolling development codebase for openSUSE Tumbleweed”, maintained by that release team, and the target project “for all contributions to openSUSE's main codebase”. “Factory is mainly used as an internal term for openSUSE's distribution developers”, the portal adds, and the recommendation for users is explicit: “Power users, developers, and openSUSE contributors are recommended to use the Tumbleweed rolling release.”\n\nThe QA gate is a public instance with public data. Reading the openQA API for distri=opensuse, version=Tumbleweed on 2026-09-19 returned 400 recent jobs whose builds were 20260917 (123 jobs), 20260918 (184) and 20260919 (6), spread over aarch64 59, arm 5, ppc64le 131, i586 33, x86_64 119 and s390x 53. Those counts describe a window of jobs, not a coverage guarantee; they do show that the same snapshot is exercised on several architectures before and after publication.\n\nThe publishing chain is visible in the metadata itself: the repository's repomd.xml names its origin as obsproduct://build.opensuse.org/openSUSE:Factory/openSUSE/20260917 — the snapshot is a product built from a project in the Build Service, not a hand-assembled archive.\n\nThe project page for the code base is itself public, and carries the project's own summary of the line: “openSUSE Tumbleweed: The Bleeding Edge, Perfected. … Always Current: Get the newest kernel, IDEs, desktops, and applications automatically”, next to operational counters (open requests, release targets, build errors) and the staging dashboard link. Those counters are read at the moment of consultation and are not a stable property of the distribution, so only the page's existence and its role as the publication point are retained here.",
+    "package_manager": "One engine, two interfaces: “Libzypp is openSUSE implementation of such a package management system and provides YaST Software Management as graphical user interface and Zypper as a command line interface.” A package is described as an archive of files with metadata — summary, description, file list, version and release, build time and builder, architecture, checksums of the contained files.\n\nZypper's documented feature set goes beyond install/remove: packages selected “by name or by capability they provide”, specific versions, plain RPM files with dependencies satisfied from repositories, per-package repository selection by prefixing the name with “repo_alias:”, updating everything where possible, installing patterns, products and patches, and “comprehensive installation summary”. Repositories are shared with YaST because both read libzypp's configuration.\n\nVendor provenance is a first-class property, not a cosmetic one: adding a community repository is documented as a prioritised operation (“zypper ar -cfp 90 …packman/suse/openSUSE_Tumbleweed/Essentials packman-essentials”) whose second step is “zypper dup --from packman-essentials --allow-vendor-change”. The priority number and the explicit vendor-change flag are the documented way to mix sources, and the same page warns that mixing repositories is exactly where the graphical updaters stop working (see “updates_and_rollbacks”).",
+    "repositories": "The published layout separates free, non-free, debug and sources: /tumbleweed/repo/ contains oss, non-oss, debug, src-oss and src-non-oss. The split is structural — separate repositories, not an installer checkbox — and is visible directly on the download server. Signing is published in the metadata: repomd.xml lists the repository keys as file entries with full fingerprints, for instance “gpg-pubkey-09d9ea69-68595a8c.asc?fpr=1C59D66FCD52563A16933DBCFEC28EAF09D9EA69”, alongside SHA-512 checksums for the metadata documents. The repository also states its revision as a Unix timestamp, so the age of the metadata is checkable without installing anything. Images are published the same way: each ISO has a matching .iso.sha256 file, and the download page offers for every image a “Download”, a “Metalink”, a “Pick Mirror”, a “Checksum” and a “Signature” link. The wiki's installation page labels the same entries “GPG signed SHA-256”. Mirrors are part of the release mechanism, not an afterthought: a snapshot is published by being “synced to the download mirrors”, and the infrastructure exposes a per-repository mirror report (download.opensuse.org/report/mirrors/tumbleweed) as well as a project mirror list. No page consulted publishes a count of mirrors, and none is quoted here.\n\nThird-party software is documented as a deliberate, caveated act rather than a default. The community Packman repository is the recommended route for codecs, added with an explicit priority; for other external repositories the portal's warning is blunt — the graphical updaters “are not capable of solving package conflicts which may arise by use of external repositories”, and for Slowroll: “Third party repositories which are not tested with Tumbleweed might break your installation.”",
+    "signing_and_trust": "Signing is published in the metadata: repomd.xml lists the repository keys as file entries with full fingerprints, for instance “gpg-pubkey-09d9ea69-68595a8c.asc?fpr=1C59D66FCD52563A16933DBCFEC28EAF09D9EA69”, alongside SHA-512 checksums for the metadata documents. The repository also states its revision as a Unix timestamp, so the age of the metadata is checkable without installing anything. Images are published the same way: each ISO has a matching .iso.sha256 file, and the download page offers for every image a “Download”, a “Metalink”, a “Pick Mirror”, a “Checksum” and a “Signature” link. The wiki's installation page labels the same entries “GPG signed SHA-256”.",
+    "upgrade_paths": "Moving from a fixed release is documented as a supported procedure with a floor version: “There are 2 supported upgrade mechanisms — Offline Upgrade… Online Upgrade…”, “Offline upgrade is slightly safer as there is no chance of running applications interfering with the Upgrade process”, and “Online upgrade to Tumbleweed >= 20200826 is only supported from Leap >= 15.2”. The online route is “install the current online updates of the old distribution”, “changing repositories to point to Tumbleweed”, then “Running zypper dup (which is shorthand for zypper dist-upgrade)”, with the caveat that extra non-standard repositories can make the offline route fail on dependencies.",
+    "updates_and_maintenance": "The supported command is a distribution upgrade, not an update: “To keep Tumbleweed upgraded to the latest snapshot using zypper, run the following command as root (ideally inside a screen or tmux session): zypper dup”. The portal heading above it states the rule as a principle: “Rolling release means no updates, only urgent patches and upgrades.” The same portal removes the usual convenience layer from that path: “When upgrading Tumbleweed, it is advised to not use graphical tools like Plasma Discover or Gnome Software. These tools are not capable of solving package conflicts which may arise by use of external repositories. The only fully supported graphical tool is Myrlyn.” This is the project's own assessment of which update front-ends are supported for its rolling line. Automation is a documented recipe rather than a default behaviour. The wiki describes two administrator-written services — dup.service running “zypper dup --no-confirm --download-only” and dupa.service running “zypper dup --no-confirm” — presented in two steps (cache, then install), prefaced with “The suggested procedure requires some considerations” and pointing to the upgrade SDB. Separately, the security portal notes that “you can even turn on fully automatic update installation”; no page says any of this is enabled out of the box. Rollback is advertised as part of the update loop: “With a single command you can update thousands of packages, rollback to last week's snapshot, fast-forward again, and even preview upcoming releases”, and “Should anything unwanted occur you can always rollback to a previous state and find your files and programs just as they were before a bumpy update.” The named technologies behind it are Btrfs and “the snapper command-line utility”, which the download page cites as openSUSE-renowned features alongside “the battle-proven YaST “control panel””. Two different rollbacks should not be conflated. Restoring a snapshot of the installed file system (snapper/Btrfs) is a system operation with a documented tool; installing an older snapshot of the repository is a packaging operation whose guarantees the consulted pages do not spell out. No page promises that downgrading packages preserves user data, and none is claimed here.\n\nThe Lifetime page, which the roadmap points to for lifecycle detail, describes the flow of fixes: Tumbleweed “receives security updates, bug fixes and new features (most often as new software versions) as soon as they are integrated and tested by the openSUSE community”, and adds that “Critical security updates for packages may also be provided in situations where new software versions may not yet address major security issues.” This is the project's clearest written statement about security maintenance on the rolling line; it defines no delay, no deadline and no supported-version matrix.",
+    "hardware": "The installation page lists, for Tumbleweed, x86_64, “LegacyX86 (i586)”, “AArch64 (arm64)”, “PowerPC (ppc64 and ppc64le)” and per-model Raspberry Pi pages, plus x86_64 live and rescue images. It does not say which of those belong to the main repository and which to Ports, so the distinction below is measured rather than quoted.\n\nMeasuring the download server on 2026-09-19: “-Current.iso” entries exist for x86_64 under /tumbleweed/iso/; under /ports/aarch64/tumbleweed/iso/ the DVD and NET images exist (snapshot 20260915, one of the 63 files listed there); /ports/i586/tumbleweed/iso/ exists; /ports/{ppc64le,riscv64,s390x,loongarch64}/tumbleweed/iso/ return 404. /distribution/tumbleweed/ does not exist at all — Tumbleweed has no “distribution” tree of its own, unlike Leap.\n\nThe 32-bit line carries a documented hardware floor: “A number of components hard-require the presence of SSE2, especially e.g. Mesa and librsvg. Programs may just terminate with SIGILL.” This is the only CPU-level requirement found in the consulted pages, and it is stated for i586. No baseline for the 64-bit line (no x86-64-v2 or v3 policy) is published anywhere in these sources.\n\nThe download page presents “Intel or AMD 64-bit desktops, laptops, and servers (x86_64)” first and separately the 32-bit line with sizes (3.4 GiB offline image, 320.0 MiB network image). Note the naming mismatch: the page says i686, the tree and the wiki say i586, and a request to an i586 “-Current.iso” path was answered with a redirect to a dated snapshot. Architecture status for 32-bit is therefore reported as documented-but-inconsistent, not resolved. File-system choice is documented as a hardware decision. “For systems with RAM less than 4 GiB install OS on XFS or ext4 file systems. Systems with insufficient amount of RAM work too slow with BTRFS.” And: “BTRFS has enormously high write amplification. You can destroy weak media without wear leveling using BTRFS, such as SD cards and USB thumb drives.” Those are the only memory figures published in the consulted pages, and they justify a file-system recommendation rather than stating a minimum requirement. The i586 line also carries an explicit support note: “Given the declining usage of i586 devices, there have been discussions over whether or not to drop support for Tumbleweed i586. While there is no concrete plan to drop i586 support now, do note this may change in the future.” It is reported here as an announced possibility, not as a decision. The same note states the floor for that line in six words: “32-bit Tumbleweed requires [i686 + SSE2]”.",
+    "installation": "The published media set for x86_64 covers three purposes: full installation (DVD), network installation (NET), three desktop-specific live images (KDE, GNOME, XFCE) and a Rescue CD. Each exists as a “-Current.iso” pointer and as a dated “-Snapshot20260917-Media.iso”. An image for MicroOS appears in the same directory because the immutable lines share the publishing infrastructure. Two constraints come with the choice of image: “The installer on the Live CDs requires an active network connection for downloading packages for installation. Use the full DVD if you do not want to depend on that.” and “Please be aware that the Rescue CD cannot be used to upgrade an existing install!” Driver-specific boot advice is published too: “For systems with Nvidia GPUs, the installer may hang unless booted with the nomodeset option.” The release notes add a firmware warning aimed at machine builders: “you are urgently advised to check for any firmware updates the hardware vendor recommends”, because “Some UEFI firmware has bugs that cause it to break if too much data gets written to the UEFI storage area”, and note that openSUSE “minimizes the risk by not writing more than the bare minimum required to boot the OS”, with kernel features that use that area for boot and crash information (“pstore”) “disabled by default”.",
+    "image_choices": [
+      "DVD image",
+      "Network image",
+      "KDE Live image",
+      "GNOME Live image",
+      "Xfce Live image",
+      "Rescue CD"
+    ],
+    "security": "Security is handled by a named team belonging to the enterprise partner: “The SUSE Security Team oversees the security of the openSUSE distribution and coordinates security updates.” The portal's opening claim is procedural — “openSUSE is a secure distribution. Both during development and after shipment security processes are honored and applied.”\n\nThe portal's update section, however, describes stable releases: “Security updates for openSUSE Leap stable releases are provided by the SUSE Security Team, with the help of community maintainers and developers”, and “For packages in Leap that are inherited from SUSE Linux Enterprise, the updates built from the same sources will be released for openSUSE Leap.” For the rolling line the explicit statement lives on the Lifetime page instead: fixes arrive “as soon as they are integrated and tested by the openSUSE community”, and “Critical security updates for packages may also be provided in situations where new software versions may not yet address major security issues.” What is not published, on any page consulted, is a fix window, a supported-version matrix or a per-release advisory series for Tumbleweed — so the accurate description is that fixes ride into the next snapshot, with critical back-ports possible, and no promised delay either way.\n\nAnnouncement channels are published and split by purpose: “Security announcements are sent to the security-announce@lists.opensuse.org mailinglist… This security announcement lists only important features and critical updates to keep traffic low. To get all openSUSE updates, subscribe to the updates@lists.opensuse.org mailinglist.” A “well defined Incident Handling Process is used to track, coordinate and release updates.”\n\nWhat the project does publish for Tumbleweed users are recommendations. The security notices page (last revised 2025-02-25) carries “Privileged File Operations in Dolphin (KDE) and Nautilus (GNOME) File Managers”, noting that Dolphin's admin mode “is based on the kio-admin package”, that Nautilus has an analogous mechanism, and that “Both approaches to editing files as root in graphical applications can have security implications in some scenarios.”\n\nMechanisms are documented as mitigation rather than as guarantees: “openSUSE's Security Features help to prevent bugs from being exploitable.” AppArmor is treated as a normal part of the system, down to command-level documentation in the release notes (a note that “systemctl stop apparmor” does not work and an explanation of the reload/restart confusion). Firewalld is documented as the firewall in the project's own reference material, and the download page claims a default posture: “with firewall and strong security policies turned on by default”.\n\nKernel hardening is claimed in the same sentence: “Built from latest kernel releases, compiled with the latest Spectre / Meltdown mitigation patches”. A public CVE index exists but is SUSE's (“SUSE security problems by CVE index” on suse.com), listed as a link from the openSUSE portal without any statement that it covers Tumbleweed packages; the coverage question is therefore left open rather than answered by assumption.",
+    "privacy": "The openSUSE pages consulted publish no privacy policy for Tumbleweed itself: the download and product pages describe features, and the project's web properties expose a survey link and communication channels, but no document found states what data an installed Tumbleweed system sends, to whom, or how to disable it. What can be documented is the absence of an opt-in telemetry programme in the consulted material: no page consulted names a phone-home service, a reporting tool or a statistics collector for Tumbleweed. That is an absence of documentation, not a proof of absence; no privacy guarantee is stated here, in either direction. Two related facts are documented and matter to the topic. First, the system's security posture is stated as a default: “with firewall and strong security policies turned on by default”, with AppArmor's behaviour described in the release notes. Second, the release notes state that kernel features writing boot and crash information to the UEFI storage area “have been disabled by default” in openSUSE — a configuration choice made to reduce firmware damage, which also limits what is persisted in that area.",
+    "desktop": "Tumbleweed ships desktops rather than editions. The image set carries KDE, GNOME and XFCE live images, and the current monthly reports for August 2026 that “KDE Plasma 6.7.4 landed with KWin GPU management fixes and a workaround for libepoxy”, i.e. desktop updates arrive as packages in snapshots, not as a new version of the distribution.\n\nConfiguration is expected to happen through YaST, described as the graphical face of the same engine that zypper uses (“YaST Software Management as graphical user interface”), and mentioned by the download page as “the battle-proven YaST “control panel””. The security portal lists it among the tools to install updates: “command line update tools (zypper) or graphical package management tools (YaST) are also available for installing updates”, and mentions that desktop applets warn about new updates.\n\nThe default applets are explicitly excluded from the supported upgrade paths (see “updates_and_rollbacks”), which is the sharpest documented statement about the desktop's integration with the update machinery: on a rolling system the software centre is treated as insufficient for conflict resolution.\n\nMultimedia is a licensing matter handled by a community repository rather than a checkbox: “Due to licensing issues, openSUSE cannot include certain multimedia codecs such as H.264… Fortunately, the Packman repository provides these codecs…”, with a documented command pair for the Essentials repository and a graphical route (“start the YaST repository manager, click “Add”, select “Community repositories”, and check “Packman””).\n\nHardware and third-party kernel modules come with a written warning that shapes who should install this: “While every effort is made to build them, at this point there is no guarantee to have all additional modules available in openSUSE Tumbleweed like for example, VMware or VirtualBox… there is no guarantee they will work tomorrow, even if they do today. If you don't know how to compile your own additional kernel modules and you don't wish to learn or keep a very close eye on what is being updated, please don't use Tumbleweed.”",
+    "opensuse_family": "Within openSUSE, Tumbleweed is one publishing mode of one code base. The family table published by the project's own portals lists: rolling (Tumbleweed), “Slowroll release” (Slowroll, beta), immutable server releases (MicroOS, Leap Micro), immutable desktop releases (Aeon beta, Kalpa alpha), “Latest regular release” (Leap 16.0, stable) and “Old regular release” (Leap 15.6, old stable).\n\nSlowroll is described as a modification of Tumbleweed rather than a sibling system: “openSUSE Slowroll uses a modified version of openSUSE Tumbleweed to give a little more stability to users who don't want the bleeding edge…”, still marked beta, migrated to with “sudo zypper in opensuse-migration-tool” after a “--dry-run”, with “All non default repositories will be disabled in the process”, and upgraded “Like Tumbleweed, use zypper dup”. Its own portal leaves one question open about its images: “Why is the Slowroll Build 19.13 ISO just a Tumbleweed Install? — We are unsure at this time.”\n\nThe immutable lines are not this system: Tumbleweed's documented update mechanism is zypper dup with snapper rollback, and no consulted page describes Tumbleweed as a transactional or image-based product, even though a MicroOS image sits in the same directory. The distinction is kept in this record rather than blurred by the shared publishing infrastructure.\n\nLeap is the contrast case the project itself recommends: “Conservative users who just need a working system (“if it ain't broke, don't fix it”) are advised to stay with the Leap stable release.” Migration in the other direction is documented on its own page, and is the only supported path between the two models.\n\nThe audience is likewise stated by the project rather than inferred: “Any user who wishes to have newer packages than are available in the openSUSE Leap repositories… Also, Tumbleweed should appeal most to Power Users, Software Developers (who require the latest software stacks and IDEs), and openSUSE Contributors (who need a reliable platform that is as close to openSUSE Factory as possible while remaining usable).”",
+    "advantages": [
+      "Snapshots gated by openQA",
+      "No release to migrate to",
+      "Signed images and repos",
+      "One update command",
+      "Rollback via snapper",
+      "Repo priorities exposed",
+      "Leap migration supported",
+      "Several architectures"
+    ],
+    "disadvantages": [
+      "No fix window promised",
+      "Support term is 'forever'",
+      "Graphical updaters out",
+      "Automation is manual",
+      "External modules uncertain",
+      "Btrfs costs RAM",
+      "Only newest snapshot listed",
+      "Wiki pages date from 2020",
+      "No system privacy note"
+    ],
+    "who_is_it_for": [
+      "Users who want current applications without waiting for a release, accepting that the unit of the system is a dated snapshot published when openQA passes rather than a versioned product.",
+      "Power users, developers and openSUSE contributors — the project's own list — who need a platform “as close to openSUSE Factory as possible while remaining usable” and are ready to run zypper dup themselves.",
+      "Administrators who plan recovery around Btrfs and snapper, and who will read a monthly report of package and CVE changes rather than a support matrix.",
+      "Machines on x86_64 with current hardware, and aarch64 through the published Ports images, where a fresh kernel and recent drivers matter more than a fixed support window."
+    ],
+    "who_is_it_not_for": [
+      "Anyone relying on third-party kernel modules they cannot rebuild: the portal names VMware, VirtualBox and proprietary graphics drivers and states there is “no guarantee they will work tomorrow, even if they do today”.",
+      "Deployments that need a documented support term, patch window or end-of-life date per version; none is published for a rolling snapshot.",
+      "Sites expecting an unattended policy out of the box: graphical updaters are declared unable to solve conflicts, and automatic dist-upgrade is a service the administrator writes.",
+      "Conservative users, whom the project itself directs to Leap, and low-RAM or flash-media installs where the documented Btrfs costs (4 GiB guidance, write amplification) apply."
+    ],
+    "verdict": "Tumbleweed is documented as a testing-gated publication of openSUSE's development code base. Its identity is the snapshot: a dated repository whose arrival is conditioned on openQA results, whose metadata names its build origin and signing keys, and whose updates are applied with a single documented command.\n\nIts strengths and its costs come from the same property. Because nothing is frozen, currency does not have to wait, regressions are caught by automated runs of the whole repository, and recovery is designed around snapshots rather than around release notes. Because nothing is frozen, there is also no published expiry, no per-version advisory process, no guarantee for external kernel modules, and no supported graphical updater.\n\nThe project's own texts draw the line where the documentation stops promising: it addresses power users, developers and contributors, recommends Leap for conservative needs, and tells anyone unwilling to follow what changed not to use Tumbleweed. Choosing it is a decision about who resolves conflicts — an automated QA gate plus the administrator, rather than a support term."
+  },
+  "components": [
+    {
+      "id": "zypper",
+      "name": "zypper",
+      "role": "package_manager",
+      "note": "The documented command-line interface of libzypp: repository access, dependency solving, installation by name or by provided capability, specific versions, plain RPM files, per-package repository selection with “repo_alias:”, patterns/products/patches, and a comprehensive installation summary. On Tumbleweed the supported maintenance command is “zypper dup”."
+    },
+    {
+      "id": "libzypp",
+      "name": "libzypp",
+      "role": "package_manager",
+      "note": "“openSUSE implementation of such a package management system”, shared by zypper and by YaST Software Management; it is the layer that carries repository priorities and the vendor-change notion behind “--allow-vendor-change”."
+    },
+    {
+      "id": "yast",
+      "name": "YaST",
+      "role": "configuration_tool",
+      "note": "Graphical administration suite and the other face of libzypp; the security portal lists it among the tools able to install updates, and the Tumbleweed page calls it “the battle-proven YaST “control panel””. Its repository manager is the documented graphical route to add a community repository."
+    },
+    {
+      "id": "snapper",
+      "name": "snapper",
+      "role": "system_tool",
+      "note": "The command-line snapshot utility named by the project next to Btrfs as the basis of “rollback to last week's snapshot, fast-forward again”. The consulted pages document its existence and role, not a retention policy."
+    },
+    {
+      "id": "btrfs",
+      "name": "Btrfs",
+      "role": "filesystem",
+      "note": "Cited as the file system the rollback story assumes, with explicit published caveats: “Systems with insufficient amount of RAM work too slow with BTRFS” (XFS or ext4 recommended under 4 GiB) and “BTRFS has enormously high write amplification. You can destroy weak media without wear leveling… such as SD cards and USB thumb drives.”"
+    },
+    {
+      "id": "openqa",
+      "name": "openQA",
+      "role": "testing_framework",
+      "note": "The gate between Factory and the published snapshot: “The core system packages receive automated testing via openQA… When automated testing is completed and the repo is in a consistent state, the repo is synced to the download mirrors”. The instance is public and its API lists jobs per architecture and per build."
+    },
+    {
+      "id": "obs",
+      "name": "Open Build Service",
+      "role": "build_system",
+      "note": "The build infrastructure the project describes as its own (“a variety of tools, such as OBS, OpenQA”), and the origin recorded in the repository metadata: <repo>obsproduct://build.opensuse.org/openSUSE:Factory/openSUSE/20260917</repo>."
+    },
+    {
+      "id": "apparmor",
+      "name": "AppArmor",
+      "role": "security_module",
+      "note": "Documented as part of the security features that “help to prevent bugs from being exploitable”, with command-level behaviour described in the Tumbleweed release notes (the “systemctl stop apparmor does not work” note and the reload/restart confusion)."
+    },
+    {
+      "id": "firewalld",
+      "name": "firewalld",
+      "role": "security_module",
+      "note": "The firewall named in the project's reference material; the download page asserts a default posture — “with firewall and strong security policies turned on by default” — without naming the tool on that page."
+    },
+    {
+      "id": "plasma-desktop",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "Shipped as one of the published live images and as the desktop whose updates are reported snapshot by snapshot (August 2026: “KDE Plasma 6.7.4 landed with KWin GPU management fixes”). GNOME and Xfce live images are published in the same directory."
+    },
+    {
+      "id": "rpm",
+      "name": "RPM",
+      "role": "package_format",
+      "note": "The package format of the libzypp stack: metadata fields (version and release, build information, architecture, file checksums) and installation of “plain RPM files” with dependencies resolved from repositories are documented for this stack."
+    }
+  ],
+  "relations": [
+    {
+      "id": "openSUSE:Factory",
+      "name": "openSUSE Factory",
+      "relation": "upstream_of",
+      "note": "“The Factory project is the rolling development codebase for openSUSE Tumbleweed.” Packages flow into Factory with no freeze, the repository is not offered to users directly, and the tested result is published as Tumbleweed — which is also how the snapshot identifies itself in the repository metadata."
+    },
+    {
+      "id": "opensuse-leap",
+      "name": "openSUSE Leap",
+      "relation": "alternative",
+      "note": "The fixed-release member of the same project, recommended in openSUSE's own words to “conservative users who just need a working system”. Its construction differs by documentation: “openSUSE Leap is very different from the way how we build openSUSE Tumbleweed, as the distribution is based on inherited binaries from SUSE Linux Enterprise.” Migration either way is documented (offline DVD or online repository switch, Leap >= 15.2 for snapshots from 20200826)."
+    },
+    {
+      "id": "openSUSE:Slowroll",
+      "name": "openSUSE Slowroll",
+      "relation": "related",
+      "note": "“openSUSE Slowroll uses a modified version of openSUSE Tumbleweed to give a little more stability”, still labelled beta, with its own release manager in the release team roster, migration through opensuse-migration-tool, non-default repositories disabled during migration, and the same update command (zypper dup)."
+    },
+    {
+      "id": "openSUSE:MicroOS",
+      "name": "openSUSE MicroOS",
+      "relation": "related",
+      "note": "The immutable server member of the same family table, sharing the download infrastructure (a MicroOS DVD image sits in the Tumbleweed ISO directory) but not the update model: Tumbleweed's documented path is zypper dup with snapper, and no consulted page describes Tumbleweed as image-based or transactional."
+    },
+    {
+      "id": "packman",
+      "name": "Packman",
+      "relation": "related",
+      "note": "The community repository openSUSE points to for what licensing prevents it from shipping: “openSUSE cannot include certain multimedia codecs such as H.264… the Packman repository provides these codecs”, added with a documented priority (-cfp 90) and a vendor-change dist-upgrade, or through YaST's community-repository selector."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "alternative",
+      "note": "Another desktop distribution with the opposite update structure: one base per long-term-support series, five years of published support per major release, and in-place upgrades between point releases. Recorded as a difference of model (cadence, support term, updater tooling), not as a ranking."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "A time-boxed distribution with its own archive, governance and desktop defaults, listed here because the arrangement of release and support is a different documented answer to the same questions Tumbleweed answers with snapshots."
+    },
+    {
+      "id": "openSUSE:BCI",
+      "name": "openSUSE BCI",
+      "relation": "downstream_derivative",
+      "note": "« openSUSE BCI is a growing set of base, development and application containers built out of the openSUSE Tumbleweed rolling release. As such, it has the same lifecycle characteristics as openSUSE Tumbleweed » — phrase lue sur la page Lifetime ; aucune page dédiée au projet BCI n'a pu être résolue sur le wiki, la source reste donc la page Lifetime."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Snapshot 20260917 (x86_64)",
+      "description": "The repository and media state at the time of verification: distro tag “openSUSE Tumbleweed 20260917”, images named -Snapshot20260917-Media.iso (DVD, NET, KDE-Live, GNOME-Live, XFCE-Live, Rescue-CD) each with a .sha256 file, plus the equivalent -Current.iso pointers."
+    },
+    {
+      "name": "Factory (the code base behind every snapshot)",
+      "description": "“The rolling development codebase”, without a freeze and explicitly “not made available to download by humans”. A snapshot is what Factory becomes after automated testing passes and the repository is in a consistent state."
+    },
+    {
+      "name": "openQA job window for the same builds",
+      "description": "Recent jobs measured on 2026-09-19 covered builds 20260917, 20260918 and 20260919 across x86_64, aarch64, arm, ppc64le, i586 and s390x; the counts describe a 400-job window and are reported as an observation of testing activity, not as a coverage guarantee."
+    },
+    {
+      "name": "aarch64 images (Ports)",
+      "description": "DVD and NET images published under /ports/aarch64/tumbleweed/iso/ with their own snapshot numbering (20260915 at the time of writing), alongside cloud and virtualisation appliances (Minimal-VM qcow2 for kvm-and-xen, Hyper-V vhdx) each with sha256, meta4 and mirror-list links."
+    },
+    {
+      "name": "i586 line",
+      "description": "A 32-bit tree exists at /ports/i586/tumbleweed/ and the download page still advertises a 32-bit offline and network image; the wiki documents an SSE2 floor for it (“Programs may just terminate with SIGILL”), and the naming differs between pages (i686 vs i586). Reported as documented but inconsistent."
+    },
+    {
+      "name": "Slowroll",
+      "description": "The conservative variant built on modified Tumbleweed: same update command, non-default repositories disabled on migration, third-party repositories discouraged, and known image quirks acknowledged on its portal (NET images “still WIP”)."
+    },
+    {
+      "name": "MicroOS and Leap Micro (adjacent, immutable)",
+      "description": "Listed by the project in the same family table as “immutable server releases”. They share the publishing infrastructure with Tumbleweed but not its packaging workflow, and are recorded here only to keep the distinction visible."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.opensuse.org/",
+    "download": "https://get.opensuse.org/tumbleweed/",
+    "wiki_portal": "https://en.opensuse.org/Portal:Tumbleweed",
+    "release_notes": "https://doc.opensuse.org/release-notes/x86_64/openSUSE/Tumbleweed/",
+    "news": "https://news.opensuse.org/",
+    "image_repository": "https://download.opensuse.org/tumbleweed/iso/",
+    "openqa": "https://openqa.opensuse.org/group_overview/1",
+    "build_service": "https://build.opensuse.org/project/show/openSUSE:Factory",
+    "factory_portal": "https://en.opensuse.org/Portal:Factory",
+    "release_team": "https://en.opensuse.org/openSUSE:Release_team",
+    "board": "https://en.opensuse.org/openSUSE:Board",
+    "security_portal": "https://en.opensuse.org/Portal:Security",
+    "installation": "https://en.opensuse.org/openSUSE:Tumbleweed_installation"
+  },
+  "sources": [
+    {
+      "title": "openSUSE Tumbleweed download page — positioning, promised capabilities, architecture wording",
+      "url": "https://get.opensuse.org/tumbleweed/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE project",
+      "note": "“Continuously Updated”, “Leading-Edge”, “Stable… a build service other Linux distributions envy us for”, “Simple to Use… rollback to last week's snapshot”, “Safe”, “Secure… firewall and strong security policies turned on by default”, “Powerful… Btrfs, snapper, YaST”, “Gaming”, x86_64 and i686 image claims with sizes"
+    },
+    {
+      "title": "openSUSE Wiki — Lifetime (durée de vie et flux de correctifs des versions)",
+      "url": "https://en.opensuse.org/Lifetime",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 209412 of 2026-08-08: Tumbleweed “has a lifetime of 'forever', assuming you are running the latest updated packages”, “receives security updates, bug fixes and new features (most often as new software versions) as soon as they are integrated and tested by the openSUSE community”, critical security updates possible when no new version exists yet; i586 discussion “no concrete plan to drop i586 support now”; Leap 16.x support rules and the note that BCI containers are built out of Tumbleweed"
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Roadmap (modèles de publication et cycles)",
+      "url": "https://en.opensuse.org/openSUSE:Roadmap",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 209688 of 2026-08-31: “openSUSE provides multiple release models… rolling releases for users who want the latest software, atomic releases for secure and stable read-only systems”; release-cycle table (Tumbleweed “Rolling”, Slowroll “30 days”); “For detailed lifecycle info of Tumbleweed and Leap, see The Lifetime Wiki Page”; active and end-of-life Leap/Leap Micro releases"
+    },
+    {
+      "title": "zypper manual page for Tumbleweed (published by the project)",
+      "url": "https://manpages.opensuse.org/Tumbleweed/zypper/zypper.8.en.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE manpages",
+      "note": "Page de manuel servie par le projet pour la branche Tumbleweed, accessible directement (200) ; listée dans le portail Zypper sous « Manual ». Le contenu de la page n'a pas été analysé ligne à ligne ici — elle atteste l'existence d'une documentation de référence versionnée par snapshot"
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Tumbleweed (definition, history, QA gating, zypper dup, codecs, audience)",
+      "url": "https://en.opensuse.org/Portal:Tumbleweed",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 139738 of 2020-03-03: “pure rolling release”, Greg Kroah-Hartman's add-on origin, 2014-11-04 merge with Factory, “as often as daily but sometimes… a few weeks”, “Rolling release means no updates, only urgent patches and upgrades”, Plasma Discover/GNOME Software advised against, Myrlyn as only fully supported graphical tool, Packman commands with -cfp 90, third-party module warning, who should try Tumbleweed"
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Factory (Factory as code base, publication rule, team, dashboards, family table)",
+      "url": "https://en.opensuse.org/Portal:Factory",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 154353 of 2021-05-02: “the rolling development codebase for openSUSE Tumbleweed”, no freeze and not downloadable by humans, openQA gate, “synced to the download mirrors… usually… several times a week”, Factory maintained by the release team, staging/QA/build-failure dashboards, mailing lists, family table (Tumbleweed, Slowroll, MicroOS, Leap Micro, Aeon, Kalpa, Leap 16.0, Leap 15.6)"
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Tumbleweed installation (images, architectures, file-system and driver advice)",
+      "url": "https://en.opensuse.org/openSUSE:Tumbleweed_installation",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 200413 of 2025-11-08: install from image or upgrade from a stable release, x86_64/i586/aarch64/ppc64/ppc64le and Raspberry Pi sections, “GPG signed SHA-256”, SSE2 hard-requirement and SIGILL on i586, 4 GiB Btrfs caveat and write-amplification warning, nomodeset for NVIDIA, live installer needs network, “Rescue CD cannot be used to upgrade”, upgrade pointer"
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Migrate Leap to Tumbleweed (supported upgrade mechanisms)",
+      "url": "https://en.opensuse.org/openSUSE:Migrate_Leap_to_Tumbleweed",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 205212 of 2026-06-21: two supported mechanisms (offline DVD, online repository switch), offline “slightly safer”, floor “Tumbleweed >= 20200826 is only supported from Leap >= 15.2”, three online steps with “zypper dup (which is shorthand for zypper dist-upgrade)”, non-standard repositories may break the offline route"
+    },
+    {
+      "title": "openSUSE Wiki — Tumbleweed zypper dist-upgrade as a systemd service (automation recipe)",
+      "url": "https://en.opensuse.org/Tumbleweed_zypper_dist-upgrade_as_a_systemd_service",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 166259 of 2022-06-04: administrator-written dup.service (--download-only) and dupa.service pair, “The suggested procedure requires some considerations”, links to SDB:System upgrade and openSUSE:Tumbleweed upgrade"
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Release team (roster, remit, channels)",
+      "url": "https://en.opensuse.org/openSUSE:Release_team",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 209820 of 2026-09-14: builds and releases all openSUSE distributions, watches Factory and its submissions, Bugzilla and feature requests; roster with two Tumbleweed release managers, Arm and s390x dedicatees, Slowroll release manager, QA engineer and coordinator; contact via #opensuse-factory, factory@ list, weekly meeting; Leap/SLE inheritance contrast sentence"
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Board (remit, election, appointment, vacancies)",
+      "url": "https://en.opensuse.org/openSUSE:Board",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 209163 of 2026-07-17: purpose (central contact, conflict resolution, communicating community interests to SUSE, facilitating decisions, initiating discussions), “shouldn't direct or control development”, members elected and chair appointed by SUSE, Treasurer the only appointed position and “vacant”, board@opensuse.org and code.opensuse.org/board/tickets"
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Guiding principles (philosophy and governance section)",
+      "url": "https://en.opensuse.org/openSUSE:Guiding_principles",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 188823 of 2024-08-16: “free and easy access to Free and Open Source Software”, goals (“create the world's best Linux distribution”, “foster the success of Linux”, “make users happy”), governance wording reproduced by the Board page"
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Project (community control, board as guardian, members, teams)",
+      "url": "https://en.opensuse.org/Portal:Project",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 134314 of 2019-05-16: “The project is controlled by its community…”, OBS and openQA named as tools the project creates, Guiding principles as the community's philosophy, Board as guardian, Members as the electorate, teams and communication channels, oSC and Hackweek as events"
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Members (definition of the electorate)",
+      "url": "https://en.opensuse.org/openSUSE:Members",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 208980 of 2026-07-06: acknowledged contributors with continued and substantial contribution; elect the Board and vote on other matters"
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Security Notices (published notices and their nature)",
+      "url": "https://en.opensuse.org/openSUSE:Security_Notices",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 193768 of 2025-02-25: notices are “security related recommendations and notices provided by the SUSE Security Team”; the listed notice concerns privileged file operations in Dolphin (kio-admin) and Nautilus with “security implications in some scenarios”"
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Zypper and Package management (stack definition and feature list)",
+      "url": "https://en.opensuse.org/Portal:Zypper",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revisions 176483 (2023-06-24) and 177236 (2023-06-30): zypper as a CLI on libzypp with repository access, dependency solving, capabilities, versions, plain RPMs, repo_alias prefix, patterns/products/patches and installation summary; “Libzypp is openSUSE implementation of such a package management system and provides YaST Software Management as graphical user interface and Zypper as a command line interface”; package metadata fields"
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Slowroll (definition, migration, repository cautions, known image issues)",
+      "url": "https://en.opensuse.org/Portal:Slowroll",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 189707 of 2024-09-15: “uses a modified version of openSUSE Tumbleweed”, beta status, opensuse-migration-tool with --dry-run, “All non default repositories will be disabled in the process”, development and untested third-party repositories discouraged, Packman Essentials for Slowroll, “Like Tumbleweed, use zypper dup to upgrade”, “We are unsure at this time” on the NET images"
+    },
+    {
+      "title": "openSUSE Wiki — Portal:Security (SUSE Security Team, update flow, announcements, features)",
+      "url": "https://en.opensuse.org/Portal:Security",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 158071 of 2021-07-15: “openSUSE is a secure distribution… security processes are honored and applied”, SUSE Security Team oversight, Leap/SLE inheritance sentence, incident handling process, security-announce@ vs updates@ lists, zypper/YaST as update tools with automatic installation mentioned, SDB pages for AppArmor, firewalld, crypto-policies, CIS benchmark link ; liste de navigation SDB:AppArmor, Firewalld, SDB:Crypto-policies, SDB:Encrypted root file system, OpenSSH et l'énoncé “openSUSE's Security Features help to prevent bugs from being exploitable”"
+    },
+    {
+      "title": "openSUSE Release Notes — Tumbleweed (UEFI advice, AppArmor note, product version)",
+      "url": "https://doc.opensuse.org/release-notes/x86_64/openSUSE/Tumbleweed/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE documentation",
+      "note": "Publication date 2026-02-27, Version 84.87.20260110.3014fbe; UEFI firmware warning and minimal NVRAM writes with pstore disabled by default; “systemctl stop apparmor does not work” and reload/restart confusion; LUKS/Plymouth workaround; Bugzilla and bug-report pointer"
+    },
+    {
+      "title": "Tumbleweed repository metadata — snapshot identity, signing keys, checksums",
+      "url": "https://download.opensuse.org/tumbleweed/repo/oss/repodata/repomd.xml",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE download service",
+      "note": "revision 1789735597; five gpg-pubkey entries with fingerprints (…09D9EA69, …287A0027, …29B700A4, …39DB7C82, …3FA1D6CE); <repo>obsproduct://build.opensuse.org/openSUSE:Factory/openSUSE/20260917</repo>; <distro cpeid=\"cpe:/o:opensuse:opensuse:20260917\">; SHA-512 primary metadata in .zst"
+    },
+    {
+      "title": "Download server listings — published images, snapshots and architectures",
+      "url": "https://download.opensuse.org/tumbleweed/iso/",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE download service",
+      "note": "x86_64: DVD/NET/KDE-Live/GNOME-Live/XFCE-Live/Rescue-CD in -Current and -Snapshot20260917-Media forms with .iso.sha256, plus MicroOS DVD; /ports/aarch64/tumbleweed/iso/ present (63 entries, snapshot 20260915), /ports/i586/tumbleweed/iso/ present; /ports/{ppc64le,riscv64,s390x}/tumbleweed/iso/ and /distribution/tumbleweed/ return 404"
+    },
+    {
+      "title": "openQA API — recent Tumbleweed jobs by architecture and build",
+      "url": "https://openqa.opensuse.org/api/v1/jobs?distri=opensuse&version=Tumbleweed",
+      "type": "official_api",
+      "accessed": "2026-09-19",
+      "publisher": "openQA instance",
+      "note": "Query of 2026-09-19, 400 jobs: x86_64 119, ppc64le 131, aarch64 59, s390x 53, i586 33, arm 5; builds 20260917 (123), 20260918 (184), 20260919 (6). Counts cover the queried window only"
+    },
+    {
+      "title": "openSUSE News — index et flux RSS : Tumbleweed Monthly Update (août 2026), Tumbleweed Monthly Update (juin 2026), Tumbleweed ARM Updates in September",
+      "url": "https://news.opensuse.org/feed/",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "date": "2026-09-02 ; 2026-07-01 ; 2026-09-16",
+      "publisher": "openSUSE News",
+      "note": "Regroupe trois billets lus dans le flux officiel du site (seule adresse servant 200 depuis ce sandbox le 2026-09-19) : « Tumbleweed Monthly Update, August 2026 (snapshot count and content) » (2026-09-02) : “23 snapshots across 31 days”; “a packed month of snapshots across the desktop, developer tooling, and security surface”; KDE Plasma 6.7.4. Source incident: the permalink answered 404 (nginx) from this sandbox on 2026-09-19 while title, date and this excerpt were read from the site's own RSS feed (https://news.opensuse.org/feed/) ; « Tumbleweed Monthly Update, June 2026 (package and CVE reporting style) » (2026-07-01) : Kernel 7.0.12 with named fixes, OpenSSL 3 CVE list, libxml2 2.15.3, webkitgtk 2.52.1, snapper sdbootutil plugin permission note — evidence that security work is reported per package update rather than per release ; « Tumbleweed ARM updates for September 2026 » (2026-09-16) : “There were a few software package updates for openSUSE Tumbleweed ARM this month with snapshots reaching the ARM port”; index and RSS entries reachable, direct permalink intermittent (404) from this sandbox on 2026-09-19 | Incident de source : les permalinks de ces billets (…/2026-09-02/tw-monthly-update-august/, …/2026-07-01/tw-monthly-update-june/, …/2026-09-16/tw-arm-update/) ont répondu 404 (nginx) à toutes les tentatives, y compris via l'outil de lecture, alors que l'index https://news.opensuse.org/ affiche leurs liens ; aucune citation n'a été reprise d'un miroir tiers."
+    },
+    {
+      "title": "openSUSE Wiki — openSUSE:Board best practices (documenter les décisions)",
+      "url": "https://en.opensuse.org/openSUSE:Board_best_practices",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE Wiki",
+      "note": "Revision 198663 of 2025-08-15, resolved through the wiki API. Used only to confirm that the board publishes a best-practices page behind “the board should document decisions and policies”; its text was not mined for new facts. The wiki returns 403 to command-line clients, so this URL was validated by API resolution (see the source-control note in the research file)."
+    },
+    {
+      "title": "openSUSE documentation index — tool and distribution documentation entry points",
+      "url": "https://doc.opensuse.org/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "openSUSE documentation",
+      "note": "Lists Leap 16.0 and 15.6 documentation, archived versions, development versions and tool docs for libzypp, libyui, Open Build Service, OpenQA, KIWI NG, Snapper, Portus, YaST and Machinery — the confirmation that snapper and openQA documentation lives outside the wiki"
+    },
+    {
+      "title": "openSUSE Build Service — project page openSUSE:Factory (publication point of the snapshots)",
+      "url": "https://build.opensuse.org/project/show/openSUSE:Factory",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "note": "Served in browser navigation (403 to command-line clients, like the wiki). Confirms Factory as a public OBS project with repositories, build results, requests, signing keys and a staging dashboard, and carries the “The next openSUSE distribution / openSUSE Tumbleweed: The Bleeding Edge, Perfected” banner. The figures visible on the page (e.g. 140 open requests, 4 release targets, and counts of succeeded/excluded build states around 18 300 per repository) are momentary build states and not a published package count: no official count of Tumbleweed packages was found, so none is asserted in this record."
+    }
+  ],
+  "last_verified": "2026-09-19"
+}

@@ -1,0 +1,171 @@
+{
+  "id": "remnux",
+  "name": "REMnux",
+  "type": "operating_system",
+  "summary": "A specialized Linux toolkit and distribution based on Ubuntu LTS, engineered specifically for reverse-engineering and analyzing malicious software, featuring static and dynamic binary analysis, memory forensics, and network behavioral simulation.",
+  "tags": [
+    "linux",
+    "ubuntu-based",
+    "malware-analysis",
+    "reverse-engineering",
+    "dfir",
+    "memory-forensics",
+    "inetsim",
+    "ghidra",
+    "yara",
+    "virtual-appliance"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-3.0-or-later and upstream open-source tool licenses",
+  "last_verified": "2026-10-12",
+  "content": {
+    "introduction": "REMnux (Reverse-Engineering Malware Linux) is an open-source Linux distribution and forensic toolkit engineered specifically for reverse engineering and analyzing malicious software. Created in 2010 by Lenny Zeltser, faculty fellow at the SANS Institute and author of the flagship course 'FOR610: Reverse Engineering Malware', REMnux provides forensic investigators, incident responders, and malware analysts with a curated, pre-configured arsenal of free community tools. The distribution eliminates the friction of finding, installing, and configuring complex reversing dependencies, enabling analysts to investigate suspicious executables, weaponized documents, and infected memory dumps immediately.",
+    "what_is_it": "Technically, REMnux is built upon Ubuntu 24.04 LTS (Noble Numbat) 64-bit (x86_64) and is orchestrated using SaltStack automation. The platform is primarily distributed as a pre-built virtual appliance (OVA) for VMware, VirtualBox, and UTM, as well as an installable package suite layered on clean Ubuntu installations via `remnux-cli`, cloud AWS AMIs, and standalone Docker containers. REMnux features a customized lightweight graphical desktop environment with an organized menu taxonomy guiding analysts through static binary properties inspection, code disassembly, network behavioral simulation, memory forensics, and malicious document triage.",
+    "origin_and_history": "Lenny Zeltser established the REMnux project in 2010 to fulfill the need for a standardized, freely available Linux environment dedicated to malware analysis, which had historically lacked the consolidated tool integration available in offensive penetration testing systems like BackTrack. Evolving in parallel with the SANS Institute's reverse-engineering curriculum, REMnux pioneered the integration of fake internet service daemons (such as INetSim) to simulate command-and-control interactions. Subsequent major releases standardized on Ubuntu LTS baselines, introduced SaltStack declarative configuration management (`salt-states`), incorporated NSA Ghidra decompilation suites, and enabled Model Context Protocol (MCP) servers for AI-assisted forensic triage.",
+    "governance_and_community": "REMnux is directed by Lenny Zeltser alongside a dedicated core of digital forensics and incident response (DFIR) specialists. The project operates under an open-source community governance model, maintaining public repositories for Salt formulas, Docker containers, documentation, and the installer on GitHub (`github.com/REMnux`). Sustained through community contributions, educational partnerships, and intellectual backing from the SANS Institute, REMnux provides all virtual machines, scripts, and documentation completely free of charge to global cybersecurity defenders.",
+    "static_analysis_and_binary_triage": "For inspecting untrusted binaries before active execution, REMnux bundles leading static triage frameworks:\n\n- Capability Detection: Mandiant capa for automatically identifying high-level program capabilities, anti-analysis tricks, and cryptographic routines.\n- Compiler and Packer Identification: Detect It Easy (DiE), TrID, and pefile for unpacking analysis, section entropy mapping, and header parsing.\n- Obfuscated String Extraction: FLARE-FLOSS for using targeted emulation to decode and display obfuscated string arrays that evade standard Unix `strings`.\n- Pattern Matching: YARA engine integration for scanning suspect files and memory against custom malware signatures and community rulebases.",
+    "code_disassembly_and_decompilation": "For deep binary reverse engineering, REMnux integrates professional disassembly suites:\n\n- NSA Ghidra: Advanced software reverse engineering framework providing multi-architecture disassembly, intermediate representation analysis, and C decompilation.\n- Cutter & Rizin: Modern graphical interface for Rizin and radare2, delivering fast control-flow graphing, binary diffing, and scriptable disassembly.\n- Android & Script Reversing: jadx and apktool for decompiling Android DEX bytecode into readable Java source, and scdbg for emulating 32-bit Windows shellcode.",
+    "network_simulation_and_behavioral_analysis": "A distinctive hallmark of REMnux is its comprehensive network simulation suite designed for dynamic malware analysis:\n\n- Internet Service Emulation: INetSim and FakeNet-NG simulate common internet protocols (HTTP, HTTPS, DNS, SMTP, FTP, IRC) within a closed virtual network, allowing analysts to capture malware beaconing and exfiltration attempts.\n- Encrypted Traffic Interception: PolarProxy and mitmproxy act as transparent TLS/SSL interception proxies, generating dynamic certificates and exporting decrypted plaintext PCAP streams for Wireshark inspection.\n- DNS Redirection: dnschef for spoofing DNS query responses and redirecting malware traffic to local analysis sinks.",
+    "memory_forensics_and_document_analysis": "For analyzing compromised hosts and initial access vectors, REMnux integrates specialized forensic suites:\n\n- Memory Forensics: Volatility 3 and Rekall for carving processes, active network connections, injected DLLs, and rootkits from physical RAM memory images.\n- Weaponized Document Analysis: The oletools suite (olevba, oledump) for dissecting malicious Microsoft Office VBA macros, XLMMacroDeobfuscator for Excel 4.0 macros, and ViperMonkey for emulated macro execution.\n- Malicious PDF Inspection: pdfid, pdf-parser, and peepdf for extracting JavaScript streams, embedded executables, and structural anomalies from suspicious PDF documents.",
+    "deployment_architectures_and_virtualization": "REMnux offers flexible deployment models suited to various lab architectures:\n\n- Virtual Appliance (OVA): The recommended full-experience environment, pre-configured with graphical themes, terminal profiles, and system tweaks.\n- Local Installation (`remnux-cli`): An automated installer (`remnux install`) deploying the full environment or an 'addon' mode on top of clean Ubuntu 24.04 LTS installations.\n- Docker Containers: Individual containerized tools allowing practitioners to run isolated utilities on foreign hosts without altering their operating system.\n- Cloud AWS AMI: Cloud-hosted virtual instances for scalable, ephemeral malware triage pipelines.",
+    "threat_model_and_operational_limits": "REMnux defines strict operational boundaries for malware investigation:\n\n- Hypervisor Isolation: Analyzing active malware poses inherent execution risks; virtual machines must be configured with private host-only or internal virtual switches and hypervisor snapshots prior to detonation.\n- No Automated Anonymity: REMnux is an offline laboratory workstation, not an anonymizing system; it does not tunnel internet traffic through Tor by default. Connecting a live analysis machine to public internet gateways risks exposing investigator IP addresses to threat actor command-and-control servers.\n- Architecture Focus: REMnux primarily targets the x86_64 architecture due to upstream dependency availability for specialized forensic disassemblers, offering limited native support for ARM-based host processors.",
+    "privacy_and_telemetry": "REMnux enforces an absolute zero-telemetry policy. The operating system contains no commercial analytics trackers, advertising daemons, or background usage reporting frameworks. Sensitive malware samples, deobfuscated strings, and investigation reports remain strictly confidential on the local analysis host.",
+    "advantages": [
+      "Specialized, comprehensive malware reverse engineering and static analysis toolkit with over a decade of community refinement",
+      "Integrated network simulation and fake services (INetSim, PolarProxy, FakeNet-NG) for safe behavioral triage",
+      "Professional disassemblers and decompilers included out-of-the-box, featuring NSA Ghidra, Cutter, and radare2",
+      "Exhaustive malicious document analysis suite covering Microsoft Office macros (oletools) and weaponized PDFs",
+      "Declarative SaltStack configuration management ensuring automated updates and reproducible installations",
+      "Multiple deployment form factors including pre-built OVA virtual appliances, Docker containers, and AWS AMIs",
+      "Zero telemetry policy with transparent open-source code and direct backing from SANS reverse engineering faculty"
+    ],
+    "disadvantages": [
+      "Executing dynamic malware samples requires strict manual hypervisor network isolation to prevent infection spills",
+      "Does not route general internet traffic through the Tor network by default for online anonymity",
+      "High memory consumption when running multiple heavy reversing suites (Ghidra, Volatility) concurrently",
+      "Native ARM (Apple Silicon) support is limited due to x86-specific dependencies of certain upstream forensic tools",
+      "Not designed as a general-purpose desktop operating system for routine office productivity"
+    ],
+    "who_is_it_for": [
+      "Malware analysts, reverse engineers, and incident responders investigating suspicious binaries and initial access payloads",
+      "Security Operations Center (SOC) and CSIRT teams performing rapid static and behavioral artifact triage",
+      "Digital forensics investigators examining volatile RAM captures and weaponized document attachments",
+      "Cybersecurity educators and students studying software reverse engineering and malware dissection (e.g., SANS FOR610)"
+    ],
+    "who_is_it_not_for": [
+      "Offensive penetration testers seeking automated exploitation and wireless attack suites (better suited to Kali Linux or BlackArch)",
+      "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
+      "Casual desktop users seeking a general everyday workstation for web browsing and office productivity",
+      "Environments unable to isolate malware detonation networks from production infrastructure"
+    ]
+  },
+  "components": [
+    {
+      "id": "remnux-salt-states",
+      "name": "SaltStack Declarative Toolset",
+      "role": "configuration_orchestrator",
+      "note": "Automated provisioning state formulas managing tool installations, configurations, and environment variables."
+    },
+    {
+      "id": "remnux-ghidra-cutter",
+      "name": "Ghidra & Cutter Reversing Suite",
+      "role": "disassembly_decompilation_suite",
+      "note": "Professional software reverse engineering tools providing multi-architecture disassembly and C decompilation."
+    },
+    {
+      "id": "remnux-inetsim",
+      "name": "INetSim Network Simulation Suite",
+      "role": "network_behavioral_simulator",
+      "note": "Network service emulation daemon simulating DNS, HTTP, HTTPS, SMTP, and IRC to analyze malware traffic."
+    },
+    {
+      "id": "remnux-volatility",
+      "name": "Volatility Memory Forensics Subsystem",
+      "role": "memory_analysis_framework",
+      "note": "Volatile memory analysis framework extracting process listings, injected code, and sockets from RAM dumps."
+    },
+    {
+      "id": "remnux-oletools",
+      "name": "oletools & Document Analysis Toolkit",
+      "role": "document_forensics_suite",
+      "note": "Specialized scripts parsing malicious Microsoft Office macros (olevba, oledump) and weaponized PDF streams."
+    },
+    {
+      "id": "remnux-cli",
+      "name": "remnux-cli Distro Controller",
+      "role": "system_maintenance_utility",
+      "note": "Command-line utility managing REMnux installation modes, SaltStack updates, and diagnostic health checks."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "upstream_base",
+      "note": "Foundational operating system; REMnux is built upon Ubuntu 24.04 LTS (Noble Numbat) 64-bit."
+    },
+    {
+      "id": "tsurugi-linux",
+      "name": "Tsurugi Linux",
+      "relation": "peer_forensic_distribution",
+      "note": "Complementary digital forensics distribution sharing malware analysis and memory forensics capabilities."
+    },
+    {
+      "id": "caine",
+      "name": "CAINE",
+      "relation": "peer_forensic_distribution",
+      "note": "Complementary Italian digital forensics platform focusing on disk triage and operating-system-level write-blocking."
+    }
+  ],
+  "variants": [
+    {
+      "name": "REMnux Virtual Appliance (OVA)",
+      "description": "Complete pre-configured virtual machine image optimized for VMware, VirtualBox, and UTM hypervisors."
+    },
+    {
+      "name": "REMnux Container & Addon Mode",
+      "description": "Dockerized container collection and CLI script for layering the malware analysis toolkit on clean Ubuntu systems."
+    }
+  ],
+  "links": {
+    "homepage": "https://remnux.org/",
+    "documentation": "https://docs.remnux.org/",
+    "repository": "https://github.com/REMnux",
+    "tools": "https://docs.remnux.org/discover-the-tools"
+  },
+  "sources": [
+    {
+      "title": "REMnux Official Project Website",
+      "url": "https://remnux.org/",
+      "type": "official",
+      "date": "2026-02-07"
+    },
+    {
+      "title": "REMnux Official Documentation Portal",
+      "url": "https://docs.remnux.org/",
+      "type": "official_documentation",
+      "date": "2026-02-07"
+    },
+    {
+      "title": "REMnux Distro Installation and Addition Guide",
+      "url": "https://docs.remnux.org/install-distro/add-to-existing-system",
+      "type": "documentation",
+      "date": "2026-06-26"
+    },
+    {
+      "title": "REMnux Technologies and Architecture Overview",
+      "url": "https://docs.remnux.org/behind-the-scenes/technologies/website-and-docs",
+      "type": "technical_specification",
+      "date": "2026-02-07"
+    },
+    {
+      "title": "REMnux GitHub Organization",
+      "url": "https://github.com/REMnux",
+      "type": "repository",
+      "date": "2026-10-12"
+    }
+  ]
+}

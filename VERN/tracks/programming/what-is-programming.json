@@ -1,0 +1,11 @@
+{
+  "id": "what-is-programming",
+  "title": "What Is Programming?",
+  "description": "Turning an idea into a sequence of instructions.",
+  "content": [
+    { "type": "heading", "text": "Instructions, in order" },
+    { "type": "text", "text": "Programming is writing instructions precisely enough that a machine can follow them without guessing what you meant." },
+    { "type": "code", "language": "python", "code": "for i in range(3):\n    print(\"hello\")" },
+    { "type": "text", "text": "The computer does exactly what the instructions say, three times, and nothing more." }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "test-tool",
+  "name": "Test Tool",
+  "type": "application",
+  "summary": "Development fixture: the smallest valid VΞRN Library resource, used to verify that a minimal document renders correctly.",
+  "tags": ["test-fixture", "minimal"],
+  "status": "active",
+  "content": {
+    "introduction": "This is a development test fixture, not a real technology. It exists to verify that a resource containing only the required fields renders without errors.",
+    "what_is_it": "A minimal Library document: required fields only, a short body, one link and one source."
+  },
+  "links": {
+    "homepage": "https://example.org/test-tool"
+  },
+  "sources": [
+    {
+      "title": "Example Domain",
+      "url": "https://example.org/",
+      "type": "documentation"
+    }
+  ],
+  "last_verified": "2026-09-04"
+}

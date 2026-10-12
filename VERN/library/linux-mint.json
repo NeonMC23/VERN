@@ -1,0 +1,545 @@
+{
+  "id": "linux-mint",
+  "name": "Linux Mint",
+  "type": "operating_system",
+  "summary": "A desktop Linux distribution published by the Linux Mint team on top of Ubuntu long-term-support releases, with its own desktop (Cinnamon), its own tooling (mintinstall, mintupdate, mintsources, mintdrivers) and its own signed repository. Linux Mint 22.3 “Zena”, released 2026-01-13 on Ubuntu 24.04 (Noble), is the current line and is documented as supported until April 2029; LMDE 7 “Gigi” keeps the same desktop on a Debian 13 base. A longer development cycle was adopted in April 2026, with the next release planned for Christmas 2026.",
+  "tags": [
+    "linux",
+    "open-source",
+    "desktop-distribution",
+    "ubuntu-based",
+    "cinnamon",
+    "lmde",
+    "long-term-support",
+    "own-repository-and-tools"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "content": {
+    "introduction": "Linux Mint is a desktop Linux distribution built and published by the Linux Mint team, an English- and French-speaking project led by its founder Clément Lefebvre, known as “Clem”. The project describes itself as “one of the most popular desktop Linux distributions and used by millions of people” and as “one of the best alternatives to Microsoft Windows and Apple MacOS”; both statements are self-descriptions, and the project publishes no measurement to support them.\n\nIts stated purpose, quoted directly, is “to produce a modern, elegant and comfortable operating system which is both powerful and easy to use”. The FAQ narrows the scope in plain terms: “Linux Mint is a free Linux-based operating system designed for use on desktop and laptop computers.” Nothing in the project's own pages claims support for server or embedded deployments.\n\nLinux Mint is a derivative in the packaging sense: each release is built on a specific Ubuntu long-term-support series, and the project publishes the pairing line by line (22, 22.1, 22.2 and 22.3 on “Ubuntu Noble”; 21 to 21.3 on “Ubuntu Jammy”; LMDE 7 on “Debian Trixie”). It is not a re-themed install of that base: the desktop, the update path, the repository, the driver tool and the release notes are all Mint's own documents and code.",
+    "what_is_it": "Concretely, what ships as “Linux Mint” is an Ubuntu LTS userland plus a layer the project maintains itself: the Cinnamon desktop (with MATE and Xfce as alternative editions), a set of configuration and installation tools named mint*, a repository of Mint-specific packages published per codename, an update front-end with its own policy for kernels, and a documented upgrade path between releases. The project states the size of the available package set on its About page, in the same sentence as its bases: “Based on Debian and Ubuntu, it provides about 30,000 packages and one of the best software managers”. That figure is an order of magnitude from a prose page, not a counted inventory; the Mint repository itself publishes no package count. The same page adds self-assessments that the project's own documentation later contradicts — “requires very little maintenance (no regressions, no antivirus, no anti-spyware)” appears beside a user-guide section devoted to regressions introduced by updates (see “Updates and upgrades”); both texts stay on the record.",
+    "origin_and_history": "The project began as a site for articles. “Clement Lefebvre, a French developer now commonly known as “Clem”, was writing reviews and tutorials for various Linux sites. To host his own articles he started a website called “Linux Mint”.” The first release followed in August 2006: “Linux Mint 1.0 “Ada”, based on Kubuntu 6.06”, with the desktop switched to GNOME in November 2006 for “Linux Mint 2.0 “Barbara”, based on Ubuntu 6.10”. 2007 is when the project says its identity formed — “A team is formed, forums chat rooms and a website are open”, a new logo and “the ambition to rival Windows and Mac OS” with 3.0 “Cassandra”. The 2007-2010 stretch is where the tool names appear: “mintupdate, mintinstall, mintdisk, mintmenu, mintdesktop, mintnanny, mintbackup, mintstick, mintwelcome, mintupload…” — a genealogy rather than the current inventory. The GNOME 3 transition is described as a break. “When GNOME 3 replaces GNOME 2 it's a catastrophe for Linux Mint… the release of Linux Mint 12 “Lisa” based on GNOME 3 is not good enough and is still to this day considered by the team as a regression.” Two answers came out of it: investment in MATE, “a joint project which consists in renaming GNOME 2 and bringing it back”, and in Cinnamon, “a Mint project, which consists in adapting GNOME 3 and turning it into a full-featured desktop”.",
+    "governance": "Linux Mint publishes a team page, not a charter. It lists five areas with their venues: software development and bug fixing (GitHub), administration and moderation for the forums, community website and IRC, design for web and user interface, translations (Launchpad) and a QA team (community website and forums). There is no published board, election procedure, decision record or code of conduct on the project's own site; releases and strategy are announced on the blog over Clem's signature, in the first person, as in “The following decisions were made”.\n\nFunding is documented in one sentence, repeated across pages: “Thanks to revenue from advertisements and your donations, the Linux Mint project can afford to buy dedicated servers, advertising campaigns, new hardware and equipment, and to provide an income for the team.” Sponsorship is presented as the way to stabilise that income: “By sponsoring Linux Mint, you contribute to giving the development team a regular and predictable income.” No amount, headcount or legal entity is published on the pages consulted, beyond an Irish tax authority reference in the privacy policy's donation sections.\n\nThe name is protected — “Linux Mint is copyrighted since 2006 and trademarked through the Linux Mark Institute” — and turned into permissions rather than restrictions for users and resellers: “Yes, you can sell Linux Mint without permission. What you cannot do is pretend to be Linux Mint…”, with the installer's OEM mode documented for machines sold to customers and logo/screenshot use allowed on the same condition. The name is protected — “Linux Mint is copyrighted since 2006 and trademarked through the Linux Mark Institute” — and turned into permissions: “Yes, you can sell Linux Mint without permission. What you cannot do is pretend to be Linux Mint…”, with OEM pre-installation documented for machines sold to customers.",
+    "license_and_usage": "No licence declaration for the whole system is published; the footer claims “Almost all the packages we distribute are open-source” and points to packages.ubuntu.com, packages.linuxmint.com and github.com/linuxmint for source. The FAQ adds a position on proprietary software (“Linux Mint does not support any political or ideological stance against any software programs or editors no matter what license they use. With that said, most if not all (depending on the edition) software used in Linux Mint is Free and Open Source.”). The licence field here is therefore left empty.",
+    "release_model": "Cadence is not fixed by a schedule. The only published statement about the future is an announcement dated 2026-04-16: “Linux Mint will adopt a longer development lifecycle. The next release is planned for Christmas 2026. Linux Mint will use the same installer as LMDE (i.e. “live-installer”).” The same text leaves the strategy open: “What hasn't been decided yet is the release strategy itself: the length of the cycle, whether minor releases are frozen (like the point releases in Mint 22.x) or backported/semi-rolling (as in LMDE), and whether we will introduce alpha releases.” The next release is named provisionally, not officially: “For now, we don't know what the next release will be called and what version it will be… As a temporary measure we decided to call the next release “Alfa” and to give it version 23.” Its announced contents (base Ubuntu 26.04 LTS, Linux kernel 7.0, Cinnamon 6.7-unstable, CJS 140, live-installer replacing Ubiquity) come from a monthly news post and are labelled by the project as previews of work in progress, not as shipped features of a published release.",
+    "releases_and_support": "Two formulations of the support term agree. The FAQ: “Linux Mint provides Long-Term Support (LTS) releases which are supported for a duration of 5 years.” The user guide: “Each major Linux Mint release is supported for 5 years.” The guide's table gives the dates by series — 19.x until April 2023, 20.x until April 2025, 21.x until April 2027, 22.x until April 2029. Point releases (22.1, 22.2, 22.3) share their series' expiry, and the release notes page for 22.3 states it as “Long term support release (LTS), supported until April 2029”, while the announcement gives only the year (“supported until 2029”). The current published line is 22.x on Ubuntu 24.04. Version detection is Mint's own: “To find your version of Linux Mint, open a terminal and type: cat /etc/linuxmint/info”. LMDE 7 “Gigi”, released 2025-10-14, is listed as “Long term support release (LTS).” without an expiry date — the project does not publish one for LMDE, and none is implied here.",
+    "editions": "Three editions are published for the Ubuntu-based line, each with its own download page and its own ISO. The project's descriptions: Cinnamon — “The most popular version of Linux Mint is the Cinnamon edition. Cinnamon is primarily developed for and by Linux Mint. It is slick, beautiful, and full of new features.” Xfce — “Xfce is a lightweight desktop environment. It doesn't support as many features as Cinnamon but it's lighter on resource usage.” MATE — “MATE is a classic desktop environment. It is the continuation of GNOME 2, which was Linux Mint's default desktop between 2006 and 2011.” The adjectives are the project's. Distinguishing the axes matters: an edition is a selection of desktop within the same base, while the base is chosen by which project you download. Linux Mint 22.3 Cinnamon and 22.3 Xfce share Ubuntu Noble; Linux Mint 22.3 and LMDE 7 share the desktop and the tooling and differ in the package base. No ARM, POWER or other port is published — mirror listings contain only “64bit” images — and no page describes a certification programme or lists derivatives of Mint.",
+    "image_choices": [
+      "Cinnamon edition",
+      "MATE edition",
+      "Xfce edition",
+      "HWE kernel images"
+    ],
+    "lmde": "LMDE is defined by its purpose as much as its contents: “LMDE is a Linux Mint project which stands for “Linux Mint Debian Edition”. Its goal is to ensure Linux Mint can continue to deliver the same user experience if Ubuntu was ever to disappear. It allows us to assess how much we depend on Ubuntu and how much work would be involved in such an event.” And: “LMDE aims to be as similar as possible to Linux Mint, but without using Ubuntu. The package base is provided by Debian instead.” The phrase “as similar as possible” is a limit stated by the project itself; no page quantifies the remaining difference. The two lines now converge on one installer: the March 2026 announcement plans “the same installer as LMDE”, described as “Live-installer (ported from LMDE to replace Ubiquity; supports OEM installations, BIOS/EFI, SecureBoot, and LVM/LUKS)”, and calls “Wayland support and a unified installer shared between Mint and LMDE” milestones significant for the project.",
+    "hardware": "The system requirements published for the current releases are identical for the main line and for LMDE: “2GB RAM (4GB recommended for a comfortable usage)”, “20GB of disk space (100GB recommended)” and “1024×768 resolution (on lower resolutions, press ALT to drag windows with the mouse if they don't fit in the screen)”. No CPU model, instruction-set baseline or server requirement is published. Hardware support is described as a property of the base and its regressions are conceded: “Each new version comes with a new kernel and a newer set of drivers… sometimes it might also introduce regressions. If you are facing hardware issues with the latest version of Linux Mint and you are unable to solve them, you can always try an earlier release.” Installation and its variants are documented in a separate guide (edition choice, verification, bootable media with mintstick, booting, OEM pre-installation, partitioning, EFI troubleshooting, post-install steps). The LMDE release notes add concrete installer behaviour: live session logs in as “mint” with an empty password, “sudo live-installer-expert-mode” for expert mode, LVM volumes must be detached before installing onto them, and “the installer will automount all swap partitions”, which are then written to /etc/fstab.",
+    "installation": "Downloads are offered as direct HTTP, torrent, or from a mirror list, and every mirror directory carries the same three images plus two verification files: linuxmint-22.3-{cinnamon,mate,xfce}-64bit.iso, sha256sum.txt and sha256sum.txt.gpg (mirror listing dated 2026-01-08 for the images, 2026-01-11 for the sums; each image about 2.9-3 GB). The release announcement is dated 2026-01-13, so image timestamps and announcement date differ, and no page explains the gap. Beyond the regular images, Mint publishes Hardware Enablement images: “These images include a kernel which is newer than the one in the regular ISO, to improve compatibility with more recent hardware”, with the warning that “Proprietary drivers and third-party modules (NVIDIA, Broadcom, VirtualBox, etc.) may have limited support with newer kernels. Only use an HWE ISO if the regular ISO does not work on your computer.” At the time of writing the HWE page lists, for 22.3, 6.14 in the regular images and 7.0 / 6.17 in HWE images, while the 22.3 release notes say 22.2 and 22.3 “ship HWE Kernel 6.14” and recommend 22.1 “which ships with LTS kernel 6.8” for affected users; the two pages describe different moments and are reported as such.",
+    "repositories": "The project states the size of its available package set on the About page, in the same sentence as its bases: “Based on Debian and Ubuntu, it provides about 30,000 packages and one of the best software managers”. That figure is an order of magnitude from a prose page, not a counted inventory; the Mint repository itself publishes no package count.\n\nOn top of the base sits a Mint repository with its own publication points: packages.linuxmint.com indexes packages per codename in binary and source views (xia, zara, zena, wilma, vera, victoria, virginia, vanessa, alfa for Mint; adrien and gigi for LMDE). The mirror page documents two rsync archives — ISO images at “pub.linuxmint.com::pub” once a day (about 200 GB) and repositories at “rsync-packages.linuxmint.com::packages” twice a day (about 50 GB), with mirror operators asked to announce themselves to root@linuxmint.com: image distribution and package distribution are separate hosts with separate cadences.\n\nThe layer Mint changes is visible in how its tools are described. mintsources is “a software configuration tool… allows the user to adjust sofware repositories, select a mirror, include PPAs and do package management tasks” (README wording), and mintdrivers is “essentially the upstream part of Software Properties GTK which handles drivers management, stripped out of the rest of the application and turned into a standalone tool”, added so that Mint could “replace software-properties”. Both READMEs build with dpkg-buildpackage and install with dpkg -i: the packaging format is unchanged, the tooling around it is not Ubuntu's.\n\nPackage compatibility follows the base, not the desktop: the main line takes Ubuntu LTS packages as its reference, LMDE takes Debian's, and PPAs are supported through mintsources without being recommended anywhere. No document promises that a package built for one line installs cleanly on the other.",
+    "upstream_and_bases": "The relation to the bases is documented as a dependency to be read, not as background. For the main line: “Linux Mint 22.x is based on Ubuntu 24.04. Make sure to read the Ubuntu release notes.” For LMDE: “LMDE 7 is based on Debian 13 Trixie. Make sure to read the Debian release notes.” Both pages push the reader upstream before listing Mint-specific issues, which is a stronger statement than “compatible with”. Ubuntu is thus the dependency the project measures itself against: series are pinned to Ubuntu LTS releases, the package index sits beside packages.ubuntu.com, translations run on Launchpad (“Please use Launchpad to translate Mintinstall”), and several documented defects are traced to Ubuntu bug reports (xorg-server, gnome-session, ntfs-3g). No consulted page describes a formal coordination body between the two projects, and no page claims a fork of Ubuntu's core. Debian is the base of LMDE — “The package base is provided by Debian instead” — and is named in the About page's phrase “Based on Debian and Ubuntu”, which describes the family as a whole rather than a direct technical link between the Ubuntu-based editions and Debian.",
+    "signing_and_trust": "Verification is stated as a duty on the download pages — “Anyone can produce fake ISO images, it is your responsibility to check you are downloading the official ones” — and as a two-part procedure in the installation guide: “The integrity check confirms that your ISO image was properly downloaded… The authenticity check confirms that the ISO image you downloaded was signed by Linux Mint”. Both checks are automated inside the system: “Right-click the ISO image and select Verify, or use the mint-iso-verify command with your ISO file.” The manual path is published with its key material: “gpg --keyserver hkp://keys.openpgp.org:80 --recv-key 27DEB15644C6B3CF3BD7D291300F846BA25BAE09”, then a fingerprint listing and “gpg --verify sha256sum.txt.gpg sha256sum.txt”, with the note that an untrusted-looking signature “is expected and perfectly normal”. The guide tells users to download the sum files rather than copy them. No page documents a signing key for the package archive itself. Secure Boot is documented as an obstacle to work around, not as a supported path: on a “Secure Boot Violation”, the installation guide recommends reconnecting before installing, avoiding third-party software options, or “Disable SecureBoot in the BIOS settings of your computer.” The April 2026 announcement says the next installer “supports… SecureBoot”. Both are on the record and are not reconciled here.",
+    "updates_and_upgrades": "Update Manager is Mint's front-end and its documentation is explicit about risk: “The Update Manager provides your operating system with software and security updates… Unfortunately they also sometimes introduce new issues called “regressions”, which can break things which worked well before.” The published recommendation pairs updates with snapshots: “it is recommended to apply all available updates and to set up system snapshots, so that you can restore your system in case something goes wrong.”\n\nThe documented classification is by kind of change, not by priority level: ““Software updates” are updates which fix bugs (or also sometimes which bring new features). “Security updates” are updates which patch vulnerabilities. “Kernel updates” represent the installation of a newer kernel.” The same page observes that security is “very important but also very technical” and that “Software updates aren't as important”; read with the advice to apply everything, that is guidance about expectations, not a triage policy. No levels scheme is documented in the pages consulted.\n\nKernels are not replaced in place: “you don't actually update the kernel, you install a new kernel alongside the existing one… At boot time, the computer selects the most recent one.” The running kernel cannot be removed, selection happens in GRUB's “Advanced options”, and reverting is documented. Proprietary drivers tie in through DKMS, which recompiles them “against every kernel you install”, hence the advice to avoid kernel series newer than the recommended one. A CLI mirrors the tool: mintupdate-cli (“list”, “list -s”, “sudo mintupdate-cli upgrade -r -k”).\n\nThat model is being reworked: “Kernel management was removed from the Update Manager and re-implemented within the System Administration tool… supports both Linux Mint and LMDE. It focuses on kernel series rather than individual kernels” — track a series, keep a chosen number of older kernels, clean up automatically, protect individual kernels, and be warned that a custom series is “your responsibility”.\n\nTimeshift is the rollback mechanism, with a stated scope: “System snapshots only cover the operating system itself. They do not include or affect your personal data.” Daily and boot snapshots are recommended, snapshots are incremental, and boot snapshots run in the background. User files are a different tool: mintbackup, “The Backup Tool… save and restore backups of files within the home directory.”\n\nUpgrades are documented step by step and constrained. Before upgrading to 22.3 the user is told to create a Timeshift snapshot and to update Cinnamon spices from System Settings; the upgrade itself runs from Update Manager and depends on refreshed mintupdate and mint-upgrade-info packages, with the instruction to replace configuration files when asked. Paths are not freely selectable: “There are no other upgrade paths than the ones listed above. For instance, you cannot upgrade version 21 to version 22 directly, you first need to upgrade it to 21.3, then to 22.” Difficulty is graded in the project's own words — point releases “take just a few minutes”, major upgrades “can take up to a few hours” and “can require a certain level of knowledge and experience from the user” — with the fallback “If you cannot upgrade perform a fresh installation.” If the upgrade is not offered, the documented causes are an outdated mint-upgrade-info or a lagging mirror (“switch to the default repositories”).",
+    "security": "Linux Mint does not publish a security team, an advisory feed, a CVE index or a fix window. Security updates are the base's, filtered through Mint's repository and Update Manager, and the project's own pages send the reader upstream (“Make sure to read the Ubuntu release notes.”). Nothing in the consulted pages states the reverse — that Mint tracks security issues itself. This absence is reported as an absence of documentation, not as a claim about the system's exposure.\n\nTwo Mint-specific decisions are documented with reasons. The Snap Store is disabled: “Following the decision made by Canonical to replace parts of APT with Snap and have the Ubuntu Store install itself without users knowledge or consent, the Snap Store is forbidden to be installed by APT in Linux Mint 20”, with the re-enable procedure published; the stated argument is about auditability — “This is a store we can't audit, which contains software nobody can patch” — and about APT packages running snap commands as root.\n\nThe second is a removal: “ZFS support was removed from the installer. This feature wasn't used by many people and required a significant amount of work and maintenance to be properly tested and supported.” Cutting a feature for its maintenance cost is a documented decision, distinct from the base not offering it.\n\nOther documented defaults bearing on security: guest sessions “can” be enabled in the Login Window utility “but this option is now disabled by default”; the shutdown timeout is set to 10 seconds in /etc/systemd/system.conf.d/50_linuxmint.conf with an override convention (60_custom.conf); home-directory encryption carries a published regression — “in Mint 20 and newer releases, your encrypted home directory is no longer unmounted on logout”; and for LMDE 7 “the root account is locked by default”.\n\nNo Mint-specific firewall tool, MAC policy or secure-boot signing scheme is documented in the consulted pages; the word “firewall” on the project's sites refers to a web application firewall guarding the website. Where Mint documents security-adjacent behaviour it concerns drivers and sessions: proprietary drivers are “not installed by default” and go through Driver Manager, which can work from the installation medium when offline.",
+    "privacy": "The project publishes a privacy policy, and it is scoped to its internet properties: “This is herein referred to as “products” is a set of Internet websites, products and services operated by the Linux Mint project”. Its stated principle is minimisation — “we are committed to gathering as little personal data as possible, ideally and in mosts cases, no data at all… We do not look at personal data as an asset, but as a liability” — and it claims GDPR compliance with a caveat that laws in other countries may differ. Advertising and measurement are documented with their scope. Analytics are limited to one path: “Linux Mint uses Google Analytics for pages which URL starts with linuxmint.com/start/. The information collected is anonymized and is used by Linux Mint to have a rough idea of how successful each particular release is.” Advertising is the funding source and brings third-party cookies: “On all websites using Adsense, including Linux Mint's, Google use cookies to track your web activity…”. Opt-outs published are browser settings, Google Ads Settings and aboutads.info; the privacy contact is privacy@linuxmint.com. That is the whole of what the policy covers. Nothing in the consulted pages describes data collection by the installed operating system, an installation-time reporting mechanism, or a privacy statement for the desktop. The documentary conclusion is narrow: Linux Mint documents privacy for its website, forums, chat and donation flows, and publishes no equivalent statement for the system it ships — which is an absence of documentation, not evidence that the installed system collects nothing or collects something. Named collection on the websites is listed: server software (“Apache, Wordpress, Akismet, PHPBB which receive and record networking information sent by your computer and your browser”), account registration and optional profile fields, third-party single sign-on adopted to stop storing credentials, and donation records kept and “shared with accountants and the Irish tax authorities”.",
+    "desktop": "Cinnamon is the desktop the project develops; its repository describes it as “A Linux desktop featuring a traditional layout, built from modern technology and introducing brand new innovative features”, and the download page as “primarily developed for and by Linux Mint”. MATE and Xfce are published as editions on the same base rather than as Mint projects, with MATE presented as “the continuation of GNOME 2”. Sessions: the shipped default is an X11 session, and a Wayland session of Cinnamon can be selected at the login screen; the strongest documented statement about Wayland in the consulted material is work-in-progress for the next release — “Cinnamon received support for Fcitx5 with full Wayland/X11 parity”, and an experiment with “the new Wayland screensaver, which we want to test early rather than later in the cycle”. No page consulted declares Wayland to be the default session of a published release, and no page declares a date for such a change. Documented defaults worth naming: PipeWire is the sound server (“Linux Mint moved to a new sound server called Pipewire”, with a documented rollback to PulseAudio), libinput is the default touchpad driver with synaptics taking priority if both are installed, and a slimmer Ubuntu font family ships as standard with the old package retained by refusing its update. The XApp family — “Cross-desktop libraries and common resources”, which “started within Linux Mint but has grown a lot since then” and is “used in many desktops and distributions” — is where new applications land: a redesigned document library, an EPUB reader and a calendar (“Clockenstein… supports multiple calendars and works with local calendars, Google Calendar and CalDAV services such as Nextcloud”) are announced for the next release, the calendar with its own daemon and notification agent.",
+    "derivatives": "Linux Mint publishes no register of distributions derived from it, and no page promotes or lists such projects. Cinnamon and XApp are used by other distributions, according to the project's own account, but that is an outgoing relation (components adopted elsewhere), not a derivative relationship. What the documentation does not support is the shorthand “Ubuntu with a theme”: the tools that decide what gets installed, when a kernel is replaced, which repositories are enabled and whether the Snap store can be installed at all are written and shipped by Linux Mint, and each of those decisions is documented as a Mint decision. No page consulted lists projects derived from Linux Mint, and the project publishes no derivative register — unlike its documentation of Cinnamon and XApp as software “used in many distributions”, which is an outgoing relation rather than a downstream one.",
+    "advantages": [
+      "Five years per release",
+      "Three editions one base",
+      "Own desktop and tools",
+      "ISO verify built in",
+      "Kernels kept side by side",
+      "Snapshot upgrade flow",
+      "Mint's own repository",
+      "Dated per-line notes"
+    ],
+    "disadvantages": [
+      "Support inherited from base",
+      "No advisory list published",
+      "No major-version skip",
+      "Secure Boot manual",
+      "Drivers installed on demand",
+      "HWE limited by DKMS",
+      "Snap store blocked off",
+      "x86_64 images only"
+    ],
+    "who_is_it_for": [
+      "Desktop and laptop users who want one long-term-support base per major release, with a dated expiry published per series (22.x until April 2029) and point releases that share it.",
+      "People arriving from Windows or macOS who want a documented desktop: three editions on the same base, codecs and drivers as explicit post-install steps, and an in-place upgrade path described step by step.",
+      "Resellers and internal fleets using the documented OEM install mode, including LMDE when the Ubuntu relationship must be measured or removed while keeping the same desktop and tools.",
+      "Administrators who want recovery designed in: Timeshift snapshots as the first upgrade step, multiple kernels kept side by side with a documented revert, and images verifiable through mint-iso-verify."
+    ],
+    "who_is_it_not_for": [
+      "ARM, POWER or other non-x86_64 targets: the mirrors publish only 64-bit images and no other architecture is announced, and no hardware certification programme is documented.",
+      "Anyone who needs a security process published by the distribution itself — an advisory feed, a CVE index or a fix window — since Mint's pages send the reader to the Ubuntu or Debian release notes instead.",
+      "Users who want the newest stack continuously: the model is one LTS base with frozen point releases, and as of April 2026 the project still declares the future minor-release policy undecided.",
+      "Setups that need Secure Boot as a documented guarantee, since the installation guide's remedy for a Secure Boot Violation is to avoid third-party software or disable it, while the “supports SecureBoot” claim concerns an installer in development."
+    ],
+    "verdict": "Linux Mint is documented as a desktop distribution that keeps Ubuntu's packaging and archive relationship while owning the parts that decide how the system changes over time: the desktop, the update front-end, the kernel policy, the sources, the installer tools and the release notes.\n\nIts shape follows from two published decisions: track only long-term-support bases, and answer regressions with snapshots and multiple kernels rather than with a rolling archive. Where it deviates from the base, it says so with a reason and a date — the Snap store policy, the removal of ZFS from the installer, the change of sound server, the 10-second shutdown timeout.\n\nThe same documentation leaves three things open, and they are the practical limits of choosing Mint on its own terms: no security process is published by the project itself, no privacy statement exists for the installed system, and the next cycle's strategy was still undecided when announced. A reader who needs any of those to be documented has to evaluate the base and the project together."
+  },
+  "components": [
+    {
+      "id": "cinnamon",
+      "name": "Cinnamon",
+      "role": "desktop_environment",
+      "note": "Mint's own desktop, described by its repository as “a Linux desktop featuring a traditional layout, built from modern technology”, and by the download page as “primarily developed for and by Linux Mint”. Spices (applets, desklets, extensions, themes) have to be updated before a system upgrade, per the official upgrade instructions."
+    },
+    {
+      "id": "apt",
+      "name": "APT",
+      "role": "package_manager",
+      "note": "The base's package manager, documented from Mint's side through the tools that wrap it: mintsources adjusts repositories, mirrors and PPAs, and the Snap policy is enforced by forbidding installation through APT. Mint's own READMEs build and install components with dpkg and dpkg-buildpackage."
+    },
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "The low-level layer of the .deb packaging, unchanged by Mint: mintinstall and mintsources READMEs instruct building with dpkg-buildpackage --no-sign and installing with dpkg -i."
+    },
+    {
+      "id": "mintinstall",
+      "name": "Software Manager (mintinstall)",
+      "role": "package_manager",
+      "note": "“Software Manager for Linux Mint” per its repository; the About page claims it as one of the distribution's strengths (“one of the best software managers”). Its README documents build steps and points translations to Launchpad."
+    },
+    {
+      "id": "mintupdate",
+      "name": "Update Manager (mintupdate)",
+      "role": "update_tool",
+      "note": "“The Linux Mint Update Manager”. Documents three kinds of update (software, security, kernel), multi-kernel installation with removal restrictions, DKMS status checking, and a command-line front-end mintupdate-cli. Kernel management is being moved out of it into the System Administration tool."
+    },
+    {
+      "id": "mintsources",
+      "name": "Software Sources (mintsources)",
+      "role": "update_tool",
+      "note": "Configuration tool documented as adjusting repositories, selecting a mirror and including PPAs; developed so that Mint could replace Ubuntu's software-properties, per its own README."
+    },
+    {
+      "id": "mintdrivers",
+      "name": "Driver Manager (mintdrivers)",
+      "role": "update_tool",
+      "note": "“Driver Manager” — the driver-handling part of Ubuntu's Software Properties GTK “stripped out… and turned into a standalone tool”. Installation guide: first post-install step, works offline from the installation medium."
+    },
+    {
+      "id": "timeshift",
+      "name": "Timeshift",
+      "role": "update_tool",
+      "note": "System snapshot utility present “in all versions of Linux Mint”; documented as RSYNC-based, incremental, automatable daily and at boot, and scoped to the operating system only — personal data is neither included nor affected."
+    },
+    {
+      "id": "mintstick",
+      "name": "USB Tool (mintstick)",
+      "role": "installer",
+      "note": "“a graphical tool that allows you to format USB sticks and create bootable USB sticks”, which is the documented way to prepare installation media."
+    },
+    {
+      "id": "mintbackup",
+      "name": "Backup Tool (mintbackup)",
+      "role": "application",
+      "note": "“The Backup Tool… makes it easy to save and restore backups of files within the home directory” — the documented counterpart to Timeshift's system scope."
+    },
+    {
+      "id": "mint-upgrade-info",
+      "name": "Upgrade metadata (mint-upgrade-info)",
+      "role": "update_tool",
+      "note": "“Metadata used to upgrade from one minor release to the next”. An upgrade is gated on having its latest version; a lagging mirror is documented as a cause of the upgrade not appearing."
+    },
+    {
+      "id": "live-installer",
+      "name": "Live installer (live-installer)",
+      "role": "installer",
+      "note": "“A live installer for the Debian edition”, which the project announced as the installer that will replace Ubiquity on both lines, with OEM, BIOS/EFI, SecureBoot and LVM/LUKS support listed as its capabilities."
+    },
+    {
+      "id": "ubiquity",
+      "name": "Ubiquity",
+      "role": "installer",
+      "note": "The installer being displaced: the announced change is that the next release “will use the same installer as LMDE”, i.e. live-installer “ported from LMDE to replace Ubiquity”."
+    },
+    {
+      "id": "xapp",
+      "name": "XApp",
+      "role": "library",
+      "note": "“Cross-desktop libraries and common resources”, started within Linux Mint and now used in other desktops and distributions; the project's August 2026 news post lists new XApp applications (a redesigned document library, an EPUB reader, a calendar with its own daemon and notification agent)."
+    },
+    {
+      "id": "pipewire",
+      "name": "PipeWire",
+      "role": "technology",
+      "note": "Documented as adopted by the distribution — “Linux Mint moved to a new sound server called Pipewire” — with inxi -A to check the running server and a documented purge path back to PulseAudio."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "upstream_of",
+      "note": "The base of every non-LMDE release: the project pins series to Ubuntu LTS releases (22.x to Noble, 21.x to Jammy), tells users to read the Ubuntu release notes, publishes its package index alongside packages.ubuntu.com, translates on Launchpad and links Ubuntu bug reports in its own release notes."
+    },
+    {
+      "id": "lmde",
+      "name": "Linux Mint Debian Edition",
+      "relation": "related",
+      "note": "Mint's own second line rather than a third party's derivative: same desktop and tools on a Debian 13 (Trixie) base, documented as existing to test how far Mint could go without Ubuntu. Both lines are covered by this record; LMDE 7 “Gigi” was released 2025-10-14 and has no published expiry date."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_of",
+      "note": "The base of LMDE — “The package base is provided by Debian instead” — and part of the About page's phrase “Based on Debian and Ubuntu”. For the Ubuntu-based editions, the relation to Debian is inherited through Ubuntu rather than documented directly by Mint."
+    },
+    {
+      "id": "opensuse-tumbleweed",
+      "name": "openSUSE Tumbleweed",
+      "relation": "alternative",
+      "note": "Another desktop Linux distribution with an opposite update structure: dated snapshots published when automated tests pass, with no fixed release and no support term to expire. Recorded as a difference of model, not a ranking."
+    },
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "A rolling, single-architecture distribution whose documentation assigns maintenance responsibility to the user; contrasted here only on documented structure (update model, package tooling, governance), not on quality."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "A distribution with its own archive, desktop defaults and governance; listed as an alternative arrangement of the same choices (base, cadence, support window), with no comparative claim made."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Linux Mint 22.3 “Zena” (Cinnamon, MATE, Xfce)",
+      "description": "The current published line, on Ubuntu 24.04 “Noble”, announced 2026-01-13 with images dated 2026-01-08, supported until April 2029, kernel 6.14 in the regular images and 7.0 / 6.17 in the HWE images."
+    },
+    {
+      "name": "Linux Mint 22, 22.1 and 22.2",
+      "description": "Earlier point releases of the same series, all listed as supported until April 2029; 22.1 is singled out in the 22.3 release notes as shipping the LTS kernel 6.8 for users affected by HWE 6.14 issues."
+    },
+    {
+      "name": "Linux Mint 21.x (Vera, Vanessa, Victoria, Virginia)",
+      "description": "The previous series, on Ubuntu 22.04 “Jammy”, supported until April 2027 and still listed on the “All versions” page; 21.3 is the required stepping stone for upgrading from 21 to 22."
+    },
+    {
+      "name": "LMDE 7 “Gigi” (Cinnamon)",
+      "description": "Linux Mint Debian Edition on Debian 13 Trixie, released 2025-10-14, described as “Long term support release (LTS).” without a published expiry; same desktop and tools, live-installer with expert mode, root account locked by default."
+    },
+    {
+      "name": "HWE images",
+      "description": "Hardware Enablement variants of the current release with a newer kernel, published per release when available and recommended only when the regular image does not boot, because proprietary drivers and third-party modules may lag."
+    },
+    {
+      "name": "Mint 23 “Alfa” (in development)",
+      "description": "Provisional name and version for the next release, planned for Christmas 2026 per the 2026-04-16 announcement, on Ubuntu 26.04 LTS with kernel 7.0, Cinnamon 6.7-unstable, CJS 140 and the live-installer replacing Ubiquity; listed in the repository index as “alfa”. Not a published release."
+    },
+    {
+      "name": "Point releases and the release strategy",
+      "description": "Whether minor releases stay frozen or become backported/semi-rolling like LMDE is documented as undecided as of April 2026, alongside the cycle length and the possible introduction of alpha milestones."
+    }
+  ],
+  "links": {
+    "homepage": "https://linuxmint.com/",
+    "about": "https://linuxmint.com/about.php",
+    "faq": "https://linuxmint.com/faq.php",
+    "downloads": "https://linuxmint.com/download.php",
+    "versions": "https://linuxmint.com/download_all.php",
+    "release_notes": "https://linuxmint.com/rel_zena.php",
+    "hwe_images": "https://linuxmint.com/hwe.php",
+    "installation_guide": "https://linuxmint-installation-guide.readthedocs.io/en/latest/",
+    "user_guide": "https://linuxmint-user-guide.readthedocs.io/en/latest/",
+    "blog": "https://blog.linuxmint.com/",
+    "repository": "http://packages.linuxmint.com/",
+    "github": "https://github.com/linuxmint",
+    "forums": "https://forums.linuxmint.com"
+  },
+  "sources": [
+    {
+      "title": "Linux Mint — About: purpose, positioning, history and the 2014 LTS-only decision",
+      "url": "https://linuxmint.com/about.php",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "Purpose wording, six success claims including “no regressions” and “about 30,000 packages”, Ada/Barbara 2006, 2007 team formation, 2011 GNOME 3 “catastrophe” and the MATE/Cinnamon decisions, 2012-present editions and LTS-only choice, cross-distribution work, trademark footer"
+    },
+    {
+      "title": "Linux Mint FAQ — scope, LTS statement, licensing and proprietary software positions",
+      "url": "https://linuxmint.com/faq.php",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "Desktop/laptop scope, “supported for a duration of 5 years”, selling and OEM pre-install permissions, logo use, proprietary drivers not installed by default, “Open Source as a choice, not as a constraint”"
+    },
+    {
+      "title": "Team page — the five documented areas of the project",
+      "url": "https://linuxmint.com/teams.php",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "Development (GitHub), administration and moderation, design, translations (Launchpad), QA; no charter, board, election or code of conduct published"
+    },
+    {
+      "title": "Get Involved — funding model and how contributions are organised",
+      "url": "https://linuxmint.com/getinvolved.php",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "“revenue from advertisements and your donations… to provide an income for the team”; sponsorship as “regular and predictable income”; bug reporting, translation and community support channels; funding.php itself returns 404"
+    },
+    {
+      "title": "Downloads — the three editions and their published descriptions",
+      "url": "https://linuxmint.com/download.php",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "Cinnamon “most popular… primarily developed for and by Linux Mint”, Xfce “lightweight… lighter on resource usage”, MATE “continuation of GNOME 2… default between 2006 and 2011”"
+    },
+    {
+      "title": "LMDE page — definition, purpose and the Debian base",
+      "url": "https://linuxmint.com/download_lmde.php",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "“Its goal is to ensure Linux Mint can continue to deliver the same user experience if Ubuntu was ever to disappear”, “assess how much we depend on Ubuntu”, “as similar as possible… without using Ubuntu”"
+    },
+    {
+      "title": "All versions — per-release package base and support status",
+      "url": "https://linuxmint.com/download_all.php",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "22.x on Ubuntu Noble supported until April 2029; 21.x on Ubuntu Jammy until April 2027; LMDE 7 on Debian Trixie “Long term support release (LTS).” with no expiry date"
+    },
+    {
+      "title": "Edition page for 22.3 Cinnamon — image size, verification files, HWE pointer",
+      "url": "https://linuxmint.com/edition.php?id=326",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "“Size: 2.9GB”, torrent/direct/mirror paths, sha256sum.txt and .gpg buttons, link to release notes and installation guide, “If this release does not boot on your computer, try an HWE ISO”"
+    },
+    {
+      "title": "Release notes for Linux Mint 22.3 “Zena” — known issues and documented defaults",
+      "url": "https://linuxmint.com/rel_zena.php",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "“supported until April 2029”, HWE 6.14 issues (VirtualBox, NVIDIA 470), 10s shutdown timeout with 50_linuxmint.conf, Snap Store disabled, home encryption caveat, guest sessions disabled by default, libinput/synaptics, ZFS removed from installer, “based on Ubuntu 24.04. Make sure to read the Ubuntu release notes”, Pipewire move, font change, hardware regressions paragraph"
+    },
+    {
+      "title": "Release notes for LMDE 7 “Gigi” — Debian base and installer specifics",
+      "url": "https://linuxmint.com/rel_gigi.php",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "“LMDE 7 is based on Debian 13 Trixie”, live session credentials, “sudo live-installer-expert-mode”, swap automount, “The root account is locked by default”, OEM root terminal shortcut"
+    },
+    {
+      "title": "HWE ISOs page — definition, kernel table and warning",
+      "url": "https://linuxmint.com/hwe.php",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "“Hardware Enablement… a kernel which is newer than the one in the regular ISO”, “Only use an HWE ISO if the regular ISO does not work on your computer”, 22.3: 6.14 regular, 7.0 / 6.17 HWE"
+    },
+    {
+      "title": "Mirrors page — the two rsync archives and their refresh cadence",
+      "url": "https://linuxmint.com/mirrors.php",
+      "type": "infrastructure",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "“pub.linuxmint.com::pub, Once a day, 200GB” and “rsync-packages.linuxmint.com::packages, Twice a day, 50GB”; mirror operators contacted at root@linuxmint.com; download mirror list by country"
+    },
+    {
+      "title": "Verify page — entry point to the ISO verification procedure",
+      "url": "https://linuxmint.com/verify.php",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "“Anyone can produce fake ISO images, it is your responsibility to check you are downloading the official ones”; “All download mirrors provide the ISO images, a sha256sum.txt file and a sha256sum.txt.gpg file”"
+    },
+    {
+      "title": "Privacy & Cookies policy — websites, forums, advertising and donations",
+      "url": "https://linuxmint.com/privacy.php",
+      "type": "legal",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "Scope “Internet websites, products and services operated by the Linux Mint project”; minimisation principles; GDPR claim with non-EU caveat; Apache/Wordpress/Akismet/PHPBB logs; OAuth sign-on; Google Analytics only under /start/; Adsense cookies; PayPal/Stripe records shared with Irish tax authorities; privacy@linuxmint.com"
+    },
+    {
+      "title": "Release announcement — Linux Mint 22.3 “Zena” released",
+      "url": "https://blog.linuxmint.com/?p=4981",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "date": "2026-01-13",
+      "publisher": "Linux Mint blog",
+      "note": "Dated 2026-01-13 by Clem; “long term support release which will be supported until 2029”; system requirements 2GB/4GB RAM, 20GB/100GB disk, 1024x768; per-mirror download lists; pointer to verify.php; 146 comments not used as sources"
+    },
+    {
+      "title": "Upgrade instructions — How to upgrade to Linux Mint 22.3",
+      "url": "https://blog.linuxmint.com/?p=4980",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "date": "2026-01-13",
+      "publisher": "Linux Mint blog",
+      "note": "Timeshift snapshot first, Cinnamon spices update, Refresh then “Edit->Upgrade to Linux Mint 22.3 Zena”, replace configuration files, mint-upgrade-info 1.3.0+ requirement, mirror lag workaround, Cinnamon menu reset recommendation, screensaver recovery commands"
+    },
+    {
+      "title": "LMDE 7 “Gigi” released — requirements and download paths",
+      "url": "https://blog.linuxmint.com/?p=4924",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "date": "2025-10-14",
+      "publisher": "Linux Mint blog",
+      "note": "Dated 2025-10-14; LMDE definition repeated; identical system requirements to the main line; torrent and mirror lists; lmde-7-cinnamon-64bit.iso naming"
+    },
+    {
+      "title": "Monthly News – March 2026 — release strategy, Mint 23 “Alfa”, installer change",
+      "url": "https://blog.linuxmint.com/?p=5019",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "date": "2026-04-16",
+      "publisher": "Linux Mint blog",
+      "note": "“longer development lifecycle”, “planned for Christmas 2026”, “same installer as LMDE”; undecided release strategy verbatim; temporary name Alfa/version 23; Alfa contents (Ubuntu 26.04 LTS, kernel 7.0, Cinnamon 6.7-unstable, CJS 140, live-installer with OEM/BIOS/EFI/SecureBoot/LVM/LUKS); “benefits of the longer cycle”"
+    },
+    {
+      "title": "Monthly News – July 2026 — HWE kernels, kernel management, Fcitx5",
+      "url": "https://blog.linuxmint.com/?p=5050",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "date": "2026-08-10",
+      "publisher": "Linux Mint blog",
+      "note": "New HWE ISOs for 22.3 with kernel 7.0; kernel management moved to the System Administration tool, series-based, shared by Mint and LMDE, protection and cleanup rules; environment variables page; “Cinnamon received support for Fcitx5 with full Wayland/X11 parity”"
+    },
+    {
+      "title": "Monthly News – August 2026 — XApp website and new applications",
+      "url": "https://blog.linuxmint.com/?p=5067",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "date": "2026-09-11",
+      "publisher": "Linux Mint blog",
+      "note": "“the features and improvements presented in this blog post are a preview”; XApp “started within Linux Mint… used in many desktops and distributions”, new site xapp-project.org; Thingy/Library redesign by document type; Xepub reader; Clockenstein calendar with daemon, notification agent, CalDAV/Google Calendar support"
+    },
+    {
+      "title": "LMDE 7 announcement — upgrade paths for LMDE users",
+      "url": "https://blog.linuxmint.com/?p=4923",
+      "type": "official",
+      "accessed": "2026-09-19",
+      "date": "2025-10-14",
+      "publisher": "Linux Mint blog",
+      "note": "Cited as the published LMDE 6 to 7 upgrade route, referenced from the LMDE 7 release announcement"
+    },
+    {
+      "title": "Linux Mint User Guide — Upgrades: support table and upgrade paths",
+      "url": "https://linuxmint-user-guide.readthedocs.io/en/latest/upgrade.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project (Read the Docs)",
+      "note": "“Each major Linux Mint release is supported for 5 years”; series table with April 2023/2025/2027/2029; “There are no other upgrade paths than the ones listed above”; minor vs major difficulty; “If you cannot upgrade perform a fresh installation”"
+    },
+    {
+      "title": "Linux Mint User Guide — Update Manager: regressions, update types, kernels, CLI",
+      "url": "https://linuxmint-user-guide.readthedocs.io/en/latest/mintupdate.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project (Read the Docs)",
+      "note": "Definition of regressions and the recommendation to combine updates with snapshots; three update types; security-vs-software phrasing; multi-kernel behaviour, GRUB selection, DKMS status and advice against newer kernel series with proprietary drivers; mintupdate-cli commands"
+    },
+    {
+      "title": "Linux Mint User Guide — Snap Store: criticism and the disabling decision",
+      "url": "https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project (Read the Docs)",
+      "note": "“The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical”; criticism sections (centralised control, APT backdoor); “forbidden to be installed by APT in Linux Mint 20”; comparison with Flatpak flexibility"
+    },
+    {
+      "title": "Linux Mint User Guide — Edge images page (stale: documents 21.3)",
+      "url": "https://linuxmint-user-guide.readthedocs.io/en/latest/edge.html",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project (Read the Docs)",
+      "note": "Definition of the “edge” image (“ships with newer components to be able to support the most modern hardware chipsets and devices”) and its warning (“not as stable as the other ISOs and may not support as many proprietary drivers”); the page still names “Linux Mint 21.3 Cinnamon Edge” as latest, so it is used only for the concept, not for current availability"
+    },
+    {
+      "title": "Linux Mint Installation Guide — verify, timeshift, drivers, codecs, efi, oem",
+      "url": "https://linuxmint-installation-guide.readthedocs.io/en/latest/",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project (Read the Docs)",
+      "note": "Integrity vs authenticity definitions; mint-iso-verify; sha256sum and GPG key import with fingerprint 27DEB15644C6B3CF3BD7D291300F846BA25BAE09; Timeshift RSYNC setup steps; Driver Manager as first post-install step with offline media path; codec installation; Secure Boot violation remedies; OEM flow"
+    },
+    {
+      "title": "packages.linuxmint.com — the project's own package index by codename",
+      "url": "http://packages.linuxmint.com/",
+      "type": "repository",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "Binary and source listings per release codename: zena, zara, xia, wilma, vera, victoria, virginia, vanessa, alfa, gigi, adrien; no package count published"
+    },
+    {
+      "title": "Kernel.org mirror — 22.3 image and checksum files",
+      "url": "https://mirrors.edge.kernel.org/linuxmint/stable/22.3/",
+      "type": "repository",
+      "accessed": "2026-09-19",
+      "publisher": "mirrors.edge.kernel.org",
+      "note": "Three 64-bit ISOs dated 2026-01-08 (3 GB each), sha256sum.txt and sha256sum.txt.gpg dated 2026-01-11; three SHA256 lines naming cinnamon/mate/xfce images; directory also shows stable, hwe, testing and debian trees at the mirror root"
+    },
+    {
+      "title": "github.com/linuxmint/mintinstall — README and repository description",
+      "url": "https://raw.githubusercontent.com/linuxmint/mintinstall/master/README.md",
+      "type": "code",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint on GitHub",
+      "note": "“Software Manager for Linux Mint”; build via dpkg-buildpackage --no-sign and install via dpkg -i; “Please use Launchpad to translate Mintinstall”"
+    },
+    {
+      "title": "github.com/linuxmint/mintsources — README",
+      "url": "https://raw.githubusercontent.com/linuxmint/mintsources/master/README.md",
+      "type": "code",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint on GitHub",
+      "note": "“This is a software configuration tool, mintsources, allows the user to adjust sofware repositories, select a mirror, include PPAs and do package management tasks”"
+    },
+    {
+      "title": "github.com/linuxmint/mintdrivers — README",
+      "url": "https://raw.githubusercontent.com/linuxmint/mintdrivers/master/README.md",
+      "type": "code",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint on GitHub",
+      "note": "“essentially the upstream part of Software Properties GTK which handles drivers management, stripped out of the rest of the application and turned into a standalone tool… allows us to replace software-properties”"
+    },
+    {
+      "title": "github.com/linuxmint — repository descriptions used to name components",
+      "url": "https://github.com/linuxmint/mintupdate",
+      "type": "code",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint on GitHub",
+      "note": "mintupdate “The Linux Mint Update Manager”; mintinstall “Software Manager”; mintdrivers “Driver Manager”; mintreport “Troubleshooting tool”; xapp “Cross-desktop libraries and common resources”; live-installer “A live installer for the Debian edition”; cinnamon “A Linux desktop featuring a traditional layout…”; mint-upgrade-info “Metadata used to upgrade from one minor release to the next”"
+    },
+    {
+      "title": "github.com/linuxmint/timeshift, mintstick, mintbackup, cinnamon, xapp — READMEs",
+      "url": "https://raw.githubusercontent.com/linuxmint/mintstick/master/README.md",
+      "type": "code",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint on GitHub",
+      "note": "Timeshift as “an application that provides functionality similar to the System Restore feature in Windows and the Time Machine tool in Mac OS… incremental snapshots of the file system at regular intervals”; mintstick “format USB sticks and create bootable USB sticks”; mintbackup “The Backup Tool… save and restore backups of files within the home directory”"
+    },
+    {
+      "title": "github.com/linuxmint/hypnotix and warpinator — application READMEs",
+      "url": "https://raw.githubusercontent.com/linuxmint/hypnotix/master/README.md",
+      "type": "code",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint on GitHub",
+      "note": "“Hypnotix is an IPTV streaming application with support for live TV, movies and series”; “Warpinator - send and receive files across a local network”, with a warning in its README about fake websites (branche master ; /main/ renvoie 404)"
+    },
+    {
+      "title": "Linux Mint — official links page (project, community and code entry points)",
+      "url": "https://linuxmint.com/links.php",
+      "type": "documentation",
+      "accessed": "2026-09-19",
+      "publisher": "Linux Mint project",
+      "note": "La page « Links » sépare les entrées en « Official » (site, forums, chat rooms, community website), « Social » (Github, Facebook, Twitter, Mastodon) et « Community » (Reddit, Discord, IRC, mintCast), et ajoute « Linux Mint officially recognizes and promotes the following communities ». Le pied de page, présent sur toutes les pages, porte la phrase sur le code source : « Almost all the packages we distribute are open-source. You can find their source code on https://packages.ubuntu.com , http://packages.linuxmint.com or https://github.com/linuxmint. ». Les références à Launchpad utilisées dans cette fiche viennent des README des outils (« Please use Launchpad to translate Mintinstall: https://translations.launchpad.net/linuxmint/latest/ ») et des notes de version 22.3 qui citent des bogues Ubuntu (xorg-server 1861609, gnome-session 1734541, ntfs-3g 2062972) ; launchpad.net ne résolvait pas depuis ce sandbox (DNS IPv6 seul, constaté en phase 7), ces adresses restent citées en texte et ne sont pas publiées comme URL de la fiche."
+    }
+  ],
+  "last_verified": "2026-09-19"
+}
