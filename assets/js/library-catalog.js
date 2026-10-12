@@ -63,6 +63,9 @@ var LIBRARY_RESOURCES = [
   "kicksecure",
   "pureos",
   "secureblue",
+  "network-security-toolkit",
+  "pentoo",
+  "caine",
   // Development test fixtures — not real technologies. Safe to remove.
   "test-linux",
   "test-desktop",

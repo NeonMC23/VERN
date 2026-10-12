@@ -1,0 +1,164 @@
+{
+  "id": "pentoo",
+  "name": "Pentoo",
+  "type": "operating_system",
+  "summary": "A specialized security auditing and penetration testing distribution based on Gentoo Hardened, featuring a kernel patched for wireless frame injection, a dedicated Portage overlay, and comprehensive SDR tools.",
+  "tags": [
+    "linux",
+    "gentoo-based",
+    "security",
+    "penetration-testing",
+    "wireless-injection",
+    "sdr",
+    "portage",
+    "xfce",
+    "hardened"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later and upstream open-source tool licenses",
+  "last_verified": "2026-10-12",
+  "content": {
+    "introduction": "Pentoo is an open-source, security-focused live operating system based on Gentoo Linux, engineered specifically for penetration testing, vulnerability assessment, and wireless security auditing. Established in 2005 by Rick Farina ('Zero_Chaos'), Jens Pranaitis ('solar'), and Anton Bolshakov, Pentoo couples the performance and compiler optimizations of Gentoo with a hardened kernel and a curated suite of offensive security applications. Operating as a rolling release, Pentoo delivers bleeding-edge security tooling across bare-metal workstations, live USB media with encrypted persistence, and virtualized audit environments.",
+    "what_is_it": "Technically, Pentoo is a specialized live distribution built upon Gentoo Linux Hardened. It utilizes the Portage package manager supplemented by the official `pentoo-overlay`, which maintains ebuilds for hundreds of specialized security applications. Pentoo features a custom-compiled Linux kernel incorporating mac80211 wireless frame injection patches, out-of-the-box support for Software Defined Radio (SDR) hardware, GPU-accelerated cryptographic hash cracking via OpenCL and CUDA, and an Xfce 4 desktop environment customized with a hierarchical menu aligned with the phases of a penetration test.",
+    "origin_and_history": "Pentoo was launched in 2005 as one of the earliest live Linux distributions dedicated to information security, preceding modern Debian-based platforms. Built to take advantage of Gentoo's source-based modularity, Pentoo allowed security practitioners to compile security utilities with hardware-specific optimizations. Over its continuous development history, the project pioneered out-of-the-box wireless injection support, established one of the largest specialized Gentoo overlays with over 20,000 commits, and transitioned to modern 64-bit amd64 images featuring automated system updates via `pentoo-updater`.",
+    "governance_and_community": "Pentoo is developed and directed by an independent community of cybersecurity specialists led by core developer Rick Farina. Operating without corporate ownership or commercial licensing, the project coordinates package maintenance, bug tracking, and architectural decisions transparently on GitHub (`github.com/pentoo/pentoo-overlay`). Community support and real-time collaboration are maintained across Discord, Libera.Chat IRC (#pentoo), and Telegram channels. Development is sustained through volunteer efforts and institutional mirror hosting in Switzerland and the United States.",
+    "gentoo_hardened_and_toolchain_security": "At its foundational layer, Pentoo adopts the Gentoo Hardened profile. The toolchain compiles applications with aggressive security mitigations, including GCC Stack Smashing Protector (SSP), Position Independent Executables (PIE) for full Address Space Layout Randomization (ASLR), and strict format string auditing. This hardened baseline prevents buffer overflows and memory corruption bugs in testing tools from being exploited by hostile targets during security engagements.",
+    "wireless_injection_and_kernel_patches": "A hallmark feature of Pentoo is its custom Linux kernel patched for wireless security evaluation. The kernel incorporates downstream driver patches enabling monitor mode (promiscuous capture) and raw 802.11 wireless frame injection across numerous Wi-Fi chipsets (Atheros, Realtek, MediaTek). These capabilities allow security auditors to perform standards-based wireless protocol evaluations, WPA2/WPA3 enterprise handshakes auditing, and rogue access point detection without manual kernel recompilation.",
+    "software_defined_radio_and_bluetooth": "Pentoo provides industry-leading coverage of radiofrequency and wireless protocols. The distribution integrates comprehensive Software Defined Radio (SDR) toolchains, including GNU Radio, HackRF, RTL-SDR, BladeRF, and USRP libraries. For short-range wireless assessments, Pentoo bundles Bluetooth and Bluetooth Low Energy (BLE) capture and auditing tools such as Ubertooth, crackle, btproxy, and the bluez-tools framework, allowing analysts to intercept and evaluate IoT communications in real time.",
+    "portage_overlay_and_package_management": "Package orchestration in Pentoo is governed by Gentoo's Portage package manager coupled with the `pentoo-overlay`. This structure allows advanced users to compile software directly from source code with custom USE flags, tailoring compiler optimizations to their CPU architecture (such as AVX-512 vector acceleration). To minimize maintenance downtime, the system provides pre-compiled binary package caches (binpkgs) and the `pentoo-updater` utility, which automates Portage tree synchronizations and dependency resolution.",
+    "live_boot_and_luks_persistence": "Pentoo is distributed primarily as an installable live hybrid ISO image supporting both modern UEFI and legacy BIOS systems. It can be run purely in system RAM (`toram` mode) for maximum throughput, deployed to USB flash drives with persistent storage encrypted via LUKS, or installed permanently onto internal SSDs via `pentoo-installer`. Persistent encrypted USB media ensure that captured network packets, wordlists, and client reports remain protected if the physical medium is lost.",
+    "threat_model_and_operational_limits": "Pentoo defines clear operational parameters regarding its intended usage:\n\n- Active Security Assessment: Pentoo is an offensive penetration testing workstation; emitted network probes and wireless injection packets are easily detected by intrusion detection systems.\n- No Universal Tor Routing: Pentoo does not tunnel general network traffic through Tor by default, transmitting traffic with the machine's real IP address unless manual proxy chains are established.\n- Advanced Administrative Complexity: The source-based nature of Gentoo requires administrators to understand Portage masked packages, USE flag resolution, and compilation troubleshooting.\n- Authorized Engagements: Tools included in Pentoo can disrupt production network operations and must be utilized strictly within authorized, contractually defined security audits.",
+    "privacy_and_telemetry": "Pentoo enforces an absolute zero-telemetry policy. The operating system contains no commercial tracking frameworks, usage reporting agents, or proprietary analytics daemons. Repository downloads and package updates connect exclusively to public Gentoo and GitHub mirrors without transmitting user identifiers or machine hardware signatures.",
+    "advantages": [
+      "Hardened operating system baseline leveraging Gentoo Hardened toolchain with SSP, PIE, and ASLR",
+      "Custom Linux kernel pre-patched for 802.11 wireless frame injection and promiscuous monitor mode",
+      "Unrivaled Software Defined Radio (SDR) support covering GNU Radio, HackRF, RTL-SDR, and USRP",
+      "Source-based Portage package management with extensive official pentoo-overlay maintaining over 20,000 commits",
+      "GPU-accelerated password hash recovery supporting OpenCL and CUDA for Hashcat and John the Ripper",
+      "Flexible deployment spanning live boot, toram execution, LUKS-encrypted persistence, and bare-metal installation",
+      "Zero telemetry policy with transparent open-source code and public community governance"
+    ],
+    "disadvantages": [
+      "Steep learning curve requiring deep familiarity with Gentoo Linux, Portage, and source compilation workflows",
+      "Software installation from source can consume significant CPU time and compilation overhead without binary caches",
+      "Does not route general internet traffic through the Tor network by default for online anonymity",
+      "Not intended as a general-purpose desktop operating system for routine office productivity or gaming",
+      "Monolithic Linux kernel architecture lacking the hypervisor-enforced compartmentalization of Qubes OS"
+    ],
+    "who_is_it_for": [
+      "Professional penetration testers, red teamers, and wireless security auditors assessing Wi-Fi, Bluetooth, and SDR targets",
+      "Experienced Gentoo Linux enthusiasts requiring a specialized, highly optimized offensive security workstation",
+      "Security researchers conducting reverse engineering, exploit development, and hardware radio frequency auditing",
+      "Auditors requiring a portable live USB environment with hardware-accelerated password recovery and LUKS persistence"
+    ],
+    "who_is_it_not_for": [
+      "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
+      "Beginners or casual Linux users unfamiliar with terminal operations, Portage USE flags, and kernel compilation",
+      "Users seeking a standard plug-and-play binary desktop distribution (better suited to Kali Linux or Parrot OS)",
+      "Legacy 32-bit hardware architectures"
+    ]
+  },
+  "components": [
+    {
+      "id": "pentoo-overlay",
+      "name": "Pentoo Portage Overlay",
+      "role": "package_repository_overlay",
+      "note": "Official Gentoo Portage overlay maintaining hundreds of specialized penetration testing and wireless ebuilds."
+    },
+    {
+      "id": "pentoo-kernel",
+      "name": "Wireless-Injection Hardened Kernel",
+      "role": "operating_system_kernel",
+      "note": "Custom-compiled Linux kernel with mac80211 patches enabling raw frame injection and promiscuous monitor mode."
+    },
+    {
+      "id": "pentoo-updater",
+      "name": "pentoo-updater Maintenance Suite",
+      "role": "system_updater",
+      "note": "Automated administration script managing Portage tree updates, USE flag synchronizations, and binary caches."
+    },
+    {
+      "id": "pentoo-sdr",
+      "name": "Software Defined Radio (SDR) Toolset",
+      "role": "radio_frequency_suite",
+      "note": "Comprehensive signal processing framework integrating GNU Radio, HackRF, BladeRF, and RTL-SDR drivers."
+    },
+    {
+      "id": "xfce-desktop-pentoo",
+      "name": "Categorized Xfce Desktop",
+      "role": "desktop_environment",
+      "note": "Customized Xfce 4 graphical interface with hierarchical menus organized by penetration testing methodology."
+    },
+    {
+      "id": "pentoo-installer",
+      "name": "Pentoo System Installer",
+      "role": "system_installer",
+      "note": "Dedicated installation framework supporting bare-metal deployment and LUKS-encrypted persistent USB setup."
+    }
+  ],
+  "relations": [
+    {
+      "id": "gentoo",
+      "name": "Gentoo",
+      "relation": "upstream_base",
+      "note": "Foundational operating system; Pentoo builds upon Gentoo Linux Hardened and the Portage packaging ecosystem."
+    },
+    {
+      "id": "kali-linux",
+      "name": "Kali Linux",
+      "relation": "peer_security_distribution",
+      "note": "Debian-based penetration testing distribution operating with binary packages, contrasting with Pentoo's source model."
+    },
+    {
+      "id": "parrot-os",
+      "name": "Parrot OS",
+      "relation": "peer_security_distribution",
+      "note": "Alternative Debian-derived cybersecurity distribution offering a broad offensive and defensive toolset."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Pentoo Full Edition",
+      "description": "Comprehensive penetration testing image (~5.6 GB) containing the exhaustive security, SDR, and reverse engineering catalog."
+    },
+    {
+      "name": "Pentoo Core Edition",
+      "description": "Lightweight live image (~2.5 GB) equipped with core wireless, network assessment, and command-line utilities."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.pentoo.ch/",
+    "repository": "https://github.com/pentoo/pentoo-overlay",
+    "iso_mirror": "https://pentoo.org/isos/Release/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=pentoo"
+  },
+  "sources": [
+    {
+      "title": "Pentoo Linux Official Portal",
+      "url": "https://www.pentoo.ch/",
+      "type": "official",
+      "date": "2026-08-12"
+    },
+    {
+      "title": "Pentoo ISO Repository and Release Directory",
+      "url": "https://pentoo.org/isos/Release/",
+      "type": "distribution_artifact",
+      "date": "2026-08-12"
+    },
+    {
+      "title": "Pentoo Portage Overlay GitHub Repository",
+      "url": "https://github.com/pentoo/pentoo-overlay",
+      "type": "repository",
+      "date": "2026-10-12"
+    },
+    {
+      "title": "DistroWatch Page for Pentoo",
+      "url": "https://distrowatch.com/table.php?distribution=pentoo",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}

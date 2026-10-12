@@ -1,0 +1,173 @@
+{
+  "id": "caine",
+  "name": "CAINE",
+  "type": "operating_system",
+  "summary": "A specialized Italian GNU/Linux live distribution engineered for digital forensics and incident response (DFIR), featuring system-level read-only write-blocking on all block devices, forensic triage scripts, and semi-automated reporting.",
+  "tags": [
+    "linux",
+    "ubuntu-based",
+    "forensics",
+    "dfir",
+    "write-blocking",
+    "incident-response",
+    "mate",
+    "caja-scripts",
+    "evidence-preservation"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL-2.0-or-later and upstream open-source tool licenses",
+  "last_verified": "2026-10-12",
+  "content": {
+    "introduction": "CAINE (Computer Aided INvestigative Environment) is an open-source, specialized GNU/Linux live distribution designed specifically for digital forensics, incident response, and judicial evidence preservation. Conceived in 2008 in Italy as an academic project by Giancarlo Giustini at the University of Modena and Reggio Emilia, CAINE is actively maintained and directed by lead forensic practitioner Nanni Bassetti. CAINE integrates professional open-source forensic utilities into a cohesive, user-friendly environment structured around the four formal phases of digital investigations: identification, preservation, analysis, and presentation.",
+    "what_is_it": "Technically, CAINE is built upon Ubuntu 24.04 LTS (Noble Numbat) 64-bit and is powered by the Linux 6.8.0 kernel. Its primary operational hallmark is an enforced software write-blocking architecture: upon system boot, all physical block devices (hard drives, solid-state disks, external USB media) are locked in read-only (RO) mode to guarantee evidence preservation. The operating system pairs the MATE desktop environment and the Caja file manager with customized forensic preview scripts, system-tray mount policy monitors, bit-stream acquisition engines, memory analysis suites, and a dedicated 'Windows Side' partition with portable incident response tools.",
+    "origin_and_history": "Project CAINE began in 2008 as Giancarlo Giustini's graduation thesis at the Information Engineering Department of the University of Modena e Reggio Emilia. Under the leadership of Nanni Bassetti, CAINE evolved into an internationally recognized independent project. Major versions introduced progressive enhancements: CAINE 8.0 ('Blazar') and 11.0 ('Wormhole') established UEFI and Secure Boot compatibility, while CAINE 13.0 ('Warpspeed') and the current CAINE 14.0 ('Lightstream', released in March 2025 and active through 2026) perfected the block device read-only locking mechanisms, memory-only execution (`toram`), and live triage scripts.",
+    "governance_and_collaborations": "CAINE is directed by Nanni Bassetti alongside an international network of digital investigators, legal consultants, and academic contributors. Adhering strictly to the open-source philosophy, all distribution components and scripts are developed publicly. Project infrastructure is supported by institutional research mirrors (notably the Italian Consortium GARR). CAINE maintains cooperative twinship relations with European security initiatives, including Lorenzo Faletra's Parrot Security OS, exchanging packaging scripts and testing feedback.",
+    "write_blocking_and_evidence_integrity": "The definitive technical foundation of CAINE 14.0 is its multi-layered software write-blocking framework designed to prevent accidental modifications to evidentiary storage:\n\n- Block Device Locking: All block devices (`/dev/sd*`, `/dev/nvme*`) are locked in read-only mode by default at the kernel and udev level.\n- `Unblock` Utility: A graphical application on the desktop that allows investigators to explicitly unlock specific destination drives to writable mode when saving disk images or case reports.\n- `Mounter` System Tray Tool: An indicator applet developed by John Lehr displaying a green disk icon when devices are safely mounted read-only on loop devices, and a red disk icon when writable mounting is enabled.\n- `rbfstab` Daemon: A background utility that dynamically generates read-only entries in `/etc/fstab` upon boot or hotplug events, preventing automatic writable mounts by the desktop file manager.",
+    "caja_scripts_and_live_triage": "CAINE incorporates a specialized suite of Live Preview Caja Scripts developed by John Lehr. Embedded directly into the Caja file browser, these scripts automate initial evidence triage without requiring heavy forensic suites. Investigators can render SQLite databases, reconstruct web browsing histories, parse Windows registry hives, extract EXIF metadata, and execute 'Save as Evidence' routines that extract selected files to an evidence folder while automatically compiling standardized text reports with timestamps and investigator commentary.",
+    "windows_side_portable_tools": "A unique architectural feature of CAINE is the 'Windows Side' partition integrated into the bootable ISO. If an incident response team is examining a running Windows host that cannot be powered down, the USB media can be inserted into the live Windows session. The partition provides portable, standalone forensics and live response utilities (including NirLauncher collections and RegRipper) to collect volatile volatile memory and triage artifacts directly without installing third-party software.",
+    "digital_forensics_toolchain_and_imaging": "For physical evidence acquisition and carving, CAINE provides leading digital forensics frameworks:\n\n- Forensic Imaging: Guymager for generating bit-stream raw (dd) and Expert Witness Format (E01) disk images with verified MD5/SHA-256 hash generation.\n- Memory Forensics: Volatility for extracting process memory, network connections, and injected modules from volatile RAM dumps.\n- Data Carving: Foremost, Scalpel, PhotoRec, and bulk_extractor for recovering fragmented files from unallocated clusters.\n- Mobile Forensics: ADB, fastboot, and libimobiledevice for examining Android and iOS backups.\n\nIn CAINE 14.0, Autopsy and GIMP were intentionally removed from the default ISO image to preserve download size, allowing users to install them via APT if needed.",
+    "boot_modes_and_casper_patch": "CAINE is distributed as a hybrid ISO image compatible with legacy BIOS and UEFI firmware (with Secure Boot support). It features a dedicated Casper patch developed by Suhanov Maxim that prevents the live bootloader from searching for root filesystem images on attached evidentiary drives, avoiding drive contamination. Users can also boot the system entirely into RAM (`toram` mode) to maximize processing throughput, or install the OS to disk via Ubiquity after unlocking the drive with `Unblock`.",
+    "threat_model_and_operational_limits": "CAINE defines rigorous operational parameters for forensic practitioners:\n\n- Software vs Hardware Blocking: While CAINE's software write-blocking is highly robust, legal chain-of-custody protocols in specific judicial jurisdictions require certified hardware write-blockers for statutory evidence admissibility.\n- No Amnesic Anonymity: CAINE is an offline forensic analysis workstation, not an anonymizing operating system; it does not route traffic through Tor by default. Network daemons such as the SSH server are disabled by default to prevent unauthorized network access during analysis.\n- Destructive Write Mode: Disabling the write-blocker via `Unblock` requires strict operational discipline to ensure that target evidence disks are not mistakenly mounted in read-write mode.",
+    "privacy_and_telemetry": "CAINE enforces an absolute zero-telemetry policy. The operating system contains no commercial analytics agents, telemetry daemons, or background data collection services. All forensic workflows and report generation occur strictly locally, ensuring that sensitive case data, evidentiary artifacts, and investigator identities remain confidential.",
+    "advantages": [
+      "Rigorous operating-system-level read-only write-blocking protecting all connected block devices by default",
+      "Integrated graphical controls (Unblock and Mounter) providing clear visual verification of disk write status",
+      "Live Preview Caja Scripts enabling rapid automated triage of databases, registry hives, and metadata",
+      "Specialized Windows Side partition containing portable live incident response tools for running Windows machines",
+      "Casper root filesystem spoofing patch preventing boot media conflicts with attached evidentiary drives",
+      "Stable foundation based on Ubuntu 24.04 LTS Noble Numbat with UEFI and Legacy BIOS compatibility",
+      "Zero telemetry policy guaranteeing absolute confidentiality of forensic case data and reports"
+    ],
+    "disadvantages": [
+      "Software write-blocking does not substitute for hardware write-blockers in strict formal judicial proceedings",
+      "Autopsy and GIMP removed from the default ISO image in version 14.0, requiring manual post-boot installation",
+      "Does not provide automated network anonymization or Tor routing by default for online reconnaissance",
+      "Disabling write-blocking for permanent installation requires manual interaction with Unblock and Ubiquity",
+      "Steep learning curve requiring professional training in digital forensics jurisprudence and evidence handling"
+    ],
+    "who_is_it_for": [
+      "Digital forensics and incident response (DFIR) specialists, law enforcement officers, and judicial investigators",
+      "Corporate incident responders and CERT/CSIRT analysts conducting live triage and post-mortem disk analysis",
+      "Cybersecurity researchers and university professors teaching digital evidence preservation and malware triage",
+      "Legal experts and forensic examiners requiring verifiable chain-of-custody workflows and automated reporting"
+    ],
+    "who_is_it_not_for": [
+      "Offensive penetration testers seeking automated exploitation and wireless attack suites (better suited to Kali Linux or Pentoo)",
+      "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
+      "Casual desktop users seeking a general everyday operating system for multimedia and office productivity",
+      "Legacy 32-bit hardware architectures"
+    ]
+  },
+  "components": [
+    {
+      "id": "caine-write-blocking",
+      "name": "CAINE Write-Blocking Subsystem",
+      "role": "evidence_protection_engine",
+      "note": "Operating system and udev framework locking all connected block devices in read-only mode by default."
+    },
+    {
+      "id": "caine-unblock",
+      "name": "Unblock Disk Unlocker GUI",
+      "role": "storage_policy_controller",
+      "note": "Desktop graphical utility allowing investigators to selectively switch designated target disks to writable mode."
+    },
+    {
+      "id": "caine-mounter",
+      "name": "Mounter System Tray Controller",
+      "role": "mount_status_indicator",
+      "note": "System tray applet providing visual color-coded disk mount status (green safe read-only, red warning writable)."
+    },
+    {
+      "id": "caine-caja-scripts",
+      "name": "Live Preview Caja Forensic Scripts",
+      "role": "evidence_triage_suite",
+      "note": "File manager scripts automating database rendering, registry extraction, and evidence report compilation."
+    },
+    {
+      "id": "caine-windows-side",
+      "name": "Windows Side Portable Suite",
+      "role": "live_response_toolkit",
+      "note": "Standalone portable forensic toolset executable directly on live Windows target machines from the ISO medium."
+    },
+    {
+      "id": "caine-casper-patch",
+      "name": "Casper Filesystem Spoofing Patch",
+      "role": "boot_integrity_patch",
+      "note": "Live boot patch preventing Casper from discovering or mounting root filesystems on connected evidence drives."
+    }
+  ],
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "upstream_base",
+      "note": "Foundational operating system; CAINE 14.0 is built upon Ubuntu 24.04 LTS (Noble Numbat) repositories."
+    },
+    {
+      "id": "tsurugi-linux",
+      "name": "Tsurugi Linux",
+      "relation": "peer_forensic_distribution",
+      "note": "Complementary Italian digital forensics distribution focusing on malware analysis, OSINT, and incident response."
+    },
+    {
+      "id": "parrot-os",
+      "name": "Parrot OS",
+      "relation": "collaborative_security_distribution",
+      "note": "European cybersecurity distribution maintaining an official collaborative twinship relationship with CAINE."
+    }
+  ],
+  "variants": [
+    {
+      "name": "CAINE Live ISO Image",
+      "description": "Standard 64-bit bootable live forensic media with default read-only locking, Caja scripts, and Windows Side tools."
+    }
+  ],
+  "links": {
+    "homepage": "https://www.caine-live.net/",
+    "documentation": "https://www.caine-live.net/page8/page8.html",
+    "tools": "https://www.caine-live.net/page11/page11.html",
+    "history": "https://www.caine-live.net/page4/history.html",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=caine"
+  },
+  "sources": [
+    {
+      "title": "CAINE Official Digital Forensics Portal",
+      "url": "https://www.caine-live.net/",
+      "type": "official",
+      "date": "2025-03-24"
+    },
+    {
+      "title": "CAINE 14.0 Lightstream Release Changelog",
+      "url": "https://www.caine-live.net/",
+      "type": "project_announcement",
+      "date": "2025-03-24"
+    },
+    {
+      "title": "CAINE Manual and Forensic Policies",
+      "url": "https://www.caine-live.net/page8/page8.html",
+      "type": "documentation",
+      "date": "2025-03-24"
+    },
+    {
+      "title": "CAINE Integrated Tools Inventory",
+      "url": "https://www.caine-live.net/page11/page11.html",
+      "type": "documentation",
+      "date": "2025-03-24"
+    },
+    {
+      "title": "CAINE Project History and Academic Origins",
+      "url": "https://www.caine-live.net/page4/history.html",
+      "type": "official",
+      "date": "2025-03-24"
+    },
+    {
+      "title": "DistroWatch Page for CAINE",
+      "url": "https://distrowatch.com/table.php?distribution=caine",
+      "type": "metadata",
+      "date": "2026-10-11"
+    }
+  ]
+}
