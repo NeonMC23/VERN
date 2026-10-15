@@ -1,0 +1,100 @@
+{
+  "id": "dragonfly-bsd",
+  "name": "DragonFly BSD",
+  "type": "operating_system",
+  "summary": "A high-performance x86_64 BSD operating system engineered for massive symmetric multiprocessing (SMP) scalability, featuring per-CPU lightweight kernel threads (LWKT), message-passing synchronization, and the advanced HAMMER2 transactional file system.",
+  "tags": [
+    "bsd",
+    "unix",
+    "smp",
+    "lwkt",
+    "hammer2",
+    "storage",
+    "performance",
+    "x86_64"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64 / x86_64"
+  ],
+  "license": "BSD Licenses (2-clause and 3-clause BSD)",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "DragonFly BSD is an open-source Unix-like operating system belonging to the BSD family, created in 2003 by Matthew Dillon. Diverging fundamentally from the architectural paths pursued by FreeBSD, NetBSD, and OpenBSD, DragonFly BSD is engineered specifically to maximize multi-core symmetric multiprocessing (SMP) performance through lightweight kernel threading, asynchronous message passing, and state-of-the-art transactional storage.",
+    "what_is_it": "DragonFly BSD is a specialized, modern operating system tailored exclusively for high-concurrency 64-bit x86_64 compute and storage systems. Rather than adapting legacy Unix monolithic locking mechanisms to modern hardware, DragonFly implements an innovative kernel concurrency model coupled with HAMMER2, an advanced copy-on-write transactional file system supporting online snapshots, deduplication, and zero-downtime recovery.",
+    "origin_and_freebsd_divergence": "The project originated in June 2003 as a fork of FreeBSD 4.8 (RELENG_4) led by Matthew Dillon, a prominent FreeBSD kernel committer and author of Amiga's DICE C compiler. Dillon diverged from FreeBSD when FreeBSD 5 introduced fine-grained mutex locking and the KSE threading architecture, which he demonstrated led to severe lock contention and cache-line bouncing on dense multicore hardware. DragonFly was founded to prove that message passing and per-CPU subsystem partitioning provided superior scalability.",
+    "kernel_architecture_and_lwkt": "DragonFly replaces global kernel locking with LightWeight Kernel Threads (LWKT). In this architecture, each physical CPU executes an autonomous thread scheduler dedicated to kernel tasks, decoupling userland scheduling from kernel execution. Synchronization between CPUs relies on asynchronous inter-processor messages and serializing tokens (lwkt_token), which automatically release when a thread blocks to completely eliminate thread deadlocks and spinlock overhead.",
+    "hammer2_file_system": "DragonFly BSD features the HAMMER and HAMMER2 file systems developed natively by Matthew Dillon. HAMMER2, which serves as the default root file system, is a copy-on-write (CoW) design providing writable instant snapshots, online compression (LZ4 and ZSTD), background and live deduplication, checksummed data integrity, and instantaneous crash recovery without necessitating fsck utility runs. DragonFly also provides swapcache, allowing fast SSD drives to transparently cache hot file system metadata and data blocks.",
+    "platform_focus_and_ecosystem": "To concentrate engineering resources on SMP efficiency, DragonFly dropped 32-bit x86 (i386) support in 2014, operating strictly on 64-bit x86_64 hardware. Third-party software is delivered through dports, a repository framework based on FreeBSD ports and managed using the pkg binary manager. System virtualization is supported via the ported NVMM Type-2 hypervisor and vkernel (virtual kernel userland testing containers). Production releases in the 6.4 branch (6.4.2) continue active maintenance alongside current development towards 6.6.",
+    "advantages": [
+      "Exceptional multicore SMP scalability utilizing per-CPU LWKT schedulers and message passing",
+      "Native HAMMER2 transactional file system with instant snapshots, deduplication, and crash resilience",
+      "Deadlock-free synchronization through recursive lwkt_token semantics avoiding spinlock latency",
+      "Fast SSD swapcache subsystem providing significant caching speedups for intense storage I/O",
+      "Standard pkg binary package management powered by the comprehensive dports collection"
+    ],
+    "disadvantages": [
+      "Strictly limited to a single hardware CPU architecture (x86_64 only)",
+      "Wireless networking and modern desktop GPU drivers lag behind upstream Linux and FreeBSD",
+      "Smaller developer community centered largely around Matthew Dillon and a focused group of committers"
+    ],
+    "who_is_it_for": [
+      "Systems programmers and researchers studying modern lockless SMP concurrency and kernel architectures",
+      "Storage administrators and database architects leveraging HAMMER2 snapshots and crash resilience",
+      "Experienced Unix administrators operating dedicated x86_64 compilation servers and compute nodes"
+    ],
+    "who_is_it_not_for": [
+      "Users requiring multi-architecture deployment across ARM64, RISC-V, or embedded devices",
+      "End users seeking an out-of-the-box graphical desktop with modern Wi-Fi and Bluetooth automation"
+    ],
+    "verdict": "DragonFly BSD is a masterclass in independent operating system research. By discarding conventional Unix locking paradigms in favor of per-CPU lightweight kernel threading and coupling it with the resilient HAMMER2 transactional file system, it provides a distinctive, highly efficient platform for high-concurrency x86_64 computing."
+  },
+  "relations": [
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "relation": "historical_origin",
+      "note": "Upstream historical codebase forked in 2003 (FreeBSD 4.8) over SMP threading and locking architectural divergence."
+    },
+    {
+      "id": "openbsd",
+      "name": "OpenBSD",
+      "relation": "sister_lineage",
+      "note": "Fellow independent BSD Unix system, contrasting DragonFly's SMP concurrency and HAMMER2 with OpenBSD's defensive security focus."
+    }
+  ],
+  "links": {
+    "home": "https://www.dragonflybsd.org/",
+    "documentation": "https://www.dragonflybsd.org/docs/",
+    "releases": "https://www.dragonflybsd.org/release64/",
+    "hammer": "https://www.dragonflybsd.org/hammer/",
+    "dports": "https://avalon.dragonflybsd.org/dports/",
+    "team": "https://www.dragonflybsd.org/team/"
+  },
+  "sources": [
+    {
+      "title": "The DragonFly BSD Project Official Portal",
+      "url": "https://www.dragonflybsd.org/",
+      "type": "official",
+      "date": "2025-10-03"
+    },
+    {
+      "title": "The DragonFlyBSD Operating System (Architecture Overview)",
+      "url": "https://www.dragonflybsd.org/presentations/dragonflybsd.asiabsdcon04.pdf",
+      "type": "technical_specification",
+      "date": "2004-03-25"
+    },
+    {
+      "title": "DragonFly BSD 6.4 Release Notes",
+      "url": "https://www.dragonflybsd.org/release64/",
+      "type": "release_notes",
+      "date": "2023-01-04"
+    },
+    {
+      "title": "DragonFly BSD Locking and Synchronization (LWKT & Tokens)",
+      "url": "https://www.dragonflybsd.org/docs/developer/Locking_and_Synchronization/",
+      "type": "technical_specification",
+      "date": "2018-07-24"
+    }
+  ]
+}

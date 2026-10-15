@@ -80,7 +80,10 @@ var LIBRARY_RESOURCES = [
   "rhino-linux",
   "solus",
   "freebsd",
-  "openbsd"
+  "openbsd",
+  "netbsd",
+  "dragonfly-bsd",
+  "hardenedbsd"
 ];
 
 (function () {

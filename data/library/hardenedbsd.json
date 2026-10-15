@@ -1,0 +1,105 @@
+{
+  "id": "hardenedbsd",
+  "name": "HardenedBSD",
+  "type": "operating_system",
+  "summary": "A security-hardened downstream fork of FreeBSD implementing comprehensive defense-in-depth exploit mitigations, including mandatory ASLR, SafeStack, Clang Control Flow Integrity (CFI), SEGVGUARD, and PaX-inspired memory protections across the base system and ports.",
+  "tags": [
+    "bsd",
+    "unix",
+    "security",
+    "hardening",
+    "aslr",
+    "safestack",
+    "cfi",
+    "freebsd"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64 / x86_64",
+    "arm64 / aarch64 (experimental)"
+  ],
+  "license": "2-clause BSD License",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "HardenedBSD is an open-source security-hardened operating system founded in 2014 by Shawn Webb and Oliver Pinter. Originating as a security-focused downstream fork of FreeBSD, HardenedBSD enhances the complete FreeBSD kernel, base system, and ports collection with advanced exploit mitigation technologies inspired by PaX and modern compiler sanitizers, providing a robust defense-in-depth computing foundation.",
+    "what_is_it": "HardenedBSD is a production-oriented operating system that delivers a fully functional FreeBSD environment while strictly enforcing compiler-level and kernel-level mitigations against memory corruption attacks. By combining FreeBSD's advanced features—such as OpenZFS, Jails, and bhyve—with mandatory Address Space Layout Randomization (ASLR), SafeStack, and Control Flow Integrity (CFI), HardenedBSD neutralizes entire vulnerability classes without requiring application-level code rewrites.",
+    "origin_and_freebsd_relationship": "Founded in 2014, HardenedBSD began with the goal of bringing PaX-style exploit mitigation technologies from Linux/Grsecurity into the FreeBSD kernel. While FreeBSD prioritizes maximum out-of-the-box backward binary compatibility and peak performance, HardenedBSD prioritizes system defense and memory safety. The project maintains rigorous upstream tracking, migrating its primary package build infrastructure to 15-STABLE in December 2025 alongside development branches tracking 16-CURRENT.",
+    "memory_protections_and_compiler_hardening": "HardenedBSD enables Address Space Layout Randomization (ASLR) and Position Independent Executables (PIE) by default across all base system utilities and ports. At the compiler level via Clang/LLVM, it enforces SafeStack (separating return addresses and safe data from potentially overflowed buffers), Control Flow Integrity (CFI, verifying valid targets for indirect calls to counter ROP and JOP attacks), and variable auto-initialization to zero (-ftrivial-var-auto-init=zero). Memory pages strictly obey W^X / PaX NOEXEC rules preventing execution in writable mappings.",
+    "kernel_defenses_and_segvguard": "At the kernel level, HardenedBSD incorporates SEGVGUARD, a rate-limiting subsystem that detects repeated segmentation fault crashes and temporarily suspends offending binaries, thwarting brute-force attempts to guess ASLR entropy. Additional defenses include ptrace debugging hardening, unprivileged kenv restrictions, hardened_malloc memory allocation, and granular per-application mitigation rule management using the secadm framework.",
+    "maintenance_status_and_infrastructure": "Maintained by Shawn Webb, Oliver Pinter, and core contributors (Robert 0x1eef, gmg), HardenedBSD publishes detailed monthly status reports and quarterly releases. In 2025 and 2026, the project modernized its developer infrastructure by adopting the Radicle decentralized code-collaboration network for its primary repositories while maintaining automated mirrors to GitHub, demonstrating continuous engineering vitality.",
+    "advantages": [
+      "Rigorous defense-in-depth exploit mitigations enabled universally by default (ASLR, PIE, SafeStack, CFI)",
+      "SEGVGUARD protection halting automated memory corruption and ASLR brute-forcing attacks",
+      "Full access to FreeBSD's enterprise features including native OpenZFS, Jails, and bhyve virtualization",
+      "Per-binary fine-tuning of hardening parameters via the secadm access control framework",
+      "Transparent engineering with frequent public status reports and quarterly release maintenance"
+    ],
+    "disadvantages": [
+      "Certain complex third-party software packages require mitigation exceptions or custom port patches",
+      "Small development team reliant on key individual maintainers compared to larger community OSes",
+      "Hardware architecture focus primarily centered on amd64, with arm64 remaining experimental"
+    ],
+    "who_is_it_for": [
+      "Security engineers and infrastructure architects managing internet-exposed bastions, VPNs, and firewalls",
+      "Organizations operating critical FreeBSD services requiring proactive defense against zero-day memory exploits",
+      "Researchers studying production compiler sanitizers, Control Flow Integrity, and OS hardening"
+    ],
+    "who_is_it_not_for": [
+      "Administrators who require 100% turnkey binary drop-in package compatibility for unmaintained proprietary binaries",
+      "General home desktop users looking for casual gaming and rapid bleeding-edge consumer driver updates"
+    ],
+    "verdict": "HardenedBSD is the premier security-focused hardening platform in the FreeBSD ecosystem. By enforcing pervasive ASLR, SafeStack, Clang CFI, and SEGVGUARD while preserving the operational power of OpenZFS and Jails, it delivers exceptional resilience against modern memory corruption threats."
+  },
+  "relations": [
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "relation": "upstream_base",
+      "note": "Upstream operating system foundation and source tree, upon which HardenedBSD applies its pervasive exploit mitigations."
+    },
+    {
+      "id": "openbsd",
+      "name": "OpenBSD",
+      "relation": "technical_peer_alternative",
+      "note": "Independent security-centric BSD benchmark, contrasting HardenedBSD's PaX/LLVM mitigations on FreeBSD with OpenBSD's kernel primitives."
+    },
+    {
+      "id": "opnsense",
+      "name": "OPNsense",
+      "relation": "alternative",
+      "note": "FreeBSD-based security and firewall appliance, representing an appliance-oriented FreeBSD deployment model."
+    }
+  ],
+  "links": {
+    "home": "https://hardenedbsd.org/",
+    "documentation": "https://hardenedbsd.org/content/about",
+    "status": "https://hardenedbsd.org/article/shawn-webb/2026-09-27/hardenedbsd-august-september-2026-status-report",
+    "github": "https://github.com/HardenedBSD/hardenedBSD"
+  },
+  "sources": [
+    {
+      "title": "HardenedBSD Official Project Portal & Mission",
+      "url": "https://hardenedbsd.org/content/about",
+      "type": "official",
+      "date": "2022-01-30"
+    },
+    {
+      "title": "HardenedBSD August / September 2026 Status Report",
+      "url": "https://hardenedbsd.org/article/shawn-webb/2026-09-27/hardenedbsd-august-september-2026-status-report",
+      "type": "release_notes",
+      "date": "2026-09-27"
+    },
+    {
+      "title": "HardenedBSD June / July 2026 Status Report (Kernel Hardening & SEGVGUARD)",
+      "url": "https://hardenedbsd.org/article/shawn-webb/2026-07-31/hardenedbsd-june-july-2026-status-report",
+      "type": "technical_specification",
+      "date": "2026-07-31"
+    },
+    {
+      "title": "HardenedBSD December 2025 Status Report (15-STABLE Infrastructure)",
+      "url": "https://hardenedbsd.org/article/shawn-webb/2025-12-28/hardenedbsd-december-2025-status-report",
+      "type": "official_documentation",
+      "date": "2025-12-28"
+    }
+  ]
+}
