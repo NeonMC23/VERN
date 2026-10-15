@@ -1,0 +1,102 @@
+{
+  "id": "solus",
+  "name": "Solus",
+  "type": "operating_system",
+  "summary": "An independent, curated rolling-release Linux distribution built from scratch exclusively for modern 64-bit desktop computing, featuring the eopkg package manager and the flagship Budgie desktop.",
+  "tags": [
+    "linux",
+    "independent",
+    "desktop",
+    "rolling",
+    "eopkg",
+    "budgie",
+    "flatpak",
+    "curated"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL and compatible open-source licenses",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "Solus is an independent GNU/Linux operating system designed from scratch specifically for personal desktop computing on 64-bit x86_64 PC hardware. Established in 2014 by Ikey Doherty under the name Evolve OS and renamed Solus in 2015, the distribution is developed by a dedicated community team. Unburdened by server or enterprise legacy, Solus focuses singularly on providing a polished, fast, and responsive user experience for desktop workstations, creative workflows, and home entertainment.",
+    "what_is_it": "Technically, Solus is a standalone distribution built without reliance on upstream repositories such as Debian, Ubuntu, or Arch Linux. It utilizes its own binary package manager, `eopkg` (an evolved derivative of Pardus's PiSi), alongside the `ypkg` build engine. Solus operates on a curated rolling-release model where software updates are tested and delivered continuously through stable weekly update rings, supplemented by periodic refresh installation ISOs.",
+    "origin_and_history": "Solus began development in 2014 as an initiative to build a modern, non-derivative Linux desktop. In tandem with the distribution, the team created the Budgie desktop environment, which gained widespread popularity across the broader Linux ecosystem. Over a decade of development, Solus evolved its governance into an international non-profit collective, successfully navigated infrastructural transitions, implemented full UsrMerge filesystem unification, and published regular major release ISO refreshes including Solus 4.5 'Resilience', Solus 4.6 'Convergence', 4.7, 4.8, and 4.9.",
+    "package_management_and_eopkg": "Software installation in Solus is driven primarily by `eopkg`, which handles binary package installations, repository synchronizations, and delta updates. Packages are described in concise YAML recipes built via `ypkg`. To complement its curated native package repository without ballooning repository maintenance overhead, Solus embraces Flatpak out of the box, offering native graphical integration with Flathub in the Software Center for third-party sandboxed applications (such as Steam, Discord, Spotify, and proprietary productivity suites).",
+    "desktop_editions_and_budgie": "Solus is celebrated as the flagship home of the Budgie desktop environment. Budgie delivers an elegant, intuitive interface built with GTK technologies, combining a classic taskbar layout with the Raven sidebar for integrated applets, notifications, and audio controls. In addition to Budgie, the Solus team produces first-class official desktop editions featuring GNOME, KDE Plasma, and XFCE, all customized with uniform dark/light styling, optimal font rendering, and integrated multimedia codecs.",
+    "hardware_support_and_focus": "Solus maintains an uncompromising hardware focus strictly targeted at 64-bit x86_64 PCs. It deliberately foregoes maintenance for 32-bit x86 legacy hardware or ARM embedded devices, allowing developers to optimize kernel configurations, compiler flags, and graphics driver stacks specifically for contemporary PC processors and GPUs. The distribution provides two kernel channels: `linux-current` tracking the latest upstream stable Linux kernels for recent hardware, and `linux-lts` for enterprise-grade hardware stability.",
+    "advantages": [
+      "Built from scratch specifically for personal desktop computing without server compromises",
+      "Curated rolling-release model providing current software combined with weekly stability testing",
+      "Flagship Budgie desktop environment offering intuitive ergonomics and low resource overhead",
+      "High responsiveness with optimized x86_64 compiler flags and fast delta package updates via eopkg",
+      "Native Flatpak and Flathub integration in the Software Center for broad third-party application support",
+      "Dual kernel branches (current and LTS) offering tailored compatibility for both modern and legacy PC components"
+    ],
+    "disadvantages": [
+      "Strictly limited to 64-bit x86_64 hardware, lacking official ARM64 single-board computer support",
+      "Native repository catalog is smaller than immense community archives like Arch AUR or Debian/Ubuntu pools",
+      "Custom eopkg package manager commands require learning distinct syntax different from apt, dnf, or pacman",
+      "Independent developer base can result in slower triage for highly specialized enterprise or niche developer packages"
+    ],
+    "who_is_it_for": [
+      "Everyday desktop users and enthusiasts seeking a fast, cohesive personal workstation OS without complex configuration",
+      "Users who appreciate a rolling-release distribution that conducts weekly stabilization checks before releasing updates",
+      "Fans of the Budgie desktop environment desiring the most authentic and integrated Budgie experience"
+    ],
+    "who_is_it_not_for": [
+      "System administrators managing headless servers, cloud container nodes, or virtualization hypervisors",
+      "Users operating ARM single-board computers (Raspberry Pi) or legacy 32-bit machines",
+      "Specialized developers requiring esoteric scientific libraries absent from native repositories or Flatpak"
+    ],
+    "verdict": "Solus is a standout accomplishment in independent Linux engineering. By maintaining an unwavering focus on the personal desktop, delivering the refined Budgie environment, and providing a reliable curated rolling model, Solus demonstrates that an independent operating system can deliver exceptional daily computing satisfaction."
+  },
+  "relations": [
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Leading independent rolling-release distribution, serving as a comparison for rolling delivery models and package management."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Leading community workstation distribution utilizing modern GTK/GNOME and KDE technologies, offering a benchmark for modern desktop standards."
+    }
+  ],
+  "links": {
+    "home": "https://getsol.us/",
+    "download": "https://getsol.us/download/",
+    "releases": "https://getsol.us/tags/releases/",
+    "repository": "https://github.com/getsolus",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=solus"
+  },
+  "sources": [
+    {
+      "title": "Solus Official Project Portal",
+      "url": "https://getsol.us/",
+      "type": "official",
+      "date": "2024-10-14"
+    },
+    {
+      "title": "Solus Official Release Notes and Announcements",
+      "url": "https://getsol.us/tags/releases/",
+      "type": "official_documentation",
+      "date": "2026-04-18"
+    },
+    {
+      "title": "Solus 4.6 Convergence Release Specifications",
+      "url": "https://getsol.us/2024/10/14/solus-4-6-released/",
+      "type": "technical_specification",
+      "date": "2024-10-14"
+    },
+    {
+      "title": "Solus Official GitHub Repositories",
+      "url": "https://github.com/getsolus",
+      "type": "repository",
+      "date": "2026-10-15"
+    }
+  ]
+}

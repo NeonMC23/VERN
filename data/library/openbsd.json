@@ -1,0 +1,110 @@
+{
+  "id": "openbsd",
+  "name": "OpenBSD",
+  "type": "operating_system",
+  "summary": "A proactive, security-focused Unix-like operating system celebrated for its uncompromising code correctness, unified Base System, pioneer mitigations like pledge and unveil, and universal security tools including OpenSSH and Packet Filter (pf).",
+  "tags": [
+    "bsd",
+    "unix",
+    "independent",
+    "security",
+    "cryptography",
+    "openssh",
+    "pledge",
+    "unveil",
+    "pf",
+    "firewall"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64",
+    "arm64",
+    "riscv64",
+    "i386",
+    "sparc64",
+    "macppc"
+  ],
+  "license": "ISC and BSD licenses",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "OpenBSD is an independent, open-source Unix-like operating system renowned worldwide for its uncompromising focus on proactive security, source code correctness, integrated cryptography, and software minimalism. Founded in 1995 by Theo de Raadt following a split from NetBSD, OpenBSD is maintained by an international community of developers. Driven by a disciplined culture of continuous source auditing and secure default configurations, OpenBSD serves as the definitive gold standard for secure networking, cryptographic servers, firewall gateways, and robust workstation computing.",
+    "what_is_it": "Technically, OpenBSD is a complete, self-contained BSD Unix operating system developing its kernel, drivers, standard C library, toolchains, and base daemons within a single synchronized repository. Rather than bolting on security features post hoc, OpenBSD implements structural mitigations across its kernel and memory allocators, including `pledge(2)` for system call restriction, `unveil(2)` for filesystem sandboxing, W^X (Write XOR Execute) memory page protections, randomized memory allocation, and kernel address randomization (KARL). Third-party applications are installed through binary packages (`pkg_add`) or compiled via ports.",
+    "origin_and_history": "OpenBSD branched from NetBSD in late 1995 under the leadership of core developer Theo de Raadt. Frustrated by bureaucratic compromises in upstream development, de Raadt established a project grounded in continuous code auditing, rigorous standards compliance, and an aversion to restrictive copyleft licensing (actively purging GPL components in favor of BSD and ISC licenses). Over three decades, OpenBSD has published predictable, rock-solid releases every six months without fail (OpenBSD 7.5, 7.6, 7.7, 7.8), maintaining an extraordinary defensive record in production environments.",
+    "proactive_security_philosophy": "OpenBSD's defining doctrine is proactive security: writing auditable, correct code from the outset rather than relying on retroactive vulnerability patching. The project pioneered the concept of 'secure by default', ensuring that default installations expose the minimum attack surface possible with unnecessary daemons disabled and restrictive permissions enforced. When architectural vulnerabilities are identified, developers systematically audit the entire codebase to eliminate the underlying bug pattern across all subsystems.",
+    "kernel_and_userland_mitigations_pledge_unveil": "OpenBSD has invented and standardized landmark defensive mechanisms now studied and adopted across computer science:\n\n- `pledge(2)`: Allows an application to declare up front the subset of system calls it requires (e.g., networking, stdio, rpath). Any subsequent invocation of an unauthorized syscall causes the kernel to immediately terminate the process with SIGABRT.\n- `unveil(2)`: Restricts an application's visible filesystem hierarchy to explicitly whitelisted directory paths, preventing compromised binaries from traversing unauthorized files.\n- Memory Hardening: Strict W^X memory page enforcement, randomized malloc (Otto malloc) with guard pages to detect heap overflows, and `pinsyscalls(2)` to block unauthorized direct syscall execution.\n- KARL (Kernel Address Randomized Link): At every boot, OpenBSD relinks the kernel binaries in randomized internal order, eliminating predictable memory targets for Return-Oriented Programming (ROP) exploits.",
+    "cryptography_and_openbsd_innovations": "OpenBSD has contributed some of the most widely deployed security software in the history of the internet:\n\n- OpenSSH: Created by OpenBSD developers in 1999 to replace clear-text telnet and rsh, OpenSSH is today the universal standard securing hundreds of millions of servers worldwide.\n- Packet Filter (`pf`): A high-performance stateful packet filtering firewall engine featuring intuitive syntax, NAT normalization, and seamless traffic routing.\n- LibreSSL: A modernized, auditable fork of OpenSSL created in 2014 to eliminate legacy vulnerabilities and refactor cryptographic primitives.\n- Lightweight Daemons: OpenNTPD, OpenBGPD, OpenSMTPD, `relayd`, and `doas` providing robust replacements for sprawling legacy Unix daemons.",
+    "package_management_and_ports": "While the Base System provides everything necessary for a functional firewall or server, third-party software is managed via OpenBSD's Ports and Packages system. Packages are compiled on dedicated automated build clusters and digitally signed with `signify(1)`. Administrators install pre-compiled, cryptographically verified packages using `pkg_add`, `pkg_delete`, and `pkg_info`, while system upgrades between six-month releases are automated using the official `sysupgrade` utility.",
+    "advantages": [
+      "World-class proactive security architecture with landmark mitigations (pledge, unveil, W^X, KARL)",
+      "Legendary 'secure by default' deployment model exposing minimal attack surface out of the box",
+      "Birthplace of ubiquitous internet security technologies including OpenSSH, Packet Filter (pf), and LibreSSL",
+      "Exceptional source code readability and meticulously maintained manual pages (man pages) for every utility",
+      "Rock-solid, highly predictable six-month release cadence with automated sysupgrade tooling",
+      "Strict free software licensing philosophy (BSD/ISC) ensuring total software freedom and auditability"
+    ],
+    "disadvantages": [
+      "Hardware acceleration for bleeding-edge desktop 3D GPUs and modern wireless Wi-Fi chipsets is more conservative than Linux",
+      "Filesystem options are limited to traditional FFS2 (Fast File System) without native OpenZFS integration",
+      "Strict security checks and absence of hyper-aggressive thread scheduling can result in lower raw synthetic CPU throughput compared to Linux",
+      "Smaller third-party commercial software ecosystem, requiring open-source ports for desktop applications"
+    ],
+    "who_is_it_for": [
+      "Security engineers, network architects, and system administrators building hardened edge firewalls, VPN routers, and mail servers",
+      "Developers and researchers valuing pristine code correctness, clear man pages, and transparent system design",
+      "Privacy-minded individuals seeking an auditable, telemetry-free Unix workstation operating system"
+    ],
+    "who_is_it_not_for": [
+      "PC gamers requiring proprietary Steam/Proton Windows translation layers or high-end proprietary GPU drivers",
+      "Users requiring complex distributed clustered enterprise filesystems on local storage arrays",
+      "Beginners expecting automatic graphical configuration wizards for hardware and networking"
+    ],
+    "verdict": "OpenBSD is an extraordinary testament to engineering discipline, code correctness, and proactive security. By refusing compromise and creating foundational technologies like OpenSSH and Packet Filter, OpenBSD stands as the preeminent operating system for secure networking, defensive infrastructure, and uncompromising Unix craftsmanship."
+  },
+  "relations": [
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "relation": "sister_lineage",
+      "note": "Fellow BSD Unix descendant, contrasting OpenBSD's defensive security and minimalism with FreeBSD's high-scale performance and OpenZFS focus."
+    },
+    {
+      "id": "alpine-linux",
+      "name": "Alpine Linux",
+      "relation": "alternative",
+      "note": "Lightweight, security-conscious Linux distribution sharing a similar philosophy of minimalism, auditable code, and proactive memory protections."
+    }
+  ],
+  "links": {
+    "home": "https://www.openbsd.org/",
+    "faq": "https://www.openbsd.org/faq/",
+    "security": "https://www.openbsd.org/security.html",
+    "man": "https://man.openbsd.org/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=openbsd"
+  },
+  "sources": [
+    {
+      "title": "The OpenBSD Project Official Web Portal",
+      "url": "https://www.openbsd.org/",
+      "type": "official",
+      "date": "2024-10-08"
+    },
+    {
+      "title": "OpenBSD FAQ Documentation and System Manual",
+      "url": "https://www.openbsd.org/faq/",
+      "type": "official_documentation",
+      "date": "2024-10-08"
+    },
+    {
+      "title": "OpenBSD Innovations and Proactive Security Technologies",
+      "url": "https://www.openbsd.org/security.html",
+      "type": "technical_specification",
+      "date": "2024-10-08"
+    },
+    {
+      "title": "OpenBSD Manual Pages — pledge(2) and unveil(2)",
+      "url": "https://man.openbsd.org/",
+      "type": "technical_specification",
+      "date": "2024-10-30"
+    }
+  ]
+}

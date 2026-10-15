@@ -77,7 +77,10 @@ var LIBRARY_RESOURCES = [
   "openwrt",
   "feren-os",
   "pikaos",
-  "rhino-linux"
+  "rhino-linux",
+  "solus",
+  "freebsd",
+  "openbsd"
 ];
 
 (function () {

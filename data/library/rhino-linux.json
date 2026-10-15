@@ -2,7 +2,7 @@
   "id": "rhino-linux",
   "name": "Rhino Linux",
   "type": "operating_system",
-  "summary": "An Ubuntu-based rolling-release distribution built upon the Ubuntu development branch, featuring the Pacstall package manager, the unified rhino-pkg CLI, and the custom XFCE-based Unicorn Desktop.",
+  "summary": "An Ubuntu-based rolling-release distribution built upon the Ubuntu development branch, featuring snapshot release 2026.1, the Pacstall package manager, the unified rhino-pkg CLI, and the custom XFCE-based Unicorn Desktop.",
   "tags": [
     "linux",
     "rolling",
@@ -80,10 +80,10 @@
   },
   "sources": [
     {
-      "title": "Rhino Linux Official Website",
+      "title": "Rhino Linux Official Website & 2026.1 Release Announcement",
       "url": "https://rhinolinux.org/",
       "type": "official",
-      "date": "2025-02-02"
+      "date": "2026-02-14"
     },
     {
       "title": "Rhino Linux Wiki and Technical Documentation",
