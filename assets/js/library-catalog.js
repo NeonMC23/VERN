@@ -71,7 +71,10 @@ var LIBRARY_RESOURCES = [
   "remnux",
   "ipfire",
   "opnsense",
-  "pfsense"
+  "pfsense",
+  "devuan",
+  "mageia",
+  "openwrt"
 ];
 
 (function () {

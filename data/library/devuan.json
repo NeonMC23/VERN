@@ -1,0 +1,117 @@
+{
+  "id": "devuan",
+  "name": "Devuan GNU+Linux",
+  "type": "operating_system",
+  "summary": "A fork of Debian engineered to preserve init diversity and system freedom, providing SysVinit by default alongside official support for OpenRC and runit without systemd entanglements.",
+  "tags": [
+    "linux",
+    "debian-derivative",
+    "init-freedom",
+    "sysvinit",
+    "openrc",
+    "runit",
+    "apt",
+    "dpkg",
+    "server",
+    "desktop"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64",
+    "arm64",
+    "armel",
+    "armhf",
+    "ppc64el"
+  ],
+  "license": "DFSG / GPL and compatible free software licenses",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "Devuan GNU+Linux is a community-developed, general-purpose operating system derived from Debian. Established in late 2014 by a collective known as the Veteran Unix Admins (VUA), Devuan was founded in response to Debian's adoption of systemd as its default init system. Devuan's primary mission is to ensure 'Init Freedom' by preserving the Unix philosophy of modularity, preventing PID 1 entanglements, and granting system administrators total freedom to select their preferred service supervision framework.",
+    "what_is_it": "Technically, Devuan provides a complete Debian-compatible operating system stripped of mandatory systemd dependencies. It ships with SysVinit as its default process supervisor (PID 1), while officially offering and supporting OpenRC and runit as selectable alternatives during installation. Devuan maintains independent software repositories that recompile upstream Debian packages to replace hard systemd linkages with modular shims like eudev, elogind, and libseat, while retaining full binary and repository compatibility with the Debian ecosystem.",
+    "origin_and_history": "The Devuan initiative began in November 2014 following contentious debates within the Debian project surrounding the transition to systemd in Debian 8 (Jessie). A group of long-standing system administrators and developers formed the Veteran Unix Admins collective and announced a fork dedicated to maintaining a systemd-free Debian base. Devuan chose minor planet names from the Minor Planet Center for its release codenames (Jessie, ASCII, Beowulf, Chimaera, Daedalus, and Excalibur). The first stable release, Devuan Jessie 1.0, arrived in 2017, demonstrating a viable, continuous migration path from standard Debian systems.",
+    "governance_and_community": "Devuan is developed as a community-driven meritocracy coordinated by the Devuan Developers collective. It operates without corporate oversight, relying on volunteer maintainers, community donations, and its self-hosted infrastructure at `git.devuan.org`. The project adheres to the Debian Free Software Guidelines (DFSG) and is recognized in Debian's official Derivatives Census as a registered derivative project that maintains its own package archive and distinct dpkg vendor identity.",
+    "init_freedom_and_init_systems": "The core technical differentiator of Devuan is its implementation of Init Freedom. Rather than enforcing a single monolithic init daemon, Devuan provides three fully supported initialization architectures:\n\n- SysVinit (Default): The traditional Unix System V init system, prioritizing simplicity, standard shell scripts in `/etc/init.d/`, and predictable sequential runlevels.\n- OpenRC: A dependency-based service management engine that operates as a supervision overlay atop SysVinit, providing parallel daemon startup and hardware event integration.\n- runit: A lightweight, fast, UNIX-style service supervision suite featuring dedicated `run` scripts and continuous process monitoring.\n\nAdministrators can switch init systems seamlessly using standard package management utilities.",
+    "debian_compatibility_and_packages": "Devuan synchronizes directly with Debian package releases while maintaining its own package repositories. Devuan packages are patched to remove hard runtime requirements on `systemd-sysv`. For subsystems requiring device and seat management, Devuan employs `eudev` (an independent fork of udev) and `elogind` (the standalone logind session manager extracted from systemd). This packaging model allows Devuan to run nearly the entire Debian software catalog—including complex server suites and desktop environments—without installing systemd.",
+    "desktop_environments_and_display": "Devuan ships with Xfce as its default desktop environment on live and desktop installation media, prized for its low resource consumption and classic workflow. In addition, the installer and package archives provide preconfigured metapackages for Cinnamon, KDE Plasma, LXQt, LXDE, and MATE. Contemporary Wayland compositors (such as Sway and Labwc) are supported via `libseat1` and `seatd`, enabling modern graphic sessions entirely free of `elogind` or systemd session brokers.",
+    "hardware_support_and_architectures": "Devuan supports a broad spectrum of hardware architectures, building official binary packages for `amd64`, `arm64`, `armel`, `armhf`, and `ppc64el`. It provides specialized minimal live images, installer netboot images, and preconfigured virtual machine appliances. ARM single-board computers (such as Raspberry Pi and Allwinner platforms) are supported through dedicated community build scripts, allowing lightweight IoT and edge server deployments.",
+    "threat_model_and_operational_limits": "Devuan provides clear boundaries regarding its design and scope:\n\n- Scope of Init Freedom: Devuan specifically targets the removal of systemd as a mandatory PID 1; it is not a privacy-focused distribution like Tails or a container-hardened hypervisor like Qubes OS.\n- Desktop Upstream Pressures: Certain modern desktop components in upstream GNOME have tight architectural coupling with systemd APIs; while Devuan patches these components, major GNOME releases require ongoing maintenance to remain functional.\n- User Competence: Devuan assumes familiarity with traditional Unix service scripts, daemon management, and basic command-line package maintenance.",
+    "advantages": [
+      "Full Debian compatibility with package stability, security updates, and access to thousands of deb packages",
+      "Guaranteed Init Freedom offering supported choices between SysVinit, OpenRC, and runit",
+      "Significantly reduced base memory footprint and faster boot times on minimal or legacy hardware",
+      "Absence of binary systemd journal files, maintaining standard plain-text syslog files for transparent parsing",
+      "Active community governance with independent package archives and self-hosted GitLab infrastructure",
+      "Support for 32-bit and 64-bit architectures as well as ARM embedded platforms"
+    ],
+    "disadvantages": [
+      "Smaller developer and packaging team compared to Debian, requiring focus on patch maintenance",
+      "Certain third-party commercial software packages assume systemd presence and may require manual unit adaptation",
+      "Upstream GNOME desktop releases occasionally introduce deep systemd couplings that require community shims",
+      "Documentation relies heavily on standard Debian resources with Devuan-specific documentation concentrated on init differences"
+    ],
+    "who_is_it_for": [
+      "System administrators seeking Debian stability and package breadth without adopting systemd",
+      "Users and organizations maintaining lightweight servers, embedded appliances, or minimal virtual machines",
+      "Unix traditionalists preferring plain-text init scripts and modular service supervision tools",
+      "Distro builders creating custom distributions founded on a systemd-free Debian base"
+    ],
+    "who_is_it_not_for": [
+      "Users who rely on systemd-specific features such as systemd-nspawn, resolved, or complex systemd timer workflows",
+      "Beginners expecting graphical one-click management for all low-level system services without terminal interaction"
+    ],
+    "verdict": "Devuan GNU+Linux is a rigorously maintained, stable operating system that fulfills its promise of Init Freedom within the Debian ecosystem. By decoupling Debian's vast package repository from systemd, Devuan preserves Unix modularity, predictable plain-text logging, and multi-init flexibility for both server deployments and desktop workstations."
+  },
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_base",
+      "note": "Upstream source distribution from which Devuan forks, replacing systemd dependencies with init alternatives while preserving repository compatibility."
+    },
+    {
+      "id": "antix",
+      "name": "antiX",
+      "relation": "alternative_init",
+      "note": "Independent Debian-based distribution also dedicated to systemd-free computing, utilizing SysVinit and runit."
+    }
+  ],
+  "links": {
+    "home": "https://www.devuan.org/",
+    "documentation": "https://www.devuan.org/os/documentation",
+    "releases": "https://www.devuan.org/os/releases",
+    "repository": "https://git.devuan.org/",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=devuan"
+  },
+  "sources": [
+    {
+      "title": "Devuan Official Web Portal",
+      "url": "https://www.devuan.org/",
+      "type": "official",
+      "date": "2026-08-14"
+    },
+    {
+      "title": "Devuan Init Freedom and Alternative Init Architecture",
+      "url": "https://www.devuan.org/os/init-freedom",
+      "type": "official_documentation",
+      "date": "2026-06-20"
+    },
+    {
+      "title": "Devuan Release Information and Codenames",
+      "url": "https://www.devuan.org/os/releases",
+      "type": "official_documentation",
+      "date": "2026-09-10"
+    },
+    {
+      "title": "Devuan Technical Operating System Profile",
+      "url": "https://www.devuan.org/os/",
+      "type": "technical_specification",
+      "date": "2026-08-01"
+    },
+    {
+      "title": "Devuan Git Repositories and Source Control",
+      "url": "https://git.devuan.org/",
+      "type": "repository",
+      "date": "2026-10-15"
+    }
+  ]
+}

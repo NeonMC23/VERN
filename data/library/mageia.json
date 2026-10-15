@@ -1,0 +1,120 @@
+{
+  "id": "mageia",
+  "name": "Mageia",
+  "type": "operating_system",
+  "summary": "An independent, community-driven RPM distribution descended from Mandriva, delivering the comprehensive Mageia Control Center, the urpmi and DNF package managers, and robust out-of-the-box hardware support.",
+  "tags": [
+    "linux",
+    "rpm",
+    "independent",
+    "desktop",
+    "server",
+    "urpmi",
+    "drakxtools",
+    "community",
+    "mandriva-lineage"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "i586",
+    "aarch64",
+    "armv7hl"
+  ],
+  "license": "GPL and free software licenses for Mageia tools; redistributable non-free firmware in optional repositories",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "Mageia is an independent, community-driven GNU/Linux distribution originating from France. Created in September 2010 as a community fork of Mandriva Linux following financial instability at Mandriva S.A., Mageia was founded by former employees and international community contributors. Supported legally and financially by the non-profit association Mageia.Org, the distribution emphasizes software stability, democratic community governance, user-friendly system administration tools, and an inclusive desktop computing experience.",
+    "what_is_it": "Technically, Mageia is an RPM-based distribution featuring an independent package build infrastructure and an expansive software repository. It combines traditional Mandriva-derived administration utilities—notably the Mageia Control Center (MCC / `drakconf`) and the `urpmi` package management ecosystem—with modern Linux engineering standards, including systemd init supervision, PipeWire audio routing, and dual package manager support for both `urpmi` and `dnf`.",
+    "origin_and_history": "The history of Mageia is directly rooted in the heritage of Mandrake Linux (founded in 1998) and its successor Mandriva Linux. When corporate restructuring and liquidation threatened Mandriva in 2010, community members and former staff established Mageia to preserve the distribution's user-centric engineering ethos and software management tools within a completely non-commercial structure. Releasing its initial version in June 2011, Mageia has published regular major releases, culminating in Mageia 9 (August 2023) and Mageia 10 (June 2026, known as 'The power of 10').",
+    "governance_and_organization": "Mageia is governed strictly by its community without corporate control. The non-profit association Mageia.Org provides financial, legal, and asset stewardship under French law. Technical direction and release management are overseen by the Mageia Council, comprising elected team leaders across Packaging, Quality Assurance (QA), System Administration, Documentation, Translation, and Graphic Atelier teams. Democratic community elections ensure broad participation and transparent decision-making.",
+    "software_management_urpmi_and_dnf": "Mageia manages RPM packages primarily through `urpmi` (User RPM Installer) and the underlying `perl-URPM` library. The urpmi suite includes `urpmi` for installation and repository upgrades, `urpme` for package removal, `urpmq` for querying dependencies, and `urpmf` for locating files within packages. Urpmi is celebrated for its conservative orphan package detection algorithm that prevents accidental removal of critical system libraries. Starting with recent releases, Mageia also integrates native command-line support for Fedora's `dnf` (and DNF5 in Mageia 10) as an alternative package manager, giving users choice across package workflows.",
+    "mageia_control_center_and_drakxtools": "The signature feature of Mageia is the Mageia Control Center (MCC), an integrated graphical administration console derived from the legendary `drakxtools` suite. Written in Perl and GTK, MCC centralizes virtually all system configuration tasks under a unified dashboard:\n\n- Software Management: Repository configuration, media mirror selection, and package updates.\n- Hardware Configuration: Display server setup (`drakx11`), sound server management (`draksound` switching between PulseAudio and PipeWire), 3D acceleration, and printer configuration.\n- Network and Internet: Wireless, Ethernet, VPN, and interactive firewall management (`drakfirewall`).\n- System Administration: User management, graphical service enabling/disabling, bootloader configuration, and interactive disk partitioning (`diskdrake`).",
+    "editions_installers_and_desktops": "Mageia provides versatile installation options adapted to different deployment scenarios. Users can choose the Classic Installer (using the traditional DrakX engine), which includes a comprehensive selection of desktop environments, complete localization catalogs, and optional non-free driver packages. Alternatively, Live ISOs featuring KDE Plasma, GNOME, or Xfce provide immediate desktop evaluation with installation managed via the Calamares installer. In addition, netinstall ISOs offer minimal downloads with full repository configuration.",
+    "hardware_support_and_32bit": "Unlike many contemporary distributions that have abandoned legacy architectures, Mageia continues to maintain active support for 32-bit x86 hardware (`i586`/`i686`) alongside standard 64-bit `x86_64` systems. Official builds are also maintained for ARM architectures (`aarch64` and `armv7hl`). Hardware detection during installation is granular, automatically identifying sound cards, wireless chipsets, and proprietary GPU adapters.",
+    "repository_policy_core_nonfree_tainted": "Mageia strictly divides its software repositories into three transparent sections:\n\n- Core: 100% free and open-source software adhering to strict free software licensing.\n- Nonfree: Proprietary or closed-source drivers, firmwares, and utilities that are legally redistributable without royalty (e.g., Wi-Fi microcodes, proprietary graphics drivers).\n- Tainted: Software that is open-source but subject to patent restrictions or legal licensing barriers in specific jurisdictions (e.g., proprietary multimedia codecs, DVD descrambling libraries).\n\nUsers can enable or disable Nonfree and Tainted media sources with a single checkbox in the Mageia Control Center.",
+    "advantages": [
+      "Mageia Control Center provides one of the most comprehensive and unified graphical administration consoles in the Linux ecosystem",
+      "Democratic, non-profit governance model free from corporate influence and vendor lock-in",
+      "Dual package management offering the battle-tested urpmi toolset alongside modern DNF/DNF5 support",
+      "Continued active maintenance for legacy 32-bit hardware (i586) as well as modern 64-bit x86 and ARM platforms",
+      "Transparent repository segmentation between Core (free), Nonfree, and Tainted software tiers",
+      "Choice between the granular classic DrakX installer and modern Live Calamares desktop media"
+    ],
+    "disadvantages": [
+      "Release cycle between major versions can span multiple years, prioritizing long-term stability over rapid feature releases",
+      "Smaller global third-party package ecosystem compared to Ubuntu/Debian PPA or Arch AUR repositories",
+      "Certain modern cloud-native deployment tools assume Debian or Enterprise Linux (RHEL) package conventions",
+      "Community forum and documentation presence is concentrated primarily in Europe and specific regional communities"
+    ],
+    "who_is_it_for": [
+      "Desktop users and home lab administrators seeking a stable, cohesive RPM-based desktop without commercial telemetry",
+      "Former Mandrake and Mandriva enthusiasts desiring the familiar, refined DrakX administrative workflow",
+      "Users maintaining older 32-bit PC hardware that cannot run distributions restricted to 64-bit architectures",
+      "Administrators who appreciate all-in-one graphical configuration for complex network, storage, and service tasks"
+    ],
+    "who_is_it_not_for": [
+      "Enthusiasts requiring a bleeding-edge rolling-release distribution with daily upstream package updates",
+      "Cloud and container specialists seeking minimal immutable or atomic container hosts"
+    ],
+    "verdict": "Mageia represents a premier example of community-driven software craftsmanship, keeping alive the celebrated Mandrake/Mandriva heritage of user-friendly desktop computing. With its unmatched Mageia Control Center, reliable urpmi and DNF package management, and enduring commitment to hardware accessibility, Mageia remains a dependable and versatile operating system."
+  },
+  "relations": [
+    {
+      "id": "pclinuxos",
+      "name": "PCLinuxOS",
+      "relation": "sister_lineage",
+      "note": "Independent distribution sharing the Mandriva codebase origin and DrakX system administration tool heritage."
+    },
+    {
+      "name": "Mandriva Linux",
+      "relation": "historical_origin",
+      "note": "Community fork created in September 2010 by former employees and contributors following the liquidation of Mandriva Linux (formerly Mandrake)."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora Linux",
+      "relation": "alternative",
+      "note": "Leading community RPM-based distribution using modern DNF and systemd, serving as a reference for RPM ecosystem comparisons."
+    }
+  ],
+  "links": {
+    "home": "https://www.mageia.org/",
+    "documentation": "https://wiki.mageia.org/",
+    "blog": "https://blog.mageia.org/",
+    "releases": "https://wiki.mageia.org/en/Mageia_10_Release_Notes",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=mageia"
+  },
+  "sources": [
+    {
+      "title": "Mageia Official Project Portal",
+      "url": "https://www.mageia.org/",
+      "type": "official",
+      "date": "2026-06-30"
+    },
+    {
+      "title": "Mageia Wiki Documentation and Community Resources",
+      "url": "https://wiki.mageia.org/",
+      "type": "official_documentation",
+      "date": "2026-06-30"
+    },
+    {
+      "title": "Mageia 10 Official Release Notes",
+      "url": "https://wiki.mageia.org/en/Mageia_10_Release_Notes",
+      "type": "official_documentation",
+      "date": "2026-10-03"
+    },
+    {
+      "title": "Mageia Blog — Potions in Mageia 05 / Package Managers",
+      "url": "https://blog.mageia.org/en/2026/09/28/potions-in-mageia-05-how-mageia-ranks-amongst-the-best-user-friendly-distros-even-though-many-people-arent-aware-of-it/",
+      "type": "official",
+      "date": "2026-09-28"
+    },
+    {
+      "title": "Mageia Control Center Technical Documentation",
+      "url": "https://wiki.mageia.org/en/Mageia_Control_Center",
+      "type": "technical_specification",
+      "date": "2026-04-18"
+    }
+  ]
+}
