@@ -1,0 +1,108 @@
+{
+  "id": "feren-os",
+  "name": "Feren OS",
+  "type": "operating_system",
+  "summary": "A desktop Linux distribution built on an Ubuntu LTS base featuring a tailored KDE Plasma desktop with a versatile Layout Switcher, designed for smooth transition from traditional proprietary operating systems.",
+  "tags": [
+    "linux",
+    "desktop",
+    "ubuntu-derivative",
+    "kde-plasma",
+    "customizable",
+    "calamares",
+    "flatpak",
+    "beginners"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GPL and compatible open-source licenses",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "Feren OS is a community-developed desktop Linux distribution created in 2015 by British developer Nathan Burbank. Engineered to deliver a refined and approachable computing environment, Feren OS focuses on easing the transition for users migrating from proprietary operating systems such as Microsoft Windows. Built upon an Ubuntu Long Term Support (LTS) foundation, the distribution pairs robust system stability with extensive desktop customization powered by a tailored KDE Plasma environment.",
+    "what_is_it": "Technically, Feren OS is an Ubuntu-derived desktop operating system that replaces standard Ubuntu desktop components with a customized KDE Plasma shell, integrated Nemo file management routines, and preconfigured software management pipelines. It features an automated Layout Switcher that shifts panel and window ergonomics across Windows, macOS, and classical layouts on demand, while leveraging the Calamares installer for straightforward system deployment.",
+    "origin_and_history": "Feren OS originated in July 2015 as a derivative of Linux Mint utilizing the Cinnamon desktop environment. As the project evolved, the development team sought greater visual flexibility, finer theming controls, and broader desktop modularity. Between 2018 and 2020, Feren OS executed a major architectural rebase, transitioning from Linux Mint Cinnamon to an Ubuntu LTS base paired with the KDE Plasma desktop. The distribution celebrated its 10-year anniversary in 2025. Its latest shipped and maintained release is 2025.03 (with Update 1 in December 2025), which refreshed the system on an established Ubuntu 22.04 LTS foundation, distinguishing this shipped release from future roadmap rebase plans.",
+    "desktop_environment_and_layout_switcher": "The signature user-facing capability of Feren OS is its preconfigured KDE Plasma desktop experience. Rather than requiring manual widget and panel positioning, the system includes a dedicated Layout Switcher utility. Users can switch between multiple pre-tuned desktop paradigms with a single click:\n\n- Windows-Style: Traditional bottom taskbar, start menu, and system tray.\n- macOS-Style: Clean top menu bar with an application dock at the bottom.\n- Classical Linux: Traditional dual-panel layout with separate task and status bars.\n- Ubuntu-Style: Left-aligned vertical launcher panel with global status controls.\n\nThe desktop integrates Kvantum theme engines, blurred translucent menus, and custom dark/light accents.",
+    "package_management_and_software_sources": "Software delivery in Feren OS combines the standard Debian/Ubuntu APT package ecosystem with out-of-the-box Flatpak integration connected to Flathub. The distribution provides a graphical software store allowing users to browse, install, and update native DEB packages and containerized Flatpaks seamlessly. In addition, Feren OS includes a dedicated 'Web Browser Manager' tool enabling users to install, switch, or remove major web browsers (such as Vivaldi, Firefox, Google Chrome, and Brave) without manual terminal configuration.",
+    "migration_tools_and_accessibility": "To streamline onboarding for new users, Feren OS includes guided setup utilities and migration tools. The initial welcome experience assists users in configuring display scaling, color schemes, and preferred default applications. For users migrating from older Windows installations, Feren OS provides transfer guidance and operates effectively on legacy PC hardware without requiring modern hardware security modules such as TPM 2.0 or mandatory Secure Boot keys.",
+    "hardware_support_and_requirements": "Feren OS targets 64-bit x86_64 PC and Intel-based Mac hardware. It requires a minimum of 3 GB of RAM (with 4 GB or more recommended for comfortable multi-tasking) and at least 20 GB of storage space. System installation is driven by the modern Calamares installer, offering automated disk partitioning, LUKS encryption options, and OEM installation modes.",
+    "advantages": [
+      "Intuitive Layout Switcher allows instant switching between Windows, macOS, and classic desktop arrangements",
+      "Stable foundation based on Ubuntu LTS ensuring broad hardware compatibility and security updates",
+      "Out-of-the-box Flatpak integration providing access to up-to-date applications via Flathub",
+      "Web Browser Manager simplifies installation and configuration of multiple popular browsers",
+      "No restrictive hardware requirements such as TPM 2.0, extending the viable lifespan of existing PCs",
+      "Polished out-of-the-box aesthetics with unified dark/light themes and fluid KDE Plasma animations"
+    ],
+    "disadvantages": [
+      "Maintained primarily by an independent single-lead developer, which can lead to longer intervals between major rebase releases",
+      "Limited support for non-x86 architectures (no official ARM64 or RISC-V desktop images)",
+      "KDE Plasma desktop footprint may be heavier on extremely resource-constrained legacy systems compared to lightweight XFCE or LXQt setups",
+      "Community documentation and support forums are smaller than those of upstream Ubuntu or Linux Mint"
+    ],
+    "who_is_it_for": [
+      "Users transitioning from Windows 10 or Windows 11 seeking a familiar, customizable desktop workflow",
+      "Desktop enthusiasts wanting a pre-configured, aesthetically cohesive KDE Plasma experience without manual configuration",
+      "Home users looking to extend the useful life of aging PC hardware without strict vendor hardware barriers"
+    ],
+    "who_is_it_not_for": [
+      "System administrators seeking minimal, headless enterprise server distributions without graphical overhead",
+      "Users requiring bleeding-edge rolling-release software kernels and daily upstream package updates",
+      "Enthusiasts deploying on ARM single-board computers like Raspberry Pi"
+    ],
+    "verdict": "Feren OS is a well-crafted, user-oriented Linux distribution that succeeds in making the power of KDE Plasma accessible to newcomers. By pairing the rock-solid stability of an Ubuntu LTS core with thoughtful ergonomics like the Layout Switcher and Web Browser Manager, Feren OS provides an inviting, reliable operating system for everyday personal computing."
+  },
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "upstream_base",
+      "note": "Upstream LTS distribution providing the package repositories, core Linux kernel, and underlying system libraries."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "historical_origin",
+      "note": "Historical foundation of Feren OS prior to its 2018-2020 transition to an Ubuntu LTS base with KDE Plasma."
+    },
+    {
+      "id": "zorin-os",
+      "name": "Zorin OS",
+      "relation": "alternative",
+      "note": "Fellow Ubuntu-based desktop distribution focused on transition ergonomics and desktop layout switching for Windows switchers."
+    }
+  ],
+  "links": {
+    "home": "https://ferenos.weebly.com/",
+    "get": "https://ferenos.weebly.com/get-feren-os.html",
+    "repository": "https://github.com/feren-OS",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=feren"
+  },
+  "sources": [
+    {
+      "title": "Feren OS Official Website",
+      "url": "https://ferenos.weebly.com/",
+      "type": "official",
+      "date": "2025-07-29"
+    },
+    {
+      "title": "Feren OS Download and Specification Directory",
+      "url": "https://ferenos.weebly.com/get-feren-os.html",
+      "type": "official_documentation",
+      "date": "2025-12-10"
+    },
+    {
+      "title": "Feren OS Architecture Evolution: Transition to Ubuntu and KDE",
+      "url": "https://ferenos.weebly.com/news/feren-os-is-changing",
+      "type": "official",
+      "date": "2018-10-31"
+    },
+    {
+      "title": "Feren OS Source Code Repositories",
+      "url": "https://github.com/feren-OS",
+      "type": "repository",
+      "date": "2026-10-15"
+    }
+  ]
+}

@@ -71,7 +71,19 @@ var LIBRARY_RESOURCES = [
   "remnux",
   "ipfire",
   "opnsense",
-  "pfsense"
+  "pfsense",
+  "devuan",
+  "mageia",
+  "openwrt",
+  "feren-os",
+  "pikaos",
+  "rhino-linux",
+  "solus",
+  "freebsd",
+  "openbsd",
+  "netbsd",
+  "dragonfly-bsd",
+  "hardenedbsd"
 ];
 
 (function () {

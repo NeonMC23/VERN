@@ -1,0 +1,124 @@
+{
+  "id": "openwrt",
+  "name": "OpenWrt",
+  "type": "operating_system",
+  "summary": "An open-source, highly extensible Linux distribution engineered for embedded network devices and wireless routers, featuring musl libc, BusyBox, procd supervision, unified UCI configuration, and the LuCI web interface.",
+  "tags": [
+    "linux",
+    "embedded",
+    "networking",
+    "router",
+    "firewall",
+    "wireless",
+    "musl",
+    "busybox",
+    "uci",
+    "opkg"
+  ],
+  "status": "active",
+  "platforms": [
+    "mips",
+    "mipsel",
+    "arm",
+    "aarch64",
+    "x86_64",
+    "riscv64",
+    "powerpc"
+  ],
+  "license": "GPL-2.0",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "OpenWrt is an open-source Linux operating system targeting embedded network appliances, residential gateways, and wireless routers. Initiated in 2004 following the public release of the Linksys WRT54G GPL firmware source code, OpenWrt replaces vendor-restricted factory firmwares with a fully customizable, package-based Linux distribution. Governed by an international community and legally affiliated with Software in the Public Interest (SPI), OpenWrt transforms consumer routers into versatile networking platforms with enterprise-grade routing, traffic shaping, and firewall capabilities.",
+    "what_is_it": "Technically, OpenWrt is a specialized embedded Linux system engineered for constrained flash and RAM environments. Built on top of the `musl` standard C library and `BusyBox` core utilities, the system utilizes custom-developed core infrastructure: `procd` (process manager and init system), `ubus` (high-speed IPC system bus), `uci` (Unified Configuration Interface), and `netifd` (network interface management daemon). It features a resilient dual-partition filesystem combining a compressed, read-only SquashFS root with a writable JFFS2/ext4 overlay, enabling instant factory resets and failsafe recovery.",
+    "origin_and_history": "OpenWrt originated in early 2004 when developers modified Cisco/Linksys's newly GPL-released code for the WRT54G series of wireless routers, naming the distribution after the device. The project progressed through landmark releases (White Russian, Kamikaze, Backfire, Attitude Adjustment, Barrier Breaker, Chaos Calmer). In May 2016, core developers formed the LEDE (Linux Embedded Development Environment) fork to overhaul release cadence and community transparency. In January 2018, LEDE and OpenWrt formally reunited under the OpenWrt name, adopting LEDE's open governance. Development continues actively, highlighted by the 23.05 and 24.10 stable release series.",
+    "governance_and_spi": "OpenWrt operates as an independent meritocracy governed by elected committers and maintainers according to rules established during the LEDE reunification. Legal stewardship, financial donations, and trademark ownership are managed through Software in the Public Interest (SPI), a 501(c)(3) non-profit organization. Project infrastructure is openly coordinated across Git repositories (`git.openwrt.org` mirrored to GitHub), a comprehensive documentation wiki, and active community forums.",
+    "embedded_architecture_and_core_stack": "OpenWrt avoids conventional desktop or server Linux daemons in favor of micro-utilities engineered for extreme efficiency:\n\n- `musl libc`: A standards-compliant, lightweight C library minimizing binary size and execution overhead.\n- `BusyBox`: A single multi-call binary replacing hundreds of common GNU command-line utilities.\n- `procd`: The central init daemon and process supervisor responsible for service lifecycles, hotplug events, and watchdog monitoring.\n- `ubus`: A JSON-RPC inter-process communication bus connecting daemons, scripts, and administrative APIs.\n- `netifd`: An asynchronous daemon handling physical network interfaces, bridge configurations, VLAN tagging, and dynamic routing events.",
+    "uci_and_ubus_configuration_model": "Rather than maintaining disparate, custom configuration formats for each network daemon, OpenWrt unifies system configuration through UCI (Unified Configuration Interface). All fundamental network, wireless, firewall, and system parameters reside in structured plain-text files located in `/etc/config/` (such as `/etc/config/network`, `/etc/config/wireless`, `/etc/config/firewall`). Administrators can query and modify configuration variables programmatically via the `uci` CLI tool or through JSON calls over `ubus`, guaranteeing that configuration edits are validated and applied atomically.",
+    "filesystem_layout_and_failsafe_recovery": "A signature architectural advantage of OpenWrt is its flash storage management:\n\n- Read-Only Base (SquashFS): The kernel and pristine base operating system reside in a highly compressed, read-only SquashFS partition.\n- Writable Overlay (OverlayFS): Configuration modifications, logs, and newly installed packages are written to a writable partition (JFFS2 or ext4) layered transparently over the base system.\n- Failsafe Mode: If network misconfiguration or software bugs prevent normal booting, administrators can enter a hardware failsafe mode (via Ethernet) to restore access without reflashing.\n- Factory Reset (`firstboot`): A single command wipes the writable overlay, instantly restoring the device to its pristine installation state without external media.",
+    "package_management_opkg_and_luci": "While compact out of the box, OpenWrt provides extensive extensibility through package repositories hosting thousands of pre-compiled packages. In the stable 24.10 series, packages are installed and updated using `opkg`. Administrators can easily install VPN servers (WireGuard, OpenVPN), ad-blocking filters (adblock, banIP), DNS resolvers (Unbound, Bind), dynamic DNS updaters, and network monitoring daemons. For graphical management, OpenWrt provides `LuCI` (Lua Configuration Interface), an accessible web dashboard communicating directly with UCI and ubus via the lightweight `uhttpd` web server.",
+    "networking_wireless_and_firewall": "OpenWrt delivers advanced networking capabilities standard in enterprise-grade appliances:\n\n- Firewall (fw4): Built atop `nftables`, fw4 delivers high-performance stateful filtering, zone-based routing, port forwarding, and NAT handling.\n- Wireless (mac80211): Upstream Linux wireless subsystem delivering access point, client, mesh (802.11s), and WDS modes across Wi-Fi 4, 5, 6, and emerging Wi-Fi 7 chipsets.\n- Traffic Shaping (SQM / Cake): Smart Queue Management utilizing modern queue disciplines (FQ-CoDel, Cake) to eliminate bufferbloat and guarantee low latency for interactive gaming and VoIP.",
+    "hardware_compatibility_and_requirements": "OpenWrt supports over 1,970 individual device models spanning MIPS, ARM, ARM64, x86_64, RISC-V, and PowerPC architectures. However, hardware requirements have evolved:\n\n- Minimum Resources for Modern Releases: OpenWrt 23.x and 24.x recommend devices with at least 16 MB of flash memory and 64 MB of RAM (with 128 MB+ RAM recommended for extensive package installation).\n- Deprecated Legacy Hardware: Routers with only 4 MB of flash or 32 MB of RAM are discontinued in modern releases due to modern Linux kernel and TLS cryptographic footprints.\n- Chipset Variances: Open-source driver availability varies; chipsets with upstream mac80211 drivers (MediaTek, Qualcomm Atheros) provide optimal support, whereas proprietary Wi-Fi architectures (certain Broadcom revisions) may exhibit operational limitations.",
+    "advantages": [
+      "Replaces restrictive proprietary router firmware with an open, auditable, and extensible Linux operating system",
+      "Unified Configuration Interface (UCI) simplifies complex networking, routing, and firewall configurations",
+      "Robust failsafe mode and overlay filesystem allowing instant factory resets without bricking risk",
+      "Extensive package repository managed via opkg with thousands of networking, VPN, and server applications",
+      "Advanced Smart Queue Management (SQM/Cake) that eliminates bufferbloat on residential internet connections",
+      "Intuitive LuCI web management console supporting full remote administration via browser",
+      "Supported by Software in the Public Interest (SPI) with active global community maintenance"
+    ],
+    "disadvantages": [
+      "Flashing custom firmware carries inherent device risk if improper firmware images are applied",
+      "Modern releases require at least 16 MB flash and 64 MB RAM, leaving older legacy routers behind",
+      "Certain proprietary Wi-Fi chipsets lack full open-source mac80211 drivers, requiring closed-source blobs or limiting performance",
+      "Does not function as a standard general-purpose desktop operating system",
+      "Advanced network topologies (VLANs, multi-WAN, policy routing) require solid networking knowledge"
+    ],
+    "who_is_it_for": [
+      "Home and small-business network administrators seeking enterprise firewall, VLAN, and QoS capabilities on commodity hardware",
+      "Privacy-conscious users deploying network-wide ad blocking (adblock) and encrypted VPN gateways (WireGuard/OpenVPN)",
+      "IoT and embedded systems engineers developing customized edge routers, sensor gateways, and mesh nodes",
+      "Enthusiasts eliminating bufferbloat and optimizing latency for real-time gaming, VoIP, and video conferencing"
+    ],
+    "who_is_it_not_for": [
+      "Users seeking a desktop operating system with graphical office, gaming, or productivity applications",
+      "Non-technical users uncomfortable with network addressing, subnetting, or firmware flashing procedures",
+      "Owners of unsupported hardware with proprietary, locked-down bootloaders preventing custom firmware installation"
+    ],
+    "verdict": "OpenWrt is the definitive open-source standard for embedded network routing. By coupling the efficiency of musl libc and BusyBox with the architectural elegance of procd, UCI, and LuCI, OpenWrt liberates consumer and commercial hardware, providing unparalleled network control, security, and extensibility."
+  },
+  "relations": [
+    {
+      "id": "ipfire",
+      "name": "IPFire",
+      "relation": "alternative",
+      "note": "Dedicated Linux distribution for network security, routing, and firewalling on x86_64 and ARM appliances."
+    },
+    {
+      "id": "alpine-linux",
+      "name": "Alpine Linux",
+      "relation": "alternative_lineage",
+      "note": "Lightweight musl-libc and BusyBox-based security-oriented distribution whose APK package format is adopted in OpenWrt's development branch."
+    }
+  ],
+  "links": {
+    "home": "https://openwrt.org/",
+    "documentation": "https://openwrt.org/docs/guide-user/start",
+    "technical_reference": "https://openwrt.org/docs/techref/start",
+    "repository": "https://git.openwrt.org/",
+    "github": "https://github.com/openwrt/openwrt",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=openwrt"
+  },
+  "sources": [
+    {
+      "title": "OpenWrt Project Official Web Portal",
+      "url": "https://openwrt.org/",
+      "type": "official",
+      "date": "2026-04-14"
+    },
+    {
+      "title": "OpenWrt User Guide and Documentation",
+      "url": "https://openwrt.org/docs/guide-user/start",
+      "type": "official_documentation",
+      "date": "2026-04-14"
+    },
+    {
+      "title": "OpenWrt Technical Reference and Architecture",
+      "url": "https://openwrt.org/docs/techref/start",
+      "type": "technical_specification",
+      "date": "2026-03-20"
+    },
+    {
+      "title": "OpenWrt 24.10.0 Official Release Notes",
+      "url": "https://openwrt.org/releases/24.10/notes-24.10.0",
+      "type": "official_documentation",
+      "date": "2026-02-06"
+    },
+    {
+      "title": "OpenWrt Official Source Code Git Repository",
+      "url": "https://git.openwrt.org/",
+      "type": "repository",
+      "date": "2026-10-15"
+    }
+  ]
+}

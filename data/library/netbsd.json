@@ -1,0 +1,116 @@
+{
+  "id": "netbsd",
+  "name": "NetBSD",
+  "type": "operating_system",
+  "summary": "An exceptionally portable, clean, and highly modular open-source BSD Unix operating system renowned for its Anykernel rump kernel architecture, universal cross-compilation infrastructure, and the multiplatform pkgsrc package collection.",
+  "tags": [
+    "bsd",
+    "unix",
+    "portable",
+    "rumpkernel",
+    "pkgsrc",
+    "server",
+    "embedded",
+    "academic"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64",
+    "i386",
+    "aarch64",
+    "arm",
+    "sparc64",
+    "powerpc",
+    "mips",
+    "riscv",
+    "m68k",
+    "alpha",
+    "vax"
+  ],
+  "license": "BSD Licenses (2-clause and 3-clause BSD)",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "NetBSD is a free, fast, secure, and highly portable Unix-like operating system descendant of 386BSD and 4.4BSD-Lite. Founded in March 1993, the project is famously guided by the motto 'Of course it runs NetBSD', reflecting its dedication to hardware portability, clean code quality, and architectural modularity across modern multicore workstations and historic or experimental architectures.",
+    "what_is_it": "NetBSD is an independent, complete operating system that develops its kernel, device drivers, C runtime library, system toolchain, and core userland utilities in a single unified source tree. Beyond classic desktop and server workloads, NetBSD serves as a premier research and embedded platform due to its pioneering Anykernel technology (rump kernels) and the multiplatform pkgsrc packaging framework.",
+    "origin_and_portability": "Originating in 1993 through the collaboration of Chris Demetriou, Theo de Raadt, Adam Glass, and Charles Hannum, NetBSD established a rigorous separation between Machine-Independent (MI) and Machine-Dependent (MD) source code. This structural discipline enables NetBSD to run on dozens of hardware platforms spanning 16 distinct CPU machine architectures while maintaining complete code clarity.",
+    "kernel_architecture_and_rump": "The NetBSD monolithic kernel is complemented by the groundbreaking Anykernel architecture developed by Antti Kantee. Known as Rump Kernels, this design allows unmodified NetBSD kernel drivers, file systems, and TCP/IP network stacks to be compiled and executed directly as userspace libraries (librump) or microkernels, enabling robust fuzzing, virtualization, and testing without risking host kernel panics.",
+    "build_system_and_pkgsrc": "NetBSD features an integrated, host-independent cross-compilation system centered on build.sh. Any developer can build the entire operating system, kernel, and userland binaries from scratch for any supported target architecture from any host operating system (including Linux and macOS) without requiring root privileges. Software package management is provided by pkgsrc, a portable framework offering over 25,000 packages using the pkgin binary package manager or bmake source compilation.",
+    "release_engineering_and_maintenance": "The project follows a stable release engineering model. The NetBSD 10 release branch introduced major performance gains including per-directory red-black tree path lookups, radix tree virtual memory improvements, POSIX ACLs, WireGuard VPN support, and the Adiantum disk cipher in cgd(4). Following NetBSD 10.0 in March 2024 and 10.1 in December 2024, NetBSD 10.2 was officially published on September 15, 2026, while the 11.0 branch undergoes release candidates.",
+    "advantages": [
+      "Exceptional hardware portability spanning modern 64-bit platforms and historic embedded architectures",
+      "Pioneering Anykernel rump kernel architecture enabling kernel subsystems to run safely in userspace",
+      "Robust, host-independent cross-compilation toolchain via build.sh without superuser privileges",
+      "Portable pkgsrc package collection usable identically across NetBSD, Linux, macOS, and illumos",
+      "Clean, unencumbered BSD licensing and strictly audited, highly readable codebase"
+    ],
+    "disadvantages": [
+      "Desktop graphical ecosystem and hardware acceleration for bleeding-edge consumer GPUs lag behind Linux",
+      "Smaller developer and commercial support community compared to Linux or FreeBSD distributions",
+      "Fewer pre-packaged commercial proprietary applications and third-party vendor drivers"
+    ],
+    "who_is_it_for": [
+      "Embedded systems engineers and hardware architects requiring an easily portable, clean operating system",
+      "Researchers and computer science academics studying operating system design and rump kernels",
+      "Unix enthusiasts, system administrators, and retrocomputing practitioners running diverse architectures"
+    ],
+    "who_is_it_not_for": [
+      "Gamers requiring modern proprietary anti-cheat engines, Steam Proton, and consumer GPU tooling",
+      "Novice desktop users expecting graphical automated control centers and zero-terminal administration"
+    ],
+    "verdict": "NetBSD stands as a triumph of portable operating system engineering. By prioritizing architectural clarity, cross-compilation rigor, and component modularity, it remains an indispensable asset for embedded devices, academic operating system research, and versatile Unix computing across dozens of hardware architectures."
+  },
+  "relations": [
+    {
+      "id": "openbsd",
+      "name": "OpenBSD",
+      "relation": "fork_derivative",
+      "note": "Independent security-focused BSD operating system branched from NetBSD in 1995 by Theo de Raadt."
+    },
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "relation": "sister_lineage",
+      "note": "Fellow BSD Unix descendant originating from 386BSD and 4.4BSD-Lite, emphasizing large-scale x86 server performance and OpenZFS."
+    },
+    {
+      "id": "alpine-linux",
+      "name": "Alpine Linux",
+      "relation": "alternative",
+      "note": "Lightweight, security-oriented Linux alternative sharing a commitment to minimalism, clean code, and embedded deployments."
+    }
+  ],
+  "links": {
+    "home": "https://www.netbsd.org/",
+    "documentation": "https://www.netbsd.org/docs/",
+    "releases": "https://www.netbsd.org/releases/formal-10/NetBSD-10.2.html",
+    "ports": "https://wiki.netbsd.org/ports/",
+    "pkgsrc": "https://www.netbsd.org/docs/pkgsrc/",
+    "github": "https://github.com/NetBSD"
+  },
+  "sources": [
+    {
+      "title": "The NetBSD Project Official Portal",
+      "url": "https://www.netbsd.org/",
+      "type": "official",
+      "date": "2026-09-15"
+    },
+    {
+      "title": "Announcing NetBSD 10.2 Release Notes",
+      "url": "https://www.netbsd.org/releases/formal-10/NetBSD-10.2.html",
+      "type": "official_documentation",
+      "date": "2026-09-15"
+    },
+    {
+      "title": "Platforms Supported by NetBSD (Ports Tier Classification)",
+      "url": "https://wiki.netbsd.org/ports/",
+      "type": "technical_specification",
+      "date": "2026-01-01"
+    },
+    {
+      "title": "Runnable Userspace Meta Programs in NetBSD (Rump Kernels)",
+      "url": "https://blog.netbsd.org/tnf/entry/runnable_userspace_meta_programs_in",
+      "type": "technical_specification",
+      "date": "2020-07-13"
+    }
+  ]
+}
