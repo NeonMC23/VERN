@@ -1,0 +1,113 @@
+{
+  "id": "rhino-linux",
+  "name": "Rhino Linux",
+  "type": "operating_system",
+  "summary": "An Ubuntu-based rolling-release distribution built upon the Ubuntu development branch, featuring the Pacstall package manager, the unified rhino-pkg CLI, and the custom XFCE-based Unicorn Desktop.",
+  "tags": [
+    "linux",
+    "rolling",
+    "ubuntu-devel",
+    "pacstall",
+    "rhino-pkg",
+    "unicorn-desktop",
+    "xfce",
+    "desktop",
+    "arm64"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "license": "GPL-3.0 and compatible open-source licenses",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "Rhino Linux is a community-driven GNU/Linux distribution that re-invents the Ubuntu operating system as a continuous, rolling-release desktop platform. Co-founded in 2023 by AJ Allen and Oren Klopfer, the project diverges from traditional Ubuntu interim and LTS cycles. By coupling Ubuntu's development branch (`devel`) with Pacstall—an AUR-inspired package manager for Debian/Ubuntu systems—and the custom-built Unicorn Desktop, Rhino Linux delivers rapid upstream updates within a stable, lightweight XFCE framework.",
+    "what_is_it": "Technically, Rhino Linux is a rolling-release operating system tracking the continuous `devel` branch of Ubuntu repositories. It unifies package management through `rhino-pkg` (RPK / RPK2 written in Nushell), a master command-line tool that aggregates Pacstall, APT, Flatpak, and Snap. The desktop environment is powered by the custom 'Unicorn Desktop', which combines an XFCE baseline with modern application grids, the Plank dock, and custom utility scripts.",
+    "origin_and_history": "Rhino Linux originated in 2020 from the 'Rolling Rhino' script created by Martin Wimpress, designed to track Ubuntu's development repositories. Developer AJ Allen subsequently launched 'Rolling Rhino Remix' to turn the script into installable disk images. Recognizing architectural limitations in the initial remix, the team executed a complete rebuild in early 2023, establishing Rhino Linux as an independent distribution. The project showcased its technical milestones at FOSDEM 2025, delivering regular snapshot releases including 2025.1 and 2026.1.",
+    "ubuntu_devel_and_rolling_model": "Unlike traditional Ubuntu releases that require point-release upgrades every six months or two years, Rhino Linux treats Ubuntu's development archive as a perpetual rolling release. Users install the system once and receive continuous software updates, eliminating the disruptive system upgrades and PPA breakages that often accompany major distribution version migrations.",
+    "pacstall_and_aur_concept": "A core architectural pillar of Rhino Linux is `Pacstall`, an independent package manager built specifically to function like Arch Linux's AUR for Ubuntu-based systems. Pacstall allows users and developers to build, package, and install software directly from upstream source repositories or GitHub releases using straightforward `pacscript` recipes. This mechanism supplies Rhino Linux with the newest Linux kernels, developer tools, and desktop applications before they enter Debian or Ubuntu archives.",
+    "rhino_pkg_unified_management": "To eliminate the friction of managing multiple package managers, Rhino Linux provides `rhino-pkg` (invoked via `rpk`). Rewritten in Nushell for speed and structured data handling (RPK2), `rhino-pkg` serves as a unified command-line wrapper. A single syntax allows users to update the entire operating system across APT, Pacstall, Flatpaks, and Snaps simultaneously (`rpk update`), or search across all four repository ecosystems in a single command.",
+    "unicorn_desktop_experience": "The default user interface of Rhino Linux is the 'Unicorn Desktop'. Engineered on top of XFCE to maintain low RAM and CPU consumption, Unicorn modernizes the user experience by integrating:\n\n- Plank: A clean, animated application dock for fast multitasking.\n- App Grid & Ulauncher: Rapid keyboard-driven application launching and system navigation.\n- Custom Theming & Unicons: Unified modern icon sets, dark mode styling, and consistent window borders.\n- Dynamic Workspaces: Fluid virtual desktop management adapted for modern widescreen displays.",
+    "hardware_support_and_arm64": "Rhino Linux supports both standard 64-bit x86_64 PCs and ARM64 (`aarch64`) architectures. Dedicated disk images are produced for ARM single-board computers including Raspberry Pi and Pine64 devices (PinePhone, Pinebook Pro). System deployment on desktop PCs is handled by the Calamares installer, followed by the `rhino-setup` wizard to configure initial user preferences.",
+    "advantages": [
+      "True rolling-release model for Ubuntu eliminating disruptive point-release upgrades",
+      "Native Pacstall integration providing an AUR-like repository for the newest upstream software",
+      "Unified rhino-pkg CLI managing APT, Pacstall, Flatpak, and Snap in a single command",
+      "Lightweight Unicorn Desktop based on XFCE delivering high responsiveness and low resource usage",
+      "Official support for both 64-bit x86 PCs and ARM64 single-board computers like Raspberry Pi",
+      "Modern Calamares installer with post-installation setup wizard"
+    ],
+    "disadvantages": [
+      "Tracking the Ubuntu devel branch can occasionally introduce upstream packaging regressions",
+      "Smaller maintainer team compared to major enterprise-backed rolling distributions",
+      "Pacstall package catalog is smaller than the comprehensive Arch User Repository (AUR)",
+      "Unicorn Desktop is currently based on X11, with full Wayland transition still under development"
+    ],
+    "who_is_it_for": [
+      "Ubuntu and Debian enthusiasts who desire continuous rolling package updates without reinstallations",
+      "Developers needing an AUR-style source build system (Pacstall) within an APT-compatible environment",
+      "Users seeking a modern, dock-centric desktop interface with the lightweight efficiency of XFCE",
+      "ARM64 experimenters running modern Linux on Raspberry Pi or Pine64 single-board computers"
+    ],
+    "who_is_it_not_for": [
+      "Enterprise server environments requiring multi-year LTS package stability and enterprise support SLAs",
+      "Users who want a pure upstream GNOME or KDE Plasma desktop without customized wrapper environments",
+      "Novice users uncomfortable with resolving occasional package dependency adjustments in a rolling distribution"
+    ],
+    "verdict": "Rhino Linux fills a unique and long-desired niche in the Linux ecosystem by delivering a genuine rolling-release distribution built upon Ubuntu. Powered by Pacstall, the innovative rhino-pkg wrapper, and the nimble Unicorn Desktop, Rhino Linux proves that the Ubuntu package ecosystem can roll continuously with style and agility."
+  },
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "upstream_base",
+      "note": "Upstream package archive and core development branch (Ubuntu devel) from which Rhino Linux continuously builds."
+    },
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "relation": "alternative",
+      "note": "Leading independent rolling-release distribution and originator of the AUR concept that inspired Pacstall."
+    }
+  ],
+  "links": {
+    "home": "https://rhinolinux.org/",
+    "documentation": "https://wiki.rhinolinux.org/",
+    "blog": "https://blog.rhinolinux.org/",
+    "repository": "https://github.com/rhino-linux",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=rhinolinux"
+  },
+  "sources": [
+    {
+      "title": "Rhino Linux Official Website",
+      "url": "https://rhinolinux.org/",
+      "type": "official",
+      "date": "2025-02-02"
+    },
+    {
+      "title": "Rhino Linux Wiki and Technical Documentation",
+      "url": "https://wiki.rhinolinux.org/",
+      "type": "official_documentation",
+      "date": "2024-10-07"
+    },
+    {
+      "title": "Rhino Linux and Pacstall Presentation at FOSDEM 2025",
+      "url": "https://blog.rhinolinux.org/fosdem-2025",
+      "type": "official",
+      "date": "2025-02-02"
+    },
+    {
+      "title": "Rhino Linux Official News and Announcements",
+      "url": "https://blog.rhinolinux.org/",
+      "type": "official",
+      "date": "2025-02-14"
+    },
+    {
+      "title": "Rhino Linux Source Code Repositories on GitHub",
+      "url": "https://github.com/rhino-linux",
+      "type": "repository",
+      "date": "2026-10-15"
+    }
+  ]
+}

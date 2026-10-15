@@ -74,7 +74,10 @@ var LIBRARY_RESOURCES = [
   "pfsense",
   "devuan",
   "mageia",
-  "openwrt"
+  "openwrt",
+  "feren-os",
+  "pikaos",
+  "rhino-linux"
 ];
 
 (function () {
