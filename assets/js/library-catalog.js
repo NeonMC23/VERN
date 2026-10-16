@@ -98,7 +98,10 @@ var LIBRARY_RESOURCES = [
   "postmarketos",
   "mobian",
   "ubuntu-touch",
-  "sailfish-os"
+  "sailfish-os",
+  "plasma-mobile",
+  "windows",
+  "macos"
 ];
 
 (function () {

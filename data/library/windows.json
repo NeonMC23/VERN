@@ -1,0 +1,111 @@
+{
+  "id": "windows",
+  "name": "Microsoft Windows",
+  "type": "operating_system",
+  "summary": "Système d'exploitation commercial propriétaire développé par Microsoft, fondé sur le noyau hybride Windows NT et les sous-systèmes d'exécution Win32, WinUI et WSL.",
+  "tags": [
+    "commercial",
+    "proprietary",
+    "desktop",
+    "server",
+    "nt-kernel",
+    "wsl",
+    "win32"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "ARM64"
+  ],
+  "license": "Commercial propriétaire (CLUF Microsoft)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "Microsoft Windows est une famille de systèmes d'exploitation commerciaux développée par Microsoft Corporation pour ordinateurs personnels, serveurs et terminaux professionnels, dominante sur le marché de l'informatique de bureau.",
+    "what_is_it": "Initié dans sa déclinaison moderne en 1993 avec Windows NT 3.1, Windows repose aujourd'hui sur la branche unifiée du noyau Windows NT (version interne NT 10.0 sur Windows 10 et Windows 11), abandonnant définitivement l'ancienne base MS-DOS 16/32 bits de la série Windows 9x.",
+    "kernel_architecture_and_subsystems": "L'architecture repose sur un noyau hybride séparant l'anneau utilisateur (Ring 3) et l'anneau noyau (Ring 0). En anneau 0, la couche d'abstraction matérielle (HAL) isole le matériel du micro-noyau NT et des services exécutifs (gestionnaire de mémoire virtuelle, gestionnaire de processus, moniteur SRM, pilotes de périphériques WDM/KMDF). En espace utilisateur, les sous-systèmes d'environnement exposent l'API Win32 historique, le runtime .NET, la plateforme UWP et les composants d'interface WinUI 3 (Windows App SDK).",
+    "storage_security_and_hardware_anchors": "Le système de fichiers principal est NTFS, doté d'un journal des transactions de métadonnées, de listes de contrôle d'accès de sécurité (ACLs) et de clichés instantanés de volume (VSS). L'intégrité matérielle moderne impose le démarrage sécurisé UEFI (Secure Boot) et une puce TPM 2.0 pour ancrer le chiffrement intégral de lecteur BitLocker, la sécurité basée sur la virtualisation (VBS) et l'intégrité du code protégée par hyperviseur (HVCI).",
+    "linux_interoperability_via_wsl": "Windows intègre le sous-système Windows Subsystem for Linux (WSL2), qui exécute un véritable noyau Linux optimisé au sein d'une machine virtuelle légère sous l'hyperviseur Hyper-V de type 1. WSL2 offre un pont transparent d'E/S réseau et de systèmes de fichiers, permettant l'exécution native d'outils en ligne de commande et d'applications graphiques Linux (WSLg) aux côtés des logiciels Windows.",
+    "distribution_model_and_telemetry": "Windows est commercialisé sous licences OEM ou boîtes payantes selon le modèle « Windows as a Service », recevant des correctifs de sécurité mensuels et des mises à jour annuelles de fonctionnalités. Le système intègre des services cloud liés au compte Microsoft (OneDrive, télémétrie diagnostique, assistant d'intelligence artificielle Copilot).",
+    "advantages": [
+      "Compatibilité logicielle et prise en charge matérielle la plus étendue du marché de bureau",
+      "Écosystème de jeux vidéo et d'applications professionnelles inégalé via DirectX 12 et Win32",
+      "Intégration d'outils de développement multiplateformes et de Linux natif via WSL2",
+      "Administration centralisée robuste en entreprise via Active Directory, Group Policy et Microsoft Intune",
+      "Fonctionnalités avancées de sécurité matérielle (BitLocker, TPM 2.0, HVCI, Windows Hello)"
+    ],
+    "disadvantages": [
+      "Logiciel propriétaire fermé avec code source sous secret commercial",
+      "Collecte de données de télémétrie intégrée et incitation accrue aux services cloud de l'éditeur",
+      "Exigences matérielles strictes imposées sur les versions récentes (TPM 2.0, Secure Boot, processeurs récents)",
+      "Surface d'attaque historiquement élevée faisant du système la cible principale des rançongiciels et malwares"
+    ],
+    "who_is_it_for": [
+      "Utilisateurs grand public et joueurs recherchant une compatibilité immédiate avec l'ensemble des titres ludiques",
+      "Entreprises et administrations déployant des parcs de postes de travail gérés sous Active Directory",
+      "Développeurs exploitant la suite Visual Studio, l'écosystème .NET ou le couplage WSL2 / Linux"
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs exigeant la souveraineté numérique et le contrôle intégral de leur système par le code libre",
+      "Infrastructures nécessitant un système d'exploitation léger et dépourvu de composants de télémétrie",
+      "Possesseurs de matériels informatiques anciens déclarés non pris en charge par les versions récentes"
+    ],
+    "verdict": "Microsoft Windows est le standard de facto de l'informatique grand public et bureautique professionnelle, combinant une rétrocompatibilité logicielle de plusieurs décennies avec un noyau NT moderne et une couche Linux intégrée via WSL2."
+  },
+  "relations": [
+    {
+      "id": "macos",
+      "name": "Apple macOS",
+      "type": "alternative",
+      "description": "Système d'exploitation de bureau commercial concurrent développé par Apple sur socle Darwin/UNIX."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "type": "related",
+      "description": "Distribution Linux de référence couramment déployée au sein de Windows Subsystem for Linux (WSL2)."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "related",
+      "description": "Distribution Linux supportée comme environnement de conteneur et d'espace utilisateur dans WSL."
+    },
+    {
+      "id": "reactos",
+      "name": "ReactOS",
+      "type": "alternative",
+      "description": "Projet de réimplémentation libre et ouverte de l'architecture de noyau et des API de Windows NT."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel de Microsoft Windows",
+      "url": "https://www.microsoft.com/windows"
+    },
+    {
+      "label": "Documentation technique Microsoft Learn — Architecture Windows",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/overview-of-windows-components"
+    },
+    {
+      "label": "Documentation Microsoft Learn — Windows Subsystem for Linux (WSL)",
+      "url": "https://learn.microsoft.com/en-us/windows/wsl/"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel de documentation Microsoft Learn pour Windows",
+      "url": "https://learn.microsoft.com/en-us/windows/",
+      "type": "documentation"
+    },
+    {
+      "title": "Spécifications d'architecture et de sécurité matérielle Microsoft Windows",
+      "url": "https://learn.microsoft.com/en-us/windows/security/",
+      "type": "official_site"
+    },
+    {
+      "title": "Historique des versions et cycle de vie de support de Microsoft Windows",
+      "url": "https://learn.microsoft.com/en-us/windows/release-health/",
+      "type": "release_notes"
+    }
+  ]
+}

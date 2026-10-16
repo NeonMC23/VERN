@@ -1,0 +1,111 @@
+{
+  "id": "macos",
+  "name": "Apple macOS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation commercial certifié UNIX développé par Apple pour les ordinateurs Mac, fondé sur le noyau hybride XNU, le socle Darwin et l'architecture matérielle Apple Silicon.",
+  "tags": [
+    "commercial",
+    "proprietary",
+    "desktop",
+    "workstation",
+    "unix",
+    "darwin",
+    "apple-silicon"
+  ],
+  "status": "active",
+  "platforms": [
+    "ARM64",
+    "x86-64"
+  ],
+  "license": "Commercial propriétaire (CLUF Apple) avec socle Darwin open source (APSL)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "Apple macOS est le système d'exploitation propriétaire développé par Apple Inc. pour sa gamme d'ordinateurs personnels et professionnels Macintosh (MacBook, iMac, Mac mini, Mac Studio et Mac Pro).",
+    "what_is_it": "Successeur de NeXTSTEP et de Mac OS classique (1984-2001), macOS combine une interface graphique soignée avec un environnement POSIX certifié UNIX par The Open Group (norme Single UNIX Specification UNIX 03).",
+    "kernel_architecture_and_darwin": "Le socle de bas niveau de macOS, nommé Darwin, est disponible en source ouverte sous licence APSL. Il s'articule autour du noyau hybride XNU (« X is Not Unix »), intégrant les primitives du micro-noyau Mach (tâches, threads, mémoire virtuelle, IPC), une couche 4.4BSD (appels système POSIX, modèle de processus, pile réseau, VFS) et le framework de pilotes DriverKit en espace utilisateur remplaçant l'ancien I/O Kit.",
+    "hardware_transition_and_graphics": "Le système a achevé sa transition des processeurs Intel x86-64 vers les puces Apple Silicon à architecture ARM64 (séries M1 à M4). L'émulateur et traducteur binaire dynamique Rosetta 2 permet l'exécution transparente des exécutables x86-64 compilés pour les anciens Mac. L'accélération graphique et le calcul matriciel GPU/NPU reposent exclusivement sur l'API bas niveau propriétaire Metal.",
+    "storage_integrity_and_security": "Le système de fichiers standard est APFS (Apple File System), optimisé pour les disques SSD avec allocation 64 bits, clonage instantané par copy-on-write, instantanés locaux et chiffrement natif FileVault. Le système réside sur un volume système signé cryptographiquement (SSV - Signed System Volume) monté en lecture seule stricte. La sécurité applicative repose sur System Integrity Protection (SIP), Gatekeeper avec notarisation obligatoire des binaires, et le système d'autorisations granulaires TCC (Transparency, Consent, and Control).",
+    "ecosystem_continuity_and_limits": "macOS s'intègre étroitement à l'écosystème matériel et logiciel d'Apple (synchronisation iCloud, trousseau de clés, technologies de continuité telles qu'AirDrop, Handoff, Sidecar et recopie d'iPhone). Le contrat de licence logicielle restreint l'usage de macOS au seul matériel produit et certifié par Apple.",
+    "advantages": [
+      "Certification officielle UNIX 03 offrant un environnement POSIX complet pour le développement logiciel",
+      "Optimisation matérielle et efficacité énergétique de premier ordre sur les architectures Apple Silicon",
+      "Architecture de sécurité multicouche robuste (Signed System Volume, SIP, Gatekeeper, Secure Enclave)",
+      "Système de fichiers moderne APFS avec snapshots locaux et clonage de fichiers à coût nul",
+      "Écosystème unifié et continuité transparente avec les appareils iOS et iPadOS"
+    ],
+    "disadvantages": [
+      "Verrouillage contractuel et technique exclusif au matériel physique fabriqué par Apple",
+      "Code source de l'interface graphique, des frameworks Cocoa/SwiftUI et des pilotes sous licence propriétaire",
+      "Catalogue de jeux vidéo natifs nettement plus restreint que sur les plateformes Windows ou Linux sous Proton",
+      "Contraintes croissantes sur l'exécution de logiciels indépendants non notarisés par les serveurs Apple"
+    ],
+    "who_is_it_for": [
+      "Développeurs logiciels, ingénieurs et créateurs de contenu recherchant un environnement UNIX graphique stable",
+      "Professionnels de l'audiovisuel, de l'édition musicale et de la création graphique exploitant la suite Apple",
+      "Utilisateurs disposant d'un équipement Apple privilégiant l'intégration écosystémique et la simplicité de maintenance"
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs souhaitant assembler leur propre ordinateur de bureau ou changer librement les composants matériels",
+      "Infrastructures de calcul ou de serveurs standard exigeant une virtualisation x86-64 banalisée",
+      "Joueurs PC intensifs dépendants d'un catalogue de jeux natifs x86 et de pilotes GPU tiers"
+    ],
+    "verdict": "Apple macOS allie la rigueur d'un socle UNIX certifié et la puissance énergétique d'Apple Silicon à une ergonomie propriétaire fermée, constituant un standard majeur de l'informatique professionnelle de bureau."
+  },
+  "relations": [
+    {
+      "id": "windows",
+      "name": "Microsoft Windows",
+      "type": "alternative",
+      "description": "Système d'exploitation de bureau commercial concurrent développé par Microsoft sur socle Windows NT."
+    },
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "type": "related",
+      "description": "Système d'exploitation Unix libre dont la couche système BSD a été intégrée dans le socle Darwin et le noyau XNU."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "type": "alternative",
+      "description": "Distribution Linux pour postes de travail et serveurs offrant un environnement open source alternatif."
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "type": "alternative",
+      "description": "Distribution Linux d'avant-garde pour postes de travail adoptant les standards ouverts du monde libre."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel d'Apple macOS",
+      "url": "https://www.apple.com/macos"
+    },
+    {
+      "label": "Portail open source d'Apple (Darwin et XNU)",
+      "url": "https://github.com/apple-oss-distributions"
+    },
+    {
+      "label": "Guide officiel de sécurité de plateforme Apple (Apple Platform Security)",
+      "url": "https://support.apple.com/guide/security/welcome/web"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel Apple macOS et spécifications techniques",
+      "url": "https://www.apple.com/macos/",
+      "type": "official_site"
+    },
+    {
+      "title": "Dépôts de code source libre Apple OS Distributions (Darwin / XNU)",
+      "url": "https://github.com/apple-oss-distributions/xNU",
+      "type": "documentation"
+    },
+    {
+      "title": "Registre officiel des produits certifiés Single UNIX Specification (UNIX 03)",
+      "url": "https://www.opengroup.org/openbrand/register/",
+      "type": "official_site"
+    }
+  ]
+}
