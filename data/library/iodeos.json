@@ -1,0 +1,105 @@
+{
+  "id": "iodeos",
+  "name": "iodéOS",
+  "type": "operating_system",
+  "summary": "A privacy-focused mobile operating system based on LineageOS and AOSP, featuring an integrated system-level DNS blocker, real-time network traffic analysis, configurable microG, and complete uninstallation of preinstalled applications.",
+  "tags": [
+    "mobile",
+    "privacy",
+    "aosp",
+    "android",
+    "arm64",
+    "microg",
+    "adblocker",
+    "firewall",
+    "france"
+  ],
+  "status": "active",
+  "platforms": [
+    "arm64 / aarch64"
+  ],
+  "license": "GPLv2 (Linux kernel) / Apache License 2.0 (AOSP userspace) & GPLv3/Proprietary (iodé app backend/frontend)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "iodéOS is an open-source mobile operating system developed by the French company iodé SAS. Built upon LineageOS and the Android Open Source Project (AOSP), iodéOS is engineered to restore user control over personal data through a deeply embedded, system-level DNS blocker that intercepts and analyzes network connections in real time without occupying the device's local VPN interface.",
+    "what_is_it": "iodéOS is a de-Googled Android distribution that combines the hardware stability of LineageOS with native privacy enforcement tools. It eliminates Google background telemetry, incorporates microG for optional Google service compatibility, allows users to uninstall any preinstalled application, and provides graphical tools to inspect and restrict background network communications.",
+    "lineageos_foundation_and_system_architecture": "At the architectural level, iodéOS leverages LineageOS device trees, vendor hardware adaptations, and AOSP system frameworks. The iodé development team sanitizes the operating system by removing built-in tracking endpoints, replacing default network location services, and decoupling system components from commercial tracking infrastructures. Security updates and operating system improvements are delivered over-the-air (OTA) via the built-in Updater application.",
+    "integrated_dns_blocker_and_network_analysis": "The central feature of iodéOS is its integrated network privacy engine, the iodé blocker. Unlike conventional privacy utilities that require root access or occupy the single Android VPN slot, the iodé blocker is embedded directly into the OS network stack. It captures and evaluates all DNS queries prior to transmission, mapping each network request to the specific application UID that initiated it. The companion iodé app provides real-time logs, per-application data transfer statistics, and geographic connection mapping.",
+    "blocking_levels_and_preinstalled_app_management": "The iodé blocker offers granular protection modes, including a Standard mode (blocking known trackers, advertising domains, and malicious hosts) and a Reinforced mode with expanded domain databases. Users can configure custom domain whitelists and blacklists on a per-application basis. To preserve end-to-end transport layer security, iodéOS intentionally avoids decrypting application-internal DNS-over-HTTPS (DoH) streams. Additionally, iodéOS allows complete uninstallation or deactivation of any preinstalled application—including microG—directly from device settings.",
+    "hardware_support_and_commercial_model": "iodéOS officially supports a selected catalog of smartphones, including Fairphone devices (Fairphone 3, 4, and 5), Google Pixel models, and select Samsung Galaxy, Sony Xperia, Motorola, and OnePlus handsets. On supported hardware, the platform enforces bootloader relocking with custom signing keys. iodé SAS finances development through the sale of certified refurbished smartphones preloaded with iodéOS and an optional premium subscription (iodé+) offering parental control and enhanced blocklists.",
+    "advantages": [
+      "Deeply integrated system-level DNS blocker that operates without occupying the Android VPN slot",
+      "Real-time visibility into per-application network requests with geographical destination mapping",
+      "All preinstalled applications, including microG, can be fully disabled or uninstalled by the user",
+      "Compatible with concurrent third-party VPN connections while maintaining local domain blocking",
+      "Official support for verified boot with bootloader relocking on Fairphone and Google Pixel hardware"
+    ],
+    "disadvantages": [
+      "Hardware support is focused on a curated list of popular brands rather than hundreds of legacy models",
+      "Cannot filter DNS queries encrypted via application-internal DoH implementations without breaking TLS",
+      "Advanced parental controls and extended blocklists require an optional paid subscription (iodé+)"
+    ],
+    "who_is_it_for": [
+      "Users seeking detailed, real-time visual control over network connections and data leakage on their smartphone",
+      "Privacy-conscious consumers wanting an out-of-the-box de-Googled phone without managing complex VPN configurations",
+      "Owners of Fairphone, Pixel, or supported Sony/Samsung hardware desiring verified boot security"
+    ],
+    "who_is_it_not_for": [
+      "Users requiring advanced kernel-level exploit mitigations and hardware memory tagging (MTE)",
+      "Users who rely on Google Mobile Services with official proprietary Google certification"
+    ],
+    "verdict": "iodéOS delivers a uniquely transparent approach to mobile privacy. By embedding DNS interception directly into the operating system rather than relying on a local VPN, it provides users with real-time network telemetry inspection and tracker blocking while maintaining full compatibility with third-party VPN services and everyday Android applications."
+  },
+  "relations": [
+    {
+      "id": "lineageos",
+      "name": "LineageOS",
+      "relation": "upstream",
+      "note": "Upstream community Android distribution providing the device trees and system base upon which iodéOS is constructed."
+    },
+    {
+      "id": "android-aosp",
+      "name": "Android / AOSP",
+      "relation": "upstream",
+      "note": "Foundational open-source mobile operating system platform from which iodéOS is downstream-derived."
+    },
+    {
+      "id": "e-os",
+      "name": "/e/OS",
+      "relation": "alternative",
+      "note": "Alternative de-Googled Android distribution that also utilizes microG and LineageOS trees but features BlissLauncher and Murena Cloud services."
+    },
+    {
+      "id": "calyxos",
+      "name": "CalyxOS",
+      "relation": "alternative",
+      "note": "Alternative privacy-oriented Android distribution featuring the rootless Datura application firewall and Seedvault backups."
+    }
+  ],
+  "links": {
+    "home": "https://iode.tech/",
+    "documentation": "https://iode.tech/documentation/iode-app/",
+    "blocker": "https://iode.tech/documentation/iode-adblocker-the-iode-blocker/",
+    "source": "https://gitlab.com/iode"
+  },
+  "sources": [
+    {
+      "title": "iodé Official Portal & System Architecture Overview",
+      "url": "https://iode.tech/",
+      "type": "official",
+      "date": "2026-05-10"
+    },
+    {
+      "title": "iodé Adblocker Technical Architecture & DNS Interception Documentation",
+      "url": "https://iode.tech/documentation/iode-adblocker-the-iode-blocker/",
+      "type": "official_documentation",
+      "date": "2025-05-23"
+    },
+    {
+      "title": "iodé app User Guide, Connection Logging & Blocking Levels",
+      "url": "https://iode.tech/documentation/iode-app/",
+      "type": "official_documentation",
+      "date": "2025-07-04"
+    }
+  ]
+}

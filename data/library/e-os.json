@@ -1,0 +1,105 @@
+{
+  "id": "e-os",
+  "name": "/e/OS",
+  "type": "operating_system",
+  "summary": "A privacy-focused mobile operating system forked from LineageOS and AOSP, providing an ungoogled Android environment integrated with microG, BlissLauncher, App Lounge with privacy scores, and optional Murena Cloud services.",
+  "tags": [
+    "mobile",
+    "privacy",
+    "aosp",
+    "android",
+    "arm64",
+    "microg",
+    "degoogled",
+    "murena"
+  ],
+  "status": "active",
+  "platforms": [
+    "arm64 / aarch64",
+    "armv7a"
+  ],
+  "license": "GPLv2 (Linux kernel) / Apache License 2.0 (AOSP userspace) & GPLv3/AGPL (associated services and apps)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "/e/OS is a free and open-source mobile operating system focused on user privacy and de-Googling. Founded in 2017 by Gaël Duval and maintained by the non-profit e Foundation alongside its commercial partner Murena, /e/OS provides an alternative smartphone environment designed to prevent unwanted data collection while maintaining compatibility with the mainstream Android mobile ecosystem.",
+    "what_is_it": "/e/OS is a turnkey mobile distribution derived from LineageOS and the Android Open Source Project (AOSP). It eliminates Google telemetry, default Google cloud integrations, and proprietary background trackers, replacing them with open-source system applications, microG compatibility libraries, and optional sovereign cloud storage integration.",
+    "aosp_lineageos_heritage_and_degoogling": "At its technical foundation, /e/OS builds upon LineageOS device trees and AOSP source code. The development team modifies the platform stack by removing embedded Google tracking URLs, replacing default NTP and DNS servers with privacy-oriented alternatives, removing proprietary network location providers, and stripping advertising identifier frameworks from core system libraries. Upstream Android Security Bulletin (ASB) patches are tracked and merged on a regular release cadence.",
+    "interface_and_application_ecosystem": "/e/OS provides its own graphical interface known as BlissLauncher, which adopts an application-centric layout displaying all installed programs across home screens without a traditional separate application drawer. For software management, the system includes App Lounge, an installer that aggregates open-source applications from F-Droid, Progressive Web Apps (PWAs), and commercial applications from Google Play through anonymous accounts. App Lounge presents an Exodus Privacy-based privacy rating for each application, detailing embedded trackers and requested permissions.",
+    "privacy_controls_and_cloud_integration": "The operating system incorporates Advanced Privacy, a system-level utility and widget that enables users to block in-app tracking requests, spoof real geographic location coordinates, and mask the device IP address via integrated Tor or VPN routing. For cloud synchronization, /e/OS integrates with Murena Cloud (an optional Nextcloud-powered service providing mail, calendar, contacts, notes, and file hosting via Single Sign-On), while allowing the entire operating system to function without an online account.",
+    "hardware_support_and_commercial_distribution": "/e/OS supports over two hundred smartphone models through community-maintained builds and officially verified releases. The system is distributed both as downloadable ROM images for existing hardware (Samsung, Google Pixel, Xiaomi, Motorola) and preinstalled on commercial hardware sold by Murena, including Fairphone devices and the Murena 2 smartphone, which features physical hardware privacy disconnect switches for cameras, microphones, and wireless connectivity.",
+    "advantages": [
+      "Turnkey privacy-by-default mobile environment eliminating Google tracking and invasive telemetry",
+      "App Lounge unifies F-Droid, PWAs, and Google Play with integrated Exodus Privacy tracker scores",
+      "Advanced Privacy system utility provides in-app tracker blocking, IP masking, and location spoofing",
+      "Native microG integration preserves functionality for apps requiring push notifications and maps",
+      "Broad hardware support spanning over 200 device models, with preinstalled commercial hardware options"
+    ],
+    "disadvantages": [
+      "BlissLauncher interface lacks a traditional application drawer, which may diverge from standard Android habits",
+      "Certain high-security banking or DRM-protected apps requiring strict hardware attestation may fail",
+      "Updates on community-maintained device builds depend on volunteer maintainers and vary in frequency"
+    ],
+    "who_is_it_for": [
+      "Everyday smartphone users seeking an out-of-the-box de-Googled mobile operating system with app store access",
+      "Privacy advocates desiring transparent visibility into in-app tracking and granular network blocking",
+      "Buyers seeking preinstalled, privacy-respecting hardware supported by a dedicated commercial entity"
+    ],
+    "who_is_it_not_for": [
+      "Users requiring advanced kernel-level exploit mitigations and hardware memory tagging (MTE)",
+      "Users exclusively reliant on commercial Google Mobile Services accounts and proprietary Google apps"
+    ],
+    "verdict": "/e/OS provides an accessible, fully de-Googled mobile operating system that balances privacy protection with daily usability. By combining a LineageOS foundation with microG, App Lounge privacy metrics, and optional cloud sovereign services, it provides a functional consumer alternative to commercial Android distributions."
+  },
+  "relations": [
+    {
+      "id": "lineageos",
+      "name": "LineageOS",
+      "relation": "upstream",
+      "note": "Upstream community Android distribution whose device trees, HAL adaptations, and codebase form the direct technical foundation of /e/OS."
+    },
+    {
+      "id": "android-aosp",
+      "name": "Android / AOSP",
+      "relation": "upstream",
+      "note": "Base foundational open-source mobile operating system stack from which /e/OS is downstream-derived."
+    },
+    {
+      "id": "calyxos",
+      "name": "CalyxOS",
+      "relation": "alternative",
+      "note": "Alternative privacy-oriented Android distribution that also utilizes microG but focuses primarily on Google Pixel, Fairphone, and Motorola hardware."
+    },
+    {
+      "id": "grapheneos",
+      "name": "GrapheneOS",
+      "relation": "alternative",
+      "note": "Alternative hardened mobile operating system emphasizing defensive security mitigations on Google Pixel hardware."
+    }
+  ],
+  "links": {
+    "home": "https://e.foundation/",
+    "documentation": "https://doc.e.foundation/os/product-description/",
+    "devices": "https://doc.e.foundation/devices",
+    "source": "https://gitlab.e.foundation/e"
+  },
+  "sources": [
+    {
+      "title": "e Foundation /e/OS Official Product Description & Architecture",
+      "url": "https://doc.e.foundation/os/product-description/",
+      "type": "official",
+      "date": "2026-06-01"
+    },
+    {
+      "title": "e Foundation Supported Devices and Release Channels",
+      "url": "https://doc.e.foundation/devices",
+      "type": "official_documentation",
+      "date": "2026-09-01"
+    },
+    {
+      "title": "Murena Official Portal & Hardware Privacy Switch Overview",
+      "url": "https://murena.com/shop/smartphones/murena-2/",
+      "type": "official_product_page",
+      "date": "2026-05-15"
+    }
+  ]
+}

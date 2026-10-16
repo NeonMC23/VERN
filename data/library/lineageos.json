@@ -1,0 +1,98 @@
+{
+  "id": "lineageos",
+  "name": "LineageOS",
+  "type": "operating_system",
+  "summary": "A community-driven, free and open-source aftermarket firmware distribution for smartphones and tablets based on the Android Open Source Project (AOSP), succeeding CyanogenMod with a strict Device Support Charter enforcing SELinux Enforcing mode.",
+  "tags": [
+    "mobile",
+    "aosp",
+    "android",
+    "cyanogenmod",
+    "arm64",
+    "open-source",
+    "aftermarket"
+  ],
+  "status": "active",
+  "platforms": [
+    "arm64 / aarch64",
+    "armv7a"
+  ],
+  "license": "GPLv2 (Linux kernel) / Apache License 2.0 (AOSP userspace) & BSD/MIT (custom utilities)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "LineageOS is a free and open-source operating system distribution for mobile devices, smartphones, tablets, and set-top boxes based on the Android Open Source Project (AOSP). Created in December 2016 as the direct community successor to CyanogenMod, LineageOS focuses on extending hardware longevity, providing ongoing software maintenance for legacy devices, and enabling system-level customization without proprietary bloatware.",
+    "what_is_it": "LineageOS is an independent aftermarket firmware distribution developed entirely by an international community of volunteer contributors. It provides a clean, stock-like Android interface free of commercial bloatware and proprietary services, augmented by a suite of lightweight open-source applications, enhanced hardware controls, and centralized security monitoring.",
+    "device_support_charter_and_selinux": "To maintain system stability and security integrity across diverse hardware, official LineageOS builds are governed by the strict Device Support Requirements Charter. The charter mandates that all official builds must operate with SELinux configured in Enforcing mode; builds set to Permissive mode are explicitly prohibited. Official status also requires functional hardware-backed encryption, working telephony and emergency calling (E911/112), proper sensor operation, and active oversight by a designated device maintainer.",
+    "base_system_and_bundled_applications": "LineageOS ships as a minimal, clean operating system without Google Mobile Services (GMS) or proprietary Google applications pre-installed. Instead, it includes an in-house suite of open-source utilities: the Aperture camera application (developed using Google's CameraX library), the Trebuchet application launcher with Protected Apps capability, the Jelly lightweight web browser, the Eleven audio player, the Etar calendar, and native integration of the Seedvault encrypted backup engine. Users requiring Google services can optionally install independent third-party packages (such as MindTheGapps) or configure microG.",
+    "customization_and_trust_interface": "LineageOS offers extensive interface customization options that do not compromise core Android architecture, including configurable status bar layouts, customizable quick settings tiles, button remapping, and audio equalization via AudioFX. The system includes the Trust interface, a centralized security and privacy dashboard within system settings that alerts users to the current status of SELinux enforcement, encryption health, SMS rate limiting, and vendor security patch levels.",
+    "hardware_breadth_and_ecosystem_impact": "LineageOS supports the broadest catalog of hardware in the open-source mobile ecosystem, providing official and community builds for hundreds of devices across dozens of manufacturers, including Google, Samsung, Motorola, Xiaomi, OnePlus, Sony, and ASUS. Because of its mature hardware trees and Hardware Abstraction Layer (HAL) adaptations, LineageOS frequently serves as the upstream hardware foundation for other specialized mobile distributions, including /e/OS and iodéOS.",
+    "advantages": [
+      "Extensive hardware compatibility spanning hundreds of smartphone and tablet models across major manufacturers",
+      "Strict Device Support Requirements Charter enforcing mandatory SELinux Enforcing mode and hardware encryption",
+      "Clean AOSP base free from vendor bloatware, carrier software, and forced proprietary services",
+      "In-house suite of dedicated open-source applications including Aperture, Trebuchet, and Jelly",
+      "Serves as the foundational hardware tree and device bring-up base for numerous downstream mobile distributions"
+    ],
+    "disadvantages": [
+      "Device support lifecycle relies on individual volunteer maintainers, leading to potential mid-cycle deprecations",
+      "Bootloader unlocking required for installation breaks default hardware-backed Google Play Integrity attestation",
+      "Upgrading between major platform versions generally requires manual flashing via recovery or fastboot"
+    ],
+    "who_is_it_for": [
+      "Users seeking to extend the operational lifespan of smartphones no longer supported by OEM manufacturers",
+      "Enthusiasts desiring a bloatware-free, customizable Android experience with fine-grained control",
+      "Developers building custom mobile firmware, porting Android to new hardware, or contributing to open-source mobile ecosystems"
+    ],
+    "who_is_it_not_for": [
+      "Users uncomfortable with unlocking bootloaders, custom recoveries, and command-line flashing tools",
+      "Users reliant on banking applications that strictly mandate locked OEM bootloader hardware attestation"
+    ],
+    "verdict": "LineageOS remains the cornerstone of the open-source Android aftermarket ecosystem. By combining CyanogenMod's legacy with a rigorous Device Support Charter requiring SELinux enforcement, it delivers unmatched hardware reach, reduces planned obsolescence, and provides a dependable foundation for community-driven mobile computing."
+  },
+  "relations": [
+    {
+      "id": "android-aosp",
+      "name": "Android / AOSP",
+      "relation": "upstream",
+      "note": "Upstream foundational open-source mobile operating system from which LineageOS is forked."
+    },
+    {
+      "id": "grapheneos",
+      "name": "GrapheneOS",
+      "relation": "alternative",
+      "note": "Alternative Android distribution focusing on defensive exploit mitigations and exclusive Google Pixel hardware support."
+    },
+    {
+      "id": "calyxos",
+      "name": "CalyxOS",
+      "relation": "alternative",
+      "note": "Alternative privacy-focused Android distribution developed by The Calyx Institute with integrated microG and Datura Firewall."
+    }
+  ],
+  "links": {
+    "home": "https://lineageos.org/",
+    "documentation": "https://wiki.lineageos.org/",
+    "devices": "https://wiki.lineageos.org/devices/",
+    "source": "https://github.com/LineageOS"
+  },
+  "sources": [
+    {
+      "title": "LineageOS Official Website & Project Announcement",
+      "url": "https://lineageos.org/",
+      "type": "official",
+      "date": "2026-06-01"
+    },
+    {
+      "title": "LineageOS Device Support Requirements Charter",
+      "url": "https://github.com/LineageOS/charter/blob/main/device-support-requirements.md",
+      "type": "official_documentation",
+      "date": "2026-01-15"
+    },
+    {
+      "title": "LineageOS Official Wiki & Application Documentation",
+      "url": "https://wiki.lineageos.org/apps/",
+      "type": "official_documentation",
+      "date": "2026-06-01"
+    }
+  ]
+}

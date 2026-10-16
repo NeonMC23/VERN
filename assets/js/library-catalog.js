@@ -89,7 +89,16 @@ var LIBRARY_RESOURCES = [
   "openindiana",
   "omnios",
   "smartos",
-  "android-aosp"
+  "android-aosp",
+  "grapheneos",
+  "calyxos",
+  "lineageos",
+  "e-os",
+  "iodeos",
+  "postmarketos",
+  "mobian",
+  "ubuntu-touch",
+  "sailfish-os"
 ];
 
 (function () {

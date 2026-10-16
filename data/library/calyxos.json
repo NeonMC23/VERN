@@ -1,0 +1,97 @@
+{
+  "id": "calyxos",
+  "name": "CalyxOS",
+  "type": "operating_system",
+  "summary": "A privacy-oriented mobile operating system developed by The Calyx Institute based on the Android Open Source Project (AOSP), featuring built-in microG integration, Datura Firewall, Seedvault encrypted backups, and verified boot support across Pixel, Fairphone, and Motorola devices.",
+  "tags": [
+    "mobile",
+    "privacy",
+    "aosp",
+    "android",
+    "arm64",
+    "microg",
+    "calyx-institute"
+  ],
+  "status": "active",
+  "platforms": [
+    "arm64 / aarch64"
+  ],
+  "license": "GPLv2 (Linux kernel) / Apache License 2.0 (AOSP userspace) & GPLv3/LGPL (various utilities)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "CalyxOS is an open-source mobile operating system developed and maintained by The Calyx Institute, a non-profit organization dedicated to digital privacy and civil liberties. Based on the Android Open Source Project (AOSP), CalyxOS aims to deliver an accessible, privacy-respecting mobile experience by minimizing tracking, providing application-level firewall controls, and offering optional microG compatibility.",
+    "what_is_it": "CalyxOS is a turnkey mobile distribution designed for everyday privacy without requiring deep technical expertise. It ships without proprietary Google Mobile Services, instead bundling open-source alternatives for application distribution, location resolution, encrypted cloud backups, and network protection, while enforcing verified boot with relocked bootloaders on supported hardware.",
+    "microg_and_degoogling_approach": "CalyxOS addresses application compatibility through an optional integration of microG, a clean-room free software implementation of Google Play Services libraries. To facilitate push notifications (via Firebase Cloud Messaging) and alternative network location services (via Mozilla Location Services) without compromising platform security, CalyxOS utilizes restricted signature spoofing limited strictly to the included microG package. Users can disable microG entirely during initial device setup or via system settings for complete elimination of Google service interactions.",
+    "network_firewall_and_security_tools": "The operating system includes Datura Firewall, a native application firewall that operates without root privileges. Datura grants users granular control over internet access, enabling independent blocking or whitelisting of Wi-Fi, cellular data, background network traffic, and VPN routing on a per-application basis. CalyxOS also incorporates the Panic Kit (Ripple) emergency trigger, which can initiate automated data wiping or distress signaling when activated.",
+    "backup_system_and_bundled_software": "CalyxOS features Seedvault, an open-source encrypted backup application developed under the sponsorship of The Calyx Institute. Seedvault performs end-to-end encrypted backups of application data and system configurations to local USB storage or remote Nextcloud/WebDAV servers. The platform preinstalls F-Droid Basic for streamlined updates of open-source applications, Aurora Store for accessing applications from Google Play without a personal Google account, and a hardened Chromium-based web browser.",
+    "hardware_support_and_lifecycle": "CalyxOS supports a curated list of smartphones that allow bootloader relocking with custom cryptographic signing keys, ensuring the integrity of Android Verified Boot (AVB). Supported hardware includes Google Pixel devices (Pixel 4a through Pixel 9 series), the modular Fairphone 4 and Fairphone 5, the SHIFT6mq, and select Motorola handsets (such as moto g32 and moto g52). The Calyx Institute delivers monthly security updates aligned with the Android Security Bulletin (ASB) via an encrypted over-the-air mechanism.",
+    "advantages": [
+      "Privacy-by-default architecture eliminating Google tracking and invasive telemetry out of the box",
+      "Native Datura Firewall offering granular per-app control over Wi-Fi, cellular, and background data",
+      "Built-in Seedvault providing end-to-end encrypted backups to USB drives or Nextcloud/WebDAV servers",
+      "Integrated microG offering broad application compatibility with the option to disable it completely",
+      "Support for multiple hardware vendors (Pixel, Fairphone, Motorola) with verified boot enforcement"
+    ],
+    "disadvantages": [
+      "Hardware compatibility is restricted to devices supporting verified boot with custom relocking keys",
+      "MicroG does not provide complete compatibility with all proprietary Google Play Services APIs",
+      "Small non-profit development team compared to commercial smartphone operating system vendors"
+    ],
+    "who_is_it_for": [
+      "Everyday users seeking a straightforward, out-of-the-box de-Googled Android experience",
+      "Privacy advocates desiring granular application firewall control and encrypted remote backups",
+      "Owners of Fairphone, Pixel, or supported Motorola devices seeking a non-commercial open-source OS"
+    ],
+    "who_is_it_not_for": [
+      "Users requiring advanced kernel-level exploit mitigations and hardware memory tagging (MTE)",
+      "Users reliant on devices from manufacturers that prohibit bootloader relocking with custom keys"
+    ],
+    "verdict": "CalyxOS provides a balanced, user-friendly approach to mobile privacy on modern Android smartphones. By combining verified boot enforcement, a rootless per-app firewall, and optional microG integration, it bridges the gap between privacy protection and daily functional usability across multiple hardware brands."
+  },
+  "relations": [
+    {
+      "id": "android-aosp",
+      "name": "Android / AOSP",
+      "relation": "upstream",
+      "note": "Upstream foundational open-source mobile operating system from which CalyxOS is derived."
+    },
+    {
+      "id": "grapheneos",
+      "name": "GrapheneOS",
+      "relation": "alternative",
+      "note": "Alternative Android distribution focusing on deep kernel and memory allocator hardening on Google Pixel hardware."
+    },
+    {
+      "id": "lineageos",
+      "name": "LineageOS",
+      "relation": "alternative",
+      "note": "Alternative community-driven Android distribution offering broader hardware support and CyanogenMod heritage."
+    }
+  ],
+  "links": {
+    "home": "https://calyxos.org/",
+    "documentation": "https://calyxos.org/about/",
+    "faq": "https://calyxos.org/docs/",
+    "source": "https://gitlab.com/CalyxOS"
+  },
+  "sources": [
+    {
+      "title": "CalyxOS Official Portal & Privacy Principles",
+      "url": "https://calyxos.org/about/",
+      "type": "official",
+      "date": "2026-06-01"
+    },
+    {
+      "title": "CalyxOS Technical Architecture & microG Implementation",
+      "url": "https://calyxos.org/about/tech/microg/",
+      "type": "official_documentation",
+      "date": "2026-06-01"
+    },
+    {
+      "title": "The Calyx Institute Projects & Seedvault Backup Overview",
+      "url": "https://calyxinstitute.org/projects/calyxos",
+      "type": "official_documentation",
+      "date": "2026-05-15"
+    }
+  ]
+}
