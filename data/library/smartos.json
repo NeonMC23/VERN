@@ -1,0 +1,98 @@
+{
+  "id": "smartos",
+  "name": "SmartOS",
+  "type": "operating_system",
+  "summary": "A specialized, stateless, in-memory SVR4 hypervisor and cloud operating system built upon illumos, designed for high-density container hosting via Solaris Zones, hardware virtualization via bhyve and KVM, and local OpenZFS storage pools.",
+  "tags": [
+    "unix",
+    "illumos",
+    "hypervisor",
+    "cloud",
+    "zfs",
+    "zones",
+    "bhyve",
+    "kvm"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64 / x86_64"
+  ],
+  "license": "Common Development and Distribution License (CDDL 1.0)",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "SmartOS is an open-source, specialized operating system and type-1 hypervisor derived from the illumos consolidation. Originally engineered by Joyent to power multi-tenant public and private cloud infrastructure, and maintained since 2022 by MNX Solutions within the Triton DataCenter ecosystem, SmartOS combines in-memory execution with enterprise Unix technologies.",
+    "what_is_it": "SmartOS is a purpose-built cloud hypervisor that boots entirely into RAM from USB, ISO, or network PXE media, without ever installing an operating system to disk. It dedicates local physical storage entirely to an OpenZFS pool (named zones) to host virtualized workloads, including native illumos Zones, Linux LX branded zones, and full hardware virtual machines via bhyve and KVM.",
+    "origin_and_joyent_heritage": "Developed by Sun Microsystems alumni at Joyent (notably Bryan Cantrill and Jerry Jelinek), SmartOS extended OpenSolaris into a specialized virtualization appliance. Joyent ported KVM to illumos, engineered LX brand syscall emulation, and created the Triton cloud orchestration stack. Following Joyent's acquisition by Samsung and the subsequent 2022 transfer to MNX Solutions, SmartOS development continues actively under the TritonDataCenter organization.",
+    "stateless_in_memory_architecture": "Unlike traditional server operating systems, SmartOS runs as a stateless live operating system. The root file system is mounted entirely in a volatile ramdisk (tmpfs), making the hypervisor core immutable and resilient against disk corruption. System updates require simply rebooting the server using a newer timestamped platform image, eliminating complex in-place OS upgrade procedures.",
+    "virtualization_and_pkgsrc_management": "Workloads in SmartOS execute either as lightweight container Zones sharing the illumos kernel with near-zero overhead or as hardware virtual machines running guest operating systems (Linux, Windows, BSD). Unlike other illumos distributions that rely on IPS, SmartOS utilizes NetBSD's pkgsrc packaging system within zones to install software packages. Network isolation is enforced via Crossbow VNICs.",
+    "deployment_and_datacenter_orchestration": "SmartOS follows a strict local-node storage principle, eliminating dependencies on external SAN or NAS networks and maximizing I/O performance. Single nodes can be managed directly via command-line tools (vmadm and imgadm), while large multi-server clusters are managed through Triton DataCenter, providing unified API-driven provisioning.",
+    "advantages": [
+      "Stateless in-memory architecture guaranteeing immutable host security and effortless platform upgrades",
+      "Near-zero overhead multi-tenant container virtualization via native illumos and Linux LX Zones",
+      "Full hardware virtualization with integrated bhyve and KVM hypervisors running inside branded zones",
+      "Maximized local disk performance dedicating 100% of storage spindles to OpenZFS VM pools",
+      "Comprehensive system introspection and low-overhead production profiling via native DTrace"
+    ],
+    "disadvantages": [
+      "Stateless design requires external storage or specific configuration techniques for persistent host settings",
+      "Steep learning curve requiring familiarity with illumos paradigms, vmadm, and JSON manifest provisioning",
+      "Strictly limited to 64-bit x86_64 server hardware with hardware virtualization extensions (VT-x or AMD-V)"
+    ],
+    "who_is_it_for": [
+      "Cloud service providers and enterprise infrastructure teams building high-density virtualization fabrics",
+      "DevOps engineers seeking an immutable, hypervisor-grade operating system with native DTrace observability",
+      "System administrators managing scalable container and VM clusters via Triton DataCenter"
+    ],
+    "who_is_it_not_for": [
+      "General-purpose workstation users requiring desktop environments, office tools, or audio/video peripherals",
+      "Workloads requiring traditional persistent root disk installations on standalone consumer hardware"
+    ],
+    "verdict": "SmartOS is a masterclass in hypervisor design, merging the architectural elegance of illumos, OpenZFS, and Zones with a stateless in-memory delivery model. By providing unmatched observability and rock-solid multi-tenant isolation, it remains a premier open-source platform for modern cloud computing."
+  },
+  "relations": [
+    {
+      "id": "illumos",
+      "name": "illumos",
+      "relation": "upstream_base",
+      "note": "Upstream core consolidation and kernel (illumos-gate) providing the SunOS foundation for SmartOS."
+    },
+    {
+      "id": "omnios",
+      "name": "OmniOS Community Edition",
+      "relation": "alternative",
+      "note": "Fellow illumos server distribution, contrasting persistent IPS disk installation with SmartOS's stateless live RAM hypervisor."
+    },
+    {
+      "id": "openindiana",
+      "name": "OpenIndiana",
+      "relation": "alternative",
+      "note": "Fellow illumos distribution, contrasting OpenIndiana's general-purpose desktop/server focus with SmartOS's container hypervisor role."
+    }
+  ],
+  "links": {
+    "home": "https://smartos.org/",
+    "documentation": "https://docs.smartos.org/",
+    "wiki": "https://wiki.smartos.org/smartos-core-technologies/",
+    "github": "https://github.com/TritonDataCenter/smartos-live"
+  },
+  "sources": [
+    {
+      "title": "SmartOS Official Portal & Cloud Hypervisor Documentation",
+      "url": "https://smartos.org/",
+      "type": "official",
+      "date": "2026-04-11"
+    },
+    {
+      "title": "SmartOS Documentation Wiki & Core Technologies",
+      "url": "https://docs.smartos.org/",
+      "type": "official_documentation",
+      "date": "2026-04-11"
+    },
+    {
+      "title": "smartos-live Official Source Repository & Build Platform",
+      "url": "https://github.com/TritonDataCenter/smartos-live",
+      "type": "official",
+      "date": "2026-05-01"
+    }
+  ]
+}

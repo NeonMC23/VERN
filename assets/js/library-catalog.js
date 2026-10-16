@@ -86,7 +86,10 @@ var LIBRARY_RESOURCES = [
   "hardenedbsd",
   "ghostbsd",
   "illumos",
-  "openindiana"
+  "openindiana",
+  "omnios",
+  "smartos",
+  "android-aosp"
 ];
 
 (function () {

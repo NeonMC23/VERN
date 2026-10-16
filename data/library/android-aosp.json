@@ -1,0 +1,99 @@
+{
+  "id": "android-aosp",
+  "name": "Android / AOSP",
+  "type": "operating_system",
+  "summary": "The foundational open-source mobile operating system developed by Google and the Open Handset Alliance, providing the open Android platform stack, modified Linux kernel with Generic Kernel Image (GKI), Hardware Abstraction Layer (HAL), and Android Runtime (ART).",
+  "tags": [
+    "mobile",
+    "linux",
+    "open-source",
+    "aosp",
+    "embedded",
+    "arm",
+    "art"
+  ],
+  "status": "active",
+  "platforms": [
+    "arm64 / aarch64",
+    "x86_64",
+    "riscv64"
+  ],
+  "license": "Apache License 2.0 (userspace) / GNU GPLv2 (Linux kernel)",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "The Android Open Source Project (AOSP) is the free and open-source software stack led by Google and the Open Handset Alliance that forms the core foundation of the global Android operating system. AOSP provides the complete operating system source code required to build and run modern touch-centric, mobile, and embedded devices.",
+    "what_is_it": "AOSP is a comprehensive, multi-layered mobile operating system consisting of a modified Linux kernel, low-level native C/C++ libraries (including the Bionic C library), a Hardware Abstraction Layer (HAL), the Android Runtime (ART) virtual execution engine, background system services, and a comprehensive application framework exposed to Java and Kotlin applications.",
+    "open_source_scope_vs_commercial_android": "There is a vital distinction between AOSP and commercial Android devices: AOSP represents the purely open-source operating system. It does not include proprietary Google Mobile Services (GMS), Google Play Store, proprietary Google Play Services APIs, or vendor-specific closed binary drivers. Independent privacy-oriented mobile operating systems, such as LineageOS, GrapheneOS, and /e/OS, fork or build directly upon AOSP to deliver fully functional mobile systems independent of Google services.",
+    "layered_architecture_and_hal": "AOSP is architectured in distinct abstraction layers. At the lowest level, the Linux kernel provides process scheduling and hardware communication. The Hardware Abstraction Layer (HAL), standardized through the Android Interface Definition Language (AIDL), defines standard interfaces for hardware modules (camera, audio, sensors, cellular radio) that operate in isolated processes via Binder inter-process communication (IPC), decoupling system updates from vendor silicon implementations.",
+    "runtime_and_kernel_evolution": "Applications execute within the Android Runtime (ART), which compiles DEX bytecode into native machine code through Ahead-of-Time (AOT) and Just-in-Time (JIT) compilation techniques. At the kernel level, AOSP employs the Generic Kernel Image (GKI) architecture: Google provides a unified Android Common Kernel (ACK) binary image for 64-bit devices, isolating hardware-specific vendor modules into a dedicated vendor_boot partition to eliminate kernel fragmentation.",
+    "build_system_security_and_licensing": "AOSP is compiled using the Soong build system and Ninja, coordinated across hundreds of Git repositories using the repo tool. The system implements defense-in-depth security: per-application Linux UID process sandboxing, mandatory SELinux access controls in Enforcing mode, File-Based Encryption (FBE), and cryptographic Android Verified Boot (AVB). Userspace code is primarily licensed under the permissive Apache License 2.0, while kernel modifications remain under GPLv2.",
+    "advantages": [
+      "Massive global open-source software ecosystem with unmatched mobile hardware compatibility",
+      "Permissive Apache 2.0 userspace licensing enabling widespread customization and independent forks",
+      "Advanced multi-tier security architecture with strict SELinux enforcement, app sandboxing, and AVB",
+      "Unified Generic Kernel Image (GKI) reducing kernel fragmentation and streamlining platform updates",
+      "Extensive developer tooling, documentation, and hardware abstraction layer (HAL) specifications"
+    ],
+    "disadvantages": [
+      "Pure AOSP lacks Google Play Services, requiring microG or alternative stores for many commercial apps",
+      "Massive codebase exceeding 100 GB of source code with demanding compile-time hardware requirements",
+      "Trunk-stable development model primarily directed by Google rather than a decentralized community"
+    ],
+    "who_is_it_for": [
+      "Device manufacturers and silicon vendors building custom mobile, tablet, automotive, or IoT platforms",
+      "Open-source mobile operating system developers building independent distributions (e.g. LineageOS, GrapheneOS)",
+      "Systems software engineers and security researchers studying mobile OS internals and runtime engineering"
+    ],
+    "who_is_it_not_for": [
+      "End users seeking an out-of-the-box turnkey mobile experience with proprietary Google apps pre-installed",
+      "Server administrators looking for traditional POSIX/glibc GNU/Linux command-line environments"
+    ],
+    "verdict": "The Android Open Source Project is one of the most consequential open-source initiatives in computing history. By delivering a complete, robust, and highly secure mobile operating system stack with the permissive Apache 2.0 license and Linux kernel, it serves as the essential bedrock for both global commercial devices and privacy-focused community mobile platforms."
+  },
+  "relations": [
+    {
+      "id": "pureos",
+      "name": "PureOS",
+      "relation": "alternative",
+      "note": "Convergent mobile GNU/Linux alternative running on the Librem 5 smartphone, contrasting GNU/Linux with Android's Bionic/ART stack."
+    },
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "relation": "related",
+      "note": "Standard reference Linux development and build workstation environment recommended by Google for compiling AOSP."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "alternative",
+      "note": "Traditional upstream open-source Linux operating system, illustrating the architectural contrast between standard glibc/GNU and AOSP/Bionic."
+    }
+  ],
+  "links": {
+    "home": "https://source.android.com/",
+    "documentation": "https://source.android.com/docs/core/architecture",
+    "faq": "https://source.android.com/docs/setup/about/faqs",
+    "source": "https://android.googlesource.com/"
+  },
+  "sources": [
+    {
+      "title": "Android Open Source Project (AOSP) Official Portal & Architecture Overview",
+      "url": "https://source.android.com/",
+      "type": "official",
+      "date": "2026-06-17"
+    },
+    {
+      "title": "AOSP Core Architecture & Hardware Abstraction Layer (HAL)",
+      "url": "https://source.android.com/docs/core/architecture",
+      "type": "official_documentation",
+      "date": "2026-06-17"
+    },
+    {
+      "title": "AOSP Frequently Asked Questions, Governance & Licensing",
+      "url": "https://source.android.com/docs/setup/about/faqs",
+      "type": "official_documentation",
+      "date": "2026-06-17"
+    }
+  ]
+}
