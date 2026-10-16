@@ -83,7 +83,10 @@ var LIBRARY_RESOURCES = [
   "openbsd",
   "netbsd",
   "dragonfly-bsd",
-  "hardenedbsd"
+  "hardenedbsd",
+  "ghostbsd",
+  "illumos",
+  "openindiana"
 ];
 
 (function () {
