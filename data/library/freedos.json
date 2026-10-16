@@ -1,0 +1,110 @@
+{
+  "id": "freedos",
+  "name": "FreeDOS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation libre et open source compatible avec le standard MS-DOS pour ordinateurs x86, doté du noyau DOS-C, du shell FreeCOM, de la prise en charge de FAT32 et du gestionnaire de paquets FDIMPLES.",
+  "tags": [
+    "dos",
+    "16-bit",
+    "real-mode",
+    "retrogaming",
+    "legacy",
+    "x86",
+    "fat32",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-32",
+    "x86-16"
+  ],
+  "license": "Open Source (GNU GPLv2 avec utilitaires libres variés)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "FreeDOS est un système d'exploitation libre et open source complet garantissant une compatibilité logicielle ascendante avec le standard MS-DOS d'IBM et de Microsoft. Fondé en 1994 par Jim Hall en réaction à l'abandon annoncé du DOS autonome au profit de Windows 95, FreeDOS permet d'exécuter des milliers de logiciels patrimoniaux, de faire revivre les jeux vidéo historiques pour PC et d'assurer le pilotage de systèmes industriels ou d'outils de maintenance de bas niveau.",
+    "what_is_it": "Techniquement, FreeDOS est un système d'exploitation mono-tâche opérant en mode réel 16 bits sur les microprocesseurs d'architecture Intel x86 (du processeur 8086 d'origine jusqu'aux puces modernes multi-cœurs en mode compatibilité BIOS hérité). Il ne met en œuvre aucune isolation de mémoire ni distinction entre espace utilisateur et espace privilégié, accordant à chaque programme un accès direct et sans intermédiaire au matériel physique, aux registres du processeur et aux interruptions logicielles du BIOS.",
+    "kernel_architecture_and_dos_c": "Le cœur du système repose sur le noyau FreeDOS, issu du projet DOS-C écrit en langage C par Pat Villani et enrichi par Bart Oldeman. Ce noyau reproduit fidèlement la table des vecteurs d'interruption DOS, en particulier la célèbre interruption `INT 21h` qui gouverne les opérations d'entrée/sortie, la création des processus et l'allocation de la mémoire conventionnelle (les 640 premiers kilo-octets). Grâce à une structure modulaire et ouverte, le noyau assure une compatibilité quasi parfaite avec les appels système historiques de MS-DOS 6.22 et PC-DOS.",
+    "filesystems_fat32_and_memory_managers": "Tout en préservant le modèle DOS traditionnel, FreeDOS introduit des avancées technologiques majeures. Il supporte nativement le système de fichiers FAT32 en plus des formats historiques FAT12 et FAT16, permettant de créer et de manipuler des partitions de disques durs modernes atteignant 2 To grâce à l'adressage LBA (Logical Block Addressing). Le pilote `DOSLFN` apporte la gestion des noms de fichiers longs, tandis que l'accès à la mémoire au-delà de 1 Mo est géré par des gestionnaires performants : `HIMEMX` pour la mémoire étendue (XMS) et `JEMM386` pour la mémoire paginée (EMS), les blocs de mémoire supérieure (UMB) et la virtualisation des interruptions.",
+    "shell_freecom_and_fdimples_packaging": "L'interface utilisateur textuelle par défaut est animée par l'interpréteur de commandes FreeCOM, successeur libre de `COMMAND.COM`. FreeCOM apporte un confort moderne avec un historique des commandes rappelable aux flèches, le complètement automatique des noms de fichiers par tabulation et des commandes inspirées d'Unix (`grep`, `head`, `tee`, `less`, `cal`). L'installation et la maintenance des logiciels s'effectuent au moyen du gestionnaire interactif **FDIMPLES** (FreeDOS Installer - My Package List Editor Software), qui organise les programmes en catégories modulaires (développement, pilotes de souris Cutemouse, son Sound Blaster, jeux, utilitaires réseau `FDNPKG`).",
+    "contemporary_roles_and_virtualization": "Dans l'écosystème contemporain, FreeDOS remplit trois missions majeures : le rétrogaming (exécution native de titres phares des années 1980 et 1990 sans émulation logicielle lourde), le contrôle industriel et l'embarqué (machines-outils, automates de mesure fonctionnant sur du matériel x86 hérité), et la maintenance de micrologiciels (flashing de BIOS de cartes mères ou de contrôleurs RAID par de grands constructeurs tels que Dell, HP ou Lenovo). Sur les ordinateurs récents privés de BIOS hérité (UEFI strict sans CSM), FreeDOS s'exécute de façon transparente au sein d'émulateurs comme DOSBox-X, QEMU, VirtualBox ou VMware.",
+    "advantages": [
+      "Compatibilité logicielle et binaire de premier plan avec l'ensemble de l'immense logithèque historique de MS-DOS.",
+      "Prise en charge native du système de fichiers FAT32 et de l'adressage LBA pour des disques durs modernes jusqu'à 2 To.",
+      "Système entièrement libre et open source sous licence GNU GPL, sans dépendance vis-à-vis d'éditeurs commerciaux fermés.",
+      "Consommation matérielle dérisoire, pouvant tourner sur n'importe quel processeur x86 avec seulement 640 Ko de mémoire vive.",
+      "Interpréteur FreeCOM moderne doté de l'historique des commandes, du complètement par tabulation et d'utilitaires Unix.",
+      "Gestionnaire de paquets interactif FDIMPLES facilitant l'installation et la suppression de composants modulaires."
+    ],
+    "disadvantages": [
+      "Système d'exploitation 16 bits en mode réel mono-tâche dépourvu de mémoire protégée, de comptes utilisateurs ou de droits d'accès.",
+      "Incompatibilité native avec le démarrage sécurisé UEFI strict (nécessite le mode hérité CSM ou un émulateur sur PC modernes).",
+      "Prise en charge réseau et multimédia limitée, nécessitant des pilotes spécialisés (paquets de paquets NDIS, pilotes de cartes son ISA/PCI).",
+      "Absence d'accélération matérielle 3D ou de gestion d'affichage moderne au-delà des standards VGA, VESA et des résolutions d'époque.",
+      "Le plantage d'une seule application entraîne généralement le blocage complet de la machine nécessitant un redémarrage physique."
+    ],
+    "who_is_it_for": [
+      "Passionnés de rétrogaming souhaitant jouer aux jeux DOS classiques dans des conditions d'exécution authentiques sur matériel réel ou émulé.",
+      "Techniciens informatiques et réparateurs ayant besoin d'un système amorçable minimaliste pour flasher des BIOS et micrologiciels matériels.",
+      "Ingénieurs et techniciens industriels maintenant en service des équipements de production (CNC, automates) pilotés par des logiciels DOS.",
+      "Étudiants et curieux désirant explorer l'architecture intime du matériel x86 et le fonctionnement des interruptions BIOS de bas niveau."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs recherchant un système de bureau contemporain pour naviguer sur le web moderne, regarder des vidéos en streaming ou faire de la bureautique avancée.",
+      "Développeurs concevant des applications logicielles multi-threads ou des micro-services réseau modernes.",
+      "Utilisateurs exigeant la sécurité des données, le chiffrement de disques et une isolation stricte des processus.",
+      "Infrastructures de serveurs multi-utilisateurs nécessitant une haute disponibilité et des connexions simultanées."
+    ],
+    "verdict": "FreeDOS est le conservateur incontournable du patrimoine informatique x86 16 bits. Réalisé avec passion et rigueur selon les préceptes du logiciel libre initiés par Jim Hall, il combine une compatibilité logicielle historique remarquable et des améliorations techniques indispensables (FAT32, FreeCOM, FDIMPLES), demeurant la référence absolue pour le rétrogaming, l'industrie et la maintenance de bas niveau."
+  },
+  "relations": [
+    {
+      "id": "reactos",
+      "name": "ReactOS",
+      "type": "alternative",
+      "description": "Système d'exploitation open source réimplémentant l'architecture de Windows NT, partageant l'objectif d'une compatibilité ascendante avec l'écosystème logiciel PC historique."
+    },
+    {
+      "id": "windows",
+      "name": "Microsoft Windows",
+      "type": "related",
+      "description": "Système d'exploitation commercial historique ayant initialement pris appui sur l'architecture DOS pour ses premières versions avant l'avènement du noyau Windows NT."
+    },
+    {
+      "id": "haiku",
+      "name": "Haiku",
+      "type": "alternative",
+      "description": "Système d'exploitation libre indépendant non-Linux destiné aux ordinateurs de bureau personnels et au multimédia."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel du projet FreeDOS",
+      "url": "https://www.freedos.org/"
+    },
+    {
+      "label": "Guides et livres officiels FreeDOS (FreeDOS Books)",
+      "url": "https://www.freedos.org/books/"
+    },
+    {
+      "label": "Documentation d'installation et d'utilisation FreeDOS",
+      "url": "https://help.freedos.org/docs/howto/install.html"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel et historique du projet FreeDOS",
+      "url": "https://www.freedos.org/",
+      "type": "official_site"
+    },
+    {
+      "title": "Ouvrages d'architecture et de programmation officielle FreeDOS",
+      "url": "https://www.freedos.org/books/",
+      "type": "documentation"
+    },
+    {
+      "title": "Documentation technique d'installation et gestionnaire FDIMPLES",
+      "url": "https://help.freedos.org/docs/howto/install.html",
+      "type": "documentation"
+    }
+  ]
+}

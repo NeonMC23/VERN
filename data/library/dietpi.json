@@ -1,0 +1,117 @@
+{
+  "id": "dietpi",
+  "name": "DietPi",
+  "type": "operating_system",
+  "summary": "Distribution Linux ultra-légère et hautement optimisée basée sur Debian GNU/Linux, conçue pour les ordinateurs monocartes (Raspberry Pi, SBC ARM) et serveurs x86-64, intégrant des outils interactifs d'administration et la journalisation en RAM.",
+  "tags": [
+    "sbc",
+    "arm",
+    "debian",
+    "minimal",
+    "lightweight",
+    "raspberry-pi",
+    "server",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "ARM64",
+    "ARM32",
+    "x86-64"
+  ],
+  "license": "Open Source (GNU GPLv2)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "DietPi est une distribution Linux ultra-légère et hautement épurée dérivée de Debian GNU/Linux. Conçue initialement par Daniel Knight en 2015 et maintenue par MichaIng, elle a pour vocation d'offrir une base d'exécution d'une sobriété maximale pour les ordinateurs monocartes (Single Board Computers - SBC) et les serveurs compacts, réduisant la consommation de mémoire vive au repos à quelques dizaines de mégaoctets.",
+    "what_is_it": "Techniquement, DietPi s'appuie sur une image minimale de Debian (ou de Raspberry Pi OS sur le matériel de la fondation), expurgée de tous les composants superflus, des documentations volumineuses et des services résidents non critiques. Le système installe moins de la moitié des paquets habituels d'une distribution généraliste, tout en fournissant une suite d'utilitaires interactifs semi-graphiques (TUI) développés en Bash pour orchestrer l'ensemble de la machine en quelques saisies au clavier.",
+    "resource_optimization_and_ramlog": "La signature technique majeure de DietPi réside dans son architecture de réduction de l'usure des mémoires flash. Grâce à `dietpi-RAMlog`, l'ensemble des journaux d'événements système (`/var/log`) est redirigé vers un disque virtuel en mémoire vive (tmpfs). Les journaux ne sont réécrits de manière groupée sur la carte microSD ou le support flash qu'une fois par heure ou lors de l'extinction du système. Ce mécanisme allonge considérablement la durée de vie des cartes mémoire et libère le contrôleur d'E/S des écritures continues, garantissant une réactivité accrue.",
+    "interactive_toolset_and_automation": "DietPi se configure au travers d'outils interactifs dédiés : `dietpi-config` permet de régler avec précision les paramètres matériels (gouverneurs de fréquence CPU, profils d'overclocking sûrs, audio, affichage, réseau et tests de résistance), `dietpi-drive_manager` gère le partitionnement et le montage de partages Samba/NFS, tandis que `dietpi-backup` prend en charge la sauvegarde et la restauration du système. L'installation initiale peut être entièrement automatisée et sans affichage (headless) en renseignant le fichier déclaratif `dietpi.txt` avant le premier démarrage.",
+    "software_catalog_and_ready_services": "Au cœur de l'écosystème se trouve `dietpi-software`, un gestionnaire de déploiement proposant plus de 100 applications optimisées et préconfigurées, prêtes à être installées en un clic. Ce catalogue couvre des serveurs web légers (Nginx, Lighttpd), des bloqueurs publicitaires DNS (Pi-hole, AdGuard Home), des solutions d'auto-hébergement et de stockage (Nextcloud, Vaultwarden), des serveurs multimédias (Plex, Jellyfin), des environnements de conteneurs (Docker, Docker Compose) et des interfaces graphiques légères (XFCE, LXDE), sans nécessiter de configuration manuelle complexe.",
+    "hardware_matrix_and_maintenance": "Initialement orienté vers le Raspberry Pi, DietPi propose des images optimisées pour une immense variété d'architectures ARM (Raspberry Pi 1 à 5, Odroid, Orange Pi, Pine64, NanoPi, ASUS Tinker Board) ainsi que pour les PC conventionnels x86-64 et les hyperviseurs de virtualisation (VirtualBox, VMware, Proxmox VE, Hyper-V). La maintenance s'opère par des mises à jour incrémentales transparentes via l'utilitaire `dietpi-update`, permettant au système de passer d'une version majeure de Debian à la suivante sans rupture de service.",
+    "advantages": [
+      "Consommation de ressources matérielles extrêmement basse (souvent moins de 50 Mo de RAM au repos).",
+      "Préservation de la durée de vie des cartes microSD grâce au système de journalisation en mémoire vive `dietpi-RAMlog`.",
+      "Catalogue `dietpi-software` de plus de 100 applications populaires préconfigurées et optimisées pour les architectures cibles.",
+      "Outils de configuration interactifs (`dietpi-config`) facilitant l'ajustement du matériel, du réseau et de l'overclocking.",
+      "Prise en charge matérielle très vaste incluant la quasi-totalité des cartes SBC ARM, les PC x86-64 et les machines virtuelles.",
+      "Processus d'installation entièrement automatisable sans écran ni clavier (headless) via le fichier `dietpi.txt`."
+    ],
+    "disadvantages": [
+      "Système volontairement épuré nécessitant l'installation manuelle d'outils de base supplémentaires pour les utilisateurs habitués aux distributions complètes.",
+      "L'interface d'administration repose sur des menus en mode texte (TUI), sans interface graphique web native intégrée par défaut.",
+      "Les scripts de configuration automatisés peuvent entrer en conflit avec des personnalisations manuelles non standard des fichiers système sous `/etc/`.",
+      "Moins orienté vers un usage de station de travail de bureau généraliste au quotidien que vers le rôle d'appliance réseau ou serveur léger.",
+      "Dépendance aux dépôts amont de Debian et aux compilations de noyaux constructeurs pour certains SBC exotiques."
+    ],
+    "who_is_it_for": [
+      "Possesseurs de cartes Raspberry Pi et nano-ordinateurs ARM recherchant des performances maximales et une empreinte mémoire minimale.",
+      "Utilisateurs de serveurs domestiques (homelab) souhaitant héberger des micro-services (Pi-hole, serveurs VPN, domotique) sur du matériel modeste.",
+      "Propriétaires d'anciens PC ou d'ordinateurs portables x86-64 désireux de recycler une machine vieillissante en serveur autonome silencieux.",
+      "Administrateurs systèmes déployant des parcs de sondes réseau ou de nœuds applicatifs légers automatisables via `dietpi.txt`."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs débutants cherchant un système de bureau visuel clé-en-main complet avec suite bureautique et lecteur multimédia préinstallés.",
+      "Développeurs exigeant une suite d'outils de compilation et de bibliothèques complètes présentes dès le premier démarrage sans configuration.",
+      "Infrastructures de calcul intensif nécessitant des environnements de virtualisation d'entreprise complexes ou des clusters distribués Ceph.",
+      "Environnements commerciaux exigeant des garanties d'assistance technique contractuelle avec accord de niveau de service (SLA)."
+    ],
+    "verdict": "DietPi constitue l'une des distributions Debian les plus intelligemment optimisées du monde open source. En conjuguant une compacité extrême, la protection active des cartes mémoires flash (`dietpi-RAMlog`) et un catalogue d'applications préconfigurées remarquable (`dietpi-software`), elle s'impose comme un choix incontournable pour tirer le meilleur parti des nano-ordinateurs et des serveurs d'entrée de gamme."
+  },
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "upstream_base",
+      "description": "Distribution Linux dont est directement dérivée la totalité de la base système et du gestionnaire de paquets de DietPi."
+    },
+    {
+      "id": "raspberry-pi-os",
+      "name": "Raspberry Pi OS",
+      "type": "alternative",
+      "description": "Système d'exploitation officiel pour cartes Raspberry Pi auquel DietPi propose une alternative ultra-légère et économe en ressources."
+    },
+    {
+      "id": "alpine-linux",
+      "name": "Alpine Linux",
+      "type": "alternative",
+      "description": "Distribution Linux indépendante axée sur le minimalisme extrême et une empreinte mémoire réduite."
+    },
+    {
+      "id": "openmediavault",
+      "name": "OpenMediaVault",
+      "type": "related",
+      "description": "Solution de stockage en réseau dont l'installation automatisée est proposée directement au sein du catalogue logiciel de DietPi."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel de DietPi",
+      "url": "https://dietpi.com/"
+    },
+    {
+      "label": "Portail de documentation officiel de DietPi",
+      "url": "https://dietpi.com/docs/"
+    },
+    {
+      "label": "Dépôt de code source officiel DietPi (GitHub)",
+      "url": "https://github.com/MichaIng/DietPi"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Documentation d'architecture et de configuration officielle DietPi",
+      "url": "https://dietpi.com/docs/",
+      "type": "documentation"
+    },
+    {
+      "title": "Portail officiel et matrice des matériels supportés DietPi",
+      "url": "https://dietpi.com/",
+      "type": "official_site"
+    },
+    {
+      "title": "Dépôt officiel du code source et outils d'optimisation DietPi",
+      "url": "https://github.com/MichaIng/DietPi",
+      "type": "repository"
+    }
+  ]
+}

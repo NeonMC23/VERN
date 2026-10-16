@@ -101,7 +101,16 @@ var LIBRARY_RESOURCES = [
   "sailfish-os",
   "plasma-mobile",
   "windows",
-  "macos"
+  "macos",
+  "chromeos",
+  "proxmox-ve",
+  "truenas",
+  "openmediavault",
+  "vyos",
+  "raspberry-pi-os",
+  "dietpi",
+  "freedos",
+  "haiku"
 ];
 
 (function () {
