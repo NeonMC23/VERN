@@ -1,0 +1,98 @@
+{
+  "id": "grapheneos",
+  "name": "GrapheneOS",
+  "type": "operating_system",
+  "summary": "A privacy and security-hardened mobile operating system based on the Android Open Source Project (AOSP), featuring a hardened memory allocator, kernel exploit mitigations, Sandboxed Google Play compatibility layer, and exclusive support for Google Pixel hardware.",
+  "tags": [
+    "mobile",
+    "security",
+    "privacy",
+    "aosp",
+    "android",
+    "arm64",
+    "pixel",
+    "hardened"
+  ],
+  "status": "active",
+  "platforms": [
+    "arm64 / aarch64"
+  ],
+  "license": "GPLv2 (Linux kernel) / Apache License 2.0 & MIT (userspace components)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "GrapheneOS is a free and open-source mobile operating system focused on defensive security engineering and user privacy. Developed as a direct hardened downstream fork of the Android Open Source Project (AOSP), it integrates substantial low-level architectural mitigations designed to prevent and contain software exploit techniques while preserving compatibility with mainstream Android applications.",
+    "what_is_it": "GrapheneOS is a production mobile operating system targeting modern Google Pixel devices. It eliminates Google telemetry, proprietary services, and tracking identifiers by default, while replacing critical AOSP userspace and kernel subsystems with heavily hardened equivalents, including a custom memory allocator, enhanced address space layout randomization, and fine-grained hardware permission controls.",
+    "exploit_mitigations_and_kernel_hardening": "At the system architecture level, GrapheneOS replaces Android's standard memory allocator with hardened_malloc, which incorporates slab quarantine indexing, randomized guard pages, and allocation metadata isolation to thwart heap corruption exploits. On ARMv9-based devices (Pixel 8 series and newer), the operating system activates Hardware Memory Tagging Extension (MTE) by default for core system components and compatible user applications. The kernel incorporates exploit mitigations backported from upstream Linux and hardened kernels, combined with an expanded 48-bit address space layout randomization (ASLR) and hardened Bionic libc runtime controls.",
+    "sandboxed_google_play_architecture": "Rather than relying on privileged system implementations or signature spoofing, GrapheneOS provides a compatibility layer known as Sandboxed Google Play. This mechanism enables standard Google Play Services, Google Services Framework, and Google Play Store to run entirely within standard, unprivileged Android application sandboxes. Google components run with the same restricted permission boundaries as third-party applications, lacking access to hardware identifiers, system-level logs, or ambient device location unless explicitly granted by the user.",
+    "privacy_controls_and_hardware_attestation": "GrapheneOS introduces granular hardware toggles not present in upstream AOSP, including dedicated per-application Network and Sensors permission switches. Storage Scopes and Contact Scopes allow users to grant applications access to specific file directories or individual contact cards without exposing full filesystem or address book access. The operating system also includes an auto-reboot timer that automatically restarts inactive devices to restore encryption keys to the Before First Unlock (BFU) state, and bundles the Auditor app for cryptographic hardware attestation using the device's Titan M2 security element.",
+    "hardware_compatibility_and_update_model": "GrapheneOS strictly limits its hardware support to Google Pixel smartphones and tablets. This hardware exclusivity is dictated by rigorous technical prerequisites: mandatory support for verified boot with user-installed custom public keys, dedicated hardware security chips (Titan M/M2) with StrongBox keystores, and timely monthly vendor security patches spanning 5 to 7 years. GrapheneOS tracks upstream AOSP releases and distributes monthly security updates via an encrypted, signed over-the-air (OTA) update system.",
+    "advantages": [
+      "Advanced defensive security posture featuring hardened_malloc, ARMv9 MTE support, and kernel exploit mitigations",
+      "Sandboxed Google Play compatibility layer enabling app functionality without granting privileged system access",
+      "Granular privacy controls including per-app Network toggles, Sensors toggles, Storage Scopes, and Contact Scopes",
+      "Cryptographic hardware-based remote attestation using the Auditor app and Titan M2 security element",
+      "Rapid integration of upstream Android Security Bulletin (ASB) patches and quarterly platform updates"
+    ],
+    "disadvantages": [
+      "Strict hardware limitation exclusively supporting supported Google Pixel devices",
+      "Apps relying on mandatory hardware-backed Google Play Integrity verdicts may fail or require configuration",
+      "Hardened memory allocation and exploit mitigations can expose bugs in poorly written third-party native code"
+    ],
+    "who_is_it_for": [
+      "Security engineers, investigative journalists, and privacy-conscious users seeking maximal mobile device hardening",
+      "Organizations and professionals requiring cryptographic verification of mobile operating system integrity",
+      "Users wanting to run Android applications without granting ambient system privileges to proprietary Google services"
+    ],
+    "who_is_it_not_for": [
+      "Users wishing to install an operating system on hardware from manufacturers other than Google Pixel",
+      "Consumers requiring pre-configured proprietary Google Mobile Services and automated cloud backup accounts out of the box"
+    ],
+    "verdict": "GrapheneOS represents a benchmark in mobile operating system security engineering. By combining deep kernel and memory allocator hardening with an unprivileged compatibility layer for Google Play services, it achieves a high degree of defensive isolation on Google Pixel hardware without severing access to the broader Android application ecosystem."
+  },
+  "relations": [
+    {
+      "id": "android-aosp",
+      "name": "Android / AOSP",
+      "relation": "upstream",
+      "note": "Upstream foundational open-source mobile operating system stack from which GrapheneOS is forked and hardened."
+    },
+    {
+      "id": "calyxos",
+      "name": "CalyxOS",
+      "relation": "alternative",
+      "note": "Alternative privacy-focused Android distribution based on AOSP, which integrates microG and supports a broader range of hardware."
+    },
+    {
+      "id": "lineageos",
+      "name": "LineageOS",
+      "relation": "alternative",
+      "note": "Alternative community-driven AOSP distribution prioritizing wide device compatibility and aftermarket hardware support."
+    }
+  ],
+  "links": {
+    "home": "https://grapheneos.org/",
+    "documentation": "https://grapheneos.org/features",
+    "faq": "https://grapheneos.org/faq",
+    "source": "https://github.com/GrapheneOS"
+  },
+  "sources": [
+    {
+      "title": "GrapheneOS Official Portal & Features Overview",
+      "url": "https://grapheneos.org/features",
+      "type": "official",
+      "date": "2026-09-02"
+    },
+    {
+      "title": "GrapheneOS Frequently Asked Questions & Hardware Criteria",
+      "url": "https://grapheneos.org/faq",
+      "type": "official_documentation",
+      "date": "2026-09-02"
+    },
+    {
+      "title": "GrapheneOS Usage Guide & Sandboxed Google Play Architecture",
+      "url": "https://grapheneos.org/usage",
+      "type": "official_documentation",
+      "date": "2026-09-02"
+    }
+  ]
+}

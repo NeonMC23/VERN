@@ -1,0 +1,122 @@
+{
+  "id": "chromeos",
+  "name": "ChromeOS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation commercial développé par Google, dérivé de ChromiumOS et du noyau Linux, articulé autour du navigateur Chrome, d'un démarrage vérifié immuable et de sous-systèmes de conteneurs Linux et Android isolés.",
+  "tags": [
+    "commercial",
+    "proprietary",
+    "desktop",
+    "cloud",
+    "linux-kernel",
+    "immutable",
+    "crostini",
+    "arcvm"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "ARM64"
+  ],
+  "license": "Commercial propriétaire (CLUF Google) avec composants amont open source ChromiumOS (licence BSD)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "ChromeOS est un système d'exploitation commercial développé par Google, initialement lancé en 2011 pour équiper les ordinateurs portables de type Chromebook. Conçu selon un paradigme centré sur le web et les services en nuage, le système privilégie la simplicité de déploiement, la rapidité d'initialisation, des mises à jour transparentes sans intervention manuelle et un cloisonnement strict des données et des processus.",
+    "what_is_it": "Techniquement, ChromeOS est dérivé du projet open source ChromiumOS. Son environnement repose sur une distribution Linux spécialisée dont la chaîne de compilation et les recettes logicielles ont été adaptées à partir de Gentoo Linux (système de paquets Portage et ebuilds). Le système intègre un noyau Linux monolithique officiel enrichi de correctifs constructeurs pour la gestion d'énergie et l'ordonnancement par cgroups, surmonté d'un espace utilisateur simplifié où le navigateur Google Chrome fait office d'environnement de bureau et d'interface utilisateur principale.",
+    "verified_boot_and_immutable_storage": "L'architecture de sécurité de ChromeOS s'articule autour de la technologie Verified Boot (démarrage vérifié) couplée à une puce matérielle de sécurité (Google Titan C ou H1). Une portion du micrologiciel en lecture seule (Coreboot/depthcharge) établit la racine de confiance matérielle, vérifiant à chaque étape la signature cryptographique du micrologiciel inscriptible, du noyau Linux et des paramètres de sécurité. La partition racine (`rootfs`) est montée en lecture seule stricte et protégée au niveau bloc par le pilote noyau dm-verity. Les mises à jour s'exécutent en arrière-plan sans interruption via un système de double partitionnement A/B, avec permutation atomique au redémarrage et retour automatique à la partition saine en cas d'échec.",
+    "graphical_stack_and_user_experience": "Contrairement aux distributions Linux de bureau traditionnelles, ChromeOS n'intègre pas de serveur X11 standard dans sa couche système native. L'affichage s'appuie sur la pile Freon, qui dialogue directement avec les pilotes DRM/KMS du noyau Linux pour le rendu matériel OpenGL ES et Vulkan. L'environnement visuel est pris en charge par le gestionnaire de fenêtres Aura et le shell Ash (Aura Shell), tandis que le compositeur Wayland intégré (Exo) prend en charge le fenêtrage et la composition fluide des applications natives, des applications web progressives (PWA) et des surfaces graphiques provenant des environnements virtualisés.",
+    "virtualization_subsystems_crostini_and_arcvm": "Pour étendre ses capacités au-delà de l'environnement web, ChromeOS intègre un moniteur de machine virtuelle léger écrit en Rust appelé crosvm, fonctionnant au-dessus de l'hyperviseur KVM du noyau. Grâce à crosvm et à des bacs à sable Minijail stricts (seccomp, espaces de noms Linux), ChromeOS fournit le sous-système Crostini (machine virtuelle Termina hébergeant des conteneurs Linux LXD/Incus sous Debian) pour les développeurs, ainsi que le sous-système ARCVM (Android Runtime for Chrome in a VM) exécutant l'écosystème d'applications Android en totale isolation du système hôte.",
+    "management_and_cloud_ecosystem": "ChromeOS est optimisé pour la gestion de flottes centralisée en entreprise et dans le secteur éducatif au travers de la console d'administration Google Workspace (Chrome Enterprise Upgrade). Les administrateurs peuvent appliquer des centaines de stratégies de sécurité, restreindre l'installation d'extensions, gérer des modes kiosque et provisionner les identités de manière instantanée. Une déclinaison intitulée ChromeOS Flex permet de convertir d'anciens PC et Mac en terminaux légers, bien que dépourvue de la couche applicative Android faute de certification matérielle TPM et ARM.",
+    "advantages": [
+      "Initialisation et démarrage du système en quelques secondes grâce à une séquence firmware et noyau optimisée.",
+      "Sécurité renforcée par conception : racine immuable en lecture seule via dm-verity, Verified Boot et puce de sécurité matérielle.",
+      "Mises à jour entièrement silencieuses et sans interruption de session via partitionnement redondant A/B.",
+      "Capacités d'exécution polyvalentes grâce aux sous-systèmes isolés Crostini (Linux Debian) et ARCVM (applications Android).",
+      "Gestion de parc et d'identités hautement centralisée via la console d'administration Google Workspace pour les parcs d'entreprise et éducatifs.",
+      "Politique de maintenance étendue avec jusqu'à 10 ans de mises à jour de sécurité et de fonctionnalités garanties sur les matériels récents."
+    ],
+    "disadvantages": [
+      "Dépendance structurelle forte à l'écosystème commercial de Google et à la connectivité aux services en nuage.",
+      "Système d'exploitation propriétaire non librement modifiable sans recompiler en amont le projet ChromiumOS.",
+      "Absence d'accès administrateur de bas niveau en mode normal (le mode développeur désactivant le démarrage vérifié et effaçant les données).",
+      "Compatibilité matérielle restreinte aux configurations certifiées par Google (particulièrement pour l'accélération graphique sous Crostini/ARCVM).",
+      "ChromeOS Flex ne prend pas en charge les applications Android et nécessite du matériel x86-64 standard."
+    ],
+    "who_is_it_for": [
+      "Élèves, étudiants et enseignants évoluant dans les environnements éducatifs pilotés par Google Workspace for Education.",
+      "Professionnels, télétravailleurs et entreprises recherchant des postes de travail légers, sécurisés et facilement administrables à distance.",
+      "Utilisateurs recherchant un terminal d'accès web fluide, nécessitant un entretien système minimal et immunisé contre les altérations de fichiers système.",
+      "Développeurs web et cloud exploitant les outils de développement Linux natifs via le sous-système Crostini."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs exigeant une station de travail hors-ligne permanente ou refusant toute synchronisation avec un compte commercial en ligne.",
+      "Professionnels dépendant de suites logicielles lourdes natives Windows ou macOS (CAO/DAO avancée, montage audiovisuel professionnel multi-pistes lourd).",
+      "Joueurs intensifs sur PC recherchant une prise en charge complète et directe des bibliothèques DirectX et des périphériques de simulation spécifiques.",
+      "Administrateurs systèmes exigeant un contrôle granulaire direct sur le noyau et la structure du système de fichiers hôte."
+    ],
+    "verdict": "ChromeOS incarne une architecture client léger moderne aboutie, combinant la robustesse du noyau Linux, l'intégrité cryptographique d'un système de fichiers immuable en lecture seule et la flexibilité d'environnements virtualisés sous KVM (Crostini et ARCVM). Particulièrement efficace pour la bureautique connectée, l'enseignement et les déploiements industriels standardisés, il impose en contrepartie une adhésion étroite aux services de Google et une séparation stricte entre l'espace utilisateur et les composants de bas niveau de la machine."
+  },
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "related",
+      "description": "Distribution Linux servant d'image de conteneur standard par défaut dans l'environnement de développement Crostini."
+    },
+    {
+      "id": "gentoo",
+      "name": "Gentoo",
+      "type": "upstream_origin",
+      "description": "Distribution Linux dont le gestionnaire de paquets Portage et les ebuilds forment le socle historique du système de compilation de ChromiumOS."
+    },
+    {
+      "id": "android-aosp",
+      "name": "Android / AOSP",
+      "type": "related",
+      "description": "Système d'exploitation mobile dont l'environnement d'exécution et les applications sont virtualisés dans ChromeOS via ARCVM."
+    },
+    {
+      "id": "windows",
+      "name": "Microsoft Windows",
+      "type": "alternative",
+      "description": "Système d'exploitation de bureau commercial concurrent développé par Microsoft pour postes de travail et ordinateurs personnels."
+    },
+    {
+      "id": "macos",
+      "name": "Apple macOS",
+      "type": "alternative",
+      "description": "Système d'exploitation de bureau commercial développé par Apple sur socle Darwin/UNIX pour ordinateurs Mac."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel de Google ChromeOS",
+      "url": "https://www.google.com/chromebook/chrome-os/"
+    },
+    {
+      "label": "Portail de documentation technique ChromiumOS",
+      "url": "https://www.chromium.org/chromium-os/"
+    },
+    {
+      "label": "Documentation officielle du projet Crostini et crosvm",
+      "url": "https://chromium.googlesource.com/chromiumos/docs/+/refs/heads/main/containers_and_vms.md"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail et spécifications officielles de Google ChromeOS",
+      "url": "https://www.google.com/chromebook/chrome-os/",
+      "type": "official_site"
+    },
+    {
+      "title": "Documentation d'architecture et de sécurité ChromiumOS",
+      "url": "https://www.chromium.org/chromium-os/chromiumos-design-docs/security-overview/",
+      "type": "documentation"
+    },
+    {
+      "title": "Spécifications techniques de virtualisation crosvm et conteneurs Crostini",
+      "url": "https://chromium.googlesource.com/chromiumos/docs/+/refs/heads/main/containers_and_vms.md",
+      "type": "documentation"
+    }
+  ]
+}

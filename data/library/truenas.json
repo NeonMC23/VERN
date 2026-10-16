@@ -1,0 +1,116 @@
+{
+  "id": "truenas",
+  "name": "TrueNAS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation et plateforme de stockage en réseau unifié (NAS/SAN) développé par iXsystems, motorisé par le système de fichiers transactionnel OpenZFS et articulé autour des éditions CORE (FreeBSD) et SCALE (Debian GNU/Linux avec Docker et KVM).",
+  "tags": [
+    "storage",
+    "nas",
+    "san",
+    "openzfs",
+    "ixsystems",
+    "debian",
+    "freebsd",
+    "docker",
+    "server"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64"
+  ],
+  "license": "Open Source (licence BSD 2-Clause pour le cœur FreeNAS/CORE, composants GPL pour l'environnement Linux de SCALE) avec options de support d'entreprise",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "TrueNAS est un système d'exploitation spécialisé et une plateforme de stockage en réseau unifié (NAS/SAN) développée par la société américaine iXsystems. Conçu pour garantir l'intégrité absolue des données et simplifier le partage de fichiers en entreprise comme chez les particuliers, TrueNAS réunit les fonctionnalités avancées du système de fichiers OpenZFS au sein d'un environnement administrable par interface web, disponible sous forme logicielle libre ou intégré dans des appliances matérielles dédiées.",
+    "what_is_it": "Historiquement issu du projet open source FreeNAS créé en 2005 sur socle FreeBSD, le système a été repris par iXsystems en 2009 puis unifié sous la marque TrueNAS en 2020. La plateforme propose deux variantes complémentaires : TrueNAS CORE, s'appuyant sur FreeBSD pour des déploiements centrés sur le stockage pur avec jails et bhyve, et TrueNAS SCALE, reposant sur Debian GNU/Linux avec un noyau Linux 6.x. TrueNAS SCALE constitue le fer de lance de la gamme, apportant la virtualisation KVM, les conteneurs Docker et des fonctionnalités de stockage en grappe étendues.",
+    "openzfs_architecture_and_data_integrity": "L'atout technologique central de TrueNAS est son intégration native et poussée d'OpenZFS, un système de fichiers 128 bits et gestionnaire de volumes logique transactionnel en copie sur écriture (Copy-on-Write). OpenZFS agrège les supports physiques en réserves de stockage (zpools) découpées en périphériques virtuels (vdevs) configurables en miroir, RAIDZ1, RAIDZ2, RAIDZ3 ou dRAID. Chaque bloc de données et de métadonnées est protégé par une somme de contrôle cryptographique (Fletcher4, SHA-256), permettant la détection et la correction automatique des corruptions silencieuses lors des cycles de nettoyage (scrubbing). La plateforme gère également les instantanés (snapshots) instantanés, la réplication asynchrone sécurisée (`zfs send/receive`), le chiffrement natif des jeux de données et la déduplication rapide (Fast Deduplication).",
+    "unified_storage_protocols_and_networking": "TrueNAS délivre une architecture de stockage unifié couvrant les besoins en mode fichier, en mode bloc et en mode objet. Pour le partage réseau de fichiers, il embarque Samba (SMB 2/3) avec une prise en charge complète des listes de contrôle d'accès Windows (NFSv4 ACLs portées par iXsystems sur Linux), NFS (v3, v4.1, v4.2 avec accélération nconnect multi-flux), ainsi que WebDAV. Pour le stockage SAN en mode bloc, il propose une cible iSCSI optimisée (SCST sous Linux, CTL sous FreeBSD) hautement performante pour les hyperviseurs distants. Il intègre également la compatibilité objet compatible Amazon S3 (via MinIO) et la synchronisation vers les fournisseurs cloud via rclone.",
+    "application_ecosystem_and_docker_transition": "Dans ses versions modernes (notamment TrueNAS SCALE 24.10 'Electric Eel'), iXsystems a fait évoluer son architecture applicative en abandonnant la complexité du moteur Kubernetes (k3s/Helm) au profit d'une intégration native de Docker Engine et de Docker Compose. Cette transition majeure permet aux utilisateurs de déployer des applications conteneurisées directement depuis le catalogue officiel ou par la rédaction de fichiers `docker-compose.yml` standards, tout en conservant la capacité de créer des machines virtuelles complètes isolées sous l'hyperviseur KVM.",
+    "administration_webui_and_middleware": "L'administration du système s'opère au travers d'une interface web moderne en Angular, fournissant des tableaux de bord interactifs pour la supervision en temps réel de l'état des disques, de l'état de santé S.M.A.R.T., des températures matérielles et de l'utilisation du cache mémoire ZFS (ARC - Adaptive Replacement Cache). Toutes les fonctions de la plateforme sont pilotables via une API RESTful et WebSocket complète servie par le middleware TrueNAS, facilitant l'automatisation. Les appliances professionnelles TrueNAS Enterprise offrent également une haute disponibilité matérielle actif-passif sans interruption de service (HA dual-controller failover).",
+    "advantages": [
+      "Protection et intégrité maximales des données grâce au système de fichiers transactionnel OpenZFS et à la correction automatique d'erreurs (self-healing).",
+      "Prise en charge unifiée complète des protocoles industriels de stockage : SMB avec ACLs Windows natives, NFS avec nconnect, iSCSI, S3 et WebDAV.",
+      "Transition vers Docker Engine et Docker Compose natifs dans TrueNAS SCALE simplifiant radicalement le déploiement d'applications conteneurisées.",
+      "Capacités de sauvegarde et de reprise d'activité professionnelles via instantanés ZFS programmés, clones légers et réplication distante.",
+      "Interface web ergonomique et réactive accompagnée d'une API RESTful/WebSocket exhaustive pour l'automatisation d'infrastructure.",
+      "Disponibilité sous forme logicielle libre gratuite pour tout matériel x86-64 et en appliances matérielles certifiées pour les entreprises."
+    ],
+    "disadvantages": [
+      "Exigences matérielles rigoureuses pour OpenZFS, nécessitant une quantité importante de mémoire vive (recommandation minimale de 8 à 16 Go de RAM) et de préférence de la mémoire ECC.",
+      "Rigidité historique dans la modification a posteriori de la topologie des zpools (l'extension de vdev RAIDZ disque par disque restant une fonctionnalité récente d'OpenZFS).",
+      "Les deux déclinaisons (CORE sous FreeBSD et SCALE sous Linux) présentent des différences de fonctionnalités et de pilotes pouvant nécessiter une migration réfléchie.",
+      "Consommation énergétique et thermique continue inhérente aux serveurs de stockage multipostes et aux configurations RAID multi-disques.",
+      "La déduplication native de blocs en temps réel exige des ressources processeur et mémoire substantielles sous peine de dégrader les débits d'E/S."
+    ],
+    "who_is_it_for": [
+      "Entreprises, institutions et centres de recherche recherchant une solution de stockage centralisée, sécurisée et souveraine pour leurs volumes critiques.",
+      "Administrateurs systèmes déployant des baies SAN ou des dépôts de sauvegarde fiables pour des grappes d'hyperviseurs VMware, Proxmox ou Hyper-V.",
+      "Créateurs de contenu, studios de post-production et agences manipulant des téraoctets de données vidéo exigeant des débits élevés et un partage multi-utilisateurs SMB/NFS.",
+      "Utilisateurs avancés et passionnés de serveurs domestiques (homelab) voulant héberger leurs données personnelles et leurs services conteneurisés sous Docker."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs débutants cherchant un boîtier de partage de fichiers grand public prêt à l'emploi sans connaissances préalables sur le stockage et la redondance RAID.",
+      "Infrastructures informatiques contraintes par du matériel ancien ou sous-dimensionné disposant de moins de 4 à 8 Go de mémoire vive.",
+      "Postes de travail de bureau ou ordinateurs portables personnels (TrueNAS étant un système serveur dédié ne proposant aucun environnement graphique local).",
+      "Déploiements sur architectures matérielles 32 bits ou architectures ARM grand public non prises en charge officiellement."
+    ],
+    "verdict": "TrueNAS représente la référence incontournable du stockage en réseau unifié libre. Tirant parti de toute la puissance et de la fiabilité éprouvée d'OpenZFS, la plateforme a su opérer avec succès sa convergence moderne vers l'écosystème Linux avec TrueNAS SCALE et Docker Compose, proposant une solution aussi redoutable pour la sauvegarde et le stockage critique d'entreprise que pour les serveurs domestiques avancés."
+  },
+  "relations": [
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "type": "upstream_base",
+      "description": "Système d'exploitation Unix libre constituant le socle historique du projet FreeNAS et de l'édition TrueNAS CORE."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "upstream_base",
+      "description": "Distribution Linux servant de socle pour l'édition moderne TrueNAS SCALE (noyau Linux et espace utilisateur Debian)."
+    },
+    {
+      "id": "proxmox-ve",
+      "name": "Proxmox VE",
+      "type": "alternative",
+      "description": "Plateforme d'hyperviseur et de virtualisation d'entreprise fréquemment interfacée avec TrueNAS pour le stockage partagé en cluster."
+    },
+    {
+      "id": "openmediavault",
+      "name": "OpenMediaVault",
+      "type": "alternative",
+      "description": "Distribution NAS légère basée sur Debian, orientée vers les architectures matérielles plus modestes."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel de TrueNAS (iXsystems)",
+      "url": "https://www.truenas.com/"
+    },
+    {
+      "label": "Portail de documentation officiel de TrueNAS",
+      "url": "https://www.truenas.com/docs/"
+    },
+    {
+      "label": "Portail du projet OpenZFS amont",
+      "url": "https://openzfs.org/"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel et spécifications de stockage TrueNAS",
+      "url": "https://www.truenas.com/",
+      "type": "official_site"
+    },
+    {
+      "title": "Documentation d'architecture et guides de configuration TrueNAS",
+      "url": "https://www.truenas.com/docs/",
+      "type": "documentation"
+    },
+    {
+      "title": "Notes de version et annonces de migration TrueNAS SCALE",
+      "url": "https://www.truenas.com/docs/scale/24.10/gettingstarted/scalereleasenotes/",
+      "type": "documentation"
+    }
+  ]
+}

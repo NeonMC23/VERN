@@ -1,0 +1,98 @@
+{
+  "id": "omnios",
+  "name": "OmniOS Community Edition",
+  "type": "operating_system",
+  "summary": "A minimalist, enterprise-grade server operating system built upon the illumos consolidation, engineered specifically for high-reliability OpenZFS storage, lightweight container virtualization via Zones, and hardware virtualization via bhyve and KVM.",
+  "tags": [
+    "unix",
+    "illumos",
+    "solaris",
+    "server",
+    "zfs",
+    "zones",
+    "bhyve",
+    "kvm"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64 / x86_64"
+  ],
+  "license": "Common Development and Distribution License (CDDL 1.0)",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "OmniOS Community Edition is an open-source, server-oriented Unix operating system built directly on the illumos-gate consolidation. Originally developed by OmniTI in 2012, it has been maintained since 2017 by the OmniOS Community Edition Association (OmniOSce) in Switzerland, delivering an austere, reliable foundation for enterprise infrastructure and network storage.",
+    "what_is_it": "OmniOS is a headless, purpose-built server distribution providing an installation focused solely on hosting services, network file sharing, and virtualized workloads. It integrates native OpenZFS file system capabilities, container-based isolation through Solaris Zones (including native and Linux LX brands), hardware-assisted virtual machines with bhyve and KVM, and Software-Defined Networking through Crossbow.",
+    "origin_and_community_continuity": "Created by Robert Mustacchi and OmniTI to meet demanding production storage requirements, OmniOS debuted with release r151002 in April 2012. When OmniTI suspended active sponsorship in 2017, the community established the non-profit OmniOSce Association (supported by Oetiker+Partner AG) to ensure independent development, continuous security patching, and predictable release cycles.",
+    "storage_architecture_and_sharing": "OmniOS relies on OpenZFS as its native root file system and volume management engine. The operating system includes in-kernel implementations for network storage protocols, providing high-performance iSCSI target services, Network File System (NFS), and native SMB/CIFS file sharing with integrated Active Directory authentication and granular ACL management.",
+    "virtualization_and_networking": "Virtualization in OmniOS operates at two complementary layers: lightweight containers using illumos Zones (supporting native illumos environments, LX brand Linux emulation, and illumos branded zones) and hardware virtualization using the bhyve hypervisor and KVM. Virtual machines execute within isolated branded zones, providing multi-layered protection. Network connectivity is orchestrated through Crossbow, enabling dynamic Virtual Network Interface Cards (VNICs) and bandwidth management.",
+    "packaging_and_release_lifecycle": "Third-party software and system components are managed via the Image Packaging System (IPS, pkg) with cryptographic package signatures and automatic ZFS boot environment generation (beadm). OmniOS maintains a strict semiannual release cadence in May and November, alternating six-month standard stable releases with three-year Long Term Support (LTS) releases (including r151054 LTS and r151058 stable).",
+    "advantages": [
+      "Enterprise-grade OpenZFS storage foundation with in-kernel SMB, NFS, and iSCSI services",
+      "Comprehensive multi-tier virtualization combining lightweight Zones with bhyve and KVM hypervisors",
+      "Software-Defined Networking through Crossbow VNICs and per-flow bandwidth management",
+      "Risk-free system updates powered by IPS package management and ZFS boot environments",
+      "Predictable release schedule offering three-year Long Term Support (LTS) editions"
+    ],
+    "disadvantages": [
+      "Strictly headless server focus with zero official desktop or graphical workstation environments",
+      "Hardware compatibility is confined to server-grade platforms, with limited consumer peripheral support",
+      "Smaller third-party software packaging repository compared to mainline Linux distributions"
+    ],
+    "who_is_it_for": [
+      "Storage administrators building high-availability NAS/SAN appliances and virtualization storage pools",
+      "Systems engineers hosting high-density container and virtual machine workloads on illumos",
+      "Enterprise organizations requiring a hardened, auditable Unix server OS with commercial support options"
+    ],
+    "who_is_it_not_for": [
+      "Desktop computer users expecting graphical installers, office productivity suites, or display servers",
+      "Deployments on ARM, Raspberry Pi, or 32-bit legacy computer hardware architectures"
+    ],
+    "verdict": "OmniOS Community Edition represents an exemplary realization of illumos as a modern enterprise server platform. By combining rock-solid OpenZFS storage, flexible Zones and bhyve virtualization, and a disciplined release engineering model, it delivers outstanding stability for demanding infrastructure deployments."
+  },
+  "relations": [
+    {
+      "id": "illumos",
+      "name": "illumos",
+      "relation": "upstream_base",
+      "note": "Upstream foundational consolidation and kernel (illumos-gate) upon which OmniOS is constructed."
+    },
+    {
+      "id": "openindiana",
+      "name": "OpenIndiana",
+      "relation": "alternative",
+      "note": "Fellow illumos distribution, contrasting OpenIndiana's general-purpose MATE desktop with OmniOS's headless server focus."
+    },
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "relation": "architectural_peer",
+      "note": "Fellow enterprise Unix-like operating system sharing OpenZFS heritage, bhyve hypervisor technology, and container paradigms."
+    }
+  ],
+  "links": {
+    "home": "https://omnios.org/",
+    "documentation": "https://omnios.org/setup/zones",
+    "releases": "https://omnios.org/releasenotes",
+    "github": "https://github.com/omniosorg/omnios-build"
+  },
+  "sources": [
+    {
+      "title": "OmniOS Community Edition Official Website & Architecture",
+      "url": "https://omnios.org/",
+      "type": "official",
+      "date": "2026-05-04"
+    },
+    {
+      "title": "OmniOS Community Edition Release Notes & Lifecycles",
+      "url": "https://omnios.org/releasenotes",
+      "type": "release_notes",
+      "date": "2026-05-04"
+    },
+    {
+      "title": "OmniOS Build System & Source Repository",
+      "url": "https://github.com/omniosorg/omnios-build",
+      "type": "official",
+      "date": "2026-05-04"
+    }
+  ]
+}

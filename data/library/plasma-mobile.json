@@ -1,0 +1,111 @@
+{
+  "id": "plasma-mobile",
+  "name": "Plasma Mobile",
+  "type": "operating_system",
+  "summary": "Interface tactile libre et écosystème d'applications mobiles développés par la communauté KDE, fondés sur le compositeur KWin Wayland et les bibliothèques Qt/Kirigami.",
+  "tags": [
+    "mobile",
+    "kde",
+    "wayland",
+    "kwin",
+    "kirigami",
+    "touch",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "ARM64",
+    "x86-64"
+  ],
+  "license": "Open Source (GPL, LGPL et licences libres KDE)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "Plasma Mobile est une initiative libre de la communauté internationale KDE visant à fournir une interface utilisateur tactile et un environnement applicatif complet pour smartphones et tablettes.",
+    "what_is_it": "Développé depuis 2015 sur les fondations de l'environnement de bureau KDE Plasma, Plasma Mobile adapte la pile graphique et logicielle KDE aux facteurs de forme mobiles sans rupture avec l'écosystème Linux traditionnel.",
+    "desktop_heritage_and_wayland_stack": "Plasma Mobile repose directement sur les composants centraux de KDE : le compositeur KWin sous protocole d'affichage Wayland, la collection modulaire KDE Frameworks 6 et le moteur de rendu Qt Quick. KWin gère l'accélération matérielle graphique OpenGL ES/Vulkan, la rotation automatique de l'affichage et les animations tactiles de transition de fenêtres.",
+    "kirigami_framework_and_adaptive_apps": "L'écosystème d'applications natives s'appuie sur le framework d'interface Kirigami, conçu par KDE avec QML pour créer des interfaces convergentes capables de s'adapter dynamiquement aux écrans étroits tactiles comme aux écrans larges de bureau. Plasma Mobile inclut des applications dédiées telles que Plasma Phonebook, Spacebar (messagerie SMS), Plasma Camera, Elisa (audio) et Angelfish (navigateur web basé sur Qt WebEngine).",
+    "telephony_audio_and_hardware_integration": "La gestion des communications cellulaires est déléguée aux démons ModemManager et oFono, assurant les appels vocaux et la transmission de données mobiles. Le routage audio est pris en charge par PipeWire et PulseAudio, tandis que le retour haptique exploite le démon standard feedbackd. L'environnement intègre également une gestion de conteneurs Waydroid pour l'exécution d'applications Android compatibles.",
+    "technical_constraints_and_limits": "Plasma Mobile ne constitue pas une distribution autonome avec son propre noyau, mais un environnement intégré au sein de systèmes hôtes tels que postmarketOS, Mobian, Fedora Mobility ou Manjaro ARM. L'autonomie de la batterie et la stabilité matérielle dépendent étroitement de la maturité des pilotes du noyau Linux mainline pour chaque processeur (SoC) mobile.",
+    "advantages": [
+      "Interface utilisateur entièrement libre et modulaire issue de la communauté KDE",
+      "Pile d'affichage Wayland native pilotée par le compositeur KWin avec accélération matérielle",
+      "Framework applicatif Kirigami offrant la convergence entre environnements mobile et bureau",
+      "Compatibilité avec les applications Linux de bureau et support des conteneurs Android via Waydroid",
+      "Absence de télémétrie propriétaire et auditabilité intégrale du code source"
+    ],
+    "disadvantages": [
+      "Dépendance vis-à-vis des distributions hôtes et du support matériel des pilotes noyau Linux",
+      "Consommation énergétique accrue en veille par rapport aux systèmes mobiles fermés du marché",
+      "Écosystème d'applications tactiles natives plus restreint que les plateformes commerciales dominantes",
+      "Intégration des capteurs photo complexes et du matériel audio cellulaire encore variable selon les appareils"
+    ],
+    "who_is_it_for": [
+      "Utilisateurs de téléphones Linux autonomes (PinePhone, PinePhone Pro, Librem 5, terminaux postmarketOS)",
+      "Développeurs Qt, QML et KDE souhaitant concevoir des applications convergentes multiplateformes",
+      "Administrateurs et passionnés de logiciel libre recherchant une pile mobile ouverte et inspectable"
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs exigeant la prise en charge immédiate de l'ensemble des services bancaires sous DRM Google Play Protect",
+      "Personnes dépendantes d'une autonomie de batterie standard de plusieurs jours sans configuration",
+      "Utilisateurs recherchant un appareil prêt à l'emploi garanti sans configuration de distribution"
+    ],
+    "verdict": "Plasma Mobile constitue un environnement mobile ouvert majeur pour le monde Linux, transposant l'écosystème KDE sur ordiphones avec une architecture Wayland et un framework convergent de référence."
+  },
+  "relations": [
+    {
+      "id": "postmarketos",
+      "name": "postmarketOS",
+      "type": "related",
+      "description": "Distribution Linux mobile basée sur Alpine proposant officiellement l'interface Plasma Mobile."
+    },
+    {
+      "id": "mobian",
+      "name": "Mobian",
+      "type": "related",
+      "description": "Distribution Debian pour appareils mobiles intégrant des images avec l'environnement Plasma Mobile."
+    },
+    {
+      "id": "kde-neon",
+      "name": "KDE neon",
+      "type": "related",
+      "description": "Distribution de référence du projet KDE partageant le socle applicatif et les composants Plasma."
+    },
+    {
+      "id": "ubuntu-touch",
+      "name": "Ubuntu Touch",
+      "type": "alternative",
+      "description": "Système d'exploitation mobile alternatif issu de Canonical maintenu par la fondation UBports."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel Plasma Mobile",
+      "url": "https://plasma-mobile.org/"
+    },
+    {
+      "label": "Documentation développeur Kirigami",
+      "url": "https://develop.kde.org/docs/kirigami/"
+    },
+    {
+      "label": "Dépôt GitLab KDE Plasma Mobile",
+      "url": "https://invent.kde.org/plasma/plasma-mobile"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel du projet KDE Plasma Mobile",
+      "url": "https://plasma-mobile.org/",
+      "type": "official_site"
+    },
+    {
+      "title": "Documentation d'architecture et Kirigami de la communauté KDE",
+      "url": "https://develop.kde.org/docs/kirigami/",
+      "type": "documentation"
+    },
+    {
+      "title": "Notes de publication KDE Plasma et feuille de route mobile",
+      "url": "https://kde.org/announcements/",
+      "type": "release_notes"
+    }
+  ]
+}

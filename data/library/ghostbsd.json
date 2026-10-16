@@ -1,0 +1,97 @@
+{
+  "id": "ghostbsd",
+  "name": "GhostBSD",
+  "type": "operating_system",
+  "summary": "A user-friendly, desktop-oriented BSD operating system built upon FreeBSD, providing an out-of-the-box MATE graphical environment, automated OpenZFS installation with boot environments, and dedicated graphical management tools.",
+  "tags": [
+    "bsd",
+    "unix",
+    "desktop",
+    "freebsd",
+    "mate",
+    "zfs",
+    "workstation"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64 / x86_64"
+  ],
+  "license": "2-clause BSD License",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "GhostBSD is an open-source, desktop-oriented Unix-like operating system founded in 2010 by Eric Turgeon. Designed to combine the stability, security, and performance of the FreeBSD operating system with an accessible, modern desktop experience, GhostBSD eliminates the manual configuration traditionally required to set up a graphical BSD workstation.",
+    "what_is_it": "GhostBSD is a turnkey, pre-configured operating system delivering a fully functional graphical desktop environment based on FreeBSD RELEASE branches. It features the MATE desktop environment by default (with community XFCE editions), an intuitive graphical installer, custom system administration utilities, and pre-packaged graphics drivers for AMD, Intel, and Nvidia hardware.",
+    "origin_and_freebsd_foundation": "Originating in 2010 as a project aimed at simplifying desktop FreeBSD deployment, GhostBSD initially drew upon FreeBSD development branches before aligning with TrueOS infrastructure, and subsequently transitioning to track upstream FreeBSD RELEASE directly. Starting with release 25.01-R14.2p1, GhostBSD adopted a transparent versioning scheme tied directly to the underlying FreeBSD release patchsets, ensuring superior operational predictability.",
+    "desktop_environment_and_tooling": "The flagship edition of GhostBSD provides a tailored MATE 1.28 desktop with the LightDM display manager and slick-greeter. The project develops several custom Python/GTK administration tools: NetworkMgr for network and Wi-Fi configuration, Software Station and Update Station for graphical package maintenance, and Backup Station for backup automation.",
+    "storage_and_boot_environments": "GhostBSD uses the OpenZFS file system as its default root storage architecture. Its graphical installer automatically configures ZFS datasets with full support for Boot Environments. Integrated with pybectl and Update Station, the system automatically generates a new bootable ZFS snapshot prior to each major system update, allowing users to reboot into an earlier working state directly from the bootloader if issues arise.",
+    "package_management_and_releases": "Third-party software is delivered through GhostBSD's own binary package repositories, compiled and curated from the FreeBSD ports collection using the standard pkg tool. GhostBSD maintains a regular publication cadence, releasing updated installation media and rolling package updates throughout 2024, 2025, and 2026 (including release 25.02-R14.3p2 and 26.1-R15.0p2 snapshots).",
+    "advantages": [
+      "Out-of-the-box desktop BSD experience with zero manual command-line configuration required",
+      "Native OpenZFS integration with automated boot environment snapshots before system upgrades",
+      "Dedicated graphical administration suite including NetworkMgr, Update Station, and Software Station",
+      "Curated binary package repositories pre-configured with proprietary graphics drivers and codecs",
+      "Rock-solid FreeBSD RELEASE foundation providing broad BSD software ecosystem compatibility"
+    ],
+    "disadvantages": [
+      "Strictly limited to 64-bit x86_64 hardware, with no official ARM64 or 32-bit images",
+      "Wireless device compatibility and consumer peripheral support lag behind mainstream desktop Linux",
+      "Smaller application catalog compared to major Linux distributions, requiring Linuxulator for specific binaries"
+    ],
+    "who_is_it_for": [
+      "Users seeking an accessible, daily-driver desktop powered by the FreeBSD kernel and OpenZFS",
+      "Developers, systems administrators, and Unix enthusiasts learning BSD in a graphical environment",
+      "Users requiring a resilient workstation with instant ZFS snapshot rollback capabilities"
+    ],
+    "who_is_it_not_for": [
+      "Gamers expecting comprehensive out-of-the-box Proton, Steam Anti-Cheat, and cutting-edge GPU support",
+      "Users deploying lightweight operating systems on ARM evaluation boards, Raspberry Pi, or 32-bit machines"
+    ],
+    "verdict": "GhostBSD successfully bridges the gap between enterprise BSD robustness and everyday desktop usability. By packaging FreeBSD RELEASE with an intuitive MATE desktop, bespoke administration tools, and automated OpenZFS boot environments, it provides an outstanding gateway into the BSD computing ecosystem."
+  },
+  "relations": [
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "relation": "upstream_base",
+      "note": "Upstream operating system foundation, providing the kernel, base system utilities, and ports collection."
+    },
+    {
+      "id": "openbsd",
+      "name": "OpenBSD",
+      "relation": "sister_lineage",
+      "note": "Fellow BSD operating system, contrasting GhostBSD's turnkey desktop and OpenZFS with OpenBSD's security minimalism."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "alternative",
+      "note": "Leading desktop Linux alternative sharing a commitment to an accessible, traditional MATE desktop experience."
+    }
+  ],
+  "links": {
+    "home": "https://ghostbsd.org/",
+    "forums": "https://forums.ghostbsd.org/",
+    "news": "https://ghostbsd.org/taxonomy/term/5",
+    "github": "https://github.com/ghostbsd"
+  },
+  "sources": [
+    {
+      "title": "GhostBSD Official Project Portal & Mission",
+      "url": "https://ghostbsd.org/",
+      "type": "official",
+      "date": "2026-04-18"
+    },
+    {
+      "title": "GhostBSD 24.04.1 Release Announcement & Changelog",
+      "url": "https://ghostbsd.org/news/GhostBSD_24.04.1_is_Now_Available",
+      "type": "release_notes",
+      "date": "2024-05-20"
+    },
+    {
+      "title": "GhostBSD Release Announcements & Versioning Scheme",
+      "url": "https://ghostbsd.org/taxonomy/term/5",
+      "type": "official_documentation",
+      "date": "2026-04-18"
+    }
+  ]
+}

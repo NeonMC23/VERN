@@ -1,0 +1,118 @@
+{
+  "id": "openmediavault",
+  "name": "OpenMediaVault",
+  "type": "operating_system",
+  "summary": "Solution logicielle de stockage en réseau (NAS) open source basée sur Debian GNU/Linux, offrant une administration web modulaire, la gestion du RAID logiciel, des partages SMB/NFS/FTP et l'intégration de conteneurs Docker.",
+  "tags": [
+    "nas",
+    "storage",
+    "debian",
+    "raid",
+    "samba",
+    "nfs",
+    "docker",
+    "server",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "ARM64",
+    "ARM32"
+  ],
+  "license": "Open Source (GNU GPLv3)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "OpenMediaVault (OMV) est une solution de stockage en réseau unifié (NAS) open source conçue pour transformer n'importe quel ordinateur personnel ou serveur standard en un serveur de fichiers et d'applications centralisé. Conçu à l'origine par Volker Theile, ancien développeur clé du projet FreeNAS, OpenMediaVault s'appuie sur la distribution Debian GNU/Linux pour offrir une alternative légère, accessible et modulaire aux systèmes NAS propriétaires du commerce.",
+    "what_is_it": "Techniquement, OpenMediaVault se présente soit sous la forme d'une image d'installation autonome complète basée sur Debian, soit sous forme de paquets logiciels pouvant être déployés directement sur une installation Debian GNU/Linux existante. Le système intègre tous les services indispensables à la gestion d'un centre de données domestique ou de petite entreprise : partitionnement de disques, surveillance S.M.A.R.T., agrégation de volumes en RAID logiciel, gestion des comptes utilisateurs et partage de dossiers sur le réseau local.",
+    "storage_services_and_filesystems": "OpenMediaVault assure une prise en charge étendue des systèmes de fichiers majeurs de l'écosystème Linux, notamment ext4 (système de fichiers recommandé par défaut), Btrfs (avec gestion des instantanés et des sous-volumes), XFS et JFS, ainsi que la lecture et l'écriture sur des volumes NTFS et exFAT pour l'échange de médias amovibles. La tolérance aux pannes des disques durs est administrée via l'utilitaire `mdadm` du noyau Linux (niveaux RAID 0, 1, 5, 6 et 10) ou par le gestionnaire de volumes logiques LVM2. L'accès aux fichiers s'effectue au travers de protocoles réseau standardisés : SMB/CIFS (via Samba avec gestion des listes de contrôle d'accès), NFS (v3 et v4), FTP/SFTP (ProFTPD) et rsync pour la réplication programmée.",
+    "management_architecture_and_webui": "L'architecture interne d'OpenMediaVault repose sur une séparation claire entre la couche de stockage de configuration et les démons applicatifs. L'état du système est centralisé dans un fichier de configuration XML déclaratif (`config.xml`). Un démon d'arrière-plan (`omv-engined`) expose une interface RPC (Remote Procedure Call) et orchestre les configurations réelles des services système au moyen de modules d'automatisation SaltStack (`omv-salt`). L'administrateur pilote l'ensemble de la machine depuis une interface graphique web sécurisée accessible via un simple navigateur, offrant des tableaux de bord interactifs de surveillance des températures, des alertes de défaillance matérielle et de la charge réseau.",
+    "modularity_and_docker_containerization": "L'un des atouts déterminants d'OpenMediaVault est sa modularité par plugins. Outre les modules officiels (antivirus ClamAV, onduleur NUT, sauvegardes BorgBackup), la communauté maintient le dépôt d'extensions OMV-Extras. Cette couche additionnelle permet d'intégrer facilement des fonctionnalités avancées comme la prise en charge de ZFS (via ZFS on Linux) et surtout la gestion complète de conteneurs applicatifs grâce au plugin `openmediavault-compose`. Ce dernier permet d'héberger des dizaines de services auto-hébergés (Plex, Jellyfin, Nextcloud, Home Assistant) via Docker et Docker Compose directement sur le serveur NAS sans altérer le système d'exploitation de base.",
+    "hardware_efficiency_and_sbc_support": "Contrairement aux solutions d'entreprise exigeantes telles que TrueNAS, OpenMediaVault se distingue par une sobriété matérielle remarquable. Il peut fonctionner de manière stable avec seulement 1 à 2 Go de mémoire vive et un processeur standard d'entrée de gamme, ce qui en fait un outil de prédilection pour recycler d'anciens PC de bureau en serveurs de stockage. De surcroît, grâce à des scripts de déploiement adaptés et à l'écosystème Armbian, OpenMediaVault s'installe très couramment sur des ordinateurs monocartes (SBC) comme le Raspberry Pi ou les cartes Odroid, fournissant une passerelle NAS compacte et économe en énergie.",
+    "advantages": [
+      "Empreinte système et consommation mémoire très faibles, permettant l'installation sur du matériel modeste ou recyclé.",
+      "Socle éprouvé basé sur Debian GNU/Linux garantissant une stabilité exemplaire et des mises à jour de sécurité fiables.",
+      "Interface d'administration web réactive et claire, rendant la configuration du NAS accessible sans compétences approfondies en ligne de commande.",
+      "Architecture hautement extensible grâce au système de plugins officiels et au dépôt communautaire OMV-Extras.",
+      "Intégration fluide de Docker et Docker Compose facilitant l'auto-hébergement d'applications et de services conteneurisés.",
+      "Prise en charge officielle et communautaire des architectures x86-64 et ARM (Raspberry Pi, Odroid) pour des serveurs compacts."
+    ],
+    "disadvantages": [
+      "Les fonctionnalités avancées comme ZFS ne sont pas intégrées au noyau par défaut et dépendent de modules tiers ou de rétroportages.",
+      "L'interface web prend entièrement le contrôle de la configuration des services gérés, ce qui peut écraser d'éventuelles modifications manuelles faites en ligne de commande.",
+      "Le support technique repose principalement sur la communauté et le forum officiel, sans contrat de support commercial direct pour les grands comptes.",
+      "L'installation du système monopolise par défaut un disque de stockage complet pour le système d'exploitation lors de l'usage de l'ISO officielle.",
+      "Moins adapté aux très grands parcs de serveurs d'entreprise ou aux architectures SAN en grappes multipath que les solutions de type TrueNAS Enterprise."
+    ],
+    "who_is_it_for": [
+      "Particuliers et passionnés d'informatique souhaitant monter un serveur NAS domestique fiable et polyvalent à coût réduit.",
+      "Petites entreprises, artisans et professions libérales ayant besoin d'un espace de partage réseau local (SMB/NFS) et de sauvegarde automatisée.",
+      "Utilisateurs d'ordinateurs monocartes (Raspberry Pi, SBC ARM) cherchant à créer un petit serveur de fichiers et de téléchargement discret.",
+      "Amateurs d'auto-hébergement souhaitant gérer des conteneurs Docker légers à côté de leurs partages de données."
+    ],
+    "who_is_it_not_for": [
+      "Grandes infrastructures de centres de données exigeant des systèmes de fichiers distribués en grappe nativement intégrés (Ceph, GlusterFS) ou du support commercial 24/7.",
+      "Utilisateurs recherchant un boîtier de stockage propriétaire clé-en-main avec service après-vente matériel intégré (Synology, QNAP).",
+      "Infrastructures nécessitant impérativement une haute disponibilité matérielle en double contrôleur actif-passif sans interruption de service.",
+      "Déploiements sur des postes de travail bureautiques individuels nécessitant un environnement graphique local avec écran et clavier."
+    ],
+    "verdict": "OpenMediaVault constitue la solution de stockage en réseau libre par excellence pour les environnements domestiques et les petites structures. Bâti avec rigueur sur les fondations stables de Debian GNU/Linux, il allie une grande simplicité d'administration web, une consommation de ressources minimale et une grande flexibilité logicielle grâce à ses extensions et à Docker Compose."
+  },
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "upstream_base",
+      "description": "Distribution Linux de référence servant de socle fondamental pour le système d'exploitation et les paquets logiciels."
+    },
+    {
+      "id": "truenas",
+      "name": "TrueNAS",
+      "type": "alternative",
+      "description": "Plateforme de stockage en réseau concurrente motorisée par OpenZFS, plus exigeante en ressources matérielles."
+    },
+    {
+      "id": "proxmox-ve",
+      "name": "Proxmox VE",
+      "type": "alternative",
+      "description": "Plateforme de virtualisation et conteneurisation basée sur Debian, souvent associée ou comparée pour les infrastructures de serveurs domestiques."
+    },
+    {
+      "id": "dietpi",
+      "name": "DietPi",
+      "type": "related",
+      "description": "Distribution légère pour cartes monocartes intégrant un script d'installation optimisé pour OpenMediaVault."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel d'OpenMediaVault",
+      "url": "https://www.openmediavault.org/"
+    },
+    {
+      "label": "Portail de documentation officiel d'OpenMediaVault",
+      "url": "https://docs.openmediavault.org/"
+    },
+    {
+      "label": "Dépôt de code source officiel OpenMediaVault (GitHub)",
+      "url": "https://github.com/openmediavault/openmediavault"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Documentation d'architecture et guides d'administration OpenMediaVault",
+      "url": "https://docs.openmediavault.org/",
+      "type": "documentation"
+    },
+    {
+      "title": "Portail officiel et présentation produit OpenMediaVault",
+      "url": "https://www.openmediavault.org/",
+      "type": "official_site"
+    },
+    {
+      "title": "Code source et gestionnaire de configuration omv-engined",
+      "url": "https://github.com/openmediavault/openmediavault",
+      "type": "repository"
+    }
+  ]
+}

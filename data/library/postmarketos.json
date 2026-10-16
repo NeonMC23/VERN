@@ -1,0 +1,107 @@
+{
+  "id": "postmarketos",
+  "name": "postmarketOS",
+  "type": "operating_system",
+  "summary": "A real mobile GNU/Linux distribution based on Alpine Linux, aiming for a 10-year smartphone lifecycle using mainline Linux kernels, pmbootstrap development tooling, and touch-friendly Wayland graphical interfaces including Phosh, Plasma Mobile, and Sxmo.",
+  "tags": [
+    "mobile",
+    "linux",
+    "alpine-linux",
+    "musl",
+    "open-source",
+    "mainline-kernel",
+    "wayland",
+    "phosh",
+    "plasma-mobile"
+  ],
+  "status": "active",
+  "platforms": [
+    "arm64 / aarch64",
+    "armv7a",
+    "x86_64"
+  ],
+  "license": "GPLv3 & GPLv2 (core components and Linux kernel) / MIT (Alpine userspace utilities)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "postmarketOS is a free and open-source mobile operating system that brings true GNU/Linux distributions to smartphones and handheld devices. Initiated in May 2017 by Oliver Smith, postmarketOS seeks to combat electronic waste and planned obsolescence by aiming for a ten-year operational lifespan for mobile hardware, completely independent of the Android/AOSP software stack.",
+    "what_is_it": "postmarketOS is a full Linux distribution built directly on the compact foundation of Alpine Linux. Rather than executing an Android userspace over vendor-modified Android kernels, postmarketOS runs standard desktop Linux utilities, the musl C library, OpenRC or systemd init systems, and native Wayland mobile user interfaces, connecting directly to standard Linux networking and audio subsystems.",
+    "alpine_linux_foundation_and_pmbootstrap": "At the architectural level, postmarketOS leverages Alpine Linux for its lightweight footprint, security posture, and rapid apk package manager. To overcome the fragmentation of mobile hardware, postmarketOS avoids creating separate, monolithic OS images for each phone. Instead, it maintains a single shared operating system core and encapsulates hardware-specific bootloader behavior, kernel modules, and device trees into a single device package (device-[vendor]-[codename]). Development and image generation are automated via pmbootstrap, a Python-based command-line tool that builds environments in isolated Alpine chroots.",
+    "kernel_strategy_and_mainline_approach": "postmarketOS prioritizes the use of the official upstream Linux kernel (mainline Linux) over downstream Android kernels provided by silicon vendors. Running mainline Linux enables long-term security maintenance, modern kernel features, and unified drivers across devices. Devices running legacy downstream Android kernels are segregated into a distinct category, while ports on community and main tiers focus on devices with mainline or near-mainline kernel support, such as the PinePhone, Librem 5, OnePlus 6/6T, and Fairphone models.",
+    "user_interfaces_and_compositors": "postmarketOS supports multiple modular mobile user interfaces executing on top of the Wayland display protocol. Users can select Phosh (a GNOME-based touch shell developed by Purism), Plasma Mobile (KDE's mobile environment utilizing Qt and KWin), Sxmo (Simple X Mobile, an ultra-lightweight tiling window manager navigable via hardware buttons), or GNOME Shell on mobile. Applications run as standard Linux native binaries or Flatpaks, with optional Android app compatibility available via Waydroid containerization.",
+    "hardware_support_tiers_and_limitations": "postmarketOS organizes its extensive catalog of over seven hundred ported devices into clear support tiers: Community (devices with active maintenance and core features operational), Testing (ports under active development with partial hardware support), and Downstream. While postmarketOS provides unprecedented longevity, real-world limitations exist: camera support requires complex libcamera integration and is limited on many devices; cellular call audio routing through PipeWire and ALSA varies by modem architecture; and battery standby consumption is generally higher than on commercial Android systems.",
+    "advantages": [
+      "True mobile GNU/Linux distribution completely independent from the Android/AOSP stack and Google services",
+      "Built on lightweight Alpine Linux with musl libc, minimal resource consumption, and rapid apk packaging",
+      "Prioritizes upstream mainline Linux kernel support, enabling prolonged security maintenance up to 10 years",
+      "pmbootstrap tooling standardizes cross-compilation, chroot isolation, and image deployment across devices",
+      "Broad choice of mobile graphical interfaces including Phosh, Plasma Mobile, Sxmo, and GNOME Shell"
+    ],
+    "disadvantages": [
+      "Camera functionality is complex and often non-functional or basic on many third-party smartphone models",
+      "Power management and standby battery consumption are less optimized than in vendor Android distributions",
+      "Does not run Android applications natively, requiring containerized execution environments like Waydroid"
+    ],
+    "who_is_it_for": [
+      "Linux enthusiasts, developers, and hackers desiring a full GNU/Linux command-line and desktop stack on mobile hardware",
+      "Users seeking to extend the operational life of older smartphones beyond OEM software obsolescence",
+      "Privacy-oriented users who want complete visibility and control over all software layers without Android frameworks"
+    ],
+    "who_is_it_not_for": [
+      "Everyday consumers expecting turnkey, commercial smartphone stability with polished camera and battery performance",
+      "Users who depend on proprietary Android apps, Google Play services, or hardware-backed mobile banking applications"
+    ],
+    "verdict": "postmarketOS represents one of the most ambitious engineering efforts in mobile open-source computing. By transplanting the lightweight Alpine Linux architecture onto mobile hardware and pursuing mainline Linux kernel support, it offers a genuine alternative to the Android monoculture and demonstrates that smartphones can function as standard, long-lived Linux computers."
+  },
+  "relations": [
+    {
+      "id": "alpine-linux",
+      "name": "Alpine Linux",
+      "relation": "upstream",
+      "note": "Upstream lightweight Linux distribution providing the musl libc, BusyBox, OpenRC, and apk package management stack upon which postmarketOS is constructed."
+    },
+    {
+      "id": "pureos",
+      "name": "PureOS",
+      "relation": "alternative",
+      "note": "Alternative mobile and desktop GNU/Linux operating system developed by Purism, originating the Phosh mobile shell used widely in postmarketOS."
+    },
+    {
+      "id": "android-aosp",
+      "name": "Android / AOSP",
+      "relation": "alternative",
+      "note": "Contrasting mainstream mobile operating system architecture, illustrating the fundamental technical difference between Android/Bionic and true GNU/Linux on mobile devices."
+    },
+    {
+      "id": "lineageos",
+      "name": "LineageOS",
+      "relation": "alternative",
+      "note": "Alternative community mobile distribution operating on the Android/AOSP framework rather than the native desktop GNU/Linux stack."
+    }
+  ],
+  "links": {
+    "home": "https://postmarketos.org/",
+    "documentation": "https://wiki.postmarketos.org/",
+    "devices": "https://wiki.postmarketos.org/wiki/Devices",
+    "source": "https://gitlab.postmarketos.org/postmarketOS"
+  },
+  "sources": [
+    {
+      "title": "postmarketOS Official Portal & Initial Announcement",
+      "url": "https://postmarketos.org/blog/2017/05/26/intro/",
+      "type": "official",
+      "date": "2017-05-26"
+    },
+    {
+      "title": "postmarketOS Wiki Architecture & Device Package Specification",
+      "url": "https://wiki.postmarketos.org/wiki/Architecture",
+      "type": "official_documentation",
+      "date": "2026-06-01"
+    },
+    {
+      "title": "postmarketOS Supported Devices Matrix & Hardware Tiers",
+      "url": "https://wiki.postmarketos.org/wiki/Devices",
+      "type": "official_documentation",
+      "date": "2026-06-01"
+    }
+  ]
+}

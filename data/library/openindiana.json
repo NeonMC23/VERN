@@ -1,0 +1,106 @@
+{
+  "id": "openindiana",
+  "name": "OpenIndiana",
+  "type": "operating_system",
+  "summary": "A community-driven, general-purpose Unix operating system distribution continuing the OpenSolaris legacy, built upon the illumos core consolidation and featuring the MATE desktop, IPS network packaging, and ZFS boot environments.",
+  "tags": [
+    "unix",
+    "illumos",
+    "opensolaris",
+    "mate",
+    "zfs",
+    "ips",
+    "workstation",
+    "server"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64 / x86_64",
+    "sparc (community)"
+  ],
+  "license": "Common Development and Distribution License (CDDL 1.0)",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "OpenIndiana is a free, open-source Unix operating system founded in September 2010 by the illumos community. Established as the direct open-source successor to the historic OpenSolaris operating system (project Indiana) following Sun Microsystems' acquisition by Oracle Corporation, OpenIndiana delivers a complete, installable system integrating the illumos kernel with a traditional desktop environment and modern software suites.",
+    "what_is_it": "OpenIndiana is a full, turnkey operating system distribution that packages the foundational illumos-gate core (SunOS 5.11 kernel, OpenZFS, DTrace, Zones, SMF) into installable ISO media. It provides a familiar MATE desktop environment, text-mode server installers, and a complete open-source application stack managed via the network-centric Image Packaging System (IPS).",
+    "origin_and_opensolaris_continuity": "When Oracle discontinued OpenSolaris in 2010, the community organized under the illumos project umbrella to maintain open-source Solaris computing. OpenIndiana was launched as the flagship distribution intended to preserve the OpenSolaris user experience, maintaining continuity for system administrators, developers, and researchers familiar with Sun Microsystems' enterprise workflows and administrative tools.",
+    "desktop_environment_and_tooling": "The desktop edition of OpenIndiana provides the lightweight MATE 1.28 desktop environment, which carries forward the intuitive user experience of GNOME 2 originally popularized by OpenSolaris. The distribution ships graphical configuration utilities, the Marco window manager, development tools (GCC 13/14, Clang, Python, Perl), and standard open-source desktop applications including Firefox and LibreOffice.",
+    "package_management_and_boot_environments": "OpenIndiana utilizes the Image Packaging System (IPS), operated through the pkg command-line utility and connected to network repositories. IPS is deeply integrated with the OpenZFS file system: when updating system components or packages, the beadm utility automatically clones and stages a new boot environment. If a package upgrade causes issues, the administrator can seamlessly select and reboot into the prior boot environment from the boot menu without risk of data loss.",
+    "release_model_and_platforms": "OpenIndiana is developed under a continuous rolling-release model called OpenIndiana Hipster. Users receive daily rolling package updates, with periodic official ISO snapshot releases published semiannually (including snapshots 2024.04, 2025.10, and 2026.04). The primary supported platform is 64-bit x86_64, with active community efforts continuing maintenance for SPARC hardware.",
+    "advantages": [
+      "Direct open-source successor to OpenSolaris, preserving familiar administrative tools and SunOS workflows",
+      "Native OpenZFS file system coupled with automated IPS boot environments (beadm) for risk-free upgrades",
+      "Full access to enterprise illumos technologies including DTrace, Solaris Zones, Crossbow, and SMF",
+      "Traditional, lightweight MATE desktop environment suitable for workstations and developer machines",
+      "Active rolling-release delivery model with periodic verified installation snapshots"
+    ],
+    "disadvantages": [
+      "Third-party desktop software catalog and hardware drivers (modern Wi-Fi, graphics GPUs) lag far behind Linux",
+      "Niche user base with fewer pre-built desktop applications and consumer multimedia tools",
+      "Requires familiarity with Solaris-specific paradigms such as IPS packaging, SMF manifests, and Zones"
+    ],
+    "who_is_it_for": [
+      "Unix administrators, systems programmers, and developers maintaining Solaris and SunOS environments",
+      "Storage administrators leveraging native OpenZFS, NFS services, and Crossbow network virtualization",
+      "Researchers and open-source enthusiasts studying illumos kernel architecture and DTrace observability"
+    ],
+    "who_is_it_not_for": [
+      "Mainstream desktop users requiring automated proprietary gaming clients, Steam Proton, and Bluetooth tooling",
+      "Users looking for extensive Linux binary package repositories (such as Debian apt or Fedora rpm)"
+    ],
+    "verdict": "OpenIndiana is the premier desktop and workstation distribution of the illumos ecosystem. By pairing the robust SunOS kernel and OpenZFS foundation with the Image Packaging System and a reliable MATE desktop, it keeps the spirit, power, and architectural elegance of OpenSolaris thriving in modern computing."
+  },
+  "relations": [
+    {
+      "id": "illumos",
+      "name": "illumos",
+      "relation": "upstream_base",
+      "note": "Upstream core operating system consolidation and kernel upon which OpenIndiana is built."
+    },
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "relation": "technical_peer_alternative",
+      "note": "Fellow open-source Unix-like operating system sharing OpenZFS and enterprise reliability, comparing SunOS/illumos with BSD."
+    },
+    {
+      "id": "ghostbsd",
+      "name": "GhostBSD",
+      "relation": "alternative",
+      "note": "Fellow user-friendly Unix-like desktop system featuring the MATE desktop and native ZFS boot environments."
+    }
+  ],
+  "links": {
+    "home": "https://www.openindiana.org/",
+    "documentation": "https://docs.openindiana.org/",
+    "downloads": "https://www.openindiana.org/downloads/",
+    "announcements": "https://www.openindiana.org/announcements/openindiana-hipster-2026-04-announcement/",
+    "github": "https://github.com/openindiana"
+  },
+  "sources": [
+    {
+      "title": "OpenIndiana Project Official Portal & Mission",
+      "url": "https://www.openindiana.org/",
+      "type": "official",
+      "date": "2024-04-28"
+    },
+    {
+      "title": "OpenIndiana Hipster 2026.04 Snapshot Announcement",
+      "url": "https://www.openindiana.org/announcements/openindiana-hipster-2026-04-announcement/",
+      "type": "release_notes",
+      "date": "2026-05-05"
+    },
+    {
+      "title": "OpenIndiana System Documentation & Package Management",
+      "url": "https://docs.openindiana.org/",
+      "type": "official_documentation",
+      "date": "2024-04-28"
+    },
+    {
+      "title": "OpenIndiana Downloads & Architecture Images",
+      "url": "https://www.openindiana.org/downloads/",
+      "type": "official",
+      "date": "2026-05-05"
+    }
+  ]
+}

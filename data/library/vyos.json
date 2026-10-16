@@ -1,0 +1,118 @@
+{
+  "id": "vyos",
+  "name": "VyOS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation réseau (NOS) open source basé sur Debian GNU/Linux, combinant le routage dynamique FRRouting (BGP, OSPF), le pare-feu NFTables et de multiples protocoles VPN sous une interface CLI hiérarchique transactionnelle.",
+  "tags": [
+    "network",
+    "router",
+    "firewall",
+    "vpn",
+    "debian",
+    "frr",
+    "bgp",
+    "wireguard",
+    "server",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "ARM64"
+  ],
+  "license": "Open Source (GNU GPLv2 / GPLv3)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "VyOS est un système d'exploitation réseau open source (NOS - Network Operating System) conçu pour transformer du matériel informatique standard x86-64 ou ARM, ainsi que des machines virtuelles et des instances dans le nuage, en routeurs, pare-feux et passerelles VPN de niveau professionnel. Né fin 2013 d'une scission communautaire suite à l'abandon de Vyatta Core après son rachat commercial, VyOS s'est imposé comme une référence logicielle pour l'interconnexion de réseaux d'entreprise, les centres de données et les infrastructures de télécommunications.",
+    "what_is_it": "Techniquement, VyOS est bâti sur une base Debian GNU/Linux personnalisée dotée d'un noyau Linux durci et optimisé pour le traitement de flux réseau à haut débit. Plutôt que de contraindre l'administrateur à manipuler individuellement les fichiers de configuration sous `/etc/`, VyOS unifie l'ensemble des démons réseau sous un cadre de gestion déclaratif et transactionnel. Son cœur applicatif (`vyos-1x`), développé en Python 3 et C, assure la compilation dynamique des paramètres de configuration vers les composants du système hôte et orchestre la persistance de l'état réseau.",
+    "dynamic_routing_and_frrouting_stack": "Pour les fonctions de routage avancé, VyOS intègre la suite logicielle FRRouting (FRR), successeur direct de Quagga et GNU Zebra. La plateforme supporte de manière exhaustive l'ensemble des grands protocoles de routage dynamique de l'Internet, tant en IPv4 qu'en IPv6 : BGP (Border Gateway Protocol avec filtrage granulaire de préfixes par expressions régulières, manipulation des attributs de communauté et validation RPKI), OSPF (OSPFv2 et OSPFv3 multi-aires), IS-IS, RIP, RIPng et Babel. VyOS prend également en charge le routage basé sur des politiques (PBR - Policy-Based Routing), l'équilibrage de charge par chemins multiples (ECMP) et le protocole de haute disponibilité et de redondance de passerelle par défaut VRRP.",
+    "firewall_filtering_and_nat": "La sécurité périmétrique et le filtrage des paquets de VyOS reposent sur le sous-système Netfilter et le moteur moderne NFTables du noyau Linux. La plateforme offre un pare-feu avec inspection d'état (stateful inspection) capable d'analyser les flux par règles séquentielles ou au travers d'une architecture par zones étanches (Zone-Based Firewall). Les fonctionnalités de translation d'adresses réseau couvrent le NAT source (SNAT/Masquerade), le NAT de destination (DNAT/Port Forwarding), le NAT un-pour-un (1:1 NAT), ainsi que les mécanismes de transition IPv6 tels que NAT64 et NPTv6. VyOS intègre également la limitation de débit, le marquage de paquets QoS et la synchronisation des tables de connexion conntrack entre plusieurs nœuds en haute disponibilité.",
+    "vpn_protocols_and_secure_tunneling": "VyOS intègre un éventail exceptionnellement large de protocoles d'interconnexion sécurisée et de tunneling. Pour les réseaux privés virtuels point-à-point et nomades, il propose une prise en charge native de WireGuard directement intégrée au noyau Linux pour un chiffrement moderne à très haute performance, ainsi qu'une pile IPsec complète motorisée par StrongSwan (supportant IKEv1, IKEv2, les interfaces de tunnel virtuelles VTI, les routes BGP sur IPsec et l'authentification centralisée RADIUS/EAP). S'y ajoutent les protocoles OpenVPN (modes client et serveur), L2TP/IPsec, GRE, VXLAN pour les superpositions réseau de centre de données, et les tunnels d'encapsulation IPv6/IPv4 (SIT, IPIP, IP6IP6).",
+    "cli_experience_and_netdevops_automation": "L'ergonomie de gestion de VyOS se distingue par son interface de ligne de commande (CLI) hiérarchique modale inspirée de JunOS. Elle sépare rigoureusement le mode opérationnel de consultation et de diagnostic (`show`, `monitor`, `ping`) du mode de configuration (`configure`, `set`, `delete`). Les modifications apportées restent dans un espace tampon non validé jusqu'à l'exécution de la commande atomique `commit`, avec possibilité d'annulation instantanée (`rollback`) en cas d'erreur. Pour les environnements de déploiement automatisé (NetDevOps) et de virtualisation cloud (KVM, VMware, AWS, Azure, GCP), VyOS propose une API HTTP RESTful complète, des modules d'automatisation Ansible certifiés et des fournisseurs Terraform permettant d'intégrer le routage dans des chaînes d'infrastructure en tant que code (IaC).",
+    "advantages": [
+      "Solution entièrement logicielle s'affranchissant des matériels réseau propriétaires fermés et des coûts de licences restrictifs.",
+      "Pile de routage dynamique exhaustive propulsée par FRRouting (BGP avec RPKI, OSPFv2/v3, IS-IS, Babel, VRRP).",
+      "Interface de commande CLI hiérarchique transactionnelle de premier ordre avec validation atomique (`commit`) et annulation (`rollback`).",
+      "Prise en charge native étendue de multiples protocoles VPN industriels modernes (WireGuard, IPsec IKEv2, OpenVPN, VXLAN).",
+      "Excellente adaptabilité aux environnements virtualisés (KVM, Proxmox, VMware ESXi) et aux instances de cloud public.",
+      "Conception modulaire entièrement automatisable au moyen d'une API REST, d'Ansible et de Terraform pour le NetDevOps."
+    ],
+    "disadvantages": [
+      "Absence d'interface graphique web (GUI) intégrée par défaut, l'administration nécessitant la maîtrise de la ligne de commande ou des API.",
+      "Le modèle économique réserve les images de production précompilées stables à long terme (LTS) aux souscriptions payantes (bien que le code source reste librement compilable).",
+      "Courbe d'apprentissage soutenue pour les administrateurs non familiers avec la syntaxe de configuration réseau hiérarchique modale.",
+      "Exige des compétences solides en architecture réseau et en sous-systèmes Linux pour le diagnostic approfondi des flux de paquets.",
+      "Ne fournit pas de moteur d'inspection applicative approfondie (DPI) ou de système de prévention d'intrusion (IPS) clé-en-main dans le cœur système."
+    ],
+    "who_is_it_for": [
+      "Ingénieurs réseau, architectes d'infrastructure et administrateurs systèmes gérant des réseaux d'entreprise ou des centres de données.",
+      "Fournisseurs d'accès Internet, opérateurs de télécommunications et hébergeurs cloud déployant des routeurs de transit BGP virtuels.",
+      "Équipes NetDevOps recherchant un routeur logiciel programmable par API REST, Ansible et Terraform pour leurs pipelines d'automatisation.",
+      "Passionnés d'informatique avancée et gestionnaires de homelabs souhaitant un routeur de bordure robuste et scriptable pour leur réseau local."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs débutants ou néophytes recherchant une passerelle pare-feu simple entièrement configurable à la souris via une interface web (pfSense ou OPNsense étant plus accessibles).",
+      "Petites structures dépourvues de compétences en ingénierie réseau et nécessitant une assistance téléphonique immédiate sans contrat d'éditeur.",
+      "Postes de travail bureautiques individuels ou machines de calcul n'assurant aucun rôle de passerelle ou de routage réseau.",
+      "Environnements exigeant des fonctionnalités de filtrage de contenu web applicatif clé-en-main (antivirus de flux, filtrage parental)."
+    ],
+    "verdict": "VyOS représente l'archétype du routeur logiciel d'entreprise open source moderne. En unifiant sur une base Debian durcie les technologies réseau les plus avancées (FRRouting, NFTables, WireGuard) sous une interface de commande transactionnelle remarquable et une API moderne, il procure une flexibilité, une puissance et une fiabilité comparables à celles des équipements constructeurs propriétaires de haut niveau."
+  },
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "upstream_base",
+      "description": "Distribution Linux fournissant les paquets de base et l'environnement d'exécution du système réseau."
+    },
+    {
+      "id": "pfsense",
+      "name": "pfSense",
+      "type": "alternative",
+      "description": "Système de pare-feu et routeur open source basé sur FreeBSD offrant une interface graphique web pour réseaux d'entreprise."
+    },
+    {
+      "id": "opnsense",
+      "name": "OPNsense",
+      "type": "alternative",
+      "description": "Solution de pare-feu et de routage basée sur HardenedBSD/FreeBSD dotée d'une interface web moderne."
+    },
+    {
+      "id": "openwrt",
+      "name": "OpenWrt",
+      "type": "alternative",
+      "description": "Système d'exploitation réseau embarqué léger orienté principalement vers les routeurs grand public et les réseaux sans fil."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel de VyOS",
+      "url": "https://vyos.io/"
+    },
+    {
+      "label": "Portail de documentation officiel de VyOS",
+      "url": "https://docs.vyos.io/en/latest/"
+    },
+    {
+      "label": "Dépôt de code source officiel VyOS (GitHub)",
+      "url": "https://github.com/vyos/vyos-1x"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Documentation d'architecture et de configuration technique VyOS",
+      "url": "https://docs.vyos.io/en/latest/",
+      "type": "documentation"
+    },
+    {
+      "title": "Notes de publication de la version stable VyOS 1.4.0 (Sagitta) LTS",
+      "url": "https://blog.vyos.io/vyos-1.4.0-lts-release",
+      "type": "official_site"
+    },
+    {
+      "title": "Portail officiel et modèle de distribution VyOS",
+      "url": "https://vyos.io/",
+      "type": "official_site"
+    }
+  ]
+}

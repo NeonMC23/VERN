@@ -1,0 +1,92 @@
+{
+  "id": "ubuntu-touch",
+  "name": "Ubuntu Touch",
+  "type": "operating_system",
+  "summary": "Système d'exploitation mobile libre axé sur la vie privée et la convergence, doté de l'environnement tactile Lomiri et maintenu par la Fondation UBports.",
+  "tags": [
+    "mobile",
+    "lomiri",
+    "convergence",
+    "ubports",
+    "privacy",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "ARM64 (aarch64)",
+    "armhf",
+    "x86_64"
+  ],
+  "license": "Open source (GPL, LGPL et licences libres Canonical/UBports)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "Ubuntu Touch est un système d'exploitation mobile libre orienté vers le respect de la vie privée et la convergence matérielle, initié en 2013 par Canonical et maintenu depuis 2017 par la communauté internationale au sein de la Fondation UBports.",
+    "what_is_it": "Ubuntu Touch propose une expérience mobile alternative aux systèmes dominants Android et iOS. Il se distingue par son interface tactile gestuelle Lomiri et son aptitude à transformer un ordiphone en poste de travail bureautique complet lorsqu'il est relié à un moniteur externe et des périphériques de saisie.",
+    "canonical_heritage_and_ubports_foundation": "Après la décision de Canonical d'abandonner le développement mobile et l'interface Unity8 en avril 2017, le projet a été repris par Marius Gripsgård et la communauté des développeurs indépendants pour former la Fondation UBports (organisation à but non lucratif enregistrée en Allemagne). UBports gère l'infrastructure de construction, les serveurs de mise à jour over-the-air (OTA), les dépôts de paquets et l'outil d'installation automatisé UBports Installer.",
+    "lomiri_interface_and_convergence_design": "L'interface utilisateur d'Ubuntu Touch est Lomiri (anciennement Unity8), reposant sur le compositeur Wayland/Mir et les bibliothèques Qt 5 / QML. L'ergonomie repose exclusivement sur des gestes tactiles depuis les bordures de l'écran (« edge gestures ») : barre de lancement rapide à gauche, basculeur multitâche à droite, volet des indicateurs et notifications en haut, et actions contextuelles en bas. Grâce à la convergence logicielle, le système adapte instantanément l'agencement des fenêtres et des applications à une disposition de bureau traditionnel lorsque l'appareil détecte un écran externe.",
+    "system_architecture_and_noble_transition": "Historiquement basé sur Ubuntu 16.04 (Xenial) puis Ubuntu 20.04 LTS (Focal), Ubuntu Touch a opéré sa transition vers le socle Ubuntu 24.04 LTS (Noble Numbat) avec la série de versions stables 24.04-1.x. La partition racine (« / ») est montée en lecture seule (« read-only ») par défaut afin d'éviter la corruption logicielle et garantir la fiabilité des mises à jour système par images A/B. Les applications tierces sont distribuées au format confiné Click via le magasin officiel OpenStore sous le contrôle d'AppArmor. La compatibilité avec les applications de l'écosystème Android est prise en charge via l'intégration du conteneur Waydroid.",
+    "hardware_abstraction_layer_and_limitations": "Pour prendre en charge plus de 110 modèles de smartphones, Ubuntu Touch utilise Halium, une couche d'abstraction matérielle s'appuyant sur Libhybris pour faire communiquer l'espace utilisateur GNU/Linux avec les pilotes binaires et micrologiciels Android propriétaires des constructeurs. Les limitations techniques dépendent du niveau de portage de chaque terminal : les protocoles VoLTE (voix sur LTE) et les appels d'urgence peuvent présenter un support incomplet sur certains modèles anciens, l'exploitation des modules photographiques complexes reste parfois bridée, et la fonction de convergence requiert une sortie vidéo physique (DisplayPort Alt Mode sur USB-C) ou une diffusion sans fil compatible.",
+    "advantages": "Ubuntu Touch dispose d'une ergonomie gestuelle fluide et intuitive, d'un mode de convergence bureautique natif, d'une partition système immuable sécurisée contre les altérations involontaires, d'un outil d'installation graphique simplifié (« UBports Installer »), et d'une gouvernance communautaire sans collecte de données publicitaires.",
+    "disadvantages": "Le système de fichiers verrouillé en lecture seule complique l'installation libre de paquets APT traditionnels, la prise en charge VoLTE varie selon les appareils et opérateurs de télécommunication, et l'écosystème d'applications natives sur l'OpenStore reste modeste face aux catalogues commerciaux.",
+    "who_is_it_for": "Ubuntu Touch convient aux utilisateurs soucieux de leur vie privée, aux passionnés de logiciels libres et aux propriétaires d'appareils compatibles (Fairphone, Volla, Google Pixel, OnePlus) recherchant un système mobile stable indépendant des services Google.",
+    "who_is_it_not_for": "Ubuntu Touch n'est pas recommandé aux personnes dont l'activité professionnelle repose impérativement sur des applications propriétaires fermées (banques en ligne avec attestation matérielle stricte, DRM multimédia haute définition) ou sur des appareils dépourvus de portage Halium complet.",
+    "verdict": "Pérennisé par la communauté UBports après son abandon par Canonical, Ubuntu Touch représente l'un des projets de système d'exploitation mobile libre les plus aboutis, démontrant la viabilité de la convergence informatique sur ordiphone."
+  },
+  "relations": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "type": "upstream_origin",
+      "description": "Distribution Linux de référence dont Ubuntu Touch tire son socle logiciel, ses paquets de base et son architecture système d'origine."
+    },
+    {
+      "id": "mobian",
+      "name": "Mobian",
+      "type": "peer_mobile_distribution",
+      "description": "Distribution Linux mobile basée sur Debian utilisant l'environnement graphique Phosh sur noyau mainline."
+    },
+    {
+      "id": "postmarketos",
+      "name": "postmarketOS",
+      "type": "peer_mobile_distribution",
+      "description": "Système mobile libre basé sur Alpine Linux partageant la volonté de pérenniser les smartphones sur le long terme."
+    },
+    {
+      "id": "sailfish-os",
+      "name": "Sailfish OS",
+      "type": "peer_alternative_mobile_os",
+      "description": "Système d'exploitation mobile développé par Jolla proposant une interface gestuelle Qt/QML et une compatibilité Android."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel UBports",
+      "url": "https://ubports.com/"
+    },
+    {
+      "label": "Matériel supporté",
+      "url": "https://devices.ubuntu-touch.io/"
+    },
+    {
+      "label": "Dépôt GitLab UBports",
+      "url": "https://gitlab.com/ubports"
+    }
+  ],
+  "sources": [
+    {
+      "title": "UBports Foundation — Annonce de sortie Ubuntu Touch 24.04-1.0",
+      "url": "https://ubports.com/blog/ubports-news-1/ubuntu-touch-24-04-1-0-release-3973",
+      "type": "official_announcement"
+    },
+    {
+      "title": "UBports Devices — Base de données de compatibilité matérielle",
+      "url": "https://devices.ubuntu-touch.io/",
+      "type": "official_documentation"
+    },
+    {
+      "title": "UBports Blog — Notes de version Ubuntu Touch 24.04 1.1 et 20.04 OTA-11",
+      "url": "https://ubports.com/blog/ubports-news-1/ubuntu-touch-24-04-1-1-and-20-04-ota-11-release-3984",
+      "type": "official_announcement"
+    }
+  ]
+}

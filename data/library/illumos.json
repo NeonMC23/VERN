@@ -1,0 +1,99 @@
+{
+  "id": "illumos",
+  "name": "illumos",
+  "type": "operating_system",
+  "summary": "An open-source Unix operating system core and software consolidation derived from OpenSolaris, maintaining the foundational SunOS 5.11 kernel, OpenZFS, DTrace, Solaris Zones, Crossbow network virtualization, and the illumos-gate repository.",
+  "tags": [
+    "unix",
+    "solaris",
+    "opensolaris",
+    "kernel",
+    "zfs",
+    "dtrace",
+    "zones",
+    "crossbow"
+  ],
+  "status": "active",
+  "platforms": [
+    "amd64 / x86_64",
+    "sparc (community)"
+  ],
+  "license": "Common Development and Distribution License (CDDL 1.0)",
+  "last_verified": "2026-10-15",
+  "content": {
+    "introduction": "illumos is an open-source Unix operating system project founded in August 2010 by Garrett D'Amore and key Sun Microsystems engineers. Created as a community fork of OpenSolaris (specifically the OS/Net or ON consolidation) following the acquisition of Sun by Oracle Corporation, illumos preserves and advances the open-source legacy of Solaris technologies in a truly independent, community-governed project.",
+    "what_is_it": "illumos is not a turnkey end-user operating system distribution; rather, it is a software consolidation (illumos-gate) that forms the core foundation of an operating system. Analogous to kernel.org for Linux or the base source tree for BSD, illumos provides the SunOS 5.11 kernel, device drivers, core system libraries, and fundamental administrative utilities, from which independent distributions such as OpenIndiana, OmniOS, SmartOS, and Tribblix are built.",
+    "origin_and_opensolaris_fork": "When Oracle closed Solaris source repositories in 2010, the open-source OpenSolaris project was effectively discontinued. In response, Garrett D'Amore launched illumos to replace the remaining closed-source binary components of OpenSolaris (such as libc_i18n and certain cryptographic modules) with clean, open implementations. The project is governed as a meritocratic community supported by the illumos Foundation, Oxide Computer Company, MNX Solutions, and independent contributors.",
+    "foundational_technologies": "illumos is the ancestral home and ongoing custodian of landmark enterprise operating system technologies: OpenZFS for transactional copy-on-write storage and self-healing data integrity; DTrace for real-time kernel and userland dynamic tracing; Solaris Zones for lightweight container virtualization (including native zones and Linux LX brand emulation); Crossbow for advanced network virtualization (VNICs and virtual switches); SMF (Service Management Facility); and FMA (Fault Management Architecture).",
+    "virtualization_and_modern_hypervisors": "Beyond operating system-level Zones virtualization, illumos incorporates hardware virtualization through ported hypervisors, notably KVM (Kernel-based Virtual Machine, adapted by Joyent) and bhyve (ported from FreeBSD). This allows illumos-based systems to execute guest operating systems including Linux, FreeBSD, and Windows alongside native multi-tenant Zones on high-density servers.",
+    "maintenance_and_architecture": "illumos is developed continuously in the illumos-gate git repository with daily commits integrating hardware drivers, security fixes, and performance enhancements. It primarily targets the 64-bit x86_64 (amd64) architecture, with a specialized community branch maintaining SPARC processor support. The project guarantees strict binary ABI backward compatibility for Solaris 10 and 11 applications.",
+    "advantages": [
+      "Industry-defining observability and system tracing with native DTrace and MDB",
+      "Native OpenZFS file system providing complete data integrity, snapshots, and volume pooling",
+      "Robust containerization via Solaris Zones and network virtualization via Crossbow VNICs",
+      "Hardware-accelerated virtual machine hosting with integrated KVM and bhyve hypervisors",
+      "Strict SunOS 5.11 binary ABI compatibility and legendary enterprise operating system stability"
+    ],
+    "disadvantages": [
+      "Does not produce an installable standalone end-user ISO image (requires an illumos distribution)",
+      "Hardware driver support for consumer laptops, modern Wi-Fi, and desktop GPUs is very limited",
+      "Smaller developer and packaging ecosystem compared to the global Linux and BSD communities"
+    ],
+    "who_is_it_for": [
+      "Operating system engineers, kernel developers, and distribution maintainers building specialized Unix platforms",
+      "Enterprise infrastructure architects operating high-scale cloud hypervisors and storage appliances",
+      "Researchers and performance engineers requiring unmatched system introspection via DTrace"
+    ],
+    "who_is_it_not_for": [
+      "Casual PC desktop users looking for a plug-and-play desktop operating system with graphical installers",
+      "Organizations reliant on proprietary commercial vendor drivers and certified desktop peripheral suites"
+    ],
+    "verdict": "illumos is a monumental achievement in open-source systems engineering. By safeguarding the extraordinary architectural achievements of OpenSolaris—ZFS, DTrace, Zones, and Crossbow—and maintaining an impeccably stable core, it remains the vital foundation for high-reliability Unix distributions and modern cloud storage infrastructure."
+  },
+  "relations": [
+    {
+      "id": "openindiana",
+      "name": "OpenIndiana",
+      "relation": "downstream_derivative",
+      "note": "Primary community workstation and general-purpose operating system distribution built directly upon illumos-gate."
+    },
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "relation": "architectural_peer",
+      "note": "Fellow non-Linux open-source enterprise operating system sharing OpenZFS lineage, DTrace capabilities, and container technologies."
+    }
+  ],
+  "links": {
+    "home": "https://illumos.org/",
+    "documentation": "https://illumos.org/docs/about/",
+    "features": "https://illumos.org/docs/about/features/",
+    "github": "https://github.com/illumos/illumos-gate"
+  },
+  "sources": [
+    {
+      "title": "illumos Project Official Portal & Documentation",
+      "url": "https://illumos.org/",
+      "type": "official",
+      "date": "2024-01-15"
+    },
+    {
+      "title": "What is illumos? (Consolidation & Architecture Overview)",
+      "url": "https://www.illumos.org/docs/about/",
+      "type": "official_documentation",
+      "date": "2024-01-15"
+    },
+    {
+      "title": "illumos Core Technology Features (ZFS, DTrace, Zones, Crossbow)",
+      "url": "https://www.illumos.org/docs/about/features/",
+      "type": "technical_specification",
+      "date": "2024-01-15"
+    },
+    {
+      "title": "illumos-gate Official Source Code Repository",
+      "url": "https://github.com/illumos/illumos-gate",
+      "type": "official",
+      "date": "2026-05-01"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "id": "mobian",
+  "name": "Mobian",
+  "type": "operating_system",
+  "summary": "Surcouche mobile pour Debian GNU/Linux apportant un environnement tactile Wayland et des outils de téléphonie sur ordiphones et tablettes.",
+  "tags": [
+    "mobile",
+    "debian",
+    "arm64",
+    "phosh",
+    "wayland",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "ARM64 (aarch64)",
+    "armhf",
+    "x86_64"
+  ],
+  "license": "Open source (GPL, LGPL et licences libres Debian)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "Mobian est un projet communautaire créé en 2020 par Arnaud Ferraris dont l'objectif est d'adapter la distribution universelle Debian GNU/Linux à l'usage sur appareils mobiles, notamment les ordiphones et tablettes tactiles.",
+    "what_is_it": "Plutôt qu'une distribution dérivée autonome et indépendante, Mobian fonctionne comme une surcouche (« overlay ») au-dessus de Debian. Le projet maintient un nombre restreint de paquets spécifiques tout en réinjectant systématiquement le code amont (« upstreaming ») au sein des dépôts officiels Debian via l'équipe DebianOnMobile.",
+    "debian_foundation_and_mobile_overlay": "Mobian s'appuie directement sur les dépôts stables et de test de Debian (Debian 12 Bookworm, Debian 13 Trixie). Le système utilise la bibliothèque standard glibc, le gestionnaire de services et d'initialisation systemd, ainsi que le gestionnaire de paquets binaire APT (dpkg). Les utilisateurs disposent ainsi d'un accès natif à l'ensemble du catalogue Debian fort de plus de 69 000 paquets logiciels. Le système de fichiers racine demeure modifiable en lecture-écriture par défaut, autorisant l'administration système standard d'une machine Debian.",
+    "touch_environment_and_phosh_ecosystem": "L'environnement graphique par défaut de Mobian est Phosh (Phone Shell), une interface tactile conçue à l'origine par Purism pour le Librem 5 et basée sur les composants GNOME / GTK. Phosh fonctionne sur le compositeur Wayland Phoc. La saisie textuelle est assurée par le clavier tactile Stevia (auparavant nommé phosh-osk-stub). Les environnements légers alternatifs Sxmo (Simple X Mobile, orienté tuiles et raccourcis gestuels) et Plasma Mobile (KDE) sont également disponibles et installables via les dépôts officiels. Pour l'exécution d'applications Android isolées, Mobian intègre le conteneur Waydroid.",
+    "hardware_support_and_mainline_kernel": "Mobian adopte une politique stricte imposant l'usage du noyau Linux amont (« mainline kernel ») et exclut l'emploi des noyaux Android obsolètes fournis par les équipementiers. Les appareils ciblés en priorité sont les téléphones conçus nativement pour Linux, tels que les PINE64 PinePhone et PinePhone Pro, le Purism Librem 5, ainsi que les tablettes PineTab et PineTab 2. Le projet produit également des images x86_64 pour tablettes compatibles UEFI (notamment Microsoft Surface) et supporte des ports communautaires sur des terminaux Android dont les pilotes ont été portés sur le noyau amont (Google Pixel 3a, OnePlus 6/6T, Pocophone F1).",
+    "technical_constraints_and_hardware_limits": "L'exigence du noyau Linux mainline implique des contraintes matérielles documentées : les fonctionnalités de capture photo et vidéo dépendent de la pile libcamera et de l'utilitaire Megapixels, offrant des résultats souvent inférieurs aux algorithmes de traitement propriétaires Android. La gestion de l'énergie en veille profonde et la réactivité du réveil lors de la réception d'appels cellulaires constituent des défis permanents. De plus, le fonctionnement des composants radio (Wi-Fi, Bluetooth, modem modem baseband) requiert le chargement de micrologiciels (« firmware blobs ») propriétaires intégrés aux images d'installation.",
+    "advantages": "Mobian offre l'écosystème Debian complet sur terminal mobile, une intégration continue dans les dépôts amont évitant la fragmentation, un système en lecture-écriture standard administrable par APT, et une indépendance totale vis-à-vis des services commerciaux de Google et Apple.",
+    "disadvantages": "L'autonomie de la batterie en veille et la gestion thermique sont moins optimisées que sous les systèmes Android commerciaux, les pilotes de capteurs photographiques demeurent limités, et le catalogue d'applications purement tactiles natives est réduit par rapport aux plateformes mobiles dominantes.",
+    "who_is_it_for": "Mobian s'adresse aux administrateurs système, développeurs et utilisateurs avancés de Linux souhaitant retrouver un environnement Debian standard et vérifiable sur leur smartphone ou tablette compatible.",
+    "who_is_it_not_for": "Mobian n'est pas adapté aux utilisateurs recherchant une expérience grand public clé en main, une autonomie de plusieurs jours sans configuration, ou un accès garanti aux applications bancaires et aux jeux mobiles exigeant les certifications DRM et SafetyNet de Google.",
+    "verdict": "Mobian constitue une passerelle rigoureuse entre l'écosystème Debian et l'informatique mobile, offrant une plateforme GNU/Linux authentique sur noyau mainline tout en acceptant les compromis inhérents au matériel mobile non conçu spécifiquement pour les pilotes libres."
+  },
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "upstream_base",
+      "description": "Distribution mère fournissant l'ensemble des dépôts de paquets binaires, la gouvernance amont et l'infrastructure de compilation pour Mobian."
+    },
+    {
+      "id": "postmarketos",
+      "name": "postmarketOS",
+      "type": "peer_mobile_distribution",
+      "description": "Distribution Linux mobile basée sur Alpine Linux partageant avec Mobian la cible du noyau mainline et les interfaces Wayland tactiles."
+    },
+    {
+      "id": "pureos",
+      "name": "PureOS",
+      "type": "peer_privacy_distribution",
+      "description": "Système d'exploitation basé sur Debian développé par Purism, à l'origine du développement initial du shell tactile Phosh."
+    },
+    {
+      "id": "ubuntu-touch",
+      "name": "Ubuntu Touch",
+      "type": "peer_mobile_distribution",
+      "description": "Distribution mobile libre alternative maintenue par UBports, exploitant l'environnement graphique convergent Lomiri."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel",
+      "url": "https://mobian-project.org/"
+    },
+    {
+      "label": "Wiki Debian Mobian",
+      "url": "https://wiki.debian.org/Teams/Mobian"
+    },
+    {
+      "label": "Forge Salsa Debian",
+      "url": "https://salsa.debian.org/Mobian-team"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Debian Wiki — Teams/Mobian Developer Guide",
+      "url": "https://wiki.debian.org/Teams/Mobian/DevelopersGuide",
+      "type": "official_documentation"
+    },
+    {
+      "title": "Debian Wiki — Mobian Supported Devices",
+      "url": "https://wiki.debian.org/Mobian/Devices",
+      "type": "official_documentation"
+    },
+    {
+      "title": "Mobian Project — Blog et annonces officielles",
+      "url": "https://blog.mobian.org/posts/2021/05/17/update-2021-05-17/",
+      "type": "official_announcement"
+    }
+  ]
+}
