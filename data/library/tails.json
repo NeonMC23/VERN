@@ -35,6 +35,7 @@
     "threat_model_and_security_limits": "Tails provides rigorous anonymity against passive network eavesdroppers, local network observers, and post-session physical forensic analysis of storage drives. However, the project documents explicit security limits:\n\n- Host Hardware and Firmware: Tails cannot protect users against pre-existing firmware rootkits, compromised UEFI BIOS, or hardware keyloggers installed on the physical machine.\n- Behavioral De-anonymization: Logging into personal social media, webmail, or banking accounts containing real identity credentials instantly de-anonymizes the user to those service providers.\n- Traffic Correlation Attacks: Sophisticated adversaries capable of simultaneously monitoring ingress traffic to Tor guard nodes and egress traffic from exit nodes can perform statistical traffic correlation analysis.\n- In-Session Exploitation: A high-severity zero-day browser or kernel exploit executed during an active session can inspect volatile memory before the system is powered down.",
     "installation_and_automatic_upgrades": "Tails is primarily distributed as a raw disk image (`.img`) designed for direct block-level writing to USB flash drives using tools such as GNOME Disks, Etcher, or `dd`. An ISO image is also maintained for DVD burning and virtual machine testing. Tails features an automated incremental upgrade system: when a new release is published, Tails downloads cryptographically signed update packages over Tor and applies changes directly to the USB drive, eliminating the need to reflash the device manually between minor versions. The bootloader leverages Microsoft-signed UEFI shim loaders, supporting out-of-the-box boot on modern PC systems with UEFI Secure Boot enabled.",
     "privacy_and_zero_telemetry": "Tails adheres to an uncompromising zero-telemetry doctrine. No analytics beacons, usage metrics, operating system serial numbers, or automated error reporting mechanisms exist within the distribution. Time synchronization is executed anonymously over Tor to prevent cleartext NTP queries that could reveal local network timing or public IP addresses. Bluetooth hardware is disabled by default to eliminate local wireless attack vectors.",
+    "release_cadence_and_upgrade_paths": "Tails publishes successive point releases rather than periodic major versions, each announced with the components it updates. Tails 7.15, published on 13 October 2026, moves Tor Browser to 15.0.25 and the Tor client to 0.4.9.14, and refreshes several firmware packages, which the announcement ties to support for newer graphics and Wi-Fi hardware. The upgrade path is automated: the Tails Upgrader can move an installation from Tails 7.0 or later directly to 7.15, downloading only the difference since the installed version. A manual upgrade remains available when automatic upgrade fails, and the documentation warns that installing a fresh image instead of upgrading erases the Persistent Storage. Systems booted from DVD cannot be upgraded in place and require burning a new disc.",
     "advantages": [
       "Strict amnesic computing model executing entirely in RAM, leaving zero digital footprints on host storage drives",
       "Automated cryptographic RAM memory wiping upon shutdown or sudden USB drive unplugging",
@@ -62,7 +63,8 @@
       "Users seeking a permanent daily desktop workstation with traditional unrestricted local disk storage",
       "Organizations expecting central Active Directory management, remote fleet telemetry, or MDM supervision",
       "Users on unsupported hardware architectures such as ARM64 laptops or single-board microcomputers"
-    ]
+    ],
+    "verdict": "Tails (The Amnesic Incognito Live System) is a portable live operating system engineered to preserve anonymity and bypass censorship by routing all network connections through the Tor network and erasing session data from RAM upon shutdown. It is designed for journalists and activists working in adversarial environments, and deliberately precludes local data retention or unrouted network communications."
   },
   "components": [
     {
@@ -204,6 +206,12 @@
       "url": "https://distrowatch.com/table.php?distribution=tails",
       "type": "metadata",
       "date": "2026-10-02"
+    },
+    {
+      "title": "Tails upgrade documentation: automatic and manual upgrade paths",
+      "url": "https://tails.net/doc/upgrade/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "id": "postmarketos",
-  "name": "postmarketOS",
+  "name": "Nura",
   "type": "operating_system",
-  "summary": "A real mobile GNU/Linux distribution based on Alpine Linux, aiming for a 10-year smartphone lifecycle using mainline Linux kernels, pmbootstrap development tooling, and touch-friendly Wayland graphical interfaces including Phosh, Plasma Mobile, and Sxmo.",
+  "summary": "A mobile GNU/Linux distribution based on Alpine Linux, aiming for a 10-year smartphone lifecycle using mainline Linux kernels, pmbootstrap development tooling, and touch-friendly Wayland graphical interfaces including Phosh, Plasma Mobile, and Sxmo.",
   "tags": [
     "mobile",
     "linux",
@@ -21,14 +21,15 @@
     "x86_64"
   ],
   "license": "GPLv3 & GPLv2 (core components and Linux kernel) / MIT (Alpine userspace utilities)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-17",
   "content": {
-    "introduction": "postmarketOS is a free and open-source mobile operating system that brings true GNU/Linux distributions to smartphones and handheld devices. Initiated in May 2017 by Oliver Smith, postmarketOS seeks to combat electronic waste and planned obsolescence by aiming for a ten-year operational lifespan for mobile hardware, completely independent of the Android/AOSP software stack.",
-    "what_is_it": "postmarketOS is a full Linux distribution built directly on the compact foundation of Alpine Linux. Rather than executing an Android userspace over vendor-modified Android kernels, postmarketOS runs standard desktop Linux utilities, the musl C library, OpenRC or systemd init systems, and native Wayland mobile user interfaces, connecting directly to standard Linux networking and audio subsystems.",
-    "alpine_linux_foundation_and_pmbootstrap": "At the architectural level, postmarketOS leverages Alpine Linux for its lightweight footprint, security posture, and rapid apk package manager. To overcome the fragmentation of mobile hardware, postmarketOS avoids creating separate, monolithic OS images for each phone. Instead, it maintains a single shared operating system core and encapsulates hardware-specific bootloader behavior, kernel modules, and device trees into a single device package (device-[vendor]-[codename]). Development and image generation are automated via pmbootstrap, a Python-based command-line tool that builds environments in isolated Alpine chroots.",
-    "kernel_strategy_and_mainline_approach": "postmarketOS prioritizes the use of the official upstream Linux kernel (mainline Linux) over downstream Android kernels provided by silicon vendors. Running mainline Linux enables long-term security maintenance, modern kernel features, and unified drivers across devices. Devices running legacy downstream Android kernels are segregated into a distinct category, while ports on community and main tiers focus on devices with mainline or near-mainline kernel support, such as the PinePhone, Librem 5, OnePlus 6/6T, and Fairphone models.",
-    "user_interfaces_and_compositors": "postmarketOS supports multiple modular mobile user interfaces executing on top of the Wayland display protocol. Users can select Phosh (a GNOME-based touch shell developed by Purism), Plasma Mobile (KDE's mobile environment utilizing Qt and KWin), Sxmo (Simple X Mobile, an ultra-lightweight tiling window manager navigable via hardware buttons), or GNOME Shell on mobile. Applications run as standard Linux native binaries or Flatpaks, with optional Android app compatibility available via Waydroid containerization.",
-    "hardware_support_tiers_and_limitations": "postmarketOS organizes its extensive catalog of over seven hundred ported devices into clear support tiers: Community (devices with active maintenance and core features operational), Testing (ports under active development with partial hardware support), and Downstream. While postmarketOS provides unprecedented longevity, real-world limitations exist: camera support requires complex libcamera integration and is limited on many devices; cellular call audio routing through PipeWire and ALSA varies by modem architecture; and battery standby consumption is generally higher than on commercial Android systems.",
+    "introduction": "Nura (formerly postmarketOS) is a free and open-source mobile operating system that brings GNU/Linux distributions to smartphones and handheld devices. Initiated in May 2017 by Oliver Smith, the project was renamed Nura on 27 September 2026; some tool names, including pmbootstrap, have not yet been updated. It aims for a ten-year operational lifespan for mobile hardware, independently of the Android/AOSP software stack.",
+    "what_is_it": "Nura is a full Linux distribution built directly on the compact foundation of Alpine Linux. Rather than executing an Android userspace over vendor-modified Android kernels, Nura runs standard desktop Linux utilities, the musl C library, OpenRC or systemd init systems, and native Wayland mobile user interfaces, connecting directly to standard Linux networking and audio subsystems.",
+    "alpine_linux_foundation_and_pmbootstrap": "At the architectural level, Nura leverages Alpine Linux for its lightweight footprint, security posture, and rapid apk package manager. To overcome the fragmentation of mobile hardware, Nura avoids creating separate, monolithic OS images for each phone. Instead, it maintains a single shared operating system core and encapsulates hardware-specific bootloader behavior, kernel modules, and device trees into a single device package (device-[vendor]-[codename]). Development and image generation are automated via pmbootstrap, a Python-based command-line tool that builds environments in isolated Alpine chroots.",
+    "kernel_strategy_and_mainline_approach": "Nura prioritizes the use of the official upstream Linux kernel (mainline Linux) over downstream Android kernels provided by silicon vendors. Running mainline Linux enables long-term security maintenance, modern kernel features, and unified drivers across devices. Devices running legacy downstream Android kernels are segregated into a distinct category, while ports on community and main tiers focus on devices with mainline or near-mainline kernel support, such as the PinePhone, Librem 5, OnePlus 6/6T, and Fairphone models.",
+    "user_interfaces_and_compositors": "Nura supports multiple modular mobile user interfaces executing on top of the Wayland display protocol. Users can select Phosh (a GNOME-based touch shell developed by Purism), Plasma Mobile (KDE's mobile environment utilizing Qt and KWin), Sxmo (Simple X Mobile, an ultra-lightweight tiling window manager navigable via hardware buttons), or GNOME Shell on mobile. Applications run as standard Linux native binaries or Flatpaks, with optional Android app compatibility available via Waydroid containerization.",
+    "hardware_support_tiers_and_limitations": "Nura organizes its catalog of over seven hundred ported devices into clear support tiers: Community (devices with active maintenance and core features operational), Testing (ports under active development with partial hardware support), and Downstream. While Nura provides longevity, real-world limitations exist: camera support requires complex libcamera integration and is limited on many devices; cellular call audio routing through PipeWire and ALSA varies by modem architecture; and battery standby consumption is generally higher than on commercial Android systems.",
+    "release_channels_and_installation": "Nura publishes two release channels: a stable channel based on the latest Alpine Linux release (v26.06 as of October 2026) and an edge channel that follows Alpine's edge repositories on a rolling basis and receives updates as soon as they reach the package repositories. Installation can use pre-built images for devices in the main and community categories, or pmbootstrap for all devices, which allows selection of the user interface and pre-installed packages during image generation. A web flasher (Chromium-based browsers, WebUSB) covers a few devices with pre-built images; a graphical OS Installer covers PCs, and recovery-mode ZIP packages or the UBports Installer are documented for selected devices.",
     "advantages": [
       "True mobile GNU/Linux distribution completely independent from the Android/AOSP stack and Google services",
       "Built on lightweight Alpine Linux with musl libc, minimal resource consumption, and rapid apk packaging",
@@ -50,7 +51,8 @@
       "Everyday consumers expecting turnkey, commercial smartphone stability with polished camera and battery performance",
       "Users who depend on proprietary Android apps, Google Play services, or hardware-backed mobile banking applications"
     ],
-    "verdict": "postmarketOS represents one of the most ambitious engineering efforts in mobile open-source computing. By transplanting the lightweight Alpine Linux architecture onto mobile hardware and pursuing mainline Linux kernel support, it offers a genuine alternative to the Android monoculture and demonstrates that smartphones can function as standard, long-lived Linux computers."
+    "verdict": "Nura is a mobile GNU/Linux distribution built on Alpine Linux. By running the Alpine userland on mobile hardware and targeting mainline Linux kernel support, it provides an alternative to Android-based mobile systems and allows smartphones to run a standard Linux software stack.",
+    "name_change_process_and_selection": "On 27 September 2026, during its own conference, the project announced that it had taken the name Nura. The decision closed a selection process opened in March 2025, after the team judged the former name too long, difficult to pronounce in many languages, awkwardly capitalised and, because it described a post-market role, impossible to protect by trademark. The project's change-request procedure recorded the plan as PMCR-0003; when the first round did not produce consensus, an amendment, PMCR-0006, set out the process that led to the announcement, and a trademark for the new name has since been filed. A selection team of four members collected more than three hundred proposals from the community, shortlisted four names and chose Nura by range voting. The name abbreviates nuraghe, the Sardinian stone towers that the proposer presented as a figure of stability across millennia. The nura.org domain being held by a third party, the project adopted nura.eco."
   },
   "relations": [
     {
@@ -79,7 +81,7 @@
     }
   ],
   "links": {
-    "home": "https://postmarketos.org/",
+    "home": "https://nura.eco/",
     "documentation": "https://wiki.postmarketos.org/",
     "devices": "https://wiki.postmarketos.org/wiki/Devices",
     "source": "https://gitlab.postmarketos.org/postmarketOS"
@@ -102,6 +104,25 @@
       "url": "https://wiki.postmarketos.org/wiki/Devices",
       "type": "official_documentation",
       "date": "2026-06-01"
+    },
+    {
+      "title": "Nura Official Portal — Alpine base, mainline kernels and touch interfaces",
+      "url": "https://nura.eco/",
+      "type": "official",
+      "date": "2026-10-16"
+    },
+    {
+      "title": "Nura — Project rebrand: Nura (official announcement)",
+      "url": "https://nura.eco/blog/2026/09/27/nura-rename/",
+      "type": "official",
+      "date": "2026-09-27"
+    },
+    {
+      "title": "Nura Wiki — Installation (release channels and installation methods)",
+      "url": "https://wiki.nura.eco/wiki/Installation",
+      "type": "official_documentation",
+      "note": "page consultée le 2026-10-17 ; dernière modification de la page : 2026-09-28",
+      "accessed": "2026-10-17"
     }
   ]
 }

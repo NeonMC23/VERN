@@ -51,7 +51,8 @@
       "Rocky Linux 10 removes support for older x86-64-v2 processors, requiring x86-64-v3 hardware."
     ],
     "who_is_it_for": "Rocky Linux is designed for enterprise systems engineers, cloud architects, researchers in high-performance computing, and IT organizations seeking a free, community-backed 1:1 binary replacement for CentOS Linux and RHEL.",
-    "who_is_it_not_for": "Rocky Linux is not intended for desktop users requiring fast-moving rolling software updates, cutting-edge consumer graphics drivers, or bleeding-edge desktop environments."
+    "who_is_it_not_for": "Rocky Linux is not intended for desktop users requiring fast-moving rolling software updates, cutting-edge consumer graphics drivers, or bleeding-edge desktop environments.",
+    "verdict": "Rocky Linux is an open-source, community-governed enterprise operating system engineered for 100% bug-for-bug compatibility with Red Hat Enterprise Linux. Supported by the Rocky Enterprise Software Foundation, it offers long-term reliability and predictable ABI stability for critical enterprise servers and HPC clusters seeking independence from proprietary subscription constraints."
   },
   "components": [
     {
@@ -110,6 +111,12 @@
     }
   ],
   "relations": [
+    {
+      "id": "rhel",
+      "name": "Red Hat Enterprise Linux",
+      "relation": "upstream_base",
+      "note": "Commercial enterprise Linux platform providing the upstream binary compatibility target and release specifications for Rocky Linux."
+    },
     {
       "id": "fedora",
       "name": "Fedora",

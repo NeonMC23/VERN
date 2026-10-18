@@ -1,0 +1,131 @@
+{
+  "id": "ios",
+  "name": "iOS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation mobile propriétaire développé par Apple Inc. pour l'iPhone, reposant sur le noyau hybride Darwin/XNU, le système de fichiers APFS et une architecture de sécurité matérielle intégrée.",
+  "tags": [
+    "mobile",
+    "smartphone",
+    "apple",
+    "darwin",
+    "xnu",
+    "apfs",
+    "arm64",
+    "proprietary"
+  ],
+  "status": "active",
+  "platforms": [
+    "ARM64"
+  ],
+  "license": "Propriétaire commercial (avec composants de bas niveau open source sous licences APSL et BSD)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "iOS est le système d'exploitation mobile propriétaire développé par Apple Inc. pour sa gamme de smartphones iPhone (et historiquement l'iPod touch). Dévoilé en 2007 sous le nom initial d'iPhone OS lors de la présentation du premier iPhone, il a été rebaptisé iOS en 2010. Il constitue le pilier technologique et économique de l'écosystème matériel et logiciel d'Apple, interconnecté de façon transparente avec les autres plateformes du constructeur (macOS, iPadOS, watchOS, tvOS) au travers des services iCloud, du trousseau synchronisé et des fonctionnalités de continuité.",
+    "what_is_it": "Techniquement, iOS est un système d'exploitation de type Unix dérivé de macOS et bâti sur le socle Darwin. Son noyau est le noyau hybride XNU (X is Not Unix), qui combine le micro-noyau Mach 3.0 (pour la gestion des threads, des tâches, de la mémoire virtuelle et des communications inter-processus via les ports Mach) avec une couche de sous-systèmes BSD (pour le modèle de processus POSIX, la gestion des signaux, des utilisateurs et la pile réseau TCP/IP) ainsi que les frameworks de gestionnaires de périphériques I/O Kit et DriverKit. L'espace utilisateur supérieur, comprenant le gestionnaire de surface tactile SpringBoard, est entièrement propriétaire.",
+    "frameworks_runtime_and_graphics": "L'environnement logiciel d'iOS repose sur une architecture en quatre couches : Core OS, Core Services, Media et Cocoa Touch. Le développement applicatif moderne s'effectue principalement en langage Swift (avec prise en charge de l'Objective-C Runtime historique). Les interfaces tactiles exploitent la bibliothèque historique UIKit et le framework déclaratif moderne SwiftUI. Le rendu graphique 2D/3D et le calcul parallèle sont pris en charge par l'API bas niveau Metal, conçue pour minimiser les surcoûts processeur. Les traitements d'intelligence artificielle sur l'appareil s'appuient sur CoreML, tirant parti des accélérateurs neuronaux matériels (Neural Engine) intégrés aux puces Apple Silicon.",
+    "hardware_security_architecture_and_sandboxing": "La sécurité d'iOS repose sur une intégration verticale étroite entre le silicium et le système d'exploitation. La séquence de démarrage suit une chaîne de confiance matérielle (Secure Boot Chain) ancrée dans une racine de confiance en mémoire morte (Boot ROM). Un coprocesseur cryptographique isolé, le Secure Enclave (SEP), traite l'authentification biométrique (Face ID, Touch ID) et pilote le moteur matériel AES du système de protection des données (Data Protection), chiffrant chaque fichier individuellement. Chaque application tierce s'exécute dans un bac à sable strict (App Sandbox) limitant ses accès à son propre répertoire conteneur, et toute exécution binaire exige une signature cryptographique valide vérifiée par le noyau au moment de l'exécution.",
+    "filesystem_storage_and_app_distribution": "Depuis iOS 10.3, le stockage repose sur le système de fichiers APFS (Apple File System), offrant le partage d'espace disque entre volumes, le clonage instantané de fichiers et la gestion des instantanés (snapshots). Le volume système est monté en lecture seule sous la forme d'un volume système scellé et signé cryptographiquement (SSV - Signed System Volume), assurant l'intégrité absolue des fichiers d'exploitation lors des mises à jour logicielles OTA. La distribution des applications s'effectue historiquement via l'App Store officiel avec revue préalable. Dans l'Union Européenne, en application du Règlement sur les marchés numériques (DMA), iOS intègre la prise en charge de boutiques d'applications tierces alternatives et de la distribution web certifiée sous contrôle de notarisation.",
+    "hardware_compatibility_and_ecosystem_scope": "iOS est compilé exclusivement pour l'architecture 64 bits ARM64 et fonctionne uniquement sur les puces conçues par Apple (à partir des appareils à puce A13, comme l'iPhone 11 et l'iPhone SE de 2e génération). Apple assure un cycle de support logiciel d'une longévité notable pour les appareils mobiles, proposant généralement cinq à sept années de mises à jour majeures du système pour chaque génération d'iPhone. Le système n'est pas installable sur du matériel tiers non-Apple et n'autorise pas l'accès direct aux privilèges d'administration root pour les utilisateurs en configuration standard.",
+    "versions_and_device_support": "La version présentée par Apple sur apple.com/ios est iOS 27. La liste de compatibilité publiée couvre les iPhone 11 et modèles ultérieurs (Pro, Pro Max, mini), les iPhone SE de 2e génération et ultérieurs, ainsi que les modèles annoncés depuis (iPhone 16e, 17e, Air, 18 Pro Max). Les iPhone XS, XS Max et XR, équipés de la puce A12, n'y figurent plus : la prise en charge démarre avec les appareils à puce A13.",
+    "apple_intelligence_requirements": "Apple précise que la génération actuelle d'Apple Intelligence fonctionne sous iOS 27 sur les iPhone 16 et modèles ultérieurs, l'iPhone 15 Pro, l'iPhone 15 Pro Max et l'iPhone Air. Elle exige que la langue de l'appareil et celle de Siri soient identiques et figurent parmi les langues prises en charge, dont le français. L'espace libre requis atteint jusqu'à 14 Go sur les iPhone 17 Pro, 17 Pro Max et Air, et jusqu'à 8 Go sur les autres modèles compatibles. Siri AI est distribué en version bêta. Ces conditions s'ajoutent à la compatibilité avec iOS 27.",
+    "differences_with_ipados": "iOS et iPadOS partagent le socle Darwin et le noyau XNU, mais Apple publie deux pages de nouveautés et deux listes d'appareils compatibles distinctes depuis la séparation formelle des deux systèmes en 2019. iPadOS documente le multitâche fenêtré, l'Apple Pencil et les périphériques de pointage ; la page iOS documente les fonctions propres à l'iPhone, dont les réglages d'Apple Intelligence et les accessoires. Un même numéro de version ne garantit donc pas un ensemble de fonctions identique sur les deux systèmes.",
+    "documentation_and_resources": "Apple publie sur apple.com/ios les nouveautés de la version courante et la liste des appareils compatibles, et consacre un article d'assistance aux prérequis d'Apple Intelligence. Les pages renvoient à un espace développeur distinct pour les frameworks et les outils. Les informations de version et de compatibilité évoluent à chaque cycle annuel ; aucun engagement public ne fixe la durée de prise en charge d'un modèle donné.",
+    "advantages": [
+      "Architecture de sécurité et de chiffrement matériel de pointe (Secure Enclave, APFS scellé, bac à sable strict).",
+      "Optimisation matérielle et logicielle exceptionnelle garantissant une grande réactivité et une efficacité énergétique élevée.",
+      "Écosystème applicatif riche avec frameworks modernes performants (SwiftUI, Metal, CoreML).",
+      "Longévité du support logiciel assurant des mises à jour de sécurité et de fonctionnalités régulières sur plusieurs années.",
+      "Intégration transparente et synchronisation continue avec l'ensemble des appareils de l'écosystème Apple.",
+      "Composants de bas niveau du socle Darwin/XNU publiés en open source sur le portail d'Apple."
+    ],
+    "disadvantages": [
+      "Système d'exploitation commercial propriétaire et fermé sur ses couches applicatives et graphiques.",
+      "Écosystème matériel strictement verrouillé : fonctionne exclusivement sur les smartphones iPhone d'Apple.",
+      "Modèle de distribution applicative contrôlé par Apple (malgré une ouverture réglementaire partielle dans l'UE).",
+      "Absence d'accès aux privilèges d'administration root et restriction stricte de la personnalisation système de bas niveau.",
+      "Impossibilité d'exécuter ou de virtualiser le système légalement sur des architectures matérielles non conçues par Apple."
+    ],
+    "who_is_it_for": [
+      "Utilisateurs de smartphones recherchant une expérience utilisateur fluide, sécurisée et intuitive au quotidien.",
+      "Personnes investies dans l'écosystème Apple exploitant la synchronisation multi-appareils (Mac, iPad, Apple Watch).",
+      "Professionnels et entreprises exigeant un chiffrement des données sur l'appareil et une gestion centralisée par MDM.",
+      "Développeurs mobiles ciblant un marché d'applications à haut niveau de monétisation via Swift et Xcode."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs exigeant un système d'exploitation entièrement libre et open source auditable de bout en bout.",
+      "Passionnés d'informatique souhaitant un accès complet aux privilèges root et la modification libre des composants du système.",
+      "Consommateurs recherchant des appareils d'entrée de gamme ou souhaitant choisir librement leur constructeur matériel.",
+      "Utilisateurs refusant les politiques de contrôle de la plateforme et de l'App Store d'Apple."
+    ],
+    "verdict": "iOS est le système d'exploitation mobile grand public d'Apple. Grâce à son intégration verticale entre le silicium Apple Silicon et le noyau Darwin/XNU, il combine sécurité matérielle et un écosystème applicatif géré par Apple, dans un environnement commercial fermé contrôlé par son constructeur."
+  },
+  "relations": [
+    {
+      "id": "ipados",
+      "name": "iPadOS",
+      "type": "derivative",
+      "note": "Système d'exploitation dédié aux tablettes iPad, historiquement issu d'iOS et partageant le même socle Darwin/XNU."
+    },
+    {
+      "id": "macos",
+      "name": "Apple macOS",
+      "type": "related",
+      "note": "Système d'exploitation pour ordinateurs Mac partageant le noyau Darwin/XNU, les frameworks Swift et l'écosystème de services Apple."
+    },
+    {
+      "id": "android-aosp",
+      "name": "Android / AOSP",
+      "type": "alternative",
+      "note": "Plateforme mobile open source concurrente majeure développée sous l'égide de Google."
+    },
+    {
+      "id": "plasma-mobile",
+      "name": "Plasma Mobile",
+      "type": "alternative",
+      "note": "Environnement mobile libre et ouvert pour smartphones GNU/Linux."
+    }
+  ],
+  "links": [
+    {
+      "label": "Portail officiel pour développeurs iOS",
+      "url": "https://developer.apple.com/ios/"
+    },
+    {
+      "label": "Guide officiel de sécurité des plateformes Apple",
+      "url": "https://support.apple.com/guide/security/welcome/web"
+    },
+    {
+      "label": "Portail des composants open source Apple (Darwin/XNU)",
+      "url": "https://opensource.apple.com/"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Documentation d'architecture et technologies iOS d'Apple",
+      "url": "https://developer.apple.com/ios/",
+      "type": "official_site"
+    },
+    {
+      "title": "Guide technique officiel de sécurité de la plateforme Apple (iOS)",
+      "url": "https://support.apple.com/guide/security/welcome/web",
+      "type": "documentation"
+    },
+    {
+      "title": "Dépôt des versions et composants open source Apple Darwin",
+      "url": "https://opensource.apple.com/",
+      "type": "official_site"
+    },
+    {
+      "title": "iOS 27 : nouveautés et appareils compatibles (Apple)",
+      "url": "https://www.apple.com/ios/",
+      "type": "vendor_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Apple Intelligence sous iOS 27 et iPadOS 27 : appareils, stockage et langues requis (assistance Apple)",
+      "url": "https://support.apple.com/en-us/121115",
+      "type": "vendor_documentation",
+      "accessed": "2026-10-18"
+    }
+  ]
+}

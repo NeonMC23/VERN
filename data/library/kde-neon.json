@@ -20,7 +20,7 @@
     "x86_64"
   ],
   "license": "GPL-2.0-or-later, LGPL-2.1-or-later, BSD-3-Clause, and MIT",
-  "last_verified": "2026-10-01",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "KDE neon is an open-source, desktop operating system created to deliver software from the KDE Community directly to users as soon as it is released. Founded in early 2016 by former Kubuntu release manager Jonathan Riddell, the project pairs a rock-solid, long-term support Ubuntu foundation with continuously deployed, vanilla KDE software stacks. It provides an unmediated experience of KDE Plasma and KDE applications without downstream vendor patching, distribution delays, or desktop configuration changes.",
     "what_is_it": "Technically, KDE neon is a hybrid semi-rolling distribution built upon Ubuntu LTS. The base operating system components (Linux kernel, glibc, systemd, system drivers) are anchored to the latest Ubuntu LTS release, while the graphical desktop environment and user applications (Qt, KDE Frameworks, Plasma, and KDE Gear) follow a rolling continuous-deployment model from upstream KDE Git repositories. The system is maintained via dedicated archives (`archive.neon.kde.org`) and installs through the Calamares installer.",
@@ -65,7 +65,7 @@
       "Users who prefer desktop environments other than KDE Plasma",
       "Users operating legacy 32-bit x86 computer hardware"
     ],
-    "verdict": "KDE neon serves as the quintessential showcase and direct delivery platform for the KDE software ecosystem. By combining the rock-solid base of Ubuntu LTS with continuously deployed, unmodified Plasma 6 and KDE Gear releases, KDE neon delivers a bleeding-edge desktop experience coupled with predictable system plumbing, establishing an ideal platform for KDE enthusiasts and Qt developers."
+    "verdict": "KDE neon is a delivery platform for the KDE software ecosystem. By combining an Ubuntu LTS base with continuously deployed, unmodified Plasma 6 and KDE Gear releases, it provides current KDE software on a stable system base."
   },
   "components": [
     {
@@ -246,12 +246,12 @@
       "note": "Details the KDE MegaRelease 6 transition, packaging Plasma 6, Frameworks 6, KDE Gear 24.02, and Qt 6."
     },
     {
-      "title": "KDE Community Wiki — KDE neon Architecture and Containers",
-      "url": "https://community.kde.org/Neon",
+      "title": "KDE Community Wiki — KDE neon Installable Images (Calamares, seeds)",
+      "url": "https://community.kde.org/Neon/InstallableImages",
       "type": "documentation",
-      "accessed": "2026-10-01",
+      "accessed": "2026-10-16",
       "publisher": "KDE Community",
-      "note": "Technical documentation for Calamares installation, CI build systems, and daily Docker/Podman container images."
+      "note": "Wiki page on KDE neon installable images: seed metapackages and Calamares installer settings (Calamares replaced ubiquity as the installer)."
     },
     {
       "title": "KDE neon Developers' Blog — Offline Updates Implementation",

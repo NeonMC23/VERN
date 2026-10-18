@@ -34,6 +34,9 @@
     "desktop_matrix_and_atomic_rebasing": "secureblue provides a diverse deployment matrix spanning GNOME, KDE Plasma, Sway, and headless server environments. For each desktop variant, specialized images accommodate different hardware setups: `main` (Intel/AMD/Nouveau graphics), `nvidia` (proprietary Nvidia drivers), `nvidia-open` (open-source kernel modules), and `-zfs` (pre-configured OpenZFS storage). Users can switch seamlessly between different desktop environments without system reinstallation by executing an atomic rebase command (`ujust rebase-secureblue`), which downloads the new OCI container image and stages it for the next boot while preserving user data in `/var/home`.",
     "threat_model_and_operational_limits": "secureblue's technical documentation defines its threat model with precision: it is designed for users whose first priority is Linux and second priority is security. The project acknowledges that desktop Linux architecture cannot achieve the hardware-enforced Xen domain isolation of Qubes OS. Furthermore, secureblue does not route general network traffic through Tor, focusing instead on local endpoint exploit mitigation, attack surface reduction, and containerized immutability.",
     "privacy_and_telemetry": "secureblue enforces a zero-telemetry policy with complete absence of behavioral analytics or user tracking. Default firewalld configurations reject all unsolicited incoming connections. Outgoing network privacy is reinforced by per-network MAC address randomization, Network Time Security (NTS) authenticated time synchronization via chronyd, encrypted DNS-over-TLS with local Unbound validation, and automatic coredump disabling to prevent memory credential dumps on disk.",
+    "installation_paths_for_each_image_type": "Installation is not a single procedure but one path per image type, and the project publishes the mapping before the steps. Desktop images are installed directly from a secureblue ISO; server images use Ignition through Butane; IoT and ARM64 images are obtained by rebasing an existing installation, the ARM64 variant being marked as beta. The documentation designates the cross-platform Fedora Media Writer as the official, tested and supported tool for creating bootable media, and states plainly that Ventoy must not be used. Three pre-installation checks are listed: Secure Boot must be enabled, the firmware must be up to date from the manufacturer, and a firmware password should be set to prevent tampering. During installation the user is asked to encrypt the target drive, to choose a strong password, and to grant the account membership of the wheel group. Images with `nvidia-open` drivers are recommended for systems with an NVIDIA GPU of the Turing generation or newer, for example a GTX 16XX card.",
+    "layered_package_management_and_automatic_updates": "The system is an immutable Fedora Atomic image, so application installation is stratified rather than unified. The documentation orders the paths: check whether the tool is already present with `rpm -qa | grep x`, install graphical applications as Flatpaks from the software store or with `flatpak install`, install command-line tools with `brew install` from the bundled Homebrew, and only when neither exists or when deeper system integration is needed, layer an RPM into the next deployment with `rpm-ostree install`. Homebrew is wired to a dedicated linuxbrew account and commands run for other users through a D-Bus service that authorises the request, so the Homebrew tree and its install scripts can only be modified by authorised users. Updates are automatic on at least a daily cadence and cover rpm-ostree, Homebrew, Flatpak and Podman; if the system falls more than a week behind, the user is notified and given the manual command. A manual update is `ujust update-system`, and `rpm-ostree status` shows whether an update is already staged for the next boot. Automatic updates are driven by timers, including `rpm-ostreed-automatic.timer` and a Flatpak timer, that the documentation names before explaining how to disable them.",
+    "image_release_model_and_branching": "The project does not ship a distribution in the usual sense. Its documentation describes secureblue as a collaborative effort that builds bootable OCI container images with BlueBuild on top of Fedora Atomic Desktop base images, keeping upstream repositories and packaging for all but a small set of specific packages such as its browser and memory allocator. Publication follows branch semantics rather than version numbers: substantial testing happens on the `staging` and `next` branches, and once a commit is merged into `live`, a new set of builds is generated and deployed immediately, which makes the GitHub releases an informational record for users rather than the delivery mechanism. A newer variant builds unified kernel images and is labelled experimental in the same documentation, with its own `bootc-upgrade.timer` for automatic updates. The project ships under the Apache License 2.0, and its copyright notice covers 2024 to 2026, while the licenses of the upstream components it assembles remain in force.",
     "advantages": [
       "Modern atomic architecture based on bootable OCI container images with immutable read-only /usr filesystem",
       "Global hardened_malloc integration across userspace and Flatpaks mitigating heap exploitation",
@@ -61,7 +64,8 @@
       "Users requiring Xen hypervisor hardware isolation for executing active, untrusted malware samples (better suited to Qubes OS)",
       "Users heavily dependent on legacy X11 applications, complex gaming anti-cheat engines, or unconfined desktop extensions",
       "Legacy 32-bit hardware architectures"
-    ]
+    ],
+    "verdict": "secureblue provides hardened, security-focused container-based images built on Fedora Atomic Desktops. By incorporating memory-allocator hardening, kernel sysctl restrictions, user-namespace lockdowns, and strict AppArmor/SELinux enforcement, it delivers enterprise-grade host protection for modern desktop workflows, requiring users to adapt to immutable OSTree concepts and Flatpak-isolated applications."
   },
   "components": [
     {
@@ -183,6 +187,18 @@
       "url": "https://github.com/secureblue/secureblue",
       "type": "repository",
       "date": "2026-10-09"
+    },
+    {
+      "title": "secureblue documentation: installation per image type, media tool and firmware checks",
+      "url": "https://secureblue.dev/install",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "secureblue repository: project description, BlueBuild and Fedora Atomic base images",
+      "url": "https://github.com/secureblue/secureblue/blob/live/docs/README.md",
+      "type": "official_repository",
+      "accessed": "2026-10-18"
     }
   ]
 }

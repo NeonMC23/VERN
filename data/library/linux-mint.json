@@ -541,5 +541,6 @@
       "note": "La page « Links » sépare les entrées en « Official » (site, forums, chat rooms, community website), « Social » (Github, Facebook, Twitter, Mastodon) et « Community » (Reddit, Discord, IRC, mintCast), et ajoute « Linux Mint officially recognizes and promotes the following communities ». Le pied de page, présent sur toutes les pages, porte la phrase sur le code source : « Almost all the packages we distribute are open-source. You can find their source code on https://packages.ubuntu.com , http://packages.linuxmint.com or https://github.com/linuxmint. ». Les références à Launchpad utilisées dans cette fiche viennent des README des outils (« Please use Launchpad to translate Mintinstall: https://translations.launchpad.net/linuxmint/latest/ ») et des notes de version 22.3 qui citent des bogues Ubuntu (xorg-server 1861609, gnome-session 1734541, ntfs-3g 2062972) ; launchpad.net ne résolvait pas depuis ce sandbox (DNS IPv6 seul, constaté en phase 7), ces adresses restent citées en texte et ne sont pas publiées comme URL de la fiche."
     }
   ],
-  "last_verified": "2026-09-19"
+  "last_verified": "2026-09-19",
+  "license": "GPL, LGPL, and compatible open-source licenses with redistributable codecs and firmware"
 }

@@ -27,6 +27,10 @@
     "unified_storage_protocols_and_networking": "TrueNAS délivre une architecture de stockage unifié couvrant les besoins en mode fichier, en mode bloc et en mode objet. Pour le partage réseau de fichiers, il embarque Samba (SMB 2/3) avec une prise en charge complète des listes de contrôle d'accès Windows (NFSv4 ACLs portées par iXsystems sur Linux), NFS (v3, v4.1, v4.2 avec accélération nconnect multi-flux), ainsi que WebDAV. Pour le stockage SAN en mode bloc, il propose une cible iSCSI optimisée (SCST sous Linux, CTL sous FreeBSD) hautement performante pour les hyperviseurs distants. Il intègre également la compatibilité objet compatible Amazon S3 (via MinIO) et la synchronisation vers les fournisseurs cloud via rclone.",
     "application_ecosystem_and_docker_transition": "Dans ses versions modernes (notamment TrueNAS SCALE 24.10 'Electric Eel'), iXsystems a fait évoluer son architecture applicative en abandonnant la complexité du moteur Kubernetes (k3s/Helm) au profit d'une intégration native de Docker Engine et de Docker Compose. Cette transition majeure permet aux utilisateurs de déployer des applications conteneurisées directement depuis le catalogue officiel ou par la rédaction de fichiers `docker-compose.yml` standards, tout en conservant la capacité de créer des machines virtuelles complètes isolées sous l'hyperviseur KVM.",
     "administration_webui_and_middleware": "L'administration du système s'opère au travers d'une interface web moderne en Angular, fournissant des tableaux de bord interactifs pour la supervision en temps réel de l'état des disques, de l'état de santé S.M.A.R.T., des températures matérielles et de l'utilisation du cache mémoire ZFS (ARC - Adaptive Replacement Cache). Toutes les fonctions de la plateforme sont pilotables via une API RESTful et WebSocket complète servie par le middleware TrueNAS, facilitant l'automatisation. Les appliances professionnelles TrueNAS Enterprise offrent également une haute disponibilité matérielle actif-passif sans interruption de service (HA dual-controller failover).",
+    "historique_et_transition_du_socle_freebsd_vers_linux": "La filiation de la plateforme se lit dans ses numéros de version autant que dans sa documentation de migration. Les versions construites sur FreeBSD s'arrêtent aux branches 13.0 et 13.3, et la documentation de migration ne les fait communiquer avec la lignée Linux qu'après mise à jour vers leur dernière révision de maintenance. Le passage à un socle Linux commence avec la branche 22.12 ; il peut se faire par une installation propre à partir de l'image ISO de la version cible, ou par le sélecteur de train de mise à jour du système FreeBSD vers la branche 24.04 (Dragonfish) puis, de branche en branche, jusqu'à la version courante. La documentation précise que la migration ne conserve pas la configuration applicative et qu'elle suppose une sauvegarde préalable du fichier de configuration système, réinjecté après installation. Les systèmes Enterprise, eux, sont livrés déjà installés, et la documentation demande aux clients HA de ne pas réinstaller eux-mêmes leurs deux contrôleurs.",
+    "cycle_de_versions_et_profils_de_mise_a_jour": "Deux régimes de numérotation coexistent. Les versions publiées jusqu'à la série 25.x suivent le schéma AA.MM (24.10 Electric Eel, 25.04 Fangtooth, 25.10 Goldeye), avec des révisions de maintenance à quatre champs : 24.10.2.4 datée du 7 août 2025 et 25.04.2.6 datée du 30 octobre 2025. À partir de TrueNAS 27, la documentation annonce un rythme annuel et un format `AA.MINEUR.CORRECTIF`, le numéro majeur reprenant l'année de publication stable. À cette cadence s'ajoutent quatre profils de mise à jour sélectionnables dans l'écran Update : Developer, Early Adopter, General et Mission Critical. Un système communautaire part du profil le plus élevé disponible pour sa version ; un système Enterprise n'a accès qu'à General et Mission Critical, et le profil Mission Critical est celui qui est appliqué à la livraison. La règle de parcours impose de passer par la dernière révision de maintenance de la branche courante avant de changer de branche majeure.",
+    "catalogue_dapplications_et_depots_logiques": "TrueNAS n'expose pas de gestionnaire de paquets généraliste à l'administrateur : le logiciel applicatif arrive par un catalogue d'applications conteneurisées, décrit dans la documentation comme le mécanisme d'installation et de gestion des applications. Le catalogue est publié sur apps.truenas.com et mis à jour quotidiennement ; il définit aussi les niveaux de support associés aux applications. Le système exécute Docker Engine et accepte les fichiers Compose, ce qui permet d'installer une application du catalogue ou une application personnalisée décrite par son propre fichier. La version 25.04 ajoute deux éléments distincts du catalogue : la sélection d'une adresse IP par application lors du déploiement, et un mécanisme expérimental de conteneurs système LXC, réservé aux tests communautaires. Le logiciel système lui-même ne s'actualise pas par dépôt de paquets : l'écran Update interroge le serveur de mises à jour du projet ou accepte un fichier téléversé localement.",
+    "installation_et_verification_des_images": "L'installation part d'une image ISO publiée sur le site du projet, à écrire sur un support amorçable. L'équipe de sécurité d'iXsystems signe ces images, et la documentation décrit deux vérifications indépendantes avant écriture : le contrôle de la signature OpenPGP du fichier `.iso.gpg` ou `.iso.sig` avec `gpg --verify` après import de la clé publique, et le contrôle de l'empreinte SHA-256 fournie à côté de l'image. Les deux peuvent être menées sur la même image, la signature attestant l'origine et l'empreinte l'intégrité du transfert. Le déroulement ensuite est identique sur matériel physique et sur machine virtuelle : démarrage sur le support, installation, puis configuration initiale du réseau par le menu console avant la première connexion à l'interface web. Une migration depuis FreeBSD impose en plus de mettre à jour la branche source vers sa dernière révision de maintenance avant de lancer l'installation.",
     "advantages": [
       "Protection et intégrité maximales des données grâce au système de fichiers transactionnel OpenZFS et à la correction automatique d'erreurs (self-healing).",
       "Prise en charge unifiée complète des protocoles industriels de stockage : SMB avec ACLs Windows natives, NFS avec nconnect, iSCSI, S3 et WebDAV.",
@@ -54,32 +58,32 @@
       "Postes de travail de bureau ou ordinateurs portables personnels (TrueNAS étant un système serveur dédié ne proposant aucun environnement graphique local).",
       "Déploiements sur architectures matérielles 32 bits ou architectures ARM grand public non prises en charge officiellement."
     ],
-    "verdict": "TrueNAS représente la référence incontournable du stockage en réseau unifié libre. Tirant parti de toute la puissance et de la fiabilité éprouvée d'OpenZFS, la plateforme a su opérer avec succès sa convergence moderne vers l'écosystème Linux avec TrueNAS SCALE et Docker Compose, proposant une solution aussi redoutable pour la sauvegarde et le stockage critique d'entreprise que pour les serveurs domestiques avancés."
+    "verdict": "TrueNAS est une plateforme de stockage en réseau unifié (NAS/SAN) open source construite autour du système de fichiers OpenZFS. Elle fournit des services intégrés de partage de fichiers (SMB, NFS, iSCSI), de réplication de données chiffrées et de gestion de volumes RAIDZ via une interface d'administration web. Avec la transition vers TrueNAS SCALE basée sur un noyau Linux Debian et l'intégration de conteneurs applicatifs, la solution s'adapte aussi bien aux infrastructures de stockage d'entreprise qu'aux serveurs de virtualisation et de sauvegarde domestiques."
   },
   "relations": [
     {
       "id": "freebsd",
       "name": "FreeBSD",
       "type": "upstream_base",
-      "description": "Système d'exploitation Unix libre constituant le socle historique du projet FreeNAS et de l'édition TrueNAS CORE."
+      "note": "Système d'exploitation Unix libre constituant le socle historique du projet FreeNAS et de l'édition TrueNAS CORE."
     },
     {
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "description": "Distribution Linux servant de socle pour l'édition moderne TrueNAS SCALE (noyau Linux et espace utilisateur Debian)."
+      "note": "Distribution Linux servant de socle pour l'édition moderne TrueNAS SCALE (noyau Linux et espace utilisateur Debian)."
     },
     {
       "id": "proxmox-ve",
       "name": "Proxmox VE",
       "type": "alternative",
-      "description": "Plateforme d'hyperviseur et de virtualisation d'entreprise fréquemment interfacée avec TrueNAS pour le stockage partagé en cluster."
+      "note": "Plateforme d'hyperviseur et de virtualisation d'entreprise fréquemment interfacée avec TrueNAS pour le stockage partagé en cluster."
     },
     {
       "id": "openmediavault",
       "name": "OpenMediaVault",
       "type": "alternative",
-      "description": "Distribution NAS légère basée sur Debian, orientée vers les architectures matérielles plus modestes."
+      "note": "Distribution NAS légère basée sur Debian, orientée vers les architectures matérielles plus modestes."
     }
   ],
   "links": [
@@ -111,6 +115,18 @@
       "title": "Notes de version et annonces de migration TrueNAS SCALE",
       "url": "https://www.truenas.com/docs/scale/24.10/gettingstarted/scalereleasenotes/",
       "type": "documentation"
+    },
+    {
+      "title": "TrueNAS documentation repository: application catalog, ISO verification, update profiles and software development life cycle",
+      "url": "https://github.com/truenas/documentation",
+      "type": "official_documentation_repository",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "TrueNAS 25.04 Fangtooth release notes: release schedule, containers and maintenance releases",
+      "url": "https://www.truenas.com/docs/scale/25.04/gettingstarted/scalereleasenotes/",
+      "type": "official_release_notes",
+      "accessed": "2026-10-18"
     }
   ]
 }

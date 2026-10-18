@@ -51,7 +51,9 @@
       "Does not claim 1:1 bug-for-bug identical package builds with RHEL since the July 2023 ABI charter adjustment."
     ],
     "who_is_it_for": "AlmaLinux is suited for enterprise system administrators, web hosting providers, cloud architects, and organizations requiring a reliable, free, long-term enterprise Linux platform with RHEL application compatibility.",
-    "who_is_it_not_for": "AlmaLinux is not intended for desktop users seeking the newest desktop environments, bleeding-edge consumer graphics drivers, or fast-track rolling software releases."
+    "who_is_it_not_for": "AlmaLinux is not intended for desktop users seeking the newest desktop environments, bleeding-edge consumer graphics drivers, or fast-track rolling software releases.",
+    "verdict": "AlmaLinux is an open-source, 1:1 binary-compatible alternative to Red Hat Enterprise Linux backed by a non-profit foundation. It provides ten-year enterprise lifecycles, automated migration tooling and support for four architectures (x86_64, AArch64, ppc64le and s390x), with slower software currency than rolling distributions.",
+    "release_cycle_and_supported_versions": "The project maintains three major release lines in parallel, AlmaLinux OS 8, 9 and 10, and publishes for each a support window measured from the general availability of the major version. AlmaLinux OS 10 has active support until 31 May 2030 and security support until 31 May 2035; AlmaLinux OS 9 has active support until 31 May 2027 and security support until 31 May 2032; AlmaLinux OS 8 had active support until 31 May 2024 and has security support until 31 May 2029. Within a line, each minor version reaches end of life when the next minor version is released: the release notes give the examples of AlmaLinux OS 8.9 ending with the release of 8.10, and of AlmaLinux OS 9.2 ending with the release of 9.3. A separate line, AlmaLinux OS Kitten 10, is published as the upstream-aligned preview, and its active support matches the end of support of CentOS Stream 10.\n\nThe release notes table gives, for each version, the codename, the beta date, the release date, the kernel version and the supported architectures. Version 8.10 Cerulean Leopard was released on 28 May 2024; 9.4 Seafoam Ocelot on 06 May 2024; 9.5 Teal Serval on 18 Nov 2024; 9.6 Sage Margay on 20 May 2025; 9.7 Moss Jungle Cat on 17 Nov 2025; 9.8 Olive Jaguar on 26 May 2026; 10.0 Purple Lion on 10 Dec 2024. The 10 line lists the architectures x86_64, x86_64_v2, aarch64, ppc64le and s390x; the 8 and 9 lines list x86_64, aarch64, ppc64le, s390x and i686, the last one being a userspace-only architecture with neither a bootable installer nor a 32-bit kernel. Media for older releases remain available in the project vault at vault.almalinux.org. The page carrying these tables states a last update on 2026-09-17.\n\nThe release cadence is therefore documented through dated minor releases inside each major line, with a support window fixed per major version rather than per minor version, and with an explicit end-of-life rule for minors that the project illustrates with two concrete pairs."
   },
   "components": [
     {
@@ -110,6 +112,12 @@
     }
   ],
   "relations": [
+    {
+      "id": "rhel",
+      "name": "Red Hat Enterprise Linux",
+      "relation": "upstream_base",
+      "note": "Commercial enterprise Linux platform providing the binary interface (kABI) and release standards that AlmaLinux maintains 1:1 binary compatibility with."
+    },
     {
       "id": "fedora",
       "name": "Fedora",
@@ -196,6 +204,12 @@
       "url": "https://distrowatch.com/table.php?distribution=almalinux",
       "type": "metadata",
       "date": "2026-10-02"
+    },
+    {
+      "title": "AlmaLinux Wiki - Release notes and support windows",
+      "url": "https://wiki.almalinux.org/release-notes/",
+      "type": "official_documentation",
+      "date": "2026-10-18"
     }
   ]
 }

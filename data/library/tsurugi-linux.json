@@ -62,7 +62,8 @@
       "Users seeking an amnesic, anonymous web browsing system for sensitive whistleblowing (better suited to Tails or Whonix)",
       "Casual desktop users seeking a general everyday operating system for gaming or office productivity",
       "Resource-constrained legacy systems with less than 8 GB of RAM"
-    ]
+    ],
+    "verdict": "Tsurugi Linux is an Ubuntu-based digital forensics and Open Source Intelligence (OSINT) analysis distribution engineered for law enforcement, corporate investigations, and incident response. It provides write-blocking device policies, preconfigured acquisition scripts, and extensive intelligence-gathering frameworks, prioritizing analytical completeness over everyday desktop computing convenience."
   },
   "components": [
     {

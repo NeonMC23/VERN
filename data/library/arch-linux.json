@@ -587,5 +587,6 @@
       "note": "Package counts of core 299, extra 14 968 and multilib 181 computed from the desc entries of the sync databases on 2026-09-19"
     }
   ],
-  "last_verified": "2026-09-19"
+  "last_verified": "2026-09-19",
+  "license": "GPL, LGPL, MIT, BSD, and upstream free software licenses with redistributable firmware"
 }

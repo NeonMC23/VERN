@@ -28,7 +28,7 @@
     "shell_freecom_and_fdimples_packaging": "L'interface utilisateur textuelle par défaut est animée par l'interpréteur de commandes FreeCOM, successeur libre de `COMMAND.COM`. FreeCOM apporte un confort moderne avec un historique des commandes rappelable aux flèches, le complètement automatique des noms de fichiers par tabulation et des commandes inspirées d'Unix (`grep`, `head`, `tee`, `less`, `cal`). L'installation et la maintenance des logiciels s'effectuent au moyen du gestionnaire interactif **FDIMPLES** (FreeDOS Installer - My Package List Editor Software), qui organise les programmes en catégories modulaires (développement, pilotes de souris Cutemouse, son Sound Blaster, jeux, utilitaires réseau `FDNPKG`).",
     "contemporary_roles_and_virtualization": "Dans l'écosystème contemporain, FreeDOS remplit trois missions majeures : le rétrogaming (exécution native de titres phares des années 1980 et 1990 sans émulation logicielle lourde), le contrôle industriel et l'embarqué (machines-outils, automates de mesure fonctionnant sur du matériel x86 hérité), et la maintenance de micrologiciels (flashing de BIOS de cartes mères ou de contrôleurs RAID par de grands constructeurs tels que Dell, HP ou Lenovo). Sur les ordinateurs récents privés de BIOS hérité (UEFI strict sans CSM), FreeDOS s'exécute de façon transparente au sein d'émulateurs comme DOSBox-X, QEMU, VirtualBox ou VMware.",
     "advantages": [
-      "Compatibilité logicielle et binaire de premier plan avec l'ensemble de l'immense logithèque historique de MS-DOS.",
+      "Compatibilité logicielle et binaire avec la logithèque historique de MS-DOS.",
       "Prise en charge native du système de fichiers FAT32 et de l'adressage LBA pour des disques durs modernes jusqu'à 2 To.",
       "Système entièrement libre et open source sous licence GNU GPL, sans dépendance vis-à-vis d'éditeurs commerciaux fermés.",
       "Consommation matérielle dérisoire, pouvant tourner sur n'importe quel processeur x86 avec seulement 640 Ko de mémoire vive.",
@@ -54,26 +54,26 @@
       "Utilisateurs exigeant la sécurité des données, le chiffrement de disques et une isolation stricte des processus.",
       "Infrastructures de serveurs multi-utilisateurs nécessitant une haute disponibilité et des connexions simultanées."
     ],
-    "verdict": "FreeDOS est le conservateur incontournable du patrimoine informatique x86 16 bits. Réalisé avec passion et rigueur selon les préceptes du logiciel libre initiés par Jim Hall, il combine une compatibilité logicielle historique remarquable et des améliorations techniques indispensables (FAT32, FreeCOM, FDIMPLES), demeurant la référence absolue pour le rétrogaming, l'industrie et la maintenance de bas niveau."
+    "verdict": "FreeDOS est une réimplémentation complète, libre et compatible de l'environnement MS-DOS pour les processeurs de la famille x86. Conçu à l'initiative de Jim Hall pour préserver l'accès aux logiciels 16 bits historiques, il apporte le support moderne des systèmes de fichiers FAT32, un interpréteur de commandes enrichi (FreeCOM) et un gestionnaire de paquets (FDIMPLES). Il demeure utilisé pour l'exécution d'applications industrielles patrimoniales, la mise à jour de microprogrammes sur cartes mères et l'émulation de jeux vidéo historiques."
   },
   "relations": [
     {
       "id": "reactos",
       "name": "ReactOS",
       "type": "alternative",
-      "description": "Système d'exploitation open source réimplémentant l'architecture de Windows NT, partageant l'objectif d'une compatibilité ascendante avec l'écosystème logiciel PC historique."
+      "note": "Système d'exploitation open source réimplémentant l'architecture de Windows NT, partageant l'objectif d'une compatibilité ascendante avec l'écosystème logiciel PC historique."
     },
     {
       "id": "windows",
       "name": "Microsoft Windows",
       "type": "related",
-      "description": "Système d'exploitation commercial historique ayant initialement pris appui sur l'architecture DOS pour ses premières versions avant l'avènement du noyau Windows NT."
+      "note": "Système d'exploitation commercial historique ayant initialement pris appui sur l'architecture DOS pour ses premières versions avant l'avènement du noyau Windows NT."
     },
     {
       "id": "haiku",
       "name": "Haiku",
       "type": "alternative",
-      "description": "Système d'exploitation libre indépendant non-Linux destiné aux ordinateurs de bureau personnels et au multimédia."
+      "note": "Système d'exploitation libre indépendant non-Linux destiné aux ordinateurs de bureau personnels et au multimédia."
     }
   ],
   "links": [

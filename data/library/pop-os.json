@@ -21,7 +21,7 @@
     "aarch64"
   ],
   "license": "GPL-3.0-or-later, MIT, and redistributable proprietary firmware/NVIDIA drivers",
-  "last_verified": "2026-10-01",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "Pop!_OS is an open-source, desktop Linux operating system developed by American computer hardware manufacturer System76. Originating in October 2017 to power System76 laptops, desktops, and servers, Pop!_OS is engineered for software developers, engineers, and digital creators. While historically utilizing a customized GNOME desktop shell, Pop!_OS 24.04 LTS marks a fundamental architectural evolution by deploying the custom-built COSMIC desktop environment, written from the ground up in the memory-safe Rust programming language.",
     "what_is_it": "Technically, Pop!_OS is an Ubuntu LTS downstream distribution combining core Ubuntu system packages with a custom-built desktop environment, specialized hardware daemons, and dedicated software archives (`apt.pop-os.org`). Key architectural components include the COSMIC Desktop Environment, the `cosmic-comp` Wayland compositor based on the Smithay library, the `system76-power` energy and hybrid GPU manager, `kernelstub` with `systemd-boot`, and an independent disk recovery partition allowing clean system refreshes without data loss.",
@@ -67,7 +67,7 @@
       "Operators of legacy 32-bit PCs or specialized embedded microcontrollers without ARM64/x86_64 UEFI support",
       "Enterprises requiring commercial third-party vendor SLAs on non-System76 hardware"
     ],
-    "verdict": "Pop!_OS stands as an innovative, high-performance desktop Linux distribution that successfully bridges developer productivity and consumer ergonomics. Distinguished by its groundbreaking Rust-based COSMIC desktop environment, native auto-tiling, dynamic hybrid graphics management, robust recovery tooling, and unwavering commitment to user privacy, Pop!_OS delivers an exceptional workstation experience for modern computing hardware."
+    "verdict": "Pop!_OS is a desktop Linux distribution that combines developer tooling with consumer ergonomics. It includes the Rust-based COSMIC desktop environment, native auto-tiling, hybrid graphics management, recovery tooling, and privacy-oriented defaults, and targets workstation use on modern hardware."
   },
   "components": [
     {
@@ -250,7 +250,7 @@
     },
     {
       "title": "GitHub — pop-os/cosmic-comp: Wayland Compositor for COSMIC",
-      "url": "https://github.com/pop-os",
+      "url": "https://github.com/pop-os/cosmic-comp",
       "type": "repository",
       "accessed": "2026-10-01",
       "publisher": "System76 Engineers & Community",
@@ -258,7 +258,7 @@
     },
     {
       "title": "GitHub — pop-os/system76-power: System Power and Graphics Daemon",
-      "url": "https://github.com/pop-os",
+      "url": "https://github.com/pop-os/system76-power",
       "type": "repository",
       "accessed": "2026-10-01",
       "publisher": "System76 Engineers & Community",

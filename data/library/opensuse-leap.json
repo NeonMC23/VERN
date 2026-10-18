@@ -38,7 +38,7 @@
     "privacy": "openSUSE Leap does not include invasive operating system telemetry, background usage trackers, or mandatory cloud accounts.\n\nThe project's guiding principles and web notices emphasize that openSUSE is free to use without commercial upsells, mandatory registrations, or embedded advertising. Operating system installations do not send desktop activity telemetry or personal telemetry dossiers back to openSUSE or SUSE servers.\n\nNetwork interactions are limited to functional requirements: package downloads, repository metadata refreshes, and NTP clock synchronisation. These network transactions communicate with openSUSE mirror infrastructure governed by the openSUSE Privacy Policy. The MirrorCache distribution system logs standard server connection metadata (such as IP addresses and requested files) strictly as necessary for network routing, load balancing, and infrastructure security.",
     "desktop": "openSUSE Leap 16.0 provides contemporary desktop environments built by the community on top of the SLE base, with an installation policy that adopts Wayland by default.\n\nDuring installation, the Agama installer offers Wayland sessions for its supported desktop environments. KDE Plasma 6.4 is available with its KWin Wayland compositor, customizable desktop tiling, and enhanced accessibility tools. GNOME 48 ('Bengaluru') is provided with notification stacking, dynamic triple buffering for interface fluidity, and digital wellbeing integrations. For lighter workloads, Xfce 4.20 is included with an experimental Wayland session utilizing gtkgreet and greetd in place of LightDM, while LXQt Wayland sessions can be added post-installation. Legacy X11/Xorg sessions remain available for manual installation from repositories.\n\nOn supported systems equipped with NVIDIA GPUs, Leap 16.0 automatically sets up the NVIDIA graphics driver repository and installs both the open kernel driver and matching user-space acceleration libraries out of the box.\n\nAudio handling is managed uniformly by PipeWire and WirePlumber, replacing PulseAudio. The first login experience is greeted by opensuse-welcome-launcher, which delegates to desktop-native greeters (plasma-welcome or gnome-tour).",
     "updates_and_maintenance": "Routine maintenance and system upgrades in openSUSE Leap follow distinct, documented command pathways:\n\nFor routine daily or weekly maintenance, official documentation recommends executing zypper patch as root. Unlike a general package update, zypper patch specifically queries patchinfo metadata in official update repositories and installs only vetted security advisories and critical bug fixes. To update all installed packages across all configured repositories (including third-party sources), administrators run zypper update.\n\nWhen moving between minor Leap versions (such as upgrading from 15.6 to 16.0), the project provides opensuse-migration-tool. This utility automates the reconfiguration of repository URLs, executes necessary pre-flight dependency checks, guides the user through security module transitions (AppArmor to SELinux), and executes the migration transaction safely.\n\nIn enterprise environments requiring commercial contracts, the same migration tool allows Leap 16 installations to transition in-place into fully supported SUSE Linux Enterprise Server 16 instances without rebuilding the machine.",
-    "opensuse_family": "openSUSE Leap exists as a foundational pillar within a broader family of related openSUSE distributions and technologies:\n\nopenSUSE Tumbleweed: The rolling-release sibling distribution that receives constant software versions from Factory. Tumbleweed serves as the development and testing ground from which Leap's desktop and community packages are derived.\n\nopenSUSE Leap Micro: An immutable, lightweight operating system built for edge computing, container hosts, and virtualised appliances. Derived from SLE Micro, Leap Micro follows the same 24-month maintenance cycle as Leap starting with Leap Micro 6.2.\n\nopenSUSE MicroOS: The rolling-release counterpart to Leap Micro, featuring read-only root filesystems and transactional updates based on Tumbleweed.\n\nAeon and Kalpa: Desktop-oriented immutable distributions utilizing transactional updates, Flatpaks, and containerized runtimes (Aeon with GNOME, Kalpa with KDE Plasma).\n\nSUSE Linux Enterprise (SLE): The upstream commercial parent product from which Leap derives its foundational system packages, enterprise kernel, and long-term security engineering.",
+    "opensuse_family": "openSUSE Leap exists within a broader family of related openSUSE distributions and technologies:\n\nopenSUSE Tumbleweed: The rolling-release sibling distribution that receives constant software versions from Factory. Tumbleweed serves as the development and testing ground from which Leap's desktop and community packages are derived.\n\nopenSUSE Leap Micro: An immutable, lightweight operating system built for edge computing, container hosts, and virtualised appliances. Derived from SLE Micro, Leap Micro follows the same 24-month maintenance cycle as Leap starting with Leap Micro 6.2.\n\nopenSUSE MicroOS: The rolling-release counterpart to Leap Micro, featuring read-only root filesystems and transactional updates based on Tumbleweed.\n\nAeon and Kalpa: Desktop-oriented immutable distributions utilizing transactional updates, Flatpaks, and containerized runtimes (Aeon with GNOME, Kalpa with KDE Plasma).\n\nSUSE Linux Enterprise (SLE): The upstream commercial parent product from which Leap derives its foundational system packages, enterprise kernel, and long-term security engineering.",
     "advantages": [
       "Enterprise code base",
       "Twenty four month support",
@@ -163,31 +163,26 @@
       "note": "The rolling-release counterpart from the openSUSE project; delivers bleeding-edge snapshots tested with openQA, contrasting with Leap's 24-month fixed support cycles."
     },
     {
-      "id": "suse-linux-enterprise",
       "name": "SUSE Linux Enterprise",
       "relation": "upstream_of",
       "note": "The commercial parent platform (SLES 16 / SLFO) from which Leap derives its foundational system binaries, kernel, and enterprise security maintenance."
     },
     {
-      "id": "openSUSE:Factory",
       "name": "openSUSE Factory",
       "relation": "related",
       "note": "The continuous integration development codebase from which community packages and desktop environments are staged and built for Leap."
     },
     {
-      "id": "openSUSE:LeapMicro",
       "name": "openSUSE Leap Micro",
       "relation": "related",
       "note": "The container and edge-focused lightweight distribution sharing Leap's enterprise stability and 24-month maintenance lifecycle."
     },
     {
-      "id": "openSUSE:MicroOS",
       "name": "openSUSE MicroOS",
       "relation": "related",
       "note": "The rolling immutable server distribution that utilizes transactional updates and read-only root filesystems."
     },
     {
-      "id": "packman",
       "name": "Packman",
       "relation": "related",
       "note": "The third-party community repository providing proprietary multimedia codecs and patented media libraries not shipped in official openSUSE repositories."
@@ -261,9 +256,9 @@
     },
     {
       "title": "openSUSE Leap 16.0 Release Notes — technical changes and additions",
-      "url": "https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/16.0/",
+      "url": "https://doc.opensuse.org/release-notes/x86_64/openSUSE/Leap/16.0/release-notes-leap-160.txt",
       "type": "documentation",
-      "accessed": "2026-09-24",
+      "accessed": "2026-10-16",
       "publisher": "openSUSE documentation team",
       "note": "Official release notes documenting switch from YaST to Cockpit (3.9.1), AppArmor status (2.6.2), Wayland defaults (2.3), PipeWire transition (2.11), 32-bit removal (3.5.12), and hardware requirements (3.5.1)."
     },
@@ -412,5 +407,6 @@
       "note": "Statement of principles: free of charge, no ads, no mandatory user accounts, installer features (Btrfs, encryption, Secure Boot), and distribution flavours."
     }
   ],
-  "last_verified": "2026-09-24"
+  "last_verified": "2026-10-16",
+  "license": "GPL, LGPL, MIT, BSD, and compatible open-source licenses with redistributable firmware"
 }

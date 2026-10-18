@@ -19,14 +19,16 @@
     "sparc (community)"
   ],
   "license": "Common Development and Distribution License (CDDL 1.0)",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "OpenIndiana is a free, open-source Unix operating system founded in September 2010 by the illumos community. Established as the direct open-source successor to the historic OpenSolaris operating system (project Indiana) following Sun Microsystems' acquisition by Oracle Corporation, OpenIndiana delivers a complete, installable system integrating the illumos kernel with a traditional desktop environment and modern software suites.",
     "what_is_it": "OpenIndiana is a full, turnkey operating system distribution that packages the foundational illumos-gate core (SunOS 5.11 kernel, OpenZFS, DTrace, Zones, SMF) into installable ISO media. It provides a familiar MATE desktop environment, text-mode server installers, and a complete open-source application stack managed via the network-centric Image Packaging System (IPS).",
     "origin_and_opensolaris_continuity": "When Oracle discontinued OpenSolaris in 2010, the community organized under the illumos project umbrella to maintain open-source Solaris computing. OpenIndiana was launched as the flagship distribution intended to preserve the OpenSolaris user experience, maintaining continuity for system administrators, developers, and researchers familiar with Sun Microsystems' enterprise workflows and administrative tools.",
-    "desktop_environment_and_tooling": "The desktop edition of OpenIndiana provides the lightweight MATE 1.28 desktop environment, which carries forward the intuitive user experience of GNOME 2 originally popularized by OpenSolaris. The distribution ships graphical configuration utilities, the Marco window manager, development tools (GCC 13/14, Clang, Python, Perl), and standard open-source desktop applications including Firefox and LibreOffice.",
-    "package_management_and_boot_environments": "OpenIndiana utilizes the Image Packaging System (IPS), operated through the pkg command-line utility and connected to network repositories. IPS is deeply integrated with the OpenZFS file system: when updating system components or packages, the beadm utility automatically clones and stages a new boot environment. If a package upgrade causes issues, the administrator can seamlessly select and reboot into the prior boot environment from the boot menu without risk of data loss.",
-    "release_model_and_platforms": "OpenIndiana is developed under a continuous rolling-release model called OpenIndiana Hipster. Users receive daily rolling package updates, with periodic official ISO snapshot releases published semiannually (including snapshots 2024.04, 2025.10, and 2026.04). The primary supported platform is 64-bit x86_64, with active community efforts continuing maintenance for SPARC hardware.",
+    "desktop_environment_and_tooling": "OpenIndiana Hipster provides a complete graphical desktop environment built around MATE, preserving the classic Unix workstation paradigm originally popularized by the Java Desktop System and GNOME 2 on Solaris. The desktop is closely integrated with illumos storage features, notably through Time Slider, a graphical snapshot management applet integrated into the Caja file manager that enables users to browse, compare, and restore historical ZFS directory snapshots effortlessly. Audio output is managed through Boomer, the native Open Sound System (OSSv4) subsystem embedded in the illumos kernel, while graphical display services are powered by the X.Org server with open-source drivers for Intel and AMD GPUs. Automated network profile management is supported by Network Auto-Magic (NWAM), enabling seamless transitions between Ethernet and wireless interfaces.",
+    "package_management_and_boot_environments": "Software management in OpenIndiana relies on the Image Packaging System (IPS), operated primarily through the command-line utility `pkg`. IPS is an enterprise-grade, network-native package manager that treats software updates as transactional operations. Software packages are published to network repositories known as publishers (with `openindiana.org` as the primary publisher). When system updates or kernel upgrades are performed, IPS automatically provisions a new OpenZFS boot environment using the `beadm` utility before applying changes. The existing operating system environment remains untouched, and the newly updated environment is activated upon reboot. If an upgrade encounters issues, users can instantly revert to previous boot environments via the GRUB boot menu.",
+    "release_model_and_platforms": "OpenIndiana follows a continuous rolling-release distribution model under the project name OpenIndiana Hipster. Software packages, security patches, and kernel enhancements tracking upstream illumos-gate are continuously built and made available via the Hipster package publisher. Periodically, the project generates updated installation media (providing both Live GUI desktop images and minimal text-mode server installers) targeted exclusively at 64-bit x86-64 hardware platforms. OpenIndiana serves as an accessible bridge for developers, administrators, and enthusiasts wishing to explore illumos, DTrace, and OpenZFS within an interactive workstation environment.",
+    "installers_and_hardware_requirements": "The official documentation describes two installation media: a live installer intended for workstations and a text installer intended for servers. Recommended specifications are a 64-bit processor, at least 20 GB of disk space and 2 GB of RAM, with 4 GB or more advised for desktop use; the default swap file is sized at 50% of installed memory, bounded between 512 MB and 32 GB. Snapshots of the Hipster branch are published roughly every six months, and the legacy oi-dev-151x branch is no longer maintained — the documentation recommends a clean install over an in-place upgrade from that branch.",
+    "security_maintenance_and_platform_scope": "OpenIndiana states that it seeks to mitigate all known flaws quickly on the maintained Hipster branch, relying on user-submitted tickets in the project bug tracker, and it publishes no fixed support period per snapshot; the documentation warns that Hipster is a rapid development branch where caution is warranted in mission-critical production. On platform scope, the project FAQ states that Hipster is not currently available on SPARC and points to other illumos distributions (DilOS, OpenSXCE, Tribblix) and to commercial Oracle Solaris for SPARC hardware. The 2026-04 snapshot announcement referenced by this entry reports SPARC porting work; the two project sources diverge and the current status is left unresolved here.",
     "advantages": [
       "Direct open-source successor to OpenSolaris, preserving familiar administrative tools and SunOS workflows",
       "Native OpenZFS file system coupled with automated IPS boot environments (beadm) for risk-free upgrades",
@@ -48,7 +50,8 @@
       "Mainstream desktop users requiring automated proprietary gaming clients, Steam Proton, and Bluetooth tooling",
       "Users looking for extensive Linux binary package repositories (such as Debian apt or Fedora rpm)"
     ],
-    "verdict": "OpenIndiana is the premier desktop and workstation distribution of the illumos ecosystem. By pairing the robust SunOS kernel and OpenZFS foundation with the Image Packaging System and a reliable MATE desktop, it keeps the spirit, power, and architectural elegance of OpenSolaris thriving in modern computing."
+    "verdict": "OpenIndiana is a desktop- and workstation-oriented distribution of the illumos ecosystem. By pairing the SunOS kernel and OpenZFS with the Image Packaging System and a MATE desktop, it continues the OpenSolaris codebase on illumos.",
+    "community_hardware_compatibility_list": "The project maintains a community hardware compatibility list, published in its documentation as a page named Systems and organised in three tables: laptops, workstations and servers. Each row gives the manufacturer, the model, whether the system works (yes or no), notes or specific usage instructions, and the contributor who reported the entry. The list is contributed by users rather than issued by a certification programme, and a failing entry stays visible with its symptom instead of being removed.\n\nThe laptop table, consulted on 2026-10-18, includes the Acer Aspire One ZG8 reported as working, the Acer Aspire AS3810T reported as not working because it hangs after the operating system banner when booting from a USB DVD, the Dell Latitude D420 reported as not working, and the HP EliteBook 2170p reported as not working with the hipster-20190308 image because wireless does not work, with a reference to the bug report. The same page lists, among servers, the HP ProLiant Microserver N40L and the SuperMicro SuperServer 6016T-MTHF as working without special drivers, and the Zotac Zbox ID-18U as working except for Intel graphics, limited to VGA, and USB 3, for which no driver is available.\n\nThe page metadata gives a creation date of 2019-07-29 and a last update of 2026-05-24, which situates the list in time and dates its most recent revision."
   },
   "relations": [
     {
@@ -79,10 +82,10 @@
   },
   "sources": [
     {
-      "title": "OpenIndiana Project Official Portal & Mission",
-      "url": "https://www.openindiana.org/",
-      "type": "official",
-      "date": "2024-04-28"
+      "title": "About OpenIndiana — héritage OpenSolaris, base illumos, MATE et IPS",
+      "url": "https://docs.openindiana.org/misc/openindiana/",
+      "type": "official_documentation",
+      "date": "2026-10-16"
     },
     {
       "title": "OpenIndiana Hipster 2026.04 Snapshot Announcement",
@@ -101,6 +104,18 @@
       "url": "https://www.openindiana.org/downloads/",
       "type": "official",
       "date": "2026-05-05"
+    },
+    {
+      "title": "OpenIndiana Docs - Community hardware compatibility list, Systems",
+      "url": "https://docs.openindiana.org/community-hcl/systems/",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "illumos - projet amont, distributions en aval",
+      "url": "https://www.illumos.org/",
+      "type": "official",
+      "date": "2026-10-18"
     }
   ]
 }

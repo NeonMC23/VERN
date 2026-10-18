@@ -19,20 +19,24 @@
     "sparc (community)"
   ],
   "license": "Common Development and Distribution License (CDDL 1.0)",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "illumos is an open-source Unix operating system project founded in August 2010 by Garrett D'Amore and key Sun Microsystems engineers. Created as a community fork of OpenSolaris (specifically the OS/Net or ON consolidation) following the acquisition of Sun by Oracle Corporation, illumos preserves and advances the open-source legacy of Solaris technologies in a truly independent, community-governed project.",
     "what_is_it": "illumos is not a turnkey end-user operating system distribution; rather, it is a software consolidation (illumos-gate) that forms the core foundation of an operating system. Analogous to kernel.org for Linux or the base source tree for BSD, illumos provides the SunOS 5.11 kernel, device drivers, core system libraries, and fundamental administrative utilities, from which independent distributions such as OpenIndiana, OmniOS, SmartOS, and Tribblix are built.",
     "origin_and_opensolaris_fork": "When Oracle closed Solaris source repositories in 2010, the open-source OpenSolaris project was effectively discontinued. In response, Garrett D'Amore launched illumos to replace the remaining closed-source binary components of OpenSolaris (such as libc_i18n and certain cryptographic modules) with clean, open implementations. The project is governed as a meritocratic community supported by the illumos Foundation, Oxide Computer Company, MNX Solutions, and independent contributors.",
-    "foundational_technologies": "illumos is the ancestral home and ongoing custodian of landmark enterprise operating system technologies: OpenZFS for transactional copy-on-write storage and self-healing data integrity; DTrace for real-time kernel and userland dynamic tracing; Solaris Zones for lightweight container virtualization (including native zones and Linux LX brand emulation); Crossbow for advanced network virtualization (VNICs and virtual switches); SMF (Service Management Facility); and FMA (Fault Management Architecture).",
-    "virtualization_and_modern_hypervisors": "Beyond operating system-level Zones virtualization, illumos incorporates hardware virtualization through ported hypervisors, notably KVM (Kernel-based Virtual Machine, adapted by Joyent) and bhyve (ported from FreeBSD). This allows illumos-based systems to execute guest operating systems including Linux, FreeBSD, and Windows alongside native multi-tenant Zones on high-density servers.",
-    "maintenance_and_architecture": "illumos is developed continuously in the illumos-gate git repository with daily commits integrating hardware drivers, security fixes, and performance enhancements. It primarily targets the 64-bit x86_64 (amd64) architecture, with a specialized community branch maintaining SPARC processor support. The project guarantees strict binary ABI backward compatibility for Solaris 10 and 11 applications.",
+    "foundational_technologies": "illumos is the ancestral custodian and primary upstream development repository for iconic enterprise Unix technologies originally created at Sun Microsystems. The consolidation maintains the core Unix SVR4 operating system kernel, the libc C standard library, network protocol stacks, and foundational administration tools. Key among these is OpenZFS, the advanced copy-on-write 128-bit file system that originated in OpenSolaris. illumos also develops DTrace, the dynamic tracing framework capable of inspecting kernel probes, lock contention, and user-space execution in real time without downtime. In addition, Crossbow provides built-in network virtualization, allowing administrators to create virtual network interfaces (VNICs), virtual switches (etherstubs), and hardware bandwidth flow controls entirely within the operating system kernel. Service supervision is orchestrated by the Service Management Facility (SMF), which manages dependency graphs and automatically restarts faulted daemons.",
+    "virtualization_and_modern_hypervisors": "illumos provides a dual-tiered virtualization architecture combining lightweight operating-system containers with full hardware hypervisors. At the OS level, Solaris Zones provide isolated user-space environments sharing the host kernel with negligible virtualization overhead, enforced resource caps, and dedicated ZFS datasets. For workloads requiring non-native operating systems, illumos distributions integrate hardware-accelerated hypervisors: a ported implementation of KVM and modern bhyve virtualization (originally from FreeBSD), running directly on illumos kernel abstractions. This allows illumos-based hosts to execute Linux, Windows, and BSD virtual machines concurrently with bare-metal speed while benefiting from ZFS storage snapshots and Crossbow networking.",
+    "maintenance_and_architecture": "Development of illumos occurs transparently in the `illumos-gate` source repository under the governance of the illumos Advocate team. Contributions undergo rigorous peer review and integration testing, adhering to strict coding guidelines and long-term backwards compatibility commitments. illumos concentrates on 64-bit x86 (x86-64) hardware architectures, providing enterprise-grade multi-socket processor support, high-density memory scaling, and modern NVMe storage controllers. While illumos does not produce desktop installers or pre-packaged end-user distributions itself, its code forms the shared upstream base for specialized downstream distributions such as OmniOS Community Edition, SmartOS, and OpenIndiana.",
+    "security_disclosure_and_cve_coordination": "illumos runs a coordinated disclosure process because it supplies several downstream distributions. Vulnerabilities are reported confidentially to security@illumos.org, whose PGP key is published on the project security page; the security team analyses the report, reserves a CVE identifier before any public disclosure, coordinates a fix with the downstream security contacts, and sets an embargo date. The fix lands in illumos-gate on that date, and downstream distributions may not integrate it earlier than illumos-gate itself; the announcement is then sent to the illumos-developer list and the CVE record is completed within 48 hours of publication. When a vulnerability is disclosed publicly without prior coordination, the team announces any available mitigation first and then prepares a fix.",
+    "downstream_distributions_and_installation_paths": "The illumos consolidation is distributed as source and consumed through downstream distributions rather than through a single installer: the project points new users to OmniOS, OpenIndiana and Tribblix, and states that installation can be carried out in a virtual machine or on bare metal. A full list of distributions is maintained on the project site so that a user can choose the one matching a given use case. The same page describes the user base as a mix of volunteers and companies building products on top of the consolidation, which is why the installation path is a distribution choice rather than a property of the base system.",
+    "ips_packaging_and_repository_model": "The gate delivers its own software as IPS packages, the Image Packaging System introduced with OpenSolaris and documented in its man pages as `pkg(7)`. The gate does not merely consume a repository: it builds one. Each deliverable is described by a manifest under `usr/src/pkg/manifests`, publication targets process those manifests, resolve inter-package dependencies with `pkgdepend resolve` and applies transformations with `pkgmogrify`, and separate debug and non-debug repositories are produced. The same tree carries an incorporation manifest, `osnet-incorporation`, which pins the versions of the packages that make up the consolidation, so a downstream distribution inherits a coherent set rather than an arbitrary latest-version selection. What the gate publishes is a repository, not an installable system: each distribution that builds on illumos republishes these packages in its own repository with its own installer, which is why package operations are documented by the distributions and not by the project.",
+    "flag_days_and_build_compatibility": "The project publishes dated flag days - notices sent to the developer mailing list when a change forces downstream builders to act - and keeps them archived by year. The 2024 entries record a change of default VERSION handling on 2024-09-03, moving the value from `env/illumos` into the nightly script, and a compatibility break on 2024-03-14 requiring source trees to match once change 16344 reaches a build machine. Earlier entries show the same pattern applied to toolchain and interface changes: GCC 10 became the primary compiler on 2023-04-13 after GCC 7 in 2019, `awk(1)` was replaced by `nawk(1)` on 2020-04-21, and smatch was enabled by default in the build on 2019-07-18. For a distribution maintaining its own gate, each notice marks a point where its patches and build recipes must be revalidated rather than merged.",
     "advantages": [
-      "Industry-defining observability and system tracing with native DTrace and MDB",
+      "System observability and tracing with native DTrace and MDB",
       "Native OpenZFS file system providing complete data integrity, snapshots, and volume pooling",
       "Robust containerization via Solaris Zones and network virtualization via Crossbow VNICs",
       "Hardware-accelerated virtual machine hosting with integrated KVM and bhyve hypervisors",
-      "Strict SunOS 5.11 binary ABI compatibility and legendary enterprise operating system stability"
+      "Strict SunOS 5.11 binary ABI compatibility and enterprise operating system stability"
     ],
     "disadvantages": [
       "Does not produce an installable standalone end-user ISO image (requires an illumos distribution)",
@@ -42,13 +46,13 @@
     "who_is_it_for": [
       "Operating system engineers, kernel developers, and distribution maintainers building specialized Unix platforms",
       "Enterprise infrastructure architects operating high-scale cloud hypervisors and storage appliances",
-      "Researchers and performance engineers requiring unmatched system introspection via DTrace"
+      "Researchers and performance engineers requiring system introspection via DTrace"
     ],
     "who_is_it_not_for": [
       "Casual PC desktop users looking for a plug-and-play desktop operating system with graphical installers",
       "Organizations reliant on proprietary commercial vendor drivers and certified desktop peripheral suites"
     ],
-    "verdict": "illumos is a monumental achievement in open-source systems engineering. By safeguarding the extraordinary architectural achievements of OpenSolaris—ZFS, DTrace, Zones, and Crossbow—and maintaining an impeccably stable core, it remains the vital foundation for high-reliability Unix distributions and modern cloud storage infrastructure."
+    "verdict": "illumos is an open-source Unix kernel and core system derived from OpenSolaris. It maintains the ZFS, DTrace, Zones, and Crossbow subsystems and serves as the foundation of several illumos distributions and storage platforms."
   },
   "relations": [
     {
@@ -94,6 +98,24 @@
       "url": "https://github.com/illumos/illumos-gate",
       "type": "official",
       "date": "2026-05-01"
+    },
+    {
+      "title": "illumos — Security Information (politique de divulgation, CVE, embargo, clé PGP)",
+      "url": "https://illumos.org/docs/security/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "illumos-gate: packaging README describing IPS manifests, repository build and incorporation packages",
+      "url": "https://github.com/illumos/illumos-gate/blob/master/usr/src/pkg/README.pkg",
+      "type": "official_source_tree_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "illumos documentation: flag days archive with dated build and interface notices",
+      "url": "https://illumos.org/docs/developers/flagdays/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

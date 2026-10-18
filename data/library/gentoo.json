@@ -248,11 +248,11 @@
   ],
   "sources": [
     {
-      "title": "Gentoo Linux Official Portal",
-      "url": "https://www.gentoo.org/",
+      "title": "About Gentoo — official introduction (Portage, USE flags)",
+      "url": "https://www.gentoo.org/get-started/about/",
       "type": "official_documentation",
-      "date": "2026-09-25",
-      "accessed": "2026-09-25",
+      "date": "2026-10-16",
+      "accessed": "2026-10-16",
       "author": "Gentoo Authors"
     },
     {
@@ -320,5 +320,5 @@
       "author": "Gentoo Portage Project"
     }
   ],
-  "last_verified": "2026-09-25"
+  "last_verified": "2026-10-16"
 }

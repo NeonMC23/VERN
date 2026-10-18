@@ -28,17 +28,21 @@
     "vax"
   ],
   "license": "BSD Licenses (2-clause and 3-clause BSD)",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "NetBSD is a free, fast, secure, and highly portable Unix-like operating system descendant of 386BSD and 4.4BSD-Lite. Founded in March 1993, the project is famously guided by the motto 'Of course it runs NetBSD', reflecting its dedication to hardware portability, clean code quality, and architectural modularity across modern multicore workstations and historic or experimental architectures.",
-    "what_is_it": "NetBSD is an independent, complete operating system that develops its kernel, device drivers, C runtime library, system toolchain, and core userland utilities in a single unified source tree. Beyond classic desktop and server workloads, NetBSD serves as a premier research and embedded platform due to its pioneering Anykernel technology (rump kernels) and the multiplatform pkgsrc packaging framework.",
+    "what_is_it": "NetBSD is an independent, complete operating system that develops its kernel, device drivers, C runtime library, system toolchain, and core userland utilities in a single unified source tree. Beyond classic desktop and server workloads, NetBSD is also used as a research and embedded platform, notably through its Anykernel technology (rump kernels) and the multiplatform pkgsrc packaging framework.",
     "origin_and_portability": "Originating in 1993 through the collaboration of Chris Demetriou, Theo de Raadt, Adam Glass, and Charles Hannum, NetBSD established a rigorous separation between Machine-Independent (MI) and Machine-Dependent (MD) source code. This structural discipline enables NetBSD to run on dozens of hardware platforms spanning 16 distinct CPU machine architectures while maintaining complete code clarity.",
-    "kernel_architecture_and_rump": "The NetBSD monolithic kernel is complemented by the groundbreaking Anykernel architecture developed by Antti Kantee. Known as Rump Kernels, this design allows unmodified NetBSD kernel drivers, file systems, and TCP/IP network stacks to be compiled and executed directly as userspace libraries (librump) or microkernels, enabling robust fuzzing, virtualization, and testing without risking host kernel panics.",
-    "build_system_and_pkgsrc": "NetBSD features an integrated, host-independent cross-compilation system centered on build.sh. Any developer can build the entire operating system, kernel, and userland binaries from scratch for any supported target architecture from any host operating system (including Linux and macOS) without requiring root privileges. Software package management is provided by pkgsrc, a portable framework offering over 25,000 packages using the pkgin binary package manager or bmake source compilation.",
-    "release_engineering_and_maintenance": "The project follows a stable release engineering model. The NetBSD 10 release branch introduced major performance gains including per-directory red-black tree path lookups, radix tree virtual memory improvements, POSIX ACLs, WireGuard VPN support, and the Adiantum disk cipher in cgd(4). Following NetBSD 10.0 in March 2024 and 10.1 in December 2024, NetBSD 10.2 was officially published on September 15, 2026, while the 11.0 branch undergoes release candidates.",
+    "kernel_architecture_and_rump": "The NetBSD monolithic kernel is complemented by the anykernel architecture developed by Antti Kantee through Rump Kernels. Rump Kernels allow unmodified NetBSD kernel drivers, network stacks, and file systems to be compiled and executed directly as user-space libraries or inside hypercalls on top of POSIX hosts or bare-metal hypervisors. This design decouples core operating system services from monolithic kernel address space, facilitating rapid driver testing, user-space network fuzzing, and isolated microservice execution without root privileges. In addition, NetBSD incorporates advanced proactive memory exploit mitigations, enforcing executable space protection (W^X / PaX NOEXEC), kernel Address Space Layout Randomization (kASLR), and position-independent executables (PIE) across supported Tier-1 architectures.",
+    "build_system_and_pkgsrc": "NetBSD features an integrated, host-independent cross-compilation infrastructure centered on the `build.sh` shell script. Any developer or administrator on a standard POSIX system (including Linux, macOS, or other BSDs) can cross-compile an entire NetBSD operating system release—including the kernel, user-space utilities, toolchain, and bootable install media—for any target architecture without requiring administrative root permissions or specialized cross-tool packages. The compilation toolchain establishes isolated tool and destination directories (`TOOLDIR` and `DESTDIR`), guaranteeing deterministic, reproducible build artifacts. Third-party software is managed via pkgsrc (the Package Source Collection), NetBSD's portable packaging framework that provides more than 30,000 packages. Because pkgsrc operates independently of the host operating system, it is widely utilized across non-NetBSD platforms, offering automated source compilation, binary package caching with `pkgin`, and cryptographically signed package manifests.",
+    "release_engineering_and_maintenance": "The project follows a disciplined release engineering model governed by the NetBSD Core Group and Release Engineering Team. Releases are categorized into formal major versions (such as the NetBSD 10 release series), maintenance point releases providing security errata and critical stability backports, and the continuous development branch known as NetBSD-current. Hardware platforms are organized into distinct tiers: Tier-1 architectures (such as amd64, i386, and modern aarch64) receive official binary releases, complete package sets, and active automated regression testing, while Tier-2 architectures are maintained on a best-effort basis by volunteer community maintainers. Security advisories and patches are distributed through the NetBSD Security Officer team, accompanied by audited source patches and binary update tools.",
+    "installation_and_upgrade_path": "Installation is driven by `sysinst`, the installer described in the NetBSD Guide, which handles the partition layout chosen for the machine. The guide states one limit explicitly: `sysinst` cannot resize an existing partition, so space must be freed beforehand with a third-party tool, and it recommends giving NetBSD its own disk when several systems share a machine. Installing inside an emulator or a hypervisor is documented as the way to test the system without touching the host. Release media can also be produced from source: `./build.sh` accepts the `install-image` target for a bootable USB stick and `iso-image` for a CD or DVD image. The NetBSD 10.2 announcement describes the upgrade path as booting an installation image and selecting the Upgrade option, updating kernel and modules first and userspace afterwards, then adjusting the package repository URL.",
+    "netbsd_11_0_release_scope": "NetBSD 11.0 was released on 30 July 2026 and is the nineteenth major release of the project. It adds a new port to 64-bit RISC-V, covering StarFive JH71XX-based devices such as the VisionFive 2 and the PINE64 STAR64 as well as QEMU, and brings initial support for the Qualcomm Snapdragon X Elite platform. An existing installation is upgraded by booting an installation image and selecting the upgrade option; the announcement notes that with other methods the kernel and modules must be updated first, that package repository URLs have to be adjusted, and that new sets may need to be installed separately with sysinst.",
+    "standards_conformance_and_linux_compatibility": "The release announces enhanced compliance with POSIX.1-2024 and with the C23 programming interface standards. Support for Linux system calls in compat_linux is extended with epoll, implemented around kqueue, POSIX message queues, statx, readahead, close_range, waitid, renameat2, clone3, sync_file_range, syncfs and inotify. These additions extend the set of Linux binaries that can run without modification through the compatibility layer.",
+    "microvm_kernel_and_network_filtering": "NetBSD 11.0 introduces a dedicated MICROVM kernel for x86, covering both i386 and amd64, designed for very fast virtual machine boot through PVH boot, VirtIO MMIO and a set of kernel optimisations; the announcement gives a boot time of about 10 ms on 2020-era x86 CPUs. A new virt68k port runs the Motorola 68000 port inside QEMU with paravirtualised devices, and the npf firewall gains layer 2 filtering as well as filtering by user and group.",
     "advantages": [
-      "Exceptional hardware portability spanning modern 64-bit platforms and historic embedded architectures",
-      "Pioneering Anykernel rump kernel architecture enabling kernel subsystems to run safely in userspace",
+      "Hardware portability spanning modern 64-bit platforms and historic embedded architectures",
+      "Anykernel rump kernel architecture enabling kernel subsystems to run safely in userspace",
       "Robust, host-independent cross-compilation toolchain via build.sh without superuser privileges",
       "Portable pkgsrc package collection usable identically across NetBSD, Linux, macOS, and illumos",
       "Clean, unencumbered BSD licensing and strictly audited, highly readable codebase"
@@ -57,7 +61,7 @@
       "Gamers requiring modern proprietary anti-cheat engines, Steam Proton, and consumer GPU tooling",
       "Novice desktop users expecting graphical automated control centers and zero-terminal administration"
     ],
-    "verdict": "NetBSD stands as a triumph of portable operating system engineering. By prioritizing architectural clarity, cross-compilation rigor, and component modularity, it remains an indispensable asset for embedded devices, academic operating system research, and versatile Unix computing across dozens of hardware architectures."
+    "verdict": "NetBSD is an open-source Unix operating system engineered with an explicit focus on cross-platform portability, clean architectural design, and modularity. Its host-independent cross-compilation framework (build.sh), componentized anykernel architecture via Rump Kernels, and extensive multi-platform package ecosystem (pkgsrc) make it an adaptable environment for embedded systems, academic operating system research, and multi-architecture server infrastructure."
   },
   "relations": [
     {
@@ -111,6 +115,18 @@
       "url": "https://blog.netbsd.org/tnf/entry/runnable_userspace_meta_programs_in",
       "type": "technical_specification",
       "date": "2020-07-13"
+    },
+    {
+      "title": "The NetBSD Guide — Installing NetBSD (sysinst, préparation, limitations de partitionnement)",
+      "url": "https://www.netbsd.org/docs/guide/en/chap-inst.html",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Announcing NetBSD 11.0 (30 July 2026)",
+      "url": "https://www.netbsd.org/releases/formal-11/NetBSD-11.0.html",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

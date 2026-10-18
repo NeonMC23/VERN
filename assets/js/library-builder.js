@@ -34,6 +34,7 @@
   }
 
   function normalizeId(raw) {
+    if (!isStr(raw)) return null;
     var id = decodeURIComponent(raw).trim().toLowerCase();
     return ID_PATTERN.test(id) ? id : null;
   }
@@ -256,7 +257,7 @@
   /* ------------------------------------------------ references & links */
 
   function refCard(ref) {
-    var id = normalizeId(ref.id);
+    var id = isStr(ref.id) ? normalizeId(ref.id) : null;
     var label = isStr(ref.name) ? ref.name : (isStr(ref.id) ? humanize(ref.id) : null);
     if (!label) return null;
 
@@ -272,7 +273,8 @@
       ]
     })];
     if (qualifier) children.push(el("span", { className: "ref__role", text: qualifier }));
-    if (isStr(ref.note)) children.push(el("span", { className: "muted", text: ref.note }));
+    var noteText = isStr(ref.note) ? ref.note : (isStr(ref.description) ? ref.description : null);
+    if (noteText) children.push(el("span", { className: "muted", text: noteText }));
 
     // Optimistically a link; resolveReferences() downgrades it if no JSON exists.
     if (id) {

@@ -29,12 +29,18 @@
     "firewall_filtering_and_nat": "La sécurité périmétrique et le filtrage des paquets de VyOS reposent sur le sous-système Netfilter et le moteur moderne NFTables du noyau Linux. La plateforme offre un pare-feu avec inspection d'état (stateful inspection) capable d'analyser les flux par règles séquentielles ou au travers d'une architecture par zones étanches (Zone-Based Firewall). Les fonctionnalités de translation d'adresses réseau couvrent le NAT source (SNAT/Masquerade), le NAT de destination (DNAT/Port Forwarding), le NAT un-pour-un (1:1 NAT), ainsi que les mécanismes de transition IPv6 tels que NAT64 et NPTv6. VyOS intègre également la limitation de débit, le marquage de paquets QoS et la synchronisation des tables de connexion conntrack entre plusieurs nœuds en haute disponibilité.",
     "vpn_protocols_and_secure_tunneling": "VyOS intègre un éventail exceptionnellement large de protocoles d'interconnexion sécurisée et de tunneling. Pour les réseaux privés virtuels point-à-point et nomades, il propose une prise en charge native de WireGuard directement intégrée au noyau Linux pour un chiffrement moderne à très haute performance, ainsi qu'une pile IPsec complète motorisée par StrongSwan (supportant IKEv1, IKEv2, les interfaces de tunnel virtuelles VTI, les routes BGP sur IPsec et l'authentification centralisée RADIUS/EAP). S'y ajoutent les protocoles OpenVPN (modes client et serveur), L2TP/IPsec, GRE, VXLAN pour les superpositions réseau de centre de données, et les tunnels d'encapsulation IPv6/IPv4 (SIT, IPIP, IP6IP6).",
     "cli_experience_and_netdevops_automation": "L'ergonomie de gestion de VyOS se distingue par son interface de ligne de commande (CLI) hiérarchique modale inspirée de JunOS. Elle sépare rigoureusement le mode opérationnel de consultation et de diagnostic (`show`, `monitor`, `ping`) du mode de configuration (`configure`, `set`, `delete`). Les modifications apportées restent dans un espace tampon non validé jusqu'à l'exécution de la commande atomique `commit`, avec possibilité d'annulation instantanée (`rollback`) en cas d'erreur. Pour les environnements de déploiement automatisé (NetDevOps) et de virtualisation cloud (KVM, VMware, AWS, Azure, GCP), VyOS propose une API HTTP RESTful complète, des modules d'automatisation Ansible certifiés et des fournisseurs Terraform permettant d'intégrer le routage dans des chaînes d'infrastructure en tant que code (IaC).",
+    "history_and_release_names": "Le projet naît en 2013, lorsque Brocade arrête l'édition communautaire de Vyatta : une équipe d'ingénieurs reprend la dernière version communautaire et publie VyOS 1.0 le 22 décembre 2013. La page officielle retrace les jalons suivants : Hydrogen en 2013, Helium en 2014, Crux en 2019, Equuleus en 2021, Sagitta en 2024 et Circinus en 2026. Ces noms servent de repères de version majeure dans la documentation du projet.",
+    "release_channels_rolling_and_lts": "Deux canaux coexistent. La documentation en ligne correspond à la version « rolling release », mise à jour en continu. Les versions LTS sont distribuées séparément : VyOS 1.5.1 LTS est téléchargeable depuis le portail de support et via les places de marché AWS, Azure et Google Cloud. Le projet indique que l'accès aux versions LTS est également ouvert aux contributeurs, dans le cadre des contreparties de contribution.",
+    "distribution_and_deployment_targets": "VyOS se déploie sur du matériel x86-64 standard, sur des machines virtuelles et dans les nuages publics. La page officielle cite les places de marché AWS, Azure et Google Cloud, ainsi qu'un déploiement sur l'offre Dell NativeEdge pour le calcul en périphérie. Le modèle de distribution repose sur des images système mises à jour par le mécanisme propre à VyOS, indépendamment des dépôts Debian de la distribution sous-jacente.",
+    "documentation_structure": "Le guide utilisateur est organisé en sections stables : historique, premiers pas, installation et gestion des images, démarrage rapide, interface de ligne de commande, vue d'ensemble et guide de configuration, mode opérationnel, automatisation, dépannage, plans de configuration, plan de données VPP, développement et contribution. Une section dédiée au contrôle de couverture et à la rédaction de la documentation figure également dans le guide.",
+    "image_based_package_delivery_and_update_check": "VyOS does not expose a distribution package manager to the administrator. The unit of deployment is the system image: `add system image` fetches an image from a URL or a local file, or accepts the keyword `latest`, and the configuration survives the operation. The `latest` keyword resolves through the URL set with `system update-check url`, which the documentation shows pointing at the rolling-release version metadata for AMD64, and the note attached to that option requires the URL to be configured for the installed release; after rebooting, the running image is read back with `show version`. The update-check URL therefore has to match the branch the system is meant to follow, and an installation kept on a numbered release is not served by the rolling metadata.",
+    "system_image_layout_and_boot_architecture": "An installation keeps one directory per system image rather than overwriting a single root filesystem. The documentation describes the boot device holding a `/boot` directory with GRUB and a squashfs image named after the build, for example `2025.07.16-0020-rolling.squashfs`; each image directory contains the kernel, a compressed root filesystem and a directory for persistent storage such as the configuration. During boot the system extracts the OS image into memory and mounts the live-rw subdirectories that hold persistent configuration, which the documentation presents as the reason the system starts from a fixed, non-persistent image. Several releases can coexist on one device: `show system image` lists them with the default and running flags, `set system image default-boot` chooses the image started at the next boot, and `delete system image` removes an unused one.",
     "advantages": [
       "Solution entièrement logicielle s'affranchissant des matériels réseau propriétaires fermés et des coûts de licences restrictifs.",
       "Pile de routage dynamique exhaustive propulsée par FRRouting (BGP avec RPKI, OSPFv2/v3, IS-IS, Babel, VRRP).",
-      "Interface de commande CLI hiérarchique transactionnelle de premier ordre avec validation atomique (`commit`) et annulation (`rollback`).",
+      "Interface de commande CLI hiérarchique transactionnelle avec validation atomique (`commit`) et annulation (`rollback`).",
       "Prise en charge native étendue de multiples protocoles VPN industriels modernes (WireGuard, IPsec IKEv2, OpenVPN, VXLAN).",
-      "Excellente adaptabilité aux environnements virtualisés (KVM, Proxmox, VMware ESXi) et aux instances de cloud public.",
+      "Adaptabilité aux environnements virtualisés (KVM, Proxmox, VMware ESXi) et aux instances de cloud public.",
       "Conception modulaire entièrement automatisable au moyen d'une API REST, d'Ansible et de Terraform pour le NetDevOps."
     ],
     "disadvantages": [
@@ -56,32 +62,32 @@
       "Postes de travail bureautiques individuels ou machines de calcul n'assurant aucun rôle de passerelle ou de routage réseau.",
       "Environnements exigeant des fonctionnalités de filtrage de contenu web applicatif clé-en-main (antivirus de flux, filtrage parental)."
     ],
-    "verdict": "VyOS représente l'archétype du routeur logiciel d'entreprise open source moderne. En unifiant sur une base Debian durcie les technologies réseau les plus avancées (FRRouting, NFTables, WireGuard) sous une interface de commande transactionnelle remarquable et une API moderne, il procure une flexibilité, une puissance et une fiabilité comparables à celles des équipements constructeurs propriétaires de haut niveau."
+    "verdict": "VyOS est un routeur logiciel open source. En unifiant sur une base Debian durcie FRRouting, NFTables et WireGuard sous une interface de commande transactionnelle et une API, il s'adresse aux déploiements de routage d'entreprise."
   },
   "relations": [
     {
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "description": "Distribution Linux fournissant les paquets de base et l'environnement d'exécution du système réseau."
+      "note": "Distribution Linux fournissant les paquets de base et l'environnement d'exécution du système réseau."
     },
     {
       "id": "pfsense",
       "name": "pfSense",
       "type": "alternative",
-      "description": "Système de pare-feu et routeur open source basé sur FreeBSD offrant une interface graphique web pour réseaux d'entreprise."
+      "note": "Système de pare-feu et routeur open source basé sur FreeBSD offrant une interface graphique web pour réseaux d'entreprise."
     },
     {
       "id": "opnsense",
       "name": "OPNsense",
       "type": "alternative",
-      "description": "Solution de pare-feu et de routage basée sur HardenedBSD/FreeBSD dotée d'une interface web moderne."
+      "note": "Solution de pare-feu et de routage basée sur HardenedBSD/FreeBSD dotée d'une interface web moderne."
     },
     {
       "id": "openwrt",
       "name": "OpenWrt",
       "type": "alternative",
-      "description": "Système d'exploitation réseau embarqué léger orienté principalement vers les routeurs grand public et les réseaux sans fil."
+      "note": "Système d'exploitation réseau embarqué léger orienté principalement vers les routeurs grand public et les réseaux sans fil."
     }
   ],
   "links": [
@@ -113,6 +119,24 @@
       "title": "Portail officiel et modèle de distribution VyOS",
       "url": "https://vyos.io/",
       "type": "official_site"
+    },
+    {
+      "title": "VyOS : histoire du projet et jalons de version",
+      "url": "https://vyos.io/about-us/",
+      "type": "official_site",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "VyOS documentation: updating VyOS and configuring the update-check URL",
+      "url": "https://docs.vyos.io/en/latest/installation/update.html",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "VyOS documentation: image management, image layout and system rollback",
+      "url": "https://docs.vyos.io/en/latest/installation/image.html",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

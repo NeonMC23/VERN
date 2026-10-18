@@ -24,9 +24,9 @@
     "i386"
   ],
   "license": "GPL-2.0-or-later, GPL-3.0-or-later, MIT, BSD, and redistributable firmware",
-  "last_verified": "2026-10-01",
+  "last_verified": "2026-10-16",
   "content": {
-    "introduction": "antiX is an open-source, systemd-free Linux distribution designed to deliver a responsive, flexible computing experience on both older hardware and modern personal computers. Initiated in 2007 by the developer known as anticapitalista, antiX originated as an ultra-lightweight spin of SimplyMEPIS designed for systems with constrained resources. Over time, antiX evolved into a standalone distribution directly coupled to Debian Stable, renowned for its modular multi-init architecture ('Init Diversity'), its lightweight window manager stack (IceWM, Fluxbox, JWM, herbstluftwm), its versatile Live USB persistence mechanisms, and its continued production of 32-bit x86 installation media alongside 64-bit images.",
+    "introduction": "antiX is an open-source, systemd-free Linux distribution designed to deliver a responsive, flexible computing experience on both older hardware and modern personal computers. Initiated in 2007 by the developer known as anticapitalista, antiX originated as an ultra-lightweight spin of SimplyMEPIS designed for systems with constrained resources. Over time, antiX evolved into a standalone distribution directly coupled to Debian Stable, built around a modular multi-init architecture ('Init Diversity'), its lightweight window manager stack (IceWM, Fluxbox, JWM, herbstluftwm), its versatile Live USB persistence mechanisms, and its continued production of 32-bit x86 installation media alongside 64-bit images.",
     "what_is_it": "Technically, antiX is a downstream derivative of Debian Stable engineered without systemd and without elogind. It provides a choice of five alternative init systems (runit by default, sysVinit, dinit, s6-rc, and s6-66), uses the lightweight `seatd` daemon and `turnstile` for user session handling, and deploys window managers rather than full desktop environment suites. System administration is centralized in the antiX Control Centre (`antix-cc`), while system installation and remastering are handled by `minstall` (inherited from MEPIS) and `iso-snapshot`.",
     "origin_and_history": "antiX began in 2007 when anticapitalista created an experimental lightweight remaster of MEPIS 3.4.3 called 'flepis' (Fluxbox-MEPIS) to run on legacy personal computers unable to support KDE. The first official release, antiX-M6.5 'Spartacus', was published in July 2007 as an officially sanctioned MEPIS respin. As MEPIS alternated between Ubuntu and Debian bases, antiX progressively severed its MEPIS desktop dependencies to align directly on Debian Stable. In 2013-2014, antiX developers partnered with MEPIS community members to launch MX Linux. Recent milestones include antiX-23 ('Arditi del Popolo', Debian 12 Bookworm) and antiX-26 / 26.1 ('Stephen Kapos', released in March and September 2026, based on Debian 13 Trixie with five systemd-free init systems).",
     "governance_and_organization": "antiX is developed and governed by an informal, non-commercial community led by its founder anticapitalista, with key technical contributions from developers such as ProwlerGR (who architected the multi-init framework and Turnstile integration). The distribution operates with no commercial parent entity, no enterprise sales tier, and no venture capital. Infrastructure costs for domain hosting and package build servers are sustained through community contributions and donations.",
@@ -56,7 +56,7 @@
     ],
     "who_is_it_for": "antiX is ideal for owners of older or low-specification personal computers (netbooks, legacy laptops, vintage desktops), minimalist Linux users, privacy advocates, and administrators seeking a resilient, systemd-free Debian desktop with advanced Live USB persistence and remastering tools.",
     "who_is_it_not_for": "It is not suitable for users seeking heavy desktop environments (such as GNOME or KDE Plasma out of the box), enterprise server setups mandating standard systemd unit files, or ARM-based single-board computers.",
-    "verdict": "antiX is an exemplary model of independent, lightweight Linux engineering. By combining Debian Stable's immense package repository with a principled systemd-free architecture, multi-init diversity led by runit, and class-leading Live persistence utilities, it keeps vintage and modern x86 hardware fully productive without corporate telemetry or resource bloat."
+    "verdict": "antiX is an independent, lightweight Linux distribution based on Debian Stable, engineered specifically for resource-constrained and legacy x86 hardware. By implementing an init-agnostic architecture without systemd (offering runit by default alongside sysVinit, dinit, and s6), utilizing lightweight window managers such as IceWM and Fluxbox, and integrating persistent Live execution and remastering tools, it provides a functional operating environment for 32-bit and 64-bit systems with low memory consumption."
   },
   "components": [
     {
@@ -192,7 +192,7 @@
   },
   "sources": [
     {
-      "title": "antiX Official Website \u2014 About antiX and System Architecture",
+      "title": "antiX Official Website — About antiX and System Architecture",
       "url": "https://antixlinux.com/about/",
       "type": "official",
       "accessed": "2026-10-01",
@@ -200,7 +200,7 @@
       "note": "Official portal documenting systemd-free architecture, hardware requirements, Live persistence, and editions."
     },
     {
-      "title": "antiX Releases \u2014 antiX-26.1 and antiX-26 Release Announcements",
+      "title": "antiX Releases — antiX-26.1 and antiX-26 Release Announcements",
       "url": "https://antixlinux.com/category/releases/",
       "type": "official",
       "accessed": "2026-10-01",
@@ -208,7 +208,7 @@
       "note": "Official release announcements for antiX-26 and 26.1 based on Debian 13 Trixie, detailing 5 init systems."
     },
     {
-      "title": "antiX Technical Documentation \u2014 antiX-23.2 Init-Diversity Architecture",
+      "title": "antiX Technical Documentation — antiX-23.2 Init-Diversity Architecture",
       "url": "https://antixlinux.com/antix-23-2-init-diversity-2025-remaster-edition/",
       "type": "documentation",
       "accessed": "2026-10-01",
@@ -216,7 +216,7 @@
       "note": "Detailed architectural breakdown of runit, sysVinit, dinit, and s6 integration without systemd dependencies."
     },
     {
-      "title": "antiX News \u2014 Kernel Upgrades and Maintenance Advisory",
+      "title": "antiX News — Kernel Upgrades and Maintenance Advisory",
       "url": "https://antixlinux.com/category/news/",
       "type": "official",
       "accessed": "2026-10-01",
@@ -224,7 +224,7 @@
       "note": "Documentation on custom antiX kernel maintenance covering Linux 6.6 LTS and 5.10 Legacy branches."
     },
     {
-      "title": "antiX Historical Forum Archive \u2014 History of antiX and MEPIS Origins",
+      "title": "antiX Historical Forum Archive — History of antiX and MEPIS Origins",
       "url": "https://antixlinux.com/forum-archive/history-of-antix-t2412.html",
       "type": "documentation",
       "accessed": "2026-10-01",
@@ -232,7 +232,7 @@
       "note": "Primary historical account by anticapitalista detailing the 2007 creation of antiX-M6.5 Spartacus from MEPIS."
     },
     {
-      "title": "DistroWatch \u2014 antiX Distribution Profile and Technical Overview",
+      "title": "DistroWatch — antiX Distribution Profile and Technical Overview",
       "url": "https://distrowatch.com/table.php?distribution=antix",
       "type": "secondary",
       "accessed": "2026-10-01",
@@ -240,7 +240,7 @@
       "note": "Independent technical summary of antiX package versions, init systems, desktop environments, and 32-bit support."
     },
     {
-      "title": "SourceForge \u2014 antiX Linux ISO Files and Development Testing Archive",
+      "title": "SourceForge — antiX Linux ISO Files and Development Testing Archive",
       "url": "https://sourceforge.net/projects/antix-linux/",
       "type": "repository",
       "accessed": "2026-10-01",

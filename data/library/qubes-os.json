@@ -34,6 +34,8 @@
     "uefi_and_secure_boot_policy": "Qubes OS does not support UEFI Secure Boot out of the box. The official installation guide instructs users to disable Secure Boot in their computer's UEFI configuration. The Xen hypervisor binary (`xen.efi`) and the Qubes Linux kernel images are not signed with a standard Microsoft-approved third-party UEFI shim certificate, necessitating that Secure Boot remain disabled for standard operation.",
     "threat_model_and_security_limits": "Qubes OS provides strong defense against application vulnerabilities and network attacks by containing compromises within individual qubes. However, the project explicitly documents the boundaries of its threat model:\n\n- Hypervisor Vulnerabilities: A zero-day privilege escalation or VM escape exploit in the Xen hypervisor can break isolation and compromise `dom0`.\n- Microarchitectural Side-Channels: Hardware CPU speculative execution vulnerabilities (Spectre, Meltdown, Rowhammer) can allow cross-VM information leakage if not mitigated by microcode.\n- Pre-Boot and Hardware Compromise: Malicious firmware rootkits, hardware keyloggers, or physical tampering prior to installation circumvent software virtualization guarantees.\n- User Operational Errors: Placing sensitive banking credentials and untrusted web browsing within the same AppVM eliminates the benefits of compartmentalization.",
     "privacy_and_telemetry": "Qubes OS enforces an absolute zero-telemetry policy. The administrative domain `dom0` contains no networking drivers or active TCP/IP stacks, making background telemetry technically impossible from the core system. Package updates for `dom0` are routed through a dedicated update proxy qube, downloaded into a temporary staging area, and cryptographically verified against Qubes master GPG signing keys before installation.",
+    "package_management_and_update_flow": "Package management follows the compartmentalisation the system applies elsewhere. dom0 has no network access, so an update is split into two phases: the UpdateVM resolves and downloads the packages, then hands them to dom0, which verifies and installs them. The documentation states that the role of UpdateVM can be assigned to any qube and that it defaults to the firewall qube, and it presents the split as a reduction of the attack surface, because the network and metadata processing code leaves the trusted computing base. The same page records the limit of that scheme: the project cannot prevent a malicious RPM from exploiting a bug in the signature verification step, and any distribution or package manager would carry a comparable exposure. Installation in dom0 is a single documented command, `sudo qubes-dom0-update anti-evil-maid`, with `--enablerepo=` to enable optional repositories and `--action=` to pass an operation to dnf, including `--action=downgrade` and `--action=reinstall`. For templates and standalones, updates are launched from the Qubes Update tool, which reports each qube as `YES`, `NO`, `MAYBE` or `OBSOLETE` and records the date of the last check.",
+    "release_support_window_and_dom0_base": "A release is supported for six months after the following major or minor release, and the documentation publishes the resulting calendar: Release 4.2 opened on 18 December 2023 and closed on 21 June 2026, while Release 4.3 opened on 21 December 2025 and is the supported release at the time of consultation. Patch releases are explicitly not separate releases: installing 4.0 and updating it fully yields the same system as installing 4.0.1, so they do not appear as rows in the table. The base of dom0 is documented release by release - Fedora 13 for Release 1, Fedora 25 for 4.0, Fedora 32 for 4.1, Fedora 37 for 4.2 and Fedora 41 for 4.3 - and the project explains that it keeps providing updates for the security-critical components regardless of the support status of that base distribution. Template support is delegated to the upstream distribution, with Fedora and Debian as the officially supported templates; for Release 4.3 the table lists Fedora 43 and 44 and Debian 13.",
     "advantages": [
       "Robust compartmentalization isolating applications, device drivers, and networks into separate Xen virtual domains",
       "TemplateVM architecture allowing centralized, immutable software updates across all derived AppVMs",
@@ -61,7 +63,8 @@
       "Users running lightweight hardware (4 GB RAM, slow spinning hard drives, or unsupported budget processors)",
       "Beginners seeking a traditional turnkey desktop operating system without manual domain management",
       "Users on non-x86 hardware platforms such as ARM64 laptops or Apple Silicon devices"
-    ]
+    ],
+    "verdict": "Qubes OS implements a compartmentalized desktop security model by isolating user domains, networking, storage, and peripherals into separate Xen-based virtual machines. It provides isolation against lateral exploitation and persistent compromise, targeting high-threat environments, while requiring substantial RAM, multi-core virtualization hardware, and a disciplined operational workflow."
   },
   "components": [
     {
@@ -204,6 +207,24 @@
       "url": "https://distrowatch.com/table.php?distribution=qubes",
       "type": "metadata",
       "date": "2026-10-11"
+    },
+    {
+      "title": "Qubes OS documentation: installing software in dom0, UpdateVM and qubes-dom0-update",
+      "url": "https://github.com/QubesOS/qubes-doc/blob/master/user/advanced-topics/how-to-install-software-in-dom0.rst",
+      "type": "official_repository_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Qubes OS documentation: how to update, Qubes Update tool and qube status values",
+      "url": "https://github.com/QubesOS/qubes-doc/blob/master/user/how-to-guides/how-to-update.rst",
+      "type": "official_repository_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Qubes OS documentation: supported releases, support calendar and dom0 base distribution",
+      "url": "https://github.com/QubesOS/qubes-doc/blob/master/user/downloading-installing-upgrading/supported-releases.rst",
+      "type": "official_repository_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

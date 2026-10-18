@@ -18,14 +18,15 @@
     "x86-64"
   ],
   "license": "Open Source (GPL, LGPL et licences libres KDE)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-17",
   "content": {
     "introduction": "Plasma Mobile est une initiative libre de la communauté internationale KDE visant à fournir une interface utilisateur tactile et un environnement applicatif complet pour smartphones et tablettes.",
     "what_is_it": "Développé depuis 2015 sur les fondations de l'environnement de bureau KDE Plasma, Plasma Mobile adapte la pile graphique et logicielle KDE aux facteurs de forme mobiles sans rupture avec l'écosystème Linux traditionnel.",
-    "desktop_heritage_and_wayland_stack": "Plasma Mobile repose directement sur les composants centraux de KDE : le compositeur KWin sous protocole d'affichage Wayland, la collection modulaire KDE Frameworks 6 et le moteur de rendu Qt Quick. KWin gère l'accélération matérielle graphique OpenGL ES/Vulkan, la rotation automatique de l'affichage et les animations tactiles de transition de fenêtres.",
-    "kirigami_framework_and_adaptive_apps": "L'écosystème d'applications natives s'appuie sur le framework d'interface Kirigami, conçu par KDE avec QML pour créer des interfaces convergentes capables de s'adapter dynamiquement aux écrans étroits tactiles comme aux écrans larges de bureau. Plasma Mobile inclut des applications dédiées telles que Plasma Phonebook, Spacebar (messagerie SMS), Plasma Camera, Elisa (audio) et Angelfish (navigateur web basé sur Qt WebEngine).",
-    "telephony_audio_and_hardware_integration": "La gestion des communications cellulaires est déléguée aux démons ModemManager et oFono, assurant les appels vocaux et la transmission de données mobiles. Le routage audio est pris en charge par PipeWire et PulseAudio, tandis que le retour haptique exploite le démon standard feedbackd. L'environnement intègre également une gestion de conteneurs Waydroid pour l'exécution d'applications Android compatibles.",
-    "technical_constraints_and_limits": "Plasma Mobile ne constitue pas une distribution autonome avec son propre noyau, mais un environnement intégré au sein de systèmes hôtes tels que postmarketOS, Mobian, Fedora Mobility ou Manjaro ARM. L'autonomie de la batterie et la stabilité matérielle dépendent étroitement de la maturité des pilotes du noyau Linux mainline pour chaque processeur (SoC) mobile.",
+    "desktop_heritage_and_wayland_stack": "Plasma Mobile adapte les technologies éprouvées de KDE Plasma Desktop aux contraintes ergonomiques et matérielles des téléphones intelligents et des tablettes tactiles. L'environnement s'exécute nativement au-dessus du compositeur KWin Wayland, configuré pour gérer les protocoles d'interaction tactile modernes (wl_touch, text-input-v3 pour la saisie virtuelle avec Maliit Keyboard) et le basculement dynamique d'orientation d'écran. Le shell mobile présente une interface articulée autour d'un panneau supérieur rétractable (regroupant les notifications système et les réglages rapides), d'une barre de navigation inférieure avec gestionnaire de tâches sous forme de cartes d'aperçu d'applications, et d'un lanceur d'applications paginé.",
+    "kirigami_framework_and_adaptive_apps": "Au cœur de l'écosystème Plasma Mobile se trouve Kirigami, une bibliothèque de composants d'interface utilisateur basée sur Qt Quick / QML développée par la communauté KDE. Kirigami est conçu pour créer des applications convergentes capables d'adapter dynamiquement leur présentation entre un format compact sur écran de smartphone et un affichage étendu sur moniteur ou tablette lorsque l'appareil est connecté à une station d'accueil. L'écosystème comprend une collection d'applications natives coordonnées : le navigateur web Angelfish, le gestionnaire de fichiers Index, le lecteur audio Elisa, la galerie d'images Koko, l'agenda Kalendar, ainsi que les clients de messagerie NeoChat (Matrix) et Tokodon (Mastodon), bénéficiant tous de la cohérence visuelle Breeze.",
+    "telephony_audio_and_hardware_integration": "Pour la gestion des fonctionnalités téléphoniques et sans fil, Plasma Mobile s'interface avec les couches logicielles sous-jacentes du monde Linux embarqué. La téléphonie vocale, l'envoi de SMS et la connectivité cellulaire sont gérés par le démon ModemManager (ou oFono selon la distribution) et l'application Plasma Phonebook / Dialler. Le routage et le contrôle des flux audio (commutation entre écouteur interne, haut-parleur principal, casque filaire et profil Bluetooth HSP/HFP) sont assurés par le serveur multimédia PipeWire et son gestionnaire de sessions WirePlumber. La gestion de l'alimentation électrique s'appuie sur le démon power-profiles-daemon et des mécanismes de veille profonde (suspend-to-RAM assisté par microcontrôleur Crust sur les puces Allwinner), cruciaux pour préserver l'autonomie sur batterie des terminaux mobiles.",
+    "technical_constraints_and_limits": "Il est important de distinguer Plasma Mobile (qui est un environnement d'interface utilisateur et une suite applicative) du système d'exploitation complet qui l'héberge. Plasma Mobile n'est pas distribué sous la forme d'un système autonome, mais est packagé par des distributions Linux mobiles indépendantes telles que Nura (ex-postmarketOS, sur socle Alpine Linux avec noyaux mainline), Mobian (sur socle Debian GNU/Linux) et Manjaro ARM. Si le projet fonctionne de façon mature sur des appareils de développement communautaires comme le PinePhone, le PinePhone Pro et le Volla Phone, son utilisation quotidienne sur des smartphones grand public portés depuis Android (OnePlus 6/6T, Xiaomi Pocophone F1) demeure sujette à des limitations matérielles : consommation d'énergie élevée en veille, pilotes d'accélération matérielle de l'appareil photo encore expérimentaux et absence d'écosystème bancaire ou d'applications commerciales propriétaires dépendantes des services Google Play.",
+    "distribution_and_installation": "Plasma Mobile est distribué sous forme de paquets ou d'images par plusieurs distributions, recensées sur la page officielle « Getting Plasma Mobile ». Nura (ex-postmarketOS) fournit des images préconstruites et, pour les appareils non couverts, une installation manuelle via pmbootstrap. Debian et Mobian publient des images flashables avec Plasma Mobile, en version stable et en images hebdomadaires issues de testing ; le paquet `plasma-mobile` est disponible dans Debian et Arch Linux. openSUSE fournit des constructions Tumbleweed pour PinePhone, Fedora un spin officiel KDE Mobile, et KDE neon une image destinée aux tablettes Intel non-Android, aux PC et aux machines virtuelles. Les images personnalisées peuvent être testées dans QEMU.",
     "advantages": [
       "Interface utilisateur entièrement libre et modulaire issue de la communauté KDE",
       "Pile d'affichage Wayland native pilotée par le compositeur KWin avec accélération matérielle",
@@ -40,7 +41,7 @@
       "Intégration des capteurs photo complexes et du matériel audio cellulaire encore variable selon les appareils"
     ],
     "who_is_it_for": [
-      "Utilisateurs de téléphones Linux autonomes (PinePhone, PinePhone Pro, Librem 5, terminaux postmarketOS)",
+      "Utilisateurs de téléphones Linux autonomes (PinePhone, PinePhone Pro, Librem 5, terminaux Nura (ex-postmarketOS))",
       "Développeurs Qt, QML et KDE souhaitant concevoir des applications convergentes multiplateformes",
       "Administrateurs et passionnés de logiciel libre recherchant une pile mobile ouverte et inspectable"
     ],
@@ -49,32 +50,32 @@
       "Personnes dépendantes d'une autonomie de batterie standard de plusieurs jours sans configuration",
       "Utilisateurs recherchant un appareil prêt à l'emploi garanti sans configuration de distribution"
     ],
-    "verdict": "Plasma Mobile constitue un environnement mobile ouvert majeur pour le monde Linux, transposant l'écosystème KDE sur ordiphones avec une architecture Wayland et un framework convergent de référence."
+    "verdict": "Plasma Mobile est un environnement mobile ouvert pour le monde Linux, qui transpose l'écosystème KDE sur ordiphones avec une architecture Wayland et un framework convergent."
   },
   "relations": [
     {
       "id": "postmarketos",
-      "name": "postmarketOS",
+      "name": "Nura",
       "type": "related",
-      "description": "Distribution Linux mobile basée sur Alpine proposant officiellement l'interface Plasma Mobile."
+      "note": "Distribution Linux mobile basée sur Alpine proposant officiellement l'interface Plasma Mobile."
     },
     {
       "id": "mobian",
       "name": "Mobian",
       "type": "related",
-      "description": "Distribution Debian pour appareils mobiles intégrant des images avec l'environnement Plasma Mobile."
+      "note": "Distribution Debian pour appareils mobiles intégrant des images avec l'environnement Plasma Mobile."
     },
     {
       "id": "kde-neon",
       "name": "KDE neon",
       "type": "related",
-      "description": "Distribution de référence du projet KDE partageant le socle applicatif et les composants Plasma."
+      "note": "Distribution de référence du projet KDE partageant le socle applicatif et les composants Plasma."
     },
     {
       "id": "ubuntu-touch",
       "name": "Ubuntu Touch",
       "type": "alternative",
-      "description": "Système d'exploitation mobile alternatif issu de Canonical maintenu par la fondation UBports."
+      "note": "Système d'exploitation mobile alternatif issu de Canonical maintenu par la fondation UBports."
     }
   ],
   "links": [
@@ -99,13 +100,19 @@
     },
     {
       "title": "Documentation d'architecture et Kirigami de la communauté KDE",
-      "url": "https://develop.kde.org/docs/kirigami/",
+      "url": "https://develop.kde.org/frameworks/kirigami/",
       "type": "documentation"
     },
     {
       "title": "Notes de publication KDE Plasma et feuille de route mobile",
       "url": "https://kde.org/announcements/",
       "type": "release_notes"
+    },
+    {
+      "title": "Plasma Mobile — Getting Plasma Mobile (canaux de distribution et d'installation)",
+      "url": "https://plasma-mobile.org/get/",
+      "type": "official_documentation",
+      "note": "page consultée le 2026-10-17"
     }
   ]
 }

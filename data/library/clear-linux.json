@@ -23,7 +23,7 @@
   "content": {
     "introduction": "Clear Linux OS was an open-source, rolling-release Linux operating system created and developed by Intel Corporation's Open Source Technology Center. Designed to demonstrate the performance potential of the Linux kernel and user space on modern x86_64 microprocessors, Clear Linux pioneered stateless filesystem architecture, bundle-based software delivery, and compiler auto-optimization across cloud, container, and server workloads.",
     "what_is_it": "Clear Linux operated as an independent operating system that omitted traditional package managers like RPM or APT at runtime, delivering software in cohesive, pre-resolved functional bundles managed by `swupd`. It separated vendor configurations from user modifications, allowing seamless system updates, instant rollbacks, and automated integrity validation.",
-    "origin_and_history": "Clear Linux was launched by Intel on February 6, 2015, initially serving as a high-efficiency platform for cloud workloads, micro-virtual machines (Intel Clear Containers), and high-performance computing. Over its ten-year lifespan, the project expanded to support developer workstations and cloud appliances, introducing pioneering compiler optimizations that influenced upstream Linux standards.",
+    "origin_and_history": "Clear Linux was launched by Intel on February 6, 2015, initially serving as a high-efficiency platform for cloud workloads, micro-virtual machines (Intel Clear Containers), and high-performance computing. Over its ten-year lifespan, the project expanded to support developer workstations and cloud appliances, introducing compiler optimizations such as function multi-versioning.",
     "intel_development_and_discontinuation": "On July 18, 2025, Intel announced the end of life of Clear Linux OS, halting security advisories, bug fixes, and development releases. On August 7, 2025, Intel archived all repositories under the `clearlinux` GitHub organization in read-only status. The public website and update mirrors were subsequently sunset in early 2026, transitioning the operating system into a historical open-source archive.",
     "stateless_architecture": "Clear Linux pioneered a strict stateless design. The operating system stored default configurations and system binaries entirely within `/usr/share/defaults/` and `/usr`, keeping `/etc` clean of vendor defaults. User-defined modifications in `/etc` and persistent data in `/var` overrode vendor defaults without risking configuration drift or update collisions.",
     "swupd_package_and_bundle_system": "Software management was governed by the Software Update Tool (`swupd`). Rather than individual packages, applications were distributed as 'bundles' (such as `os-core`, `c-basic`, or `containers-basic`) containing all required libraries and dependencies. System updates were assigned sequential version integers, with `swupd` downloading binary diffs atomically and offering automated self-healing via `swupd verify --fix`.",
@@ -34,8 +34,11 @@
     "clr_installer_and_storage": "System installations were performed via `clr-installer`, an independent Go-based tool providing an interactive text user interface (TUI), graphical installer, and automated YAML/JSON installation scripts. Clear Linux required UEFI firmware and GPT partition tables, utilizing `systemd-boot` as default bootloader and Ext4 or Btrfs as root filesystem.",
     "security_model_and_secure_boot": "Security architecture relied on cryptographically signed update manifests verified by `swupd`, strict stateless path isolation, and UEFI Secure Boot validation. Clear Linux did not enforce SELinux or AppArmor by default, relying instead on container sandboxing and stateless system separation.",
     "telemetry_and_privacy": "Clear Linux included `telemetrics-client`, an opt-out telemetry service designed to record software crash dumps and hardware capability metrics for Intel engineering. Users could disable telemetry at any time via `telemctl opt-out`.",
+    "bundle_based_package_model": "Clear Linux does not install packages one by one. The documentation states that swupd replaces APT or YUM by installing bundles rather than packages, and defines a bundle as everything needed to deliver a software capability, the smallest unit the system manages, shipped with all of its dependencies instead of pulling a cascade of dependent packages. Bundles are declared in a separate repository: each file under `bundles/` is processed through m4 macros, lines beginning with `#` are ignored, and the result is the list of packages that compose the bundle. Every bundle carries a status that governs its lifecycle - work in progress, active, deprecated or pending deletion - and the declared rule is that deprecation precedes removal by two format bumps, after which the bundle moves to pending deletion. Installation and removal are single commands, `swupd bundle-add <bundle name>` and `swupd bundle-remove <bundle name>`, and the same tool checks the integrity of the system with `swupd verify`.",
+    "file_level_versioning_and_update_servers": "Versioning is defined at file level rather than at package level. The documentation explains that the system generates an entirely new operating system version with any set of software changes, including downgrades or removals, and that a single number describes the versions of all the software on the system: every release carrying the same number is guaranteed to contain the same versions of software, so two machines at the same version are comparable without further inspection. Updates are served by documented roles: a version server answers the update check, a content server provides file and metadata content for all versions, and a content URL server publishes manifests that list and describe file contents, symbolic links and directories. The client fetches only the files that changed, using binary deltas, and the documentation gives the order of magnitude of a security patch at 15 KB. The commands shown are `sudo swupd check-update`, `sudo swupd update --version <version number>`, `swupd info` and `swupd update <version number>`, the last allowing a target version rather than only the latest.",
+    "project_maintenance_state_and_public_documentation": "The repositories that carry the update client, the bundle definitions and the mixer tool each open with the same notice: the project is discontinued, Intel will no longer maintain it, Intel does not guarantee development or support including maintenance, bug fixes, new releases or updates, patches are no longer accepted, and a downstream user who needs the software should create a fork. The same repositories are archived on the hosting platform, which makes their state readable but no longer editable. The bundle documentation still names the contribution channel used before discontinuation - a mailing list and an IRC channel - and describes its review rules, including the requirement that bundle files contain a completed header used to generate the software catalogue. The official documentation site referenced by the client README, `clearlinux.org`, no longer resolves at the time of consultation, and the release and download hosts do not answer either; this unavailability of the web front end is recorded here as such, and does not by itself establish the absence of any function described in the archived sources.",
     "advantages": [
-      "Demonstrated industry-leading x86_64 CPU execution speeds through compiler optimizations and FMV.",
+      "x86_64 CPU execution speed through compiler optimizations and FMV.",
       "Stateless architecture separating system defaults from user configuration.",
       "Atomic, binary delta system updates and instant rollback capabilities via swupd.",
       "Automated system integrity verification and self-healing with swupd verify --fix.",
@@ -49,7 +52,9 @@
       "Strict x86_64 microarchitecture requirements excluding older processors and non-x86 architectures (ARM/Power)."
     ],
     "who_is_it_for": "Clear Linux is preserved as an educational and historical reference for systems architects, compiler researchers, and Linux performance engineers studying stateless system design and aggressive compiler optimizations.",
-    "who_is_it_not_for": "Clear Linux is not suitable for production deployments, everyday desktop use, or environments requiring ongoing security maintenance and vendor support."
+    "who_is_it_not_for": "Clear Linux is not suitable for production deployments, everyday desktop use, or environments requiring ongoing security maintenance and vendor support.",
+    "verdict": "Clear Linux was a performance-oriented Linux distribution engineered by Intel, combining compiler optimizations with a stateless system design. Its scaling back of active desktop development and its reduced package selection limited it primarily to benchmark and server evaluation scenarios.",
+    "desktop_and_server_editions_and_image_verification": "The download page of the project offered two installation editions, both distributed as live images. Clear Linux OS Desktop started a live graphical desktop and used a graphical installer to install on bare metal, while Clear Linux OS Server started a lighter live system operated from the command line and used a text-based installer. The same page published container images, a Docker image, and preconfigured images for cloud and hypervisor environments, including a Hyper-V generation 1 image for Microsoft Azure.\n\nEach image was accompanied by a SHA512 checksum and by a signature, and the page carried a dedicated step, labelled Validate your download, inside a Before You Install section that also covered recommended system requirements and a system compatibility check. Two build identifiers appear in the page: 41840 is named as the last known ISO build, to be used when the automatically generated latest link is broken, and 43800 is offered as a downloadable build. The About page adds that more than 90% of the components were packaged by an internal tool and that the distribution reached more than 4000 components.\n\nThese elements describe the shape of the published artefacts, two editions, container and cloud images, checksums and signatures. They do not establish the state of any individual image, since the former download hosts no longer answer."
   },
   "components": [
     {
@@ -180,6 +185,30 @@
       "url": "https://distrowatch.com/table.php?distribution=clear",
       "type": "metadata",
       "date": "2026-10-02"
+    },
+    {
+      "title": "Clear Linux bundle definitions: README, bundle statuses and format bump rules",
+      "url": "https://github.com/clearlinux/clr-bundles",
+      "type": "archived_repository",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Clear Linux documentation: swupd guide, bundles, versioning, servers and commands",
+      "url": "https://github.com/clearlinux/clear-linux-documentation/blob/master/source/guides/clear/swupd.rst",
+      "type": "archived_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Clear Linux Project - Downloads, editions et verification",
+      "url": "https://clearlinux.github.io/downloads.html",
+      "type": "official",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "Clear Linux Project - About",
+      "url": "https://clearlinux.github.io/about.html",
+      "type": "official",
+      "date": "2026-10-18"
     }
   ]
 }

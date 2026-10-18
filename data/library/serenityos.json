@@ -1,0 +1,147 @@
+{
+  "id": "serenityos",
+  "name": "SerenityOS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation libre de type Unix écrit à partir de zéro en C++ moderne pour ordinateurs de bureau, associant une esthétique graphique inspirée des années 1990 à des mécanismes de sécurité avancés et un moteur web natif.",
+  "tags": [
+    "desktop",
+    "unix-like",
+    "cplusplus",
+    "monolithic",
+    "custom-toolkit",
+    "retro-ui",
+    "pledge-unveil",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "x86-32"
+  ],
+  "license": "Open Source (Licence 2-Clause BSD)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "SerenityOS est un système d'exploitation de bureau libre écrit intégralement à partir de zéro en langage C++ moderne. Initié en 2018 par le développeur Andreas Kling, le projet combine un cœur de type Unix préemptif avec l'ergonomie productive et l'identité graphique épurée des stations de travail de la fin des années 1990 (Windows 95/NT 4.0 et Classic Mac OS). Le projet se caractérise par une volonté délibérée de concevoir l'ensemble de la pile logicielle en interne, du noyau jusqu'au navigateur web, sans recourir à des bibliothèques tierces préexistantes.",
+    "what_is_it": "Techniquement, SerenityOS n'est pas une distribution Linux et n'emprunte pas le code d'un système BSD historique. Il s'agit d'un système complet comprenant un noyau monolithique préemptif, une bibliothèque utilitaire propriétaire (AK - Andreas's Kit) se substituant à la STL standard, un système de virtualisation de fichiers avec pilote Ext2FS autonome, un compositeur graphique dédié (WindowServer), une boîte à outils d'interface (LibGUI), et un moteur de rendu web complet (LibWeb/LibJS) à l'origine du navigateur multiplateforme Ladybird.",
+    "kernel_architecture_and_security": "Le noyau monolithique de SerenityOS gère la pagination de mémoire virtuelle, le multi-threading préemptif, les descripteurs de fichiers Unix et les sockets locaux. Sur le plan de la sécurité, le système s'est distingué en intégrant des primitives d'isolation de processus inspirées d'OpenBSD : les appels système `pledge()` (permettant à un processus d'abandonner définitivement l'accès à certaines familles d'appels système) et `unveil()` (restreignant de manière irréversible la visibilité de l'arborescence du système de fichiers). S'y ajoutent des protections modernes au niveau binaire : pages mémoire protégées par `W^X` (Write XOR Execute), sections mémoire en lecture seule post-initialisation et tables RELRO.",
+    "graphical_subsystems_windowserver_and_libgui": "La couche graphique de SerenityOS est assurée par `WindowServer`, un serveur d'affichage et compositeur fenêtré sur mesure communiquant avec les applications clientes par mémoire partagée et sockets Unix haute vitesse. La boîte à outils native `LibGUI` propose une hiérarchie de composants graphiques cohérente (menus déroulants, barres d'outils biseautées, arborescences de fichiers) appuyée sur la bibliothèque de rendu vectoriel et matriciel 2D `LibGfx`. L'environnement de bureau offre une fluidité visuelle instantanée, un mode multi-écrans, un gestionnaire de fenêtres spatial et une gestion fluide des thèmes graphiques personnalisables.",
+    "native_web_engine_libweb_and_ladybird": "L'un des accomplissements majeurs du projet est la création en interne d'un moteur de rendu web moderne complet, indépendant des géants du web (Blink, Gecko, WebKit). La bibliothèque `LibWeb` implémente le modèle de boîte CSS, le parseur HTML5 et un arbre DOM dont la durée de vie des objets est intégralement synchronisée avec le ramasse-miettes du moteur JavaScript `LibJS`. Ce travail a permis d'équiper SerenityOS d'un navigateur graphique natif performant, avant de donner naissance au projet dérivé multiplateforme **Ladybird**, désormais soutenu par une fondation indépendante.",
+    "applications_ecosystem_and_hardware_scope": "SerenityOS est fourni avec un écosystème logiciel natif d'une richesse singulière : éditeur de texte avec coloration syntaxique (TextEditor), logiciel de retouche d'images par calques (PixelPaint), lecteur audio, tableur, visionneuse de documents PDF, environnement de développement avec débogueur (HackStudio) et jeux (DOOM, Démineur). Conçu avant tout pour être exécuté au sein de l'émulateur QEMU, SerenityOS peut démarrer sur certaines configurations matérielles physiques x86 réelles (contrôleurs NVMe/AHCI, contrôleurs réseau Intel/Realtek), mais ne propose pas de support pour les puces Wi-Fi contemporaines ni d'accélération 3D matérielle pour les GPU modernes. Le développement adopte un modèle continu (rolling release) sous licence permissive 2-Clause BSD.",
+    "history_and_first_commit": "Le dépôt du projet compte son premier commit au 10 octobre 2018 ; la page anniversaire du site précise que des parties du code existaient avant cette date et que ce commit correspond à la mise en commun dans un dépôt partagé. Andreas Kling décrit l'objectif comme un mariage entre l'esthétique des logiciels de productivité de la fin des années 1990 et l'accessibilité des systèmes Unix de la fin des années 2000. Le développement se poursuit sur un rythme continu, sans versions numérotées publiées sur le site.",
+    "supported_platforms_and_build": "Le README du dépôt définit SerenityOS comme un système d'exploitation de type Unix graphique pour ordinateurs 64 bits x86, Arm et RISC-V. Le dépôt fournit des instructions de compilation (Build Instructions), des pages de manuel et un répertoire Ports pour les logiciels tiers adaptés. L'exécution de référence reste l'émulateur QEMU ; le noyau est monolithique et le système de fichiers natif est Ext2, avec un pilote développé dans le projet.",
+    "licensing_and_project_model": "Le code est placé sous licence BSD 2-clauses, indiquée en tête du dépôt GitHub. Le projet se présente comme communautaire, avec un serveur Discord, des pages de manuel en ligne et des instructions de contribution dans le dépôt. Le navigateur Ladybird, issu des bibliothèques LibWeb et LibJS développées pour SerenityOS, est désormais développé comme projet distinct doté d'une fondation indépendante, tandis que le système poursuit son propre cycle de développement.",
+    "documentation_and_community": "La documentation disponible se compose du site officiel (présentation, pages de manuel, FAQ), du dépôt GitHub (instructions de compilation, politique de contribution, politique de sécurité) et du serveur Discord cité comme canal d'échange. Les pages de manuel en ligne documentent les appels système et les outils du système. Le site ne publie pas de journal de versions séparé ni de calendrier de publication.",
+    "differences_with_neighbouring_systems": "SerenityOS ne reprend ni le noyau Linux ni le noyau d'un BSD : il fournit son propre noyau monolithique, sa bibliothèque C, son compositeur graphique et son moteur web. Il se distingue en cela de Redox OS, organisé autour d'un micro-noyau avec pilotes en espace utilisateur, et de Haiku, qui réimplémente les API de BeOS. À la différence des distributions Linux, il ne partage ni le noyau ni l'écosystème de paquets d'une distribution existante, ce qui limite la disponibilité de logiciels tiers aux ports réalisés dans le dépôt.",
+    "advantages": [
+      "Système d'exploitation entièrement développé en C++ moderne de manière cohérente, du noyau jusqu'au navigateur web.",
+      "Ergonomie visuelle et rapidité d'exécution remarquables inspirées de l'âge d'or des systèmes de bureau des années 1990.",
+      "Intégration de mécanismes de sécurité et de bac à sable avancés (`pledge`, `unveil`, W^X, RELRO).",
+      "Moteur web et moteur JavaScript entièrement développés en interne (LibWeb/LibJS) ayant donné naissance à Ladybird.",
+      "Écosystème riche d'applications natives intégrées et cohérentes couvrant la bureautique, le graphisme et la programmation.",
+      "Licence libre permissive 2-Clause BSD et développement totalement public et transparent."
+    ],
+    "disadvantages": [
+      "Système conçu principalement comme un projet pour passionnés et hackers, sans vocation à remplacer un OS de production industrielle.",
+      "Prise en charge matérielle physique restreinte (le système s'exécute quasi exclusivement en machine virtuelle QEMU).",
+      "Absence de prise en charge des protocoles sans fil Wi-Fi modernes et de l'accélération graphique matérielle 3D des GPU récents.",
+      "Absence de versions stables figées : le modèle de développement continu (rolling) peut entraîner des régressions ponctuelles.",
+      "Incompatibilité avec les écosystèmes applicatifs fermés ou les conteneurs Linux natifs."
+    ],
+    "who_is_it_for": [
+      "Développeurs passionnés de programmation système et d'architecture C++ souhaitant explorer une base de code lisible et cohérente.",
+      "Nostalgiques de l'ergonomie sobre et efficace des interfaces graphiques de bureau de la fin des années 1990.",
+      "Étudiants et ingénieurs en informatique désireux d'étudier la construction intégrale d'un système de type Unix et d'un moteur web.",
+      "Amateurs d'émulation système et de machines virtuelles légères avec démarrage instantané."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs grand public cherchant un système d'exploitation principal pour leur ordinateur portable physique au quotidien.",
+      "Professionnels dépendant de matériels informatiques récents avec périphériques Wi-Fi, Bluetooth et cartes graphiques 3D dédiées.",
+      "Administrateurs d'infrastructures de serveurs de centre de données exigeant des garanties de support d'entreprise et de haute disponibilité.",
+      "Utilisateurs nécessitant une suite bureautique commerciale propriétaire ou des outils de travail collaboratif en entreprise."
+    ],
+    "verdict": "SerenityOS est un système Unix-like développé en C++ par une communauté indépendante. Il comprend une interface graphique à l'esthétique rétro, des mécanismes d'isolation (`pledge`/`unveil`) et un moteur de rendu web autonome, et sert de plateforme d'expérimentation et d'apprentissage.",
+    "installation_sur_materiel_et_prerequis_de_compilation": "SerenityOS n'est pas distribué sous forme d'image d'installation préconstruite. Le guide d'installation sur matériel réel indique qu'aucune image de ce type n'est publiée et qu'une installation physique suppose de compiler soi-même une image depuis les sources. Le disque cible est effacé : le guide demande de sauvegarder les données avant toute écriture.\n\nLes exigences matérielles publiées sont précises : un disque SATA, NVMe ou USB d'au moins 2 GB, un processeur x86-64, au moins 256 MB de mémoire vive. Seuls les contrôleurs USB xHCI et UHCI sont pris en charge. Le système utilise le chargeur d'amorçage GRUB2, ce qui permet un amorçage multiple avec un autre système déjà installé. Le guide signale l'absence de prise en charge réelle du GPU : ni OpenGL, ni Vulkan, ni lecture vidéo accélérée, l'affichage reposant sur le framebuffer multiboot ou sur le framebuffer EFI GOP ; il signale aussi l'absence de prise en charge du Wi-Fi.\n\nLa compilation demande un compilateur hôte récent, GCC 14 ou Clang 17 et suivants, et une liste de dépendances installée au préalable. À titre d'exemple, la documentation donne pour Debian et Ubuntu la commande `sudo apt install build-essential cmake curl libmpfr-dev libmpc-dev libgmp-dev e2fsprogs ninja-build qemu-system-gui qemu-system-x86 qemu-utils ccache rsync unzip texinfo libssl-dev zlib1g-dev`, avec `fuse2fs` en option pour construire des images sans privilèges root.",
+    "depot_de_ports_et_scripts_de_construction": "Le logiciel tiers de SerenityOS est distribué par un arbre de ports, et non par un gestionnaire de paquets avec binaires précompilés. La foire aux questions du projet le formule nettement : SerenityOS n'a pas de gestionnaire de paquets de type Linux capable de télécharger des logiciels précompilés.\n\nChaque port est un répertoire contenant un script nommé `package.sh`, qui déclare le nom et la version du logiciel, ses dépendances, les fichiers à télécharger ainsi que les options de configuration et de compilation. L'installation d'un port se fait en se plaçant dans son répertoire puis en exécutant `./package.sh`. Le script `build_all.sh`, placé à la racine de l'arbre, installe tous les ports disponibles et accepte l'argument `clean` pour supprimer les fichiers de construction antérieurs. La variable `SERENITY_PORT_DIRS` permet de pointer vers un ou plusieurs répertoires de ports externes, ce qui autorise des ports tiers hors de l'arbre officiel.\n\nLa construction suppose que SerenityOS a déjà été compilé et que l'environnement de compilation est disponible. Les ports ne sont donc pas des paquets binaires installables sur un système quelconque : ce sont des recettes de compilation exécutées dans l'environnement du projet, et leur mise à jour suit les modifications de cet environnement plutôt qu'un cycle de publication séparé."
+  },
+  "relations": [
+    {
+      "id": "haiku",
+      "name": "Haiku",
+      "type": "alternative",
+      "note": "Système d'exploitation libre dédié au poste de travail personnel et conçu autour d'une interface graphique réactive."
+    },
+    {
+      "id": "redox-os",
+      "name": "Redox OS",
+      "type": "alternative",
+      "note": "Système d'exploitation libre moderne de type Unix réécrivant la pile système avec des garanties architecturales innovantes."
+    },
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "type": "related",
+      "note": "Système d'exploitation Unix libre dont SerenityOS s'inspire pour certains principes de conception de système de fichiers et d'outils."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel du projet SerenityOS",
+      "url": "https://serenityos.org/"
+    },
+    {
+      "label": "Pages de manuel officielles de SerenityOS",
+      "url": "https://man.serenityos.org/"
+    },
+    {
+      "label": "Dépôt de code source officiel SerenityOS (GitHub)",
+      "url": "https://github.com/SerenityOS/serenity"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel et articles d'architecture SerenityOS",
+      "url": "https://serenityos.org/happy/1st/",
+      "type": "official_site"
+    },
+    {
+      "title": "Documentation technique des mécanismes de sécurité et pages de manuel",
+      "url": "https://man.serenityos.org/",
+      "type": "documentation"
+    },
+    {
+      "title": "Dépôt officiel du code source et des sous-systèmes SerenityOS",
+      "url": "https://github.com/SerenityOS/serenity",
+      "type": "repository"
+    },
+    {
+      "title": "SerenityOS : présentation et objectifs du projet",
+      "url": "https://serenityos.org/",
+      "type": "official_site",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "SerenityOS - Bare-metal installation guide",
+      "url": "https://raw.githubusercontent.com/SerenityOS/serenity/master/Documentation/BareMetalInstallation.md",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "SerenityOS - Frequently asked questions",
+      "url": "https://raw.githubusercontent.com/SerenityOS/serenity/master/Documentation/FAQ.md",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "SerenityOS - Ports readme",
+      "url": "https://raw.githubusercontent.com/SerenityOS/serenity/master/Ports/README.md",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "SerenityOS - Build instructions",
+      "url": "https://raw.githubusercontent.com/SerenityOS/serenity/master/Documentation/BuildInstructions.md",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    }
+  ]
+}

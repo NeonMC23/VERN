@@ -37,6 +37,7 @@
     "application_ecosystem_and_containers": "Desktop applications are isolated from the immutable base through Flatpak, with Flathub configured out of the box through Discover or GNOME Software. Command-line development tools and non-native dependencies are containerized using Distrobox, Toolbx, or Boxkit, allowing users to run Debian, Ubuntu, Arch Linux, or Fedora development environments without layering packages onto the host root filesystem.",
     "security_and_secure_boot": "Bazzite operates with SELinux enabled in Enforcing mode by default. System container images published to GitHub Container Registry are cryptographically signed using Sigstore Cosign. UEFI Secure Boot is supported through the enrollment of Universal Blue's Machine Owner Key (MOK), requiring password verification during post-installation configuration.",
     "privacy_and_telemetry": "Bazzite does not implement custom telemetry tracking or data harvesting daemons. Network traffic is restricted to user-initiated tasks, package synchronization via Flathub, and OCI image update checks against GitHub Container Registry. Privacy parameters inherit upstream Fedora and Flatpak policies.",
+    "package_layering_and_preferred_install_paths": "On an image-based system the package model is layered rather than flat. Bazzite documents rpm-ostree as the mechanism for adding individual RPM packages on top of the immutable image, and states explicitly that this path is intended for system-level applications, libraries and dependencies rather than for ordinary software. The documentation lists the consequences: a layered package can pause system updates until it is removed, prevent rebasing to a different image, conflict with packages already part of the image, and lengthen download times as more layers accumulate. It therefore recommends Flatpak, Homebrew, containers, AppImage, Waydroid or a Windows compatibility layer first, and presents layering as a temporary measure. Third-party COPR repositories can be enabled and are explicitly discouraged; when a layered package breaks an upgrade, rpm-ostree reset removes every layered package and returns the system to its shipped image.",
     "advantages": [
       "Atomic image-based system updates eliminating partial update states and system breakage.",
       "Instant rollback to previous deployments via GRUB or command-line invocation.",
@@ -52,7 +53,8 @@
       "Higher initial disk space consumption compared to minimal desktop installations due to dual ostree deployments."
     ],
     "who_is_it_for": "Bazzite is designed for PC gamers, handheld console owners (Steam Deck, ROG Ally, Legion Go), and users seeking a maintenance-free, appliance-like Linux desktop experience with modern hardware driver support.",
-    "who_is_it_not_for": "Bazzite is not suitable for users requiring frequent host-level kernel patching, legacy systems lacking UEFI support, or administrators who rely on mutable system-wide package managers for legacy workstation setups."
+    "who_is_it_not_for": "Bazzite is not suitable for users requiring frequent host-level kernel patching, legacy systems lacking UEFI support, or administrators who rely on mutable system-wide package managers for legacy workstation setups.",
+    "verdict": "Bazzite provides a specialized, gaming-optimized immutable desktop image built upon Fedora Atomic Desktops. By preconfiguring Steam, proprietary graphics drivers, HDR support, and handheld compatibility (such as for the Steam Deck), it offers a turnkey gaming station with rollback resilience, though its container-centric workflow requires departure from traditional package management practices."
   },
   "components": [
     {
@@ -199,6 +201,12 @@
       "url": "https://distrowatch.com/table.php?distribution=bazzite",
       "type": "metadata",
       "date": "2026-10-02"
+    },
+    {
+      "title": "Bazzite documentation: package layering with rpm-ostree",
+      "url": "https://docs.bazzite.gg/Installing_and_Managing_Software/rpm-ostree/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

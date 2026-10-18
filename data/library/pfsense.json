@@ -60,7 +60,10 @@
       "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
       "DevOps teams requiring a modern native RESTful API out-of-the-box for infrastructure-as-code automation (better suited to OPNsense)",
       "Users seeking a simple plug-and-play home router without any network administration knowledge"
-    ]
+    ],
+    "verdict": "pfSense Community Edition is a FreeBSD-based network firewall and routing platform providing stateful filtering and VPN integration. It is deployed on physical and virtual perimeter systems; the community edition and the commercial editions follow separate release cadences.",
+    "installation_par_image_iso_et_etat_initial_du_pare_feu": "Netgate documents the installation in four stages: obtaining the installer, downloading the installation media, preparing that media, and performing the installation. Installation images are distributed as compressed archives that must be decompressed before writing, and the media are created either on a USB memstick or on a DVD. The installer then configures the platform and the system boots on the installed storage.\n\nThe first boot does not expose an open firewall. The documentation states that the WAN interface is blocked except for traffic coming from the LAN, that IPv4 NAT is configured, that an IPv4 DHCP server is enabled on the LAN, and that IPv6 autoconfiguration is provided by a DHCPv6 server together with SLAAC router advertisements. The DNS Resolver is active, SSH access is disabled, and the web interface answers on port 443 over HTTPS. The administrator signs in with the default credentials defined during installation and is expected to change them afterwards.\n\nInstallation is documented for dedicated hardware, and the page describing the post-installation state was last updated on 2025-12-16.",
+    "canal_de_publication_et_versions_maintenues": "pfSense software is published on two separate trains, and the releases page keeps their states apart. pfSense Plus, the edition used on Netgate appliances and in cloud marketplaces, is numbered by year and month: 26.07, 26.03.1 and 26.03 are listed as currently supported. pfSense Community Edition keeps the historical 2.x numbering: 2.9.0 and 2.8.1 are listed as currently supported. Releases that left support are still documented, under a separate heading, with their change notes: for Plus, 25.11.1, 25.11, 25.07.1, 25.07, 24.11 and older; for Community Edition, 2.8.0, 2.7.2, 2.7.1, 2.7.0, 2.6.0 and the 2.0 to 2.5 series.\n\nThe two trains therefore advance with distinct identifiers and distinct support states, and a Community Edition number does not correspond to a Plus number. Change notes exist for each release: the 2.9.0 notes record, among other changes, that the recommended TLS server certificate lifetime was lowered from 398 days to 200 days, following CA/Browser Forum baseline requirements for certificates issued between 2026-03-15 and 2027-03-15."
   },
   "components": [
     {
@@ -161,6 +164,42 @@
       "url": "https://distrowatch.com/table.php?distribution=pfsense",
       "type": "metadata",
       "date": "2026-10-11"
+    },
+    {
+      "title": "pfSense Documentation - Installation guide",
+      "url": "https://docs.netgate.com/pfsense/en/latest/install/",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "pfSense Documentation - Perform the installation",
+      "url": "https://docs.netgate.com/pfsense/en/latest/install/install-pfsense.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "pfSense Documentation - Prepare installation media",
+      "url": "https://docs.netgate.com/pfsense/en/latest/install/prepare-installer-media.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "pfSense Documentation - Download the installer image",
+      "url": "https://docs.netgate.com/pfsense/en/latest/install/download-installer-image.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "pfSense Documentation - Releases and supported versions",
+      "url": "https://docs.netgate.com/pfsense/en/latest/releases/index.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "pfSense 2.9.0 release notes",
+      "url": "https://docs.netgate.com/pfsense/en/latest/releases/2-9-0.html",
+      "type": "release_notes",
+      "date": "2026-10-18"
     }
   ]
 }

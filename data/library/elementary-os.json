@@ -20,7 +20,7 @@
     "x86_64"
   ],
   "license": "GPL-3.0-or-later, LGPL-3.0-or-later, MIT, and redistributable proprietary firmware/microcode",
-  "last_verified": "2026-09-25",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "elementary OS is an open-source, desktop operating system engineered to provide a cohesive, visually harmonized computing environment. Built upon the LTS releases of Ubuntu, elementary OS replaces traditional desktop suites with its own Pantheon desktop environment. Emphasizing typography, consistent layout spacing, and deliberate interface minimalism, the distribution relies on its custom Granite UI toolkit and the Vala programming language, while enforcing strict sandboxing and user consent protocols across its native application stack.",
     "what_is_it": "Technically, elementary OS is an Ubuntu LTS derivative that substitutes Canonical's GNOME desktop and Snap ecosystem with a custom userland and application framework. Its primary components include the Gala window manager (a Mutter-derived compositor), the Wingpanel top status bar, the Plank desktop dock, the Slingshot application launcher, and Switchboard modular settings. Desktop software is distributed predominantly via Flatpak packages hosted in its curated AppCenter alongside Flathub, running within containerized boundaries using XDG Desktop Portals for secure host resource access.",
@@ -39,6 +39,7 @@
     "parental_controls_and_onboarding": "To streamline initial configuration, the system launches the `io.elementary.onboarding` wizard upon first boot, allowing users to configure Night Light display warmth, enable automatic maintenance (clearing cache and trash bins), and adjust privacy toggles. Integrated directly into Switchboard is a dedicated Screen Time and Parental Controls module, permitting system administrators to enforce daily compute quotas, restrict operating hours, and filter application and web access on individual user accounts.",
     "security_and_permissions": "elementary OS leverages Ubuntu's AppArmor profiles and cryptographic repository signing. In the user environment, the Security & Privacy settings panel provides an exhaustive overview of runtime permissions granted to applications. Users can audit and revoke permissions for geolocation, camera, microphone, and filesystem access on a per-app basis. Visual indicators in Wingpanel notify users whenever hardware sensors (such as webcams or microphones) are active.",
     "privacy_and_telemetry": "Privacy is an explicitly articulated core value of elementary OS. The operating system contains zero telemetry agents, no tracking scripts, and no persistent device identifiers transmitted to external servers. Searching within the application launcher or AppCenter operates purely locally or through non-profiling API calls. On web services (`elementary.io`), traffic analytics are gathered exclusively using open-source, cookie-free Plausible Analytics in compliance with GDPR. The official privacy policy explicitly affirms: 'We don't collect personal data through our operating system. Your data belongs to you, and only you.'",
+    "release_series_and_point_release_cadence": "The project ships point releases within a series rather than following a fixed calendar. The current OS 8 line received 8.0.2 on 22 September 2025, then 8.1 on 22 December 2025, then 8.1.1 on 27 February 2026, and the blog published a further set of OS 8 updates on 6 April 2026. Each announcement describes both fixes and feature work carried into the same series, so the practical unit of change is the point release rather than the major version. This differs from distributions that tie every change to a dated release; here the major number changes rarely and the intermediate numbers carry the maintenance, which is why the blog archives the earlier series separately.",
     "advantages": [
       "Rigorous visual cohesion and design consistency enforced by published Human Interface Guidelines (HIG)",
       "Bespoke Pantheon desktop environment developed in native Vala, offering low resource overhead and smooth animations",
@@ -67,7 +68,7 @@
       "Users who rely on non-sandboxed system tweaks or deep package tampering that bypasses Flatpak and Portals",
       "Enterprise administrators requiring formal corporate vendor certifications or multi-year commercial RHEL-style enterprise SLAs"
     ],
-    "verdict": "elementary OS delivers a focused, design-driven desktop experience that distinguishes itself within the Linux landscape through its adherence to Human Interface Guidelines, its custom Pantheon environment, and its pioneering AppCenter ecosystem. By grounding itself in Ubuntu LTS stability while championing Flatpak sandboxing, Wayland modernity, and an unwavering zero-telemetry privacy stance, elementary OS offers a compelling, distraction-free operating system for users and creators who prioritize craftsmanship, privacy, and simplicity."
+    "verdict": "elementary OS is a desktop Linux distribution built around its own Human Interface Guidelines, the Pantheon desktop environment, and the AppCenter application store. It combines an Ubuntu LTS base with Flatpak sandboxing, Wayland, and a zero-telemetry default configuration, and targets users and creators who prioritize a consistent desktop design and privacy."
   },
   "components": [
     {
@@ -245,7 +246,7 @@
     },
     {
       "title": "elementary Developer Documentation — Human Interface Guidelines (HIG)",
-      "url": "https://elementary.io/docs/human-interface-guidelines",
+      "url": "https://docs.elementary.io/hig",
       "type": "documentation",
       "accessed": "2026-09-25",
       "publisher": "elementary, Inc.",
@@ -274,6 +275,12 @@
       "accessed": "2026-09-25",
       "publisher": "elementary Project Maintainers",
       "note": "Source repository for AppCenter, implementing Flatpak integration, Flathub discovery, and Stripe payment processing."
+    },
+    {
+      "title": "elementary blog index: release announcements and OS updates",
+      "url": "https://blog.elementary.io/",
+      "type": "official_blog",
+      "accessed": "2026-10-18"
     }
   ]
 }

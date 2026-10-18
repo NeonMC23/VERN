@@ -20,7 +20,7 @@
     "x86_64"
   ],
   "license": "GPL-2.0-or-later, LGPL-2.1-or-later (KDE and Qt components), and standard Ubuntu package licenses",
-  "last_verified": "2026-10-01",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "Kubuntu is an official flavor of the Ubuntu operating system that combines Ubuntu's stable Linux foundation with the versatile KDE Plasma desktop environment. Created in April 2005 alongside Ubuntu 5.04 (Hoary Hedgehog) by Jonathan Riddell in collaboration with Canonical, Kubuntu provides users with a feature-rich, graphically refined computing environment built on the Qt framework. Kubuntu follows Canonical's structured engineering and release cadence, offering full access to Ubuntu's global archive of precompiled software while delivering KDE's extensive ecosystem of productivity and creative tools.",
     "what_is_it": "Technically, Kubuntu is an official Ubuntu derivative that shares the common Ubuntu Linux kernel, GNU C library (`glibc`), `systemd` init daemon, and APT package repositories (`main`, `restricted`, `universe`, `multiverse`). It distinguishes itself by deploying the KDE Plasma desktop shell, the KWin window manager and Wayland compositor, the SDDM display manager, the universal Calamares installer, the KDE Gear application suite (including Dolphin, Konsole, and Kate), and KDE Discover software center, maintaining complete binary compatibility with standard Ubuntu packages.",
@@ -36,6 +36,7 @@
     "hardware_support_and_architectures": "Kubuntu targets exclusively 64-bit `x86_64` (amd64) processors, having discontinued 32-bit (i386) installation images in 2019:\n\n- Processor: 64-bit dual-core processor (2.0 GHz or higher recommended).\n- Memory (RAM): Minimum 2 GB RAM for basic desktop boot; 4 GB RAM recommended for standard desktop compositing; 8 GB recommended for multitasking and heavy web applications.\n- Storage: 25 GB of available disk space recommended.\n- Firmware: Full support for legacy BIOS and UEFI firmware, including out-of-the-box Secure Boot support via Canonical's signed `shim` loader.",
     "security_and_apparmor": "Kubuntu benefits from Canonical's Ubuntu Security Team infrastructure. Kernel-level mandatory access control is enforced via AppArmor. System updates and CVE mitigations are delivered synchronously with Ubuntu Security Notices (USN). In Kubuntu 25.10 and later, memory-safe system privilege elevation is enhanced by the inclusion of `sudo-rs`, a Rust-based reimplementation of `sudo`.",
     "privacy_and_telemetry": "Kubuntu enforces a user-centric privacy policy. The desktop environment contains no third-party advertisements or covert analytical daemons. Ubuntu's optional hardware reporting tool (`ubuntu-report`) is not active by default in Kubuntu desktop sessions. Any diagnostic data sharing remains strictly opt-in and under user control.",
+    "release_cadence_and_support_window": "Kubuntu follows the Ubuntu calendar rather than a calendar of its own. Interim releases appear every six months and are maintained for nine months, while LTS releases appear every two years and receive five years of standard security maintenance on the Ubuntu archive. The Kubuntu 26.04 LTS release, codenamed Resolute Raccoon, was published on 23 April 2026 on the Ubuntu 26.04 LTS base released the same day, and the announcement states that the flavour itself receives security updates and critical fixes until April 2029 - three years, a shorter window than the five years granted to the Ubuntu LTS packages it builds on. That release carries Plasma 6.6, Qt 6.10.2, KDE Frameworks 6.24.0, KDE Gear 25.12.3 and Linux kernel 7.0. The difference between the two windows matters for planning: keeping a Kubuntu LTS installation supported beyond April 2029 requires either upgrading to the next LTS or relying on the Ubuntu Pro subscription, which extends the base system rather than the KDE packages.",
     "advantages": [
       "Official Ubuntu flavor delivering seamless integration of the modern KDE Plasma desktop",
       "Frozen point-release stability with thoroughly tested KDE component versions",
@@ -52,7 +53,8 @@
       "Default inclusion of Snap containerization may not align with preferences of all users"
     ],
     "who_is_it_for": "Kubuntu is designed for users, software developers, and organizations seeking a modern, visually customizable desktop operating system backed by the reliability, security, and expansive software ecosystem of Ubuntu.",
-    "who_is_it_not_for": "It is not designed for users seeking a continuous rolling release of the latest upstream KDE software (for which KDE neon or rolling distributions are tailored), or for legacy computers with less than 2 GB of RAM."
+    "who_is_it_not_for": "It is not designed for users seeking a continuous rolling release of the latest upstream KDE software (for which KDE neon or rolling distributions are tailored), or for legacy computers with less than 2 GB of RAM.",
+    "verdict": "Kubuntu pairs the extensive package ecosystem and long-term hardware support of Ubuntu with the visual refinement and deep configurability of the KDE Plasma desktop. It provides an ergonomic, performant computing environment well-suited for general users and developers seeking traditional desktop paradigms with modern Wayland integration, balanced against the standard maintenance and support cycles of the Ubuntu archive."
   },
   "components": [
     {
@@ -177,12 +179,12 @@
       "note": "Primary distribution portal covering release announcements, governance charter, and community guidelines."
     },
     {
-      "title": "Kubuntu Official News — Release Archives",
-      "url": "https://kubuntu.org/news/",
+      "title": "Kubuntu Official News — Announcing Kubuntu 24.04 Noble Numbat",
+      "url": "https://kubuntu.org/news/kubuntu-24-04-lts-noble-numbat-released/",
       "type": "official",
-      "accessed": "2026-10-01",
+      "accessed": "2026-10-16",
       "publisher": "Kubuntu Team",
-      "note": "Official announcements detailing 24.04 LTS, Calamares installer adoption, and Plasma 5.27 LTS stability."
+      "note": "Official release announcement for Kubuntu 24.04 LTS “Noble Numbat”, featuring KDE Plasma 5.27 LTS and a 6.8-based kernel."
     },
     {
       "title": "Kubuntu Official News — 24.10 Oracular Oriole Release Notes",
@@ -231,6 +233,12 @@
       "accessed": "2026-10-01",
       "publisher": "DistroWatch",
       "note": "Independent summary documenting release histories, package versions, and system specifications."
+    },
+    {
+      "title": "Ubuntu release cycle: interim and LTS cadence, support windows and ESM",
+      "url": "https://ubuntu.com/about/release-cycle",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

@@ -110,7 +110,23 @@ var LIBRARY_RESOURCES = [
   "raspberry-pi-os",
   "dietpi",
   "freedos",
-  "haiku"
+  "haiku",
+  "reactos",
+  "serenityos",
+  "redox-os",
+  "templeos",
+  "hurd",
+  "kolibrios",
+  "ios",
+  "ipados",
+  "aros",
+  "plan9",
+  "9front",
+  "helenos",
+  "genode",
+  "rhel",
+  "cachyos",
+  "nitrux"
 ];
 
 (function () {

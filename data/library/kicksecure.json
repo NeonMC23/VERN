@@ -62,7 +62,8 @@
       "Users requiring strict hardware-enforced hypervisor domain compartmentalization (better suited to Qubes OS)",
       "Casual computer users seeking a plug-and-play multimedia desktop with proprietary drivers enabled by default",
       "Legacy 32-bit computer architectures"
-    ]
+    ],
+    "verdict": "Kicksecure is a security-hardened Linux distribution built on Debian, implementing kernel hardening, sandboxing, memory allocator protection, and anti-fingerprinting defaults. It serves as a baseline for high-security workstations or as host system for Whonix, while requiring acceptance of strict confinement and occasional compatibility issues with unhardened third-party software."
   },
   "components": [
     {

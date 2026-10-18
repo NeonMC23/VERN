@@ -258,5 +258,6 @@
       "note": "GDPR privacy notice detailing hosting under Netlify, access log handling, and zero-telemetry policy."
     }
   ],
-  "last_verified": "2026-09-24"
+  "last_verified": "2026-09-24",
+  "license": "MIT (Nix & Nixpkgs infrastructure) and upstream open-source licenses"
 }

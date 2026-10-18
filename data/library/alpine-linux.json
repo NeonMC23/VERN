@@ -76,7 +76,8 @@
       "Workflows dependent on complex GNU-specific coreutils flags that require extensive workarounds on BusyBox.",
       "Enterprises requiring commercial vendor warranties and multi-year LTS releases exceeding two years of maintenance."
     ],
-    "verdict": "Alpine Linux is an efficient, security-oriented Linux distribution engineered around the strengths of musl libc, BusyBox, and OpenRC. Its lightweight architecture and swift package management through apk-tools make it the premier choice for containerized infrastructure and stateless network appliances. While its adherence to standards-based musl requires accommodation for proprietary binaries, it delivers a transparent, resource-efficient platform for modern cloud and server deployments."
+    "verdict": "Alpine Linux is a security-oriented Linux distribution built around musl libc, BusyBox, and OpenRC. Its lightweight architecture and apk-tools package management are oriented toward containerized infrastructure and stateless network appliances. Its use of the standards-based musl libc requires accommodation for proprietary binaries; the distribution otherwise provides a small-footprint base for cloud and server deployments.",
+    "dates_de_branche_et_fin_de_maintenance": "The releases page publishes, for each stable branch, the branch date, the end-of-support date, the list of minor releases and the support level. Branch 3.24 was cut on 2026-06-09 and is supported until 2028-06-01; its minor releases are 3.24.2, 3.24.1 and 3.24.0, and both the main and the community repositories are maintained for it. Branch 3.23 was cut on 2025-12-03 and is supported until 2027-11-01, with 3.23.6, 3.23.5, 3.23.4, 3.23.3, 3.23.2 and 3.23.0 listed and with the main repository only at the support level. Branch 3.22 was cut on 2025-05-30 and is supported until 2027-05-01, with 3.22.6 to 3.22.0. Branch 3.21 was cut on 2024-12-05 and is supported until 2026-11-01, with 3.21.8 to 3.21.0. Branch 3.20 was cut on 2024-05-22, is supported until 2026-04-01, and its latest listed minor release is 3.20.10.\n\nTwo distinctions follow from the table. First, the branch date is not the publication date of the minor releases: a branch is created once, then receives numbered point releases during its support window. Second, the support level is not uniform across branches: the most recent branch keeps both repositories, while older branches are listed with the main repository alone. The `edge` branch has no branch date or end-of-support date in the table, because it is not a stable branch but the development branch from which release branches are cut."
   },
   "components": [
     {
@@ -297,6 +298,20 @@
       "date": "2026-09-25",
       "accessed": "2026-09-25",
       "author": "Alpine Linux Security Team"
+    },
+    {
+      "title": "Alpine Linux Wiki — Diskless Mode",
+      "url": "https://wiki.alpinelinux.org/wiki/Diskless_Mode",
+      "type": "official_documentation",
+      "date": "2026-10-16",
+      "accessed": "2026-10-16",
+      "author": "Alpine Linux Wiki contributors"
+    },
+    {
+      "title": "Alpine Linux - Release branches",
+      "url": "https://alpinelinux.org/releases/",
+      "type": "official_documentation",
+      "date": "2026-10-18"
     }
   ],
   "last_verified": "2026-09-25"

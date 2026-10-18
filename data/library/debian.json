@@ -108,6 +108,7 @@
       "goal_and_status": "The published goal is that every build of every package in Debian should be reproducible byte for byte. The status sentence on the same page is as direct: reproducible builds of Debian as a whole are still not a reality, individual reproducible builds of packages are done, and it is a stretch to say that Debian is reproducible. The documented tooling is .buildinfo files carrying build environments and checksums, rebuilders comparing results, and debian-repro-status for checking installed packages.",
       "measurement": "The test platform reports, for forky on amd64, 37,556 of 39,387 source packages reproducible, that is 95.4 percent, with 1,130 unreproducible, 467 build failures and 111 timeouts; forky arm64 measures 94.8 percent and unstable amd64 94.1 percent. These are continuous measurements of development suites, not of a published stable release, and they cover that platform's test set rather than the whole archive."
     },
+    "origin_and_founding_of_the_project": "The project documents its own origin rather than leaving it to third parties. The Debian Project was officially founded by Ian Murdock on 16 August 1993, at a time when the very idea of a Linux distribution was new, and its creation was sponsored by the Free Software Foundation's GNU project. The name is explained in the same chapter: it comes from the first names of the creator and his wife, Debra, and the official pronunciation is given as 'deb ee n'. The history manual also records the organisational consequence of that beginning: Debian motivated the formation of Software in the Public Interest, a New York-based non-profit created to let the project and similar organisations accept contributions that are tax deductible in the United States. The introduction to the same manual describes the project as a worldwide group of volunteers producing a distribution composed entirely of free software, with architectures listed as 32- and 64-bit x86, ARM, MIPS, PowerPC and IBM S/390, and thousands of prepackaged applications. The manual itself carries a version, 14.1, and a revision date, 12 August 2026.",
     "advantages": [
       "Five-year release life cycle",
       "Seven release architectures",
@@ -275,7 +276,7 @@
   "variants": [
     {
       "name": "Debian 13 trixie (stable)",
-      "description": "The current release, at point release 13.7.0 of 2026-09-12, supported by the Security Team until 2028-08-09 and by LTS until 2030-06-30. Software keeps the versions frozen at release."
+      "description": "The stable release series (Debian 13 \"trixie\"), maintained with regular point release updates (e.g., 13.x maintenance ISO revisions) by the Release Team and security updates by the Security Team, followed by community LTS support."
     },
     {
       "name": "Debian 12 bookworm (oldstable)",
@@ -364,15 +365,15 @@
       "title": "Debian 13 release notes: issues to be aware of",
       "url": "https://www.debian.org/releases/trixie/release-notes/issues.en.html",
       "type": "documentation",
-      "accessed": "2026-09-19",
-      "note": "Last release for armel, /boot sizing before an upgrade, i386 demotion"
+      "accessed": "2026-10-16",
+      "note": "Interrupted remote upgrades with the advice to update OpenSSH beforehand (1:9.2p1-2+deb12u7 or greater), last release for armel, /boot sizing before an upgrade, i386 demotion"
     },
     {
       "title": "Debian 13 release notes: upgrading from Debian 12",
       "url": "https://www.debian.org/releases/trixie/release-notes/upgrading.en.html",
       "type": "documentation",
-      "accessed": "2026-09-19",
-      "note": "Supported upgrade path, preparation steps, default deb822 source list, OpenSSH warning"
+      "accessed": "2026-10-16",
+      "note": "Supported upgrade path, preparation steps, default deb822 source list"
     },
     {
       "title": "Installation Guide for amd64: hardware requirements",
@@ -679,7 +680,20 @@
       "publisher": "Linux Mint project",
       "accessed": "2026-09-19",
       "note": "Does not state its upstream base, which is why Mint is described as related rather than as a derivative here"
+    },
+    {
+      "title": "Debian: A Brief History of Debian, founding date, name origin and sponsorship",
+      "url": "https://www.debian.org/doc/manuals/project-history/intro.en.html",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Debian: about Debian, project definition, kernels and supported hardware",
+      "url": "https://www.debian.org/intro/about",
+      "type": "official_site",
+      "accessed": "2026-10-18"
     }
   ],
-  "last_verified": "2026-09-19"
+  "last_verified": "2026-10-16",
+  "license": "DFSG-compliant free software licenses (GPL, LGPL, BSD, MIT) and redistributable firmware"
 }

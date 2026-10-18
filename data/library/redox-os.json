@@ -1,0 +1,166 @@
+{
+  "id": "redox-os",
+  "name": "Redox OS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation libre de type Unix fondé sur une architecture micro-noyau moderne et écrit en Rust, exécutant l'ensemble des pilotes en espace utilisateur et utilisant le système de fichiers RedoxFS.",
+  "tags": [
+    "microkernel",
+    "rust",
+    "memory-safety",
+    "unix-like",
+    "redoxfs",
+    "orbital",
+    "relibc",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "x86-32",
+    "ARM64",
+    "RISC-V"
+  ],
+  "license": "Open Source (Licence MIT)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "Redox OS est un système d'exploitation libre et généraliste de type Unix conçu autour d'une architecture à micro-noyau novatrice. Initié en 2015 par Jeremy Soller, le projet a pour objectif de repenser les fondations des systèmes d'exploitation modernes en tirant parti des garanties strictes de sécurité mémoire, de concurrence sans verrou et de typage fort offertes par le langage de programmation Rust, tout en s'inspirant des principes d'élégance architecturale de MINIX, seL4 et Plan 9.",
+    "what_is_it": "Techniquement, Redox OS se distingue nettement des systèmes monolithiques conventionnels (Linux, BSD, Windows NT). Son noyau ne gère en mode privilégié (Ring 0) que les fonctions primitives irréductibles du système. La totalité des pilotes de périphériques, les systèmes de fichiers et la pile réseau TCP/IP sont déportés dans l'espace utilisateur (Ring 3) sous forme de processus autonomes et non privilégiés. La communication entre ces composants s'effectue au moyen de mécanismes d'appels inter-processus (IPC) standardisés reposant sur une syntaxe d'URI unifiée.",
+    "microkernel_architecture_and_user_space_drivers": "Le micro-noyau de Redox OS se limite strictement à l'ordonnancement préemptif des threads, à la gestion des espaces d'adressage virtuel (pagination mémoire) et aux canaux de communication IPC. Cette réduction drastique de la surface du code privilégié renforce la résilience opérationnelle : la défaillance imprévue ou le plantage d'un pilote de disque, de carte réseau ou de système de fichiers ne provoque aucune panique du noyau (kernel panic). Le processus fautif peut être isolé, arrêté et relancé à chaud par des moniteurs de supervision de services sans altérer le fonctionnement du reste de la machine.",
+    "paradigm_everything_is_an_url_and_redoxfs": "Poussant plus loin la maxime historique d'Unix (« tout est fichier ») et la vision distribuée de Plan 9, Redox OS adopte le paradigme « tout est une URL ». Les interactions avec les ressources matérielles et logicielles s'expriment au travers de schémas d'URI normalisés (`file:`, `tcp:`, `orbital:`, `audio:`). Les applications lisent et écrivent sur ces schémas via les appels système standards (`open`, `read`, `write`). Le système de fichiers natif de la plateforme est **RedoxFS**, un système de fichiers transactionnel en copie sur écriture (Copy-on-Write) inspiré des concepts de ZFS, garantissant l'intégrité des blocs par sommes de contrôle et la résilience totale face aux pannes d'alimentation électrique.",
+    "relibc_posix_compatibility_and_orbital_gui": "Pour concilier l'innovation du langage Rust avec la logithèque existante du monde Unix, Redox OS a développé **relibc**, une bibliothèque C standard portable écrite intégralement en Rust. Conçue pour remplacer la glibc ou musl tout en éliminant les vulnérabilités de corruption de mémoire propres au langage C, relibc offre les interfaces POSIX indispensables pour porter des compilateurs, des utilitaires en ligne de commande et des interpréteurs (Python, Git, Bash, Rust). L'environnement visuel est pris en charge par **Orbital**, un serveur d'affichage et gestionnaire de fenêtres léger écrit en Rust, capable de faire tourner des applications graphiques natives et des composants issus de l'environnement de bureau moderne COSMIC.",
+    "hardware_support_and_project_maturity": "Redox OS prend en charge l'architecture x86-64 comme plateforme de référence, aux côtés d'images pour x86 32 bits (i586) et de travaux en cours pour AArch64 (ARM64) et RISC-V. Bien que parfaitement fonctionnel au sein d'hyperviseurs comme QEMU et capable de démarrer sur certains ordinateurs physiques compatibles (notamment les machines System76), Redox OS demeure officiellement au stade de développement **Alpha**. Les garanties formelles de sécurité et la prise en charge des périphériques matériels les plus complexes (accélération 3D moderne, gestion fine du Wi-Fi) demeurent en cours de développement actif. Le système est distribué sous licence libre et permissive MIT.",
+    "releases_and_community": "Le site officiel affiche Redox OS 0.9.0 comme version courante et renvoie à des notes de version. Le projet se décrit comme une communauté active depuis 2015, héberge son code sur un serveur GitLab auto-hébergé et organise chaque année un Redox Summer of Code depuis 2018. Le financement est présenté comme reposant sur des dons (Donorbox, Patreon, Bitcoin, Ethereum) et sur la vente de produits dérivés ; les canaux d'échange cités sont Matrix et le GitLab du projet.",
+    "kernel_size_and_isolation_model": "Le manuel du projet évalue le noyau à environ 50 000 lignes de code, un chiffre qu'il présente comme souvent en diminution, et décrit une architecture inspirée de MINIX et de seL4. Les services système et les pilotes s'exécutent en espace utilisateur selon le principe de moindre autorité : chaque composant est isolé dans un processus distinct, son échec n'entraîne pas celui des autres et il ne dispose pas de privilèges d'administration. La bibliothèque relibc fournit les fonctions POSIX côté utilisateur.",
+    "hardware_support_matrix": "Le manuel liste les architectures prises en charge : x86-64, x86 32 bits à partir d'un Pentium II avec limitations, AMD 32 et 64 bits, AArch64 avec limitations et RISC-V 64 bits (riscv64gc) avec limitations. Les interfaces matérielles citées sont ACPI, PCI et USB ; le stockage couvre IDE (PATA), SATA (AHCI) et NVMe ; l'affichage passe par VESA, UEFI GOP ou les GPU Intel ; le son, les entrées PS/2 et USB et les cartes Ethernet Intel et Realtek sont également documentés.",
+    "installation_profiles_and_encryption": "Le programme d'installation propose quatre profils : Desktop (installation annoncée autour de 200 secondes), Server (autour de 90 secondes), Clone depuis un disque live et installation en mode live par défaut. Il permet d'écrire sur un disque entier, sur une partition RedoxFS brute ou dans un fichier image, et de définir un mot de passe de chiffrement de la partition principale RedoxFS : le chiffrement porte sur l'ensemble du disque et le mot de passe est demandé par le chargeur d'amorçage au démarrage.",
+    "package_management_pkgar": "La gestion de paquets repose sur pkgar : chaque paquet est décrit par un en-tête et des métadonnées vérifiés par hachage BLAKE3, seuls les fichiers modifiés sont téléchargés lors d'une mise à jour, puis déplacés atomiquement pour éviter l'installation de données invalides. Une procédure de vérification compare les métadonnées enregistrées aux fichiers installés et permet de reconstruire un paquet depuis un système existant. Le manuel indique que le format de dépôt est encore à l'étude.",
+    "advantages": [
+      "Architecture micro-noyau moderne isolant les pilotes de périphériques et les systèmes de fichiers en espace utilisateur.",
+      "Sécurité mémoire native et élimination des vulnérabilités de corruption de mémoire grâce au langage Rust.",
+      "Résilience remarquable face aux pannes de pilotes : possibilité de redémarrer un pilote planté sans crash du noyau.",
+      "Système de fichiers moderne RedoxFS en copie sur écriture (Copy-on-Write) garantissant l'intégrité transactionnelle des données.",
+      "Paradigme d'URI élégant et unifié (« tout est une URL ») simplifiant les interfaces de communication inter-processus.",
+      "Bibliothèque C standard portable `relibc` écrite en Rust assurant la compatibilité avec les logiciels POSIX existants."
+    ],
+    "disadvantages": [
+      "Système encore officiellement en phase Alpha de développement, avec des fonctionnalités de base en cours de stabilisation.",
+      "Prise en charge matérielle physique encore partielle, nécessitant des configurations matérielles spécifiques ou l'usage de QEMU.",
+      "Catalogue applicatif natif en cours de constitution comparé aux systèmes d'exploitation établis depuis plusieurs décennies.",
+      "La communication inter-processus (IPC) inhérente aux architectures micro-noyaux peut introduire des surcoûts de latence par rapport à un noyau monolithique.",
+      "Absence d'accélération graphique 3D matérielle complète pour les cartes graphiques contemporaines."
+    ],
+    "who_is_it_for": [
+      "Chercheurs, architectes de systèmes d'exploitation et passionnés explorant le futur des architectures micro-noyaux sécurisées.",
+      "Développeurs de l'écosystème Rust désireux d'étudier ou de contribuer à un système d'exploitation moderne entièrement rédigé en Rust.",
+      "Ingénieurs en systèmes critiques et informatique embarquée recherchant une isolation matérielle et logicielle de haut niveau.",
+      "Utilisateurs avancés souhaitant expérimenter des concepts d'ingénierie logicielle novateurs au sein de machines virtuelles."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs grand public recherchant un système de bureau prêt pour la production quotidienne sur leur ordinateur personnel.",
+      "Joueurs de jeux vidéo PC exigeant des bibliothèques DirectX 12 / Vulkan avancées et des pilotes graphiques fermés.",
+      "Entreprises nécessitant des certifications industrielles formelles, des accords de niveau de service (SLA) ou du support 24/7.",
+      "Infrastructures de production nécessitant des déploiements massifs de conteneurs Linux ou de bases de données distribuées lourdes."
+    ],
+    "verdict": "Redox OS est un projet de système d'exploitation expérimental. En conjuguant les garanties mémoire du langage Rust à l'architecture micro-noyau, il explore une alternative aux systèmes monolithiques écrits en C.",
+    "origine_et_chronologie_du_projet": "La chronologie établie par les sources du projet commence avec la création du dépôt principal. L'API du service d'hébergement donne pour le dépôt redox-os/redox une date de création au 2015-04-20 ; c'est la seule date de fondation vérifiable dans les sources consultées. Aucune page du livre de documentation ne donne de date de fondation, de nom de fondateur ni de date de première publication ; cette limite est consignée comme telle.\n\nLe projet publie une chronique mensuelle intitulée « This Month in Redox », dont le dernier numéro consultable est daté du 2026-08-31. Cette chronique documente l'évolution du système mois par mois : intégration de pilotes, avancement du portage de logiciels, état de RedoxFS. Le 2025-09-12, le projet a publié un texte intitulé « Development Priorities for 2025/26 », qui énonce les chantiers prioritaires de la période. Les sujets de l'édition 2026 du programme de bourses de développement, Redox Summer of Code, sont également publiés sur le même fil.\n\nLe livre expose la motivation du projet dans une page dédiée : un micro-noyau, des redémarrages partiels des services, un système de fichiers RedoxFS présenté comme comparable à ZFS, et une API POSIX fournie par relibc permettant de porter des logiciels par recompilation. Ces éléments expliquent la direction technique suivie entre 2015 et 2026, sans constituer une histoire datée des versions, que les sources consultées ne fournissent pas."
+  },
+  "relations": [
+    {
+      "id": "serenityos",
+      "name": "SerenityOS",
+      "type": "alternative",
+      "note": "Système d'exploitation moderne indépendant de type Unix conçu pour les postes de travail."
+    },
+    {
+      "id": "haiku",
+      "name": "Haiku",
+      "type": "alternative",
+      "note": "Système d'exploitation libre axé sur la réactivité de l'interface utilisateur et une architecture orientée objet."
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "related",
+      "note": "Distribution Linux dont de nombreux outils et programmes en ligne de commande sont portés sur Redox OS via relibc."
+    },
+    {
+      "id": "plan9",
+      "name": "Plan 9 from Bell Labs",
+      "type": "architectural_inspiration",
+      "note": "Le manuel de Redox OS décrit un modèle de ressources nommées par schémas « largement inspiré de Plan 9 » ; Plan 9 reste un système distinct, sans lien de code avec Redox OS."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel du projet Redox OS",
+      "url": "https://www.redox-os.org/"
+    },
+    {
+      "label": "Manuel de référence officiel (The Redox Book)",
+      "url": "https://doc.redox-os.org/book/"
+    },
+    {
+      "label": "Dépôt de code source officiel Redox OS (GitHub)",
+      "url": "https://github.com/redox-os/redox"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel Redox OS — micro-noyau en Rust, pilotes en espace utilisateur",
+      "url": "https://www.redox-os.org/",
+      "type": "official_site"
+    },
+    {
+      "title": "Manuel d'architecture et de conception du micro-noyau Redox",
+      "url": "https://doc.redox-os.org/book/",
+      "type": "documentation"
+    },
+    {
+      "title": "Dépôt officiel du code source et des composants Redox OS",
+      "url": "https://github.com/redox-os/redox",
+      "type": "repository"
+    },
+    {
+      "title": "Redox OS Book : comparaison avec les autres systèmes (taille du noyau, POLA, relibc)",
+      "url": "https://doc.redox-os.org/book/how-redox-compares.html",
+      "type": "documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Redox OS Book : architectures et interfaces matérielles prises en charge",
+      "url": "https://doc.redox-os.org/book/hardware-support.html",
+      "type": "documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Redox OS Book : profils d'installation et chiffrement de partition",
+      "url": "https://doc.redox-os.org/book/installing.html",
+      "type": "documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Redox OS Book : gestion de paquets pkgar",
+      "url": "https://doc.redox-os.org/book/package-management.html",
+      "type": "documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Redox - Development priorities for 2025/26 and monthly reports",
+      "url": "https://redox-os.org/news/",
+      "type": "official",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "Redox - Why a new operating system",
+      "url": "https://doc.redox-os.org/book/why-a-new-os.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "GitHub API - redox-os/redox repository metadata",
+      "url": "https://api.github.com/repos/redox-os/redox",
+      "type": "official",
+      "date": "2026-10-18"
+    }
+  ]
+}

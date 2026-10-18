@@ -27,7 +27,10 @@
     "architectures_and_editions": "Le système est distribué en deux architectures matérielles complémentaires : une déclinaison 32 bits (`armhf`) assurant une rétrocompatibilité intégrale avec l'ensemble des modèles de cartes depuis la toute première Raspberry Pi 1 et le Pi Zero (processeurs ARMv6 et ARMv7), et une déclinaison 64 bits (`aarch64` / ARM64) exploitant pleinement la mémoire et les instructions 64 bits des modèles récents (Raspberry Pi 3, 4, 5 et Zero 2 W). Trois éditions officielles sont mises à disposition : l'édition « Lite », dépourvue de serveur graphique pour les usages serveurs et embarqués légers, l'édition « Desktop », proposant l'environnement de bureau complet, et l'édition « Desktop with recommended software », intégrant des environnements de développement (Thonny, Scratch) et la suite bureautique LibreOffice.",
     "pixel_desktop_and_wayland_transition": "L'environnement graphique officiel de Raspberry Pi OS, baptisé PIXEL (Pi Executive Engineering LXDE), offre un bureau sobre, intuitif et particulièrement économe en mémoire vive. Historiquement basé sur le serveur X11 et le gestionnaire de fenêtres Openbox, l'environnement graphique a opéré une transition majeure vers le protocole moderne Wayland. Initialement propulsé par le compositeur 3D Wayfire dans la branche Bookworm, le bureau a adopté par défaut le compositeur empilable léger Labwc (Lab Wayland Compositor) et l'outil de gestion d'affichage `raindrop`, apportant une fluidité accrue, une réactivité optimale sur les écrans tactiles et une compatibilité ascendante avec les anciennes cartes matérielles via Xwayland.",
     "hardware_integration_and_raspi_config": "L'un des traits distinctifs de Raspberry Pi OS réside dans son outillage d'administration matérielle dédié. L'utilitaire en mode console et graphique `raspi-config` permet de configurer en toute simplicité les bus de communication électronique (I2C, SPI, UART, interface caméra CSI, écran DSI, bus 1-Wire), d'ajuster le partitionnement, de gérer la mémoire partagée du GPU et de basculer entre backends d'affichage sans modifier manuellement les fichiers de configuration de bas niveau (`config.txt`). L'installation du système est quant à elle automatisée par l'utilitaire officiel Raspberry Pi Imager, permettant d'écrire l'image sur carte microSD, clé USB ou SSD NVMe tout en préconfigurant le réseau sans fil Wi-Fi, le compte utilisateur et les clés SSH.",
-    "package_ecosystem_and_maintenance_lifecycle": "Raspberry Pi OS bénéficie de la richesse logistique des dépôts APT de Debian (plus de 60 000 paquets disponibles) complétés par un dépôt dédié hébergé par Raspberry Pi pour les composants matériels et logiciels spécifiques. Le cycle de maintenance suit fidèlement celui des versions majeures stables de Debian (publiées tous les deux ans). Conformément aux standards récents de Debian, l'environnement de développement Python impose l'isolation des dépendances logicielles installées par `pip` au sein d'environnements virtuels (`venv`), garantissant ainsi l'intégrité et la stabilité à long terme des outils système préinstallés.",
+    "package_ecosystem_and_maintenance_lifecycle": "Raspberry Pi OS bénéficie de la richesse logistique des dépôts APT de Debian (plus de 69 000 paquets disponibles) complétés par un dépôt dédié hébergé par Raspberry Pi pour les composants matériels et logiciels spécifiques. Le cycle de maintenance suit fidèlement celui des versions majeures stables de Debian (publiées tous les deux ans). Conformément aux standards récents de Debian, l'environnement de développement Python impose l'isolation des dépendances logicielles installées par `pip` au sein d'environnements virtuels (`venv`), garantissant ainsi l'intégrité et la stabilité à long terme des outils système préinstallés.",
+    "debian_release_names": "Les noms de code Debian servent de repère de version : la version courante de Raspberry Pi OS est basée sur Debian Trixie, la précédente sur Debian Bookworm. Parce que le calendrier est décalé, un même numéro de version de Debian peut correspondre à plusieurs publications de Raspberry Pi OS, et les deux systèmes ne partagent ni la date ni le numéro de leurs versions majeures.",
+    "installation_and_major_upgrades": "L'installation passe par Raspberry Pi Imager, disponible pour Windows, macOS et Linux, ou par l'écriture d'une image disque téléchargée. La documentation précise qu'il ne faut pas effectuer de mise à niveau en place vers une nouvelle version majeure : il faut réinstaller une image récente, après sauvegarde des fichiers importants, l'installation écrasant la carte.",
+    "package_management_and_firmware": "APT est le gestionnaire de paquets par défaut, utilisé en ligne de commande (apt-cache, apt install) comme par l'outil graphique Add / Remove Software. Le firmware est fourni par le paquet raspi-firmware, réinstallable pour revenir à la dernière version stable si une mise à jour de prépublication pose problème. La documentation réserve rpi-update aux tests et au développement.",
     "advantages": [
       "Optimisation matérielle et logicielle parfaite pour toute la gamme des ordinateurs monocartes Raspberry Pi (du Pi 1 au Pi 5).",
       "Stabilité remarquable héritée directement du socle éprouvé de Debian GNU/Linux.",
@@ -55,32 +58,32 @@
       "Puristes du logiciel libre refusant tout composant micrologiciel binaire propriétaire (des systèmes libres stricts comme Trisquel ou Debian libre étant alors préférés).",
       "Infrastructures de virtualisation lourdes de centres de données nécessitant des hyperviseurs multiprocesseurs x86."
     ],
-    "verdict": "Raspberry Pi OS est le système d'exploitation par excellence pour les nano-ordinateurs monocartes. Mariant la robustesse intemporelle de Debian à une pile graphique moderne et légère propulsée par Wayland et Labwc, il offre une plateforme d'une souplesse incomparable pour l'éducation, le prototypage électronique et l'informatique embarquée."
+    "verdict": "Raspberry Pi OS est le système d'exploitation officiel des nano-ordinateurs monocartes Raspberry Pi. Fondé sur Debian et sur une pile graphique Wayland/Labwc, il cible l'éducation, le prototypage électronique et l'informatique embarquée."
   },
   "relations": [
     {
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "description": "Distribution Linux dont est directement dérivée la totalité de la base logicielle et des paquets de Raspberry Pi OS."
+      "note": "Distribution Linux dont est directement dérivée la totalité de la base logicielle et des paquets de Raspberry Pi OS."
     },
     {
       "id": "dietpi",
       "name": "DietPi",
       "type": "alternative",
-      "description": "Distribution alternative minimaliste et hautement optimisée conçue spécifiquement pour les cartes monocartes comme le Raspberry Pi."
+      "note": "Distribution alternative minimaliste et hautement optimisée conçue spécifiquement pour les cartes monocartes comme le Raspberry Pi."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
       "type": "alternative",
-      "description": "Distribution Linux proposant des images officielles préconfigurées pour Raspberry Pi 4 et 5 avec bureau GNOME."
+      "note": "Distribution Linux proposant des images officielles préconfigurées pour Raspberry Pi 4 et 5 avec bureau GNOME."
     },
     {
       "id": "postmarketos",
-      "name": "postmarketos",
+      "name": "Nura",
       "type": "related",
-      "description": "Distribution Linux orientée mobilité et matériel ARM partageant l'usage de Wayland et des interfaces tactiles."
+      "note": "Distribution Linux orientée mobilité et matériel ARM partageant l'usage de Wayland et des interfaces tactiles."
     }
   ],
   "links": [
@@ -112,6 +115,18 @@
       "title": "Dépôt officiel du code source et de la documentation technique Raspberry Pi",
       "url": "https://github.com/raspberrypi/documentation",
       "type": "repository"
+    },
+    {
+      "title": "Raspberry Pi OS : présentation, éditions, architectures et cycle Debian",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/os/rpi-os-introduction.adoc",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Raspberry Pi OS : gestion des paquets et du firmware (APT, raspi-firmware)",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/os/updating.adoc",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

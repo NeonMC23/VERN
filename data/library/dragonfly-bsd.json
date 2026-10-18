@@ -18,14 +18,19 @@
     "amd64 / x86_64"
   ],
   "license": "BSD Licenses (2-clause and 3-clause BSD)",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "DragonFly BSD is an open-source Unix-like operating system belonging to the BSD family, created in 2003 by Matthew Dillon. Diverging fundamentally from the architectural paths pursued by FreeBSD, NetBSD, and OpenBSD, DragonFly BSD is engineered specifically to maximize multi-core symmetric multiprocessing (SMP) performance through lightweight kernel threading, asynchronous message passing, and state-of-the-art transactional storage.",
     "what_is_it": "DragonFly BSD is a specialized, modern operating system tailored exclusively for high-concurrency 64-bit x86_64 compute and storage systems. Rather than adapting legacy Unix monolithic locking mechanisms to modern hardware, DragonFly implements an innovative kernel concurrency model coupled with HAMMER2, an advanced copy-on-write transactional file system supporting online snapshots, deduplication, and zero-downtime recovery.",
     "origin_and_freebsd_divergence": "The project originated in June 2003 as a fork of FreeBSD 4.8 (RELENG_4) led by Matthew Dillon, a prominent FreeBSD kernel committer and author of Amiga's DICE C compiler. Dillon diverged from FreeBSD when FreeBSD 5 introduced fine-grained mutex locking and the KSE threading architecture, which he demonstrated led to severe lock contention and cache-line bouncing on dense multicore hardware. DragonFly was founded to prove that message passing and per-CPU subsystem partitioning provided superior scalability.",
-    "kernel_architecture_and_lwkt": "DragonFly replaces global kernel locking with LightWeight Kernel Threads (LWKT). In this architecture, each physical CPU executes an autonomous thread scheduler dedicated to kernel tasks, decoupling userland scheduling from kernel execution. Synchronization between CPUs relies on asynchronous inter-processor messages and serializing tokens (lwkt_token), which automatically release when a thread blocks to completely eliminate thread deadlocks and spinlock overhead.",
-    "hammer2_file_system": "DragonFly BSD features the HAMMER and HAMMER2 file systems developed natively by Matthew Dillon. HAMMER2, which serves as the default root file system, is a copy-on-write (CoW) design providing writable instant snapshots, online compression (LZ4 and ZSTD), background and live deduplication, checksummed data integrity, and instantaneous crash recovery without necessitating fsck utility runs. DragonFly also provides swapcache, allowing fast SSD drives to transparently cache hot file system metadata and data blocks.",
-    "platform_focus_and_ecosystem": "To concentrate engineering resources on SMP efficiency, DragonFly dropped 32-bit x86 (i386) support in 2014, operating strictly on 64-bit x86_64 hardware. Third-party software is delivered through dports, a repository framework based on FreeBSD ports and managed using the pkg binary manager. System virtualization is supported via the ported NVMM Type-2 hypervisor and vkernel (virtual kernel userland testing containers). Production releases in the 6.4 branch (6.4.2) continue active maintenance alongside current development towards 6.6.",
+    "kernel_architecture_and_lwkt": "DragonFly BSD eliminates traditional global kernel locks and heavy multiprocessor synchronization mechanisms by introducing LightWeight Kernel Threads (LWKT) and a per-CPU core execution model. In this architecture, each physical CPU core maintains its own private runqueue, scheduler state, and memory allocations. Inter-core coordination avoids coarse-grained mutex contention; instead, threads and kernel subsystems communicate across cores via lightweight asynchronous message passing and serialized message ports. DragonFly employs software tokens—fine-grained, non-blocking synchronization constructs—and an optimized SLAB memory allocator that dynamically isolates per-core memory pools, maximizing scalability on modern multi-core x86-64 hardware during high-throughput parallel workloads. In addition, DragonFly supports the virtual kernel (VKERNEL) architecture, which allows a full DragonFly kernel to be compiled and executed directly as an unprivileged user-space process for debugging drivers and network protocols.",
+    "hammer2_file_system": "DragonFly BSD is the primary platform for the HAMMER and HAMMER2 file systems, designed natively by Matthew Dillon. HAMMER2 represents a next-generation 64-bit copy-on-write storage architecture engineered for data integrity, high concurrency, and non-blocking operation. It features instant root-level and directory-level snapshots, live block-level deduplication, online LZ4 and Zstandard compression, and multi-volume clustering capabilities across networked nodes. Because all structural operations adhere to atomic copy-on-write semantics, HAMMER2 volumes never require catastrophic file system checks (fsck) after abrupt power loss or system crashes, while directory trees support bidirectional synchronization and historical snapshot retention with minimal performance degradation.",
+    "platform_focus_and_ecosystem": "To concentrate development bandwidth on symmetric multiprocessing optimization, DragonFly BSD dropped 32-bit x86 (i386) hardware support in 2014, operating exclusively as a 64-bit x86-64 operating system. Third-party software is distributed via DPorts, an adapted fork of the FreeBSD Ports collection maintained specifically to patch and validate software packages against DragonFly's unique threading model and libc interfaces. Binary packages are packaged using the standard `pkg` package manager. Unlike FreeBSD, DragonFly does not include native hypervisors like bhyve, focusing instead on bare-metal multi-threaded compute nodes, storage servers, and chrooted development environments.",
+    "installation_media_and_platform_scope": "DragonFly BSD is a 64-bit-only system: the project states explicitly that its images are built for x86_64 alone, and 32-bit i386 support was dropped with release 3.8 in 2014. Distribution images are live systems that boot to a root login without a password, published as raw USB images and as ISO images for the current 6.4.x series, with an uncompressed ISO variant for VPS providers and daily snapshot builds for testing. A graphical environment is not part of the live image: Xorg must be installed separately. Third-party software comes from dports, a DragonFly derivative of the FreeBSD ports collection consumed through the standard `pkg` tool.",
+    "release_history_6_4": "Version 6.4.0 was released on 2022-12-30, 6.4.1 on 2025-04-30 and 6.4.2 on 2025-05-09. The 6.4 series adds hardware support for type-2 hypervisors through NVMM, an amdgpu driver and the experimental ability to remote-mount HAMMER2 volumes. The 6.4.1 and 6.4.2 releases are bug-fix releases: handling of the pkg(8) configuration file, an updated certificate bundle, a memory leak in the legacy NATA driver, SMBIOS exposure for dmidecode on UEFI-only systems, and installer handling of QEMU disk geometry.",
+    "dports_binary_packages": "The project reports that the last merged DPorts release is based on the FreeBSD ports branch 2024Q3, with work under way on 2025Q2 as of the consultation date. Binary packages are managed with pkg(8); the 6.4.1 release notes mention the shipped df-latest.conf repository configuration and an updated root certificate bundle used to reach the repository over HTTPS.",
+    "virtual_kernels_and_smp_design": "DragonFly can run a complete kernel as a user process; the project calls this feature virtual kernels and presents it as a way to manage resources and to accelerate kernel development and debugging. The kernel uses its own synchronization and locking mechanisms for symmetric multiprocessing, with the stated aim of removing in-kernel bottlenecks so that nearly all operations can run concurrently on any number of processors.",
+    "security_controls_passwords_firewall_and_jails": "The DragonFly handbook devotes a chapter to security practices. Password storage is documented through the hash prefixes visible in `/etc/master.passwd`: MD5 hashes start with `$1$`, Blowfish hashes with `$2a$`, while DES strings are shorter and use a 64-character alphabet without a dollar sign. The format applied to new passwords is selected by the `passwd_format` login capability in `/etc/login.conf`, which accepts the values `des`, `md5` and `blf`. The same chapter covers S/Key and OPIE one-time passwords, including the two-letter, five-digit seed and an iteration count between 1 and 100, and notes that PAM records the last password used. Firewalling is described in two layers: IPFW was inherited from FreeBSD and remains supported, while the pf packet filter imported from OpenBSD is presented as the recommended solution, with the caveat that the DragonFly copy is not synchronised with the OpenBSD code. The kernel option `IPFIREWALL_DEFAULT_TO_ACCEPT` switches the default rule from deny to allow, and logging stops for a rule once its packet limit is reached until the counter is reset with `ipfw zero`. IPsec is covered as the VPN mechanism. A separate chapter documents jails as an enhanced replacement for chroot, started, stopped and controlled with the `jail` utility. The chapter states mechanisms and configuration keys; it publishes neither a patch cadence nor a support duration.",
     "advantages": [
       "Exceptional multicore SMP scalability utilizing per-CPU LWKT schedulers and message passing",
       "Native HAMMER2 transactional file system with instant snapshots, deduplication, and crash resilience",
@@ -47,7 +52,8 @@
       "Users requiring multi-architecture deployment across ARM64, RISC-V, or embedded devices",
       "End users seeking an out-of-the-box graphical desktop with modern Wi-Fi and Bluetooth automation"
     ],
-    "verdict": "DragonFly BSD is a masterclass in independent operating system research. By discarding conventional Unix locking paradigms in favor of per-CPU lightweight kernel threading and coupling it with the resilient HAMMER2 transactional file system, it provides a distinctive, highly efficient platform for high-concurrency x86_64 computing."
+    "verdict": "DragonFly BSD is an independently developed BSD-derived operating system. By replacing conventional Unix locking with per-CPU lightweight kernel threads and coupling them with the HAMMER2 transactional file system, it targets high-concurrency x86_64 workloads.",
+    "source_repositories_package_tree_and_manual_pages": "The project publishes its source tree in a browsable repository at gitweb.dragonflybsd.org and maintains an official mirror in the DragonFlyBSD organisation on GitHub, in the repository DragonFlyBSD/DragonFlyBSD. That repository carries release tags whose names match the versions documented by the project, v6.4.0, v6.4.1 and v6.4.2, and also a v6.5.0 tag at the time of consultation. A second official repository, DragonFlyBSD/DPorts, is described as the dedicated application build system for DragonFly BSD; it was created on 2012-10-29 and was still being updated, with a last push on 2026-03-13.\n\nThe manual pages produced by that build system are published alongside those of the base system. The service at man.dragonflybsd.org serves the manual in the nine conventional sections, from user commands and system calls through devices and kernel services, file formats, games, environments and how-tos, administration and maintenance commands, up to kernel programming, with a search by command name and by section. It also exposes a separate section for the manual pages shipped by DPorts. A query for pkg(8) returns the System Manager's Manual page from section 8, which shows that the on-line service covers the packaging tools as well as the commands described elsewhere in this record.\n\nThree distinct hosts therefore carry the primary material: the historical project domain, the manual page service and the repository host. The two last ones are named here because they hold content produced and maintained by the project itself."
   },
   "relations": [
     {
@@ -95,6 +101,42 @@
       "url": "https://www.dragonflybsd.org/docs/developer/Locking_and_Synchronization/",
       "type": "technical_specification",
       "date": "2018-07-24"
+    },
+    {
+      "title": "DragonFly BSD — Download (images live, portée 64 bits)",
+      "url": "https://www.dragonflybsd.org/download/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "DragonFly BSD Handbook - Security",
+      "url": "https://www.dragonflybsd.org/docs/handbook/Security/",
+      "type": "documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "DragonFly BSD Handbook - Jails",
+      "url": "https://www.dragonflybsd.org/docs/handbook/Jails/",
+      "type": "documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "DragonFly On-Line Manual Pages",
+      "url": "https://man.dragonflybsd.org/",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "DragonFlyBSD/DragonFlyBSD - depot officiel",
+      "url": "https://github.com/DragonFlyBSD/DragonFlyBSD",
+      "type": "repository",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "DragonFlyBSD/DPorts - systeme de construction des applications",
+      "url": "https://github.com/DragonFlyBSD/DPorts",
+      "type": "repository",
+      "date": "2026-10-18"
     }
   ]
 }

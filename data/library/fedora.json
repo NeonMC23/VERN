@@ -119,6 +119,8 @@
       "not_in_fedora": "Steam and the proprietary NVIDIA driver come from RPM Fusion, and Proton is Valve's compatibility layer rather than a Fedora component. Gaming distributions built on Fedora, such as Nobara or Bazzite, add those pieces themselves and carry their own kernel patches and codecs."
     },
     "performance": "Fedora publishes no benchmarks of its own, so there is no official figure to quote. What is documented is structural: a release tracks recent upstream code, the desktop or window manager chosen is the largest single factor in how light the system feels, and lighter options exist as Spins and as the Minimal image. Numbers quoted elsewhere describe somebody's hardware and configuration rather than the distribution.",
+    "project_origin_and_naming": "Fedora's lineage is documented release by release in the project wiki. The earliest entry is a preview of July 29, 1994, an initial test release that was never distributed publicly and that used Red Hat's first package manager, RPP. The Red Hat Linux line continued to RHL 9, codenamed Shrike, on March 31, 2003, and a final beta numbered 9.0.93 and codenamed Severn followed on July 21, 2003, which the wiki presents as the start of an open development process. On September 25, 2003, a week after Red Hat announced that this open process was merging with the pre-existing Fedora Linux project, the second beta reappeared as Fedora Core 1 test 2 at version 0.94. The naming rules that came out of that transition still explain the vocabulary: Fedora Core carried code names only, the first being Cambridge, while Red Hat Enterprise Linux carried release names without code names.",
+    "kernel_policy_and_base_system": "Fedora tracks upstream Linux closely instead of freezing a kernel for the life of a release. The project's kernel page states the policy plainly: stay on the latest released kernel and rebase when it goes end of life, which means that a single Fedora release receives several major kernel versions during its lifetime rather than one kernel patched in place. The packaging work is organised in branches of an exploded source git tree: os-build holds the Rawhide kernel and is synchronised with Linus Torvalds' master tree daily, ark-latest is a rebase branch containing what is actually built, and the fedora-6.x branches are stable branches shared by every Fedora release rebased to that series. Merge requests target os-build even when the change is meant for a stable branch, otherwise the change is dropped at the next rebase. This contrasts with distributions that ship one long-term kernel per release and backport fixes into it; here the kernel version itself moves, and the surrounding base system - systemd, the GNU toolchain and the RPM stack - follows the same release cadence.",
     "advantages": [
       "Six-month release cadence",
       "Recent upstream software",
@@ -225,7 +227,7 @@
   ],
   "relations": [
     {
-      "id": "red-hat-enterprise-linux",
+      "id": "rhel",
       "name": "Red Hat Enterprise Linux",
       "relation": "upstream_of",
       "note": "The project describes Fedora as the first upstream of RHEL; Red Hat in turn sponsors Fedora."
@@ -499,7 +501,20 @@
       "date": "2026-06-16",
       "accessed": "2026-09-19",
       "note": "Report of the Fedora Project Leader's Flock keynote, including the decline in active packagers"
+    },
+    {
+      "title": "Fedora Project wiki: kernel policy, branches and rebase model",
+      "url": "https://fedoraproject.org/wiki/Kernel",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Fedora Project wiki: history of Red Hat Linux and origins of the Fedora Project",
+      "url": "https://fedoraproject.org/wiki/History",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ],
-  "last_verified": "2026-09-19"
+  "last_verified": "2026-09-19",
+  "license": "GPL, LGPL, MIT, Apache-2.0, and compatible open-source licenses with redistributable firmware"
 }
