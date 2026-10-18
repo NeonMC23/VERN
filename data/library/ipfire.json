@@ -61,7 +61,10 @@
       "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
       "Users with single-NIC computers unable to configure VLANs or add secondary network interfaces",
       "Offensive penetration testers seeking automated exploit execution and payload crafting tools"
-    ]
+    ],
+    "verdict": "IPFire is a dedicated, hardened Linux firewall and gateway distribution featuring stateful packet inspection, Intrusion Prevention System (IPS) capabilities, and an intuitive web management interface. It offers high network throughput and modular extensibility on modest hardware, though its specialized monolithic nature makes it unsuitable for general server or container hosting workloads.",
+    "installation_sur_materiel_et_images_d_amorcage": "Le guide d'installation d'IPFire décompose l'opération en sept étapes : vérification des prérequis, préparation du support, exécution de l'installateur, configuration initiale, configuration réseau, configuration de la connexion Internet, puis étapes suivantes. La documentation annonce un déroulement d'une quinzaine de minutes sur matériel réel.\n\nCinq images sont proposées : une image de CD amorçable à graver, une image pour clé USB lorsque le système ne dispose pas de lecteur optique, une image USB de type disquette pour les BIOS qui ne reconnaissent pas correctement la précédente, une image déjà installée et optimisée pour les supports flash, clé USB, carte CompactFlash ou SSD, et une image Alix destinée aux systèmes sans port VGA, dont toute la sortie console passe par le port série. Chaque image active à la fois la console série et la console graphique ; la console série sert aux systèmes sans clavier ni écran. L'installation en machine virtuelle est présentée comme réservée aux tests et au développement, et déconseillée en production.\n\nL'installateur demande la langue, affiche le message de bienvenue, fait accepter la licence, puis propose le partitionnement et le formatage. La configuration initiale porte sur la disposition du clavier, le fuseau horaire, le nom d'hôte, le nom de domaine et les mots de passe des comptes root et admin, qui peuvent comporter jusqu'à 50 caractères. Le compte root sert uniquement à la connexion en ligne de commande et n'est pas utilisé par l'interface web.",
+    "images_par_architecture_et_modes_de_mise_a_disposition": "La page de téléchargement du projet distingue deux architectures : x86_64 et aarch64. Pour chacune, deux artefacts sont proposés : une image ISO destinée aux installations sur matériel, aux machines virtuelles et aux supports optiques, et une image flash destinée au matériel embarqué, aux clés USB et aux cartes SD. Les tailles annoncées sont de 671 MB pour l'image ISO x86_64 et de 511 MB pour l'image flash correspondante, puis de 613 MB pour l'image ISO aarch64 et de 506 MB pour son image flash.\n\nChaque artefact est disponible en téléchargement direct et par le réseau BitTorrent. La même page propose des images destinées aux fournisseurs cloud, avec des points d'entrée pour AWS, Exoscale et Hetzner Cloud, ainsi qu'une aide à la mise en œuvre dans ces environnements. Les images publiées portent la version courante, IPFire 2.29 – Core Update 204, identique dans le titre de la page de téléchargement et dans celui de l'annonce de version.\n\nCette page ne publie ni calendrier de publication ni date de fin de support par image. L'annonce de version consultée porte le jour et le mois sans l'année ; aucune date n'est donc ajoutée ici, et aucune fréquence de publication n'est déduite de la succession des annonces."
   },
   "components": [
     {
@@ -162,6 +165,48 @@
       "url": "https://distrowatch.com/table.php?distribution=ipfire",
       "type": "metadata",
       "date": "2026-10-11"
+    },
+    {
+      "title": "IPFire documentation - Installation guide",
+      "url": "https://wiki.ipfire.org/installation/start",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "IPFire documentation - Step 1, prerequisites",
+      "url": "https://wiki.ipfire.org/installation/step1",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "IPFire documentation - Step 2, installation media",
+      "url": "https://wiki.ipfire.org/installation/step2",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "IPFire documentation - Step 3, run the installer",
+      "url": "https://wiki.ipfire.org/installation/step3",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "IPFire documentation - Step 4, initial setup",
+      "url": "https://wiki.ipfire.org/installation/step4",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "IPFire documentation - Images",
+      "url": "https://wiki.ipfire.org/installation/images",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "IPFire - Downloads, images par architecture",
+      "url": "https://www.ipfire.org/download",
+      "type": "official",
+      "date": "2026-10-18"
     }
   ]
 }

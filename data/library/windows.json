@@ -22,13 +22,18 @@
   "content": {
     "introduction": "Microsoft Windows est une famille de systèmes d'exploitation commerciaux développée par Microsoft Corporation pour ordinateurs personnels, serveurs et terminaux professionnels, dominante sur le marché de l'informatique de bureau.",
     "what_is_it": "Initié dans sa déclinaison moderne en 1993 avec Windows NT 3.1, Windows repose aujourd'hui sur la branche unifiée du noyau Windows NT (version interne NT 10.0 sur Windows 10 et Windows 11), abandonnant définitivement l'ancienne base MS-DOS 16/32 bits de la série Windows 9x.",
-    "kernel_architecture_and_subsystems": "L'architecture repose sur un noyau hybride séparant l'anneau utilisateur (Ring 3) et l'anneau noyau (Ring 0). En anneau 0, la couche d'abstraction matérielle (HAL) isole le matériel du micro-noyau NT et des services exécutifs (gestionnaire de mémoire virtuelle, gestionnaire de processus, moniteur SRM, pilotes de périphériques WDM/KMDF). En espace utilisateur, les sous-systèmes d'environnement exposent l'API Win32 historique, le runtime .NET, la plateforme UWP et les composants d'interface WinUI 3 (Windows App SDK).",
-    "storage_security_and_hardware_anchors": "Le système de fichiers principal est NTFS, doté d'un journal des transactions de métadonnées, de listes de contrôle d'accès de sécurité (ACLs) et de clichés instantanés de volume (VSS). L'intégrité matérielle moderne impose le démarrage sécurisé UEFI (Secure Boot) et une puce TPM 2.0 pour ancrer le chiffrement intégral de lecteur BitLocker, la sécurité basée sur la virtualisation (VBS) et l'intégrité du code protégée par hyperviseur (HVCI).",
-    "linux_interoperability_via_wsl": "Windows intègre le sous-système Windows Subsystem for Linux (WSL2), qui exécute un véritable noyau Linux optimisé au sein d'une machine virtuelle légère sous l'hyperviseur Hyper-V de type 1. WSL2 offre un pont transparent d'E/S réseau et de systèmes de fichiers, permettant l'exécution native d'outils en ligne de commande et d'applications graphiques Linux (WSLg) aux côtés des logiciels Windows.",
-    "distribution_model_and_telemetry": "Windows est commercialisé sous licences OEM ou boîtes payantes selon le modèle « Windows as a Service », recevant des correctifs de sécurité mensuels et des mises à jour annuelles de fonctionnalités. Le système intègre des services cloud liés au compte Microsoft (OneDrive, télémétrie diagnostique, assistant d'intelligence artificielle Copilot).",
+    "kernel_architecture_and_subsystems": "Windows repose sur une architecture de noyau hybride (NTOSKRNL) organisée en couches modulaires distinctes : le noyau exécutif (Executive), le micro-noyau de base et la couche d'abstraction matérielle (HAL - Hardware Abstraction Layer). L'Exécutif regroupe les gestionnaires fondamentaux du système d'exploitation, notamment l'Object Manager (qui gère l'ensemble des primitives système sous forme d'objets sécurisés), le Process and Thread Manager, le Virtual Memory Manager (VMM, orchestrant la mémoire virtuelle paginée et l'allocation physique), l'I/O Manager et le Security Reference Monitor (SRM). Les pilotes de périphériques s'articulent autour des modèles Windows Driver Frameworks (KMDF en mode noyau pour les pilotes matériels critiques et UMDF en mode utilisateur pour les périphériques isolés). En espace utilisateur, les applications interagissent avec les sous-systèmes d'environnement par l'intermédiaire de la bibliothèque d'appels natifs `ntdll.dll` et du sous-système Windows Win32 (orchestré par le processus `csrss.exe`), assurant une compatibilité binaire continue sur plusieurs décennies pour les binaires Win32, COM, .NET et WinUI.",
+    "storage_security_and_hardware_anchors": "Le modèle de sécurité de Windows s'appuie sur une gestion granulaire des droits fondée sur les jetons d'accès (Access Tokens), les identifiants de sécurité (SID - Security Identifiers) et les listes de contrôle d'accès discrétionnaires (DACL) et système (SACL) validées par le SRM. À partir de Windows Vista et 7, le contrôle de compte d'utilisateur (UAC) sépare les privilèges d'administration des sessions courantes. Sur le plan matériel, les versions contemporaines (Windows 11) imposent des ancrages de confiance cryptographiques stricts : amorçage sécurisé UEFI (Secure Boot) et module de plateforme sécurisée TPM 2.0 (Trusted Platform Module) mesurant l'intégrité de l'amorçage via des registres PCR. Le chiffrement complet du stockage est assuré par BitLocker sur le système de fichiers NTFS. Au niveau de la protection mémoire, Windows intègre la sécurité basée sur la virtualisation (VBS - Virtualization-Based Security) utilisant l'hyperviseur Hyper-V pour isoler un environnement sécurisé (VSM), hébergeant l'intégrité du code protégée par hyperviseur (HVCI) et Credential Guard contre le vol d'identifiants en mémoire vive.",
+    "linux_interoperability_via_wsl": "L'interopérabilité avec les environnements Linux est assurée nativement par le sous-système Windows pour Linux (WSL). Alors que WSL1 reposait sur une couche d'émulation traduisant les appels système Linux en appels système NT, WSL2 s'appuie sur une micro-machine virtuelle Hyper-V exécutant un véritable noyau Linux compilé et maintenu par Microsoft. Cette architecture offre une compatibilité POSIX complète et des performances d'E/S système accrues via un système de fichiers virtuel VHDX (ext4). L'intégration entre les deux environnements est étroite : partage dynamique de la mémoire vive et des processeurs logiques, accès transparent aux fichiers Windows via le protocole 9P / virtio-fs, pont réseau unifié et paravirtualisation graphique via le pilote d3d12 (DXCore). Le composant WSLg ajoute la prise en charge des applications graphiques Linux et des flux audio sans configuration manuelle de serveur X11, en relayant les fenêtres Wayland vers le compositeur de bureau Windows.",
+    "distribution_model_and_telemetry": "Le modèle de maintenance de Windows suit un cycle de mises à jour cumulatives régulières (Patch Tuesday) et de mises à niveau annuelles de fonctionnalités (General Availability Channel). Pour les environnements de production industrielle, bancaire et médicale nécessitant une stabilité absolue exempte de changements d'interface, Microsoft propose les canaux LTSC (Long-Term Servicing Channel) garantissant 5 à 10 ans de support axé exclusivement sur les correctifs de sécurité. L'administration centralisée s'appuie sur Active Directory (AD), Azure AD (Entra ID), les stratégies de groupe (GPO) et les plateformes MDM telles qu'Intune. Le système intègre des services de télémétrie diagnostique collectant des données d'utilisation et d'erreurs matérielles, ainsi que des exigences matérielles strictes pour ses moutures récentes (excluant les processeurs antérieurs à 2017/2018), imposant des compromis de confidentialité et d'obsolescence programmée pour le parc informatique existant.",
+    "origine_de_la_lignee_et_fin_de_windows_10": "La documentation de cycle de vie situe la branche actuelle dans une succession datée. Windows 10 a été maintenu jusqu'au 14 octobre 2025, sa version 22H2 étant la dernière de cette lignée et ses éditions restant servies par des mises à jour mensuelles jusqu'à cette échéance, les versions LTSC existantes continuant au-delà. Windows 11 débute avec la version 21H2, publiée le 4 octobre 2021, suivie de 23H2 le 31 octobre 2023, de 24H2 le 1er octobre 2024, de 25H2 le 30 septembre 2025 et de 26H1 le 10 février 2026. Chaque version porte un numéro de compilation stable que la page de santé des versions permet de suivre : 22631 pour 23H2, 26100 pour 24H2, 26200 pour 25H2 et 28000 pour 26H1. La page de cycle de vie de Windows 11 Enterprise précise deux points de périmètre : la version 26H2 est la dernière à prendre en charge les appareils équipés d'un processeur Snapdragon 850, et 26H1 n'est pas conçue comme une mise à niveau sur place pour les appareils existants, mais pour des appareils mis sur le marché début 2026.",
+    "canaux_de_maintenance_et_duree_de_service": "Le modèle de service distingue deux types de publications. Les mises à jour de qualité apportent des correctifs de sécurité et de fiabilité, et peuvent ajouter des fonctions ; les mises à jour de fonctionnalités paraissent une fois par an et servent de base à la chronologie de maintenance du système. Trois canaux répartissent les appareils : le canal de disponibilité générale, qui reçoit les mises à jour de fonctionnalités dès leur publication, le canal de maintenance à long terme, réservé aux appareils spécialisés et qui reçoit une nouvelle version tous les deux à trois ans, et le programme Insider, qui sert aux tests. Les dates de fin de service sont publiées par version : 26H1 est suivie jusqu'au 14 mars 2028 avec un support étendu jusqu'au 13 mars 2029, 25H2 jusqu'au 12 octobre 2027 et jusqu'au 10 octobre 2028, 24H2 jusqu'au 12 octobre 2027 en support étendu, 23H2 jusqu'au 10 novembre 2026. Pour les éditions LTSC, la version 24H2 est suivie jusqu'au 9 octobre 2029 en support standard et jusqu'au 10 octobre 2034 pour IoT Enterprise, l'édition Enterprise LTSC 2024 n'ayant pas de support étendu. La dernière révision publiée au 13 octobre 2026 porte la mention 2026-10 B.",
+    "package_management_and_software_sources": "Windows ne s'administre pas par un unique gestionnaire de paquets, mais le système intègre depuis Windows 10 un gestionnaire en ligne de commande documenté. WinGet est le client du service Windows Package Manager ; il est distribué dans le paquet App Installer, lui-même composant système livré et mis à jour par le Microsoft Store sur les éditions de bureau, et par les mises à jour sur Windows Server 2025. Le client n'est pris en charge qu'à partir de Windows 10 version 1809, compilation 17763, et n'est disponible qu'après une première ouverture de session, le Store enregistrant alors le gestionnaire de façon asynchrone ; si l'enregistrement n'a pas eu lieu, la documentation donne la commande `Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe`. Les fonctions en cours de développement s'obtiennent par une version d'aperçu, soit par téléchargement, soit par les canaux Canary et Dev du programme Insider. Les applications proviennent d'un dépôt communautaire auquel un éditeur soumet un manifeste validé par l'outil dédié, et l'installation s'exécute avec ou sans élévation selon les droits de la console.",
+    "installation_et_conditions_materielles": "L'installation et la mise à niveau sont encadrées par des exigences matérielles publiées. Windows 11 demande un processeur 64 bits compatible à 1 GHz ou plus avec au moins deux cœurs, 4 Go de mémoire, 64 Go d'espace disque disponible, une carte graphique compatible DirectX 12 avec pilote WDDM 2.0, un micrologiciel UEFI capable de Secure Boot, un module TPM 2.0, un écran d'au moins 9 pouces en 720p et 8 bits par canal, et une connexion Internet pour les mises à jour. L'édition Famille exige en outre une connexion et un compte Microsoft lors de la configuration initiale. La mise à niveau directe depuis Windows 10 suppose deux conditions cumulatives : exécuter la version 2004 ou ultérieure et avoir appliqué la mise à jour de sécurité du 14 septembre 2021. Le mode S n'est pris en charge que sur l'édition Famille, et sa désactivation est irréversible ; les autres éditions doivent en sortir avant la mise à niveau. Le système est également pris en charge sur machine virtuelle.",
+    "community_manifest_repository_and_installer_types": "The default source of the Windows Package Manager is a public repository of manifest files, separate from the open-source client. The repository states which installer formats it accepts: MSIX, MSI, APPX, MSIXBundle, APPXBundle and .exe applications, plus font files in .ttf, .ttc, .otf, .otc and .fnt, for which community submissions are not yet open. Script-based installers are explicitly not supported. Contributions go through a pull request on which an automated bot determines whether a Contributor License Agreement is needed, and the repository documents the separate steps of authoring a manifest, testing it and submitting it, along with request procedures for a new package or a new version of an existing package. Private hosting of packages is documented separately from the public source, which places the default catalogue, the private catalogue and the client itself in three distinct objects.",
     "advantages": [
       "Compatibilité logicielle et prise en charge matérielle la plus étendue du marché de bureau",
-      "Écosystème de jeux vidéo et d'applications professionnelles inégalé via DirectX 12 et Win32",
+      "Écosystème de jeux vidéo et d'applications professionnelles via DirectX 12 et Win32",
       "Intégration d'outils de développement multiplateformes et de Linux natif via WSL2",
       "Administration centralisée robuste en entreprise via Active Directory, Group Policy et Microsoft Intune",
       "Fonctionnalités avancées de sécurité matérielle (BitLocker, TPM 2.0, HVCI, Windows Hello)"
@@ -49,32 +54,32 @@
       "Infrastructures nécessitant un système d'exploitation léger et dépourvu de composants de télémétrie",
       "Possesseurs de matériels informatiques anciens déclarés non pris en charge par les versions récentes"
     ],
-    "verdict": "Microsoft Windows est le standard de facto de l'informatique grand public et bureautique professionnelle, combinant une rétrocompatibilité logicielle de plusieurs décennies avec un noyau NT moderne et une couche Linux intégrée via WSL2."
+    "verdict": "Microsoft Windows est un système d'exploitation grand public et professionnel édité par Microsoft, combinant une rétrocompatibilité logicielle de plusieurs décennies avec le noyau NT et une couche Linux intégrée via WSL2."
   },
   "relations": [
     {
       "id": "macos",
       "name": "Apple macOS",
       "type": "alternative",
-      "description": "Système d'exploitation de bureau commercial concurrent développé par Apple sur socle Darwin/UNIX."
+      "note": "Système d'exploitation de bureau commercial concurrent développé par Apple sur socle Darwin/UNIX."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
       "type": "related",
-      "description": "Distribution Linux de référence couramment déployée au sein de Windows Subsystem for Linux (WSL2)."
+      "note": "Distribution Linux de référence couramment déployée au sein de Windows Subsystem for Linux (WSL2)."
     },
     {
       "id": "debian",
       "name": "Debian",
       "type": "related",
-      "description": "Distribution Linux supportée comme environnement de conteneur et d'espace utilisateur dans WSL."
+      "note": "Distribution Linux supportée comme environnement de conteneur et d'espace utilisateur dans WSL."
     },
     {
       "id": "reactos",
       "name": "ReactOS",
       "type": "alternative",
-      "description": "Projet de réimplémentation libre et ouverte de l'architecture de noyau et des API de Windows NT."
+      "note": "Projet de réimplémentation libre et ouverte de l'architecture de noyau et des API de Windows NT."
     }
   ],
   "links": [
@@ -106,6 +111,54 @@
       "title": "Historique des versions et cycle de vie de support de Microsoft Windows",
       "url": "https://learn.microsoft.com/en-us/windows/release-health/",
       "type": "release_notes"
+    },
+    {
+      "title": "Microsoft Lifecycle: Windows 10 Home and Pro, end of support and final version",
+      "url": "https://learn.microsoft.com/en-us/lifecycle/products/windows-10-home-and-pro",
+      "type": "official_lifecycle",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Microsoft Lifecycle: Windows 11 Home and Pro, version support dates",
+      "url": "https://learn.microsoft.com/en-us/lifecycle/products/windows-11-home-and-pro",
+      "type": "official_lifecycle",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Microsoft Lifecycle: Windows 11 Enterprise and Education, LTSC servicing scope",
+      "url": "https://learn.microsoft.com/en-us/lifecycle/products/windows-11-enterprise-and-education",
+      "type": "official_lifecycle",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Microsoft Learn: Windows 11 release information and build numbers",
+      "url": "https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information",
+      "type": "official_release_notes",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Microsoft Learn: Windows as a service, quality and feature updates, servicing channels",
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/update/waas-overview",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Microsoft Learn: WinGet, App Installer and Windows Package Manager",
+      "url": "https://learn.microsoft.com/en-us/windows/package-manager/winget/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Microsoft Learn: Windows 11 system requirements and upgrade conditions",
+      "url": "https://learn.microsoft.com/en-us/windows/whats-new/windows-11-requirements",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Windows Package Manager Community Repository: default source manifests and supported installer types",
+      "url": "https://github.com/microsoft/winget-pkgs",
+      "type": "official_repository",
+      "accessed": "2026-10-18"
     }
   ]
 }

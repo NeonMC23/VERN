@@ -57,7 +57,7 @@
     ],
     "who_is_it_for": "PCLinuxOS is designed for desktop Linux users, system administrators, and hobbyists who seek a stable rolling-release system free from systemd, who value classical Unix init workflows combined with modern desktop environments (KDE Plasma 6, MATE, Xfce), and who benefit from rapid bare-metal live ISO backup and cloning tools.",
     "who_is_it_not_for": "It is not suitable for corporate environments requiring vendor enterprise SLAs, cloud or container infrastructures reliant on systemd unit semantics, devices requiring locked UEFI Secure Boot, or hardware based on ARM64, RISC-V, or 32-bit processors.",
-    "verdict": "PCLinuxOS represents one of the most durable independent distributions in Linux history. By coupling the simplicity of SysVinit and elogind with a modern transition to DNF, pre-configured multimedia codecs, and the standout mylivecd remastering utility, it delivers an approachable rolling-release computing experience unencumbered by corporate telemetry or systemd dependencies."
+    "verdict": "PCLinuxOS is an independent rolling-release distribution. By coupling SysVinit and elogind with DNF, pre-configured multimedia codecs, and the mylivecd remastering utility, it provides a rolling-release system without corporate telemetry or systemd dependencies."
   },
   "components": [
     {

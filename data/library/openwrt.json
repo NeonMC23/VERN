@@ -65,7 +65,9 @@
       "Non-technical users uncomfortable with network addressing, subnetting, or firmware flashing procedures",
       "Owners of unsupported hardware with proprietary, locked-down bootloaders preventing custom firmware installation"
     ],
-    "verdict": "OpenWrt is the definitive open-source standard for embedded network routing. By coupling the efficiency of musl libc and BusyBox with the architectural elegance of procd, UCI, and LuCI, OpenWrt liberates consumer and commercial hardware, providing unparalleled network control, security, and extensibility."
+    "verdict": "OpenWrt is an open-source firmware platform for embedded network routing. By combining musl libc and BusyBox with procd, UCI, and LuCI, it provides a configurable system for consumer and commercial networking hardware.",
+    "release_scheme_and_branch_maintenance": "The project identifies its major releases by year and month: 19.07, 21.02, 22.03, 23.05, 24.10 and 25.12. Each major release then receives maintenance updates that increment the last component. In the official download archive, the 24.10 branch holds eight such updates, from 24.10.0 to 24.10.8, the last one timestamped 2026-07-25; the 25.12 branch holds six, from 25.12.0 to 25.12.6, timestamped from 2026-03-03 to 2026-10-18. Earlier branches remain published after a successor appears: 19.07, 21.02, 22.03 and 23.05 are still present in the archive, with 23.05.6 as their latest update, timestamped 2025-08-21. The archive also keeps per-branch failure logs, from faillogs-18.06 to faillogs-25.12.",
+    "security_advisories_and_disclosure": "The project publishes numbered security advisories that name the affected component and the associated CVE identifier. The official index lists 24 advisories between 2019-11-05 and 2025-12-16. The most recent cover a privilege escalation in Dropbear through Unix domain socket forwarding (CVE-2025-14282, 2025-12-16), a local privilege escalation in ltq-ptm (CVE-2025-62525) and a heap buffer overflow in ubusd (CVE-2025-62526), both dated 2025-10-22. Earlier entries cover build artifact poisoning in the Attended SysUpgrade server (CVE-2024-54143), multiple issues in mac80211 and cfg80211 (2022-10-17), dnsmasq (2021-01-19), a man-in-the-middle flaw in opkg (CVE-2020-7982), a cross-site request forgery in LuCI (CVE-2019-17367) and invalid data access via HTTP POST in uhttpd (CVE-2019-19945). The index also records the 2021-01-17 advisory on the forum break-in."
   },
   "relations": [
     {
@@ -119,6 +121,18 @@
       "url": "https://git.openwrt.org/",
       "type": "repository",
       "date": "2026-10-15"
+    },
+    {
+      "title": "OpenWrt — official release archive (index of /releases/)",
+      "url": "https://downloads.openwrt.org/releases/",
+      "type": "distribution_artifact",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "OpenWrt — Security Advisories index",
+      "url": "https://openwrt.org/advisory/start",
+      "type": "security_advisory_index",
+      "date": "2026-10-18"
     }
   ]
 }

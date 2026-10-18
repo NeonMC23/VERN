@@ -24,9 +24,18 @@
     "introduction": "iodéOS is an open-source mobile operating system developed by the French company iodé SAS. Built upon LineageOS and the Android Open Source Project (AOSP), iodéOS is engineered to restore user control over personal data through a deeply embedded, system-level DNS blocker that intercepts and analyzes network connections in real time without occupying the device's local VPN interface.",
     "what_is_it": "iodéOS is a de-Googled Android distribution that combines the hardware stability of LineageOS with native privacy enforcement tools. It eliminates Google background telemetry, incorporates microG for optional Google service compatibility, allows users to uninstall any preinstalled application, and provides graphical tools to inspect and restrict background network communications.",
     "lineageos_foundation_and_system_architecture": "At the architectural level, iodéOS leverages LineageOS device trees, vendor hardware adaptations, and AOSP system frameworks. The iodé development team sanitizes the operating system by removing built-in tracking endpoints, replacing default network location services, and decoupling system components from commercial tracking infrastructures. Security updates and operating system improvements are delivered over-the-air (OTA) via the built-in Updater application.",
-    "integrated_dns_blocker_and_network_analysis": "The central feature of iodéOS is its integrated network privacy engine, the iodé blocker. Unlike conventional privacy utilities that require root access or occupy the single Android VPN slot, the iodé blocker is embedded directly into the OS network stack. It captures and evaluates all DNS queries prior to transmission, mapping each network request to the specific application UID that initiated it. The companion iodé app provides real-time logs, per-application data transfer statistics, and geographic connection mapping.",
-    "blocking_levels_and_preinstalled_app_management": "The iodé blocker offers granular protection modes, including a Standard mode (blocking known trackers, advertising domains, and malicious hosts) and a Reinforced mode with expanded domain databases. Users can configure custom domain whitelists and blacklists on a per-application basis. To preserve end-to-end transport layer security, iodéOS intentionally avoids decrypting application-internal DNS-over-HTTPS (DoH) streams. Additionally, iodéOS allows complete uninstallation or deactivation of any preinstalled application—including microG—directly from device settings.",
-    "hardware_support_and_commercial_model": "iodéOS officially supports a selected catalog of smartphones, including Fairphone devices (Fairphone 3, 4, and 5), Google Pixel models, and select Samsung Galaxy, Sony Xperia, Motorola, and OnePlus handsets. On supported hardware, the platform enforces bootloader relocking with custom signing keys. iodé SAS finances development through the sale of certified refurbished smartphones preloaded with iodéOS and an optional premium subscription (iodé+) offering parental control and enhanced blocklists.",
+    "integrated_dns_blocker_and_network_analysis": "The centerpiece of iodéOS is the iodé blocker, an advanced network security engine integrated directly into the operating system's networking stack. Unlike third-party ad-blocking utilities that require creating a local pseudo-VPN interface, the iodé blocker operates natively at the system socket layer. This architectural design leaves Android's native VPN slot entirely available, allowing users to run WireGuard, OpenVPN, or corporate VPNs concurrently with active system-level ad and tracker blocking. The blocker inspects DNS queries and IP packet destinations in real time, comparing outbound requests against curated blacklists of trackers, telemetry endpoints, malware domains, and advertising networks, dropping unwanted traffic before it leaves the device.",
+    "blocking_levels_and_preinstalled_app_management": "Through the iodé application interface, users can customize protection levels and monitor real-time network activity. The firewall offers three graduated blocking levels: Standard mode (blocking common commercial trackers and malicious domains while preventing application breakage), Reinforced mode (blocking aggressive telemetry and analytic servers), and Extreme mode (imposing strict domain whitelisting). Users can inspect detailed network telemetry graphs detailing which trackers each application attempted to contact, and enforce per-app firewall rules to deny Wi-Fi, cellular, or background data transmission entirely. During the initial setup wizard, iodéOS allows users to choose whether to enable microG or operate in a strictly microG-free environment.",
+    "hardware_support_and_commercial_model": "iodéOS is developed by a France-based engineering team that combines open-source operating system development with sustainable hardware distribution. The operating system officially supports an expanding roster of smartphones, focusing particularly on ethically manufactured and repairable devices such as Fairphone (Fairphone 3/4/5), Teracube, and Google Pixel hardware, alongside community builds for select Samsung and OnePlus models. The company sells pre-installed refurbished and brand-new Fairphone devices, offering mainstream consumers a turnkey, private smartphone out of the box with automated OTA system updates and customer support.",
+    "company_origin_and_release_track": "iodéOS is produced by iodé, a company based in Toulouse, France, working with an international team; the system is downloadable and installable free of charge, while the company sells refurbished and new phones with iodéOS preinstalled, online and through a shop in Toulouse. Release numbering follows the Android generation: the project states that in 2026 most devices run iodéOS 7 on Android 16, that security updates are published monthly, and that each iodéOS version is supported for at least four years, the effective horizon depending on firmware, vendor blobs and hardware support from the manufacturer. The same FAQ describes iodéOS as a LineageOS fork installable on more than fifty phone and tablet models.",
+    "application_sources_and_google_services": "Two application sources are preinstalled rather than one: F-Droid, described as an open-source catalogue, and Aurora Store, presented as a front end to Google Play that reports the trackers embedded in each application. Google service compatibility is provided by microG, which is installed with the system; the FAQ states that Google Cloud Messaging push notifications are enabled by default and can be disabled at any time.",
+    "sales_geography_and_payment_channels": "Devices are sold throughout the European Union, as well as in Norway, the United Kingdom and Switzerland; the Premium subscription is offered worldwide. Outside those areas the project points to installing iodéOS on an existing device, to a pre-installed phone sold by its partner brax, or to independent resellers. Orders are generally prepared within one to three days, followed by one to three days of delivery within France and a few additional days elsewhere. Accepted payment methods are credit card through Stripe, PayPal, bank transfer through Fintecture, SEPA direct debit, available since 2026, and cryptocurrencies through Coinbase; a SEPA direct debit may take up to fourteen working days to be validated. A physical shop operates in Toulouse.",
+    "refurbishment_grading_and_hardware_warranty": "European refurbishment partners run hardware tests on more than forty control points, with procedures adapted to each brand and instrumented with the manufacturers' certified tools. The battery must retain at least 80% of its capacity and must not exceed 700 charge cycles. Two cosmetic grades are offered: grade A covers micro-scratches that are invisible while the phone is on, grade B covers more pronounced scratches with no impact on functionality, and every device is described as fully functional regardless of grade. Hardware warranty is one year for refurbished units, two years for Shift devices and five years for new Fairphones, and the project keeps it explicitly separate from the software support period.",
+    "gsi_fallback_and_bootloader_relocking": "When a device is not on the official list, the project documents installation from a Generic System Image (GSI) and directs requests for new device support to its community forum. Some models display a warning at every boot stating that the bootloader is unlocked: the bootloader must be unlocked by iodé before installation. The project states that it relocks the bootloader on the Fairphone and Pixel devices it sells, as well as on some Motorola models, relocking being possible only where the manufacturer allows it.",
+    "community_channels_and_contribution_paths": "Beyond the commercial channels, the project documents three ways of taking part: a community forum for questions and device requests, public GitLab projects for the source code and issue tracking, and a beta testers group used to try builds before release. It also lists smaller contribution paths - following the project and its newsletter, donating, and reporting problems through the issue tracker - and states that its income comes exclusively from device sales, Premium subscriptions and donations.",
+    "ota_update_pipeline_and_local_backup": "System updates are delivered over the air rather than through a desktop flashing tool, and the documentation describes the flow as a notification, a download that should be taken over Wi-Fi, an on-screen confirmation and a reboot that applies the image. The same operation refreshes the blocking database, so the filter list an administrator sees is tied to the system release cadence rather than to a separate subscription. Backup is handled locally: the build ships Seedvault, reached from Settings, System then Backup, which produces encrypted backups that can be restored on the same device or transferred to a new one during the setup wizard. The device list is capped rather than open-ended - the project states that more than 50 devices are supported and that each receives monthly over-the-air updates - and the published support floor is at least 4 years per device, with the caveat that firmware, vendor blobs and hardware differences can shorten or extend the effective window for a given model.",
+    "blocking_databases_and_dns_resolution_choices": "The blocker does not keep its own list: it aggregates four community-maintained blocklists - Energized Protection, StevenBlack, OISD and The Blocklist Project - and refreshes them at least once a month, more often for beta testers. The blocking-databases page lists two levels. Standard blocking aggregates several hundred thousand trackers and balances privacy with application functionality; reinforced blocking adds a list of more than 2 million domains and may affect how applications behave. Separate controls cover adult content, the major social networks and custom lists. Resolution is handled inside the system: the iodé resolver answers first and falls back to Quad9 at 9.9.9.9 if it cannot answer, a documented choice justified by malware filtering without site censorship, and blocked names are answered with a non-routable address such as 0.0.0.0 or simply denied. Because the filtering happens at the DNS layer, it does not occupy the VPN interface that a conventional blocker would claim, and it covers every query routed through the system resolver whatever the protocol - plain DNS on port 53, DoT on 853 or the system DoH settings. It does not cover an application that embeds its own encrypted resolver and reaches a DoH server directly, which the documentation states plainly rather than presenting the filter as exhaustive.",
+    "installer_and_generic_image_flashing": "Two installation paths are documented. The default one is a graphical installer published for Windows and Linux, described as covering most of the more than 60 officially supported devices; the project warns that installing the system, automatically or manually, carries risk and that it accepts no liability for damage caused by the operation. The manual path uses the Android platform development tools. A third route is the Generic System Image, intended for devices outside the official list: it requires Project Treble support, verified with the Treble Info application distributed on F-Droid, and the image must match the device architecture and partition scheme, A-only or A/B. Installation is then a single flashing step, `fastboot flash system system.img`, followed by a data wipe when the device comes from another ROM or GSI, then a reboot. The documentation states the limits of that route rather than leaving them implicit: GSI builds are not optimised for a given device and may prove less reliable, and hardware functions such as the camera or the fingerprint sensor may not work. The page carries an update date of 29 September 2025. Support duration is stated per version rather than per device: the FAQ announces updates for at least 4 years for each iodéOS version, and notes that in 2026 most devices are based on Android 16 with iodéOS 7, firmware and vendor blobs being able to shorten the effective period.",
     "advantages": [
       "Deeply integrated system-level DNS blocker that operates without occupying the Android VPN slot",
       "Real-time visibility into per-application network requests with geographical destination mapping",
@@ -84,10 +93,10 @@
   },
   "sources": [
     {
-      "title": "iodé Official Portal & System Architecture Overview",
-      "url": "https://iode.tech/",
-      "type": "official",
-      "date": "2026-05-10"
+      "title": "iodé Official FAQ — system technologies and privacy features",
+      "url": "https://iode.tech/en/faq/",
+      "type": "official_documentation",
+      "date": "2026-10-16"
     },
     {
       "title": "iodé Adblocker Technical Architecture & DNS Interception Documentation",
@@ -100,6 +109,42 @@
       "url": "https://iode.tech/documentation/iode-app/",
       "type": "official_documentation",
       "date": "2025-07-04"
+    },
+    {
+      "title": "iodé community forum and support channels",
+      "url": "https://community.iode.tech/",
+      "type": "official_forum",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "iodéOS documentation: OTA updates and Seedvault backup",
+      "url": "https://iode.tech/documentation/updates-backups/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "iodéOS documentation: blocking databases and blocking levels",
+      "url": "https://iode.tech/documentation/blocking-databases/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "iodéOS documentation: DNS resolution, fallback resolver and private DNS behaviour",
+      "url": "https://iode.tech/documentation/dns-resolver/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "iodéOS installation page: graphical installer for Windows and Linux, manual installation path",
+      "url": "https://iode.tech/installation/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "iodéOS documentation: Generic System Image, Treble requirements and flashing command",
+      "url": "https://iode.tech/documentation/gsi/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

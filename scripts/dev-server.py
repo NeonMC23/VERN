@@ -38,7 +38,7 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_PORT = 5500
-DEFAULT_HOST = "127.0.0.1"
+DEFAULT_HOST = "0.0.0.0"
 
 # /library/{id} or /library/{id}/ — ids are lowercase, hyphen separated.
 # An optional leading prefix lets the same rule work when the site is served

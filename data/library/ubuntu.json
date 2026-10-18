@@ -264,6 +264,54 @@
       "name": "Multipass",
       "relation": "related",
       "note": "A local VM tool for Ubuntu images, documented in the server manual and named in the data collection notice as a product covered alongside Ubuntu."
+    },
+    {
+      "id": "kubuntu",
+      "name": "Kubuntu",
+      "relation": "official_flavour",
+      "note": "Official Ubuntu flavour featuring the KDE Plasma desktop environment built upon the shared Ubuntu archive."
+    },
+    {
+      "id": "lubuntu",
+      "name": "Lubuntu",
+      "relation": "official_flavour",
+      "note": "Official lightweight Ubuntu flavour featuring the LXQt desktop environment and minimal resource requirements."
+    },
+    {
+      "id": "xubuntu",
+      "name": "Xubuntu",
+      "relation": "official_flavour",
+      "note": "Official Ubuntu flavour featuring the lightweight and customizable Xfce desktop environment."
+    },
+    {
+      "id": "ubuntu-mate",
+      "name": "Ubuntu MATE",
+      "relation": "official_flavour",
+      "note": "Official Ubuntu flavour integrating the traditional MATE desktop environment based on GNOME 2 design paradigms."
+    },
+    {
+      "id": "linux-mint",
+      "name": "Linux Mint",
+      "relation": "downstream_derivative",
+      "note": "Widely used desktop Linux distribution built upon Ubuntu LTS package repositories, featuring Cinnamon, MATE, and Xfce."
+    },
+    {
+      "id": "pop-os",
+      "name": "Pop!_OS",
+      "relation": "downstream_derivative",
+      "note": "Desktop Linux operating system developed by System76, derived from Ubuntu and featuring custom COSMIC desktop and hardware optimizations."
+    },
+    {
+      "id": "elementary-os",
+      "name": "elementary OS",
+      "relation": "downstream_derivative",
+      "note": "Desktop operating system built on Ubuntu LTS featuring the custom Pantheon desktop environment and curated AppCenter."
+    },
+    {
+      "id": "ubuntu-touch",
+      "name": "Ubuntu Touch",
+      "relation": "mobile_ecosystem",
+      "note": "Touch-optimized mobile operating system originally initiated by Canonical, now developed independently by the UBports Foundation."
     }
   ],
   "variants": [
@@ -617,21 +665,21 @@
     },
     {
       "title": "Repositories/Ubuntu",
-      "url": "https://help.ubuntu.com/community/Repositories/Ubuntu",
+      "url": "https://github.com/ubuntu/wiki-archives/blob/main/UbuntuCommunityHelpWiki/R/Repositories-Ubuntu.wiki",
       "type": "community",
       "accessed": "2026-09-19",
       "note": "Definitions of main, universe, restricted and multiverse, media containing main and restricted, partner repository off by default, PPAs and configuration files; a community page that predates current tooling names"
     },
     {
       "title": "UpgradeNotes",
-      "url": "https://help.ubuntu.com/community/UpgradeNotes",
+      "url": "https://github.com/ubuntu/wiki-archives/blob/main/UbuntuCommunityHelpWiki/U/UpgradeNotes.wiki",
       "type": "community",
       "accessed": "2026-09-19",
       "note": "One-release-at-a-time upgrade rule and caution against uncontrolled packages, with support durations superseded by ubuntu.com, last edited in 2019"
     },
     {
       "title": "UbuntuBackports",
-      "url": "https://help.ubuntu.com/community/UbuntuBackports",
+      "url": "https://github.com/ubuntu/wiki-archives/blob/main/UbuntuCommunityHelpWiki/U/UbuntuBackports.wiki",
       "type": "community",
       "accessed": "2026-09-19",
       "note": "Backports as newer packages for older releases with no security support guarantee and requester-side maintenance"
@@ -731,5 +779,6 @@
       "note": "Daily and release trees per series, minimal, oci, vagrant and wsl directories"
     }
   ],
-  "last_verified": "2026-09-19"
+  "last_verified": "2026-10-16",
+  "license": "GPL, LGPL, and compatible open-source licenses with redistributable firmware"
 }

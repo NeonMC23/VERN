@@ -65,7 +65,8 @@
       "Beginners looking for a general-purpose Linux distribution for daily web browsing, office tasks, and casual use",
       "Gamers and media creators seeking stable proprietary graphics drivers and standard multimedia application ecosystems",
       "Users attempting unauthorized security testing, malicious hacking, or network disruption without explicit written consent"
-    ]
+    ],
+    "verdict": "Kali Linux is a distribution for penetration testing, security auditing, and reverse engineering. Maintained by Offensive Security on a Debian testing rolling base, it provides a collection of offensive tools and hardware interfaces, but its security model and toolchain density make it inappropriate for general-purpose desktop or server use."
   },
   "components": [
     {

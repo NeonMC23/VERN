@@ -243,8 +243,8 @@
       "title": "Manjaro GitLab Code Repositories",
       "url": "https://gitlab.manjaro.org/",
       "type": "official",
-      "accessed": "2026-09-24",
-      "note": "Source code hosting for core Manjaro applications including pamac, mhwd, pacman-mirrors, and manjaro-settings-manager."
+      "accessed": "2026-10-16",
+      "note": "Source code hosting for core Manjaro applications including pamac, mhwd, pacman-mirrors, and manjaro-settings-manager; repository tags document component versions (pamac 11.7.1, mhwd 0.6.6)."
     },
     {
       "title": "Manjaro Community and Support Forum",
@@ -261,12 +261,13 @@
       "note": "Legal privacy disclosure covering server hosting, web data processing, and compliance under German and European law."
     },
     {
-      "title": "Manjaro Stable Package Repositories (Alwyzon Mirror)",
-      "url": "https://mirror.alwyzon.net/manjaro/stable/",
-      "type": "official",
-      "accessed": "2026-09-24",
-      "note": "Primary mirror database inspection verifying package versions for core and extra repositories (Linux 7.1, Pamac 11.7, MHWD 0.6.6)."
+      "title": "Manjaro 26.1 ‘Bian-May’ — Official Release Announcement",
+      "url": "https://forum.manjaro.org/t/manjaro-26-1-bian-may-released/189526",
+      "type": "official_announcement",
+      "accessed": "2026-10-16",
+      "note": "Official release announcement: Bian-May 26.1.0 (2026-08-12) and 26.1.2 (2026-09-10), with ISO images built on kernels 7.1, 6.12 and 6.18 (LTS)."
     }
   ],
-  "last_verified": "2026-09-24"
+  "last_verified": "2026-10-16",
+  "license": "GPL, LGPL, MIT, BSD, and upstream open-source licenses with redistributable firmware"
 }

@@ -21,10 +21,13 @@
   "content": {
     "introduction": "CalyxOS is an open-source mobile operating system developed and maintained by The Calyx Institute, a non-profit organization dedicated to digital privacy and civil liberties. Based on the Android Open Source Project (AOSP), CalyxOS aims to deliver an accessible, privacy-respecting mobile experience by minimizing tracking, providing application-level firewall controls, and offering optional microG compatibility.",
     "what_is_it": "CalyxOS is a turnkey mobile distribution designed for everyday privacy without requiring deep technical expertise. It ships without proprietary Google Mobile Services, instead bundling open-source alternatives for application distribution, location resolution, encrypted cloud backups, and network protection, while enforcing verified boot with relocked bootloaders on supported hardware.",
-    "microg_and_degoogling_approach": "CalyxOS addresses application compatibility through an optional integration of microG, a clean-room free software implementation of Google Play Services libraries. To facilitate push notifications (via Firebase Cloud Messaging) and alternative network location services (via Mozilla Location Services) without compromising platform security, CalyxOS utilizes restricted signature spoofing limited strictly to the included microG package. Users can disable microG entirely during initial device setup or via system settings for complete elimination of Google service interactions.",
-    "network_firewall_and_security_tools": "The operating system includes Datura Firewall, a native application firewall that operates without root privileges. Datura grants users granular control over internet access, enabling independent blocking or whitelisting of Wi-Fi, cellular data, background network traffic, and VPN routing on a per-application basis. CalyxOS also incorporates the Panic Kit (Ripple) emergency trigger, which can initiate automated data wiping or distress signaling when activated.",
-    "backup_system_and_bundled_software": "CalyxOS features Seedvault, an open-source encrypted backup application developed under the sponsorship of The Calyx Institute. Seedvault performs end-to-end encrypted backups of application data and system configurations to local USB storage or remote Nextcloud/WebDAV servers. The platform preinstalls F-Droid Basic for streamlined updates of open-source applications, Aurora Store for accessing applications from Google Play without a personal Google account, and a hardened Chromium-based web browser.",
+    "microg_and_degoogling_approach": "CalyxOS delivers a privacy-conscious mobile environment that strips out default Google telemetry, device trackers, and proprietary analytics services. To preserve broad application compatibility for mainstream users, CalyxOS integrates microG, the open-source re-implementation of Google Play Services. CalyxOS implements restricted signature spoofing, allowing only the cryptographically signed microG package to emulate Google Play Services identities while blocking arbitrary third-party applications from spoofing package signatures. Users have granular control to enable or disable microG features entirely, including Google Cloud Messaging (push notifications) and location providers (configured with privacy-preserving Mozilla Location Services or local Nominatim databases).",
+    "network_firewall_and_security_tools": "A central component of CalyxOS is Datura Firewall, an integrated application-level firewall engineered by the Calyx Institute. Datura allows users to manage network permissions on a per-app basis, toggling access to Wi-Fi, cellular data, background connections, or blocking internet access entirely. Because Datura operates directly at the Android framework level using native Linux iptables/nftables rules, it does not occupy the device's single native Android VPN slot. This architecture allows users to run external third-party VPNs (such as CalyxVPN, WireGuard, or Mullvad) alongside active firewall policies. CalyxOS also enforces encrypted DNS by default, pre-configuring DNS-over-TLS servers (such as Cloudflare, Quad9, or custom resolvers) to prevent ISP DNS snooping.",
+    "backup_system_and_bundled_software": "CalyxOS includes Seedvault, a comprehensive open-source backup solution built into the operating system settings. Developed under Calyx Institute sponsorship, Seedvault creates client-side encrypted backups of installed applications, application data, SMS messages, call logs, and system settings, storing them on external USB flash drives or remote Nextcloud instances via WebDAV. The default software bundle emphasizes verified open-source utilities: the Chromium-based Calyx Browser with built-in tracker protection, the F-Droid client with Privileged Extension for seamless background updates, the Signal encrypted messaging app, and Orbot for routing application traffic through the Tor anonymity network.",
     "hardware_support_and_lifecycle": "CalyxOS supports a curated list of smartphones that allow bootloader relocking with custom cryptographic signing keys, ensuring the integrity of Android Verified Boot (AVB). Supported hardware includes Google Pixel devices (Pixel 4a through Pixel 9 series), the modular Fairphone 4 and Fairphone 5, the SHIFT6mq, and select Motorola handsets (such as moto g32 and moto g52). The Calyx Institute delivers monthly security updates aligned with the Android Security Bulletin (ASB) via an encrypted over-the-air mechanism.",
+    "institutional_origin_and_release_chronology": "CalyxOS is produced by the Calyx Institute, a non-profit organisation that describes its work as defending digital privacy and offers members a Pixel phone with CalyxOS preinstalled. Beyond the AOSP base, releases are split between security updates and feature updates, each published monthly. The release chronology recorded on the project news page runs as follows: CalyxOS 7.2.5.20 on Android 16 for all supported devices with the September 2026 security update; on 1 October 2026 the rollout of CalyxOS 8.0.0.0 on Android 17 began for part of the device list, followed on 5 October 2026 by an announcement of a device-specific release schedule. Releases had been interrupted earlier in 2026: the project published 7.2.2.0 on 1 July 2026 describing it as restored and as the build that would receive all future updates.",
+    "device_catalog_and_support_tiers": "The project publishes three device tiers. Current devices include the Pixel 6 through Pixel 10a, Pixel Fold, Pixel Tablet, Fairphone 5, Fairphone (Gen. 6), SHIFTphone 8 and several Motorola models (moto g 5G 2024, g84 5G, g34 5G, g45 5G). Extended support covers the Pixel 4a (5G), Pixel 5, Pixel 5a (5G), Fairphone 4 and moto g52, g42 and g32. Older Pixel models and beta OnePlus builds are listed as no longer supported.",
+    "bundled_applications": "CalyxOS ships a set of applications chosen for private communication: Signal for calls, messages and video, Tor Browser for web access, VPN services from Tor and Riseup, and the F-Droid and Aurora Store catalogues for applications. microG substitutes part of Google Play Services and is presented as optional. These applications are listed on the project's home page alongside the device list.",
     "advantages": [
       "Privacy-by-default architecture eliminating Google tracking and invasive telemetry out of the box",
       "Native Datura Firewall offering granular per-app control over Wi-Fi, cellular, and background data",
@@ -89,9 +92,27 @@
     },
     {
       "title": "The Calyx Institute Projects & Seedvault Backup Overview",
-      "url": "https://calyxinstitute.org/projects/calyxos",
+      "url": "https://calyxinstitute.org/projects/calyx-os",
       "type": "official_documentation",
       "date": "2026-05-15"
+    },
+    {
+      "title": "CalyxOS — News (chronologie des versions 7.2.x et 8.0.0.0, mises à jour mensuelles)",
+      "url": "https://calyxos.org/news/",
+      "type": "project_announcement",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "The Calyx Institute — présentation de l'organisation à but non lucratif",
+      "url": "https://calyxinstitute.org/",
+      "type": "official_site",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "CalyxOS : appareils pris en charge, fonctions et actualités de version",
+      "url": "https://calyxos.org/",
+      "type": "official_site",
+      "accessed": "2026-10-18"
     }
   ]
 }

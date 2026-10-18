@@ -18,14 +18,18 @@
     "amd64 / x86_64"
   ],
   "license": "Common Development and Distribution License (CDDL 1.0)",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "OmniOS Community Edition is an open-source, server-oriented Unix operating system built directly on the illumos-gate consolidation. Originally developed by OmniTI in 2012, it has been maintained since 2017 by the OmniOS Community Edition Association (OmniOSce) in Switzerland, delivering an austere, reliable foundation for enterprise infrastructure and network storage.",
     "what_is_it": "OmniOS is a headless, purpose-built server distribution providing an installation focused solely on hosting services, network file sharing, and virtualized workloads. It integrates native OpenZFS file system capabilities, container-based isolation through Solaris Zones (including native and Linux LX brands), hardware-assisted virtual machines with bhyve and KVM, and Software-Defined Networking through Crossbow.",
-    "origin_and_community_continuity": "Created by Robert Mustacchi and OmniTI to meet demanding production storage requirements, OmniOS debuted with release r151002 in April 2012. When OmniTI suspended active sponsorship in 2017, the community established the non-profit OmniOSce Association (supported by Oetiker+Partner AG) to ensure independent development, continuous security patching, and predictable release cycles.",
-    "storage_architecture_and_sharing": "OmniOS relies on OpenZFS as its native root file system and volume management engine. The operating system includes in-kernel implementations for network storage protocols, providing high-performance iSCSI target services, Network File System (NFS), and native SMB/CIFS file sharing with integrated Active Directory authentication and granular ACL management.",
-    "virtualization_and_networking": "Virtualization in OmniOS operates at two complementary layers: lightweight containers using illumos Zones (supporting native illumos environments, LX brand Linux emulation, and illumos branded zones) and hardware virtualization using the bhyve hypervisor and KVM. Virtual machines execute within isolated branded zones, providing multi-layered protection. Network connectivity is orchestrated through Crossbow, enabling dynamic Virtual Network Interface Cards (VNICs) and bandwidth management.",
-    "packaging_and_release_lifecycle": "Third-party software and system components are managed via the Image Packaging System (IPS, pkg) with cryptographic package signatures and automatic ZFS boot environment generation (beadm). OmniOS maintains a strict semiannual release cadence in May and November, alternating six-month standard stable releases with three-year Long Term Support (LTS) releases (including r151054 LTS and r151058 stable).",
+    "origin_and_community_continuity": "OmniOS debuted in 2012 as an open-source enterprise operating system created by OmniTI and led by illumos contributor Robert Mustacchi. Following changes at OmniTI, the project transitioned smoothly to the OmniOS Community Edition Association (omniosce.org), an independent non-profit foundation based in Switzerland. The association maintains dedicated build farms, automated release pipelines, and comprehensive documentation, ensuring predictable long-term maintenance, active security errata backporting, and direct integration of upstream illumos improvements. Today, the OmniOS Community Edition Association provides regular security updates and continuous packaging maintenance for both stable LTS releases and rolling interim snapshots.",
+    "storage_architecture_and_sharing": "OmniOS Community Edition is built from the ground up around OpenZFS, offering native in-kernel file sharing and enterprise block storage protocols. File sharing is handled by high-performance, in-kernel CIFS/SMB 3.1.1 and NFS v3/v4 servers, allowing multi-gigabit throughput with native ZFS ACL support and Active Directory domain integration. For SAN storage infrastructures, OmniOS provides the Common Multiprotocol SCSI Target (COMSTAR) framework. COMSTAR enables administrators to transform standard x86 servers into high-availability SAN arrays, exposing ZFS volumes (zvols) as Fibre Channel, iSCSI, or SRP (SCSI RDMA Protocol) LUNs with fine-grained host mapping and multipath I/O (MPxIO) support. Storage pools support multi-pathing (MPxIO), scheduled background scrubs, and resilient fault management reporting via FMA.",
+    "virtualization_and_networking": "OmniOS combines lightweight OS-level isolation with full hardware virtualization. illumos Zones provide secure, resource-capped container environments with minimal overhead, including sparse zones and LX-branded zones capable of executing Linux binaries directly on translated system calls. For hardware virtualization, OmniOS embeds the bhyve hypervisor, allowing administrators to run unmodified Linux, BSD, and Windows guest virtual machines. Networking is managed via the Crossbow framework (`dladm`), which provisions virtual network interfaces (VNICs), virtual switches, and QoS bandwidth policing directly in software, interconnecting zones and virtual machines without requiring external network hardware.",
+    "packaging_and_release_lifecycle": "Software management in OmniOS uses the Image Packaging System (IPS via the `pkg` command), tightly integrated with OpenZFS boot environments (`beadm`) for zero-downtime, fully reversible operating system upgrades. OmniOS operates on a strict, predictable release cadence: a new version is released every six months (May and November), with every second release designated as a Long Term Support (LTS) version maintained for three full years. Automated installations and bare-metal provisioning are orchestrated via Kayak, an integrated network installation framework tailored for datacenter automation that deploys ZFS root pools over PXE or HTTP. Administrators can schedule automated pool scrubbing, disk health monitoring via FMA (Fault Management Architecture), and configure headless remote management with ease.",
+    "current_release_and_support_dates": "La page des notes de version donne, pour chaque construction, sa date de fin de support : r151058, publiée en mai 2026, est supportée jusqu'au 2027-05-03 ; r151056, publiée en novembre 2025, jusqu'au 2026-11-02. Les versions antérieures y figurent avec une date de fin de support déjà atteinte, à l'exception de la LTS courante, archivée. Une page distincte, le calendrier des versions, indique la date de la prochaine publication.",
+    "dtrace_and_self_hosting": "DTrace est documenté comme le cadre de traçage dynamique du système, utilisable pour le diagnostic sur l'ensemble de la pile logicielle. Le projet se décrit par ailleurs comme auto-hébergé : il publie le dépôt de construction OmniOS (omnios-build) et documente la construction du système à partir des sources, ainsi que la fabrication d'images pour l'externalisation.",
+    "security_advisories_and_update_policy": "OmniOS separates two release tracks with different security behaviour. The stable track applies non-disruptive userland updates weekly when updates exist and produces a full release roughly every six months, with even-numbered identifiers such as r151022 released in May 2017; kernel updates reach stable only when they address security or stability and no workaround exists, and installation media are rebuilt only for a security or installation issue. The bloody track receives userland and kernel changes as they are introduced. Both are consumed with `pkg update` from IPS publishers, documented as `pkg.omnios.org/r151058/core` and `pkg.omnios.org/r151058/extra`, with a mirror host also published. Two concrete security notices illustrate the process. For CVE-2023-31284 the project described an unprivileged kernel stack overflow reachable from the global zone or any non-global zone, recommended applying distribution patches, and noted that a kernel built with the default stack protector can convert the flaw into a denial of service without that being a guarantee. For CVE-2024-3094 the project stated that OmniOS was not affected because the malicious code required a Linux build host and GNU ld, listed the xz versions shipped per release (5.2.6 in r151038, 5.4.2 in r151046, 5.4.4 in r151048 and 5.6.1 in bloody), and reported switching its bloody builds to the raw source archive. Meltdown mitigation is documented through the kernel variable `kpti_enable`, PCID and INVPCID use, a check with `dmesg | grep KPTI`, and a `kpti=0` boot argument placed in `/boot/conf.d/kpti` to disable the mitigation.",
+    "installation_path_and_initial_configuration": "The OmniOS installation walk-through describes an install of r151054 from a bootable CD, a USB drive or PXE. After boot, the installer offers several boot options; pressing T within ten seconds selects the older text installer, while the default timeout starts the dialogue-based installer. The operator picks a keyboard layout, then chooses the entry that finds disks, creates the root pool and installs the system. Detected disks are selected with the space bar, and when several drives are chosen the installer asks for a RAID level before writing the image. The same page gives virtual-machine guidance with a 64-bit x86-64 architecture, a 1 GiB memory minimum and an 8 GiB disk minimum, and names VirtualBox, VMware, Xen, Hyper-V, KVM and bhyve as supported hosts. After the image is written, a post-installation menu offers network configuration, either static or through DHCP with gateway and DNS entries, and the creation of an initial non-root user with a login shell and a set of privileges. The page records that the root password stays blank unless it is set through that menu, in which case pressing return at the console login prompt is enough to log in; this default is documented rather than enforced by a first-boot prompt.",
     "advantages": [
       "Enterprise-grade OpenZFS storage foundation with in-kernel SMB, NFS, and iSCSI services",
       "Comprehensive multi-tier virtualization combining lightweight Zones with bhyve and KVM hypervisors",
@@ -47,7 +51,7 @@
       "Desktop computer users expecting graphical installers, office productivity suites, or display servers",
       "Deployments on ARM, Raspberry Pi, or 32-bit legacy computer hardware architectures"
     ],
-    "verdict": "OmniOS Community Edition represents an exemplary realization of illumos as a modern enterprise server platform. By combining rock-solid OpenZFS storage, flexible Zones and bhyve virtualization, and a disciplined release engineering model, it delivers outstanding stability for demanding infrastructure deployments."
+    "verdict": "OmniOS Community Edition is an enterprise-oriented server operating system built upon the illumos kernel and Unix SVR4 architecture. By integrating the OpenZFS file system with native network sharing protocols (NFS and kernel SMB), dual-layer virtualization via Solaris Zones and bhyve, and a predictable six-month release cycle supported by long-term maintenance branches, it provides a specialized platform for storage infrastructure, directory services, and virtualized enterprise server workloads."
   },
   "relations": [
     {
@@ -93,6 +97,42 @@
       "url": "https://github.com/omniosorg/omnios-build",
       "type": "official",
       "date": "2026-05-04"
+    },
+    {
+      "title": "OmniOS - Stable vs. Bloody (rythme des mises à jour et politique de noyau)",
+      "url": "https://omnios.org/about/stablevsbloody.html",
+      "type": "documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "OmniOS - Mitigating Meltdown (KPTI)",
+      "url": "https://omnios.org/info/kpti.html",
+      "type": "technical_note",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "OmniOS - Security Alert CVE-2023-31284",
+      "url": "https://omnios.org/article/CVE-2023-31284.html",
+      "type": "security_advisory",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "OmniOS - OmniOS is not affected by CVE-2024-3094",
+      "url": "https://omnios.org/article/xz-utils-CVE-2024-3094.html",
+      "type": "security_advisory",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "OmniOS - IPS Repositories (publishers et miroirs)",
+      "url": "https://omnios.org/info/ipsrepos.html",
+      "type": "documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "OmniOS - A Fresh Installation Walk-through (r151054, installateur dialogue)",
+      "url": "https://omnios.org/setup/freshinstall.html",
+      "type": "documentation",
+      "date": "2026-10-18"
     }
   ]
 }

@@ -73,7 +73,7 @@
       "Organizations whose administrative workflows depend strictly on systemd unit files and timer management.",
       "Environments requiring commercial vendor support contracts and strict enterprise SLAs."
     ],
-    "verdict": "Slackware Linux is a foundational, independent operating system that preserves the clarity and technical elegance of traditional Unix. By avoiding automatic dependency engines, systemd monoliths, and invasive distribution patches, it gives administrators complete authority over their machines. With its BSD-style init scripts, pkgtools framework, and robust SlackBuilds ecosystem, Slackware remains an enduring benchmark of stability, simplicity, and user control."
+    "verdict": "Slackware Linux is an independent operating system that follows the administration model of traditional Unix systems. It omits automatic dependency resolution, the systemd suite and distribution-specific patches, and relies on BSD-style init scripts, the pkgtools framework and SlackBuilds, leaving package selection and configuration decisions to the administrator."
   },
   "components": [
     {
@@ -239,7 +239,7 @@
     },
     {
       "title": "Slackware 15.0 Release Announcement",
-      "url": "http://www.slackware.com/",
+      "url": "http://www.slackware.com/announce/15.0.php",
       "type": "project_announcement",
       "date": "2022-02-02",
       "accessed": "2026-09-25",
@@ -294,5 +294,5 @@
       "author": "Slackware Security Team"
     }
   ],
-  "last_verified": "2026-09-25"
+  "last_verified": "2026-10-16"
 }

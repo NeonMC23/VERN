@@ -1,0 +1,145 @@
+{
+  "id": "nitrux",
+  "name": "Nitrux",
+  "type": "operating_system",
+  "summary": "Distribution Linux 64-bits bâtie sur Debian, caractérisée par une racine immuable via OverlayFS, le système d'initialisation OpenRC, le compositeur Wayland Hyprland et la gestion logicielle rootless NX AppHub.",
+  "tags": [
+    "linux",
+    "desktop",
+    "debian-derivative",
+    "immutable",
+    "openrc",
+    "hyprland",
+    "wayland",
+    "mauikit",
+    "appimage"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86_64"
+  ],
+  "license": "GNU GPLv3 et licences libres associées",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "Nitrux est une distribution Linux pour ordinateurs personnels développée par Nitrux Latinoamericana S.C. sous la direction d'Uri Herrera. Conçue initialement autour de composants Ubuntu et KDE, elle a opéré plusieurs mutations architecturales majeures pour devenir un système d'exploitation de bureau autonome fondé sur Debian, exploitant le système d'initialisation OpenRC et une racine système immuable gérée par OverlayFS. Elle privilégie une pile d'affichage moderne Wayland animée par le compositeur à pavage dynamique Hyprland, des applications bâties sur la boîte à outils MauiKit et une distribution d'applications utilisateur sans privilèges administrateur reposant sur NX AppHub et le format AppImage.",
+    "what_is_it": "Il s'agit d'un système d'exploitation de bureau intégrant un modèle d'immuabilité système couplé à une gestion d'applications conteneurisées et encapsulées. Nitrux isole son système de fichiers racine en lecture seule afin de garantir la cohérence du système de base et d'éviter les altérations causées par les installations directes de paquets. Les applications graphiques et utilitaires sont fournies via des formats décorrélés du système de base (AppBoxes, Flatpak, Distrobox), tandis que les composants centraux reçoivent des mises à jour atomiques de type OTA (Over-The-Air) orchestrées par l'outil système NUTS (Nitrux Update Tool System).",
+    "immutable_architecture_and_overlayroot": "Depuis sa version 2.6.0 (janvier 2023), Nitrux applique une politique stricte d'immuabilité au système de fichiers racine par le biais de son module NX Overlayroot. En s'appuyant sur OverlayFS, la racine du système est montée en lecture seule lors du démarrage normal. Les modifications directes de la hiérarchie système (`/usr`, `/bin`, `/lib`) sont bloquées par défaut, ce qui protège le système contre les corruptions accidentelles et les logiciels malveillants. Seuls le répertoire des données utilisateur (`/home`) et les chemins d'état persistant (`/var/lib`) conservent des droits d'écriture permanents. Cette séparation permet d'assurer des sauvegardes et des restaurations atomiques reproductibles lors des montées de version du système d'exploitation.",
+    "openrc_and_debian_base": "Contrairement à la majorité des distributions Linux contemporaines basées sur Debian ou Ubuntu, Nitrux a écarté le gestionnaire de services systemd au profit d'OpenRC pour son système d'initialisation. OpenRC gère le démarrage des démons système, la configuration des niveaux d'exécution (*runlevels*) et la gestion des services d'arrière-plan avec une empreinte mémoire réduite et une séparation nette entre l'initialisation et la gestion des processus utilisateurs. La base logicielle est construite directement à partir des branches de paquets Debian, adaptées par l'équipe de développement avec des noyaux Linux configurés pour de hautes performances interactives (incluant la compression zstd de niveau 6 et des optimisations de latence processeur).",
+    "nx_apphub_and_appboxes": "Nitrux adopte un paradigme de gestion applicative sans droits root (*rootless*). Le gestionnaire de paquets traditionnel APT est désactivé pour l'installation directe de logiciels applicatifs sur l'hôte afin de ne pas compromettre l'intégrité de la racine. En remplacement, Nitrux fournit NX AppHub, un outil en ligne de commande et démon d'intégration qui assemble de façon déclarative des paquets Debian dans des paquets autonomes appelés AppBoxes. Les AppBoxes s'appuient sur le runtime FUSE 3 et le format AppImage, intégrant leurs dépendances et exécutant les logiciels sous le contrôle de profils de bac à sable (Bubblewrap, Firejail ou AppArmor). Pour les besoins de développement ou les logiciels indisponibles sous cette forme, le système prend en charge Flatpak au niveau utilisateur ainsi que Distrobox pour exécuter des conteneurs d'autres distributions Linux.",
+    "hyprland_and_mauikit_desktop": "L'environnement graphique de Nitrux est articulé autour du compositeur Wayland Hyprland, configuré pour offrir une navigation à fenêtres juxtaposées (*tiling*) fluide et réactive. Les applications natives du bureau s'appuient sur MauiKit, un framework d'interface graphique modulaire développé par le projet (fourni sous la forme d'un fork spécifique adapté à Linux). Cet ensemble fournit une collection d'outils cohérents (gestionnaire de fichiers Index, terminal station, lecteur multimédia VVave) adaptés aux résolutions d'écran modernes et aux interactions tactiles ou au clavier. Le système vérifie la compatibilité matérielle lors de la phase d'amorçage via la couche logicielle HCVL (*Hardware Compatibility Validation Layer*) et fournit des images ISO distinctes optimisées pour les GPU AMD/Intel ou NVIDIA.",
+    "system_requirements": "La documentation officielle fixe un minimum de 4 Go de mémoire vive, un processeur x86 64 bits compatible AVX2 (niveau x86-64-v3), 64 Go de stockage et 512 Mo de mémoire vidéo. Le firmware doit être EFI ou UEFI : les machines à BIOS hérité ne sont pas prises en charge, et le démarrage CSM n'est que conditionnel. Une connexion Internet est facultative pendant l'installation mais nécessaire aux mises à jour. Le projet note qu'un système peut démarrer avec 2 Go de mémoire, mais que cet usage reste limité à des tâches légères.",
+    "gpu_support_limits": "Les cartes graphiques doivent fournir une prise en charge Mesa GBM/KMS, ou, pour NVIDIA, un module noyau open source fonctionnel. La documentation exclut explicitement les GPU NVIDIA qui dépendent du pilote Nouveau ou du pilote propriétaire, les cartes ATI/AMD GCN 1.0 et antérieures, et les GPU obsolètes. Ces restrictions découlent du choix de Wayland et de Hyprland comme environnement graphique par défaut.",
+    "init_system_rationale": "Nitrux utilise OpenRC au lieu de systemd. La documentation justifie ce choix par la philosophie Unix : OpenRC est décrit comme un lanceur de processus qui s'appuie sur l'init fourni par le système, assure l'isolation des processus, le démarrage parallèle et la gestion des dépendances de services, sans absorber des fonctions annexes. systemd y est présenté comme une suite logicielle englobant gestionnaire de périphériques, gestionnaire de session, gestionnaire réseau et service de journalisation.",
+    "installation_workflow": "Le guide d'installation distingue une image ISO pour le matériel AMD et Intel et une image distincte pour NVIDIA, puis décrit la validation de l'intégrité et de l'authenticité de l'image, l'écriture sur clé USB avec Rufus, Ventoy ou dd, et le processus d'installation. Le partitionnement peut être automatisé ou manuel ; le chiffrement du disque, l'activation de Secure Boot, l'installation en simple ou double amorçage avec Windows ou une autre distribution Linux, et le triple amorçage sont documentés séparément.",
+    "recommended_configuration": "La configuration recommandée par la documentation est de 8 Go de mémoire vive, un processeur x86 64 bits de niveau x86-64-v3 avec AVX2, un processeur Intel de 8e génération (Coffee Lake) ou un AMD Ryzen 1000 ou plus récent, un amorçage USB 3.0 et un stockage NVMe. Les extensions de virtualisation et l'IOMMU sont citées parmi les capacités attendues du firmware. Le firmware EFI ou UEFI reste nécessaire, Secure Boot demeurant optionnel.",
+    "release_history_and_version_series": "The release archive lists the successive versions with their publication announcements: 7.0.0, 6.1.0, 6.0.0, 5.1.0 and 5.0.0, preceded by a series carrying short codenames - 3.9.1 \"mk\", 3.9.0 \"pd\", 3.8.0 \"db\", 3.7.1 \"sp\" and 3.7.0 \"ub\". The home page designates 7.0.0 as the latest release, and the site footer dates the project's activity from 2017 to 2026 under Nitrux Latinoamericana S.C. Each entry in the archive links both a changelog and the announcement published for that version, so the version history is documented release by release rather than summarised in a single page.",
+    "secure_boot_encryption_and_image_validation": "The documentation devotes a specific chapter set to integrity and boot: it distinguishes the ISO built for AMD and Intel hardware from the one built for NVIDIA hardware, documents an integrity validation step and a separate authenticity validation step for the downloaded image, and describes flashing with USB Flash Preflight, Rufus, Ventoy or dd. Installation is documented with automated and non-automated partitioning options, full-disk encryption, and single-boot, dual-boot and triple-boot scenarios, including a dedicated page on using Secure Boot with Nitrux.",
+    "advantages": [
+      "Racine système immuable via NX Overlayroot et OverlayFS garantissant l'intégrité du système de base contre les corruptions et les conflits de paquets.",
+      "Mises à jour atomiques du système d'exploitation orchestrées par NUTS sans risque de rupture d'état à mi-chemin.",
+      "Gestion logicielle rootless via NX AppHub (AppBoxes), Flatpak et Distrobox préservant la stabilité du système hôte.",
+      "Système d'initialisation OpenRC offrant une alternative légère et modulaire à l'architecture systemd.",
+      "Environnement graphique moderne articulé autour du compositeur Wayland Hyprland et de la suite d'applications MauiKit.",
+      "Noyaux Linux optimisés pour la faible latence et intégration matérielle validée dès l'amorçage via HCVL."
+    ],
+    "disadvantages": [
+      "Incompatibilité avec les habitudes traditionnelles d'administration Debian (impossibilité d'utiliser `apt install` directement sur la racine en mode normal).",
+      "Courbe d'apprentissage exigeante pour les utilisateurs non initiés aux compositeurs à pavage Wayland et aux environnements sans systemd.",
+      "Exigences matérielles strictes limitées aux architectures x86_64 modernes disposant d'un micrologiciel UEFI.",
+      "Consommation d'espace disque accrue liée à la duplication de dépendances dans les formats de paquets autonomes et les conteneurs."
+    ],
+    "who_is_it_for": [
+      "Utilisateurs avancés recherchant un environnement de travail de bureau contemporain sous Wayland avec gestion par pavage.",
+      "Développeurs et techniciens souhaitant une station de travail immuable avec gestion des dépendances isolées via conteneurs et AppBoxes.",
+      "Enthousiastes Linux désireux d'utiliser une distribution basée sur Debian articulée autour d'OpenRC plutôt que de systemd."
+    ],
+    "who_is_it_not_for": [
+      "Débutants sous Linux habitués aux paradigmes de bureau traditionnels (menus flottants classiques, installation directe de paquets via APT).",
+      "Utilisateurs d'ordinateurs anciens ou limités en mémoire vive et espace disque ne répondant pas aux spécifications matérielles minimales.",
+      "Administrateurs systèmes dont l'infrastructure logicielle dépend strictement de démons et d'unités de services systemd."
+    ],
+    "verdict": "Nitrux constitue une proposition singulière et résolument technique dans le paysage des distributions Linux. En combinant un socle Debian épuré de systemd au profit d'OpenRC, une racine immuable protégée par OverlayFS, un bureau Wayland articulé autour de Hyprland et une gestion applicative conteneurisée et déclarative, le projet s'adresse aux utilisateurs avertis qui privilégient la résilience architecturale et l'efficacité opérationnelle moderne."
+  },
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "relation": "upstream_base",
+      "note": "Socle amont à partir duquel les paquets et bibliothèques de base de Nitrux sont assemblés et maintenus."
+    },
+    {
+      "id": "vanilla-os",
+      "name": "Vanilla OS",
+      "relation": "alternative",
+      "note": "Autre distribution de bureau Linux explorant l'immuabilité du système hôte et l'exécution d'applications conteneurisées."
+    },
+    {
+      "id": "bazzite",
+      "name": "Bazzite",
+      "relation": "alternative",
+      "note": "Distribution de bureau immuable moderne articulée autour de conteneurs et de l'architecture OSTree."
+    },
+    {
+      "id": "kde-neon",
+      "name": "KDE neon",
+      "relation": "related_ecosystem",
+      "note": "Écosystème partageant des composants amont historiques liés aux technologies Qt et KDE exploités par les bibliothèques MauiKit."
+    }
+  ],
+  "links": {
+    "home": "https://nxos.org/",
+    "documentation": "https://nxos.org/documentation/",
+    "repository": "https://github.com/Nitrux",
+    "distrowatch": "https://distrowatch.com/table.php?distribution=nitrux"
+  },
+  "sources": [
+    {
+      "title": "Nitrux Official Website & System Architecture",
+      "url": "https://nxos.org/home/nx/",
+      "type": "official",
+      "date": "2026-10-16"
+    },
+    {
+      "title": "Nitrux Documentation — Immutable Architecture & NX Overlayroot",
+      "url": "https://nxos.org/documentation/core-concepts/system-architecture/immutable-architecture/",
+      "type": "official_documentation",
+      "date": "2026-03-19"
+    },
+    {
+      "title": "Nitrux Documentation — Getting Started & Installation Requirements",
+      "url": "https://nxos.org/documentation/getting-started/installation/installing-nitrux/",
+      "type": "official_documentation",
+      "date": "2026-03-25"
+    },
+    {
+      "title": "Nitrux Organization Repositories on GitHub",
+      "url": "https://github.com/Nitrux",
+      "type": "repository",
+      "date": "2026-10-16"
+    },
+    {
+      "title": "Nitrux : configuration minimale requise (mémoire, processeur, stockage, firmware)",
+      "url": "https://nxos.org/documentation/getting-started/system-requirements/minimum/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Nitrux : configuration recommandée",
+      "url": "https://nxos.org/documentation/getting-started/system-requirements/recommended/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Nitrux : choix et rôle du système d'initialisation OpenRC",
+      "url": "https://nxos.org/documentation/core-concepts/system-architecture/init/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Nitrux : index de la documentation (installation, chiffrement, Secure Boot, canaux logiciels)",
+      "url": "https://nxos.org/documentation/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    }
+  ]
+}

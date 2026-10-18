@@ -21,7 +21,7 @@
     "i386"
   ],
   "license": "GPL-2.0-or-later, GPL-3.0-or-later, MIT, and redistributable proprietary firmware/microcode",
-  "last_verified": "2026-09-25",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "MX Linux is an open-source, desktop-focused Linux distribution developed collaboratively by members of the former MEPIS community and developers from antiX. Originating in December 2013 and publishing its first release in March 2014, the distribution pairs a solid foundation derived directly from Debian Stable with an array of native graphical utilities known as MX Tools. Designed to deliver an operational out-of-the-box experience, MX Linux incorporates proprietary firmware, media codecs, and hardware enablement layers alongside standard free software packages.",
     "what_is_it": "Technically, MX Linux is a downstream distribution built on Debian Stable that provides custom kernel options, a dedicated package repository (`mxrepo.com`), and an integrated administration layer. Unlike minimal or roll-your-own distributions, MX Linux configures a complete desktop environment upon installation. Its flagship edition features a customized Xfce desktop with a signature vertical panel layout, while official companion editions deliver KDE Plasma and Fluxbox. A key architectural distinction of MX Linux is its dual-init system architecture, permitting the system to run either SysVinit or systemd as PID 1 depending on boot selection.",
@@ -277,7 +277,7 @@
     },
     {
       "title": "MX Linux User Manual — Live Persistence and Snapshot Management",
-      "url": "https://mxlinux.org/current-release-features/",
+      "url": "https://mxlinux.org/manuals/",
       "type": "manual",
       "accessed": "2026-09-25",
       "publisher": "MX Linux Documentation Team",

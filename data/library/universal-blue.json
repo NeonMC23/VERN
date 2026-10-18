@@ -53,7 +53,9 @@
       "Relies on external container registries (GitHub Container Registry) for system update delivery."
     ],
     "who_is_it_for": "Universal Blue is designed for developers, cloud-native engineers, system administrators, and Linux enthusiasts seeking an appliance-like, maintenance-free workstation with modern drivers and reproducible container workflows.",
-    "who_is_it_not_for": "Universal Blue is not intended for legacy BIOS machines, low-bandwidth environments with restricted container registry access, or users whose workflows depend strictly on mutable host packages without containerization."
+    "who_is_it_not_for": "Universal Blue is not intended for legacy BIOS machines, low-bandwidth environments with restricted container registry access, or users whose workflows depend strictly on mutable host packages without containerization.",
+    "verdict": "Universal Blue builds customizable, community-maintained OCI container images on Fedora Atomic Desktops. It provides declarative, image-based systems with preconfigured hardware drivers, codecs and Flatpak integration, and offers rollback through rpm-ostree and GRUB deployment selection, while requiring container-based development and packaging workflows.",
+    "governance_independence_and_project_positioning": "The project describes itself on its home page as a manufacturing process rather than as a distribution, with the sentence that it is not a distribution but a new way to consume existing distributions, and it characterises its own output as a layer of customisation on Fedora that can be cleanly removed. The same page states that a user can rebase back to Fedora without reinstalling.\n\nThe site publishes explicit non-affiliation statements. Beside the organisations listed as the origin of some contributors, the page states that Universal Blue is not affiliated or endorsed by any of those organisations. In its cloud native section it states that Universal Blue is an open source project and does not have a formal relationship with Red Hat or any other vendors, and the footer of the site repeats that the project is not affiliated with Red Hat or the Fedora Project.\n\nThe separation between the project and the images it publishes appears in the documentation page, which lists four distinct end-user documentation sets, one for Aurora, one for Bazzite, one for Bluefin and one for uCore. The base images are described as lightweight by design and as not shipping with many of the enhancements of the other images, and as intended to be derived into new images through a Containerfile and the build actions of the project.\n\nNone of the pages consulted during this review gives a decision-making procedure, a list of office holders, or a dated governance document for the project."
   },
   "components": [
     {
@@ -205,6 +207,12 @@
       "url": "https://distrowatch.com/table.php?distribution=universalblue",
       "type": "metadata",
       "date": "2026-10-02"
+    },
+    {
+      "title": "Universal Blue - documentation par image",
+      "url": "https://universal-blue.org/documentation.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
     }
   ]
 }

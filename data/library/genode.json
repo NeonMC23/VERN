@@ -1,0 +1,126 @@
+{
+  "id": "genode",
+  "name": "Genode OS Framework",
+  "type": "operating_system",
+  "summary": "Framework de système d'exploitation modulaire et open source fondé sur une architecture à micro-noyau et une sécurité par capacités, organisant ses services en un arbre hiérarchique de composants strictement isolés.",
+  "tags": [
+    "microkernel",
+    "capability-based",
+    "framework",
+    "sculpt-os",
+    "component-architecture",
+    "security",
+    "multi-kernel",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "x86-32",
+    "ARM",
+    "ARM64",
+    "RISC-V"
+  ],
+  "license": "Open Source (GNU Affero General Public License v3 avec options de licences commerciales)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "Genode (Genode OS Framework) est un framework de système d'exploitation modulaire libre écrit en C++. Initié en 2008 par Norman Feske et Christian Helmuth au sein de la société allemande Genode Labs, le projet est issu de recherches académiques menées à l'Université de Technologie de Dresde (TU Dresden). Genode a pour vocation de dépasser les vulnérabilités structurelles des systèmes monolithiques traditionnels en concevant le système d'exploitation non comme un bloc de code tout-puissant, mais comme un environnement architectural structuré permettant d'assembler des composants logiciels indépendants sous un contrôle strict de capacités.",
+    "what_is_it": "Techniquement, Genode n'est ni une distribution Linux ni un système de type Unix conventionnel. Il s'agit d'un framework d'infrastructure système qui organise la totalité des fonctionnalités d'exploitation (pilotes de périphériques, systèmes de fichiers, gestionnaires d'affichage, piles réseau et environnements applicatifs) sous la forme d'un arbre hiérarchique récursif de composants isolés (component tree). Le composant racine initial alloue à ses enfants des quotas de ressources stricts et des droits d'accès exclusifs (capabilities), garantissant que chaque composant ne peut interagir qu'avec les services pour lesquels une autorisation explicite lui a été déléguée.",
+    "capability_security_model_and_component_tree": "Le modèle de sécurité de Genode repose sur le principe du moindre privilège appliqué par des capacités typées vérifiées matériellement par le micro-noyau. Aucun processus super-utilisateur (root) universel n'existe dans le système. Chaque composant parent joue le rôle d'autorité de régulation pour ses processus enfants : il contrôle leur consommation de mémoire physique, leur temps processeur et leurs canaux de communication par appels de procédure distante (RPC). Ce cloisonnement rigoureux empêche par conception toute élévation de privilèges ou déplacement latéral d'un attaquant : la compromission d'un pilote matériel ou d'un service réseau reste strictement confinée à son sous-arbre sans pouvoir contaminer le reste du système.",
+    "kernel_agnostic_architecture_and_supported_kernels": "L'une des particularités remarquables de Genode réside dans son indépendance vis-à-vis du noyau sous-jacent (kernel-agnostic). Grâce à une couche d'abstraction uniforme, Genode peut être déployé indifféremment sur plusieurs micro-noyaux selon les contraintes de robustesse ou de certification : NOVA (micro-hyperviseur hautement optimisé pour la virtualisation x86), seL4 (micro-noyau formellement vérifié mathématiquement pour les systèmes critiques), Fiasco.OC (micro-noyau de la famille L4), Linux (utilisé comme banc d'essai en espace utilisateur pour le prototypage rapide) ou base-hw (le micro-noyau minimaliste développé en interne par Genode Labs pour s'exécuter directement sur le silicium sans dépendance externe).",
+    "sculpt_os_desktop_and_sandboxed_drivers": "Pour les ordinateurs de bureau et ordinateurs portables, Genode propose **Sculpt OS** (*Sculpt for The Curious*). Sculpt offre une interface graphique interactive originale permettant de visualiser l'arbre des composants sous forme de graphe dynamique et d'interconnecter à chaud des périphériques de stockage, des cartes Wi-Fi, des interfaces graphiques et des machines virtuelles. Pour assurer la compatibilité avec le matériel informatique contemporain, Genode encapsule des pilotes matériels complets issus du noyau Linux ou d'OpenBSD (notamment pour les contrôleurs Wi-Fi, Ethernet et USB) au sein d'environnements restreints (DDE - Device Driver Environment), neutralisant tout risque de panique noyau en cas de défaillance matérielle.",
+    "software_ecosystem_and_hardware_portability": "Bien qu'indépendant d'Unix, Genode fournit une bibliothèque C standard (`libc`) et une couche d'émulation des interfaces POSIX autorisant le portage d'applications usuelles (navigateur web Falkon, utilitaires en ligne de commande, serveurs web). Il permet également de lancer des machines virtuelles Linux ou Windows isolées au sein de composants non privilégiés via son moniteur de machines virtuelles (VMM). Le framework est distribué sous la licence libre **GNU AGPLv3** (avec des licences commerciales disponibles auprès de Genode Labs) et fonctionne sur les architectures matérielles x86-32, x86-64, ARM (ARMv7 et AArch64) et RISC-V.",
+    "diffusion_de_sculpt_et_cycle_de_publication": "Genode est diffusé principalement à travers Sculpt OS, dont la version courante lors de la consultation est 26.04, publiée en avril 2026 sous la forme d'une image disque de 35 Mio accompagnée de sa signature et de sa clé publique. L'image s'écrit sur clé USB avec dd sous systèmes Unix, ou avec Rufus ou Win32 Disk Imager sous Windows. Deux variantes complémentaires sont publiées : une version expérimentale de Sculpt pour le PinePhone, distribuée par le dépôt de Genode Labs, et une image pour l'ordinateur portable MNT Reform en variante i.MX8. Les composants ne proviennent pas d'un gestionnaire de paquets externe : ils sont fournis par des fournisseurs fédérés et installés depuis le graphe de composants de l'interface d'administration Leitzentrale, qui porte aussi la mise à jour du système et le retour à une version antérieure.",
+    "advantages": [
+      "Architecture à composants hautement sécurisée fondée sur les capacités et le principe du moindre privilège.",
+      "Agnosticisme de noyau permettant de fonctionner indifféremment sur seL4, NOVA, base-hw ou Linux.",
+      "Isolation complète des pilotes matériels en espace utilisateur (aucun risque de crash du système en cas de bogue de pilote).",
+      "Système de bureau dynamique Sculpt OS offrant une gestion visuelle et interactive de l'arbre des composants.",
+      "Capacité à héberger des machines virtuelles Linux et Windows en micro-composants cloisonnés.",
+      "Portabilité multi-architectures majeure couvrant x86-64, ARM64 et RISC-V sous licence libre GNU AGPLv3."
+    ],
+    "disadvantages": [
+      "Courbe d'apprentissage exigeante rompant radicalement avec les conventions des systèmes d'exploitation Unix/Linux conventionnels.",
+      "Catalogue applicatif natif restreint nécessitant de passer par des couches d'émulation POSIX ou des machines virtuelles pour les logiciels complexes.",
+      "Prise en charge de l'accélération graphique 3D matérielle complexe encore en cours de perfectionnement.",
+      "Configuration système textuelle ou par graphe Sculpt requérant une solide culture de l'ingénierie des systèmes d'exploitation.",
+      "Non destiné au grand public recherchant une distribution grand public immédiatement familière."
+    ],
+    "who_is_it_for": [
+      "Chercheurs, architectes de systèmes et ingénieurs en cybersécurité explorant les architectures par capacités et la résilience formelle.",
+      "Développeurs de systèmes critiques et d'informatique industrielle (automobile, télécoms, défense, aérospatiale).",
+      "Passionnés d'architectures alternatives souhaitant utiliser un poste de travail réellement cloisonné via Sculpt OS.",
+      "Utilisateurs avancés recherchant un environnement informatique où aucun processus ne détient de privilèges absolus."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs débutants recherchant un système de bureau conventionnel de type Windows, macOS ou Ubuntu.",
+      "Joueurs de jeux vidéo PC récents dépendant de pilotes graphiques propriétaires et d'anticheats fermés.",
+      "Administrateurs d'infrastructures de cloud computing exigeant des orchestrateurs de conteneurs Linux standard.",
+      "Professionnels dépendant de suites bureautiques ou créatives propriétaires non virtualisables."
+    ],
+    "verdict": "Genode OS Framework est un framework de système d'exploitation fondé sur le principe de sécurité par capacités. Il organise des composants indépendants dans un arbre hiérarchique au-dessus d'un micro-noyau, comme alternative aux noyaux monolithiques traditionnels, et sert de base à des systèmes généralistes ou spécialisés."
+  },
+  "relations": [
+    {
+      "id": "helenos",
+      "name": "HelenOS",
+      "type": "alternative",
+      "note": "Système d'exploitation libre multi-serveurs à micro-noyau explorant l'isolation stricte des services."
+    },
+    {
+      "id": "redox-os",
+      "name": "Redox OS",
+      "type": "alternative",
+      "note": "Système d'exploitation libre moderne à micro-noyau développé en Rust."
+    },
+    {
+      "id": "hurd",
+      "name": "GNU Hurd",
+      "type": "alternative",
+      "note": "Noyau officiel du projet GNU articulé autour d'une architecture micro-noyau multi-serveurs."
+    },
+    {
+      "id": "qubes-os",
+      "name": "Qubes OS",
+      "type": "related",
+      "note": "Système d'exploitation sécurisé par compartimentation matérielle et virtualisation."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel du projet Genode OS Framework",
+      "url": "https://genode.org/"
+    },
+    {
+      "label": "Documentation d'architecture officielle et manuel Genode Foundations",
+      "url": "https://genode.org/documentation/index"
+    },
+    {
+      "label": "Dépôt de code source officiel Genode (GitHub)",
+      "url": "https://github.com/genodelabs/genode"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel et ressources techniques Genode OS Framework",
+      "url": "https://genode.org/",
+      "type": "official_site"
+    },
+    {
+      "title": "Documentation d'architecture et livre de référence Genode Foundations",
+      "url": "https://genode.org/documentation/index",
+      "type": "documentation"
+    },
+    {
+      "title": "Dépôt officiel du code source et des composants Genode",
+      "url": "https://github.com/genodelabs/genode",
+      "type": "repository"
+    },
+    {
+      "title": "Genode — Sculpt OS 26.04 (image disque, signature, variantes PinePhone et MNT Reform)",
+      "url": "https://genode.org/download/sculpt",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    }
+  ]
+}

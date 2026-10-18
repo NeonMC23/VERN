@@ -33,6 +33,7 @@
     "deployment_architectures_and_virtualization": "REMnux offers flexible deployment models suited to various lab architectures:\n\n- Virtual Appliance (OVA): The recommended full-experience environment, pre-configured with graphical themes, terminal profiles, and system tweaks.\n- Local Installation (`remnux-cli`): An automated installer (`remnux install`) deploying the full environment or an 'addon' mode on top of clean Ubuntu 24.04 LTS installations.\n- Docker Containers: Individual containerized tools allowing practitioners to run isolated utilities on foreign hosts without altering their operating system.\n- Cloud AWS AMI: Cloud-hosted virtual instances for scalable, ephemeral malware triage pipelines.",
     "threat_model_and_operational_limits": "REMnux defines strict operational boundaries for malware investigation:\n\n- Hypervisor Isolation: Analyzing active malware poses inherent execution risks; virtual machines must be configured with private host-only or internal virtual switches and hypervisor snapshots prior to detonation.\n- No Automated Anonymity: REMnux is an offline laboratory workstation, not an anonymizing system; it does not tunnel internet traffic through Tor by default. Connecting a live analysis machine to public internet gateways risks exposing investigator IP addresses to threat actor command-and-control servers.\n- Architecture Focus: REMnux primarily targets the x86_64 architecture due to upstream dependency availability for specialized forensic disassemblers, offering limited native support for ARM-based host processors.",
     "privacy_and_telemetry": "REMnux enforces an absolute zero-telemetry policy. The operating system contains no commercial analytics trackers, advertising daemons, or background usage reporting frameworks. Sensitive malware samples, deobfuscated strings, and investigation reports remain strictly confidential on the local analysis host.",
+    "package_management_and_update_policy": "REMnux does not behave like a general-purpose Ubuntu system with a package manager left to the user. The distribution disables the automated Ubuntu update mechanisms unless it is installed in add-on mode, and the documented reason is control over when the analysis system opens network connections, which matters on an isolated analysis network. Updates are applied with the `remnux install` command run as a regular non-root user while the system is connected, and that single command updates the operating system and the toolkit together, so the administrator does not manage the two separately. Tools are packaged and configured with SaltStack states and Debian packages; adding a tool means writing or revising a state file, which is also how contributions are made. The add-on installation on an existing Ubuntu 24.04 host verifies the installer against a published SHA-256 hash before running it.",
     "advantages": [
       "Specialized, comprehensive malware reverse engineering and static analysis toolkit with over a decade of community refinement",
       "Integrated network simulation and fake services (INetSim, PolarProxy, FakeNet-NG) for safe behavioral triage",
@@ -60,7 +61,8 @@
       "Whistleblowers and activists seeking an amnesic, anonymous web browsing system (better suited to Tails or Whonix)",
       "Casual desktop users seeking a general everyday workstation for web browsing and office productivity",
       "Environments unable to isolate malware detonation networks from production infrastructure"
-    ]
+    ],
+    "verdict": "REMnux is a specialized Linux distribution and software suite designed for reverse engineering and analyzing malicious software. By assembling disassembly tools, behavioral monitors, decoders, and sandboxing scripts into a preconfigured environment, it dramatically reduces setup overhead for security incident responders, while requiring isolated hypervisor deployment to mitigate malware execution hazards."
   },
   "components": [
     {
@@ -166,6 +168,18 @@
       "url": "https://github.com/REMnux",
       "type": "repository",
       "date": "2026-10-12"
+    },
+    {
+      "title": "REMnux documentation: keeping the distro up to date",
+      "url": "https://docs.remnux.org/install-distro/keep-the-distro-up-to-date",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "REMnux documentation: adding or updating tools through Salt states and Debian packages",
+      "url": "https://docs.remnux.org/get-involved/add-or-update-tools",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

@@ -36,6 +36,7 @@
     "hardware_kill_switches_and_driver_limits": "PureOS operates in synergy with Purism hardware features, including physical hardware kill switches that mechanically sever electrical circuits to the camera, microphone, Wi-Fi, Bluetooth, and cellular modems. However, the strict FSF policy against proprietary binary blobs creates hardware constraints: on standard off-the-shelf third-party PCs, internal Wi-Fi cards (such as modern Intel, Broadcom, or Realtek chips) and discrete Nvidia graphics cards requiring closed-source firmware will not operate unless users supply free hardware adapters (such as Atheros AR9271 USB Wi-Fi dongles).",
     "threat_model_and_operational_limits": "PureOS documents clear operational boundaries regarding its defensive scope:\n\n- Monolithic Kernel Sandbox: While AppArmor and Wayland provide process confinement, PureOS does not enforce the hypervisor-level domain compartmentalization of Qubes OS.\n- Network Privacy Limits: PureOS does not route internet traffic through Tor by default. Online activity is visible to ISPs unless the user configures a trusted VPN or launches Tor Browser.\n- Hardware Dependency: The highest security guarantees of PureOS (PureBoot tamper detection and hardware kill switches) depend on Purism's proprietary-free hardware platforms and cannot be fully replicated on standard generic PC hardware.",
     "privacy_and_telemetry": "PureOS enforces an uncompromising zero-telemetry policy. No telemetry agents, user analytics engines, or behavioral profiling trackers are packaged within the operating system. Repository interactions through APT occur via standard HTTP/HTTPS channels without transmitting unique hardware serial numbers, advertising tokens, or telemetry identifiers to remote servers.",
+    "current_release_and_upgrade_path": "The release published by Purism is PureOS 11, codenamed Crimson, distributed as a 2 GB image with published SHA256 sums and a KDE Plasma variant alongside the GNOME one. The documented upgrade path starts from Byzantium: the download page instructs users to launch the PureOS Upgrade tool from an existing installation and to follow its prompts, rather than reinstalling. A fresh installation is written with Etcher after selecting the ISO and the target USB drive. The stated system requirements are a 64-bit processor, at least 4 GB of RAM and at least 15 GB of disk space, which places the distribution in the same bracket as an ordinary desktop system rather than a specialised configuration. The download page separates the upgrade instructions from the installation instructions, so the two paths are not interchangeable.",
     "advantages": [
       "Officially endorsed by the Free Software Foundation as a 100% Free GNU/Linux distribution (FSDG compliant)",
       "True mobile-to-desktop convergence allowing responsive applications to scale from smartphone to workstation monitors",
@@ -63,7 +64,8 @@
       "Gamers and 3D animators requiring proprietary Nvidia GPU drivers and closed-source gaming software",
       "Whistleblowers requiring amnesic, system-wide Tor routing for all network communication (better suited to Tails or Whonix)",
       "Users requiring Xen hypervisor hardware domain isolation for untrusted malware execution (better suited to Qubes OS)"
-    ]
+    ],
+    "verdict": "PureOS is an FSF-endorsed, strictly libre Debian-derivative developed by Purism that excludes all proprietary firmware and binary blobs. It delivers an uncompromising free-software computing experience with convergence capabilities between mobile and desktop form factors, but its strict adherence to software freedom limits hardware compatibility to carefully selected devices supporting open-source firmware."
   },
   "components": [
     {
@@ -176,6 +178,12 @@
       "url": "https://distrowatch.com/table.php?distribution=pureos",
       "type": "metadata",
       "date": "2026-10-11"
+    },
+    {
+      "title": "PureOS download page: release 11 Crimson, upgrade path and system requirements",
+      "url": "https://pureos.net/download/",
+      "type": "official_site",
+      "accessed": "2026-10-18"
     }
   ]
 }

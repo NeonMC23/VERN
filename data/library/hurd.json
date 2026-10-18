@@ -1,0 +1,125 @@
+{
+  "id": "hurd",
+  "name": "GNU Hurd",
+  "type": "operating_system",
+  "summary": "Ensemble de serveurs et démons s'exécutant sur le micro-noyau GNU Mach, constituant le noyau officiel du système d'exploitation libre GNU conçu par la Free Software Foundation.",
+  "tags": [
+    "gnu",
+    "microkernel",
+    "mach",
+    "translators",
+    "posix",
+    "glibc",
+    "fsf",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-32",
+    "x86-64"
+  ],
+  "license": "Open Source (GNU General Public License v2 ou ultérieure)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "GNU Hurd est le noyau officiel développé par le projet GNU, initié en 1983 par Richard Stallman et la Free Software Foundation (FSF) dans le but d'offrir un système d'exploitation entièrement libre compatible Unix. Bien que la majorité des systèmes GNU utilisent aujourd'hui le noyau monolithique Linux (formant le système GNU/Linux), le développement de Hurd a débuté dès 1990 pour concrétiser la vision originelle de la FSF : un système à micro-noyau modulaire, extensible, résilient et accordant à chaque utilisateur un contrôle étendu sur ses services système sans nécessiter les privilèges de l'administrateur.",
+    "what_is_it": "Techniquement, GNU Hurd n'est pas un noyau conventionnel unique, mais une suite de serveurs logiciels spécialisés s'exécutant dans l'espace utilisateur au-dessus du micro-noyau **GNU Mach** (une variante dérivée de Mach 3.0 développé à l'Université Carnegie Mellon). GNU Mach prend en charge les opérations primitives d'ordonnancement des threads, la gestion des espaces d'adressage virtuel et la communication inter-processus (IPC) basée sur les ports Mach. Les serveurs de Hurd implémentent les protocoles réseau, les systèmes de fichiers, l'authentification et les signaux POSIX en espace non privilégié.",
+    "multi_server_microkernel_and_mach_ipc": "L'architecture de Hurd repose sur une séparation nette des responsabilités entre démons indépendants. Le serveur `proc` gère la table des processus et l'attribution des identifiants (PID) ; le serveur `auth` manipule les jetons d'identification et les privilèges d'accès ; le serveur `exec` assure le chargement et l'exécution des binaires au format ELF ; le serveur `pflocal` gère les sockets locaux du domaine Unix, tandis que `pfinet` fournit la pile réseau TCP/IP. Ces composants communiquent par échange de messages asynchrones via les canaux IPC de Mach, dont les interfaces RPC sont automatiquement générées par le compilateur de stubs MIG (Mach Interface Generator). Une défaillance dans un serveur applicatif n'entraîne donc pas de crash global de la machine.",
+    "translators_and_flexible_vfs_architecture": "L'innovation la plus emblématique de GNU Hurd réside dans le concept de **traducteur** (*translator*). Un traducteur est un programme s'exécutant en espace utilisateur qui s'attache à un nœud de l'arborescence du système de fichiers et en contrôle l'accès de façon dynamique. Les traducteurs passifs sont stockés sur disque comme des métadonnées et activés à la demande ; les traducteurs actifs s'exécutent en mémoire. Tout utilisateur ordinaire peut attacher ses propres traducteurs à ses répertoires personnels via la commande `settrans` sans avoir besoin des privilèges `root` : il devient ainsi possible de monter une image ISO, une archive compressée ou un système de fichiers distant (FTP, HTTP) sous forme d'un simple répertoire transparent.",
+    "posix_compliance_glibc_and_debian_port": "Pour garantir l'interopérabilité avec les logiciels écrits pour le monde Unix, GNU Hurd s'appuie sur une implémentation complète de l'interface POSIX fournie par la bibliothèque C standard du projet, la **glibc** (GNU C Library). La grande majorité des utilitaires GNU, outils de compilation (GCC, Make, Binutils) et environnements de développement fonctionnent à l'identique sous Hurd. L'incarnation la plus stable et accessible du système est la distribution **Debian GNU/Hurd**, maintenue par le projet Debian sous la forme d'un portage officiel sans noyau Linux. Plus de 80 % des paquets logiciels de l'archive Debian y sont disponibles et fonctionnels.",
+    "hardware_support_maturity_and_limitations": "La plateforme matérielle de référence de GNU Hurd est l'architecture **x86 32 bits (i386)**. Des travaux majeurs récents ont permis d'amorcer et de consolider un portage vers l'architecture **x86-64 (AMD64)** avec une pile utilisateur 64 bits opérationnelle. Bien qu'il s'agisse d'un projet historique actif depuis plus de trente ans, Hurd demeure classé comme un système expérimental. Ses limitations pratiques comprennent l'absence de prise en charge native des technologies sans fil (Wi-Fi), un support USB partiel s'appuyant sur des pilotes virtualisés (couche DDE/Rump), et un support multi-processeurs symétrique (SMP) en cours de stabilisation dans GNU Mach. Le système est particulièrement adapté aux machines virtuelles (QEMU, KVM, VirtualBox) et aux machines x86 de test.",
+    "advantages": [
+      "Noyau officiel du projet GNU illustrant une architecture micro-noyau modulaire et élégante.",
+      "Mécanisme révolutionnaire des traducteurs permettant aux utilisateurs ordinaires d'étendre le système de fichiers sans droits root.",
+      "Isolation des services système dans l'espace utilisateur limitant l'impact des pannes ou failles de sécurité.",
+      "Excellente compatibilité POSIX grâce à l'intégration étroite avec la GNU C Library (glibc).",
+      "Écosystème logiciel Debian GNU/Hurd donnant accès à des milliers de paquets open source éprouvés.",
+      "Projet sous licence libre GNU GPL garantissant la pérennité et la liberté d'utilisation du code."
+    ],
+    "disadvantages": [
+      "Stade de développement encore expérimental après plus de trois décennies de travail.",
+      "Performances d'entrées/sorties et de communication IPC inférieures aux noyaux monolithiques modernes très optimisés.",
+      "Prise en charge matérielle incomplète sur les machines physiques récentes (Wi-Fi, Bluetooth, gestion fine de l'énergie).",
+      "Prise en charge multi-cœurs (SMP) encore incomplète au niveau de GNU Mach.",
+      "Inadapté aux serveurs de production critiques ou aux postes de travail professionnels au quotidien."
+    ],
+    "who_is_it_for": [
+      "Chercheurs, enseignants et étudiants en informatique explorant les architectures micro-noyaux et les systèmes distribués.",
+      "Défenseurs fervents du logiciel libre désireux de faire fonctionner le système GNU originel tel que conçu par la FSF.",
+      "Développeurs curieux d'expérimenter la programmation de serveurs en espace utilisateur et de traducteurs VFS.",
+      "Utilisateurs de Debian intéressés par les architectures non-Linux sous environnement virtualisé."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs à la recherche d'un système d'exploitation stable pour une utilisation bureautique ou multimédia quotidienne.",
+      "Entreprises cherchant une solution de serveur d'hébergement avec garanties de performance industrielle et support commercial.",
+      "Propriétaires de matériel informatique moderne récent exigeant des pilotes Wi-Fi ou d'accélération graphique 3D.",
+      "Infrastructures de déploiement de conteneurs Linux natifs (Docker, Kubernetes)."
+    ],
+    "verdict": "GNU Hurd est un projet expérimental du projet GNU. En repensant la structure des systèmes d'exploitation au travers d'une constellation de serveurs coopératifs et de son mécanisme de traducteurs, il met en œuvre une architecture micro-noyau. Bien qu'il demeure expérimental face à Linux, il conserve un intérêt éducatif et historique."
+  },
+  "relations": [
+    {
+      "id": "debian",
+      "name": "Debian",
+      "type": "related",
+      "note": "Distribution Linux majeure fournissant le portage officiel le plus complet de l'espace utilisateur GNU avec le noyau Hurd (Debian GNU/Hurd)."
+    },
+    {
+      "id": "freebsd",
+      "name": "FreeBSD",
+      "type": "alternative",
+      "note": "Système d'exploitation Unix libre à noyau monolithique représentant l'approche traditionnelle face à l'architecture micro-noyau de Hurd."
+    },
+    {
+      "id": "redox-os",
+      "name": "Redox OS",
+      "type": "alternative",
+      "note": "Système d'exploitation libre moderne fondé sur une architecture micro-noyau."
+    },
+    {
+      "id": "linux-from-scratch",
+      "name": "Linux From Scratch",
+      "type": "related",
+      "note": "Projet documentant la construction étape par étape du système d'exploitation GNU avec un noyau indépendant."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel du projet GNU Hurd",
+      "url": "https://www.gnu.org/software/hurd/"
+    },
+    {
+      "label": "Documentation d'architecture et manuel technique de GNU Hurd",
+      "url": "https://www.gnu.org/software/hurd/hurd/documentation.html"
+    },
+    {
+      "label": "Dépôt officiel du code source GNU Hurd (Savannah)",
+      "url": "https://git.savannah.gnu.org/cgit/hurd/hurd.git"
+    },
+    {
+      "label": "Portage officiel Debian GNU/Hurd",
+      "url": "https://www.debian.org/ports/hurd/"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel et vue d'ensemble du projet GNU Hurd",
+      "url": "https://www.gnu.org/software/hurd/",
+      "type": "official_site"
+    },
+    {
+      "title": "Documentation technique du micro-noyau GNU Mach et des serveurs Hurd",
+      "url": "https://www.gnu.org/software/hurd/microkernel/mach/gnumach.html",
+      "type": "documentation"
+    },
+    {
+      "title": "Dépôt officiel de code source du projet GNU Hurd",
+      "url": "https://git.savannah.gnu.org/cgit/hurd/hurd.git",
+      "type": "repository"
+    },
+    {
+      "title": "Documentation et état du portage Debian GNU/Hurd",
+      "url": "https://www.debian.org/ports/hurd/",
+      "type": "official_site"
+    }
+  ]
+}

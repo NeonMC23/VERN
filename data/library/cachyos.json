@@ -1,0 +1,142 @@
+{
+  "id": "cachyos",
+  "name": "CachyOS",
+  "type": "operating_system",
+  "summary": "Distribution Linux indépendante basée sur Arch Linux, conçue pour maximiser la réactivité et la vitesse d'exécution grâce à des dépôts recompilés pour x86-64-v3/v4/Zen et des ordonnanceurs de processus CPU avancés.",
+  "tags": [
+    "arch-based",
+    "desktop",
+    "gaming",
+    "performance",
+    "schedulers",
+    "x86-64-v3",
+    "btrfs",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "ARM64"
+  ],
+  "license": "Open Source (GNU General Public License et licences libres diverses issues d'Arch Linux)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "CachyOS est une distribution Linux indépendante basée sur **Arch Linux**, créée en 2021 par une équipe internationale de développeurs et de contributeurs open source. Le projet a pour vocation d'exploiter pleinement la puissance des microprocesseurs modernes en améliorant la vitesse d'exécution des binaires, la fluidité des interactions sur le bureau et les performances sous de lourdes charges de travail (jeu vidéo, compilation de logiciels, modélisation 3D). Tout en conservant le modèle de mise à jour continue (rolling release) et la vaste logithèque d'Arch Linux via Pacman et AUR, CachyOS s'en distingue par son infrastructure de compilation sur mesure et ses réglages de bas niveau avancés.",
+    "what_is_it": "Techniquement, CachyOS est un système Linux complet qui enrichit le socle d'Arch Linux d'une chaîne d'optimisations matérielles spécifiques. Contrairement à la majorité des distributions Linux généralistes qui compilent leurs paquets pour le niveau de base générique x86-64-v1 afin de garantir la compatibilité avec d'anciens processeurs de 2003, CachyOS maintient ses propres dépôts de paquets logiciels entièrement recompilés avec des drapeaux d'optimisation processeur avancés et des compilateurs récents (GCC et Clang/LLVM avec LTO et PGO). L'installateur détecte automatiquement les capacités du processeur de la machine pour configurer les dépôts les plus optimisés.",
+    "cpu_architecture_levels_and_optimized_repositories": "CachyOS propose des dépôts de paquets logiciels compilés pour des micro-architectures processeur contemporaines : **cachyos-v3** (pour le niveau d'architecture x86-64-v3, exigeant AVX, AVX2, FMA, BMI1/BMI2, présent sur les processeurs Intel Haswell / AMD Zen 1 et plus récents) ; **cachyos-v4** (tirant parti du jeu d'instructions vectorielles AVX-512 sur les puces Intel Skylake-X/Ice Lake et AMD Zen 4/Zen 5) ; et **cachyos-zen4** (spécifiquement optimisé pour les micro-architectures AMD Zen 4 et Zen 5). Ces instructions vectorielles étendues permettent d'accélérer significativement les bibliothèques multimédias, les calculs mathématiques et la cryptographie.",
+    "custom_linux_kernels_and_advanced_schedulers": "Le cœur technique de CachyOS réside dans son offre de noyaux Linux fortement optimisés (`linux-cachyos`), synchronisés avec les versions amont stables et enrichis de patchs d'interactivité. CachyOS propose et supporte une panoplie d'ordonnanceurs de processus CPU avancés : **BORE** (Burst-Oriented Response Enhancer, ordonnanceur par défaut améliorant drastiquement la réactivité interactive sous forte charge de calcul), **EEVDF** (amont optimisé), **BMQ / PDS** (du projet Project C de Con Kolivas) et le cadre **sched-ext** (ordonnanceurs de processus extensibles dans le noyau utilisant eBPF). L'utilitaire graphique dédié `cachyos-kernel-manager` permet de tester et basculer entre ces différents noyaux en quelques clics.",
+    "storage_filesystem_btrfs_and_memory_tuning": "Par défaut, CachyOS installe son système sur le système de fichiers moderne **Btrfs**, configuré avec une compression transparente de blocs (algorithme zstd niveau 1) et un mécanisme automatisé d'instantanés (snapshots) avant chaque mise à jour système via Snapper ou Btrfs Assistant. Le système supporte également ZFS (via des modules noyau précompilés dans les dépôts), XFS et ext4. Pour la mémoire vive, CachyOS active un swap compressé en RAM (**zram** avec zstd) et le démon **ananicy-cpp**, qui réajuste dynamiquement en temps réel les priorités de processus pour garantir la priorité aux fenêtres actives, aux lecteurs multimédias et aux jeux vidéo.",
+    "desktop_environments_and_dedicated_tooling": "CachyOS est livré avec un installateur graphique convivial basé sur Calamares (ainsi qu'un installateur en ligne de commande TUI) et propose un large éventail d'environnements de bureau préconfigurés (KDE Plasma par défaut, GNOME, XFCE, Hyprland, i3). Le système intègre des outils logiciels maison exclusifs : **Cachy-Browser** (fork durci et optimisé de Firefox compilé avec LTO/PGO), `cachyos-package-installer`, `cachyos-bugreport` et le shell interactif moderne **fish** configuré par défaut. CachyOS est un projet entièrement open source régi par les licences libres GNU GPL et les licences amont d'Arch Linux, avec un développement public hébergé sur GitHub.",
+    "security_secure_boot_and_boot_chain_integrity": "Le wiki de CachyOS documente une procédure de démarrage vérifié qui reste optionnelle et repose sur des clés créées par l'utilisateur. Pour GRUB, la commande `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=cachyos --modules=\"tpm\" --disable-shim-lock` active la prise en charge des clés d'autorité locale, et la page signale que charger des modules inutiles dans le gestionnaire d'amorçage présente un risque et que la commande ne doit être exécutée que si Secure Boot est réellement nécessaire. L'enrôlement passe par `sbctl` : `pacman -S sbctl`, puis `sbctl create-keys`, puis `sbctl enroll-keys --microsoft --firmware-builtin`. Sur les cartes ASUS et Gigabyte, l'option `--firmware-builtin` peut créer des entrées `builtin-db` en double et provoquer une violation Secure Boot ; la page prescrit alors `sbctl enroll-keys --microsoft` seul, après suppression des clés dans le micrologiciel. `sbctl status` expose les champs Installed, Owner GUID, Setup Mode, Secure Boot et Vendor Keys. Avec Limine à partir de la version 11.2.0, une somme BLAKE2B de la configuration doit être enrôlée et chaque chemin du fichier de configuration doit porter son empreinte, faute de quoi le gestionnaire s'arrête sur un message explicite et l'éditeur de configuration est désactivé. Pour fwupd, la page fait signer `fwupdx64.efi` par `sbctl` et renseigne `DisableShimForSecureBoot` dans `/etc/fwupd/fwupd.conf`.",
+    "advantages": [
+      "Optimisations processeur de pointe avec dépôts dédiés recompilés pour x86-64-v3, v4 et Zen4.",
+      "Offre unique de noyaux Linux optimisés avec ordonnanceurs de processus avancés (BORE, sched-ext, EEVDF).",
+      "Système de fichiers Btrfs avec compression transparente zstd et instantanés automatisés par défaut.",
+      "Gestionnaire de mémoire optimisé avec swap zram en RAM et démon d'ajustement ananicy-cpp.",
+      "Excellente prise en main grâce à l'installateur Calamares et aux utilitaires maison (cachyos-kernel-manager).",
+      "Accès complet à la logithèque d'Arch Linux (Pacman et AUR) combiné à un modèle en rolling release continu."
+    ],
+    "disadvantages": [
+      "Modèle en rolling release pouvant nécessiter une attention périodique lors de mises à jour majeures de paquets.",
+      "Les gains de performances réels dépendent fortement des applications utilisées et ne constituent pas une accélération magique universelle.",
+      "Les dépôts x86-64-v3/v4 exigent des microprocesseurs relativement récents (incompatibles avec de très vieux ordinateurs d'avant 2013).",
+      "Les noyaux avec ordonnanceurs expérimentaux (sched-ext) peuvent nécessiter des ajustements selon le profil d'usage.",
+      "Moins adapté aux environnements de serveurs de production critiques exigeant une base logicielle figée sur dix ans."
+    ],
+    "who_is_it_for": [
+      "Joueurs de jeux vidéo sur PC (Linux gaming) recherchant une réactivité maximale et des noyaux optimisés pour Proton/Wine.",
+      "Utilisateurs d'Arch Linux souhaitant bénéficier d'optimisations matérielles poussées (AVX2, AVX-512) sans compiler eux-mêmes.",
+      "Passionnés d'informatique et testeurs curieux d'expérimenter de nouveaux ordonnanceurs de processus CPU (BORE, eBPF).",
+      "Créateurs de contenu et développeurs exploitant des charges de calcul intensives sur processeurs multi-cœurs modernes."
+    ],
+    "who_is_it_not_for": [
+      "Administrateurs système recherchant une distribution pour serveurs critiques avec support commercial à long terme.",
+      "Utilisateurs possédant de très anciens ordinateurs personnels à processeurs x86-64 de première génération (v1).",
+      "Personnes préférant des distributions avec versions fixes stables et figées (Debian Stable, Ubuntu LTS).",
+      "Débutants absolus en informatique rétifs aux principes du modèle de mise à jour en rolling release."
+    ],
+    "verdict": "CachyOS est une distribution Linux orientée optimisation processeur. En combinant la base Arch Linux, des dépôts recompilés pour les architectures x86-64-v3/v4/Zen4, des ordonnanceurs CPU (BORE, sched-ext) et un stockage Btrfs, elle cible les usages de bureau et de jeu.",
+    "origin_founders_and_publication_milestones": "The official About page names two founders, Peter Jung, known as ptr1337, and Vladislav Nepogodin, known as vnepogodin, both described as Founder and Developer, and it lists the roles of the wider team, among them a kernel maintainer who also contributes to the scx scheduler project. The page presents the distribution as a performance-focused rebuild of Arch Linux packages with a customised kernel.\n\nThe project blog provides the dated publication record. Its archive begins with an entry dated 2023-11-19 announcing the November 2023 update, followed by an entry dated 2023-12-01 on the x86-64-v4 repository made available for testing. Release announcements then continue with dated entries: 24 January 2026, 8 March 2026, 26 April 2026, 28 June 2026 and 9 August 2026, each titled as the release of that month, alongside entries from March, April, May, July, August and November 2025. On 2025-12-25 the project published a year-end review, CachyOS Recap 2025, reporting the members added to the team during the year, the sponsors and usage figures, and referring to the numbers of the previous year's recap.\n\nNeither the About page nor the blog archive states a founding date or a first release date. The creation date of the source repositories is not used here as a founding date, and the earliest dated document found is the 2023-11-19 entry."
+  },
+  "relations": [
+    {
+      "id": "arch-linux",
+      "name": "Arch Linux",
+      "type": "derivative",
+      "note": "Distribution Linux en rolling release sur laquelle CachyOS fonde son écosystème de paquets et ses outils."
+    },
+    {
+      "id": "endeavouros",
+      "name": "EndeavourOS",
+      "type": "alternative",
+      "note": "Distribution Linux basée sur Arch axée sur une installation conviviale et une expérience proche de la base."
+    },
+    {
+      "id": "nobara-linux",
+      "name": "Nobara Linux",
+      "type": "alternative",
+      "note": "Distribution Linux orientée vers le jeu vidéo et l'optimisation des performances basée sur Fedora."
+    },
+    {
+      "id": "bazzite",
+      "name": "Bazzite",
+      "type": "alternative",
+      "note": "Système d'exploitation immuable optimisé pour le jeu vidéo et les consoles portables."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel du projet CachyOS",
+      "url": "https://cachyos.org/"
+    },
+    {
+      "label": "Documentation officielle et Wiki de CachyOS",
+      "url": "https://wiki.cachyos.org/"
+    },
+    {
+      "label": "Dépôt de code source et composants CachyOS (GitHub)",
+      "url": "https://github.com/CachyOS"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Portail officiel et présentation du projet CachyOS",
+      "url": "https://cachyos.org/",
+      "type": "official_site"
+    },
+    {
+      "title": "Documentation technique officielle, fonctionnalités et dépôts CachyOS",
+      "url": "https://wiki.cachyos.org/",
+      "type": "documentation"
+    },
+    {
+      "title": "Dépôt officiel du code source et des outils CachyOS",
+      "url": "https://github.com/CachyOS",
+      "type": "repository"
+    },
+    {
+      "title": "Wiki CachyOS - configuration de Secure Boot et signature de la chaîne d'amorçage",
+      "url": "https://wiki.cachyos.org/configuration/secure_boot_setup/",
+      "type": "official_wiki",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "CachyOS - About, founders and team",
+      "url": "https://cachyos.org/about/",
+      "type": "official",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "CachyOS Blog - archive des annonces datees",
+      "url": "https://cachyos.org/blog/",
+      "type": "official",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "CachyOS - Recap 2025 et Merry Christmas",
+      "url": "https://cachyos.org/blog/2025-christmas-new-year",
+      "type": "official",
+      "date": "2026-10-18"
+    }
+  ]
+}

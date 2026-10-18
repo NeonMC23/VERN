@@ -1,0 +1,129 @@
+{
+  "id": "helenos",
+  "name": "HelenOS",
+  "type": "operating_system",
+  "summary": "Système d'exploitation libre généraliste conçu de zéro autour du micro-noyau modulaire SPARTAN, exécutant ses pilotes et services en espace utilisateur avec une portabilité exceptionnelle sur huit architectures de processeurs.",
+  "tags": [
+    "microkernel",
+    "multi-server",
+    "spartan",
+    "written-from-scratch",
+    "multi-architecture",
+    "ipc",
+    "research",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-32",
+    "x86-64",
+    "ARM",
+    "ARM64",
+    "MIPS",
+    "PowerPC",
+    "SPARC",
+    "RISC-V"
+  ],
+  "license": "Open Source (Licence BSD 3-Clause)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "HelenOS est un système d'exploitation généraliste libre écrit intégralement à partir de zéro (from scratch) en langage C. Initié en 2001 par Jakub Jermář à la Faculté de Mathématiques et de Physique de l'Université Charles de Prague, le projet s'est mué en une initiative de recherche collaborative internationale. HelenOS a pour objectif d'explorer la conception d'un système d'exploitation moderne et robuste fondé sur une véritable architecture à **micro-noyau multi-serveurs**, où chaque fonction classique (pilotes matériels, systèmes de fichiers, pile réseau, gestion de l'affichage) est déportée dans des processus indépendants et isolés s'exécutant dans l'espace utilisateur, sans reproduire les contraintes historiques ou la complexité monolithique des systèmes Unix.",
+    "what_is_it": "Techniquement, HelenOS n'est ni un dérivé de Linux ni un clone d'Unix : il s'agit d'un système autonome implémentant ses propres abstractions natives. Son noyau privilégié en anneau 0 (Ring 0), nommé SPARTAN, se limite strictement aux fonctionnalités primitives indispensables : l'ordonnancement préemptif des threads au sein de tâches, la gestion de la mémoire virtuelle paginée et la commutation de messages inter-processus (IPC). La quasi-totalité des services du système — le gestionnaire de périphériques (devman), le serveur de localisation de services (locsrv), le serveur de système de fichiers virtuel (vfs) et l'ensemble des pilotes — s'exécute dans l'espace utilisateur (Ring 3) sous forme de tâches non privilégiées.",
+    "spartan_microkernel_and_asynchronous_ipc": "L'architecture du micro-noyau SPARTAN garantit une résilience opérationnelle élevée : la défaillance imprévue ou le plantage d'un pilote de disque, d'une interface réseau ou d'un gestionnaire de système de fichiers ne provoque aucune panique du noyau (kernel panic). Le composant défaillant peut être isolé, arrêté et relancé par le superviseur de services sans interrompre l'exécution du reste de la machine. Les communications inter-processus reposent sur un protocole IPC asynchrone natif basé sur des messages à quatre arguments entiers, complété par le partage de mémoire virtuelle pour les transferts de gros volumes de données.",
+    "filesystems_storage_and_network_stack": "HelenOS intègre un serveur de système de fichiers virtuel (VFS) déporté en espace utilisateur qui unifie l'accès aux données. Le système prend en charge une grande variété de formats de stockage : la famille FAT (FAT12, FAT16, FAT32), ext4 (lecture et écriture de base), exFAT, ISO 9660 (disques optiques), UDF et Minix FS. La pile réseau est également modulaire et décomposée en plusieurs démons coopératifs prenant en charge Ethernet, la couche IP (IPv4 et IPv6 expérimental), les protocoles de transport TCP et UDP, ainsi que des utilitaires de base (client DHCP, résolveur DNS, outil de téléchargement).",
+    "user_interface_bdsh_and_graphical_compositor": "Pour interagir avec l'utilisateur, HelenOS dispose de deux environnements distincts : un interpréteur de commandes en mode texte interactif nommé **bdsh** (Brain Dead Shell), doté d'utilitaires d'inspection des processus, d'éditeurs de texte en console et d'outils de diagnostic ; et un environnement graphique fenêtré natif en espace utilisateur (**ui** / display server). Ce dernier propose un gestionnaire de fenêtres avec barres de titre, boutons d'interaction, rendu de polices vectorielles et matricielles, émulateur de terminal graphique fenêtré ainsi que des jeux légers de démonstration.",
+    "exceptional_multi_architecture_portability": "L'accomplissement technique le plus remarquable d'HelenOS est sa portabilité native sur huit familles de processeurs différentes : **IA-32** (x86 32 bits), **AMD64** (x86-64), **ARM** (ARMv4 à ARMv7, Raspberry Pi), **AArch64** (ARM 64 bits), **MIPS** (MIPS32 et MIPS64, plateformes Malta et PlayStation 2), **PowerPC** (32 bits), **SPARC V9** (UltraSPARC), et **RISC-V** (RV64). Distribué sous la licence libre et permissive **Licence BSD 3-Clause**, HelenOS s'exécute de façon optimale au sein des hyperviseurs (QEMU) et sur des machines physiques compatibles, constituant une plateforme de recherche académique d'une grande valeur.",
+    "versions_publiees_et_cibles_materielles": "La version publiée la plus récente est HelenOS 0.14.1. Pour chaque version, le projet publie les notes de version, les archives de sources et des images binaires classées par architecture et par machine. La 0.14.1 couvre amd64 (PC générique, image ISO), arm32 (BeagleBoard XM, BeagleBone, GTA02, IntegratorCP, Raspberry Pi), arm64 (HiKey960 et QEMU virt en ISO), ia32 (PC générique, ISO), ia64 (PowerEdge 3250/7250 et ski), mips32 (Malta en big et little endian, msim), ppc32 (station G4, ISO) et sparc64 (Sun Ultra 5/60 et Sun Fire T1000, ISO). Des compilations nocturnes sont disponibles sur l'infrastructure d'intégration continue du projet, ce qui permet de suivre l'état du dépôt entre deux versions. La page de téléchargement ne liste que des images complètes, des sources et des notes de version : aucun paquet installable séparément n'y figure.",
+    "advantages": [
+      "Architecture micro-noyau multi-serveurs pure et élégante éliminant les risques de crash global du système.",
+      "Tous les pilotes matériels, systèmes de fichiers et piles réseau s'exécutent en espace utilisateur isolé (Ring 3).",
+      "Portabilité multi-architectures exceptionnelle couvrant huit familles de processeurs (x86, ARM, RISC-V, MIPS, PowerPC, SPARC).",
+      "Large prise en charge de systèmes de fichiers (FAT12/16/32, ext4, exFAT, ISO 9660, Minix FS).",
+      "Environnement complet comprenant un shell en ligne de commande (bdsh) et un serveur graphique fenêtré natif.",
+      "Code source de grande qualité académique, entièrement ouvert sous licence libre permissive BSD 3-Clause."
+    ],
+    "disadvantages": [
+      "Système conçu principalement pour la recherche académique, sans prétention à remplacer un système de production industriel.",
+      "Catalogue applicatif restreint comparé aux écosystèmes logiciels des distributions Linux ou BSD.",
+      "Absence de prise en charge matérielle moderne pour le Wi-Fi contemporain, le Bluetooth et l'accélération 3D des GPU récents.",
+      "Surcoûts de communication IPC inhérents aux architectures micro-noyaux lors de sollicitations d'entrées/sorties intenses.",
+      "Incompatibilité avec les écosystèmes applicatifs fermés ou les conteneurs Linux natifs."
+    ],
+    "who_is_it_for": [
+      "Chercheurs, enseignants et étudiants en informatique explorant la conception de micro-noyaux et de systèmes multi-serveurs.",
+      "Développeurs système souhaitant étudier une base de code en langage C lisible, propre et modulaire.",
+      "Ingénieurs en systèmes embarqués et informatique matérielle ciblant des architectures variées (ARM, RISC-V, MIPS, SPARC).",
+      "Passionnés d'architectures logicielles alternatives expérimentant de nouveaux systèmes sous QEMU."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs grand public à la recherche d'un système d'exploitation pour la navigation web moderne ou le jeu vidéo.",
+      "Entreprises recherchant des environnements certifiés pour des serveurs d'hébergement avec support commercial garanti.",
+      "Développeurs dépendant de logiciels propriétaires fermés ou de frameworks de haut niveau (Node.js, Electron, JVM).",
+      "Infrastructures de production nécessitant des déploiements massifs de bases de données distribuées lourdes."
+    ],
+    "verdict": "HelenOS est un projet académique et technique dans le domaine des systèmes d'exploitation. En matérialisant le concept d'un système multi-serveurs où chaque service et pilote est confiné dans l'espace utilisateur au-dessus du micro-noyau SPARTAN, et en assurant une portabilité sur huit architectures processeurs, il constitue un support éducatif pour l'étude des systèmes."
+  },
+  "relations": [
+    {
+      "id": "hurd",
+      "name": "GNU Hurd",
+      "type": "alternative",
+      "note": "Système d'exploitation officiel du projet GNU articulé autour d'une architecture micro-noyau multi-serveurs sur GNU Mach."
+    },
+    {
+      "id": "redox-os",
+      "name": "Redox OS",
+      "type": "alternative",
+      "note": "Système d'exploitation libre moderne fondé sur une architecture micro-noyau et écrit en Rust."
+    },
+    {
+      "id": "haiku",
+      "name": "Haiku",
+      "type": "alternative",
+      "note": "Système d'exploitation libre axé sur la modularité et la réactivité de l'interface graphique."
+    },
+    {
+      "id": "serenityos",
+      "name": "SerenityOS",
+      "type": "alternative",
+      "note": "Système d'exploitation libre moderne indépendant développé de zéro pour ordinateurs de bureau."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel du projet HelenOS",
+      "url": "http://www.helenos.org/"
+    },
+    {
+      "label": "Documentation d'architecture et conception technique d'HelenOS",
+      "url": "http://www.helenos.org/doc/design/"
+    },
+    {
+      "label": "Dépôt de code source officiel HelenOS (GitHub)",
+      "url": "https://github.com/HelenOS/helenos"
+    }
+  ],
+  "sources": [
+    {
+      "title": "FAQ officielle HelenOS — micro-noyau SPARTAN et architecture multiserver",
+      "url": "https://www.helenos.org/wiki/FAQ",
+      "type": "documentation"
+    },
+    {
+      "title": "Manuel de conception du micro-noyau SPARTAN et des serveurs HelenOS",
+      "url": "http://www.helenos.org/doc/design/",
+      "type": "documentation"
+    },
+    {
+      "title": "Dépôt officiel du code source et des composants système HelenOS",
+      "url": "https://github.com/HelenOS/helenos",
+      "type": "repository"
+    },
+    {
+      "title": "HelenOS — Download (versions publiées, images par architecture et par machine, compilations nocturnes)",
+      "url": "https://www.helenos.org/download",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    }
+  ]
+}

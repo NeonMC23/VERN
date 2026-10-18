@@ -70,7 +70,7 @@
       "Enterprise organizations requiring commercial support contracts and multi-year fixed-lifecycle releases.",
       "Users whose primary software ecosystem relies strictly on pre-packaged systemd service units and timers."
     ],
-    "verdict": "Void Linux is an independent, minimalist operating system that pairs the speed of the C-based XBPS package manager with the simplicity of the runit process supervisor. Its native dual libc support (glibc and musl) and robust xbps-src cross-compilation framework make it a technically distinctive distribution in the Linux landscape. It delivers a lean, transparent rolling-release environment for users and developers who value architectural independence and minimal background abstraction."
+    "verdict": "Void Linux is an independent, minimalist operating system built around the XBPS package manager, written in C, and the runit process supervisor. It provides native repositories for both glibc and musl and a cross-compilation framework through xbps-src, and follows a rolling-release model."
   },
   "components": [
     {

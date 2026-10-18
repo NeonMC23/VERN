@@ -75,7 +75,7 @@
       "Out of box Secure Boot users",
       "Commercial contract teams"
     ],
-    "verdict": "EndeavourOS stands out as an exemplary implementation of an accessible Arch-based distribution. By combining an intuitive Calamares installer, sensible modern defaults (systemd-boot and dracut), and a lightweight suite of in-house helper tools with direct access to unmodified Arch Linux repositories, it strips away the installation friction of Arch without compromising its purity or performance. Its refusal to bundle bloated software stores or force desktop customizations preserves user agency, while its active community provides a welcoming safety net. However, as a pure rolling release requiring periodic terminal maintenance, manual intervention awareness, and active oversight, EndeavourOS is best suited for users willing to take ownership of their operating system."
+    "verdict": "EndeavourOS provides an accessible desktop installation of Arch Linux, pairing the standard Calamares installer with modern upstream defaults such as systemd-boot and dracut. By configuring direct access to upstream Arch package repositories and avoiding custom application layers or graphical package managers by default, it preserves the standard Arch packaging model while simplifying hardware setup and initial desktop deployment. As a rolling-release distribution, it requires periodic command-line maintenance and user oversight during major package transitions, making it suitable for users seeking a streamlined Arch Linux installation without abstraction layers."
   },
   "components": [
     {
@@ -231,7 +231,7 @@
   "sources": [
     {
       "title": "EndeavourOS Announcements — Titan Nova is available",
-      "url": "https://endeavouros.com/t/titan-nova-is-available/81179",
+      "url": "https://forum.endeavouros.com/t/titan-nova-is-available/81179",
       "type": "official",
       "accessed": "2026-09-24",
       "publisher": "EndeavourOS development team",
@@ -239,7 +239,7 @@
     },
     {
       "title": "EndeavourOS Announcements — Download Links",
-      "url": "https://endeavouros.com/t/endeavouros-download-links/81632",
+      "url": "https://forum.endeavouros.com/t/endeavouros-download-links/81632",
       "type": "official",
       "accessed": "2026-09-24",
       "publisher": "EndeavourOS team",
@@ -247,7 +247,7 @@
     },
     {
       "title": "EndeavourOS Announcements — What's new In EndeavourOS Titan release",
-      "url": "https://endeavouros.com/t/whats-new-in-endeavouros-titan-release/78542",
+      "url": "https://forum.endeavouros.com/t/whats-new-in-endeavouros-titan-release/78542",
       "type": "official",
       "accessed": "2026-09-24",
       "publisher": "EndeavourOS development team",
@@ -255,7 +255,7 @@
     },
     {
       "title": "EndeavourOS Announcements — Incident notice regarding website compromise",
-      "url": "https://endeavouros.com/t/the-main-website-and-discovery-are-down-due-to-severe-compromise/81317",
+      "url": "https://forum.endeavouros.com/t/the-main-website-and-discovery-are-down-due-to-severe-compromise/81317",
       "type": "official",
       "accessed": "2026-09-24",
       "publisher": "EndeavourOS team",
@@ -263,7 +263,7 @@
     },
     {
       "title": "EndeavourOS Forum — What to expect on the first release",
-      "url": "https://endeavouros.com/t/what-to-expect-on-the-first-release/182",
+      "url": "https://forum.endeavouros.com/t/what-to-expect-on-the-first-release/182",
       "type": "official",
       "accessed": "2026-09-24",
       "publisher": "EndeavourOS founders",
@@ -311,7 +311,7 @@
     },
     {
       "title": "EndeavourOS Discourse API — about.json metadata",
-      "url": "https://endeavouros.com/about.json",
+      "url": "https://forum.endeavouros.com/about.json",
       "type": "official",
       "accessed": "2026-09-24",
       "publisher": "EndeavourOS community",
@@ -319,7 +319,7 @@
     },
     {
       "title": "EndeavourOS Community — BTRFS available for EnOS supported ARM devices",
-      "url": "https://endeavouros.com/t/btrfs-available-for-enos-supported-arm-devices/64095",
+      "url": "https://forum.endeavouros.com/t/btrfs-available-for-enos-supported-arm-devices/64095",
       "type": "community",
       "accessed": "2026-09-24",
       "publisher": "Pudge (EndeavourOS ARM developer)",
@@ -342,5 +342,6 @@
       "note": "Official tracking portal for security advisories (ASA) and vulnerability groups (AVG) affecting core and extra packages consumed by EndeavourOS."
     }
   ],
-  "last_verified": "2026-09-24"
+  "last_verified": "2026-10-16",
+  "license": "GPL, LGPL, MIT, BSD, and upstream open-source licenses with redistributable firmware"
 }

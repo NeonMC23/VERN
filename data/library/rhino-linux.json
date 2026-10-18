@@ -30,6 +30,9 @@
     "rhino_pkg_unified_management": "To eliminate the friction of managing multiple package managers, Rhino Linux provides `rhino-pkg` (invoked via `rpk`). Rewritten in Nushell for speed and structured data handling (RPK2), `rhino-pkg` serves as a unified command-line wrapper. A single syntax allows users to update the entire operating system across APT, Pacstall, Flatpaks, and Snaps simultaneously (`rpk update`), or search across all four repository ecosystems in a single command.",
     "unicorn_desktop_experience": "The default user interface of Rhino Linux is the 'Unicorn Desktop'. Engineered on top of XFCE to maintain low RAM and CPU consumption, Unicorn modernizes the user experience by integrating:\n\n- Plank: A clean, animated application dock for fast multitasking.\n- App Grid & Ulauncher: Rapid keyboard-driven application launching and system navigation.\n- Custom Theming & Unicons: Unified modern icon sets, dark mode styling, and consistent window borders.\n- Dynamic Workspaces: Fluid virtual desktop management adapted for modern widescreen displays.",
     "hardware_support_and_arm64": "Rhino Linux supports both standard 64-bit x86_64 PCs and ARM64 (`aarch64`) architectures. Dedicated disk images are produced for ARM single-board computers including Raspberry Pi and Pine64 devices (PinePhone, Pinebook Pro). System deployment on desktop PCs is handled by the Calamares installer, followed by the `rhino-setup` wizard to configure initial user preferences.",
+    "release_artifacts_and_platform_images": "Rhino Linux 2026.1 is published as a generic x86_64 image of 2.70 GiB and a generic ARM64 image of 2.69 GiB, both shipping the Unicorn desktop and the 7.0.9-generic kernel. Dedicated ARM64 builds are provided for PINE64 devices and for the Raspberry Pi, and every image is published with a sha256 checksum. Earlier releases are archived on SourceForge, container images are published separately, and the source code is linked from the download page.",
+    "installation_and_conversion_paths": "The wiki splits its user documentation along the installation paths it supports: a general installation guide, a page for the ISO and live image, one page for PINE64 devices and one for the Raspberry Pi, followed by post-installation steps. Two further chapters cover adopting the system on hardware that already runs something else - switching an installation to UBXI and converting an existing system to Rhino Linux - and a separate chapter documents Nvidia driver installation. The same wiki explains the rolling model as one in which no major upgrade step exists, packages being updated continuously instead.",
+    "hotfix_mechanism_and_patch_distribution": "The security-relevant machinery documented by the project is a hotfix channel rather than a published disclosure policy. `rhino-hotfix` is a command-line utility whose stated purpose is to distribute and apply hotfixes and patches to existing installations. It takes the name of a hotfix and can be pointed at a specific source through a metalink argument that selects a repository, a branch, or a pull request, for example `rhino-hotfix hotfix@#42` to fetch a candidate from pull request 42, or `rhino-hotfix` with no argument to list the available hotfixes from the project repository. Ordinary software updates travel through Pacstall and APT, so security fixes reach installed systems through the rolling update stream. The public wiki indexes no vulnerability disclosure page and no advisory archive; the hotfix utility and the rolling repository are therefore the documented mechanisms, and the absence of a formal disclosure policy is a limit of the project's public documentation rather than a property established here.",
     "advantages": [
       "True rolling-release model for Ubuntu eliminating disruptive point-release upgrades",
       "Native Pacstall integration providing an AUR-like repository for the newest upstream software",
@@ -55,7 +58,7 @@
       "Users who want a pure upstream GNOME or KDE Plasma desktop without customized wrapper environments",
       "Novice users uncomfortable with resolving occasional package dependency adjustments in a rolling distribution"
     ],
-    "verdict": "Rhino Linux fills a unique and long-desired niche in the Linux ecosystem by delivering a genuine rolling-release distribution built upon Ubuntu. Powered by Pacstall, the innovative rhino-pkg wrapper, and the nimble Unicorn Desktop, Rhino Linux proves that the Ubuntu package ecosystem can roll continuously with style and agility."
+    "verdict": "Rhino Linux is a rolling-release distribution built on Ubuntu. Powered by Pacstall, the rhino-pkg wrapper, and the Unicorn Desktop, it provides a continuously updated Ubuntu-based system."
   },
   "relations": [
     {
@@ -108,6 +111,12 @@
       "url": "https://github.com/rhino-linux",
       "type": "repository",
       "date": "2026-10-15"
+    },
+    {
+      "title": "Rhino Linux wiki: Rhino Hotfix utility for distributing patches",
+      "url": "https://wiki.rhinolinux.org/user/hotfix",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }

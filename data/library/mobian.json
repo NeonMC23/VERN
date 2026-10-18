@@ -18,14 +18,16 @@
     "x86_64"
   ],
   "license": "Open source (GPL, LGPL et licences libres Debian)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-17",
   "content": {
     "introduction": "Mobian est un projet communautaire créé en 2020 par Arnaud Ferraris dont l'objectif est d'adapter la distribution universelle Debian GNU/Linux à l'usage sur appareils mobiles, notamment les ordiphones et tablettes tactiles.",
     "what_is_it": "Plutôt qu'une distribution dérivée autonome et indépendante, Mobian fonctionne comme une surcouche (« overlay ») au-dessus de Debian. Le projet maintient un nombre restreint de paquets spécifiques tout en réinjectant systématiquement le code amont (« upstreaming ») au sein des dépôts officiels Debian via l'équipe DebianOnMobile.",
     "debian_foundation_and_mobile_overlay": "Mobian s'appuie directement sur les dépôts stables et de test de Debian (Debian 12 Bookworm, Debian 13 Trixie). Le système utilise la bibliothèque standard glibc, le gestionnaire de services et d'initialisation systemd, ainsi que le gestionnaire de paquets binaire APT (dpkg). Les utilisateurs disposent ainsi d'un accès natif à l'ensemble du catalogue Debian fort de plus de 69 000 paquets logiciels. Le système de fichiers racine demeure modifiable en lecture-écriture par défaut, autorisant l'administration système standard d'une machine Debian.",
-    "touch_environment_and_phosh_ecosystem": "L'environnement graphique par défaut de Mobian est Phosh (Phone Shell), une interface tactile conçue à l'origine par Purism pour le Librem 5 et basée sur les composants GNOME / GTK. Phosh fonctionne sur le compositeur Wayland Phoc. La saisie textuelle est assurée par le clavier tactile Stevia (auparavant nommé phosh-osk-stub). Les environnements légers alternatifs Sxmo (Simple X Mobile, orienté tuiles et raccourcis gestuels) et Plasma Mobile (KDE) sont également disponibles et installables via les dépôts officiels. Pour l'exécution d'applications Android isolées, Mobian intègre le conteneur Waydroid.",
-    "hardware_support_and_mainline_kernel": "Mobian adopte une politique stricte imposant l'usage du noyau Linux amont (« mainline kernel ») et exclut l'emploi des noyaux Android obsolètes fournis par les équipementiers. Les appareils ciblés en priorité sont les téléphones conçus nativement pour Linux, tels que les PINE64 PinePhone et PinePhone Pro, le Purism Librem 5, ainsi que les tablettes PineTab et PineTab 2. Le projet produit également des images x86_64 pour tablettes compatibles UEFI (notamment Microsoft Surface) et supporte des ports communautaires sur des terminaux Android dont les pilotes ont été portés sur le noyau amont (Google Pixel 3a, OnePlus 6/6T, Pocophone F1).",
-    "technical_constraints_and_hardware_limits": "L'exigence du noyau Linux mainline implique des contraintes matérielles documentées : les fonctionnalités de capture photo et vidéo dépendent de la pile libcamera et de l'utilitaire Megapixels, offrant des résultats souvent inférieurs aux algorithmes de traitement propriétaires Android. La gestion de l'énergie en veille profonde et la réactivité du réveil lors de la réception d'appels cellulaires constituent des défis permanents. De plus, le fonctionnement des composants radio (Wi-Fi, Bluetooth, modem modem baseband) requiert le chargement de micrologiciels (« firmware blobs ») propriétaires intégrés aux images d'installation.",
+    "touch_environment_and_phosh_ecosystem": "L'environnement graphique principal de Mobian est Phosh (Phone Shell), une interface tactile conçue pour les terminaux mobiles au-dessus du compositeur Wayland wlroots, initialement développée par Purism pour le Librem 5 et aujourd'hui hébergée sous l'égide de GNOME. Phosh est associé à Squeekboard, un clavier virtuel à l'écran gérant la disposition multi-langues et les touches modificatrices, et à Feedbackd, un démon système orchestrant les signaux haptiques (vibrations) et sonores. La téléphonie cellulaire, l'envoi de SMS et la gestion des données mobiles sont assurés par ModemManager et NetworkManager, tandis que le routage audio des conversations téléphoniques est pris en charge par Callaudiod et PipeWire, permettant d'exécuter des applications de bureau GNOME adaptatives utilisant les bibliothèques libadwaita et libhandy.",
+    "hardware_support_and_mainline_kernel": "Mobian applique une politique technique stricte : le système repose exclusivement sur le noyau Linux amont (« mainline kernel ») et refuse l'utilisation des noyaux Android modifiés ou des chargeurs d'amorçage propriétaires. Cette orientation limite volontairement le catalogue de matériel pris en charge aux appareils dont l'architecture est documentée et supportée par le noyau Linux officiel : principalement le PinePhone et le PinePhone Pro de Pine64, le Librem 5 de Purism, ainsi que certaines tablettes x86-64 et monocartes d'expérimentation. Mobian suit le cycle de développement continu de Debian Testing (actuellement Trixie), les paquets spécifiques au mobile étant progressivement rétro-portés et intégrés directement dans les dépôts officiels du projet Debian amont.",
+    "technical_constraints_and_hardware_limits": "L'adoption sans compromis du noyau Linux mainline engendre des contraintes pratiques significatives pour l'utilisateur final. L'autonomie sur batterie demeure sensiblement inférieure à celle d'un système Android conventionnel, bien que la gestion de la veille profonde (suspend-to-RAM via le microprogramme Crust sur architecture Allwinner A64) permette d'atteindre plusieurs heures d'inactivité tout en conservant la réception des appels entrants et des SMS. L'accélération matérielle des capteurs photo nécessite des modules de traitement d'image spécifiques (comme Megapixels), et l'écosystème applicatif est celui des logiciels libres de bureau GNU/Linux, excluant l'accès direct aux applications bancaires ou aux services mobiles propriétaires requérant les certifications Android SafetyNet ou Play Integrity.",
+    "images_and_installation": "Les images Mobian sont publiées sur images.mobian.org. L'installation suit la procédure décrite sur la page de chaque appareil dans la liste des appareils pris en charge ; la documentation Debian du projet recense en complément les problèmes connus et limitations logicielles, ainsi que des procédures pour les tâches courantes. Plasma Mobile peut être utilisé à la place de Phosh sur une installation Mobian, et Debian fournit le paquet correspondant.",
+    "debian_release_tracking_and_signed_archive": "Mobian follows Debian's stable releases. Its current stable was announced on 13 October 2025, about two months after the Debian release, with images built on Phosh 46.0 and Plasma Mobile 6.3 running a 6.12 kernel for almost all supported devices (the Librem 5 remains on 6.6). Stable images are published for the PinePhone, PinePhone Pro, PineTab, Librem 5, Pixel 3a and 3a XL, OnePlus 6 and 6T, and Pocophone F1; images also exist for the Fairphone 4 and 5, the PineTab 2 and the SHIFT6mq, with the project stating that important hardware features such as Wi-Fi or audio do not work on those. Images and the package archive are signed with PGP keys that were rotated at this transition, the previous key having expired since the preceding stable; the project recommends backing up data and flashing a fresh image rather than upgrading in place, and documents the manual upgrade path for users who attempt it.",
     "advantages": "Mobian offre l'écosystème Debian complet sur terminal mobile, une intégration continue dans les dépôts amont évitant la fragmentation, un système en lecture-écriture standard administrable par APT, et une indépendance totale vis-à-vis des services commerciaux de Google et Apple.",
     "disadvantages": "L'autonomie de la batterie en veille et la gestion thermique sont moins optimisées que sous les systèmes Android commerciaux, les pilotes de capteurs photographiques demeurent limités, et le catalogue d'applications purement tactiles natives est réduit par rapport aux plateformes mobiles dominantes.",
     "who_is_it_for": "Mobian s'adresse aux administrateurs système, développeurs et utilisateurs avancés de Linux souhaitant retrouver un environnement Debian standard et vérifiable sur leur smartphone ou tablette compatible.",
@@ -37,25 +39,25 @@
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "description": "Distribution mère fournissant l'ensemble des dépôts de paquets binaires, la gouvernance amont et l'infrastructure de compilation pour Mobian."
+      "note": "Distribution mère fournissant l'ensemble des dépôts de paquets binaires, la gouvernance amont et l'infrastructure de compilation pour Mobian."
     },
     {
       "id": "postmarketos",
-      "name": "postmarketOS",
+      "name": "Nura",
       "type": "peer_mobile_distribution",
-      "description": "Distribution Linux mobile basée sur Alpine Linux partageant avec Mobian la cible du noyau mainline et les interfaces Wayland tactiles."
+      "note": "Distribution Linux mobile basée sur Alpine Linux partageant avec Mobian la cible du noyau mainline et les interfaces Wayland tactiles."
     },
     {
       "id": "pureos",
       "name": "PureOS",
       "type": "peer_privacy_distribution",
-      "description": "Système d'exploitation basé sur Debian développé par Purism, à l'origine du développement initial du shell tactile Phosh."
+      "note": "Système d'exploitation basé sur Debian développé par Purism, à l'origine du développement initial du shell tactile Phosh."
     },
     {
       "id": "ubuntu-touch",
       "name": "Ubuntu Touch",
       "type": "peer_mobile_distribution",
-      "description": "Distribution mobile libre alternative maintenue par UBports, exploitant l'environnement graphique convergent Lomiri."
+      "note": "Distribution mobile libre alternative maintenue par UBports, exploitant l'environnement graphique convergent Lomiri."
     }
   ],
   "links": [
@@ -87,6 +89,18 @@
       "title": "Mobian Project — Blog et annonces officielles",
       "url": "https://blog.mobian.org/posts/2021/05/17/update-2021-05-17/",
       "type": "official_announcement"
+    },
+    {
+      "title": "Debian Wiki — Mobian (installation, images, problèmes connus)",
+      "url": "https://wiki.debian.org/Mobian",
+      "type": "official_documentation",
+      "note": "page consultée le 2026-10-17"
+    },
+    {
+      "title": "Mobian — A new Stable, and rotating keys (13 octobre 2025 : Trixie, noyaux, appareils, signature PGP)",
+      "url": "https://blog.mobian.org/posts/2025/10/new-stable-rotating-keys/",
+      "type": "project_announcement",
+      "accessed": "2026-10-18"
     }
   ]
 }

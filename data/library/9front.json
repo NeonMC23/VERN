@@ -1,0 +1,170 @@
+{
+  "id": "9front",
+  "name": "9front",
+  "type": "operating_system",
+  "summary": "Fork communautaire indépendant et modernisé de Plan 9 from Bell Labs, offrant un support natif 64 bits x86-64, des pilotes SATA/NVMe/USB réécrits, du TLS natif et le système de fichiers journalisé hjfs.",
+  "tags": [
+    "distributed",
+    "plan9-derivative",
+    "x86-64",
+    "9p-protocol",
+    "namespaces",
+    "hjfs",
+    "git-fs",
+    "open-source"
+  ],
+  "status": "active",
+  "platforms": [
+    "x86-64",
+    "x86-32",
+    "ARM",
+    "MIPS"
+  ],
+  "license": "Open Source (Licence MIT avec composants sous Lucent Public License)",
+  "last_verified": "2026-10-16",
+  "content": {
+    "introduction": "9front est un système d'exploitation libre issu d'un fork communautaire indépendant de Plan 9 from Bell Labs (Fourth Edition), créé en 2011. Né de la volonté de développeurs et d'utilisateurs chevronnés de revitaliser l'écosystème Plan 9 face à l'inertie du développement corporatif chez Bell Labs, 9front a pour objectif de rendre les concepts novateurs de Plan 9 (espaces de noms par processus, protocole 9P, environnement textuel Acme) pleinement opérationnels sur les ordinateurs personnels, serveurs et machines virtuelles modernes.",
+    "what_is_it": "Techniquement, 9front n'est pas une simple réemballage ou distribution mineure de Plan 9 : il s'agit d'un système autonome ayant profondément remanié le noyau, la chaîne de compilation et les pilotes matériels. Tout en conservant la pureté conceptuelle de Plan 9 (« tout est fichier », protocoles 9P2000, espaces de noms privés composés par `bind` et `mount`), 9front a comblé les lacunes matérielles et réseau qui empêchaient l'utilisation pratique de Plan 9 au XXIe siècle.",
+    "kernel_modernization_amd64_and_hardware_drivers": "L'un des accomplissements majeurs de 9front est la mise en œuvre d'une architecture 64 bits native et robuste pour microprocesseurs **x86-64 (AMD64)**, comprenant le noyau, la chaîne de compilation C (`6c`, `6a`, `6l`) et l'ensemble de l'espace utilisateur. Le projet a intégralement réécrit la pile de pilotes matériels : prise en charge des contrôleurs de disques SATA (AHCI) et interfaces SSD NVMe ultra-rapides, pile USB complète pour contrôleurs XHCI (USB 3.x), EHCI et UHCI, pilotes pour contrôleurs réseau Gigabit et 10-Gigabit Ethernet (Intel igb/ixgbe, Realtek), gestion du microcode CPU Intel/AMD et prise en charge de l'amorçage moderne en mode UEFI aux côtés du BIOS hérité.",
+    "storage_architecture_hjfs_and_cwfs": "9front a grandement fiabilisé la couche de stockage en intégrant par défaut **hjfs** (Hearn's Journaled File System), un système de fichiers moderne apportant la journalisation des blocs et la prise en charge des instantanés (snapshots), garantissant l'intégrité transactionnelle des données face aux arrêts électriques brutaux. Il maintient également **cwfs** (Cache-WORM File System), conçu pour créer des serveurs de fichiers hiérarchiques à deux niveaux (mémoire cache rapide et stockage d'archives immuables). Le protocole 9P bénéficie d'optimisations de débit substantielles et d'extensions de négociation fiables.",
+    "modern_network_stack_tls_and_git_fs": "Sur le plan réseau, 9front intègre nativement une pile cryptographique contemporaine : prise en charge complète d'IPv6, implémentation des protocoles de chiffrement TLS/SSL dans le noyau et l'espace utilisateur, client et serveur SSH natifs, et synchronisation temporelle NTP. Fait remarquable, le système intègre l'outil `git/fs`, qui permet de manipuler les dépôts Git sous forme d'un système de fichiers virtuel 9P navigable : chaque branche, étiquette ou commit s'explore comme un répertoire standard. L'environnement graphique Rio gère le lissage des polices vectorielles TrueType, et le système est livré avec des émulateurs rétro intégrés (NES, GameBoy, x86).",
+    "hardware_compatibility_and_community_governance": "9front s'exécute de façon optimale sur les ordinateurs portables x86-64 (notamment la gamme Lenovo ThinkPad), les PC de bureau physiques récents, les nano-ordinateurs ARM (Raspberry Pi 0, 1, 2, 3, 4) et l'ensemble des hyperviseurs modernes (QEMU, VirtualBox, bhyve). Le système est distribué sous licence libre et permissive **Licence MIT** (avec des composants sous Lucent Public License). Le projet est gouverné de manière collégiale et indépendante par sa communauté, et s'accompagne d'une documentation technique sans concession réputée, la FQA (Frequently Questioned Answers).",
+    "versions_images_et_cibles_materielles": "9front ne publie pas de version numérotée au sens des distributions Linux : la version courante est identifiée par un numéro de compilation — 11952 lors de la consultation — et diffusée sous forme d'images prêtes à l'emploi. Le répertoire de téléchargement associe à cette version une image ISO 386, une image ISO et une image qcow2 amd64, une image qcow2 arm64, ainsi que quatre images destinées à des cartes ARM nommées pi, pi3, honeycomb et reform. La préparation des disques est documentée dans la section 8 du manuel : fdisk et prep pour les tables de partitions, format pour le marquage des supports, mbr pour l'amorçage. Les partitions Plan 9 utilisent le type 0x39 sur table DOS et l'identifiant GUID C91818F9-8025-47AF-89D2-F030D7000C2C sur table GPT, ce qui permet de cohabiter avec d'autres systèmes sur un même disque.",
+    "security_authentication_agent_and_trust_boundaries": "L'authentification de 9front est assurée par `auth/factotum`, un système de fichiers de l'espace utilisateur qui sert d'agent pour un utilisateur donné et conserve des clés représentées par des paires `attribut=valeur` (utilisateur, domaine d'authentification, protocole, données secrètes). Le service expose les entrées `rpc`, `proto`, `confirm`, `needkey`, `log` et `ctl` ; la lecture de `ctl` renvoie la liste des clés et ne restitue d'un attribut secret que le nom suivi d'un point d'interrogation. La page `factotum(4)` énumère les protocoles pris en charge : `p9any` comme métaprotocole de négociation, `p9sk1` présenté comme hérité, `dp9ik` qui ajoute la résistance au forçage de mot de passe et la confidentialité persistante, puis `p9cr`, `apop`, `cram`, `chap`, `mschap`, `mschapv2` et `mschap2`. L'agent agit comme client pour les processus partageant son identifiant utilisateur et comme serveur pour tout processus ; la page `auth(2)` expose les appels de gestion d'espaces de noms (`newns`, `addns`, `amount`) et la fonction `noworld`, qui signale l'appartenance au groupe `noworld` de `/adm/users` et que `telnetd` et `ftpd` utilisent pour un accès restreint. La page `securenet(8)` décrit un boîtier externe à chiffrement DES protégé par un code PIN de quatre chiffres. Ces documents décrivent des mécanismes activables ; ils ne publient ni politique de correctifs, ni durée de support, ni procédure de signalement des vulnérabilités.",
+    "advantages": [
+      "Continuation active et moderne de l'architecture distribuée de Plan 9 sur processeurs 64 bits (x86-64).",
+      "Pilotes matériels modernes réécrits pour SATA AHCI, NVMe, USB 3.x (XHCI) et Ethernet Gigabit.",
+      "Système de fichiers journalisé hjfs avec instantanés garantissant la résilience des données.",
+      "Pile réseau contemporaine complète intégrant IPv6, TLS/SSL natif et client/serveur SSH.",
+      "Outil innovant `git/fs` exposant les dépôts Git sous forme d'arborescences de fichiers virtuelles 9P.",
+      "Gouvernance communautaire indépendante et licence libre permissive MIT."
+    ],
+    "disadvantages": [
+      "Courbe d'apprentissage atypique exigeant de maîtriser les concepts d'espaces de noms privés et l'éditeur Acme.",
+      "Incompatibilité avec la plupart des logiciels fermés ou des suites bureautiques propriétaires du monde PC.",
+      "Support des puces Wi-Fi physiques récentes encore partiel comparé aux distributions Linux grand public.",
+      "Absence d'accélération graphique 3D matérielle complexe pour les jeux vidéo modernes contemporains.",
+      "Documentation volontairement caustique (FQA) exigeant une bonne autonomie technique de l'utilisateur."
+    ],
+    "who_is_it_for": [
+      "Développeurs, ingénieurs et chercheurs en informatique souhaitant exploiter la puissance des systèmes distribués 9P au quotidien.",
+      "Admirateurs de la philosophie de Plan 9 recherchant une implémentation fonctionnelle sur matériel PC moderne.",
+      "Programmeurs appréciant les environnements textuels ultra-rapides et hautement configurables (Acme, Sam, rc).",
+      "Amateurs d'architectures alternatives exécutant des systèmes légers et indépendants sous QEMU ou ThinkPad."
+    ],
+    "who_is_it_not_for": [
+      "Utilisateurs débutants recherchant un système de bureau conventionnel de type Windows ou macOS.",
+      "Professionnels dépendant de logiciels commerciaux propriétaires spécifiques (Adobe, Microsoft Office).",
+      "Administrateurs d'infrastructures de cloud computing exigeant des orchestrateurs de conteneurs Linux natifs.",
+      "Joueurs de jeux vidéo modernes nécessitant des pilotes graphiques Vulkan ou DirectX récents."
+    ],
+    "verdict": "9front est un fork communautaire de Plan 9. En conservant l'architecture de Plan 9 tout en ajoutant des fondations matérielles et cryptographiques modernes (AMD64, NVMe, USB 3, TLS, git/fs), il maintient une distribution utilisable au quotidien du système de recherche de Bell Labs.",
+    "origin_and_earliest_release_announcements": "Le projet se présente, dans sa propre FQA, comme un fork de Plan 9 from Bell Labs lancé pour remédier à un manque perçu de ressources de développement consacrées à Plan 9 au sein de Bell Labs. La plus ancienne annonce de version archivée sur le site est datée du 17 juin 2011, sous le chemin d'archive 2011/06/17, et s'intitule « Plan 9 from the People's Front of cat-v.org (9front) ». Cette annonce indique que Plan 9 a été forkée pour poursuivre un développement hors de Bell Labs, que la page d'accueil et le code étaient alors hébergés sur Google Code, que le système pouvait être démarré depuis un CD live construit régulièrement ou compilé dans une installation Plan 9 existante, et que les discussions se tenaient sur le canal #cat-v du réseau irc.freenode.net.\n\nL'archive des annonces couvre les années 2011 à 2026, par dossiers annuels. La FQA énonce que les nouvelles versions sont produites « on a regular, but unscheduled, basis » et renvoie à cette archive ; elle ne publie ni calendrier, ni durée de support, ni date de fin de vie. La dernière annonce consultée est datée du 2 août 2026, sous le chemin d'archive 2026/08/02, et s'intitule « 9FRONT “THIS WAS SUPPOSED TO BE FUN” RELEASED ». Pour ces deux annonces, la date provient du chemin d'archive publié par le site et non d'une mention imprimée : les pages elles-mêmes n'affichent pas de date.\n\nLa FQA décrit enfin les contributions comme occasionnelles, réparties entre plusieurs fuseaux horaires et fournisseurs d'accès, et renvoie à la liste de diffusion du projet pour le déroulement du développement.",
+    "additional_software_sources_and_contrib_tree": "La FQA documente la distribution des logiciels supplémentaires sous forme de partages 9P. Le partage `9fs 9front` rend accessibles, sous /n/, les répertoires suivants : 9front/ pour le code source du système, 9front.torrent pour le torrent de l'image ISO courante, extra/ pour le code source de logiciels tiers, fqa/ pour les sources troff de la FQA, hardware/ pour le matériel connu comme fonctionnel avec ses informations système, ses firmwares et ses manuels, et iso/ pour les images ISO courantes.\n\nUn second partage officiel, monté par `9fs 9contrib`, expose sous /n/contrib/ les répertoires de contribution maintenus par des utilisateurs du projet ; ces répertoires sont également servis en HTTP à l'adresse contrib.9front.org. La FQA renvoie en complément à une liste de serveurs 9P publics, à shithub.us, à une liste de logiciels Plan 9, à sr.ht et à l'organisation GitHub Plan9-Archive, ainsi qu'à la page wiki.9front.org/extra.\n\nElle décrit également ANTS, une collection de modifications et de logiciels ajoutant des capacités de manipulation d'espaces de noms, présentée comme fondée sur 9front et placée sous licence MIT pour le code original et sous Lucent Public License pour les modifications du code de Bell Labs.\n\nCes pages décrivent une diffusion par partages de sources et par répertoires de contribution ; elles ne documentent ni gestionnaire de paquets binaires, ni résolveur de dépendances, ni dépôt de paquets signés."
+  },
+  "relations": [
+    {
+      "id": "plan9",
+      "name": "Plan 9 from Bell Labs",
+      "type": "related",
+      "note": "Système d'exploitation distribué de recherche conçu par Bell Labs dont 9front est le fork communautaire actif."
+    },
+    {
+      "id": "redox-os",
+      "name": "Redox OS",
+      "type": "alternative",
+      "note": "Système à micro-noyau en Rust partageant des idéaux d'architecture unifiée."
+    },
+    {
+      "id": "openbsd",
+      "name": "OpenBSD",
+      "type": "related",
+      "note": "Système BSD réputé pour sa rigueur de code et son indépendance philosophique."
+    },
+    {
+      "id": "serenityos",
+      "name": "SerenityOS",
+      "type": "alternative",
+      "note": "Système d'exploitation libre contemporain développé indépendamment."
+    }
+  ],
+  "links": [
+    {
+      "label": "Site officiel du projet 9front",
+      "url": "https://9front.org/"
+    },
+    {
+      "label": "Manuel officiel et documentation technique FQA de 9front",
+      "url": "http://fqa.9front.org/"
+    },
+    {
+      "label": "Pages de manuel officielles de 9front",
+      "url": "http://man.9front.org/"
+    }
+  ],
+  "sources": [
+    {
+      "title": "FQA 1 — Introduction à 9front (origine, plateformes prises en charge, hjfs)",
+      "url": "https://fqa.9front.org/fqa1.html",
+      "type": "documentation"
+    },
+    {
+      "title": "Documentation technique et manuel FQA officiel de 9front",
+      "url": "http://fqa.9front.org/",
+      "type": "documentation"
+    },
+    {
+      "title": "Manuel de référence des pages de manuel de 9front",
+      "url": "http://man.9front.org/",
+      "type": "documentation"
+    },
+    {
+      "title": "9front — images de la version courante (386, amd64, arm64, cartes ARM)",
+      "url": "https://9front.org/iso/",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "9front — prep(8) : préparation des disques, partitions Plan 9 sur table DOS et GPT",
+      "url": "https://man.9front.org/8/prep",
+      "type": "technical_manual",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "9front manual - factotum(4), agent d'authentification",
+      "url": "http://man.9front.org/4/factotum",
+      "type": "manual",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "9front manual - auth(2), routines d'authentification et espaces de noms",
+      "url": "http://man.9front.org/2/auth",
+      "type": "manual",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "9front manual - securenet(8), jeton d'authentification externe",
+      "url": "http://man.9front.org/8/securenet",
+      "type": "manual",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "9front - annonce de la première version archivee, 2011-06-17",
+      "url": "http://9front.org/releases/2011/06/17/0-9front/",
+      "type": "official",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "9front FQA 8 - section 8.8, logiciels supplementaires",
+      "url": "http://fqa.9front.org/fqa8.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "9front - annonce de version, chemin d'archive 2026/08/02",
+      "url": "http://9front.org/releases/2026/08/02/0/",
+      "type": "official",
+      "date": "2026-10-18"
+    }
+  ]
+}

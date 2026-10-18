@@ -19,16 +19,22 @@
     "riscv64"
   ],
   "license": "Apache License 2.0 (userspace) / GNU GPLv2 (Linux kernel)",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-16",
   "content": {
     "introduction": "The Android Open Source Project (AOSP) is the free and open-source software stack led by Google and the Open Handset Alliance that forms the core foundation of the global Android operating system. AOSP provides the complete operating system source code required to build and run modern touch-centric, mobile, and embedded devices.",
     "what_is_it": "AOSP is a comprehensive, multi-layered mobile operating system consisting of a modified Linux kernel, low-level native C/C++ libraries (including the Bionic C library), a Hardware Abstraction Layer (HAL), the Android Runtime (ART) virtual execution engine, background system services, and a comprehensive application framework exposed to Java and Kotlin applications.",
     "open_source_scope_vs_commercial_android": "There is a vital distinction between AOSP and commercial Android devices: AOSP represents the purely open-source operating system. It does not include proprietary Google Mobile Services (GMS), Google Play Store, proprietary Google Play Services APIs, or vendor-specific closed binary drivers. Independent privacy-oriented mobile operating systems, such as LineageOS, GrapheneOS, and /e/OS, fork or build directly upon AOSP to deliver fully functional mobile systems independent of Google services.",
-    "layered_architecture_and_hal": "AOSP is architectured in distinct abstraction layers. At the lowest level, the Linux kernel provides process scheduling and hardware communication. The Hardware Abstraction Layer (HAL), standardized through the Android Interface Definition Language (AIDL), defines standard interfaces for hardware modules (camera, audio, sensors, cellular radio) that operate in isolated processes via Binder inter-process communication (IPC), decoupling system updates from vendor silicon implementations.",
-    "runtime_and_kernel_evolution": "Applications execute within the Android Runtime (ART), which compiles DEX bytecode into native machine code through Ahead-of-Time (AOT) and Just-in-Time (JIT) compilation techniques. At the kernel level, AOSP employs the Generic Kernel Image (GKI) architecture: Google provides a unified Android Common Kernel (ACK) binary image for 64-bit devices, isolating hardware-specific vendor modules into a dedicated vendor_boot partition to eliminate kernel fragmentation.",
-    "build_system_security_and_licensing": "AOSP is compiled using the Soong build system and Ninja, coordinated across hundreds of Git repositories using the repo tool. The system implements defense-in-depth security: per-application Linux UID process sandboxing, mandatory SELinux access controls in Enforcing mode, File-Based Encryption (FBE), and cryptographic Android Verified Boot (AVB). Userspace code is primarily licensed under the permissive Apache License 2.0, while kernel modifications remain under GPLv2.",
+    "layered_architecture_and_hal": "AOSP is architectured in rigorously separated abstraction layers. At the lowest level, an adapted Linux kernel provides memory management, process scheduling, and device drivers. Above the kernel sits the Hardware Abstraction Layer (HAL), which defines standard C++ and Java interfaces that hardware vendors must implement (such as camera, audio, sensors, and graphics) without exposing proprietary driver internals to higher system layers. Through Project Treble, Google separated the vendor implementation (`/vendor`) from the core Android OS framework (`/system`) using versioned interfaces. Modern AOSP versions transitioned HAL definitions from HIDL to the Android Interface Definition Language (AIDL), facilitating modular updates. Furthermore, Project Mainline packages critical system components (including cryptographic modules, ART runtime, and networking stacks) into standalone APEX (Android Package Extension) containers that can be updated independently of complete operating system firmware images.",
+    "runtime_and_kernel_evolution": "Application execution in AOSP is powered by the Android Runtime (ART), which replaced the legacy Dalvik VM. ART employs a sophisticated hybrid execution pipeline combining Ahead-Of-Time (AOT) compilation, dynamic Just-In-Time (JIT) compilation, and profile-guided optimization. When an application is installed, the `dex2oat` compiler processes Dalvik Executable (DEX) bytecode into optimized native machine code (ELF binaries). During device idle periods, ART profiles frequently accessed methods and compiles them natively, balancing disk footprint with maximum runtime execution speed. Unlike traditional GNU/Linux environments, AOSP utilizes Bionic, a custom, lightweight C standard library engineered specifically for low memory consumption, high thread creation speeds, and exclusion of GPL-licensed user-space code. In recent releases, Google has also driven the Generic Kernel Image (GKI) initiative, unifying device vendor kernels with upstream Linux Long Term Support (LTS) releases through standard vendor module interfaces.",
+    "build_system_security_and_licensing": "The AOSP build system has evolved from GNU Make to Soong, Blueprint, and Ninja, enabling deterministic and parallelized builds across hundreds of Git sub-repositories managed by the `repo` coordination tool. System security is rooted in a defense-in-depth model featuring mandatory SELinux in Enforcing mode with fine-grained type enforcement domains for every system daemon and application sandbox. Storage integrity is enforced by Android Verified Boot (AVB) using `dm-verity`, which cryptographically authenticates each block of the system partition against a root of trust anchored in hardware fuses during startup. From a licensing standpoint, AOSP adheres to the permissive Apache 2.0 and BSD licenses for user-space libraries and frameworks, allowing commercial hardware manufacturers to develop proprietary device customizations and intellectual property without being obligated to disclose source code, while the underlying kernel remains licensed under the GNU GPL v2.",
+    "source_checkout_prerequisites_and_compatibility_requirements": "Building AOSP from source requires a Linux host meeting the documented prerequisites: Ubuntu 18.04 or later for Android 11 and above, together with a listed package set (git-core, gnupg, flex, bison, build-essential, zip, curl, zlib1g-dev, libc6-dev-i386, libx11-dev, lib32z1-dev, libgl1-mesa-dev, libxml2-utils, xsltproc, unzip, fontconfig). OpenJDK, Make and Python 3 ship as prebuilt versions with the latest release branch, and the `repo` launcher coordinates the many Git repositories: it is installed from the distribution package or downloaded and verified against a published GPG key before use. The project describes AOSP as a complete, production-quality developer product whose source is open for customization and porting. A device counts as Android-compatible only if it implements the Compatibility Definition Document and passes the Compatibility Test Suite, which is the boundary between the open-source platform and commercial Android.",
+    "project_origin_and_source_release_cadence": "The Android Open Source Project is not published continuously. The documentation states that, to maintain platform stability for the ecosystem, Google publishes source code to AOSP twice a year, in Q2 and Q4, and that builders and contributors should follow the `android-latest-release` manifest branch, which always references the most recent release pushed to AOSP. The current setup instructions address the `android17-release` branch, while a separate page keeps the procedure for Android 2.3 through 8.0, so the documentation preserves the older toolchain alongside the current one instead of replacing it. This release cadence explains why a tree checked out at a given moment may lag behind the commercial Android builds shipping on devices: the drop is periodic by design, and the manifest branch name, not a calendar date, identifies what a tree contains.",
+    "source_tree_composition_and_package_delivery": "An AOSP tree is not a single repository. The documentation defines Repo as a Python wrapper around Git that performs operations across many Git repositories, and a manifest file as an XML file that specifies where each Git project is placed inside the tree; Repo uses those manifests to aggregate the projects into the Android superproject. A checkout therefore resolves a manifest, not a version number, and the same tree can contain projects maintained on different schedules, together with prebuilt artifacts recorded in the documentation's terminology. The build then produces the images from that assembly: `source build/envsetup.sh` imports the command set, `lunch` selects a target, and the build variant decides what the resulting images contain. The target string has a documented structure - product name, release configuration and build variant - as in `lunch aosp_cf_x86_64_only_phone-aosp_current-userdebug`, where `cf` marks a Cuttlefish emulator target and `userdebug` the build variant.",
+    "release_configurations_and_ab_update_slots": "Two mechanisms govern how a built system is replaced on a device. The first is the release configuration: the `lunch` output prints the platform version codename, the target product, the build variant and the build identifier, and the documentation names `aosp_current` as the development release configuration. The second is the A/B partition scheme documented for over-the-air updates: the device carries two sets of partitions, normally slot A and slot B, the running system uses one slot while the other is left untouched, and each slot records a bootable attribute and a successful attribute set by user space. An update writes the inactive slot, so an error during or immediately after the update can roll back to the previous slot and leave a working system; no partition used by the current slot should be written during the update, including partitions that exist in only one copy. The update engine daemon and the bootloader cooperate on slot selection, and the documentation presents A/B updates delivered through OTA as recommended for new devices only.",
+    "workstation_requirements_and_device_flashing": "Building the platform has documented host requirements: a 64-bit x86 workstation, at least 400 GB of free disk space split between 250 GB for the checkout and 150 GB for the build, and a minimum of 64 GB of RAM. The same page gives the observed build times rather than an estimate: about 40 minutes for a full build on the 72-core machines Google uses, a few minutes for an incremental build, and about 6 hours for a full build on a 6-core machine with 64 GB of RAM. Writing the result to hardware is a separate documented sequence. The device is put in fastboot mode with `adb reboot bootloader`, the bootloader is unlocked with `fastboot flashing unlock_critical` on recent devices or `fastboot oem unlock` on pre-2015 hardware, and the images are written with `fastboot flashall -w`, a single command that checks compatibility with the installed bootloader and radio, writes the boot, recovery and system partitions together and reboots, the `-w` option wiping the data partition. Re-locking uses `fastboot flashing lock` on 2015 or later devices.",
+    "default_manifest_and_project_layout": "The manifest repository itself is public, so the composition of the tree can be read rather than inferred. Its `default.xml` on the `main` branch declares a remote named `aosp` whose fetch URL is relative to the manifest repository, a code review endpoint at `android-review.googlesource.com`, a default revision `main` and a parallel sync setting of `sync-j=\"4\"`. The file lists 1045 `<project>` entries, each with a path in the working tree and a repository name, plus link files that place generated or shared build files at fixed locations such as `build/CleanSpec.mk`. It also carries a notice dated 27 March 2025 stating that the latest release branch is referenced by `android-latest-release` and that platform developers should use that manifest rather than `aosp-main`. These declarations are the level at which package composition can be audited: a project added to the tree, a path moved, or a revision changed is recorded in one XML file under version control.",
     "advantages": [
-      "Massive global open-source software ecosystem with unmatched mobile hardware compatibility",
+      "Global open-source software ecosystem with broad mobile hardware compatibility",
       "Permissive Apache 2.0 userspace licensing enabling widespread customization and independent forks",
       "Advanced multi-tier security architecture with strict SELinux enforcement, app sandboxing, and AVB",
       "Unified Generic Kernel Image (GKI) reducing kernel fragmentation and streamlining platform updates",
@@ -48,7 +54,7 @@
       "End users seeking an out-of-the-box turnkey mobile experience with proprietary Google apps pre-installed",
       "Server administrators looking for traditional POSIX/glibc GNU/Linux command-line environments"
     ],
-    "verdict": "The Android Open Source Project is one of the most consequential open-source initiatives in computing history. By delivering a complete, robust, and highly secure mobile operating system stack with the permissive Apache 2.0 license and Linux kernel, it serves as the essential bedrock for both global commercial devices and privacy-focused community mobile platforms."
+    "verdict": "The Android Open Source Project is the open-source software stack, led by Google and the Open Handset Alliance, that provides the source code of the Android platform. It distributes a complete mobile operating system stack, including a modified Linux kernel and user-space libraries; the user-space components are distributed mainly under the Apache 2.0 and BSD licenses, while the kernel is distributed under the GNU GPL v2 with system exceptions. It is used both for commercial devices and as a base for community Android distributions."
   },
   "relations": [
     {
@@ -68,6 +74,24 @@
       "name": "Debian",
       "relation": "alternative",
       "note": "Traditional upstream open-source Linux operating system, illustrating the architectural contrast between standard glibc/GNU and AOSP/Bionic."
+    },
+    {
+      "id": "lineageos",
+      "name": "LineageOS",
+      "relation": "downstream_derivative",
+      "note": "Community-driven open-source mobile distribution derived directly from AOSP, extending hardware support across hundreds of device models."
+    },
+    {
+      "id": "grapheneos",
+      "name": "GrapheneOS",
+      "relation": "downstream_derivative",
+      "note": "Privacy and security-hardened mobile operating system based on AOSP, incorporating enhanced sandboxing and memory exploit mitigations."
+    },
+    {
+      "id": "calyxos",
+      "name": "CalyxOS",
+      "relation": "downstream_derivative",
+      "note": "Privacy-focused mobile operating system built on AOSP, integrating microG and encrypted communication defaults."
     }
   ],
   "links": {
@@ -94,6 +118,54 @@
       "url": "https://source.android.com/docs/setup/about/faqs",
       "type": "official_documentation",
       "date": "2026-06-17"
+    },
+    {
+      "title": "AOSP — Licenses (Apache 2.0, BSD et GPLv2 pour le noyau)",
+      "url": "https://source.android.com/docs/setup/about/licenses",
+      "type": "official_documentation",
+      "accessed": "2026-10-17"
+    },
+    {
+      "title": "AOSP — Set up for AOSP development : requirements (Ubuntu 18.04+, paquets, Repo, OpenJDK)",
+      "url": "https://source.android.com/docs/setup/start/requirements",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "AOSP — About AOSP (produit de développement complet, CDD et CTS)",
+      "url": "https://source.android.com/docs/setup/about",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "AOSP documentation: build environment, lunch targets and release configurations",
+      "url": "https://source.android.com/docs/setup/build/building",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "AOSP documentation: workstation requirements, Repo and manifest files",
+      "url": "https://source.android.com/docs/setup/requirements",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "AOSP documentation: flashing a device, unlocking and re-locking the bootloader",
+      "url": "https://source.android.com/docs/setup/build/running",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "AOSP documentation: A/B system updates, slots and rollback behaviour",
+      "url": "https://source.android.com/docs/core/ota/ab",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "AOSP manifest repository: default.xml project layout and remote declarations",
+      "url": "https://android.googlesource.com/platform/manifest/+/refs/heads/main/default.xml",
+      "type": "official_source_tree_file",
+      "accessed": "2026-10-18"
     }
   ]
 }

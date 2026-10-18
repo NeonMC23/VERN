@@ -29,6 +29,8 @@
     "management_architecture_and_webui": "L'architecture interne d'OpenMediaVault repose sur une séparation claire entre la couche de stockage de configuration et les démons applicatifs. L'état du système est centralisé dans un fichier de configuration XML déclaratif (`config.xml`). Un démon d'arrière-plan (`omv-engined`) expose une interface RPC (Remote Procedure Call) et orchestre les configurations réelles des services système au moyen de modules d'automatisation SaltStack (`omv-salt`). L'administrateur pilote l'ensemble de la machine depuis une interface graphique web sécurisée accessible via un simple navigateur, offrant des tableaux de bord interactifs de surveillance des températures, des alertes de défaillance matérielle et de la charge réseau.",
     "modularity_and_docker_containerization": "L'un des atouts déterminants d'OpenMediaVault est sa modularité par plugins. Outre les modules officiels (antivirus ClamAV, onduleur NUT, sauvegardes BorgBackup), la communauté maintient le dépôt d'extensions OMV-Extras. Cette couche additionnelle permet d'intégrer facilement des fonctionnalités avancées comme la prise en charge de ZFS (via ZFS on Linux) et surtout la gestion complète de conteneurs applicatifs grâce au plugin `openmediavault-compose`. Ce dernier permet d'héberger des dizaines de services auto-hébergés (Plex, Jellyfin, Nextcloud, Home Assistant) via Docker et Docker Compose directement sur le serveur NAS sans altérer le système d'exploitation de base.",
     "hardware_efficiency_and_sbc_support": "Contrairement aux solutions d'entreprise exigeantes telles que TrueNAS, OpenMediaVault se distingue par une sobriété matérielle remarquable. Il peut fonctionner de manière stable avec seulement 1 à 2 Go de mémoire vive et un processeur standard d'entrée de gamme, ce qui en fait un outil de prédilection pour recycler d'anciens PC de bureau en serveurs de stockage. De surcroît, grâce à des scripts de déploiement adaptés et à l'écosystème Armbian, OpenMediaVault s'installe très couramment sur des ordinateurs monocartes (SBC) comme le Raspberry Pi ou les cartes Odroid, fournissant une passerelle NAS compacte et économe en énergie.",
+    "user_access_control_and_security_permissions": "Access to stored data is managed through users, groups and shared-folder permissions before any service sees a request. The documentation describes three permission levels on a shared folder - read/write, read only and no access - applied through group membership, with a note that finer control belongs to the filesystem access control list described in the shared-folder documentation. Users belong to groups, a group identifier must be numeric between 1000 and 60000, and groups can be created in bulk from CSV data, which matters on installations that map an existing directory service. These permissions are enforced by the services themselves, such as SMB/CIFS or FTP, and the documentation presents them as a layer distinct from the underlying filesystem ownership.",
+    "debian_package_base_and_plugin_model": "The product is a Debian system, and the documentation states that base directly: openmediavault is described as a NAS solution built on Debian Linux for x86-64 and ARM, and the system is administered as a Debian installation with the openmediavault packages on top. Extension happens through plugins, which the documentation calls the preferred way to extend the NAS because of the modular design, and third-party plugins are catalogued at omv-extras.org rather than in the main documentation. For software outside that catalogue the guidance is to run containerised applications built with podman or Docker instead of installing regular packages alongside the NAS stack, the stated reason being component dependencies that later updates turn into conflicts and that can leave the web interface unusable. The FAQ lists `omv-upgrade` and `omv-release-upgrade` as the two maintenance commands of the system and points to the software section for their description.",
     "advantages": [
       "Empreinte système et consommation mémoire très faibles, permettant l'installation sur du matériel modeste ou recyclé.",
       "Socle éprouvé basé sur Debian GNU/Linux garantissant une stabilité exemplaire et des mises à jour de sécurité fiables.",
@@ -56,32 +58,34 @@
       "Infrastructures nécessitant impérativement une haute disponibilité matérielle en double contrôleur actif-passif sans interruption de service.",
       "Déploiements sur des postes de travail bureautiques individuels nécessitant un environnement graphique local avec écran et clavier."
     ],
-    "verdict": "OpenMediaVault constitue la solution de stockage en réseau libre par excellence pour les environnements domestiques et les petites structures. Bâti avec rigueur sur les fondations stables de Debian GNU/Linux, il allie une grande simplicité d'administration web, une consommation de ressources minimale et une grande flexibilité logicielle grâce à ses extensions et à Docker Compose."
+    "verdict": "OpenMediaVault est une distribution de stockage en réseau libre destinée aux environnements domestiques et aux petites structures. Bâtie sur Debian GNU/Linux, elle fournit une administration web, une empreinte de ressources réduite et une extension par modules et Docker Compose.",
+    "origine_et_lignee_du_projet": "La chronologie publiée par le projet commence avec la version 0.2, nommée Ix, basée sur Debian 6 et datée d'octobre 2011. Les versions suivantes conservent cette correspondance avec la version stable de Debian : 6.0 Shaitan, sur Debian 11, publiée en mai 2022 ; 7.0 Sandworm, sur Debian 12, publiée en mars 2024 ; 8.0 Synchrony, sur Debian 13, publiée en décembre 2025 et donnée pour stable dans la documentation 8.x.\n\nLe tableau des versions comporte quatre colonnes : numéro, nom de code, distribution de base et statut, avec la date de publication et la date de fin de support. La colonne de fin de support donne juin 2026 pour la version 7.0. Les noms de code des versions 4.0 Arrakis, 5.0 Usul et 6.0 Shaitan sont repris de l'univers de Dune ; ceux des versions suivantes ne suivent pas la même source.\n\nLe projet se décrit comme une solution de stockage en réseau basée sur Debian, distribuée sous licence GPLv3, avec une architecture modulaire étendue par des plugins. Les services cités dans la présentation officielle comprennent SSH, (S)FTP, SMB/CIFS, un serveur multimédia DAAP, RSync et Kubernetes. La documentation 8.x porte la mention de dernière mise à jour du 2026-06-08.",
+    "installation_multivariante_et_conditions_d_emploi": "La documentation exclut explicitement l'installation dans LXC ou dans toute autre solution de conteneur. Elle distingue cinq variantes : installation sur disque dédié à partir d'une image ISO, qui est la méthode recommandée sur matériel x86-64 ou AMD64 ; installation sur clé USB ; installation sur un système Debian déjà présent ; installation par debootstrap, présentée comme un dernier recours lorsque l'installateur ne reconnaît pas un composant essentiel comme un disque NVMe ou une carte réseau récente ; installation sur carte SD. Pour les cartes ARM32 et ARM64, la variante Debian est celle qui est indiquée.\n\nAu premier démarrage, l'écran de connexion affiche l'adresse IP attribuée à l'interface web. L'identifiant par défaut est `admin` avec le mot de passe `openmediavault` ; le mot de passe root est celui choisi pendant l'installation, et sur les images ARM il est identique à celui du compte admin. La documentation précise que l'accès SSH au compte root est activé par défaut afin de permettre l'accès à un système sans écran, qu'il doit être désactivé dans la page Services puis SSH, et que l'accès root passe ensuite par un utilisateur non privilégié ajouté aux groupes `_ssh` et `sudo`, puis par `sudo su`.\n\nLa page d'installation de la documentation 8.x porte la mention de dernière mise à jour du 2025-12-25."
   },
   "relations": [
     {
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "description": "Distribution Linux de référence servant de socle fondamental pour le système d'exploitation et les paquets logiciels."
+      "note": "Distribution Linux de référence servant de socle fondamental pour le système d'exploitation et les paquets logiciels."
     },
     {
       "id": "truenas",
       "name": "TrueNAS",
       "type": "alternative",
-      "description": "Plateforme de stockage en réseau concurrente motorisée par OpenZFS, plus exigeante en ressources matérielles."
+      "note": "Plateforme de stockage en réseau concurrente motorisée par OpenZFS, plus exigeante en ressources matérielles."
     },
     {
       "id": "proxmox-ve",
       "name": "Proxmox VE",
       "type": "alternative",
-      "description": "Plateforme de virtualisation et conteneurisation basée sur Debian, souvent associée ou comparée pour les infrastructures de serveurs domestiques."
+      "note": "Plateforme de virtualisation et conteneurisation basée sur Debian, souvent associée ou comparée pour les infrastructures de serveurs domestiques."
     },
     {
       "id": "dietpi",
       "name": "DietPi",
       "type": "related",
-      "description": "Distribution légère pour cartes monocartes intégrant un script d'installation optimisé pour OpenMediaVault."
+      "note": "Distribution légère pour cartes monocartes intégrant un script d'installation optimisé pour OpenMediaVault."
     }
   ],
   "links": [
@@ -113,6 +117,42 @@
       "title": "Code source et gestionnaire de configuration omv-engined",
       "url": "https://github.com/openmediavault/openmediavault",
       "type": "repository"
+    },
+    {
+      "title": "openmediavault documentation: users, groups and shared folder permissions",
+      "url": "https://docs.openmediavault.org/en/latest/administration/users.html",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "openmediavault documentation: plugins and extension model",
+      "url": "https://docs.openmediavault.org/en/latest/plugins/index.html",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "openmediavault documentation: frequently asked questions",
+      "url": "https://docs.openmediavault.org/en/latest/faq.html",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "openmediavault documentation - historical releases",
+      "url": "https://docs.openmediavault.org/en/stable/releases.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "openmediavault - About the project",
+      "url": "https://www.openmediavault.org/about.html",
+      "type": "official",
+      "date": "2026-10-18"
+    },
+    {
+      "title": "openmediavault documentation - Installation",
+      "url": "https://docs.openmediavault.org/en/stable/installation/index.html",
+      "type": "official_documentation",
+      "date": "2026-10-18"
     }
   ]
 }

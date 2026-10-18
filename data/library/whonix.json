@@ -36,6 +36,8 @@
     "live_mode_and_anti_forensics": "While Whonix stores state persistently on virtual disks by default, the project provides an optional Live Mode (`grub-live`). When selected at boot, all disk write operations are redirected to volatile RAM using overlayfs. Upon shutdown, all modifications made during the session vanish. However, Whonix explicitly notes that host-level swap files, memory dumps, or hypervisor caches on the host OS can still retain forensic artifacts unless the host itself is run in live mode.",
     "threat_model_and_limitations": "Whonix explicitly documents the boundaries of its security model in its official 'Warning' documentation:\n\n- Whonix is not Tor: Whonix relies on Tor for traffic routing; any theoretical or practical vulnerability in Tor's cryptography or consensus mechanism directly affects Whonix users.\n- End-to-End Traffic Correlation: An adversary with global surveillance capabilities observing both the ingress to the user's Tor guard node and the egress from the Tor exit node can correlate connection timings.\n- Host OS and Hardware Compromise: If the host operating system, hypervisor, BIOS/UEFI firmware, or physical hardware (such as a hardware keylogger) is compromised, all Whonix VMs are compromised.\n- Operational Security (OPSEC): Technical isolation cannot protect users who log into personal accounts, reveal identifying details, or succumb to linguistic stylometry analysis.",
     "privacy_and_zero_telemetry": "Whonix adheres to an absolute zero-telemetry policy. No user identifiers, hardware serial numbers, usage analytics, or crash telemetry are transmitted to Whonix or third-party servers. All repository updates, time synchronization queries, and version checks travel exclusively through Tor. Software packages are delivered via `deb.whonix.org` and verified using GnuPG cryptographic signatures.",
+    "debian_repositories_and_backports_policy": "Whonix installs software through Debian APT and documents the repository choices rather than a package catalogue of its own. The recommended order is the Debian stable suite first; when a newer version is needed, backports come next, and the guide states that using backports is preferable to manual installation or to third-party package managers. The entries are written as deb822 `.sources` files, one per extra repository such as `backports.sources` and `fasttrack.sources`: backports point at `deb.debian.org` with the `trixie-backports` suite, while the Fasttrack repository uses `fasttrack.debian.net` with the `trixie-fasttrack` suite and its own `fasttrack-archive-keyring.gpg`. Both can be reached through Tor by prefixing the URI with `tor+`, and Debian offers an onion mirror for the main archive. Installing from testing or unstable, or from a custom APT repository, is documented separately with warnings attached.",
+    "installation_on_kvm_from_signed_images": "The KVM page is maintained by a contributor and marked as community-supported: the Whonix project does not provide official support for KVM, unlike the virtualizers it ships builds for. The documented path has two branches. A user can install KVM on the host distribution - Debian, Ubuntu, Arch Linux, Fedora or another distribution - and then use the Whonix images; alternatively the images can be built from source. Downloads are split between a GUI variant built on LXQt and a CLI variant, each published in a stable and a testers flavour, and each accompanied by OpenPGP and signify signatures so that the downloaded archive can be verified before import. The page separates that setup material from the virtualizer configuration itself, which is left to the host documentation.",
     "advantages": [
       "Robust two-VM split architecture eliminating IP, DNS, UDP, and ICMP leaks by design",
       "Tor routing enforced at the network topology level rather than by application proxy settings",
@@ -63,7 +65,8 @@
       "High-bandwidth, low-latency users engaged in competitive online gaming, video streaming, or peer-to-peer file sharing",
       "Users with low-specification hardware incapable of supporting concurrent virtualization",
       "Users seeking a standard daily desktop distribution with unrestricted clearnet Internet access"
-    ]
+    ],
+    "verdict": "Whonix is a specialized security and anonymity platform that eliminates IP and DNS leaks by partitioning the computing environment into two separate virtual machines: a Tor-gateway and an isolated workstation. It guarantees that applications cannot discover or broadcast the host's true network identity even when compromised, requiring hypervisor overhead and acceptance of Tor's bandwidth limitations."
   },
   "components": [
     {
@@ -221,6 +224,18 @@
       "url": "https://distrowatch.com/table.php?distribution=whonix",
       "type": "metadata",
       "date": "2026-10-11"
+    },
+    {
+      "title": "Whonix wiki: installing additional software safely, Debian repositories and backports",
+      "url": "https://www.whonix.org/wiki/Install_Software",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
+    },
+    {
+      "title": "Whonix wiki: using Whonix with KVM, setup instructions and signed downloads",
+      "url": "https://www.whonix.org/wiki/KVM",
+      "type": "official_documentation",
+      "accessed": "2026-10-18"
     }
   ]
 }
