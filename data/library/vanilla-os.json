@@ -20,7 +20,7 @@
     "aarch64"
   ],
   "license": "GPL-3.0-or-later",
-  "last_verified": "2026-10-02",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Vanilla OS is an open-source, immutable desktop Linux operating system built around an appliance-like architectural model. Designed to provide a pristine, unmodified GNOME desktop experience, Vanilla OS separates the core operating system from user data and applications through a dual-root A/B partition layout, Open Container Initiative (OCI) image deployments, and containerized development subsystems.",
     "what_is_it": "Vanilla OS delivers a secure, tamper-resistant computing platform where the root filesystem is mounted strictly read-only during runtime. System updates and modifications are executed atomically in the background on an alternate partition, while user applications run in Flatpak sandboxes and developer environments operate in isolated OCI containers, preventing dependency conflicts from impacting operating system stability.",
@@ -29,8 +29,10 @@
     "upstream_base_and_debian_transition": "While Vanilla OS 1 was derived from Ubuntu, current releases (Vanilla OS 2 Orchid and Vanilla OS 3 Reunion) utilize Debian Sid (Unstable) as upstream base. Debian Sid provides a continuous stream of modern packages that Vanilla OS freezes and stabilizes through its custom repository management tool, Eratosthenes, before packaging into minimal OCI container images.",
     "immutable_architecture_and_abroot_v2": "System immutability is governed by ABRoot v2. The system provisions two mirror root partitions (A and B). When the machine boots from partition A, that filesystem is locked in read-only mode. When updates are performed, complete OCI images are downloaded and applied to partition B in a single atomic transaction. At reboot, the master bootloader switches default boot flags to partition B. If an issue occurs, instant rollback to partition A is available from the boot menu.",
     "smart_updates_and_vso": "System maintenance is automated by the Vanilla System Operator (VSO). VSO monitors hardware states and network availability, applying system updates silently when the machine is idle and connected to AC power, avoiding disruption during interactive user tasks such as gaming or video editing.",
-    "apx_subsystems_and_stacks": "Command-line tools and development software are managed through Apx v2, a container abstraction tool with both CLI and graphical interfaces (Apx GUI). Rather than modifying the host filesystem, Apx provisions isolated subsystems based on Debian, Ubuntu, Fedora, Arch Linux (with AUR support), or Alpine Linux. Configurations are formalized as Stacks, allowing reproducible and portable developer setups.",
+    "release_cadence_and_update_policy": "Vanilla OS does not follow a fixed release schedule. A status article published on 25 September 2024 states that the project cannot promise a weekly or monthly periodic update and prefers a cadence tied to completed work; the same article reports five updates in the month following the 28 July 2024 release of Vanilla OS 2 Orchid. The project presents the distribution as a point-release system rather than a rolling release, and its own comparison of the two models lists Vanilla OS alongside Ubuntu and Debian among point releases.\n\nSystem updates are delivered as complete OCI images. `abroot upgrade --check-only` reports whether an image is available, `abroot upgrade` prepares it in the future state, and `abroot rollback --check-only` then `abroot rollback` select the previous state, each operation taking effect at reboot. The same workflow is exposed by VSO through `vso upgrade check` and `vso upgrade`.",
+    "apx_subsystems_and_stacks": "Command-line tools and development software are managed through Apx 3, a container abstraction tool with both CLI and graphical interfaces (Apx GUI). Rather than modifying the host filesystem, Apx provisions isolated subsystems from stacks that the current documentation describes as based on Debian and openSUSE Leap, with custom stacks supported. Configurations are formalized as Stacks, allowing reproducible and portable developer setups.",
     "application_ecosystem_and_flatpak": "Desktop applications are deployed exclusively through Flatpak, with Flathub configured as the primary repository in GNOME Software. Application runtimes operate in isolated sandboxes, ensuring that desktop applications cannot alter host libraries or compromise system integrity.",
+    "package_layers_flatpak_apx_and_host_packages": "Vanilla OS splits software into layers and documents an explicit order of preference. Desktop applications are distributed as Flatpak packages. Development tools and distribution packages go through Apx, which the project describes as the default package manager, a wrapper around several package managers that installs software and runs commands inside a managed container. Apx manages package-manager definitions, stacks and subsystems: `apx stacks list`, `apx subsystems list`, or `apx subsystems new --name dev --stack vanilla-dev`, after which commands are issued per subsystem (`apx dev install`, `apx dev enter`, `apx dev run`) and applications can be exported with `apx dev export --app`.\n\nPackages that need desktop integration without belonging to the host are installed through the VSO native subsystem. Only drivers, kernel modules and early-boot services belong in the host image, where they are added with `abroot pkg add` and materialised with `abroot pkg apply`, which rebuilds a future ABRoot state and requires a reboot; `abroot pkg list` shows the pending list. Custom images are built with Vib and published as OCI images, and `/opt` and `/usr/local` remain persistent paths backed by `/var`, so image-owned files must not be placed there.",
     "android_compatibility_via_waydroid": "Vanilla OS integrates Waydroid, managed under the hood by VSO, allowing users to run Android applications seamlessly alongside desktop Linux applications under Wayland without configuring virtual machine hypervisors manually.",
     "desktop_environment_vanilla_gnome": "Vanilla OS adheres strictly to upstream GNOME design philosophy, shipping a stock, unbranded GNOME desktop (GNOME 46 in Orchid) running on Wayland. The project avoids third-party themes, docks, or intrusive extensions, delivering the clean aesthetic intended by the GNOME Foundation.",
     "prime_profiles_and_graphics": "For laptops and workstations with hybrid graphics (Intel/NVIDIA or AMD/NVIDIA), Vanilla OS provides PRIME Profiles and management utilities (`cur-gpu`, `nrun`, `prime-switch`), allowing on-demand GPU switching between power-saving integrated graphics and high-performance discrete acceleration.",
@@ -196,6 +198,36 @@
       "url": "https://distrowatch.com/table.php?distribution=vanilla",
       "type": "metadata",
       "date": "2026-10-02"
+    },
+    {
+      "title": "Vanilla OS Documentation — Packaging",
+      "url": "https://github.com/Vanilla-OS/documentation/blob/main/articles/en/packaging.md",
+      "type": "official_documentation",
+      "date": "2026-08-24"
+    },
+    {
+      "title": "Vanilla OS Documentation — Apx",
+      "url": "https://github.com/Vanilla-OS/documentation/blob/main/articles/en/apx.md",
+      "type": "official_documentation",
+      "date": "2026-08-24"
+    },
+    {
+      "title": "Vanilla OS Documentation — ABRoot",
+      "url": "https://github.com/Vanilla-OS/documentation/blob/main/articles/en/abroot.md",
+      "type": "official_documentation",
+      "date": "2026-08-24"
+    },
+    {
+      "title": "Vanilla OS — Future Plans, Updates, and Next Release (25 septembre 2024)",
+      "url": "https://github.com/Vanilla-OS/website/blob/v2/articles/2024-09-25-vanillaos-2-future-plans-updates-next-release.md",
+      "type": "official",
+      "date": "2024-09-25"
+    },
+    {
+      "title": "Vanilla OS — Point vs Rolling Release and the modern solutions (31 janvier 2023)",
+      "url": "https://github.com/Vanilla-OS/website/blob/v2/articles/2023-02-01-pro-cons-rolling-point-release.md",
+      "type": "official",
+      "date": "2023-01-31"
     }
   ]
 }
