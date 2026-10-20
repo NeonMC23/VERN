@@ -18,7 +18,7 @@
     "x86-64"
   ],
   "license": "Open Source (GPL, LGPL et licences libres KDE)",
-  "last_verified": "2026-10-17",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Plasma Mobile est une initiative libre de la communauté internationale KDE visant à fournir une interface utilisateur tactile et un environnement applicatif complet pour smartphones et tablettes.",
     "what_is_it": "Développé depuis 2015 sur les fondations de l'environnement de bureau KDE Plasma, Plasma Mobile adapte la pile graphique et logicielle KDE aux facteurs de forme mobiles sans rupture avec l'écosystème Linux traditionnel.",
@@ -27,6 +27,8 @@
     "telephony_audio_and_hardware_integration": "Pour la gestion des fonctionnalités téléphoniques et sans fil, Plasma Mobile s'interface avec les couches logicielles sous-jacentes du monde Linux embarqué. La téléphonie vocale, l'envoi de SMS et la connectivité cellulaire sont gérés par le démon ModemManager (ou oFono selon la distribution) et l'application Plasma Phonebook / Dialler. Le routage et le contrôle des flux audio (commutation entre écouteur interne, haut-parleur principal, casque filaire et profil Bluetooth HSP/HFP) sont assurés par le serveur multimédia PipeWire et son gestionnaire de sessions WirePlumber. La gestion de l'alimentation électrique s'appuie sur le démon power-profiles-daemon et des mécanismes de veille profonde (suspend-to-RAM assisté par microcontrôleur Crust sur les puces Allwinner), cruciaux pour préserver l'autonomie sur batterie des terminaux mobiles.",
     "technical_constraints_and_limits": "Il est important de distinguer Plasma Mobile (qui est un environnement d'interface utilisateur et une suite applicative) du système d'exploitation complet qui l'héberge. Plasma Mobile n'est pas distribué sous la forme d'un système autonome, mais est packagé par des distributions Linux mobiles indépendantes telles que Nura (ex-postmarketOS, sur socle Alpine Linux avec noyaux mainline), Mobian (sur socle Debian GNU/Linux) et Manjaro ARM. Si le projet fonctionne de façon mature sur des appareils de développement communautaires comme le PinePhone, le PinePhone Pro et le Volla Phone, son utilisation quotidienne sur des smartphones grand public portés depuis Android (OnePlus 6/6T, Xiaomi Pocophone F1) demeure sujette à des limitations matérielles : consommation d'énergie élevée en veille, pilotes d'accélération matérielle de l'appareil photo encore expérimentaux et absence d'écosystème bancaire ou d'applications commerciales propriétaires dépendantes des services Google Play.",
     "distribution_and_installation": "Plasma Mobile est distribué sous forme de paquets ou d'images par plusieurs distributions, recensées sur la page officielle « Getting Plasma Mobile ». Nura (ex-postmarketOS) fournit des images préconstruites et, pour les appareils non couverts, une installation manuelle via pmbootstrap. Debian et Mobian publient des images flashables avec Plasma Mobile, en version stable et en images hebdomadaires issues de testing ; le paquet `plasma-mobile` est disponible dans Debian et Arch Linux. openSUSE fournit des constructions Tumbleweed pour PinePhone, Fedora un spin officiel KDE Mobile, et KDE neon une image destinée aux tablettes Intel non-Android, aux PC et aux machines virtuelles. Les images personnalisées peuvent être testées dans QEMU.",
+    "release_trains_and_independent_software_releases": "Le billet du 8 juillet 2025 accompagnant les versions indépendantes de juillet précise que l'essentiel des logiciels de Plasma Mobile est désormais publié dans le cadre des cycles de publication de Plasma ou de KDE Gear, et que les archives de ces versions sont signées. Les publications sont datées par les annonces KDE de Plasma 6.4 le 17 juin 2025, Plasma 6.5 le 21 octobre 2025, Plasma 6.6 le 17 février 2026 et Plasma 6.7 le 16 juin 2026. Le billet « Plasma Mobile 6.5 », daté du 10 novembre 2025, détaille les changements apportés aux composants mobiles après la sortie de Plasma 6.5 : configuration et activation du conteneur Waydroid depuis l'application de réglages et le panneau de réglages rapides, chargement du verrouillage par réutilisation des processus de la barre d'état et du tiroir d'actions, double appui pour verrouiller sur l'écran d'accueil Folio. Les billets de novembre 2025 et de décembre 2025 documentent les versions indépendantes de Plasma Camera et de Plasma Settings, avec leurs archives publiées séparément. Le billet du 14 août 2024 annonce la sortie de Plasma Dialer 24.08, fondée sur Qt6, avec un paquet déposé sur download.kde.org et signé par une clé GPG.",
+    "security_advisory_and_disclosure_flow": "Les questions de sécurité relatives aux logiciels produits par KDE, dont les composants de Plasma Mobile, sont traitées selon la politique de sécurité de KDE. La page kde.org/info/security consultée le 19 octobre 2026 demande de les adresser à security@kde.org, réserve sysadmin@kde.org aux logiciels utilisés mais non produits par KDE, et indique que les problèmes signalés sont vérifiés avec l'auteur ou le mainteneur du code concerné. La politique précise que les coordinateurs de publication et les distributeurs qui empaquettent le logiciel sont informés dès qu'un correctif est disponible, afin qu'ils préparent leurs paquets binaires, puis que des alertes de sécurité sont publiées sur kde.org/info/security, avec les correctifs sous forme de source et les binaires disponibles. La page consultée précise également que KDE ne dispose pas de programme de prime aux bogues. Les avis recensés au 19 octobre 2026 sont classés par produit : deux avis de 2018 désignent Plasma Desktop et Plasma, aucun ne désigne nommément Plasma Mobile, Plasma Camera, Plasma Settings, Plasma Dialer ou Plasma Phonebook.",
     "advantages": [
       "Interface utilisateur entièrement libre et modulaire issue de la communauté KDE",
       "Pile d'affichage Wayland native pilotée par le compositeur KWin avec accélération matérielle",
@@ -113,6 +115,72 @@
       "url": "https://plasma-mobile.org/get/",
       "type": "official_documentation",
       "note": "page consultée le 2026-10-17"
+    },
+    {
+      "title": "Plasma Mobile - July Software Releases: Plasma Camera & Plasma Settings",
+      "url": "https://plasma-mobile.org/2025/07/08/releases-25-07/",
+      "type": "official_blog",
+      "date": "2025-07-08"
+    },
+    {
+      "title": "Plasma Mobile - November Software Releases: Plasma Camera & Plasma Settings",
+      "url": "https://plasma-mobile.org/2025/11/06/releases-25-11/",
+      "type": "official_blog",
+      "date": "2025-11-06"
+    },
+    {
+      "title": "Plasma Mobile - December Software Releases: Plasma Camera & Plasma Settings",
+      "url": "https://plasma-mobile.org/2025/12/05/releases-25-12/",
+      "type": "official_blog",
+      "date": "2025-12-05"
+    },
+    {
+      "title": "Plasma Mobile - Plasma Mobile 6.5 (10 novembre 2025)",
+      "url": "https://plasma-mobile.org/2025/11/10/plasma-6-5/",
+      "type": "official_blog",
+      "date": "2025-11-10"
+    },
+    {
+      "title": "Plasma Mobile - Plasma Dialer 24.08 is out (14 août 2024)",
+      "url": "https://plasma-mobile.org/2024/08/14/plasma-dialer-24.08/",
+      "type": "official_blog",
+      "date": "2024-08-14"
+    },
+    {
+      "title": "KDE - annonce Plasma 6.4 (17 juin 2025)",
+      "url": "https://kde.org/announcements/plasma/6/6.4.0/",
+      "type": "release_notes",
+      "date": "2025-06-17"
+    },
+    {
+      "title": "KDE - annonce Plasma 6.5 (21 octobre 2025)",
+      "url": "https://kde.org/announcements/plasma/6/6.5.0/",
+      "type": "release_notes",
+      "date": "2025-10-21"
+    },
+    {
+      "title": "KDE - annonce Plasma 6.6 (17 février 2026)",
+      "url": "https://kde.org/announcements/plasma/6/6.6.0/",
+      "type": "release_notes",
+      "date": "2026-02-17"
+    },
+    {
+      "title": "KDE - annonce Plasma 6.7 (16 juin 2026)",
+      "url": "https://kde.org/announcements/plasma/6/6.7.0/",
+      "type": "release_notes",
+      "date": "2026-06-16"
+    },
+    {
+      "title": "KDE - avis de sécurité (canal de signalement et publication des avis)",
+      "url": "https://kde.org/info/security/",
+      "type": "official_documentation",
+      "accessed": "2026-10-19"
+    },
+    {
+      "title": "KDE Community Wiki - Security Policy",
+      "url": "https://community.kde.org/Policies/Security_Policy",
+      "type": "official_documentation",
+      "accessed": "2026-10-19"
     }
   ]
 }

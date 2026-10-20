@@ -19,7 +19,7 @@
     "ARM64"
   ],
   "license": "Open Source (GNU General Public License et licences libres diverses issues d'Arch Linux)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "CachyOS est une distribution Linux indépendante basée sur **Arch Linux**, créée en 2021 par une équipe internationale de développeurs et de contributeurs open source. Le projet a pour vocation d'exploiter pleinement la puissance des microprocesseurs modernes en améliorant la vitesse d'exécution des binaires, la fluidité des interactions sur le bureau et les performances sous de lourdes charges de travail (jeu vidéo, compilation de logiciels, modélisation 3D). Tout en conservant le modèle de mise à jour continue (rolling release) et la vaste logithèque d'Arch Linux via Pacman et AUR, CachyOS s'en distingue par son infrastructure de compilation sur mesure et ses réglages de bas niveau avancés.",
     "what_is_it": "Techniquement, CachyOS est un système Linux complet qui enrichit le socle d'Arch Linux d'une chaîne d'optimisations matérielles spécifiques. Contrairement à la majorité des distributions Linux généralistes qui compilent leurs paquets pour le niveau de base générique x86-64-v1 afin de garantir la compatibilité avec d'anciens processeurs de 2003, CachyOS maintient ses propres dépôts de paquets logiciels entièrement recompilés avec des drapeaux d'optimisation processeur avancés et des compilateurs récents (GCC et Clang/LLVM avec LTO et PGO). L'installateur détecte automatiquement les capacités du processeur de la machine pour configurer les dépôts les plus optimisés.",
@@ -58,6 +58,32 @@
     "verdict": "CachyOS est une distribution Linux orientée optimisation processeur. En combinant la base Arch Linux, des dépôts recompilés pour les architectures x86-64-v3/v4/Zen4, des ordonnanceurs CPU (BORE, sched-ext) et un stockage Btrfs, elle cible les usages de bureau et de jeu.",
     "origin_founders_and_publication_milestones": "The official About page names two founders, Peter Jung, known as ptr1337, and Vladislav Nepogodin, known as vnepogodin, both described as Founder and Developer, and it lists the roles of the wider team, among them a kernel maintainer who also contributes to the scx scheduler project. The page presents the distribution as a performance-focused rebuild of Arch Linux packages with a customised kernel.\n\nThe project blog provides the dated publication record. Its archive begins with an entry dated 2023-11-19 announcing the November 2023 update, followed by an entry dated 2023-12-01 on the x86-64-v4 repository made available for testing. Release announcements then continue with dated entries: 24 January 2026, 8 March 2026, 26 April 2026, 28 June 2026 and 9 August 2026, each titled as the release of that month, alongside entries from March, April, May, July, August and November 2025. On 2025-12-25 the project published a year-end review, CachyOS Recap 2025, reporting the members added to the team during the year, the sponsors and usage figures, and referring to the numbers of the previous year's recap.\n\nNeither the About page nor the blog archive states a founding date or a first release date. The creation date of the source repositories is not used here as a founding date, and the earliest dated document found is the 2023-11-19 entry."
   },
+  "components": [
+    {
+      "id": "linux-cachyos",
+      "name": "linux-cachyos",
+      "role": "kernel",
+      "note": "Project kernel presented on cachyos.org with BORE, sched-ext, BMQ and RT variants."
+    },
+    {
+      "id": "pacman",
+      "name": "pacman",
+      "role": "package_manager",
+      "note": "Package manager of the Arch Linux base, used with the x86-64-v3, x86-64-v4 and Zen4 repositories described on the project site."
+    },
+    {
+      "id": "calamares",
+      "name": "Calamares",
+      "role": "system_installer",
+      "note": "Graphical installer offered alongside a CLI installer, according to the project site and the installation guide."
+    },
+    {
+      "id": "sched-ext",
+      "name": "sched-ext",
+      "role": "process_scheduler_optimization",
+      "note": "Scheduler framework listed among the kernel features of the project."
+    }
+  ],
   "relations": [
     {
       "id": "arch-linux",
@@ -82,6 +108,16 @@
       "name": "Bazzite",
       "type": "alternative",
       "note": "Système d'exploitation immuable optimisé pour le jeu vidéo et les consoles portables."
+    }
+  ],
+  "variants": [
+    {
+      "name": "CachyOS Desktop Edition",
+      "description": "Desktop image described on the download page, with the online installer offering 17 or more desktop environments and window managers."
+    },
+    {
+      "name": "CachyOS Handheld Edition",
+      "description": "Handheld image with preinstalled gaming tools, officially supporting ROG Ally, Steam Deck OLED and LCD, Legion Go and Legion Go S, with KDE Plasma as the only desktop."
     }
   ],
   "links": [

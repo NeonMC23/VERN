@@ -17,10 +17,11 @@
     "arm64 / aarch64"
   ],
   "license": "GPLv2 (Linux kernel) / Apache License 2.0 (AOSP userspace) & GPLv3/LGPL (various utilities)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "CalyxOS is an open-source mobile operating system developed and maintained by The Calyx Institute, a non-profit organization dedicated to digital privacy and civil liberties. Based on the Android Open Source Project (AOSP), CalyxOS aims to deliver an accessible, privacy-respecting mobile experience by minimizing tracking, providing application-level firewall controls, and offering optional microG compatibility.",
     "what_is_it": "CalyxOS is a turnkey mobile distribution designed for everyday privacy without requiring deep technical expertise. It ships without proprietary Google Mobile Services, instead bundling open-source alternatives for application distribution, location resolution, encrypted cloud backups, and network protection, while enforcing verified boot with relocked bootloaders on supported hardware.",
+    "technical_base_android_platform_and_build_system": "CalyxOS est construit sur l’Android Open Source Project, que le projet décrit comme la base des téléphones Android construits par des fabricants comme Samsung, et reprend largement du code et des pratiques de la communauté LineageOS. La couche applicative associe microG, réimplémentation libre des services Google Play, le client F-Droid Basic pour le catalogue FOSS et Aurora Store pour l’accès au catalogue de Google Play.\n\nLes sources sont publiées sur `gitlab.com/CalyxOS` et recopiées sur `github.com/CalyxOS`, les contributions passant par une instance Gerrit de revue de code. La documentation de développement indique la branche `android17` : elle est synchronisée par `repo init --git-lfs -u https://gitlab.com/CalyxOS/platform_manifest -b android17`, suivi de `repo sync`. Les fichiers propriétaires d’un appareil s’obtiennent avec `./calyx/scripts/pixel/device.sh` et le nom de code de l’appareil, par exemple `akita` pour le Pixel 8a ; la construction s’effectue par `breakfast akita user` puis `m`, et l’installation par `fastboot flashall`. Le projet précise qu’une construction doit être signée pour permettre le verrouillage du chargeur d’amorçage, la variante `user` servant aux publications et la variante `userdebug` au développement.",
     "microg_and_degoogling_approach": "CalyxOS delivers a privacy-conscious mobile environment that strips out default Google telemetry, device trackers, and proprietary analytics services. To preserve broad application compatibility for mainstream users, CalyxOS integrates microG, the open-source re-implementation of Google Play Services. CalyxOS implements restricted signature spoofing, allowing only the cryptographically signed microG package to emulate Google Play Services identities while blocking arbitrary third-party applications from spoofing package signatures. Users have granular control to enable or disable microG features entirely, including Google Cloud Messaging (push notifications) and location providers (configured with privacy-preserving Mozilla Location Services or local Nominatim databases).",
     "network_firewall_and_security_tools": "A central component of CalyxOS is Datura Firewall, an integrated application-level firewall engineered by the Calyx Institute. Datura allows users to manage network permissions on a per-app basis, toggling access to Wi-Fi, cellular data, background connections, or blocking internet access entirely. Because Datura operates directly at the Android framework level using native Linux iptables/nftables rules, it does not occupy the device's single native Android VPN slot. This architecture allows users to run external third-party VPNs (such as CalyxVPN, WireGuard, or Mullvad) alongside active firewall policies. CalyxOS also enforces encrypted DNS by default, pre-configuring DNS-over-TLS servers (such as Cloudflare, Quad9, or custom resolvers) to prevent ISP DNS snooping.",
     "backup_system_and_bundled_software": "CalyxOS includes Seedvault, a comprehensive open-source backup solution built into the operating system settings. Developed under Calyx Institute sponsorship, Seedvault creates client-side encrypted backups of installed applications, application data, SMS messages, call logs, and system settings, storing them on external USB flash drives or remote Nextcloud instances via WebDAV. The default software bundle emphasizes verified open-source utilities: the Chromium-based Calyx Browser with built-in tracker protection, the F-Droid client with Privileged Extension for seamless background updates, the Signal encrypted messaging app, and Orbot for routing application traffic through the Tor anonymity network.",
@@ -51,6 +52,32 @@
     ],
     "verdict": "CalyxOS provides a balanced, user-friendly approach to mobile privacy on modern Android smartphones. By combining verified boot enforcement, a rootless per-app firewall, and optional microG integration, it bridges the gap between privacy protection and daily functional usability across multiple hardware brands."
   },
+  "components": [
+    {
+      "id": "android-aosp",
+      "name": "Android",
+      "role": "operating_system_kernel",
+      "note": "Base platform: the project describes CalyxOS as an Android mobile operating system; the page does not name AOSP."
+    },
+    {
+      "id": "datura-firewall",
+      "name": "Datura Firewall",
+      "role": "firewall_manager",
+      "note": "Firewall giving fine-grained control over network access for every application, listed among the system features."
+    },
+    {
+      "id": "seedvault",
+      "name": "Seedvault",
+      "role": "system_tool",
+      "note": "Documented as Secure Backup with Seedvault: automatic backups once configured, optional backup to a USB drive or Nextcloud, and client-side encryption."
+    },
+    {
+      "id": "verified-boot",
+      "name": "Verified Boot",
+      "role": "security_technology",
+      "note": "Listed under device security: verified boot ensures that the operating system has not been modified."
+    }
+  ],
   "relations": [
     {
       "id": "android-aosp",
@@ -113,6 +140,24 @@
       "url": "https://calyxos.org/",
       "type": "official_site",
       "accessed": "2026-10-18"
+    },
+    {
+      "title": "CalyxOS — développement (sources GitLab et Gerrit, construction android17, signature)",
+      "url": "https://calyxos.org/docs/development/",
+      "type": "official_documentation",
+      "accessed": "2026-10-19"
+    },
+    {
+      "title": "CalyxOS — à propos (AOSP, LineageOS, microG, F-Droid, Aurora Store)",
+      "url": "https://calyxos.org/docs/about",
+      "type": "official_documentation",
+      "accessed": "2026-10-19"
+    },
+    {
+      "title": "CalyxOS — dépôt GitLab des sources",
+      "url": "https://gitlab.com/CalyxOS",
+      "type": "repository",
+      "accessed": "2026-10-19"
     }
   ]
 }

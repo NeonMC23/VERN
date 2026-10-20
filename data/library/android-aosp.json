@@ -19,7 +19,7 @@
     "riscv64"
   ],
   "license": "Apache License 2.0 (userspace) / GNU GPLv2 (Linux kernel)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "The Android Open Source Project (AOSP) is the free and open-source software stack led by Google and the Open Handset Alliance that forms the core foundation of the global Android operating system. AOSP provides the complete operating system source code required to build and run modern touch-centric, mobile, and embedded devices.",
     "what_is_it": "AOSP is a comprehensive, multi-layered mobile operating system consisting of a modified Linux kernel, low-level native C/C++ libraries (including the Bionic C library), a Hardware Abstraction Layer (HAL), the Android Runtime (ART) virtual execution engine, background system services, and a comprehensive application framework exposed to Java and Kotlin applications.",
@@ -56,6 +56,32 @@
     ],
     "verdict": "The Android Open Source Project is the open-source software stack, led by Google and the Open Handset Alliance, that provides the source code of the Android platform. It distributes a complete mobile operating system stack, including a modified Linux kernel and user-space libraries; the user-space components are distributed mainly under the Apache 2.0 and BSD licenses, while the kernel is distributed under the GNU GPL v2 with system exceptions. It is used both for commercial devices and as a base for community Android distributions."
   },
+  "components": [
+    {
+      "id": "art",
+      "name": "Android runtime (ART)",
+      "role": "library",
+      "note": "Runtime provided by AOSP that translates application bytecode into processor-specific instructions, as described in the Android platform architecture documentation."
+    },
+    {
+      "id": "hal",
+      "name": "Hardware Abstraction Layer (HAL)",
+      "role": "driver_domain",
+      "note": "Interface layer between the framework API and the underlying hardware, described in the same architecture documentation."
+    },
+    {
+      "id": "framework-api",
+      "name": "Android framework API",
+      "role": "system_libraries",
+      "note": "Framework API through which applications communicate with system services to access hardware."
+    },
+    {
+      "id": "system-services",
+      "name": "System services",
+      "role": "service",
+      "note": "Services that applications reach through the framework API, as described in the architecture documentation."
+    }
+  ],
   "relations": [
     {
       "id": "pureos",

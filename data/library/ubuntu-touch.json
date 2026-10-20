@@ -18,7 +18,7 @@
     "x86_64"
   ],
   "license": "Open source (GPL, LGPL et licences libres Canonical/UBports)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Ubuntu Touch est un système d'exploitation mobile libre orienté vers le respect de la vie privée et la convergence matérielle, initié en 2013 par Canonical et maintenu depuis 2017 par la communauté internationale au sein de la Fondation UBports.",
     "what_is_it": "Ubuntu Touch propose une expérience mobile alternative aux systèmes dominants Android et iOS. Il se distingue par son interface tactile gestuelle Lomiri et son aptitude à transformer un ordiphone en poste de travail bureautique complet lorsqu'il est relié à un moniteur externe et des périphériques de saisie.",
@@ -37,6 +37,20 @@
     "who_is_it_not_for": "Ubuntu Touch n'est pas recommandé aux personnes dont l'activité professionnelle repose impérativement sur des applications propriétaires fermées (banques en ligne avec attestation matérielle stricte, DRM multimédia haute définition) ou sur des appareils dépourvus de portage Halium complet.",
     "verdict": "Pérennisé par la communauté UBports après son abandon par Canonical, Ubuntu Touch représente l'un des projets de système d'exploitation mobile libre les plus aboutis, démontrant la viabilité de la convergence informatique sur ordiphone."
   },
+  "components": [
+    {
+      "id": "lomiri",
+      "name": "Lomiri",
+      "role": "desktop_environment",
+      "note": "Ubuntu Touch is powered by Lomiri, the desktop environment designed for any screen size."
+    },
+    {
+      "id": "openstore",
+      "name": "OpenStore",
+      "role": "software_center",
+      "note": "Open source app store for Ubuntu Touch, built and maintained by Brian Douglass and linked from the UBports site; it is maintained outside the UBports core team."
+    }
+  ],
   "relations": [
     {
       "id": "ubuntu",

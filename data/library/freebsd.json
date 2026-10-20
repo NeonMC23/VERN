@@ -24,7 +24,7 @@
     "powerpc"
   ],
   "license": "BSD-2-Clause",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "FreeBSD is an advanced, open-source Unix-like operating system directly descended from the Computer Systems Research Group (CSRG) at the University of California, Berkeley (4.4BSD-Lite). Initiated in 1993 by Jordan Hubbard, Nate Williams, and Rod Grimes, FreeBSD develops a complete, coherent operating system comprising a monolithic modular kernel and an integrated userland. Known for its networking performance, storage features, and process isolation, FreeBSD powers high-density internet infrastructures, storage appliances, and embedded networking platforms worldwide.",
     "what_is_it": "Technically, FreeBSD is not a Linux distribution; it is a full BSD Unix descendant that develops its kernel, drivers, standard libraries (libc), and base utilities within a unified source repository. It features strict architectural separation between the pristine 'Base System' and third-party software installed under `/usr/local/`. The operating system natively incorporates OpenZFS for enterprise filesystem storage, FreeBSD Jails for lightweight OS-level containerization, bhyve for hardware hypervisor virtualization, and the `pkg` package manager alongside the FreeBSD Ports Collection.",
@@ -62,6 +62,38 @@
     ],
     "verdict": "FreeBSD is one of the long-established open-source Unix systems. Combining over three decades of Unix development with technologies such as OpenZFS, Jails, and a high-throughput network stack, it is used for enterprise and network infrastructure."
   },
+  "components": [
+    {
+      "id": "freebsd-kernel",
+      "name": "FreeBSD kernel",
+      "role": "operating_system_kernel",
+      "note": "Monolithic kernel configured through a kernel configuration file and rebuilt from source, as described in chapter 10 of the FreeBSD Handbook."
+    },
+    {
+      "id": "pkg",
+      "name": "pkg",
+      "role": "package_manager",
+      "note": "Binary package manager covered by section 4.4 of the FreeBSD Handbook, \"Using pkg for Binary Package Management\"."
+    },
+    {
+      "id": "ports-collection",
+      "name": "Ports Collection",
+      "role": "build_system",
+      "note": "Source-based software installation documented in section 4.5 of the Handbook, with poudriere used to build packages in section 4.6."
+    },
+    {
+      "id": "bsdinstall",
+      "name": "bsdinstall",
+      "role": "system_installer",
+      "note": "Installer described in section 2 of the Handbook: disk-space allocation, distribution files, network interfaces, accounts, time zone and services."
+    },
+    {
+      "id": "rc-d",
+      "name": "rc.d",
+      "role": "init_system",
+      "note": "Service startup scripts run during boot, described in chapter 15 of the Handbook, \"The FreeBSD Booting Process\"."
+    }
+  ],
   "relations": [
     {
       "id": "openbsd",
@@ -80,6 +112,24 @@
       "name": "OPNsense",
       "relation": "downstream_derivative",
       "note": "Open-source firewall and security platform utilizing FreeBSD as its foundation, paired with an MVC administrative web interface."
+    }
+  ],
+  "variants": [
+    {
+      "name": "FreeBSD 15.1-RELEASE (production)",
+      "description": "Production release listed on the FreeBSD download page, published 16 June 2026."
+    },
+    {
+      "name": "FreeBSD 15.0-RELEASE (legacy)",
+      "description": "Release listed as legacy on the FreeBSD download page."
+    },
+    {
+      "name": "FreeBSD 14.5-RELEASE (legacy)",
+      "description": "Release listed as legacy on the FreeBSD download page."
+    },
+    {
+      "name": "FreeBSD 14.4-RELEASE (legacy)",
+      "description": "Release listed as legacy on the FreeBSD download page."
     }
   ],
   "links": {

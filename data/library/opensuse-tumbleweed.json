@@ -196,16 +196,8 @@
   ],
   "variants": [
     {
-      "name": "Snapshot 20260917 (x86_64)",
-      "description": "The repository and media state at the time of verification: distro tag “openSUSE Tumbleweed 20260917”, images named -Snapshot20260917-Media.iso (DVD, NET, KDE-Live, GNOME-Live, XFCE-Live, Rescue-CD) each with a .sha256 file, plus the equivalent -Current.iso pointers."
-    },
-    {
       "name": "Factory (the code base behind every snapshot)",
       "description": "“The rolling development codebase”, without a freeze and explicitly “not made available to download by humans”. A snapshot is what Factory becomes after automated testing passes and the repository is in a consistent state."
-    },
-    {
-      "name": "openQA job window for the same builds",
-      "description": "Recent jobs measured on 2026-09-19 covered builds 20260917, 20260918 and 20260919 across x86_64, aarch64, arm, ppc64le, i586 and s390x; the counts describe a 400-job window and are reported as an observation of testing activity, not as a coverage guarantee."
     },
     {
       "name": "aarch64 images (Ports)",
@@ -449,6 +441,6 @@
       "note": "Served in browser navigation (403 to command-line clients, like the wiki). Confirms Factory as a public OBS project with repositories, build results, requests, signing keys and a staging dashboard, and carries the “The next openSUSE distribution / openSUSE Tumbleweed: The Bleeding Edge, Perfected” banner. The figures visible on the page (e.g. 140 open requests, 4 release targets, and counts of succeeded/excluded build states around 18 300 per repository) are momentary build states and not a published package count: no official count of Tumbleweed packages was found, so none is asserted in this record."
     }
   ],
-  "last_verified": "2026-09-19",
+  "last_verified": "2026-10-19",
   "license": "GPL, LGPL, MIT, BSD, and compatible open-source licenses with redistributable firmware"
 }

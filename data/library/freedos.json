@@ -19,7 +19,7 @@
     "x86-16"
   ],
   "license": "Open Source (GNU GPLv2 avec utilitaires libres variés)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "FreeDOS est un système d'exploitation libre et open source complet garantissant une compatibilité logicielle ascendante avec le standard MS-DOS d'IBM et de Microsoft. Fondé en 1994 par Jim Hall en réaction à l'abandon annoncé du DOS autonome au profit de Windows 95, FreeDOS permet d'exécuter des milliers de logiciels patrimoniaux, de faire revivre les jeux vidéo historiques pour PC et d'assurer le pilotage de systèmes industriels ou d'outils de maintenance de bas niveau.",
     "what_is_it": "Techniquement, FreeDOS est un système d'exploitation mono-tâche opérant en mode réel 16 bits sur les microprocesseurs d'architecture Intel x86 (du processeur 8086 d'origine jusqu'aux puces modernes multi-cœurs en mode compatibilité BIOS hérité). Il ne met en œuvre aucune isolation de mémoire ni distinction entre espace utilisateur et espace privilégié, accordant à chaque programme un accès direct et sans intermédiaire au matériel physique, aux registres du processeur et aux interruptions logicielles du BIOS.",
@@ -56,6 +56,20 @@
     ],
     "verdict": "FreeDOS est une réimplémentation complète, libre et compatible de l'environnement MS-DOS pour les processeurs de la famille x86. Conçu à l'initiative de Jim Hall pour préserver l'accès aux logiciels 16 bits historiques, il apporte le support moderne des systèmes de fichiers FAT32, un interpréteur de commandes enrichi (FreeCOM) et un gestionnaire de paquets (FDIMPLES). Il demeure utilisé pour l'exécution d'applications industrielles patrimoniales, la mise à jour de microprogrammes sur cartes mères et l'émulation de jeux vidéo historiques."
   },
+  "components": [
+    {
+      "id": "freedos-kernel",
+      "name": "FreeDOS kernel",
+      "role": "operating_system_kernel",
+      "note": "Kernel listed among the components contributed to the project and announced as updated in the current distribution."
+    },
+    {
+      "id": "fdnpkg16",
+      "name": "FDNPKG16",
+      "role": "package_manager",
+      "note": "Package manager for 16-bit systems, included in the T2610 distribution and described as the package manager that works on 16-bit computers."
+    }
+  ],
   "relations": [
     {
       "id": "reactos",

@@ -20,7 +20,7 @@
     "aarch64"
   ],
   "license": "GPL-3.0 and compatible open-source licenses",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Rhino Linux is a community-driven GNU/Linux distribution that re-invents the Ubuntu operating system as a continuous, rolling-release desktop platform. Co-founded in 2023 by AJ Allen and Oren Klopfer, the project diverges from traditional Ubuntu interim and LTS cycles. By coupling Ubuntu's development branch (`devel`) with Pacstall—an AUR-inspired package manager for Debian/Ubuntu systems—and the custom-built Unicorn Desktop, Rhino Linux delivers rapid upstream updates within a stable, lightweight XFCE framework.",
     "what_is_it": "Technically, Rhino Linux is a rolling-release operating system tracking the continuous `devel` branch of Ubuntu repositories. It unifies package management through `rhino-pkg` (RPK / RPK2 written in Nushell), a master command-line tool that aggregates Pacstall, APT, Flatpak, and Snap. The desktop environment is powered by the custom 'Unicorn Desktop', which combines an XFCE baseline with modern application grids, the Plank dock, and custom utility scripts.",
@@ -60,6 +60,26 @@
     ],
     "verdict": "Rhino Linux is a rolling-release distribution built on Ubuntu. Powered by Pacstall, the rhino-pkg wrapper, and the Unicorn Desktop, it provides a continuously updated Ubuntu-based system."
   },
+  "components": [
+    {
+      "id": "ubuntu-base",
+      "name": "Ubuntu",
+      "role": "operating_system_kernel",
+      "note": "Base system: the project describes Rhino Linux as an Ubuntu-based rolling release that follows the Ubuntu devel branch instead of LTS or interim releases."
+    },
+    {
+      "id": "pacstall",
+      "name": "Pacstall",
+      "role": "package_manager",
+      "note": "Presented as the AUR for Ubuntu, providing software that is not available in the standard repositories; the project places it at the core of the system."
+    },
+    {
+      "id": "unicorn",
+      "name": "Unicorn",
+      "role": "desktop_environment",
+      "note": "In-house desktop experience shipped preinstalled: a custom-built XFCE desktop, according to the project site."
+    }
+  ],
   "relations": [
     {
       "id": "ubuntu",

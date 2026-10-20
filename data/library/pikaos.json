@@ -19,7 +19,7 @@
     "x86_64"
   ],
   "license": "GPL and compatible open-source licenses; proprietary drivers available",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "PikaOS is an open-source, performance-focused GNU/Linux distribution tailored specifically for PC gaming, multimedia content creation, live streaming, and software development. Founded in 2022 by developer Cosmo (Raven) and maintained by the international PikaOS Project community, the operating system reimagines modern gaming on a Debian foundation. By pairing an aggressive rolling-release model with deep compilation-level optimizations and pre-tuned graphics pipelines, PikaOS removes the manual configuration barriers traditionally associated with Linux gaming.",
     "what_is_it": "Technically, PikaOS is an optimized Debian Sid (unstable) rolling-release distribution that builds upon an extensively tuned kernel and userland stack. All core system packages are compiled with x86-64-v3 (AVX2) instructions and Link Time Optimization (LTO). The system integrates a customized Linux kernel incorporating the CachyOS patchset (including the BORE CPU scheduler), an accelerated Booster-based initramfs generator, and an automated continuous delivery packaging engine named 'Neo Brunel'.",
@@ -30,9 +30,11 @@
     "desktop_environments_and_layouts": "PikaOS offers choices between GNOME and KDE Plasma desktop editions. On GNOME, the distribution includes the `pika-gnome-layouts` utility (inspired by Nobara's layout switcher), allowing users to switch between standard GNOME, Windows-style taskbars, and macOS-style dock ergonomics. The desktop is tuned with performance extensions and custom dark styling optimized for distraction-free gaming and creative workflows.\n\nThe download catalogue is no longer limited to GNOME and Plasma, however: it also lists COSMIC, Hyprland and Niri images, each with an NVIDIA variant, bringing to five the number of desktops offered as an installable image.",
     "package_management_and_neo_brunel": "Package operations are handled through APT with the modern, high-speed `nala` frontend, alongside full Flatpak support via Flathub. In 2026, maintainer Ferreo introduced custom performance patches to APT and dpkg to accelerate package solving and installation. To maintain repository stability on a fast-moving Debian Sid base, the team maintains 'Neo Brunel', a self-healing package builder and promotion framework that tests packages across staging and canary tiers before releasing them to stable user channels.",
     "release_artifacts_and_desktop_matrix": "Published images carry version 4.0, named Nest, with a build timestamp of 20 August 2026 and an architecture recorded as amd64-v3. The download catalogue splits each desktop into a standard and an NVIDIA variant: COSMIC, GNOME, Hyprland, KDE and Niri, each image being published alongside its md5 checksum. File names follow the pattern PikaOS-<version>-<desktop>-<variant>-<architecture>-<date>-<revision>.iso.",
+    "iso_image_changelog_and_release_history": "The project's wiki keeps a changelog page that collects the PikaOS 4 ISO entries. The listed series opens with the PikaOS IV debut on 04/11/2024 and continues with entries dated 05/01/2025, 28/01/2025, 06/03/2025, 24/03/2025, 22/04/2025, 05/05/2025, 20/05/2025, 24/06/2025, 05/07/2025 (the Niri ISO), 01/08/2025, 01/11/2025, 16/12/2025, 03/01/2026, 24/01/2026, 26/01/2026, 03/02/2026, 23/02/2026 and 04/04/2026. The entries are presented as dated ISO revisions of the same major version rather than as numbered minor releases, and the page states no fixed publication calendar.",
     "create_and_stream_edition_tooling": "The project details the tooling aimed at content creation and streaming. The Blender package is built with CUDA, OptiX, HIP, HIPRT and OneAPI support, and the full ROCm, CUDA and OneAPI stacks are packaged for compute workloads. The OBS package includes game capture and stream-key support. These elements distinguish the CREATE and STREAM editions from gaming support alone.",
     "graphical_administration_tools": "The graphical tool Pikman updates APT packages and Flatpak applications together, switches kernels and schedulers, and manages graphics drivers. The project states that the same operations remain available from the command line, the graphical interface being presented as a front end to those operations. The project frames the graphical tools as optional: updates, kernel and scheduler switching and driver management can all be performed from a terminal, and the interface is put forward as an alternative route to the same operations rather than as a requirement.",
     "installer_filesystems_and_upstream_base": "Installation supports the XFS, Btrfs and EXT4 file systems. The declared base combines Debian Sid with the Deb Multimedia repository, packages being patched and compiled together across the project's repositories. The wiki states that package optimisation combines O3, LTO and avx2, while the home page summarises the same optimisation under the x86-64-v3 label.",
+    "secure_boot_signing_and_system_integrity": "The wiki records that the live medium and a running installation fail to boot when UEFI Secure Boot is enabled, the reported errors including an invalid key, an invalid magic number and a Secure Boot violation; it attributes the situation to the project being unable to pay Microsoft for a Secure Boot signing key. Two remedies are documented. The first is to disable Secure Boot in the firmware. The second signs the kernel and the bootloader with locally generated keys and is available only after installation, carried out with Secure Boot disabled: `pikman install sbctl-booster-extra`, `sudo sbctl setup --setup`, `sudo sbctl create-keys`, `sudo sbctl enroll-keys --microsoft`, a reinstall of the running kernel package such as `sudo apt reinstall linux-image-6.14.6-pikaos`, the signing of the rEFInd binaries with `sudo sbctl sign` and a check with `sudo sbctl verify`; the resulting unified kernel image is then selected from the rEFInd menu.",
     "advantages": [
       "Optimized kernel with CachyOS patches and BORE scheduler delivering low latency and high gaming framerates",
       "System packages recompiled with x86-64-v3 (AVX2) and Link Time Optimization (LTO) for improved CPU throughput",
@@ -115,6 +117,18 @@
       "url": "https://wiki.pika-os.com/en/home",
       "type": "official_documentation",
       "accessed": "2026-10-18"
+    },
+    {
+      "title": "PikaOS Wiki — changelog des images ISO (PikaOS 4)",
+      "url": "https://wiki.pika-os.com/en/changelogs-wiki",
+      "type": "official_documentation",
+      "date": "2026-10-19"
+    },
+    {
+      "title": "PikaOS Wiki — Secure Boot (échec au démarrage, signature avec sbctl)",
+      "url": "https://wiki.pika-os.com/en/guides-wiki/secure-boot",
+      "type": "official_documentation",
+      "date": "2026-10-19"
     }
   ]
 }

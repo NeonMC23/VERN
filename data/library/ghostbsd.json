@@ -17,7 +17,7 @@
     "amd64 / x86_64"
   ],
   "license": "2-clause BSD License",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "GhostBSD is an open-source, desktop-oriented Unix-like operating system founded in 2010 by Eric Turgeon. Designed to combine the stability, security, and performance of the FreeBSD operating system with an accessible, modern desktop experience, GhostBSD eliminates the manual configuration traditionally required to set up a graphical BSD workstation.",
     "what_is_it": "GhostBSD is a turnkey, pre-configured operating system delivering a fully functional graphical desktop environment based on FreeBSD RELEASE branches. It features the MATE desktop environment by default (with community XFCE editions), an intuitive graphical installer, custom system administration utilities, and pre-packaged graphics drivers for AMD, Intel, and Nvidia hardware.",
@@ -50,6 +50,20 @@
     ],
     "verdict": "GhostBSD combines a FreeBSD RELEASE base with a MATE desktop, graphical administration tools, and automated OpenZFS boot environments. It provides a FreeBSD-based desktop system preconfigured with these tools."
   },
+  "components": [
+    {
+      "id": "freebsd-base",
+      "name": "FreeBSD",
+      "role": "operating_system_kernel",
+      "note": "Base system: the project describes GhostBSD as a FreeBSD-based operating system."
+    },
+    {
+      "id": "mate",
+      "name": "MATE",
+      "role": "desktop_environment",
+      "note": "Desktop environment of the official images; the download page states that the MATE images are built and backed by the GhostBSD team."
+    }
+  ],
   "relations": [
     {
       "id": "freebsd",
@@ -68,6 +82,12 @@
       "name": "Linux Mint",
       "relation": "alternative",
       "note": "Leading desktop Linux alternative sharing a commitment to an accessible, traditional MATE desktop experience."
+    }
+  ],
+  "variants": [
+    {
+      "name": "GhostBSD 26.1-R15.0p2 (MATE, amd64)",
+      "description": "Official image listed on the download page for the 64-bit amd64 architecture, with 8 GB of RAM and 15 GB of free storage stated as requirements."
     }
   ],
   "links": {

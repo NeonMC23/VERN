@@ -22,15 +22,18 @@
     "RISC-V"
   ],
   "license": "Open Source (GNU Affero General Public License v3 avec options de licences commerciales)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Genode (Genode OS Framework) est un framework de système d'exploitation modulaire libre écrit en C++. Initié en 2008 par Norman Feske et Christian Helmuth au sein de la société allemande Genode Labs, le projet est issu de recherches académiques menées à l'Université de Technologie de Dresde (TU Dresden). Genode a pour vocation de dépasser les vulnérabilités structurelles des systèmes monolithiques traditionnels en concevant le système d'exploitation non comme un bloc de code tout-puissant, mais comme un environnement architectural structuré permettant d'assembler des composants logiciels indépendants sous un contrôle strict de capacités.",
     "what_is_it": "Techniquement, Genode n'est ni une distribution Linux ni un système de type Unix conventionnel. Il s'agit d'un framework d'infrastructure système qui organise la totalité des fonctionnalités d'exploitation (pilotes de périphériques, systèmes de fichiers, gestionnaires d'affichage, piles réseau et environnements applicatifs) sous la forme d'un arbre hiérarchique récursif de composants isolés (component tree). Le composant racine initial alloue à ses enfants des quotas de ressources stricts et des droits d'accès exclusifs (capabilities), garantissant que chaque composant ne peut interagir qu'avec les services pour lesquels une autorisation explicite lui a été déléguée.",
+    "release_archive_and_source_hosting_history": "L'archive des notes de version publiée par le projet couvre les versions 8.11 à 26.08 : la numérotation y associe l'année et le mois, et les entrées relevées pour 2026 sont 26.02, 26.05 et 26.08, cette dernière portant notamment sur VirtualBox 7.2.14 et sur un environnement de pilotes Linux 6.18.19. Le déplacement de l'hébergement du code y est également documenté : la note de version 26.02 indique que la première moitié de la migration de GitHub vers Codeberg est achevée, et la page du dépôt GitHub genodelabs/genode porte la mention d'un archivage au 20 mai 2026 avec passage en lecture seule ; le dépôt Codeberg correspondant est actif et son README y mentionne le dépôt complémentaire genode-world.",
     "capability_security_model_and_component_tree": "Le modèle de sécurité de Genode repose sur le principe du moindre privilège appliqué par des capacités typées vérifiées matériellement par le micro-noyau. Aucun processus super-utilisateur (root) universel n'existe dans le système. Chaque composant parent joue le rôle d'autorité de régulation pour ses processus enfants : il contrôle leur consommation de mémoire physique, leur temps processeur et leurs canaux de communication par appels de procédure distante (RPC). Ce cloisonnement rigoureux empêche par conception toute élévation de privilèges ou déplacement latéral d'un attaquant : la compromission d'un pilote matériel ou d'un service réseau reste strictement confinée à son sous-arbre sans pouvoir contaminer le reste du système.",
     "kernel_agnostic_architecture_and_supported_kernels": "L'une des particularités remarquables de Genode réside dans son indépendance vis-à-vis du noyau sous-jacent (kernel-agnostic). Grâce à une couche d'abstraction uniforme, Genode peut être déployé indifféremment sur plusieurs micro-noyaux selon les contraintes de robustesse ou de certification : NOVA (micro-hyperviseur hautement optimisé pour la virtualisation x86), seL4 (micro-noyau formellement vérifié mathématiquement pour les systèmes critiques), Fiasco.OC (micro-noyau de la famille L4), Linux (utilisé comme banc d'essai en espace utilisateur pour le prototypage rapide) ou base-hw (le micro-noyau minimaliste développé en interne par Genode Labs pour s'exécuter directement sur le silicium sans dépendance externe).",
     "sculpt_os_desktop_and_sandboxed_drivers": "Pour les ordinateurs de bureau et ordinateurs portables, Genode propose **Sculpt OS** (*Sculpt for The Curious*). Sculpt offre une interface graphique interactive originale permettant de visualiser l'arbre des composants sous forme de graphe dynamique et d'interconnecter à chaud des périphériques de stockage, des cartes Wi-Fi, des interfaces graphiques et des machines virtuelles. Pour assurer la compatibilité avec le matériel informatique contemporain, Genode encapsule des pilotes matériels complets issus du noyau Linux ou d'OpenBSD (notamment pour les contrôleurs Wi-Fi, Ethernet et USB) au sein d'environnements restreints (DDE - Device Driver Environment), neutralisant tout risque de panique noyau en cas de défaillance matérielle.",
     "software_ecosystem_and_hardware_portability": "Bien qu'indépendant d'Unix, Genode fournit une bibliothèque C standard (`libc`) et une couche d'émulation des interfaces POSIX autorisant le portage d'applications usuelles (navigateur web Falkon, utilitaires en ligne de commande, serveurs web). Il permet également de lancer des machines virtuelles Linux ou Windows isolées au sein de composants non privilégiés via son moniteur de machines virtuelles (VMM). Le framework est distribué sous la licence libre **GNU AGPLv3** (avec des licences commerciales disponibles auprès de Genode Labs) et fonctionne sur les architectures matérielles x86-32, x86-64, ARM (ARMv7 et AArch64) et RISC-V.",
     "diffusion_de_sculpt_et_cycle_de_publication": "Genode est diffusé principalement à travers Sculpt OS, dont la version courante lors de la consultation est 26.04, publiée en avril 2026 sous la forme d'une image disque de 35 Mio accompagnée de sa signature et de sa clé publique. L'image s'écrit sur clé USB avec dd sous systèmes Unix, ou avec Rufus ou Win32 Disk Imager sous Windows. Deux variantes complémentaires sont publiées : une version expérimentale de Sculpt pour le PinePhone, distribuée par le dépôt de Genode Labs, et une image pour l'ordinateur portable MNT Reform en variante i.MX8. Les composants ne proviennent pas d'un gestionnaire de paquets externe : ils sont fournis par des fournisseurs fédérés et installés depuis le graphe de composants de l'interface d'administration Leitzentrale, qui porte aussi la mise à jour du système et le retour à une version antérieure.",
+    "installation_and_tool_chain": "La compilation du framework passe par une chaîne d'outils dédiée : le projet indique que les compilateurs GNU fournis par les distributions ne conviennent pas, en raison de correctifs propres à chaque distribution et de la configuration du stockage local de thread, et fournit donc sa propre chaîne. Des binaires précompilés existent pour Debian 12.10 et pour Ubuntu 24.04, chacun avec son empreinte SHA-256 ; l'archive s'extrait avec `sudo tar xPf genode-toolchain-<version>-<os>.tar.xz` et s'installe dans `/usr/local/genode/tool/<version>`, emplacement attendu par le système de construction. La chaîne est unifiée depuis la version 11.11 pour x86_32, x86_64, ARM, aarch64 et RISC-V, et les outils portent les préfixes `genode-x86-`, `genode-arm-`, `genode-riscv-` et `genode-aarch64-`. Une construction depuis les sources reste possible avec `tool/tool_chain`.",
+    "depot_and_package_provisioning": "La fourniture de logiciels s'appuie sur un dépôt public distinct des images système : l'index du serveur depot.genode.org énumère des répertoires par fournisseur, parmi lesquels genodelabs et skalk, tous deux modifiés le 13 octobre 2026, cproc_test, modifié le 19 octobre 2026, ainsi que alex-ab, atopia, chelmuth, cnuke, jschlatow, mstein, nfeske et ssumpf. La note de version 26.08 situe explicitement un paquet expérimental, `goa_offline_sdk`, dans le dépôt du fournisseur cproc pour Sculpt 26.04, ce qui rattache le contenu d'un dépôt à une version de système. L'arbre de sources principal est complété par le dépôt genode-world, décrit par le projet comme une bibliothèque croissante de logiciels supplémentaires intégrables dans les scénarios de composants.",
     "advantages": [
       "Architecture à composants hautement sécurisée fondée sur les capacités et le principe du moindre privilège.",
       "Agnosticisme de noyau permettant de fonctionner indifféremment sur seL4, NOVA, base-hw ou Linux.",
@@ -121,6 +124,30 @@
       "url": "https://genode.org/download/sculpt",
       "type": "official_documentation",
       "accessed": "2026-10-18"
+    },
+    {
+      "title": "Genode — archive des notes de version (de 8.11 à 26.08)",
+      "url": "https://genode.org/documentation/release-notes/index",
+      "type": "official_documentation",
+      "date": "2026-10-19"
+    },
+    {
+      "title": "Genode — chaîne d'outils officielle (binaires précompilés, installation, construction)",
+      "url": "https://genode.org/download/tool-chain",
+      "type": "official_documentation",
+      "date": "2026-10-19"
+    },
+    {
+      "title": "Genode — dépôt public de composants (index par fournisseur)",
+      "url": "https://depot.genode.org/",
+      "type": "distribution_artifact",
+      "date": "2026-10-19"
+    },
+    {
+      "title": "Genode — dépôt de code source Codeberg (dépôt actif, dépôt genode-world)",
+      "url": "https://codeberg.org/genodelabs/genode",
+      "type": "repository",
+      "date": "2026-10-19"
     }
   ]
 }

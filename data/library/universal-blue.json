@@ -21,7 +21,7 @@
     "aarch64"
   ],
   "license": "Apache-2.0",
-  "last_verified": "2026-10-02",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Universal Blue (ublue) is an open-source project and software manufacturing framework that constructs and delivers bootable Linux operating system images built upon Fedora Atomic Desktops. Rather than operating as a conventional monolithic Linux distribution, Universal Blue applies cloud-native site reliability engineering (SRE) patterns, OCI container standards, and automated continuous delivery to desktop and edge client operating systems.",
     "what_is_it": "Universal Blue serves as an image framework and collection of bootable container images designed to combine the reliability of a stateless operating system with the flexibility of a traditional Linux workstation. The system root (`/usr`) is immutable and mounted read-only, while system updates, driver layers, and kernel configurations are assembled upstream in GitHub Actions, published to GitHub Container Registry, and deployed atomically to client machines via `bootc` and `rpm-ostree`.",
@@ -35,6 +35,7 @@
     "akmods_caching_layer_and_nvidia": "To eliminate client-side kernel module compilation, Universal Blue maintains an automated caching layer (`ublue-os/akmods`). Out-of-tree kernel modules—including proprietary NVIDIA display drivers, v4l2loopback, ZFS, and OpenRGB—are precompiled in GitHub Actions against target Fedora kernels and embedded into pre-built images (`-nvidia` and `-nvidia-open`).",
     "updates_rollbacks_and_rebasing": "System maintenance is non-destructive. If an image update causes regressions, users can immediately roll back using `rpm-ostree rollback` or select the prior deployment in the GRUB boot menu. Furthermore, users can rebase between different desktop environments, GPU variants, or back to stock Fedora Silverblue without reinstalling via `rpm-ostree rebase`.",
     "application_ecosystem_and_homebrew": "Desktop software is managed through Flatpak, with Flathub configured as the primary software repository. For command-line tools and utilities, Universal Blue includes Homebrew (`brew`) in user space (`/home/linuxbrew/.linuxbrew`), enabling developers to install modern CLI tooling without requiring host administrative privileges or polluting the root filesystem.",
+    "package_sources_rpm_layering_and_copr": "Les paquets RPM propres au projet sont regroupés dans le dépôt `ublue-os/packages`, que le projet présente comme la base de plusieurs dépôts COPR hébergés sous `copr.fedorainfracloud.org/coprs/ublue-os`, chacun ayant sa propre finalité. Le dépôt demande de suivre les règles de packaging de Fedora, de faire passer `rpmlint`, de rendre les paquets constructibles hors ligne une fois les sources récupérées, et fournit un conteneur de construction qui monte le répertoire `mock` courant pour récupérer les RPM et SRPM produits ; la recette `just build` prend le fichier de spécification en argument, et l’option `--forcearch` permet de viser une autre architecture lorsque qemu-user-static est disponible sur l’hôte.\n\nLes modules du noyau hors arborescence sont fournis par `ublue-os/akmods`, qui publie des images OCI contenant des paquets RPM de noyaux mis en cache et des modules supplémentaires, construites et publiées quotidiennement et déclinées par ligne de noyau, dont la variante LONGTERM 6.18.\n\nLe dépôt `ublue-os/main`, qui fournit l’image commune de base, indique qu’il ne construit plus depuis septembre 2025 que les images base, kinoite et silverblue, et que les images sway, budgie et cosmic ont été retirées le 15 octobre 2025. Les applications de bureau restent distribuées par Flatpak depuis Flathub et les outils en ligne de commande par Homebrew installé dans l’espace utilisateur.",
     "containerized_development_environments": "Developer workflows that require traditional mutable package managers are decoupled from the host operating system using Distrobox and Toolbx. Developers can spawn isolated container environments running Arch Linux, Debian, Ubuntu, or Alpine with transparent access to user home directories and hardware acceleration.",
     "security_and_sigstore_signatures": "Security architecture enforces SELinux in Enforcing mode by default. All published OCI images are signed cryptographically using Sigstore Cosign, providing cryptographic verification of image provenance from the build pipeline to the client device. Secure Boot is supported through user enrollment of the Universal Blue Machine Owner Key (MOK).",
     "privacy_and_telemetry": "Universal Blue implements no custom telemetry daemons, user tracking, or advertising identifiers. All build recipes and container layers are publicly auditable on GitHub, and network communications are confined to standard repository synchronization and image pulls from GitHub Container Registry.",
@@ -213,6 +214,24 @@
       "url": "https://universal-blue.org/documentation.html",
       "type": "official_documentation",
       "date": "2026-10-18"
+    },
+    {
+      "title": "ublue-os/packages — spécifications RPM, dépôts COPR et construction par mock",
+      "url": "https://github.com/ublue-os/packages",
+      "type": "repository",
+      "accessed": "2026-10-19"
+    },
+    {
+      "title": "ublue-os/akmods — images OCI de noyaux et modules mis en cache",
+      "url": "https://github.com/ublue-os/akmods",
+      "type": "repository",
+      "accessed": "2026-10-19"
+    },
+    {
+      "title": "ublue-os/main — image commune de base et périmètre des images construites",
+      "url": "https://github.com/ublue-os/main",
+      "type": "repository",
+      "accessed": "2026-10-19"
     }
   ]
 }
