@@ -61,6 +61,20 @@
     ],
     "verdict": "PikaOS is a gaming distribution that brings the performance optimizations of CachyOS and the gaming tooling of Nobara into the Debian Sid ecosystem. With its AVX2-optimized package base, custom BORE kernel, and preconfigured gaming stack, it targets Linux gaming systems."
   },
+  "components": [
+    {
+      "id": "debian-base",
+      "name": "Debian",
+      "role": "operating_system_kernel",
+      "note": "Base distribution: the feature table lists \"Debian Sid + Deb Multimedia\", with packages \"curated, patched and compiled together\" and \"optimised across our base repositories\"; the hero line summarises the system as \"Debian Sid · Custom kernel · Latest packages and GPU stack\" (pika-os.com)."
+    },
+    {
+      "id": "pikaos-kernel",
+      "name": "PikaOS custom kernel",
+      "role": "kernel",
+      "note": "Feature table: \"Custom performance build\" with \"CachyOS patches and switchable SCX schedulers\" (pika-os.com)."
+    }
+  ],
   "relations": [
     {
       "id": "debian",

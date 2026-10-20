@@ -60,6 +60,26 @@
     ],
     "verdict": "Nitrux constitutes a singular and resolutely technical proposal in the landscape of Linux distributions. By combining a Debian base stripped of systemd in favour of OpenRC, an immutable root protected by OverlayFS, a Wayland desktop articulated around Hyprland and containerised and declarative application management, the project addresses experienced users who favour architectural resilience and modern operational efficiency."
   },
+  "components": [
+    {
+      "id": "debian-base",
+      "name": "Debian",
+      "role": "operating_system_kernel",
+      "note": "Base distribution: \"Nitrux is a 64-bit-only Linux desktop distribution built from Debian.\"; the same page adds that Nitrux is \"up to date, thanks to recent Debian releases and the performance-oriented kernel configurations we chose\" (nxos.org/home/nx)."
+    },
+    {
+      "id": "openrc",
+      "name": "OpenRC",
+      "role": "init_system",
+      "note": "\"Nitrux also does not use systemd as its init system; instead, it uses OpenRC, a simpler init and service manager.\" (nxos.org/home/nx)."
+    },
+    {
+      "id": "hyprland",
+      "name": "Hyprland",
+      "role": "wayland_compositor",
+      "note": "\"It uses the Hyprland window compositor and our bespoke Wayland-focused Workspace Environment.\" (nxos.org/home/nx)."
+    }
+  ],
   "relations": [
     {
       "id": "debian",

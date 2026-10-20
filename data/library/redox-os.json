@@ -82,6 +82,12 @@
       "name": "pkgar",
       "role": "package_manager",
       "note": "Described as \"a file format, library, and command-line executable for creating and extracting cryptographically secure collections of files, primarily for use in package management on Redox OS\"; the page explains that the name is short for \"package archive\" (Package Management)."
+    },
+    {
+      "id": "relibc",
+      "name": "relibc",
+      "role": "library",
+      "note": "\"relibc is a portable C standard library written in Rust and is under heavy development\"; the README lists \"C, Linux, BSD functions and extensions\", a \"POSIX compatibility layer\" and \"Interfaces for system components\" (README, github.com/redox-os/relibc)."
     }
   ],
   "relations": [

@@ -53,6 +53,14 @@
     ],
     "verdict": "HardenedBSD is a FreeBSD-derived operating system focused on exploit mitigations. It enforces ASLR, SafeStack, Clang CFI, and SEGVGUARD while retaining OpenZFS and Jails, adding defenses against memory corruption attacks."
   },
+  "components": [
+    {
+      "id": "freebsd-base",
+      "name": "FreeBSD",
+      "role": "operating_system_kernel",
+      "note": "Base system: \"HardenedBSD is a fork of FreeBSD, founded in 2014, that implements exploit mitigations and security hardening technologies.\"; the README adds that \"HardenedBSD exists today as a fork of FreeBSD that closely follow's FreeBSD's source code\" and that \"HardenedBSD syncs with FreeBSD every six hours\" (README, github.com/HardenedBSD/hardenedBSD)."
+    }
+  ],
   "relations": [
     {
       "id": "freebsd",

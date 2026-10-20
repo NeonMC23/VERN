@@ -54,6 +54,20 @@
     ],
     "verdict": "Plasma Mobile is an open mobile environment for the Linux world, which transposes the KDE ecosystem onto smartphones with a Wayland architecture and a convergent framework."
   },
+  "components": [
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "\"Plasma Mobile is an open-source project to create a mobile shell and application ecosystem for Linux, based on KDE Plasma.\" (plasma-mobile.org)."
+    },
+    {
+      "id": "kwin",
+      "name": "KWin",
+      "role": "window_manager_and_compositor",
+      "note": "\"The interface is using KWin over Wayland and is now mostly stable, albeit a little rough around the edges in some areas.\" (plasma-mobile.org/about)."
+    }
+  ],
   "relations": [
     {
       "id": "postmarketos",

@@ -62,6 +62,14 @@
     ],
     "verdict": "Raspberry Pi OS is the official operating system of Raspberry Pi single-board nano-computers. Based on Debian and on a Wayland/Labwc graphics stack, it targets education, electronics prototyping and embedded computing."
   },
+  "components": [
+    {
+      "id": "debian-base",
+      "name": "Debian",
+      "role": "operating_system_kernel",
+      "note": "Base system: \"Raspberry Pi OS is based on the Debian Linux distribution and supports over 69,000 Debian packages.\"; the same page adds that the latest version \"is based on Debian Trixie\" and that \"Releases happen roughly once every two years.\" (documentation/asciidoc/computers/os/rpi-os-introduction.adoc, github.com/raspberrypi/documentation)."
+    }
+  ],
   "relations": [
     {
       "id": "debian",

@@ -89,6 +89,24 @@
       "name": "IPS (pkg)",
       "role": "package_manager",
       "note": "\"Packages in OmniOS are managed using the pkg command-line utility\" (Getting Started); \"OmniOS takes a layered approach to packaging. In addition to the fairly minimal software delivered as the core OS, additional packages are provided through extra repositories\" (IPS Repositories)."
+    },
+    {
+      "id": "smf",
+      "name": "SMF",
+      "role": "service_supervision",
+      "note": "Named in the description carried on every page of the site: \"illumos based server OS with ZFS, Bhyve, DTrace, Crossbow, SMF and Linux zone support\" (omnios.org, meta description and home page)."
+    },
+    {
+      "id": "kvm",
+      "name": "KVM",
+      "role": "hypervisor",
+      "note": "KVM support is documented through branded zones: the site carries a page titled \"bhyve and KVM branded zones\" and a companion page \"Migrate KVM to bhyve\"; the home page description names \"Linux zone support\" (omnios.org/info/bhyve_kvm_brand.html, omnios.org)."
+    },
+    {
+      "id": "zones",
+      "name": "Zones",
+      "role": "container_engine",
+      "note": "Zone support is documented in the setup guide (\"Creating a simple zone\") and through dedicated pages (\"LX Branded Zones\", \"Linked Image Zones\"); the site-wide description lists \"Linux zone support\" (omnios.org/setup/zones, omnios.org/info/lxzones.html, omnios.org)."
     }
   ],
   "relations": [
