@@ -141,7 +141,7 @@
   },
   "sources": [
     {
-      "title": "About Pentoo — base Gentoo, noyau personnalisé et overlay Portage",
+      "title": "About Pentoo — Gentoo base, custom kernel and Portage overlay",
       "url": "https://www.pentoo.ch/about/",
       "type": "official",
       "date": "2026-10-16"
@@ -165,25 +165,25 @@
       "date": "2026-10-11"
     },
     {
-      "title": "Pentoo — répertoire des images amd64 (noms, tailles, empreintes)",
+      "title": "Pentoo — amd64 image directory (names, sizes, checksums)",
       "url": "https://pentoo.org/isos/Release/Pentoo_amd64_hardened/",
       "type": "distribution_artifact",
       "date": "2026-10-19"
     },
     {
-      "title": "Pentoo — répertoire des images amd64 « Core » (nom, taille, empreintes)",
+      "title": "Pentoo — amd64 “Core” image directory (name, size, checksums)",
       "url": "https://pentoo.org/isos/Release/Pentoo_Core_amd64_hardened/",
       "type": "distribution_artifact",
       "date": "2026-10-19"
     },
     {
-      "title": "Pentoo — répertoire des images amd64 « Full » (nom, taille, empreintes)",
+      "title": "Pentoo — amd64 “Full” image directory (name, size, checksums)",
       "url": "https://pentoo.org/isos/Release/Pentoo_Full_amd64_hardened/",
       "type": "distribution_artifact",
       "date": "2026-10-19"
     },
     {
-      "title": "pentoo-overlay — README (installation par eselect-repository, autobuilds quotidiens, contrôles)",
+      "title": "pentoo-overlay — README (installation via eselect-repository, daily autobuilds, checks)",
       "url": "https://github.com/pentoo/pentoo-overlay/blob/master/README.md",
       "type": "repository",
       "date": "2026-10-19"

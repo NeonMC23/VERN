@@ -111,7 +111,7 @@
       "date": "2026-10-16"
     },
     {
-      "title": "HardenedBSD — README du dépôt hardenedBSD (images signées, contrôles secadm/hbsdcontrol, synchronisation FreeBSD)",
+      "title": "HardenedBSD — hardenedBSD repository README (signed images, secadm/hbsdcontrol checks, FreeBSD synchronisation)",
       "url": "https://github.com/HardenedBSD/hardenedBSD",
       "type": "repository",
       "accessed": "2026-10-18"
@@ -123,19 +123,19 @@
       "date": "2026-10-19"
     },
     {
-      "title": "HardenedBSD — Mirrors (rsync et miroirs de médias d’installation)",
+      "title": "HardenedBSD — Mirrors (rsync and installation media mirrors)",
       "url": "https://hardenedbsd.org/content/mirrors",
       "type": "official_documentation",
       "date": "2026-10-19"
     },
     {
-      "title": "HardenedBSD — usr.sbin/pkg/HardenedBSD.conf (dépôts pkg par défaut, Tor et pkgbase)",
+      "title": "HardenedBSD — usr.sbin/pkg/HardenedBSD.conf (default pkg repositories, Tor and pkgbase)",
       "url": "https://github.com/HardenedBSD/hardenedBSD/blob/hardened/current/master/usr.sbin/pkg/HardenedBSD.conf",
       "type": "repository",
       "date": "2026-10-19"
     },
     {
-      "title": "HardenedBSD — arborescence des artefacts de construction (pub)",
+      "title": "HardenedBSD — build artefacts tree (pub)",
       "url": "https://installers.hardenedbsd.org/pub/",
       "type": "distribution_artifact",
       "date": "2026-10-19"

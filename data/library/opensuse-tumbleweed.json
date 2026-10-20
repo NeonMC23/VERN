@@ -191,7 +191,7 @@
     {
       "name": "openSUSE BCI",
       "relation": "downstream_derivative",
-      "note": "« openSUSE BCI is a growing set of base, development and application containers built out of the openSUSE Tumbleweed rolling release. As such, it has the same lifecycle characteristics as openSUSE Tumbleweed » — phrase lue sur la page Lifetime ; aucune page dédiée au projet BCI n'a pu être résolue sur le wiki, la source reste donc la page Lifetime."
+      "note": "\"openSUSE BCI is a growing set of base, development and application containers built out of the openSUSE Tumbleweed rolling release. As such, it has the same lifecycle characteristics as openSUSE Tumbleweed\" — sentence read on the Lifetime page; no dedicated page for the BCI project could be resolved on the wiki, so the source remains the Lifetime page."
     }
   ],
   "variants": [
@@ -241,7 +241,7 @@
       "note": "“Continuously Updated”, “Leading-Edge”, “Stable… a build service other Linux distributions envy us for”, “Simple to Use… rollback to last week's snapshot”, “Safe”, “Secure… firewall and strong security policies turned on by default”, “Powerful… Btrfs, snapper, YaST”, “Gaming”, x86_64 and i686 image claims with sizes"
     },
     {
-      "title": "openSUSE Wiki — Lifetime (durée de vie et flux de correctifs des versions)",
+      "title": "openSUSE Wiki — Lifetime (release lifetime and patch flow)",
       "url": "https://en.opensuse.org/Lifetime",
       "type": "documentation",
       "accessed": "2026-09-19",
@@ -249,7 +249,7 @@
       "note": "Revision 209412 of 2026-08-08: Tumbleweed “has a lifetime of 'forever', assuming you are running the latest updated packages”, “receives security updates, bug fixes and new features (most often as new software versions) as soon as they are integrated and tested by the openSUSE community”, critical security updates possible when no new version exists yet; i586 discussion “no concrete plan to drop i586 support now”; Leap 16.x support rules and the note that BCI containers are built out of Tumbleweed"
     },
     {
-      "title": "openSUSE Wiki — openSUSE:Roadmap (modèles de publication et cycles)",
+      "title": "openSUSE Wiki — openSUSE:Roadmap (release models and cycles)",
       "url": "https://en.opensuse.org/openSUSE:Roadmap",
       "type": "documentation",
       "accessed": "2026-09-19",
@@ -262,7 +262,7 @@
       "type": "documentation",
       "accessed": "2026-09-19",
       "publisher": "openSUSE manpages",
-      "note": "Page de manuel servie par le projet pour la branche Tumbleweed, accessible directement (200) ; listée dans le portail Zypper sous « Manual ». Le contenu de la page n'a pas été analysé ligne à ligne ici — elle atteste l'existence d'une documentation de référence versionnée par snapshot"
+      "note": "Manual page served by the project for the Tumbleweed branch, reachable directly (200); listed in the Zypper portal under \"Manual\". The content of the page was not analysed line by line here — it attests the existence of reference documentation versioned per snapshot"
     },
     {
       "title": "openSUSE Wiki — Portal:Tumbleweed (definition, history, QA gating, zypper dup, codecs, audience)",
@@ -374,7 +374,7 @@
       "type": "documentation",
       "accessed": "2026-09-19",
       "publisher": "openSUSE Wiki",
-      "note": "Revision 158071 of 2021-07-15: “openSUSE is a secure distribution… security processes are honored and applied”, SUSE Security Team oversight, Leap/SLE inheritance sentence, incident handling process, security-announce@ vs updates@ lists, zypper/YaST as update tools with automatic installation mentioned, SDB pages for AppArmor, firewalld, crypto-policies, CIS benchmark link ; liste de navigation SDB:AppArmor, Firewalld, SDB:Crypto-policies, SDB:Encrypted root file system, OpenSSH et l'énoncé “openSUSE's Security Features help to prevent bugs from being exploitable”"
+      "note": "Revision 158071 of 2021-07-15: “openSUSE is a secure distribution… security processes are honored and applied”, SUSE Security Team oversight, Leap/SLE inheritance sentence, incident handling process, security-announce@ vs updates@ lists, zypper/YaST as update tools with automatic installation mentioned, SDB pages for AppArmor, firewalld, crypto-policies, CIS benchmark link ; SDB navigation list SDB:AppArmor, Firewalld, SDB:Crypto-policies, SDB:Encrypted root file system, OpenSSH and the statement “openSUSE's Security Features help to prevent bugs from being exploitable”"
     },
     {
       "title": "openSUSE Release Notes — Tumbleweed (UEFI advice, AppArmor note, product version)",
@@ -409,16 +409,16 @@
       "note": "Query of 2026-09-19, 400 jobs: x86_64 119, ppc64le 131, aarch64 59, s390x 53, i586 33, arm 5; builds 20260917 (123), 20260918 (184), 20260919 (6). Counts cover the queried window only"
     },
     {
-      "title": "openSUSE News — index et flux RSS : Tumbleweed Monthly Update (août 2026), Tumbleweed Monthly Update (juin 2026), Tumbleweed ARM Updates in September",
+      "title": "openSUSE News — index and RSS feed: Tumbleweed Monthly Update (August 2026), Tumbleweed Monthly Update (June 2026), Tumbleweed ARM Updates in September",
       "url": "https://news.opensuse.org/feed/",
       "type": "official",
       "accessed": "2026-09-19",
       "date": "2026-09-02 ; 2026-07-01 ; 2026-09-16",
       "publisher": "openSUSE News",
-      "note": "Regroupe trois billets lus dans le flux officiel du site (seule adresse servant 200 depuis ce sandbox le 2026-09-19) : « Tumbleweed Monthly Update, August 2026 (snapshot count and content) » (2026-09-02) : “23 snapshots across 31 days”; “a packed month of snapshots across the desktop, developer tooling, and security surface”; KDE Plasma 6.7.4. Source incident: the permalink answered 404 (nginx) from this sandbox on 2026-09-19 while title, date and this excerpt were read from the site's own RSS feed (https://news.opensuse.org/feed/) ; « Tumbleweed Monthly Update, June 2026 (package and CVE reporting style) » (2026-07-01) : Kernel 7.0.12 with named fixes, OpenSSL 3 CVE list, libxml2 2.15.3, webkitgtk 2.52.1, snapper sdbootutil plugin permission note — evidence that security work is reported per package update rather than per release ; « Tumbleweed ARM updates for September 2026 » (2026-09-16) : “There were a few software package updates for openSUSE Tumbleweed ARM this month with snapshots reaching the ARM port”; index and RSS entries reachable, direct permalink intermittent (404) from this sandbox on 2026-09-19 | Incident de source : les permalinks de ces billets (…/2026-09-02/tw-monthly-update-august/, …/2026-07-01/tw-monthly-update-june/, …/2026-09-16/tw-arm-update/) ont répondu 404 (nginx) à toutes les tentatives, y compris via l'outil de lecture, alors que l'index https://news.opensuse.org/ affiche leurs liens ; aucune citation n'a été reprise d'un miroir tiers."
+      "note": "Groups three posts read in the official feed of the site (the only address serving 200 from this sandbox on 2026-09-19): \"Tumbleweed Monthly Update, August 2026 (snapshot count and content)\" (2026-09-02): “23 snapshots across 31 days”; “a packed month of snapshots across the desktop, developer tooling, and security surface”; KDE Plasma 6.7.4. Source incident: the permalink answered 404 (nginx) from this sandbox on 2026-09-19 while title, date and this excerpt were read from the site's own RSS feed (https://news.opensuse.org/feed/); \"Tumbleweed Monthly Update, June 2026 (package and CVE reporting style)\" (2026-07-01): Kernel 7.0.12 with named fixes, OpenSSL 3 CVE list, libxml2 2.15.3, webkitgtk 2.52.1, snapper sdbootutil plugin permission note — evidence that security work is reported per package update rather than per release; \"Tumbleweed ARM updates for September 2026\" (2026-09-16): “There were a few software package updates for openSUSE Tumbleweed ARM this month with snapshots reaching the ARM port”; index and RSS entries reachable, direct permalink intermittent (404) from this sandbox on 2026-09-19 | Source incident: the permalinks of these posts (…/2026-09-02/tw-monthly-update-august/, …/2026-07-01/tw-monthly-update-june/, …/2026-09-16/tw-arm-update/) answered 404 (nginx) on all attempts, including through the reader tool, while the index https://news.opensuse.org/ shows their links; no quotation was taken from a third-party mirror."
     },
     {
-      "title": "openSUSE Wiki — openSUSE:Board best practices (documenter les décisions)",
+      "title": "openSUSE Wiki — openSUSE:Board best practices (documenting decisions)",
       "url": "https://en.opensuse.org/openSUSE:Board_best_practices",
       "type": "documentation",
       "accessed": "2026-09-19",

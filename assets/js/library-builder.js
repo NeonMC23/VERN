@@ -77,6 +77,60 @@
     return s;
   }
 
+  // Approved English headings for the section keys that arrived in French.
+  // The table is keyed by the structural JSON key only - never by a resource id
+  // - so it holds no resource-specific logic, and the keys themselves are never
+  // renamed. A key missing from the table falls back to humanize(), which is the
+  // historical behaviour, so an untranslated key still renders (in French): add
+  // an entry here when a new section key needs an English heading.
+  var SECTION_TITLES = {
+    "versions_images_et_cibles_materielles": "Release images and target hardware",
+    "dates_de_branche_et_fin_de_maintenance": "Branch dates and end of maintenance",
+    "origine_du_projet_et_lignee_googlebook": "Project origin and googlebook lineage",
+    "diffusion_de_sculpt_et_cycle_de_publication": "Sculpt distribution and publication cycle",
+    "versions_publiees_et_cibles_materielles": "Published versions and target hardware",
+    "origine_iphone_os_and_ios_naming": "Origin iphone os and ios naming",
+    "app_store_et_canaux_de_mise_a_disposition_des_applications": "App store and application distribution channels",
+    "installation_et_mises_a_jour_logicielles": "Software installation and updates",
+    "origine_et_lancement_d_ipados": "Ipados origin and launch",
+    "images_par_architecture_et_modes_de_mise_a_disposition": "Images by architecture and distribution modes",
+    "installation_sur_materiel_et_images_d_amorcage": "Installation on hardware and boot images",
+    "canaux_de_mise_a_jour_et_fenetre_de_support": "Update channels and support window",
+    "installation_et_reinstallation_de_macos": "Macos installation and reinstallation",
+    "origine_et_nomenclature_des_versions": "Origin and version nomenclature",
+    "avis_de_securite_et_traitement_des_correctifs": "Security advisories and patch handling",
+    "origine_et_premieres_versions_stables": "Origin and first stable versions",
+    "cadence_de_publication_et_versions_prises_en_charge": "Publication cadence and supported versions",
+    "installation_et_supports_d_amorcage": "Installation and boot media",
+    "installation_multivariante_et_conditions_d_emploi": "Multi variant installation and usage conditions",
+    "origine_et_lignee_du_projet": "Project origin and lineage",
+    "canal_de_publication_et_versions_maintenues": "Publication channel and maintained versions",
+    "installation_par_image_iso_et_etat_initial_du_pare_feu": "Iso image installation and initial firewall state",
+    "depot_contrib_et_distribution_du_logiciel": "Contrib repository and software distribution",
+    "distribution_quatrieme_edition_et_supports_d_installation": "Fourth edition distribution and installation media",
+    "origine_et_lignee_de_recherche_bell_labs": "Bell labs research origin and lineage",
+    "catalogue_de_paquets_rapps_et_depot_rapps_db": "Rapps package catalog and rapps db repository",
+    "modele_de_securite_herite_de_nt_et_reglages_par_defaut": "Nt inherited security model and default settings",
+    "origine_freewin95_et_lancement_de_reactos": "Freewin95 origin and reactos launch",
+    "origine_et_chronologie_du_projet": "Project origin and timeline",
+    "deploiement_et_mises_a_jour": "Deployment and updates",
+    "securite_systeme_et_confinement": "System security and confinement",
+    "depot_de_ports_et_scripts_de_construction": "Ports repository and build scripts",
+    "installation_sur_materiel_et_prerequis_de_compilation": "Installation on hardware and build prerequisites",
+    "catalogue_dapplications_et_depots_logiques": "Application catalog and logical repositories",
+    "cycle_de_versions_et_profils_de_mise_a_jour": "Version cycle and update profiles",
+    "historique_et_transition_du_socle_freebsd_vers_linux": "History and freebsd to linux base transition",
+    "installation_et_verification_des_images": "Installation and image verification",
+    "canaux_de_maintenance_et_duree_de_service": "Servicing channels and service duration",
+    "installation_et_conditions_materielles": "Installation and hardware requirements",
+    "origine_de_la_lignee_et_fin_de_windows_10": "Lineage origin and end of windows 10"
+  };
+
+  function sectionTitle(key) {
+    return Object.prototype.hasOwnProperty.call(SECTION_TITLES, key)
+      ? SECTION_TITLES[key] : humanize(key);
+  }
+
   function safeHref(url) {
     if (!isStr(url)) return null;
     var u = url.trim();
@@ -130,7 +184,7 @@
   function renderNode(key, value, level) {
     if (value == null || value === "") return null;
 
-    var label = key != null ? humanize(key) : null;
+    var label = key != null ? sectionTitle(key) : null;
 
     if (isScalar(value)) {
       var text = String(value);

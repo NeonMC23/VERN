@@ -146,19 +146,19 @@
       "date": "2026-06-17"
     },
     {
-      "title": "AOSP — Licenses (Apache 2.0, BSD et GPLv2 pour le noyau)",
+      "title": "AOSP — Licenses (Apache 2.0, BSD and GPLv2 for the kernel)",
       "url": "https://source.android.com/docs/setup/about/licenses",
       "type": "official_documentation",
       "accessed": "2026-10-17"
     },
     {
-      "title": "AOSP — Set up for AOSP development : requirements (Ubuntu 18.04+, paquets, Repo, OpenJDK)",
+      "title": "AOSP — Set up for AOSP development: requirements (Ubuntu 18.04+, packages, Repo, OpenJDK)",
       "url": "https://source.android.com/docs/setup/start/requirements",
       "type": "official_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "AOSP — About AOSP (produit de développement complet, CDD et CTS)",
+      "title": "AOSP — About AOSP (full development product, CDD and CTS)",
       "url": "https://source.android.com/docs/setup/about",
       "type": "official_documentation",
       "accessed": "2026-10-18"

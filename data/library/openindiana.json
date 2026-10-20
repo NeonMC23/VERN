@@ -19,7 +19,7 @@
     "sparc (community)"
   ],
   "license": "Common Development and Distribution License (CDDL 1.0)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-20",
   "content": {
     "introduction": "OpenIndiana is a free, open-source Unix operating system founded in September 2010 by the illumos community. Established as the direct open-source successor to the historic OpenSolaris operating system (project Indiana) following Sun Microsystems' acquisition by Oracle Corporation, OpenIndiana delivers a complete, installable system integrating the illumos kernel with a traditional desktop environment and modern software suites.",
     "what_is_it": "OpenIndiana is a full, turnkey operating system distribution that packages the foundational illumos-gate core (SunOS 5.11 kernel, OpenZFS, DTrace, Zones, SMF) into installable ISO media. It provides a familiar MATE desktop environment, text-mode server installers, and a complete open-source application stack managed via the network-centric Image Packaging System (IPS).",
@@ -53,6 +53,32 @@
     "verdict": "OpenIndiana is a desktop- and workstation-oriented distribution of the illumos ecosystem. By pairing the SunOS kernel and OpenZFS with the Image Packaging System and a MATE desktop, it continues the OpenSolaris codebase on illumos.",
     "community_hardware_compatibility_list": "The project maintains a community hardware compatibility list, published in its documentation as a page named Systems and organised in three tables: laptops, workstations and servers. Each row gives the manufacturer, the model, whether the system works (yes or no), notes or specific usage instructions, and the contributor who reported the entry. The list is contributed by users rather than issued by a certification programme, and a failing entry stays visible with its symptom instead of being removed.\n\nThe laptop table, consulted on 2026-10-18, includes the Acer Aspire One ZG8 reported as working, the Acer Aspire AS3810T reported as not working because it hangs after the operating system banner when booting from a USB DVD, the Dell Latitude D420 reported as not working, and the HP EliteBook 2170p reported as not working with the hipster-20190308 image because wireless does not work, with a reference to the bug report. The same page lists, among servers, the HP ProLiant Microserver N40L and the SuperMicro SuperServer 6016T-MTHF as working without special drivers, and the Zotac Zbox ID-18U as working except for Intel graphics, limited to VGA, and USB 3, for which no driver is available.\n\nThe page metadata gives a creation date of 2019-07-29 and a last update of 2026-05-24, which situates the list in time and dates its most recent revision."
   },
+  "components": [
+    {
+      "id": "illumos-gate",
+      "name": "illumos-gate",
+      "role": "operating_system_kernel",
+      "note": "\"illumos-gate includes the illumos kernel, along with many of the device drivers, core libraries, and system utilities\"; \"To form a complete distribution, the OpenIndiana project combines illumos-gate with oi-userland, and with other free and open-source software\" (About OpenIndiana, docs.openindiana.org/misc/openindiana/)."
+    },
+    {
+      "id": "oi-userland",
+      "name": "oi-userland",
+      "role": "build_system",
+      "note": "\"To form a complete distribution, the OpenIndiana project combines illumos-gate with oi-userland, and with other free and open-source software\"; the documentation carries a \"Building with oi-userland\" section (About OpenIndiana)."
+    },
+    {
+      "id": "ips",
+      "name": "IPS",
+      "role": "package_manager",
+      "note": "\"OpenIndiana uses the network based Image Packaging System (IPS)\"; \"You may also continue to use the legacy pkgadd/pkgrm commands\" (About OpenIndiana, \"What package manager does OpenIndiana use?\")."
+    },
+    {
+      "id": "mate",
+      "name": "MATE",
+      "role": "desktop_environment",
+      "note": "\"By default, the windowing GUI system is based on the popular Mate system\" (About OpenIndiana); the handbook table gives \"Live installer (Mate desktop)\" and documents \"pkg install mate_install\", and the 2026.04 announcement lists a \"Mate desktop 1.28 refresh\". The release-schedule table on the same About page lists the live installer as \"(Gnome desktop)\"."
+    }
+  ],
   "relations": [
     {
       "id": "illumos",
@@ -73,6 +99,16 @@
       "note": "Fellow user-friendly Unix-like desktop system featuring the MATE desktop and native ZFS boot environments."
     }
   ],
+  "variants": [
+    {
+      "name": "OpenIndiana Hipster 2026.04 (snapshot)",
+      "description": "Current Hipster snapshot, published as Live DVD, Live USB, Text Install and Minimal Install images for 64-bit x86 and announced on 5 May 2026; the About page states that the project \"releases a snapshot of the Hipster rolling release branch\" approximately every six months."
+    },
+    {
+      "name": "oi-dev-151x (legacy branch)",
+      "description": "The About page states that \"the legacy oi-dev-151x branch is no longer maintained\"; upgrades to Hipster remain possible, with a clean install described as the most trouble-free method."
+    }
+  ],
   "links": {
     "home": "https://www.openindiana.org/",
     "documentation": "https://docs.openindiana.org/",
@@ -82,7 +118,7 @@
   },
   "sources": [
     {
-      "title": "About OpenIndiana — héritage OpenSolaris, base illumos, MATE et IPS",
+      "title": "About OpenIndiana — OpenSolaris heritage, illumos base, MATE and IPS",
       "url": "https://docs.openindiana.org/misc/openindiana/",
       "type": "official_documentation",
       "date": "2026-10-16"
@@ -112,7 +148,7 @@
       "date": "2026-10-18"
     },
     {
-      "title": "illumos - projet amont, distributions en aval",
+      "title": "illumos - upstream project, downstream distributions",
       "url": "https://www.illumos.org/",
       "type": "official",
       "date": "2026-10-18"

@@ -2,7 +2,7 @@
   "id": "proxmox-ve",
   "name": "Proxmox VE",
   "type": "operating_system",
-  "summary": "Plateforme open source de virtualisation d'entreprise et de conteneurisation basée sur Debian GNU/Linux, associant l'hyperviseur KVM, les conteneurs LXC, le système de fichiers de cluster distribué pmxcfs et le stockage Ceph/ZFS sous une interface web unifiée.",
+  "summary": "Open-source enterprise virtualisation and containerisation platform based on Debian GNU/Linux, combining the KVM hypervisor, LXC containers, the pmxcfs distributed cluster file system and Ceph/ZFS storage under a unified web interface.",
   "tags": [
     "hypervisor",
     "virtualization",
@@ -21,47 +21,47 @@
   "license": "GNU AGPLv3 (Affero General Public License v3)",
   "last_verified": "2026-10-19",
   "content": {
-    "introduction": "Proxmox VE (Proxmox Virtual Environment) est une solution logicielle open source complète de virtualisation d'entreprise développée par la société autrichienne Proxmox Server Solutions GmbH. Conçue pour simplifier la gestion de centres de données et d'infrastructures informatiques virtualisées, elle combine deux technologies de virtualisation majeures — l'hyperviseur KVM et les conteneurs système LXC — au sein d'une interface d'administration web unifiée.",
-    "what_is_it": "Techniquement, Proxmox VE s'installe sur du matériel standard x86-64 comme une distribution spécialisée reposant sur le socle Debian GNU/Linux. Elle intègre un noyau Linux personnalisé maintenu par Proxmox (suivant les branches LTS du noyau Ubuntu/Linux amont), optimisé avec les pilotes matériels nécessaires, la prise en charge native d'OpenZFS, de Ceph et de la virtualisation KVM. La plateforme transforme des serveurs physiques individuels en nœuds de calcul et de stockage capables de fonctionner de manière autonome ou groupés en grappes haute disponibilité.",
-    "dual_virtualization_kvm_and_lxc": "L'un des fondements architecturaux de Proxmox VE réside dans sa dualité technologique. Pour l'exécution de systèmes d'exploitation invités hétérogènes (Microsoft Windows, distributions Linux diverses, systèmes BSD), Proxmox VE exploite l'hyperviseur QEMU/KVM avec virtualisation matérielle assistée (Intel VT-x et AMD-V) et prise en charge du relais direct de périphériques PCI (PCIe passthrough). Pour les charges de travail Linux nécessitant des performances d'E/S maximales et une faible empreinte mémoire, la plateforme propose des conteneurs système LXC (Linux Containers), qui partagent le noyau de l'hôte sans couche d'émulation intermédiaire.",
-    "clustering_and_cluster_filesystem_pmxcfs": "La gestion en grappe (cluster) de Proxmox VE adopte une architecture multi-maître décentralisée sans nœud de gestion dédié unique. Cette coordination repose sur le système de fichiers exclusif pmxcfs (Proxmox Cluster File System). Conçu comme une base de données SQLite persistante sur disque répliquée en mémoire vive (RAM, jusqu'à 128 Mo), pmxcfs synchronise en temps réel la configuration des milliers de machines virtuelles et de conteneurs sur tous les nœuds de la grappe via le moteur de messagerie et de quorum Corosync (protocole Totem). Tout nœud connecté peut ainsi piloter l'ensemble de la grappe sans risque de point individuel de panne (SPOF).",
-    "storage_integration_ceph_zfs_and_backup": "Proxmox VE offre une prise en charge native approfondie des architectures de stockage locales et distribuées. Il intègre directement la gestion d'OpenZFS pour le stockage local résilient (RAIDZ, miroirs, instantanés et réplication asynchrone programmée) ainsi que LVM-thin. À l'échelle de la grappe, Proxmox VE intègre une pile complète de gestion du stockage distribué Ceph (serveurs MON, MGR, OSD et métadonnées MDS), administrable directement depuis l'interface web pour fournir du stockage en blocs RBD et des systèmes de fichiers partagés CephFS. La solution s'interface également nativement avec Proxmox Backup Server (PBS) pour exécuter des sauvegardes incrémentales, dédupliquées à la source et chiffrées côté client.",
-    "management_interface_and_rest_api": "L'administration quotidienne s'effectue intégralement via une interface graphique web sécurisée HTTPS basée sur ExtJS, sans nécessiter d'agent lourd sur les postes clients. L'interface offre la surveillance en direct des ressources matérielles, la gestion du réseau logiciel (SDN, VLANs, ponts Linux, Open vSwitch), la configuration du pare-feu intégré par machine ou à l'échelle du cluster, et la console graphique HTML5 (noVNC ou SPICE). Toutes les actions sont relayées par une API RESTful complète exposée par les services d'arrière-plan, rendant la plateforme entièrement automatisable via des scripts en ligne de commande (`pvesh`), Terraform, Ansible ou Packer.",
-    "release_history_9_2": "La version 9.2 est sortie le 21 mai 2026. Elle repose sur Debian Trixie (13.5), avec le noyau Linux 7.0 comme version stable par défaut, QEMU 11.0, LXC 7.0, ZFS 2.4 et Ceph Squid 19.2.3 ou Tentacle 20.2.1. La feuille de route officielle y associe l'équilibrage de charge dynamique du Cluster Resource Scheduler. La version arm64, publiée le 5 août 2026, s'appuie sur Debian Trixie 13.6 et Ceph Tentacle 20.2.3.",
-    "arm64_port_and_limits": "Proxmox VE 9.2 pour arm64 est la première publication du produit pour une architecture autre que x86-64. Elle est pleinement supportée sur les plateformes d'entreprise NVIDIA Grace et NVIDIA Vera, et sur les autres matériels ARMv9-A ou plus récents compatibles UEFI en support « best effort ». Les hôtes doivent démarrer en UEFI et décrire leur matériel par ACPI : les cartes à arbre de périphériques (device-tree) comme le Raspberry Pi ne sont pas prises en charge. Certaines fonctions x86 sont absentes, dont SeaBIOS pour les machines virtuelles, AMD SEV et Intel GVT-g ; la migration à chaud n'est possible qu'entre nœuds de même architecture. Les dépôts, les outils et le cycle de publication sont communs aux deux architectures.",
-    "installation_and_update_paths": "L'installation se fait à partir d'une image ISO gravée sur USB ou CD-ROM, ou bien sur une installation Debian existante convertie. Les mises à jour système proviennent des dépôts de paquets ; le wiki recommande de les appliquer fréquemment pour recevoir les correctifs de sécurité et les nouvelles fonctions. La montée de version majeure est documentée par un guide dédié, par exemple de la 8 vers la 9, et une table des versions supportées indique la version courante et la date de fin de vie des versions antérieures.",
-    "cluster_resource_scheduler": "Le Cluster Resource Scheduler (CRS) gère l'équilibrage de charge de la grappe. Dans son mode dynamique, il exploite les métriques d'utilisation des nœuds et des invités en temps réel pour répartir les invités gérés par le gestionnaire de haute disponibilité, et peut les migrer automatiquement afin de réduire le déséquilibre global entre nœuds. Le comportement et la sensibilité du mécanisme sont configurables. Cette fonction apparaît parmi les nouveautés mises en avant par la feuille de route de la version 9.2.",
-    "documentation_and_support": "La documentation de référence est le wiki officiel du projet, qui regroupe la documentation d'administration, les guides d'installation et de migration, la feuille de route des versions et les tables de support. Les annonces de version renvoient au forum du projet. Le code source est réparti sur les dépôts publics de Proxmox, et les échanges techniques passent par la liste de diffusion et le forum cités par le projet.",
+    "introduction": "Proxmox VE (Proxmox Virtual Environment) is a complete open-source enterprise virtualisation software solution developed by the Austrian company Proxmox Server Solutions GmbH. Designed to simplify the management of data centres and virtualised computing infrastructures, it combines two major virtualisation technologies, the KVM hypervisor and LXC system containers, within a unified web administration interface.",
+    "what_is_it": "Technically, Proxmox VE is installed on standard x86-64 hardware as a specialised distribution resting on the Debian GNU/Linux foundation. It integrates a custom Linux kernel maintained by Proxmox (following the LTS branches of the upstream Ubuntu/Linux kernel), optimised with the necessary hardware drivers and native support for OpenZFS, Ceph and KVM virtualisation. The platform turns individual physical servers into computing and storage nodes capable of operating autonomously or grouped into high-availability clusters.",
+    "dual_virtualization_kvm_and_lxc": "One of the architectural foundations of Proxmox VE lies in its technological duality. For the execution of heterogeneous guest operating systems (Microsoft Windows, various Linux distributions, BSD systems), Proxmox VE uses the QEMU/KVM hypervisor with assisted hardware virtualisation (Intel VT-x and AMD-V) and support for direct PCI device passthrough (PCIe passthrough). For Linux workloads requiring maximum I/O performance and a low memory footprint, the platform offers LXC system containers (Linux Containers), which share the host kernel without an intermediate emulation layer.",
+    "clustering_and_cluster_filesystem_pmxcfs": "Cluster management in Proxmox VE adopts a decentralised multi-master architecture without a single dedicated management node. This coordination rests on the exclusive pmxcfs file system (Proxmox Cluster File System). Designed as an SQLite database persisted on disk and replicated in RAM (up to 128 MB), pmxcfs synchronises in real time the configuration of thousands of virtual machines and containers on all the nodes of the cluster through the Corosync messaging and quorum engine (Totem protocol). Any connected node can thus drive the whole cluster without risk of a single point of failure (SPOF).",
+    "storage_integration_ceph_zfs_and_backup": "Proxmox VE offers in-depth native support for local and distributed storage architectures. It directly integrates OpenZFS management for resilient local storage (RAIDZ, mirrors, snapshots and scheduled asynchronous replication) as well as LVM-thin. At cluster scale, Proxmox VE integrates a complete distributed storage management stack for Ceph (MON, MGR, OSD and MDS metadata servers), administrable directly from the web interface to provide RBD block storage and shared CephFS file systems. The solution also interfaces natively with Proxmox Backup Server (PBS) to run incremental backups, deduplicated at the source and encrypted on the client side.",
+    "management_interface_and_rest_api": "Day-to-day administration is carried out entirely through a secure HTTPS web graphical interface based on ExtJS, without requiring a heavy agent on client machines. The interface offers live monitoring of hardware resources, software network management (SDN, VLANs, Linux bridges, Open vSwitch), configuration of the integrated firewall per machine or at cluster scale, and the HTML5 graphical console (noVNC or SPICE). All actions are relayed by a complete RESTful API exposed by the background services, making the platform fully automatable through command-line scripts (`pvesh`), Terraform, Ansible or Packer.",
+    "release_history_9_2": "Version 9.2 was released on 21 May 2026. It rests on Debian Trixie (13.5), with the Linux 7.0 kernel as the default stable version, QEMU 11.0, LXC 7.0, ZFS 2.4 and Ceph Squid 19.2.3 or Tentacle 20.2.1. The official roadmap associates it with the dynamic load balancing of the Cluster Resource Scheduler. The arm64 version, published on 5 August 2026, relies on Debian Trixie 13.6 and Ceph Tentacle 20.2.3.",
+    "arm64_port_and_limits": "Proxmox VE 9.2 for arm64 is the first publication of the product for an architecture other than x86-64. It is fully supported on the NVIDIA Grace and NVIDIA Vera enterprise platforms, and on other ARMv9-A or more recent hardware compatible with UEFI under \"best effort\" support. Hosts must boot in UEFI and describe their hardware through ACPI: device-tree boards such as the Raspberry Pi are not supported. Some x86 features are absent, including SeaBIOS for virtual machines, AMD SEV and Intel GVT-g; live migration is possible only between nodes of the same architecture. The repositories, the tools and the release cycle are common to both architectures.",
+    "installation_and_update_paths": "Installation is done from an ISO image burned to USB or CD-ROM, or on an existing Debian installation converted for the purpose. System updates come from the package repositories; the wiki recommends applying them frequently in order to receive security fixes and new features. Major version upgrades are documented by a dedicated guide, for example from 8 to 9, and a table of supported versions indicates the current version and the end-of-life date of earlier versions.",
+    "cluster_resource_scheduler": "The Cluster Resource Scheduler (CRS) handles load balancing of the cluster. In its dynamic mode, it uses the real-time usage metrics of nodes and guests to distribute the guests managed by the high-availability manager, and can migrate them automatically in order to reduce the overall imbalance between nodes. The behaviour and sensitivity of the mechanism are configurable. This feature appears among the novelties highlighted by the roadmap of version 9.2.",
+    "documentation_and_support": "The reference documentation is the official wiki of the project, which groups the administration documentation, the installation and migration guides, the version roadmap and the support tables. Release announcements refer to the project forum. The source code is spread over the public Proxmox repositories, and technical exchanges go through the mailing list and the forum cited by the project.",
     "container_security_and_access_control": "The administration guide states the isolation boundary explicitly: containers share the host kernel, which exposes an attack surface, and full virtual machines provide better isolation when containers are offered to untrusted users. LXC compensates with AppArmor profiles that restrict dangerous actions such as mount, with control groups that organise processes hierarchically, and with kernel namespaces; disabling AppArmor for a container by setting `lxc.apparmor.profile = unconfined` is documented as not recommended for production, since misconfiguration or a kernel flaw can then allow privilege escalation inside the guest. Access to the management layer is separated from the guest layer: authentication realms can be local, Microsoft AD or LDAP, permissions are role-based on every object - virtual machines, storage and nodes - and two-factor authentication is available through OATH and YubiKey.",
     "debian_base_and_proxmox_kernel": "Proxmox VE is a Debian GNU/Linux system with additional repositories that carry the Proxmox packages, so the Debian archive remains available in full, including its security updates and bug fixes, alongside the project's own packages. The kernel is not the stock Debian one: Proxmox builds its own Linux kernel from an Ubuntu kernel base and enables the virtualisation and container features the platform expects, which is why kernel upgrades arrive through the Proxmox repositories and not from the distribution the system was installed from. The install ISO contains a complete Debian system plus the Proxmox packages, and the support table in the FAQ maps each Proxmox VE release to the Debian release it builds on.",
     "advantages": [
-      "Solution logicielle entièrement open source sous licence stricte GNU AGPLv3, sans fonctionnalités réservées aux versions fermées.",
-      "Dualité de virtualisation performante : hyperviseur complet KVM pour l'isolation totale et conteneurs légers LXC pour la densité de calcul.",
-      "Architecture de cluster multi-maître sans contrôleur central unique grâce au système de fichiers répliqué pmxcfs et Corosync.",
-      "Prise en charge native intégrée des technologies de stockage d'entreprise OpenZFS et Ceph directement dans l'interface web.",
-      "Migration à chaud sans coupure de service (live migration) des machines virtuelles KVM et des conteneurs LXC entre nœuds du cluster.",
-      "API RESTful exhaustive et intégration native avec Proxmox Backup Server pour la sauvegarde incrémentale dédupliquée."
+      "Fully open-source software solution under the strict GNU AGPLv3 licence, without features reserved for closed versions.",
+      "High-performance virtualisation duality: complete KVM hypervisor for total isolation and lightweight LXC containers for computing density.",
+      "Multi-master cluster architecture without a single central controller thanks to the replicated pmxcfs file system and Corosync.",
+      "Native built-in support for the OpenZFS and Ceph enterprise storage technologies directly in the web interface.",
+      "Live migration without service interruption of KVM virtual machines and LXC containers between cluster nodes.",
+      "Exhaustive RESTful API and native integration with Proxmox Backup Server for deduplicated incremental backup."
     ],
     "disadvantages": [
-      "Le modèle économique réserve le dépôt de paquets de production hautement stabilisé (Enterprise Repository) et le support professionnel aux abonnements payants.",
-      "Courbe d'apprentissage exigeante pour la configuration optimale des paramètres de quorum Corosync, du stockage Ceph et des réseaux SDN.",
-      "Sensibilité élevée de Corosync aux variations de latence réseau, nécessitant impérativement un réseau dédié physique pour les communications de cluster.",
-      "Prise en charge officielle limitée à l'architecture processeur x86-64 pour les environnements de production d'entreprise.",
-      "Gestion des sauvegardes natives sans PBS plus basique en termes de vitesse et de volume de rétention."
+      "The business model reserves the highly stabilised production package repository (Enterprise Repository) and professional support for paid subscriptions.",
+      "Demanding learning curve for the optimal configuration of Corosync quorum parameters, Ceph storage and SDN networks.",
+      "High sensitivity of Corosync to network latency variations, imperatively requiring a dedicated physical network for cluster communications.",
+      "Official support limited to the x86-64 processor architecture for enterprise production environments.",
+      "Native backup management without PBS more basic in terms of speed and retention volume."
     ],
     "who_is_it_for": [
-      "Administrateurs systèmes et équipes d'infrastructure d'entreprise cherchant une alternative open source éprouvée aux suites de virtualisation propriétaires (VMware vSphere, Nutanix, Hyper-V).",
-      "Hébergeurs, fournisseurs de services managés et opérateurs télécoms déployant des clusters de virtualisation et de conteneurs haute disponibilité.",
-      "Équipes DevOps nécessitant une plateforme unifiée et scriptable par API pour instancier des environnements de test, d'intégration et de production.",
-      "Passionnés d'informatique et professionnels du homelab gérant des serveurs personnels polyvalents avec stockage ZFS et conteneurs LXC."
+      "System administrators and enterprise infrastructure teams looking for a proven open-source alternative to proprietary virtualisation suites (VMware vSphere, Nutanix, Hyper-V).",
+      "Hosting companies, managed service providers and telecom operators deploying high-availability virtualisation and container clusters.",
+      "DevOps teams requiring a unified platform that can be scripted through API to instantiate test, integration and production environments.",
+      "Computing enthusiasts and homelab professionals managing versatile personal servers with ZFS storage and LXC containers."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs débutants recherchant un hyperviseur de bureau simple pour tester occasionnellement un système (VirtualBox ou VMware Workstation étant plus adaptés).",
-      "Infrastructures reposant exclusivement sur des processeurs ARM64 ou RISC-V en production commerciale sans support officiel de l'éditeur.",
-      "Organisations exigeant un support commercial téléphonique 24/7 sans être disposées à souscrire un contrat de maintenance auprès de l'éditeur.",
-      "Environnements de micro-services exigeant une orchestration native Kubernetes sans couche d'hyperviseur sous-jacente."
+      "Beginner users looking for a simple desktop hypervisor to test a system occasionally (VirtualBox or VMware Workstation being better suited).",
+      "Infrastructures relying exclusively on ARM64 or RISC-V processors in commercial production without official support from the publisher.",
+      "Organisations requiring 24/7 commercial telephone support without being willing to subscribe to a maintenance contract with the publisher.",
+      "Microservices environments requiring native Kubernetes orchestration without an underlying hypervisor layer."
     ],
-    "verdict": "Proxmox VE est une plateforme de virtualisation et de cloud privé open source. Bâtie sur Debian et l'hyperviseur KVM, elle se distingue par son architecture multi-maître (pmxcfs), son intégration de Ceph et ZFS, et sa console d'administration web, pour les centres de données comme pour les environnements de laboratoire."
+    "verdict": "Proxmox VE is an open-source virtualisation and private cloud platform. Built on Debian and the KVM hypervisor, it stands out through its multi-master architecture (pmxcfs), its integration of Ceph and ZFS, and its web administration console, for data centres as well as laboratory environments."
   },
   "components": [
     {
@@ -94,65 +94,65 @@
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "note": "Distribution Linux servant de socle fondamental pour le système d'exploitation et les paquets de base de Proxmox VE."
+      "note": "Linux distribution serving as the fundamental foundation for the operating system and base packages of Proxmox VE."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
       "type": "related",
-      "note": "Distribution Linux dont les versions de noyau LTS servent de base de suivi pour le noyau Linux personnalisé de Proxmox VE."
+      "note": "Linux distribution whose LTS kernel versions serve as the tracking basis for the custom Linux kernel of Proxmox VE."
     },
     {
       "id": "truenas",
       "name": "TrueNAS",
       "type": "alternative",
-      "note": "Système d'exploitation de stockage en réseau unifié basé sur OpenZFS, fréquemment associé à Proxmox VE ou utilisé en solution alternative de stockage."
+      "note": "Unified network storage operating system based on OpenZFS, frequently associated with Proxmox VE or used as an alternative storage solution."
     },
     {
       "id": "openmediavault",
       "name": "OpenMediaVault",
       "type": "alternative",
-      "note": "Solution de stockage en réseau basée sur Debian GNU/Linux offrant une gestion simplifiée de partages et de services légers."
+      "note": "Network storage solution based on Debian GNU/Linux offering simplified management of shares and lightweight services."
     }
   ],
   "links": [
     {
-      "label": "Site officiel de Proxmox Virtual Environment",
+      "label": "Official Proxmox Virtual Environment website",
       "url": "https://www.proxmox.com/en/proxmox-virtual-environment/overview"
     },
     {
-      "label": "Guide officiel d'administration Proxmox VE (Administration Guide)",
+      "label": "Official Proxmox VE administration guide (Administration Guide)",
       "url": "https://pve.proxmox.com/pve-docs/pve-admin-guide.html"
     },
     {
-      "label": "Wiki officiel et documentation communautaire Proxmox VE",
+      "label": "Official wiki and Proxmox VE community documentation",
       "url": "https://pve.proxmox.com/wiki/Introduction"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel et présentation produit Proxmox VE",
+      "title": "Official portal and product presentation of Proxmox VE",
       "url": "https://www.proxmox.com/en/proxmox-virtual-environment/overview",
       "type": "official_site"
     },
     {
-      "title": "Guide d'administration et d'architecture Proxmox VE",
+      "title": "Proxmox VE administration and architecture guide",
       "url": "https://pve.proxmox.com/pve-docs/pve-admin-guide.html",
       "type": "documentation"
     },
     {
-      "title": "Dépôts de code source et composants système Proxmox VE",
+      "title": "Proxmox VE source code repositories and system components",
       "url": "https://git.proxmox.com/",
       "type": "repository"
     },
     {
-      "title": "Feuille de route Proxmox VE : versions 9.2 et 9.2 pour arm64",
+      "title": "Proxmox VE roadmap: versions 9.2 and 9.2 for arm64",
       "url": "https://pve.proxmox.com/wiki/Roadmap",
       "type": "official_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Page principale du wiki Proxmox VE : installation, mises à jour, versions supportées",
+      "title": "Main page of the Proxmox VE wiki: installation, updates, supported versions",
       "url": "https://pve.proxmox.com/wiki/Main_Page",
       "type": "official_documentation",
       "accessed": "2026-10-18"

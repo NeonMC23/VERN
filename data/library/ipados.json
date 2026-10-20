@@ -2,7 +2,7 @@
   "id": "ipados",
   "name": "iPadOS",
   "type": "operating_system",
-  "summary": "Système d'exploitation propriétaire développé par Apple Inc. pour l'iPad, dérivé du socle Darwin/XNU et enrichi d'un multitâche fenêtré avancé, de la gestion du stylet Apple Pencil et d'écrans externes.",
+  "summary": "Proprietary operating system developed by Apple Inc. for the iPad, derived from the Darwin/XNU foundation and extended with advanced windowed multitasking, Apple Pencil stylus support and external displays.",
   "tags": [
     "tablet",
     "apple",
@@ -17,140 +17,140 @@
   "platforms": [
     "ARM64"
   ],
-  "license": "Propriétaire commercial (avec composants de bas niveau open source sous licences APSL et BSD)",
+  "license": "Proprietary commercial (with low-level components released under the APSL and BSD licences)",
   "last_verified": "2026-10-19",
   "content": {
-    "introduction": "iPadOS est le système d'exploitation propriétaire conçu par Apple Inc. spécifiquement pour sa famille de tablettes iPad (iPad standard, iPad mini, iPad Air et iPad Pro). De 2010 à 2019, l'iPad fonctionnait sous une version adaptée d'iOS. Lors de la WWDC de juin 2019, Apple a officialisé la séparation entre les deux plateformes en introduisant iPadOS (version initiale 13.1), dans le but de proposer une expérience informatique distincte orientée vers la productivité sur grand écran tactile, l'usage bureautique, le stylet actif et les périphériques de pointage externes.",
-    "what_is_it": "Techniquement, iPadOS partage les fondations logicielles de base d'iOS et de macOS : le système Darwin et son noyau hybride XNU (alliant le micro-noyau Mach 3.0, une couche de services de type BSD et le framework de pilotes DriverKit), ainsi que le système de fichiers APFS. Toutefois, iPadOS s'en distingue nettement par une couche d'abstraction fenêtrée propre, conçue pour exploiter des diagonales d'écran de 8,3 à 13 pouces et gérer des scénarios de travail hybrides associant commandes tactiles, curseur dynamique pour souris/trackpad et saisie au stylet de haute précision.",
-    "origine_et_lancement_d_ipados": "Apple a présente iPadOS le 3 juin 2019 à San Jose comme un système doté d'un nouveau nom, destiné à reconnaître l'expérience propre à l'iPad. Le communiqué précise qu'iPadOS s'appuie sur la même fondation qu'iOS tout en ajoutant des capacités adaptées au grand écran et à la polyvalence de l'appareil, et qu'il bénéficie des nouveautés d'iOS 13. Le 24 septembre 2019, Apple annonce qu'iPadOS est disponible ce jour-là comme mise à jour gratuite pour l'iPad Air 2 et modèles ultérieurs, tous les modèles d'iPad Pro, l'iPad de 5e génération et modèles ultérieurs, et l'iPad mini 4 et modèles ultérieurs. Le même communiqué fixe au 25 septembre 2019 le début d'expédition du septième iPad et annonce un prix de départ de 329 dollars.\n\nCes deux textes constituent la référence de périmètre : iPadOS y est nommé comme un système distinct, mais décrit comme partageant la fondation d'iOS, et les documents Apple qui suivent continuent de traiter les deux plates-formes séparément.",
-    "advanced_multitasking_and_stage_manager": "L'un des éléments distinctifs d'iPadOS réside dans ses mécanismes de multitâche. Le système propose historiquement les modes *Split View* (deux applications actives juxtaposées avec séparation redimensionnable) et *Slide Over* (application secondaire flottante escamotable par balayage). Introduit avec iPadOS 16, **Stage Manager** (*Visualisateur d'équipe*) introduit un gestionnaire de fenêtres superposables et redimensionnables, permettant d'organiser jusqu'à quatre fenêtres simultanées sur l'écran de la tablette. Sur les modèles d'iPad équipés de puces Apple Silicon série M (M1, M2, M4) ou de certaines puces A récentes, Stage Manager prend en charge l'extension du bureau sur un écran externe haute résolution (jusqu'à 6K en USB-C/Thunderbolt) avec quatre fenêtres supplémentaires, portant à huit le nombre d'applications actives simultanées.",
-    "apple_pencil_integration_and_pointer_system": "iPadOS intègre une prise en charge approfondie de l'Apple Pencil via le framework système **PencilKit**, garantissant un temps de latence réduit à quelques millisecondes et un rejet rigoureux de la paume (palm rejection). La technologie **Scribble** (*Griffonner*) permet la reconnaissance optique de l'écriture manuscrite en temps réel directement dans n'importe quel champ de saisie textuel du système. Pour les périphériques de pointage, iPadOS met en œuvre un curseur dynamique : représenté sous forme d'un cercle semi-transparent, il se métamorphose et s'aimante aux boutons, icônes et menus contextuels lors du survol, préservant l'intuitivité de l'interface tactile tout en autorisant une grande précision bureautique.",
-    "desktop_class_safari_and_files_management": "Pour renforcer la productivité bureautique, le navigateur web Safari sur iPadOS s'identifie par défaut avec un en-tête d'agent utilisateur (user-agent) de bureau Mac, permettant d'exécuter des applications web complexes sans basculer vers des interfaces mobiles allégées. L'application native Fichiers (Files) prend en charge la gestion complète des supports de stockage amovibles (clés USB, lecteurs de cartes SD, disques durs externes et volumes réseau SMB) formatés en APFS, HFS+, FAT32 ou exFAT. Le système bénéficie également de raccourcis clavier étendus pour les claviers physiques externes.",
-    "hardware_limits_and_feature_segmentation": "iPadOS fonctionne exclusivement sur les puces Apple Silicon ARM64 (séries A et M). Cependant, l'accès à certaines fonctionnalités avancées est conditionné par la puissance matérielle de chaque modèle : les iPad d'entrée de gamme à puces série A restent limités au multitâche par Split View et Slide Over sans prise en charge de Stage Manager ni du bureau étendu sur moniteur externe. La sécurité du système repose sur la même architecture rigoureuse qu'iOS (Secure Enclave, volume système scellé SSV, chiffrement matériel APFS, bac à sable strict et signature obligatoire du code). La distribution applicative s'effectue au travers de l'App Store et des places de marché alternatives dans l'Union Européenne en conformité avec le DMA.",
-    "versions_and_device_support": "La version présentée par Apple sur apple.com/ipados est iPadOS 27. La liste de compatibilité couvre l'iPad Pro de 4e génération et ultérieurs (puce M1 et suivantes), l'iPad Air de 4e génération et ultérieurs (puce M2 et suivantes), l'iPad de 9e génération et ultérieurs, et l'iPad mini de 6e génération. Les modèles antérieurs ne reçoivent pas cette version, et la liste publiée fait foi par rapport aux capacités matérielles annoncées lors de la commercialisation.",
-    "installation_et_mises_a_jour_logicielles": "Apple documente deux voies de mise à jour d'iPadOS. La voie sans fil passe par Réglages, Général, Mise à jour logicielle : l'écran affiche la version installée et l'existence d'une mise à jour, puis l'utilisateur lance l'option de téléchargement et d'installation. La page d'assistance précise que l'appareil doit être branché sur secteur et connecté en Wi-Fi, que certaines mises à jour ne sont pas proposées sans fil et que des connexions VPN ou proxy peuvent empêcher l'appareil de joindre les serveurs de mise à jour. Si l'espace manque, le système peut retirer temporairement des applications, réinstallées automatiquement une fois l'installation terminée.\n\nLorsque la mise à jour n'apparaît pas sur l'appareil, la page d'assistance renvoie à une mise à jour par ordinateur et distingue deux procédures : l'une pour un Mac sous macOS Catalina ou ultérieur, l'autre pour un Mac sous macOS Mojave ou antérieur et pour un PC Windows. Les réglages de mise à jour automatique proposent l'installation automatique, l'appareil téléchargeant et installant alors la mise à jour pendant la nuit, sur secteur et en Wi-Fi, avec une notification avant l'installation, ainsi que le téléchargement automatique en arrière-plan. Un réglage distinct, placé sous « fichiers système », commande le téléchargement et l'installation automatiques de mises à jour de fichiers système qui améliorent des fonctions sans changer la version du logiciel.",
-    "apple_intelligence_on_ipad": "Apple indique qu'Apple Intelligence fonctionne sous iPadOS 27 sur l'iPad mini équipé de la puce A17 Pro et sur les modèles dotés d'une puce M1 ou ultérieure. La langue de l'appareil et celle de Siri doivent être identiques et figurer parmi les langues prises en charge, dont le français. L'espace libre requis atteint jusqu'à 14 Go sur les iPad à puce M4 ou ultérieure, et jusqu'à 8 Go sur les autres modèles compatibles. Siri AI est distribué en version bêta ; l'accès aux fonctions dépend donc du modèle, y compris parmi les iPad compatibles avec iPadOS 27.",
-    "differences_with_ios": "iPadOS et iOS partagent le noyau XNU, le système de fichiers APFS et la majeure partie des frameworks, mais Apple les publie comme deux systèmes distincts depuis 2019, avec deux pages de nouveautés et deux listes d'appareils compatibles. Les fonctions avancées restent en outre conditionnées au modèle d'iPad : la liste de compatibilité iOS 27 et celle d'iPadOS 27 ne mentionnent ni les mêmes appareils ni les mêmes prérequis matériels.",
-    "documentation_and_resources": "Apple publie sur apple.com/ipados les nouveautés de la version courante et la liste des appareils compatibles, et maintient un guide d'utilisation de l'iPad décliné par version du système (iPadOS 27, 26, 18, 17, 16, 15, 14 et 13 dans la sélection proposée). Un article d'assistance détaille les prérequis d'Apple Intelligence. Aucune durée de prise en charge garantie n'est publiée : la compatibilité se constate version par version.",
-    "security_model_and_update_disclosure_policy": "Apple publie un guide de sécurité des plates-formes daté d'août 2026 et couvrant iPadOS 26.5. Le document place une racine de confiance matérielle dans la Boot ROM, décrit des moteurs AES dédiés et l'enclave sécurisée, puis traite le démarrage vérifié, l'intégrité du volume système signé, les mises à jour logicielles signées et les correctifs de sécurité d'arrière-plan. La signature de code des applications possède une section propre à iOS, iPadOS et visionOS ; la protection des données, le mode verrouillage présenté comme une protection extrême facultative et la sécurité réseau (TLS, VPN, Wi-Fi) figurent également au sommaire. Le rythme de publication est décrit par la page des versions de sécurité d'Apple : iOS et iPadOS 27.0.1 datent du 28 septembre 2026 sans entrée CVE publiée, 26.7.1 du 28 septembre 2026, 27 du 23 septembre 2026 et 26.7 du 14 septembre 2026, avec pour chaque mise à jour la liste des iPad compatibles, par exemple iPad de neuvième génération et ultérieurs ou iPad Pro 12,9 pouces de quatrième génération et ultérieurs. La même page indique qu'une mise à jour installée ne peut pas être rétrogradée et qu'Apple ne commente une faille qu'après enquête et disponibilité du correctif ; ces éléments décrivent une politique de publication, pas une durée de support promise par version.",
-    "app_store_et_canaux_de_mise_a_disposition_des_applications": "Apple distingue plusieurs canaux de distribution des applications sur iPad. Le canal public est l'App Store, où l'utilisateur achète ou télécharge l'application. Pour les organisations, le guide de déploiement décrit l'achat en volume dans la section Apps and Books d'Apple School Manager ou d'Apple Business, qui permet d'attribuer des licences à des appareils ou à des utilisateurs et d'installer les applications à distance, y compris lorsque l'application App Store a été retirée de l'appareil ; les achats intégrés et les abonnements ne sont pas compatibles avec ce modèle.\n\nLes applications gérées sont installées par un service de gestion des appareils, soit par la commande InstallApplication, soit par la gestion déclarative des applications à partir d'iPadOS 17.2 ; dans ce second cas, une version précise de l'application peut être définie et les mises à jour sont appliquées silencieusement, l'utilisateur n'étant sollicité que lorsque l'application est au premier plan. Les Custom Apps, réservées aux organisations, passent par App Store Connect et une revue Apple avant une diffusion privée dans Apple School Manager ou Apple Business. Une entreprise peut aussi diffuser ses applications internes avec l'Apple Developer Enterprise Program : le fichier .ipa doit être accompagné d'un manifeste XML, servi en HTTPS avec un certificat reconnu par l'appareil, et le profil de provisionnement de distribution expire 12 mois après son émission. Les applications non listées restent publiées sur l'App Store mais ne sont accessibles que par un lien direct.",
+    "introduction": "iPadOS is the proprietary operating system designed by Apple Inc. specifically for its iPad tablet family (standard iPad, iPad mini, iPad Air and iPad Pro). From 2010 to 2019, the iPad ran an adapted version of iOS. At WWDC in June 2019, Apple formalised the split between the two platforms by introducing iPadOS (initial version 13.1), with the aim of offering a distinct computing experience oriented towards productivity on a large touch screen, office use, the active stylus and external pointing devices.",
+    "what_is_it": "Technically, iPadOS shares the basic software foundations of iOS and macOS: the Darwin system and its hybrid XNU kernel (combining the Mach 3.0 microkernel, a BSD-type services layer and the DriverKit driver framework), as well as the APFS file system. iPadOS nonetheless stands clearly apart through its own windowed abstraction layer, designed to make use of screen diagonals from 8.3 to 13 inches and to handle hybrid working scenarios combining touch commands, a dynamic pointer for mice and trackpads, and high-precision stylus input.",
+    "origine_et_lancement_d_ipados": "Apple presented iPadOS on 3 June 2019 in San Jose as a system with a new name, intended to acknowledge the experience specific to the iPad. The press release states that iPadOS builds on the same foundation as iOS while adding capabilities suited to the large screen and the versatility of the device, and that it benefits from the new features of iOS 13. On 24 September 2019, Apple announced that iPadOS was available that day as a free update for iPad Air 2 and later models, all iPad Pro models, the fifth-generation iPad and later models, and the iPad mini 4 and later models. The same press release sets 25 September 2019 as the start of shipping of the seventh iPad and announces a starting price of 329 dollars.\n\nThese two texts constitute the scope reference: iPadOS is named there as a distinct system, but described as sharing the iOS foundation, and the Apple documents that follow continue to treat the two platforms separately.",
+    "advanced_multitasking_and_stage_manager": "One of the distinctive elements of iPadOS lies in its multitasking mechanisms. The system has historically offered the *Split View* modes (two active applications side by side with a resizable divider) and *Slide Over* (a floating secondary application that can be dismissed by swiping). Introduced with iPadOS 16, **Stage Manager** introduces a manager of overlapping and resizable windows, allowing up to four simultaneous windows to be organised on the tablet screen. On iPad models equipped with Apple Silicon M-series chips (M1, M2, M4) or certain recent A chips, Stage Manager supports extending the desktop onto a high-resolution external display (up to 6K over USB-C/Thunderbolt) with four additional windows, bringing to eight the number of simultaneously active applications.",
+    "apple_pencil_integration_and_pointer_system": "iPadOS integrates in-depth support for the Apple Pencil through the **PencilKit** system framework, ensuring a latency reduced to a few milliseconds and strict palm rejection. The **Scribble** technology allows optical recognition of handwriting in real time directly in any text input field of the system. For pointing devices, iPadOS implements a dynamic pointer: shown as a semi-transparent circle, it transforms itself and snaps to buttons, icons and contextual menus on hover, preserving the intuitiveness of the touch interface while allowing great office precision.",
+    "desktop_class_safari_and_files_management": "To strengthen office productivity, the Safari web browser on iPadOS identifies itself by default with a Mac desktop user-agent header, making it possible to run complex web applications without falling back to reduced mobile interfaces. The native Files application supports full management of removable storage media (USB flash drives, SD card readers, external hard drives and SMB network volumes) formatted in APFS, HFS+, FAT32 or exFAT. The system also benefits from extended keyboard shortcuts for external physical keyboards.",
+    "hardware_limits_and_feature_segmentation": "iPadOS runs exclusively on ARM64 Apple Silicon chips (A and M series). However, access to certain advanced features is conditioned by the hardware power of each model: entry-level iPads with A-series chips remain limited to Split View and Slide Over multitasking without support for Stage Manager or the extended desktop on an external monitor. System security relies on the same rigorous architecture as iOS (Secure Enclave, sealed system volume SSV, APFS hardware encryption, strict sandboxing and mandatory code signing). Application distribution takes place through the App Store and alternative marketplaces in the European Union in compliance with the DMA.",
+    "versions_and_device_support": "The version presented by Apple on apple.com/ipados is iPadOS 27. The compatibility list covers the fourth-generation iPad Pro and later (M1 chip and later), the fourth-generation iPad Air and later (M2 chip and later), the ninth-generation iPad and later, and the sixth-generation iPad mini. Earlier models do not receive this version, and the published list prevails over the hardware capabilities announced at the time of commercialisation.",
+    "installation_et_mises_a_jour_logicielles": "Apple documents two update paths for iPadOS. The wireless path goes through Settings, General, Software Update: the screen displays the installed version and the existence of an update, then the user starts the download-and-install option. The support page states that the device must be connected to power and to Wi-Fi, that some updates are not offered wirelessly and that VPN or proxy connections may prevent the device from reaching the update servers. If space is lacking, the system can temporarily remove applications, which are reinstalled automatically once the installation is complete.\n\nWhen the update does not appear on the device, the support page refers to an update via computer and distinguishes two procedures: one for a Mac running macOS Catalina or later, the other for a Mac running macOS Mojave or earlier and for a Windows PC. The automatic update settings offer automatic installation, the device then downloading and installing the update overnight, on power and on Wi-Fi, with a notification before installation, as well as automatic download in the background. A separate setting, placed under \"system files\", controls the automatic download and installation of system file updates that improve functions without changing the software version.",
+    "apple_intelligence_on_ipad": "Apple states that Apple Intelligence works under iPadOS 27 on the iPad mini equipped with the A17 Pro chip and on models with an M1 chip or later. The device language and the Siri language must be identical and appear among the supported languages, including French. The free space required reaches up to 14 GB on iPads with an M4 chip or later, and up to 8 GB on other compatible models. Siri AI is distributed as a beta; access to the features therefore depends on the model, including among iPads compatible with iPadOS 27.",
+    "differences_with_ios": "iPadOS and iOS share the XNU kernel, the APFS file system and most frameworks, but Apple publishes them as two distinct systems since 2019, with two pages of new features and two lists of compatible devices. Advanced functions are moreover conditioned on the iPad model: the iOS 27 compatibility list and the iPadOS 27 one mention neither the same devices nor the same hardware prerequisites.",
+    "documentation_and_resources": "Apple publishes on apple.com/ipados the new features of the current version and the list of compatible devices, and maintains an iPad user guide declined per system version (iPadOS 27, 26, 18, 17, 16, 15, 14 and 13 in the proposed selection). A support article details the Apple Intelligence prerequisites. No guaranteed support period is published: compatibility is observed version by version.",
+    "security_model_and_update_disclosure_policy": "Apple publishes a platform security guide dated August 2026 and covering iPadOS 26.5. The document places a hardware root of trust in the Boot ROM, describes dedicated AES engines and the secure enclave, then covers verified boot, the integrity of the signed system volume, signed software updates and background security fixes. Application code signing has a section specific to iOS, iPadOS and visionOS; data protection, lockdown mode presented as an optional extreme protection, and network security (TLS, VPN, Wi-Fi) also appear in the table of contents. The publication rhythm is described by Apple's security releases page: iOS and iPadOS 27.0.1 date from 28 September 2026 with no published CVE entry, 26.7.1 from 28 September 2026, 27 from 23 September 2026 and 26.7 from 14 September 2026, with for each update the list of compatible iPads, for example ninth-generation iPad and later or fourth-generation 12.9-inch iPad Pro and later. The same page states that an installed update cannot be downgraded and that Apple comments on a flaw only after investigation and availability of the fix; these elements describe a disclosure policy, not a support period promised per version.",
+    "app_store_et_canaux_de_mise_a_disposition_des_applications": "Apple distinguishes several application distribution channels on the iPad. The public channel is the App Store, where the user buys or downloads the application. For organisations, the deployment guide describes volume purchasing in the Apps and Books section of Apple School Manager or Apple Business, which allows licences to be assigned to devices or users and applications to be installed remotely, including when the App Store application has been removed from the device; in-app purchases and subscriptions are not compatible with this model.\n\nManaged applications are installed by a device management service, either with the InstallApplication command or with declarative application management from iPadOS 17.2; in the second case, a precise version of the application can be defined and updates are applied silently, the user being prompted only when the application is in the foreground. Custom Apps, reserved for organisations, go through App Store Connect and an Apple review before private distribution in Apple School Manager or Apple Business. An enterprise can also distribute its internal applications with the Apple Developer Enterprise Program: the .ipa file must be accompanied by an XML manifest, served over HTTPS with a certificate recognised by the device, and the distribution provisioning profile expires 12 months after its issue. Unlisted applications remain published on the App Store but are accessible only through a direct link.",
     "advantages": [
-      "Expérience de productivité sur tablette tactile très aboutie, à mi-chemin entre la mobilité et l'ordinateur personnel.",
-      "Multitâche fenêtré puissant (Split View, Slide Over, Stage Manager sur puces compatibles).",
-      "Prise en charge du bureau étendu sur moniteurs externes haute résolution jusqu'à 6K (sur iPad avec puces série M).",
-      "Intégration exemplaire de l'Apple Pencil avec latence ultra-faible, framework PencilKit et reconnaissance Scribble.",
-      "Curseur adaptatif pour souris et trackpads pensé spécifiquement pour l'ergonomie tactile.",
-      "Socle de sécurité matériel éprouvé (Secure Enclave, APFS scellé, bac à sable applicatif)."
+      "A very accomplished productivity experience on a touch tablet, halfway between mobility and the personal computer.",
+      "Powerful windowed multitasking (Split View, Slide Over, Stage Manager on compatible chips).",
+      "Support for the extended desktop on high-resolution external monitors up to 6K (on iPads with M-series chips).",
+      "Exemplary integration of the Apple Pencil with ultra-low latency, the PencilKit framework and Scribble recognition.",
+      "Adaptive pointer for mice and trackpads designed specifically for touch ergonomics.",
+      "Proven hardware security foundation (Secure Enclave, sealed APFS, application sandboxing)."
     ],
     "disadvantages": [
-      "Système commercial propriétaire et fermé dépendant exclusivement du matériel Apple.",
-      "Segmentation des fonctionnalités clés selon le modèle d'iPad (Stage Manager et écran étendu réservés aux puces série M ou A spécifiques).",
-      "Gestion des fichiers et du stockage moins ouverte et permissive que celle d'un système d'exploitation de bureau conventionnel (macOS, Linux).",
-      "Absence de terminal système natif et impossibilité d'exécuter des binaires non signés en configuration standard.",
-      "Tarification élevée des matériels compatibles avec les fonctionnalités productives les plus avancées."
+      "Proprietary and closed commercial system depending exclusively on Apple hardware.",
+      "Segmentation of key features according to the iPad model (Stage Manager and extended display reserved for specific M-series or A chips).",
+      "File and storage management less open and permissive than that of a conventional desktop operating system (macOS, Linux).",
+      "No native system terminal and impossibility of running unsigned binaries in the standard configuration.",
+      "High pricing of the hardware compatible with the most advanced productive features."
     ],
     "who_is_it_for": [
-      "Créateurs numériques, illustrateurs, graphistes et designers exploitant le dessin de précision à l'Apple Pencil.",
-      "Étudiants, enseignants et professionnels nomades recherchant un appareil hybride pour la prise de notes et la bureautique.",
-      "Utilisateurs de tablettes souhaitant travailler avec plusieurs fenêtres et un moniteur externe via Stage Manager.",
-      "Développeurs et concepteurs d'applications pour iPad tirant parti de Swift, SwiftUI et Metal."
+      "Digital creators, illustrators, graphic artists and designers making use of precision drawing with the Apple Pencil.",
+      "Students, teachers and mobile professionals looking for a hybrid device for note-taking and office work.",
+      "Tablet users wishing to work with several windows and an external monitor through Stage Manager.",
+      "Developers and designers of iPad applications taking advantage of Swift, SwiftUI and Metal."
     ],
     "who_is_it_not_for": [
-      "Développeurs système ou ingénieurs nécessitant des environnements de virtualisation locale, Docker ou des compilateurs bas niveau.",
-      "Professionnels dépendant de logiciels de bureau propriétaires hérités disponibles uniquement sur macOS ou Windows.",
-      "Utilisateurs recherchant un système d'exploitation entièrement libre et open source personnalisable sans restriction.",
-      "Consommateurs souhaitant installer leur système sur des tablettes tactiles d'autres constructeurs."
+      "System developers or engineers requiring local virtualisation environments, Docker or low-level compilers.",
+      "Professionals depending on legacy proprietary desktop software available only on macOS or Windows.",
+      "Users looking for a fully free and open-source operating system, customisable without restriction.",
+      "Consumers wishing to install their system on touch tablets from other manufacturers."
     ],
-    "verdict": "iPadOS est le système d'exploitation d'Apple pour iPad. Il associe le noyau Darwin/XNU et la sécurité matérielle à des fonctions propres aux grands écrans (Stage Manager, gestion de l'Apple Pencil, curseur, Safari de classe bureau), dans le cadre des restrictions d'un écosystème commercial propriétaire."
+    "verdict": "iPadOS is Apple's operating system for the iPad. It combines the Darwin/XNU kernel and hardware security with features specific to large screens (Stage Manager, Apple Pencil management, pointer, desktop-class Safari), within the restrictions of a proprietary commercial ecosystem."
   },
   "relations": [
     {
       "id": "ios",
       "name": "iOS",
       "type": "related",
-      "note": "Système d'exploitation mobile pour iPhone dont iPadOS a été formellement séparé en 2019 pour développer des fonctionnalités productives adaptées aux grands écrans."
+      "note": "Mobile operating system for the iPhone from which iPadOS was formally separated in 2019 to develop productive features suited to large screens."
     },
     {
       "id": "macos",
       "name": "Apple macOS",
       "type": "related",
-      "note": "Système d'exploitation de bureau d'Apple dont iPadOS emprunte des concepts d'ergonomie (curseur dynamique, gestion de fenêtres Stage Manager, Safari de classe bureau)."
+      "note": "Apple's desktop operating system, from which iPadOS borrows ergonomic concepts (dynamic pointer, Stage Manager window management, desktop-class Safari)."
     },
     {
       "id": "android-aosp",
       "name": "Android / AOSP",
       "type": "alternative",
-      "note": "Système mobile alternatif motorisant des tablettes tactiles concurrentes."
+      "note": "Alternative mobile system powering competing touch tablets."
     }
   ],
   "links": [
     {
-      "label": "Présentation officielle d'iPadOS par Apple",
+      "label": "Official presentation of iPadOS by Apple",
       "url": "https://www.apple.com/ipados/"
     },
     {
-      "label": "Portail officiel pour développeurs iPadOS",
+      "label": "Official portal for iPadOS developers",
       "url": "https://developer.apple.com/ipados/"
     },
     {
-      "label": "Guide d'utilisation et fonctionnalités multitâche iPadOS",
+      "label": "User guide and iPadOS multitasking features",
       "url": "https://support.apple.com/guide/ipad/welcome/ipados"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel et vue d'ensemble des fonctionnalités d'iPadOS",
+      "title": "Official portal and feature overview of iPadOS",
       "url": "https://www.apple.com/ipados/",
       "type": "official_site"
     },
     {
-      "title": "Technologies et documentation de développement pour iPadOS",
+      "title": "Development technologies and documentation for iPadOS",
       "url": "https://developer.apple.com/ipados/",
       "type": "documentation"
     },
     {
-      "title": "Guide officiel Apple des fonctionnalités multitâche et Stage Manager",
+      "title": "Official Apple guide to multitasking features and Stage Manager",
       "url": "https://support.apple.com/guide/ipad/welcome/ipados",
       "type": "documentation"
     },
     {
-      "title": "Apple Intelligence sous iOS 27 et iPadOS 27 : appareils, stockage et langues requis (assistance Apple)",
+      "title": "Apple Intelligence on iOS 27 and iPadOS 27: required devices, storage and languages (Apple support)",
       "url": "https://support.apple.com/en-us/121115",
       "type": "vendor_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Guide d'utilisation de l'iPad, iPadOS 27 (assistance Apple)",
+      "title": "User guide for iPad, iPadOS 27 (Apple support)",
       "url": "https://support.apple.com/guide/ipad/ipados-27-apd3b3c1c0c1/ipados",
       "type": "vendor_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Apple Platform Security, édition d'août 2026 (couvre iPadOS 26.5)",
+      "title": "Apple Platform Security, August 2026 edition (covers iPadOS 26.5)",
       "url": "https://help.apple.com/pdf/security/en_US/apple-platform-security-guide.pdf",
       "type": "vendor_security_guide",
       "date": "2026-10-18"
     },
     {
-      "title": "Apple - versions de sécurité (journal des mises à jour iOS et iPadOS)",
+      "title": "Apple - security releases (iOS and iPadOS update log)",
       "url": "https://support.apple.com/en-us/100100",
       "type": "vendor_security_index",
       "date": "2026-10-18"
     },
     {
-      "title": "Apple Newsroom — The new iPadOS powers unique experiences designed for iPad (3 juin 2019)",
+      "title": "Apple Newsroom — The new iPadOS powers unique experiences designed for iPad (3 June 2019)",
       "url": "https://www.apple.com/newsroom/2019/06/the-new-ipados-powers-unique-experiences-designed-for-ipad/",
       "type": "official",
       "date": "2019-06-03"
     },
     {
-      "title": "Apple Newsroom — New version of the most popular iPad starts shipping tomorrow (24 septembre 2019)",
+      "title": "Apple Newsroom — New version of the most popular iPad starts shipping tomorrow (24 September 2019)",
       "url": "https://www.apple.com/newsroom/2019/09/new-version-of-the-most-popular-ipad-starts-shipping-tomorrow/",
       "type": "official",
       "date": "2019-09-24"
     },
     {
-      "title": "Assistance Apple — Mettre à jour votre iPhone ou iPad",
+      "title": "Apple Support — Update your iPhone or iPad",
       "url": "https://support.apple.com/en-us/118575",
       "type": "vendor_documentation",
       "date": "2026-10-19"

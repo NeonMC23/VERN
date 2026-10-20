@@ -2,7 +2,7 @@
   "id": "ios",
   "name": "iOS",
   "type": "operating_system",
-  "summary": "Système d'exploitation mobile propriétaire développé par Apple Inc. pour l'iPhone, reposant sur le noyau hybride Darwin/XNU, le système de fichiers APFS et une architecture de sécurité matérielle intégrée.",
+  "summary": "Proprietary mobile operating system developed by Apple Inc. for the iPhone, resting on the hybrid Darwin/XNU kernel, the APFS file system and an integrated hardware security architecture.",
   "tags": [
     "mobile",
     "smartphone",
@@ -17,164 +17,164 @@
   "platforms": [
     "ARM64"
   ],
-  "license": "Propriétaire commercial (avec composants de bas niveau open source sous licences APSL et BSD)",
+  "license": "Proprietary commercial (with low-level components released under the APSL and BSD licences)",
   "last_verified": "2026-10-19",
   "content": {
-    "introduction": "iOS est le système d'exploitation mobile propriétaire développé par Apple Inc. pour sa gamme de smartphones iPhone (et historiquement l'iPod touch). Dévoilé en 2007 sous le nom initial d'iPhone OS lors de la présentation du premier iPhone, il a été rebaptisé iOS en 2010. Il constitue le pilier technologique et économique de l'écosystème matériel et logiciel d'Apple, interconnecté de façon transparente avec les autres plateformes du constructeur (macOS, iPadOS, watchOS, tvOS) au travers des services iCloud, du trousseau synchronisé et des fonctionnalités de continuité.",
-    "what_is_it": "Techniquement, iOS est un système d'exploitation de type Unix dérivé de macOS et bâti sur le socle Darwin. Son noyau est le noyau hybride XNU (X is Not Unix), qui combine le micro-noyau Mach 3.0 (pour la gestion des threads, des tâches, de la mémoire virtuelle et des communications inter-processus via les ports Mach) avec une couche de sous-systèmes BSD (pour le modèle de processus POSIX, la gestion des signaux, des utilisateurs et la pile réseau TCP/IP) ainsi que les frameworks de gestionnaires de périphériques I/O Kit et DriverKit. L'espace utilisateur supérieur, comprenant le gestionnaire de surface tactile SpringBoard, est entièrement propriétaire.",
-    "origine_iphone_os_and_ios_naming": "Le 9 janvier 2007, Apple a présenté l'iPhone à la Macworld Conference & Expo de San Francisco comme un appareil réunissant un téléphone, un lecteur iPod à commandes tactiles et un terminal de communication Internet, doté d'une interface multi-touch. Le communiqué annonce une disponibilité aux États-Unis en juin 2007, en Europe fin 2007 et en Asie en 2008, avec des modèles de 4 Go et 8 Go, et documente les radios prises en charge : GSM quadri-bande, EDGE, Wi-Fi 802.11b/g et Bluetooth 2.0 EDR. Le communiqué du 7 juin 2010 présentant l'iPhone 4 désigne le système sous le nom d'iOS, en version 4, et mentionne le multitâche, les dossiers et 1 500 nouvelles interfaces de programmation ; l'appareil y est annoncé pour le 24 juin 2010 aux États-Unis, au Royaume-Uni, en France, en Allemagne et au Japon. Ces deux communiqués documentent la présentation initiale et l'emploi de l'appellation iOS ; ils n'énoncent aucune durée de prise en charge des modèles.",
-    "frameworks_runtime_and_graphics": "L'environnement logiciel d'iOS repose sur une architecture en quatre couches : Core OS, Core Services, Media et Cocoa Touch. Le développement applicatif moderne s'effectue principalement en langage Swift (avec prise en charge de l'Objective-C Runtime historique). Les interfaces tactiles exploitent la bibliothèque historique UIKit et le framework déclaratif moderne SwiftUI. Le rendu graphique 2D/3D et le calcul parallèle sont pris en charge par l'API bas niveau Metal, conçue pour minimiser les surcoûts processeur. Les traitements d'intelligence artificielle sur l'appareil s'appuient sur CoreML, tirant parti des accélérateurs neuronaux matériels (Neural Engine) intégrés aux puces Apple Silicon.",
-    "home_screen_and_interface_gestures": "L'interface d'iOS est décrite dans le guide d'utilisation de l'iPhone. Sur les modèles dotés de Face ID, un balayage vers le haut depuis le bord inférieur de l'écran revient à l'écran d'accueil ; le même geste suivi d'une pause ouvre le sélecteur d'applications, et un balayage vers la droite ou la gauche permet de passer d'une application ouverte à une autre. Un balayage depuis le coin supérieur droit ouvre le centre de contrôle, où un appui long sur un contrôle révèle des options supplémentaires et où la liste des contrôles se modifie dans Réglages > Centre de contrôle. Un double-clic sur le bouton latéral affiche la carte Apple Pay par défaut et un triple-clic active le raccourci d'accessibilité. Les applications s'ouvrent depuis les pages de l'écran d'accueil ou depuis la bibliothèque d'applications, atteinte en balayant vers la gauche au-delà de la dernière page ; cette bibliothèque, documentée à partir d'iOS 14, classe automatiquement les applications par catégorie, réordonne les plus utilisées et y place les applications nouvellement installées. Apple documente également la personnalisation des icônes et des widgets de l'écran d'accueil.",
-    "hardware_security_architecture_and_sandboxing": "La sécurité d'iOS repose sur une intégration verticale étroite entre le silicium et le système d'exploitation. La séquence de démarrage suit une chaîne de confiance matérielle (Secure Boot Chain) ancrée dans une racine de confiance en mémoire morte (Boot ROM). Un coprocesseur cryptographique isolé, le Secure Enclave (SEP), traite l'authentification biométrique (Face ID, Touch ID) et pilote le moteur matériel AES du système de protection des données (Data Protection), chiffrant chaque fichier individuellement. Chaque application tierce s'exécute dans un bac à sable strict (App Sandbox) limitant ses accès à son propre répertoire conteneur, et toute exécution binaire exige une signature cryptographique valide vérifiée par le noyau au moment de l'exécution.",
-    "filesystem_storage_and_app_distribution": "Depuis iOS 10.3, le stockage repose sur le système de fichiers APFS (Apple File System), offrant le partage d'espace disque entre volumes, le clonage instantané de fichiers et la gestion des instantanés (snapshots). Le volume système est monté en lecture seule sous la forme d'un volume système scellé et signé cryptographiquement (SSV - Signed System Volume), assurant l'intégrité absolue des fichiers d'exploitation lors des mises à jour logicielles OTA. La distribution des applications s'effectue historiquement via l'App Store officiel avec revue préalable. Dans l'Union Européenne, en application du Règlement sur les marchés numériques (DMA), iOS intègre la prise en charge de boutiques d'applications tierces alternatives et de la distribution web certifiée sous contrôle de notarisation.",
-    "app_store_and_beta_testing_channels": "La distribution des applications sur iOS s'appuie sur l'App Store, que la documentation développeur d'Apple présente comme un canal de diffusion vers les appareils de ses plates-formes. Le guide de déploiement d'Apple recense d'autres méthodes : applications personnalisées, applications non répertoriées, applications internes d'entreprise, et TestFlight pour les versions bêta. TestFlight permet de désigner jusqu'à 100 membres de l'équipe de développement comme testeurs internes, d'inviter jusqu'à 10 000 testeurs externes et de partager jusqu'à 100 builds ; la description de l'application bêta et les informations d'examen sont exigées pour les testeurs externes. Ces méthodes de distribution sont distinctes du canal grand public de l'App Store.",
-    "hardware_compatibility_and_ecosystem_scope": "iOS est compilé exclusivement pour l'architecture 64 bits ARM64 et fonctionne uniquement sur les puces conçues par Apple (à partir des appareils à puce A13, comme l'iPhone 11 et l'iPhone SE de 2e génération). Apple assure un cycle de support logiciel d'une longévité notable pour les appareils mobiles, proposant généralement cinq à sept années de mises à jour majeures du système pour chaque génération d'iPhone. Le système n'est pas installable sur du matériel tiers non-Apple et n'autorise pas l'accès direct aux privilèges d'administration root pour les utilisateurs en configuration standard.",
-    "versions_and_device_support": "La version présentée par Apple sur apple.com/ios est iOS 27. La liste de compatibilité publiée couvre les iPhone 11 et modèles ultérieurs (Pro, Pro Max, mini), les iPhone SE de 2e génération et ultérieurs, ainsi que les modèles annoncés depuis (iPhone 16e, 17e, Air, 18 Pro Max). Les iPhone XS, XS Max et XR, équipés de la puce A12, n'y figurent plus : la prise en charge démarre avec les appareils à puce A13.",
-    "software_installation_update_and_downgrade_rules": "Apple documente deux voies de mise à jour d'iOS. Depuis l'appareil, la mise à jour s'effectue dans Réglages > Général > Mise à jour logicielle, après sauvegarde et connexion à une source d'alimentation et à un réseau Wi-Fi ; si elle n'apparaît pas, Apple décrit la mise à jour depuis un ordinateur : Finder sur macOS Catalina ou une version ultérieure, et une procédure distincte pour macOS Mojave ou antérieur et pour Windows. La page des versions de sécurité d'Apple indique, au 19 octobre 2026, que la dernière version d'iOS est 27.0.1, publiée le 28 septembre 2026, que la version 26.7.1 figure dans la liste à la même date et que la version 27 est datée du 14 septembre 2026 ; elle précise qu'après installation d'une mise à jour, iOS ne peut pas être rétrogradé vers la version précédente. Ces pages ne fixent aucune durée pendant laquelle un modèle donné reçoit des mises à jour.",
-    "apple_intelligence_requirements": "Apple précise que la génération actuelle d'Apple Intelligence fonctionne sous iOS 27 sur les iPhone 16 et modèles ultérieurs, l'iPhone 15 Pro, l'iPhone 15 Pro Max et l'iPhone Air. Elle exige que la langue de l'appareil et celle de Siri soient identiques et figurent parmi les langues prises en charge, dont le français. L'espace libre requis atteint jusqu'à 14 Go sur les iPhone 17 Pro, 17 Pro Max et Air, et jusqu'à 8 Go sur les autres modèles compatibles. Siri AI est distribué en version bêta. Ces conditions s'ajoutent à la compatibilité avec iOS 27.",
-    "differences_with_ipados": "iOS et iPadOS partagent le socle Darwin et le noyau XNU, mais Apple publie deux pages de nouveautés et deux listes d'appareils compatibles distinctes depuis la séparation formelle des deux systèmes en 2019. iPadOS documente le multitâche fenêtré, l'Apple Pencil et les périphériques de pointage ; la page iOS documente les fonctions propres à l'iPhone, dont les réglages d'Apple Intelligence et les accessoires. Un même numéro de version ne garantit donc pas un ensemble de fonctions identique sur les deux systèmes.",
-    "documentation_and_resources": "Apple publie sur apple.com/ios les nouveautés de la version courante et la liste des appareils compatibles, et consacre un article d'assistance aux prérequis d'Apple Intelligence. Les pages renvoient à un espace développeur distinct pour les frameworks et les outils. Les informations de version et de compatibilité évoluent à chaque cycle annuel ; aucun engagement public ne fixe la durée de prise en charge d'un modèle donné.",
+    "introduction": "iOS is the proprietary mobile operating system developed by Apple Inc. for its range of iPhone smartphones (and historically the iPod touch). Unveiled in 2007 under the initial name iPhone OS at the presentation of the first iPhone, it was renamed iOS in 2010. It is the technological and economic pillar of Apple's hardware and software ecosystem, transparently interconnected with the manufacturer's other platforms (macOS, iPadOS, watchOS, tvOS) through iCloud services, the synchronised keychain and continuity features.",
+    "what_is_it": "Technically, iOS is a Unix-type operating system derived from macOS and built on the Darwin foundation. Its kernel is the hybrid XNU kernel (X is Not Unix), which combines the Mach 3.0 microkernel (for managing threads, tasks, virtual memory and inter-process communication through Mach ports) with a layer of BSD subsystems (for the POSIX process model, signal, user and TCP/IP network stack management) as well as the I/O Kit and DriverKit device driver frameworks. The upper user space, including the SpringBoard touch surface manager, is entirely proprietary.",
+    "origine_iphone_os_and_ios_naming": "On 9 January 2007, Apple presented the iPhone at the Macworld Conference & Expo in San Francisco as a device combining a phone, a touch-controlled iPod player and an Internet communication terminal, equipped with a multi-touch interface. The press release announces availability in the United States in June 2007, in Europe at the end of 2007 and in Asia in 2008, with 4 GB and 8 GB models, and documents the supported radios: quad-band GSM, EDGE, 802.11b/g Wi-Fi and Bluetooth 2.0 EDR. The press release of 7 June 2010 presenting the iPhone 4 designates the system under the name iOS, in version 4, and mentions multitasking, folders and 1,500 new programming interfaces; the device is announced there for 24 June 2010 in the United States, the United Kingdom, France, Germany and Japan. These two press releases document the initial presentation and the use of the iOS name; they state no support period for the models.",
+    "frameworks_runtime_and_graphics": "The iOS software environment rests on a four-layer architecture: Core OS, Core Services, Media and Cocoa Touch. Modern application development is carried out mainly in the Swift language (with support for the historical Objective-C runtime). Touch interfaces make use of the historical UIKit library and the modern declarative SwiftUI framework. 2D/3D graphical rendering and parallel computing are supported by the low-level Metal API, designed to minimise processor overhead. On-device artificial intelligence processing relies on CoreML, taking advantage of the hardware neural accelerators (Neural Engine) integrated into Apple Silicon chips.",
+    "home_screen_and_interface_gestures": "The iOS interface is described in the iPhone user guide. On models equipped with Face ID, a swipe up from the bottom edge of the screen returns to the home screen; the same gesture followed by a pause opens the application switcher, and a swipe to the right or left moves from one open application to another. A swipe from the top right corner opens Control Centre, where a long press on a control reveals additional options and where the list of controls is modified in Settings > Control Centre. A double-click on the side button displays the default Apple Pay card and a triple-click activates the accessibility shortcut. Applications open from the pages of the home screen or from the App Library, reached by swiping left beyond the last page; this library, documented from iOS 14, automatically sorts applications by category, reorders the most used ones and places newly installed applications there. Apple also documents the customisation of home screen icons and widgets.",
+    "hardware_security_architecture_and_sandboxing": "iOS security relies on close vertical integration between the silicon and the operating system. The boot sequence follows a hardware chain of trust (Secure Boot Chain) anchored in a root of trust in read-only memory (Boot ROM). An isolated cryptographic coprocessor, the Secure Enclave (SEP), handles biometric authentication (Face ID, Touch ID) and drives the hardware AES engine of the Data Protection system, encrypting each file individually. Every third-party application runs in a strict sandbox (App Sandbox) limiting its access to its own container directory, and any binary execution requires a valid cryptographic signature verified by the kernel at run time.",
+    "filesystem_storage_and_app_distribution": "Since iOS 10.3, storage rests on the APFS file system (Apple File System), offering space sharing between volumes, instant file cloning and snapshot management. The system volume is mounted read-only in the form of a sealed volume signed cryptographically (SSV - Signed System Volume), ensuring the absolute integrity of the operating files during OTA software updates. Application distribution has historically taken place through the official App Store with prior review. In the European Union, in application of the Digital Markets Act (DMA), iOS includes support for alternative third-party application stores and for certified web distribution under notarisation control.",
+    "app_store_and_beta_testing_channels": "Application distribution on iOS relies on the App Store, which Apple's developer documentation presents as a distribution channel to the devices of its platforms. Apple's deployment guide lists other methods: custom applications, unlisted applications, internal enterprise applications, and TestFlight for beta versions. TestFlight allows up to 100 members of the development team to be designated as internal testers, up to 10,000 external testers to be invited and up to 100 builds to be shared; the beta application description and review information are required for external testers. These distribution methods are distinct from the App Store's general public channel.",
+    "hardware_compatibility_and_ecosystem_scope": "iOS is compiled exclusively for the 64-bit ARM64 architecture and runs only on chips designed by Apple (from devices with the A13 chip, such as the iPhone 11 and the second-generation iPhone SE). Apple provides a software support cycle of notable longevity for mobile devices, generally offering five to seven years of major system updates for each iPhone generation. The system cannot be installed on third-party non-Apple hardware and does not allow direct access to root administrative privileges for users in the standard configuration.",
+    "versions_and_device_support": "The version presented by Apple on apple.com/ios is iOS 27. The published compatibility list covers the iPhone 11 and later models (Pro, Pro Max, mini), the second-generation iPhone SE and later, as well as the models announced since (iPhone 16e, 17e, Air, 18 Pro Max). The iPhone XS, XS Max and XR, equipped with the A12 chip, no longer appear there: support starts with devices with the A13 chip.",
+    "software_installation_update_and_downgrade_rules": "Apple documents two iOS update paths. From the device, the update is performed in Settings > General > Software Update, after a backup and connection to a power source and a Wi-Fi network; if it does not appear, Apple describes updating from a computer: Finder on macOS Catalina or later, and a separate procedure for macOS Mojave or earlier and for Windows. Apple's security releases page states, as of 19 October 2026, that the latest iOS version is 27.0.1, published on 28 September 2026, that version 26.7.1 appears in the list on the same date and that version 27 is dated 14 September 2026; it states that after installing an update, iOS cannot be downgraded to the previous version. These pages set no period during which a given model receives updates.",
+    "apple_intelligence_requirements": "Apple states that the current generation of Apple Intelligence works under iOS 27 on the iPhone 16 and later models, the iPhone 15 Pro, the iPhone 15 Pro Max and the iPhone Air. It requires that the device language and the Siri language be identical and appear among the supported languages, including French. The free space required reaches up to 14 GB on the iPhone 17 Pro, 17 Pro Max and Air, and up to 8 GB on the other compatible models. Siri AI is distributed as a beta. These conditions are additional to compatibility with iOS 27.",
+    "differences_with_ipados": "iOS and iPadOS share the Darwin foundation and the XNU kernel, but Apple publishes two separate pages of new features and two separate lists of compatible devices since the formal separation of the two systems in 2019. iPadOS documents windowed multitasking, the Apple Pencil and pointing devices; the iOS page documents the features specific to the iPhone, including Apple Intelligence settings and accessories. A same version number therefore does not guarantee an identical set of features on the two systems.",
+    "documentation_and_resources": "Apple publishes on apple.com/ios the new features of the current version and the list of compatible devices, and devotes a support article to the Apple Intelligence prerequisites. The pages refer to a separate developer area for frameworks and tools. Version and compatibility information changes with each annual cycle; no public commitment sets the support period of a given model.",
     "advantages": [
-      "Architecture de sécurité et de chiffrement matériel de pointe (Secure Enclave, APFS scellé, bac à sable strict).",
-      "Optimisation matérielle et logicielle exceptionnelle garantissant une grande réactivité et une efficacité énergétique élevée.",
-      "Écosystème applicatif riche avec frameworks modernes performants (SwiftUI, Metal, CoreML).",
-      "Longévité du support logiciel assurant des mises à jour de sécurité et de fonctionnalités régulières sur plusieurs années.",
-      "Intégration transparente et synchronisation continue avec l'ensemble des appareils de l'écosystème Apple.",
-      "Composants de bas niveau du socle Darwin/XNU publiés en open source sur le portail d'Apple."
+      "State-of-the-art hardware security and encryption architecture (Secure Enclave, sealed APFS, strict sandbox).",
+      "Exceptional hardware and software optimisation ensuring great responsiveness and high energy efficiency.",
+      "Rich application ecosystem with high-performance modern frameworks (SwiftUI, Metal, CoreML).",
+      "Longevity of software support ensuring regular security and feature updates over several years.",
+      "Transparent integration and continuous synchronisation with all the devices of the Apple ecosystem.",
+      "Low-level components of the Darwin/XNU foundation published as open source on Apple's portal."
     ],
     "disadvantages": [
-      "Système d'exploitation commercial propriétaire et fermé sur ses couches applicatives et graphiques.",
-      "Écosystème matériel strictement verrouillé : fonctionne exclusivement sur les smartphones iPhone d'Apple.",
-      "Modèle de distribution applicative contrôlé par Apple (malgré une ouverture réglementaire partielle dans l'UE).",
-      "Absence d'accès aux privilèges d'administration root et restriction stricte de la personnalisation système de bas niveau.",
-      "Impossibilité d'exécuter ou de virtualiser le système légalement sur des architectures matérielles non conçues par Apple."
+      "Commercial operating system, proprietary and closed in its application and graphical layers.",
+      "Strictly locked hardware ecosystem: runs exclusively on Apple iPhone smartphones.",
+      "Application distribution model controlled by Apple (despite a partial regulatory opening in the EU).",
+      "No access to root administrative privileges and strict restriction of low-level system customisation.",
+      "Impossibility of running or virtualising the system legally on hardware architectures not designed by Apple."
     ],
     "who_is_it_for": [
-      "Utilisateurs de smartphones recherchant une expérience utilisateur fluide, sécurisée et intuitive au quotidien.",
-      "Personnes investies dans l'écosystème Apple exploitant la synchronisation multi-appareils (Mac, iPad, Apple Watch).",
-      "Professionnels et entreprises exigeant un chiffrement des données sur l'appareil et une gestion centralisée par MDM.",
-      "Développeurs mobiles ciblant un marché d'applications à haut niveau de monétisation via Swift et Xcode."
+      "Smartphone users looking for a smooth, secure and intuitive daily user experience.",
+      "People invested in the Apple ecosystem making use of multi-device synchronisation (Mac, iPad, Apple Watch).",
+      "Professionals and enterprises requiring on-device data encryption and centralised MDM management.",
+      "Mobile developers targeting a highly monetised application market through Swift and Xcode."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs exigeant un système d'exploitation entièrement libre et open source auditable de bout en bout.",
-      "Passionnés d'informatique souhaitant un accès complet aux privilèges root et la modification libre des composants du système.",
-      "Consommateurs recherchant des appareils d'entrée de gamme ou souhaitant choisir librement leur constructeur matériel.",
-      "Utilisateurs refusant les politiques de contrôle de la plateforme et de l'App Store d'Apple."
+      "Users requiring a fully free and open-source operating system, auditable end to end.",
+      "Computing enthusiasts wanting full access to root privileges and free modification of system components.",
+      "Consumers looking for entry-level devices or wishing to choose their hardware manufacturer freely.",
+      "Users refusing Apple's platform and App Store control policies."
     ],
-    "verdict": "iOS est le système d'exploitation mobile grand public d'Apple. Grâce à son intégration verticale entre le silicium Apple Silicon et le noyau Darwin/XNU, il combine sécurité matérielle et un écosystème applicatif géré par Apple, dans un environnement commercial fermé contrôlé par son constructeur."
+    "verdict": "iOS is Apple's mainstream mobile operating system. Through its vertical integration between Apple Silicon and the Darwin/XNU kernel, it combines hardware security and an application ecosystem managed by Apple, in a closed commercial environment controlled by its manufacturer."
   },
   "relations": [
     {
       "id": "ipados",
       "name": "iPadOS",
       "type": "derivative",
-      "note": "Système d'exploitation dédié aux tablettes iPad, historiquement issu d'iOS et partageant le même socle Darwin/XNU."
+      "note": "Operating system dedicated to iPad tablets, historically derived from iOS and sharing the same Darwin/XNU foundation."
     },
     {
       "id": "macos",
       "name": "Apple macOS",
       "type": "related",
-      "note": "Système d'exploitation pour ordinateurs Mac partageant le noyau Darwin/XNU, les frameworks Swift et l'écosystème de services Apple."
+      "note": "Operating system for Mac computers sharing the Darwin/XNU kernel, the Swift frameworks and the Apple services ecosystem."
     },
     {
       "id": "android-aosp",
       "name": "Android / AOSP",
       "type": "alternative",
-      "note": "Plateforme mobile open source concurrente majeure développée sous l'égide de Google."
+      "note": "Major competing open-source mobile platform developed under the aegis of Google."
     },
     {
       "id": "plasma-mobile",
       "name": "Plasma Mobile",
       "type": "alternative",
-      "note": "Environnement mobile libre et ouvert pour smartphones GNU/Linux."
+      "note": "Free and open mobile environment for GNU/Linux smartphones."
     }
   ],
   "links": [
     {
-      "label": "Portail officiel pour développeurs iOS",
+      "label": "Official portal for iOS developers",
       "url": "https://developer.apple.com/ios/"
     },
     {
-      "label": "Guide officiel de sécurité des plateformes Apple",
+      "label": "Official Apple platform security guide",
       "url": "https://support.apple.com/guide/security/welcome/web"
     },
     {
-      "label": "Portail des composants open source Apple (Darwin/XNU)",
+      "label": "Portal of Apple open-source components (Darwin/XNU)",
       "url": "https://opensource.apple.com/"
     }
   ],
   "sources": [
     {
-      "title": "Documentation d'architecture et technologies iOS d'Apple",
+      "title": "Architecture and technology documentation of Apple iOS",
       "url": "https://developer.apple.com/ios/",
       "type": "official_site"
     },
     {
-      "title": "Guide technique officiel de sécurité de la plateforme Apple (iOS)",
+      "title": "Official technical security guide for the Apple platform (iOS)",
       "url": "https://support.apple.com/guide/security/welcome/web",
       "type": "documentation"
     },
     {
-      "title": "Dépôt des versions et composants open source Apple Darwin",
+      "title": "Repository of Apple Darwin open-source releases and components",
       "url": "https://opensource.apple.com/",
       "type": "official_site"
     },
     {
-      "title": "iOS 27 : nouveautés et appareils compatibles (Apple)",
+      "title": "iOS 27: new features and compatible devices (Apple)",
       "url": "https://www.apple.com/ios/",
       "type": "vendor_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Apple Intelligence sous iOS 27 et iPadOS 27 : appareils, stockage et langues requis (assistance Apple)",
+      "title": "Apple Intelligence on iOS 27 and iPadOS 27: required devices, storage and languages (Apple support)",
       "url": "https://support.apple.com/en-us/121115",
       "type": "vendor_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Apple - communiqué du 9 janvier 2007 (présentation de l'iPhone)",
+      "title": "Apple - press release of 9 January 2007 (introduction of the iPhone)",
       "url": "https://www.apple.com/newsroom/2007/01/09Apple-Reinvents-the-Phone-with-iPhone/",
       "type": "official_announcement",
       "date": "2007-01-09"
     },
     {
-      "title": "Apple - communiqué du 7 juin 2010 (iPhone 4 et iOS 4)",
+      "title": "Apple - press release of 7 June 2010 (iPhone 4 and iOS 4)",
       "url": "https://www.apple.com/newsroom/2010/06/07Apple-Presents-iPhone-4/",
       "type": "official_announcement",
       "date": "2010-06-07"
     },
     {
-      "title": "Apple Support - Update your iPhone or iPad (mise à jour depuis l'appareil ou un ordinateur)",
+      "title": "Apple Support - Update your iPhone or iPad (update from the device or a computer)",
       "url": "https://support.apple.com/en-us/118575",
       "type": "vendor_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Apple Support - Apple security releases (versions et dates de publication)",
+      "title": "Apple Support - Apple security releases (versions and publication dates)",
       "url": "https://support.apple.com/en-us/100100",
       "type": "vendor_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Apple Developer - App Store (distribution des applications)",
+      "title": "Apple Developer - App Store (application distribution)",
       "url": "https://developer.apple.com/app-store/",
       "type": "vendor_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Apple Developer - TestFlight (testeurs internes et externes, builds)",
+      "title": "Apple Developer - TestFlight (internal and external testers, builds)",
       "url": "https://developer.apple.com/testflight/",
       "type": "vendor_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Apple Developer - Distribution (méthodes de distribution)",
+      "title": "Apple Developer - Distribution (distribution methods)",
       "url": "https://developer.apple.com/distribute/",
       "type": "vendor_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Apple Support - Apple Platform Deployment (applications personnalisées, non répertoriées, internes)",
+      "title": "Apple Support - Apple Platform Deployment (custom, unlisted, in-house apps)",
       "url": "https://support.apple.com/guide/deployment/welcome/web",
       "type": "vendor_documentation",
       "accessed": "2026-10-19"
@@ -186,7 +186,7 @@
       "accessed": "2026-10-19"
     },
     {
-      "title": "Apple Support - Open apps on iPhone (écran d'accueil et bibliothèque d'applications)",
+      "title": "Apple Support - Open apps on iPhone (Home Screen and App Library)",
       "url": "https://support.apple.com/guide/iphone/open-apps-iphca3d8b4e3/ios",
       "type": "vendor_documentation",
       "accessed": "2026-10-19"

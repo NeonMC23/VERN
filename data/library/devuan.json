@@ -24,7 +24,7 @@
     "ppc64el"
   ],
   "license": "DFSG / GPL and compatible free software licenses",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-20",
   "content": {
     "introduction": "Devuan GNU+Linux is a community-developed, general-purpose operating system derived from Debian. Established in late 2014 by a collective known as the Veteran Unix Admins (VUA), Devuan was founded in response to Debian's adoption of systemd as its default init system. Devuan's primary mission is to ensure 'Init Freedom' by preserving the Unix philosophy of modularity, preventing PID 1 entanglements, and granting system administrators total freedom to select their preferred service supervision framework.",
     "what_is_it": "Technically, Devuan provides a complete Debian-compatible operating system stripped of mandatory systemd dependencies. It ships with SysVinit as its default process supervisor (PID 1), while officially offering and supporting OpenRC and runit as selectable alternatives during installation. Devuan maintains independent software repositories that recompile upstream Debian packages to replace hard systemd linkages with modular shims like eudev, elogind, and libseat, while retaining full binary and repository compatibility with the Debian ecosystem.",
@@ -64,6 +64,44 @@
     ],
     "verdict": "Devuan GNU+Linux is a rigorously maintained, stable operating system that fulfills its promise of Init Freedom within the Debian ecosystem. By decoupling Debian's vast package repository from systemd, Devuan preserves Unix modularity, predictable plain-text logging, and multi-init flexibility for both server deployments and desktop workstations."
   },
+  "components": [
+    {
+      "id": "debian-base",
+      "name": "Debian",
+      "role": "operating_system_kernel",
+      "note": "Base distribution: the portal describes Devuan as \"a fork of Debian without systemd\", and the packages page states that \"Devuan package repositories are exclusive. Other repositories, including Debian, Ubuntu, Mint etc, should not be used directly.\" The release table maps each Devuan suite to a Debian suite (devuan.org/os/, devuan.org/os/packages, devuan.org/os/releases)."
+    },
+    {
+      "id": "linux",
+      "name": "Linux",
+      "role": "kernel",
+      "note": "The OS overview lists \"Kernel Linux 6.12\" among the characteristics of the stable release, version 6 \"Excalibur\", released 2025-11-02 (devuan.org/os/)."
+    },
+    {
+      "id": "sysvinit",
+      "name": "SysVinit",
+      "role": "init_system",
+      "note": "The OS overview lists \"Init system SysVinit OpenRC Runit\" and the Init Freedom page states that \"Devuan uses the sysvinit init system by default\"; OpenRC is listed as \"available since ASCII\" and runit as \"available since Beowulf\" among the alternative init systems (devuan.org/os/, devuan.org/os/init-freedom)."
+    },
+    {
+      "id": "apt",
+      "name": "APT",
+      "role": "package_manager",
+      "note": "Listed under \"Package management apt dpkg\" with \"Package format deb\" in the OS overview; the packages page names deb.devuan.org as \"the recommended default mirror\" and recommends codenames rather than suite names in /etc/apt/sources.list (devuan.org/os/, devuan.org/os/packages)."
+    },
+    {
+      "id": "dpkg",
+      "name": "dpkg",
+      "role": "package_manager",
+      "note": "Listed alongside apt under \"Package management\" in the OS overview, which gives \"Package format deb\" (devuan.org/os/)."
+    },
+    {
+      "id": "xfce",
+      "name": "Xfce",
+      "role": "desktop_environment",
+      "note": "The OS overview gives \"Desktop Environments Default: Xfce Alternate: Cinnamon, KDE, LXQt, LXDE, MATE Others: available post-install\" (devuan.org/os/)."
+    }
+  ],
   "relations": [
     {
       "id": "debian",
@@ -76,6 +114,40 @@
       "name": "antiX",
       "relation": "alternative_init",
       "note": "Independent Debian-based distribution also dedicated to systemd-free computing, utilizing SysVinit and runit."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Devuan 6 Excalibur (stable)",
+      "description": "Stable suite released 2025-11-02, minor planet 9499, corresponding to Debian Trixie 13 and listed as maintained; the OS overview gives Linux kernel 6.12, SysVinit as the default init system and Xfce as the default desktop. The portal states that Excalibur can be installed as an upgrade from Daedalus or migrated from Debian Trixie, and that skipping releases is not supported."
+    },
+    {
+      "name": "Devuan 5 Daedalus (oldstable)",
+      "description": "Oldstable suite released 2023-08-14, minor planet 1864, corresponding to Debian Bookworm 12 and listed as maintained; the portal states that Daedalus \"has moved to oldstable status\" and that it is the release from which Excalibur can be installed as an upgrade."
+    },
+    {
+      "name": "Devuan 4 Chimaera (archived)",
+      "description": "Archived suite released 2021-10-14, minor planet 623, corresponding to Debian Bullseye 11."
+    },
+    {
+      "name": "Devuan 3 Beowulf (archived)",
+      "description": "Archived suite released 2020-06-01, minor planet 38086, corresponding to Debian Buster 10; the Init Freedom page dates the availability of runit to this suite (\"available since Beowulf\")."
+    },
+    {
+      "name": "Devuan 2 ASCII (archived)",
+      "description": "Archived suite released 2018-06-08, minor planet 3568, corresponding to Debian Stretch 9; the Init Freedom page dates the availability of OpenRC to this suite (\"available since ASCII\")."
+    },
+    {
+      "name": "Devuan 1 Jessie (archived)",
+      "description": "Archived suite released 2017-05-25, minor planet 10464, corresponding to Debian Jessie 8; the release page describes Jessie as the first Devuan stable release, which mirrors Debian's Jessie."
+    },
+    {
+      "name": "Devuan Freia (testing)",
+      "description": "Development suite not released, minor planet 76, corresponding to Debian Forky and listed as maintained; the release page states that \"testing refers to Devuan Freia (Debian Forky)\"."
+    },
+    {
+      "name": "Ceres (unstable)",
+      "description": "Development suite not released, minor planet 1, corresponding to Debian Sid and listed as maintained; the release page states that unstable \"always has the codename ceres\" and that ceres is an alias for Debian's sid."
     }
   ],
   "links": {

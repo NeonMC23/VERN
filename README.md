@@ -41,6 +41,7 @@ Only the Library is functionally implemented. Tracks and Tools are placeholder p
 │   ├── dev-server.py       # Official local dev server (dynamic routing)
 │   ├── start-dev.sh        # Convenience wrapper
 │   ├── build-pages.py      # Generates the 6 static HTML pages
+│   ├── check-language.js   # Language guard for public text (read-only, Node)
 │   └── diagnose.py         # Environment/route diagnostics
 ├── 404.html                # Real 404 + fallback shell for /library/{id}/
 ├── _redirects              # Cloudflare Pages routing rule
@@ -119,6 +120,11 @@ In all three cases the same shell loads `library-builder.js`, which reads the re
 ### The builder is generic
 
 `library-builder.js` contains **zero resource-specific logic**. There is no `if (id === "fedora")`, no `renderFedora()`, no per-resource branch. It renders by *shape*: strings become paragraphs, short string arrays become pills, longer ones become bullet lists, objects become nested sub-sections, arrays of objects become repeated blocks. Any schema-conformant document therefore renders without touching the code.
+
+The one mapping the builder does hold is `SECTION_TITLES`: a table from a `content` section
+key to the heading displayed for it. It is keyed by section name — never by a resource id — so
+one entry serves every resource carrying that key, and it stays shape-based rather than
+per-resource.
 
 Data is inserted with `createElement` and `textContent` only — never `innerHTML` — so JSON content cannot inject markup.
 
@@ -213,7 +219,15 @@ A document missing any required field is rejected by the builder with a visible 
 | `links` | object or array | "Links" section |
 | `articles` | array | "Articles" section |
 
-Keys inside `content` are free-form: any key becomes a section, its name humanised (`who_is_it_for` → "Who is it for?"). Common ones are `introduction`, `what_is_it`, `how_does_it_work`, `advantages`, `disadvantages`, `who_is_it_for`, `who_is_it_not_for`, `verdict`.
+Keys inside `content` are free-form: any key becomes a section. A key is a **structural
+identifier**, the heading is **display text**: a key listed in `SECTION_TITLES` renders with its
+approved English heading, any other key falls back to having its name humanised
+(`who_is_it_for` → "Who is it for?"). A heading can therefore be changed without renaming a key,
+and a key is never renamed to change a heading — reports and the conformity measure classify
+sections by key name.
+
+To add or change a heading, edit one line of `SECTION_TITLES` and check the rendered page;
+the procedure is in `DEVELOPMENT.md`. Common ones are `introduction`, `what_is_it`, `how_does_it_work`, `advantages`, `disadvantages`, `who_is_it_for`, `who_is_it_not_for`, `verdict`.
 
 Unknown *top-level* fields are also rendered generically as an extra section, so the schema degrades gracefully rather than dropping data.
 
@@ -362,6 +376,7 @@ Diagnostics:
 
 ```bash
 python3 scripts/diagnose.py 5500
+node scripts/check-language.js --titles     # language guard: 0 = CONFORME, 1 = DETECTION, 2 = NON_CONCLUANT
 ```
 
 ### Do not use VS Code Live Server / Live Preview for Library routes

@@ -2,7 +2,7 @@
   "id": "macos",
   "name": "Apple macOS",
   "type": "operating_system",
-  "summary": "Système d'exploitation commercial certifié UNIX développé par Apple pour les ordinateurs Mac, fondé sur le noyau hybride XNU, le socle Darwin et l'architecture matérielle Apple Silicon.",
+  "summary": "Commercial UNIX-certified operating system developed by Apple for Mac computers, founded on the hybrid XNU kernel, the Darwin foundation and the Apple Silicon hardware architecture.",
   "tags": [
     "commercial",
     "proprietary",
@@ -17,97 +17,97 @@
     "ARM64",
     "x86-64"
   ],
-  "license": "Commercial propriétaire (CLUF Apple) avec socle Darwin open source (APSL)",
+  "license": "Proprietary commercial (Apple EULA) with open-source Darwin foundation (APSL)",
   "last_verified": "2026-10-16",
   "content": {
-    "introduction": "Apple macOS est le système d'exploitation propriétaire développé par Apple Inc. pour sa gamme d'ordinateurs personnels et professionnels Macintosh (MacBook, iMac, Mac mini, Mac Studio et Mac Pro).",
-    "what_is_it": "Successeur de NeXTSTEP et de Mac OS classique (1984-2001), macOS combine une interface graphique soignée avec un environnement POSIX certifié UNIX par The Open Group (norme Single UNIX Specification UNIX 03).",
-    "kernel_architecture_and_darwin": "macOS repose sur le socle open source Darwin et son noyau hybride XNU (« X is Not Unix »). L'architecture de XNU fusionne deux composantes fondamentales : le micro-noyau Mach 3.0 (responsable de la gestion des tâches, des fils d'exécution, de la communication inter-processus via ports IPC et de la gestion de la mémoire virtuelle VM) et une couche monolithique dérivée de FreeBSD (fournissant l'interface POSIX, la gestion des identités et permissions BSD, la pile réseau TCP/IP et le système de fichiers virtuel VFS). Pour la prise en charge matérielle, macOS utilisait traditionnellement l'I/O Kit (un framework orienté objet écrit en C++ restreint en espace noyau), progressivement remplacé par DriverKit, un modèle moderne exécutant les pilotes matériels en espace utilisateur afin d'immuniser le noyau contre les paniques logicielles. L'ordonnancement asynchrone des tâches et le parallélisme système sont orchestrés en profondeur par Grand Central Dispatch (GCD / libdispatch).",
-    "hardware_transition_and_graphics": "macOS a opéré une transformation architecturale majeure avec la transition des processeurs Intel x86-64 vers l'architecture ARM64 propriétaire Apple Silicon (puces M1, M2, M3, M4). Cette plateforme s'appuie sur une architecture de mémoire unifiée (UMA - Unified Memory Architecture) permettant au processeur central (CPU), au processeur graphique (GPU) et au moteur neuronal (Neural Engine) de partager un espace mémoire physique unique à très haute bande passante sans copie inter-bus. La compatibilité ascendante avec le catalogue applicatif hérité Intel est assurée par l'émulateur binaire Rosetta 2, combinant une traduction statique AOT (Ahead-Of-Time) lors de l'installation et une compilation JIT dynamique pour le code généré à la volée. Sur le plan de l'affichage, Apple a totalement déprécié OpenGL et OpenCL au profit exclusif de son API graphique bas niveau Metal, optimisée pour le rendu matériel direct et le calcul intensif sur ses GPU intégrés.",
-    "storage_integrity_and_security": "Le stockage et la sécurité de macOS s'articulent autour du système de fichiers APFS (Apple File System) et du modèle SSV (Sealed System Volume). Depuis macOS Big Sur, la partition système contenant l'ensemble de l'OS est scellée cryptographiquement sous forme d'un arbre de hachages SHA-256 (arbre de Merkle). Lors du démarrage, la racine de confiance matérielle (Secure Enclave et amorçage sécurisé Apple Silicon) valide l'empreinte cryptographique du volume scellé avant d'autoriser son montage en lecture seule ; toute tentative de modification hors mise à jour officielle invalide le sceau et bloque l'amorçage. La sécurité applicative combine la protection de l'intégrité du système (SIP - System Integrity Protection, interdisant même au super-utilisateur `root` de modifier les zones système critiques), Gatekeeper (imposant la signature cryptographique et la notarisation par Apple des binaires tiers), le bac à sable applicatif (App Sandbox) et le système TCC (Transparency, Consent, and Control), qui oblige chaque application à demander le consentement explicite de l'utilisateur avant d'accéder aux données privées, à la caméra ou au microphone.",
-    "ecosystem_continuity_and_limits": "macOS partage des fondations technologiques étroites avec iOS, iPadOS, watchOS et visionOS (noyau Darwin, frameworks Foundation et CoreGraphics, langage Swift, gestionnaire de fenêtres Quartz Compositor). Toutefois, il s'en distingue par son ouverture relative : il conserve un accès complet à l'interpréteur de commandes UNIX (zsh par défaut), aux environnements de développement libres (via les outils Xcode Command Line Tools et des gestionnaires communautaires comme Homebrew) et autorise le chargement d'applications distribuées hors du Mac App Store officiel. Cette intégration s'accompagne d'une dépendance stricte au matériel Apple : les conditions contractuelles de licence interdisent l'exécution de macOS sur des machines non-Apple (rendant les configurations Hackintosh obsolètes et instables face aux sécurités d'Apple Silicon), et le contrôle étroit exercé par le constructeur restreint la modularité matérielle et l'évolutivité des composants après achat.",
-    "origine_et_nomenclature_des_versions": "Apple publie la liste des versions de son système avec, pour chacune, le dernier numéro livré. La série commence à Mac OS X Cheetah 10.0.4 et se poursuit par Puma 10.1.5, Jaguar 10.2.8, Panther 10.3.9, Tiger 10.4.11, Leopard 10.5.8, Snow Leopard 10.6.8, Lion 10.7.5, Mountain Lion 10.8.5, Mavericks 10.9.5, Yosemite 10.10.5 et El Capitan 10.11.6. Le préfixe change ensuite : Sierra 10.12.6, High Sierra 10.13.6 et Mojave 10.14.6 sont nommés macOS, Catalina 10.15.8 clôt la numérotation en 10.x, puis la série reprend à 11 avec Big Sur 11.7.11, suivie de Monterey 12.7.6, Ventura 13.7.8, Sonoma 14.8.9, Sequoia 15.8.1, Tahoe 26 en 26.7.1 et Golden Gate 27 en 27.0.1. La page qui porte cette liste est datée du 28 septembre 2026 et renvoie, pour chaque version majeure, à la liste des modèles compatibles. La nomenclature n'est donc pas un simple compteur : le passage de 10.15 à 11 puis de 15 à 26 correspond à des changements de régime de numérotation, et la version commerciale reste attachée à un nom.",
-    "canaux_de_mise_a_jour_et_fenetre_de_support": "La mise à jour relève de trois mécanismes documentés. Le premier est le processus lui-même : Apple indique que le système vérifie l'intégrité d'une mise à jour, la personnalise pour l'appareil et empêche les attaques par retour à une version antérieure, et que le volume de données de l'utilisateur n'est jamais monté pendant l'opération. Le deuxième est la granularité : à côté des versions majeures et des correctifs, des améliorations de sécurité en arrière-plan sont livrées séparément et leur contenu peut être cumulé dans la mise à jour mineure suivante. Le troisième est le report : la documentation décrit une fenêtre de report de 90 jours avant qu'une mise à jour ne devienne visible pour l'utilisateur, et des seuils de batterie distincts selon le type d'appareil et le mode de déclenchement, 50 % pour une mise à jour automatique sur un Mac à processeur Intel contre 20 % pour une mise à jour lancée par l'utilisateur. Les mises à jour peuvent être mises en cache sur un Mac exécutant macOS 10.13 ou une version ultérieure, avec activation du cache de contenu, l'appareil devant néanmoins joindre les serveurs d'Apple pour finaliser l'opération.",
-    "package_distribution_and_app_control": "Apple documente trois voies de distribution logicielle qui ne se confondent pas. La première est le Mac App Store, qui ne sert que des applications signées et vérifiées. La deuxième est le paquet `.pkg` : une solution de gestion de parc peut installer des paquets sur des Mac surveillés, soit par la gestion déclarative d'applications disponible à partir de macOS 26, soit par la commande `InstallEnterpriseApplication` sur tout Mac géré ; le paquet doit être signé par une signature vérifiable par l'appareil, peut contenir une ou plusieurs applications et des contenus installés hors de `/Applications`, et la gestion déclarative permet de marquer un paquet comme obligatoire ou facultatif. La troisième est l'application téléchargée hors magasin, contrôlée par Gatekeeper, qui vérifie que le logiciel vient d'un développeur identifié, qu'il est notarié par Apple et qu'il n'a pas été modifié, avec accord de l'utilisateur au premier lancement. XProtect complète l'ensemble en identifiant et bloquant les logiciels malveillants déjà présents.",
-    "installation_et_reinstallation_de_macos": "L'installation du système est décrite selon cinq méthodes. La première est la mise à jour par le panneau Logiciel système, présentée comme la plus directe parce qu'elle ne propose que les versions compatibles avec la machine et demande moins d'espace que les autres méthodes. La deuxième est le démarrage depuis la récupération macOS, utilisé pour réinstaller le système, lorsque la mise à jour échoue ou lorsque la machine ne démarre plus faute de système fonctionnel. La troisième passe par le terminal, qui permet de télécharger l'installateur d'une version compatible pas plus ancienne que celle livrée avec la machine. La quatrième est la création d'un support amorçable. La cinquième regroupe les méthodes propres aux versions anciennes. Chaque version majeure est en outre associée à une liste de modèles compatibles, publiée séparément : l'installation n'est donc pas seulement une question de méthode, mais aussi de modèle de Mac reconnu pour la version visée.",
+    "introduction": "Apple macOS is the proprietary operating system developed by Apple Inc. for its range of Macintosh personal and professional computers (MacBook, iMac, Mac mini, Mac Studio and Mac Pro).",
+    "what_is_it": "Successor of NeXTSTEP and of classic Mac OS (1984-2001), macOS combines a refined graphical interface with a POSIX environment certified UNIX by The Open Group (Single UNIX Specification UNIX 03 standard).",
+    "kernel_architecture_and_darwin": "macOS rests on the open-source Darwin foundation and its hybrid XNU kernel (\"X is Not Unix\"). The XNU architecture merges two fundamental components: the Mach 3.0 microkernel (responsible for managing tasks, threads, inter-process communication through IPC ports and virtual memory management) and a monolithic layer derived from FreeBSD (providing the POSIX interface, BSD identity and permission management, the TCP/IP network stack and the virtual file system VFS). For hardware support, macOS traditionally used I/O Kit (an object-oriented framework written in restricted C++ in kernel space), progressively replaced by DriverKit, a modern model running hardware drivers in user space in order to immunise the kernel against software panics. Asynchronous task scheduling and system parallelism are orchestrated in depth by Grand Central Dispatch (GCD / libdispatch).",
+    "hardware_transition_and_graphics": "macOS has carried out a major architectural transformation with the transition from Intel x86-64 processors to the proprietary ARM64 Apple Silicon architecture (M1, M2, M3, M4 chips). This platform relies on a unified memory architecture (UMA) allowing the central processor (CPU), the graphics processor (GPU) and the neural engine to share a single physical memory space at very high bandwidth without inter-bus copying. Backwards compatibility with the legacy Intel application catalogue is ensured by the Rosetta 2 binary emulator, combining static AOT (Ahead-Of-Time) translation during installation and dynamic JIT compilation for code generated on the fly. On the display side, Apple has fully deprecated OpenGL and OpenCL in favour of the exclusive use of its low-level Metal graphics API, optimised for direct hardware rendering and intensive computing on its integrated GPUs.",
+    "storage_integrity_and_security": "Storage and security in macOS are organised around the APFS file system (Apple File System) and the SSV (Sealed System Volume) model. Since macOS Big Sur, the system partition containing the whole OS is cryptographically sealed in the form of a SHA-256 hash tree (Merkle tree). At boot, the hardware root of trust (Secure Enclave and Apple Silicon secure boot) validates the cryptographic fingerprint of the sealed volume before authorising its read-only mounting; any attempt at modification outside an official update invalidates the seal and blocks booting. Application security combines system integrity protection (SIP, forbidding even the `root` superuser to modify critical system areas), Gatekeeper (imposing Apple code signing and notarisation of third-party binaries), the application sandbox (App Sandbox) and the TCC system (Transparency, Consent, and Control), which requires every application to ask for the user's explicit consent before accessing private data, the camera or the microphone.",
+    "ecosystem_continuity_and_limits": "macOS shares close technological foundations with iOS, iPadOS, watchOS and visionOS (Darwin kernel, Foundation and CoreGraphics frameworks, Swift language, Quartz Compositor window manager). It nonetheless stands apart through its relative openness: it preserves full access to the UNIX command interpreter (zsh by default), to free development environments (through the Xcode Command Line Tools and community managers such as Homebrew) and allows loading applications distributed outside the official Mac App Store. This integration comes with a strict dependence on Apple hardware: the contractual licence terms forbid running macOS on non-Apple machines (making Hackintosh configurations obsolete and unstable in the face of Apple Silicon security), and the close control exercised by the manufacturer restricts hardware modularity and component upgradability after purchase.",
+    "origine_et_nomenclature_des_versions": "Apple publishes the list of versions of its system with, for each, the last delivered number. The series starts at Mac OS X Cheetah 10.0.4 and continues with Puma 10.1.5, Jaguar 10.2.8, Panther 10.3.9, Tiger 10.4.11, Leopard 10.5.8, Snow Leopard 10.6.8, Lion 10.7.5, Mountain Lion 10.8.5, Mavericks 10.9.5, Yosemite 10.10.5 and El Capitan 10.11.6. The prefix then changes: Sierra 10.12.6, High Sierra 10.13.6 and Mojave 10.14.6 are named macOS, Catalina 10.15.8 closes the 10.x numbering, then the series resumes at 11 with Big Sur 11.7.11, followed by Monterey 12.7.6, Ventura 13.7.8, Sonoma 14.8.9, Sequoia 15.8.1, Tahoe 26 in 26.7.1 and Golden Gate 27 in 27.0.1. The page carrying this list is dated 28 September 2026 and refers, for each major version, to the list of compatible models. The nomenclature is therefore not a simple counter: the move from 10.15 to 11 then from 15 to 26 corresponds to changes of numbering regime, and the commercial version remains attached to a name.",
+    "canaux_de_mise_a_jour_et_fenetre_de_support": "Updating is covered by three documented mechanisms. The first is the process itself: Apple states that the system verifies the integrity of an update, personalises it for the device and prevents rollback attacks, and that the user data volume is never mounted during the operation. The second is granularity: alongside major versions and patches, background security improvements are delivered separately and their content can be accumulated in the following minor update. The third is deferral: the documentation describes a deferral window of 90 days before an update becomes visible to the user, and distinct battery thresholds according to the type of device and the trigger mode, 50% for an automatic update on a Mac with an Intel processor against 20% for an update started by the user. Updates can be cached on a Mac running macOS 10.13 or later, with content caching enabled, the device nonetheless having to reach Apple's servers to finalise the operation.",
+    "package_distribution_and_app_control": "Apple documents three software distribution paths that are not to be confused. The first is the Mac App Store, which serves only signed and verified applications. The second is the `.pkg` package: a fleet management solution can install packages on supervised Macs, either through the declarative application management available from macOS 26, or through the `InstallEnterpriseApplication` command on any managed Mac; the package must be signed by a signature verifiable by the device, can contain one or more applications and content installed outside `/Applications`, and declarative management allows a package to be marked as required or optional. The third is the application downloaded outside the store, controlled by Gatekeeper, which verifies that the software comes from an identified developer, that it is notarised by Apple and that it has not been modified, with the user's agreement at first launch. XProtect completes the set by identifying and blocking malicious software already present.",
+    "installation_et_reinstallation_de_macos": "System installation is described according to five methods. The first is the update through the System Settings software panel, presented as the most direct because it offers only versions compatible with the machine and requires less space than the other methods. The second is booting from macOS Recovery, used to reinstall the system, when the update fails or when the machine no longer starts for lack of a working system. The third goes through the terminal, which makes it possible to download the installer of a compatible version no older than the one delivered with the machine. The fourth is the creation of a bootable medium. The fifth groups the methods specific to older versions. Each major version is moreover associated with a list of compatible models, published separately: installation is therefore not only a question of method, but also of Mac model recognised for the target version.",
     "advantages": [
-      "Certification officielle UNIX 03 offrant un environnement POSIX complet pour le développement logiciel",
-      "Optimisation matérielle et efficacité énergétique sur les architectures Apple Silicon",
-      "Architecture de sécurité multicouche robuste (Signed System Volume, SIP, Gatekeeper, Secure Enclave)",
-      "Système de fichiers moderne APFS avec snapshots locaux et clonage de fichiers à coût nul",
-      "Écosystème unifié et continuité transparente avec les appareils iOS et iPadOS"
+      "Official UNIX 03 certification offering a complete POSIX environment for software development",
+      "Hardware optimisation and energy efficiency on Apple Silicon architectures",
+      "Robust multi-layer security architecture (Signed System Volume, SIP, Gatekeeper, Secure Enclave)",
+      "Modern APFS file system with local snapshots and zero-cost file cloning",
+      "Unified ecosystem and transparent continuity with iOS and iPadOS devices"
     ],
     "disadvantages": [
-      "Verrouillage contractuel et technique exclusif au matériel physique fabriqué par Apple",
-      "Code source de l'interface graphique, des frameworks Cocoa/SwiftUI et des pilotes sous licence propriétaire",
-      "Catalogue de jeux vidéo natifs nettement plus restreint que sur les plateformes Windows ou Linux sous Proton",
-      "Contraintes croissantes sur l'exécution de logiciels indépendants non notarisés par les serveurs Apple"
+      "Contractual and technical lock-in exclusive to physical hardware manufactured by Apple",
+      "Source code of the graphical interface, of the Cocoa/SwiftUI frameworks and of the drivers under proprietary licence",
+      "Native video game catalogue significantly smaller than on Windows or on Linux with Proton",
+      "Growing constraints on running independent software not notarised by Apple servers"
     ],
     "who_is_it_for": [
-      "Développeurs logiciels, ingénieurs et créateurs de contenu recherchant un environnement UNIX graphique stable",
-      "Professionnels de l'audiovisuel, de l'édition musicale et de la création graphique exploitant la suite Apple",
-      "Utilisateurs disposant d'un équipement Apple privilégiant l'intégration écosystémique et la simplicité de maintenance"
+      "Software developers, engineers and content creators looking for a stable graphical UNIX environment",
+      "Audiovisual, music publishing and graphic creation professionals using the Apple suite",
+      "Users with Apple equipment favouring ecosystem integration and simplicity of maintenance"
     ],
     "who_is_it_not_for": [
-      "Utilisateurs souhaitant assembler leur propre ordinateur de bureau ou changer librement les composants matériels",
-      "Infrastructures de calcul ou de serveurs standard exigeant une virtualisation x86-64 banalisée",
-      "Joueurs PC intensifs dépendants d'un catalogue de jeux natifs x86 et de pilotes GPU tiers"
+      "Users wishing to assemble their own desktop computer or freely change hardware components",
+      "Standard computing or server infrastructures requiring ordinary x86-64 virtualisation",
+      "Intensive PC gamers depending on a native x86 game catalogue and third-party GPU drivers"
     ],
-    "verdict": "Apple macOS est le système d'exploitation propriétaire d'Apple pour ses ordinateurs Macintosh. Il repose sur un environnement POSIX certifié UNIX 03 par The Open Group, sur le noyau XNU et sur l'architecture Apple Silicon, avec une interface et un écosystème applicatif contrôlés par Apple."
+    "verdict": "Apple macOS is Apple's proprietary operating system for its Macintosh computers. It rests on a POSIX environment certified UNIX 03 by The Open Group, on the XNU kernel and on the Apple Silicon architecture, with an interface and an application ecosystem controlled by Apple."
   },
   "relations": [
     {
       "id": "windows",
       "name": "Microsoft Windows",
       "type": "alternative",
-      "note": "Système d'exploitation de bureau commercial concurrent développé par Microsoft sur socle Windows NT."
+      "note": "Competing commercial desktop operating system developed by Microsoft on a Windows NT foundation."
     },
     {
       "id": "freebsd",
       "name": "FreeBSD",
       "type": "related",
-      "note": "Système d'exploitation Unix libre dont la couche système BSD a été intégrée dans le socle Darwin et le noyau XNU."
+      "note": "Free Unix operating system whose BSD system layer was integrated into the Darwin foundation and the XNU kernel."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
       "type": "alternative",
-      "note": "Distribution Linux pour postes de travail et serveurs offrant un environnement open source alternatif."
+      "note": "Linux distribution for workstations and servers offering an alternative open-source environment."
     },
     {
       "id": "fedora",
       "name": "Fedora",
       "type": "alternative",
-      "note": "Distribution Linux d'avant-garde pour postes de travail adoptant les standards ouverts du monde libre."
+      "note": "Avant-garde Linux distribution for workstations adopting the open standards of the free software world."
     }
   ],
   "links": [
     {
-      "label": "Site officiel d'Apple macOS",
+      "label": "Official Apple macOS website",
       "url": "https://www.apple.com/macos"
     },
     {
-      "label": "Portail open source d'Apple (Darwin et XNU)",
+      "label": "Apple open-source portal (Darwin and XNU)",
       "url": "https://github.com/apple-oss-distributions"
     },
     {
-      "label": "Guide officiel de sécurité de plateforme Apple (Apple Platform Security)",
+      "label": "Official Apple Platform Security guide",
       "url": "https://support.apple.com/guide/security/welcome/web"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel Apple macOS et spécifications techniques",
+      "title": "Official Apple macOS portal and technical specifications",
       "url": "https://www.apple.com/macos/",
       "type": "official_site"
     },
     {
-      "title": "Dépôts de code source libre Apple OS Distributions (Darwin / XNU)",
+      "title": "Apple OS Distributions open-source code repositories (Darwin / XNU)",
       "url": "https://github.com/apple-oss-distributions/xNU",
       "type": "documentation"
     },
     {
-      "title": "Registre officiel des produits certifiés Single UNIX Specification (UNIX 03)",
+      "title": "Official register of Single UNIX Specification certified products (UNIX 03)",
       "url": "https://www.opengroup.org/openbrand/register/",
       "type": "official_site"
     },

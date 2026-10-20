@@ -119,13 +119,13 @@
       "accessed": "2026-10-18"
     },
     {
-      "title": "PikaOS Wiki — changelog des images ISO (PikaOS 4)",
+      "title": "PikaOS Wiki — changelog of ISO images (PikaOS 4)",
       "url": "https://wiki.pika-os.com/en/changelogs-wiki",
       "type": "official_documentation",
       "date": "2026-10-19"
     },
     {
-      "title": "PikaOS Wiki — Secure Boot (échec au démarrage, signature avec sbctl)",
+      "title": "PikaOS Wiki — Secure Boot (boot failure, signing with sbctl)",
       "url": "https://wiki.pika-os.com/en/guides-wiki/secure-boot",
       "type": "official_documentation",
       "date": "2026-10-19"

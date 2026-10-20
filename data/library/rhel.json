@@ -2,7 +2,7 @@
   "id": "rhel",
   "name": "Red Hat Enterprise Linux",
   "type": "operating_system",
-  "summary": "Distribution Linux commerciale certifiée pour serveurs d'entreprise et environnements de production critiques, offrant un cycle de vie garanti de 10 ans, le renforcement SELinux et la gestion par conteneurs Podman.",
+  "summary": "Commercial Linux distribution certified for enterprise servers and critical production environments, offering a guaranteed 10-year lifecycle, SELinux hardening and Podman container management.",
   "tags": [
     "enterprise",
     "server",
@@ -20,97 +20,97 @@
     "ppc64le",
     "s390x"
   ],
-  "license": "Open Source (GNU GPL, LGPL et licences libres variées avec souscription commerciale d'assistance et de certification Red Hat)",
+  "license": "Open Source (GNU GPL, LGPL and various free licences with a commercial Red Hat assistance and certification subscription)",
   "last_verified": "2026-10-16",
   "content": {
-    "introduction": "Red Hat Enterprise Linux (RHEL) est une distribution Linux commerciale développée par Red Hat (filiale d'IBM depuis 2019). RHEL constitue la plateforme d'exploitation d'entreprise de référence sur le marché mondial des centres de données, des infrastructures infonuagiques, du secteur bancaire, des télécommunications et des services publics. Conçu pour garantir une fiabilité, une sécurité et une prévisibilité opérationnelle maximales, RHEL se distingue par un processus d'ingénierie rigoureux combinant un noyau Linux stabilisé, des certifications matérielles et logicielles étendues et des politiques de cycle de vie pluriannuelles.",
-    "what_is_it": "Techniquement, RHEL est une distribution Linux complète articulée autour du gestionnaire de système systemd, du format de paquetage RPM et du gestionnaire de dépendances DNF. Il est essentiel de distinguer RHEL des autres projets de son écosystème : Fedora constitue son laboratoire amont (upstream) d'innovation rapide ; CentOS Stream sert de branche de développement continu (midstream) préfigurant les futures versions mineures de RHEL ; tandis que RHEL est le produit commercial certifié, durci et assorti de contrats de niveau de service (SLA). Des distributions compatibles construites en aval (downstream rebuilds) comme AlmaLinux et Rocky Linux s'efforcent d'en reproduire la compatibilité binaire sans affiliation commerciale avec Red Hat.",
-    "kernel_stability_backporting_and_appstreams": "Le noyau de RHEL repose sur une politique de stabilisation stricte : plutôt que d'adopter continuellement les versions amont majeures du noyau Linux, Red Hat maintient une version de base éprouvée et y applique des milliers de rétroportages (backports) de correctifs de sécurité critiques et de pilotes matériels récents, préservant ainsi l'intégrité de l'interface binaire du noyau (kABI). Pour concilier cette pérennité du socle avec la nécessité d'utiliser des outils de développement récents, RHEL met en œuvre les **Application Streams** (AppStream) : ce mécanisme permet de déployer plusieurs versions concurrentes et indépendantes de langages, de serveurs web ou de bases de données (Python, Node.js, PHP, PostgreSQL) sans impacter les bibliothèques centrales du système d'exploitation.",
-    "enterprise_security_architecture_and_selinux": "La sécurité de RHEL est articulée autour de **SELinux** (Security-Enhanced Linux), activé et appliqué par défaut en mode strict (enforcing) avec des politiques ciblées qui confinent les démons et services réseau dans des domaines restreints pour juguler les compromissions. Le système intègre également les politiques de chiffrement à l'échelle du système (**System-wide Crypto Policies**), permettant aux administrateurs de basculer l'ensemble des protocoles cryptographiques (TLS, SSH, IPsec, Kerberos) vers des niveaux de conformité réglementaires stricts (FIPS 140-3, PCI-DSS). S'y ajoutent la gestion centralisée d'identités (Red Hat IdM basé sur FreeIPA) et la suite d'audit automatisée OpenSCAP.",
-    "containers_virtualization_and_cockpit_management": "Pour les charges applicatives modernes, RHEL promeut un écosystème de conteneurs sans démon (daemonless) et sans privilèges super-utilisateur, s'appuyant sur les outils natifs conformes aux standards OCI : **Podman** (gestion des conteneurs et pods), **Buildah** (construction d'images) et **Skopeo** (manipulation d'images de conteneurs). Pour la virtualisation d'entreprise, RHEL intègre l'hyperviseur natif **KVM** piloté par **libvirt**. L'administration locale et distante est facilitée par la console web **Cockpit**, offrant une interface graphique épurée et sécurisée pour superviser les ressources processeur, le stockage de volumes XFS/Stratis, les interfaces réseau et les journaux de services.",
-    "lifecycle_policies_and_hardware_platforms": "La politique de cycle de vie officielle de Red Hat garantit une durée de vie de **10 ans** pour chaque version majeure de RHEL, scindée en une phase de support complet (Full Support Phase de 5 ans, avec ajouts de pilotes et correctifs majeurs) et une phase de maintenance (Maintenance Support Phase de 5 ans, dédiée aux correctifs de sécurité critiques), complétée par des extensions de support étendu payantes (Extended Life Phase - ELP / EUS). RHEL est certifié et optimisé pour quatre architectures matérielles d'entreprise : **x86-64**, **AArch64** (ARM 64 bits), **IBM POWER** (ppc64le) et les mainframes **IBM Z** (s390x).",
+    "introduction": "Red Hat Enterprise Linux (RHEL) is a commercial Linux distribution developed by Red Hat (a subsidiary of IBM since 2019). RHEL is the reference enterprise operating platform on the global market of data centres, cloud infrastructures, the banking sector, telecommunications and public services. Designed to guarantee maximum reliability, security and operational predictability, RHEL stands out through a rigorous engineering process combining a stabilised Linux kernel, extensive hardware and software certifications and multi-year lifecycle policies.",
+    "what_is_it": "Technically, RHEL is a complete Linux distribution articulated around the systemd system manager, the RPM packaging format and the DNF dependency manager. It is essential to distinguish RHEL from the other projects of its ecosystem: Fedora constitutes its fast-innovation upstream laboratory; CentOS Stream serves as the continuous development (midstream) branch prefiguring the future minor versions of RHEL; while RHEL is the certified, hardened commercial product accompanied by service level agreements (SLA). Compatible distributions built downstream (downstream rebuilds) such as AlmaLinux and Rocky Linux strive to reproduce its binary compatibility without commercial affiliation with Red Hat.",
+    "kernel_stability_backporting_and_appstreams": "The RHEL kernel rests on a strict stabilisation policy: rather than continuously adopting the major upstream versions of the Linux kernel, Red Hat maintains a proven base version and applies thousands of backports of critical security fixes and recent hardware drivers to it, thus preserving the integrity of the kernel binary interface (kABI). To reconcile this durability of the foundation with the need to use recent development tools, RHEL implements **Application Streams** (AppStream): this mechanism makes it possible to deploy several competing and independent versions of languages, web servers or databases (Python, Node.js, PHP, PostgreSQL) without affecting the central libraries of the operating system.",
+    "enterprise_security_architecture_and_selinux": "RHEL security is articulated around **SELinux** (Security-Enhanced Linux), enabled and applied by default in strict mode (enforcing) with targeted policies that confine daemons and network services in restricted domains to curb compromises. The system also integrates system-wide encryption policies (**System-wide Crypto Policies**), allowing administrators to switch all cryptographic protocols (TLS, SSH, IPsec, Kerberos) to strict regulatory compliance levels (FIPS 140-3, PCI-DSS). Added to these are centralised identity management (Red Hat IdM based on FreeIPA) and the OpenSCAP automated auditing suite.",
+    "containers_virtualization_and_cockpit_management": "For modern application workloads, RHEL promotes a daemonless and unprivileged container ecosystem, relying on native tools compliant with OCI standards: **Podman** (container and pod management), **Buildah** (image building) and **Skopeo** (container image handling). For enterprise virtualisation, RHEL integrates the native **KVM** hypervisor driven by **libvirt**. Local and remote administration is facilitated by the **Cockpit** web console, offering a refined and secure graphical interface to supervise processor resources, XFS/Stratis volume storage, network interfaces and service logs.",
+    "lifecycle_policies_and_hardware_platforms": "The official lifecycle policy of Red Hat guarantees a lifetime of **10 years** for each major version of RHEL, split into a full support phase (Full Support Phase of 5 years, with driver additions and major fixes) and a maintenance phase (Maintenance Support Phase of 5 years, dedicated to critical security fixes), completed by paid extended support options (Extended Life Phase - ELP / EUS). RHEL is certified and optimised for four enterprise hardware architectures: **x86-64**, **AArch64** (64-bit ARM), **IBM POWER** (ppc64le) and **IBM Z** mainframes (s390x).",
     "advantages": [
-      "Stabilité et fiabilité d'entreprise de référence avec kABI pérenne et rétroportages rigoureux.",
-      "Cycle de vie standard de 10 ans garanti par version majeure avec options de support étendu (EUS/ELP).",
-      "Sécurité renforcée par défaut avec SELinux en mode enforcing et politiques cryptographiques système.",
-      "Mécanisme des Application Streams permettant de faire évoluer les outils de développement sans toucher au socle.",
-      "Écosystème de conteneurs sans démon moderne et sécurisé (Podman, Buildah, Skopeo).",
-      "Certifications matérielles et réglementaires mondiales étendues (FIPS 140-3, Common Criteria, support OEM constructeurs)."
+      "Reference enterprise stability and reliability with durable kABI and rigorous backports.",
+      "Standard 10-year lifecycle guaranteed per major version with extended support options (EUS/ELP).",
+      "Hardened security by default with SELinux in enforcing mode and system cryptographic policies.",
+      "Application Streams mechanism making it possible to evolve development tools without touching the foundation.",
+      "Modern and secure daemonless container ecosystem (Podman, Buildah, Skopeo).",
+      "Extensive worldwide hardware and regulatory certifications (FIPS 140-3, Common Criteria, OEM manufacturer support)."
     ],
     "disadvantages": [
-      "Modèle commercial sous souscription payante pour l'accès aux binaires certifiés et au support technique officiel.",
-      "Rythme d'évolution des logiciels du socle système volontairement lent comparativement aux distributions communautaires rapides.",
-      "Accès aux dépôts sources assujetti aux conditions contractuelles du portail client Red Hat.",
-      "Complexité de configuration des politiques de sécurité SELinux avancées pour les administrateurs non initiés.",
-      "Moins adapté aux ordinateurs de bureau personnels ou aux stations de travail orientées vers le jeu vidéo."
+      "Commercial model under paid subscription for access to certified binaries and official technical support.",
+      "Deliberately slow pace of evolution of the system foundation software compared with fast community distributions.",
+      "Access to source repositories subject to the contractual terms of the Red Hat customer portal.",
+      "Complexity of configuring advanced SELinux security policies for administrators not familiar with them.",
+      "Less suited to personal desktop computers or to video game-oriented workstations."
     ],
     "who_is_it_for": [
-      "Grandes entreprises, banques, ministères et opérateurs de télécommunications exigeant un support 24/7 contractuel.",
-      "Administrateurs système gérant des parcs de serveurs physiques critiques ou des clusters infonuagiques hybrides.",
-      "Architectes d'infrastructures concevant des plateformes de conteneurs basées sur Red Hat OpenShift.",
-      "Développeurs certifiant des logiciels d'entreprise pour les environnements de production industrielle."
+      "Large enterprises, banks, ministries and telecommunications operators requiring contractual 24/7 support.",
+      "System administrators managing fleets of critical physical servers or hybrid cloud clusters.",
+      "Infrastructure architects designing container platforms based on Red Hat OpenShift.",
+      "Developers certifying enterprise software for industrial production environments."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs particuliers à la recherche d'une distribution de bureau gratuite pour leur ordinateur portable quotidien.",
-      "Développeurs exigeant immédiatement les tout derniers pilotes graphiques ou les dernières versions quotidiennes de paquets.",
-      "Joueurs de jeux vidéo PC récents recherchant des optimisations de performances gaming de pointe.",
-      "Petites structures ou projets amateurs sans budget pour des souscriptions de support commercial d'entreprise."
+      "Private users looking for a free desktop distribution for their everyday laptop.",
+      "Developers immediately requiring the very latest graphics drivers or the latest daily package versions.",
+      "Players of recent PC video games looking for leading-edge gaming performance optimisations.",
+      "Small structures or hobby projects without a budget for enterprise commercial support subscriptions."
     ],
-    "verdict": "Red Hat Enterprise Linux est une distribution Linux d'entreprise éditée par Red Hat. En garantissant une continuité d'exploitation de dix ans, des mécanismes de sécurité (SELinux, FIPS) et une suite d'outils (Podman, Cockpit, AppStream) certifiée sur les architectures x86-64, ARM64, POWER et s390x, elle cible les infrastructures informatiques critiques."
+    "verdict": "Red Hat Enterprise Linux is an enterprise Linux distribution published by Red Hat. By guaranteeing ten years of operational continuity, security mechanisms (SELinux, FIPS) and a suite of tools (Podman, Cockpit, AppStream) certified on the x86-64, ARM64, POWER and s390x architectures, it targets critical computing infrastructures."
   },
   "relations": [
     {
       "id": "fedora",
       "name": "Fedora",
       "type": "related",
-      "note": "Distribution communautaire rapide servant de laboratoire amont (upstream) pour les technologies de RHEL."
+      "note": "Fast community distribution serving as an upstream laboratory for RHEL technologies."
     },
     {
       "id": "almalinux",
       "name": "AlmaLinux",
       "type": "derivative",
-      "note": "Distribution Linux d'entreprise compatible binaire avec RHEL gérée par la communauté."
+      "note": "Community-managed enterprise Linux distribution binary compatible with RHEL."
     },
     {
       "id": "rocky-linux",
       "name": "Rocky Linux",
       "type": "derivative",
-      "note": "Distribution Linux d'entreprise communautaire offrant une compatibilité binaire avec RHEL."
+      "note": "Community enterprise Linux distribution offering binary compatibility with RHEL."
     },
     {
       "id": "debian",
       "name": "Debian",
       "type": "alternative",
-      "note": "Distribution Linux universelle majeure pour serveurs d'entreprise et infrastructures."
+      "note": "Major universal Linux distribution for enterprise servers and infrastructures."
     }
   ],
   "links": [
     {
-      "label": "Portail officiel de Red Hat Enterprise Linux",
+      "label": "Official Red Hat Enterprise Linux portal",
       "url": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux"
     },
     {
-      "label": "Politiques de cycle de vie et de support officiel RHEL",
+      "label": "Official RHEL lifecycle and support policies",
       "url": "https://access.redhat.com/support/policy/updates/errata"
     },
     {
-      "label": "Portail de support et documentation technique Red Hat",
+      "label": "Red Hat support portal and technical documentation",
       "url": "https://access.redhat.com/"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel et présentation produit de Red Hat Enterprise Linux",
+      "title": "Official portal and product presentation of Red Hat Enterprise Linux",
       "url": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux",
       "type": "official_site"
     },
     {
-      "title": "Politiques officielles de cycle de vie et de maintenance des erratas RHEL",
+      "title": "Official RHEL life cycle and errata maintenance policies",
       "url": "https://access.redhat.com/support/policy/updates/errata",
       "type": "documentation"
     },
     {
-      "title": "Portail officiel d'accès et documentation technique Red Hat",
+      "title": "Official Red Hat access portal and technical documentation",
       "url": "https://access.redhat.com/",
       "type": "official_site"
     }

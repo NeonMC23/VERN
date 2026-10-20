@@ -2,7 +2,7 @@
   "id": "haiku",
   "name": "Haiku",
   "type": "operating_system",
-  "summary": "Système d'exploitation libre et open source pour ordinateurs de bureau, inspiré de BeOS et doté d'un noyau hybride modulaire préemptif, du système de fichiers indexé BFS et de l'environnement de bureau Deskbar/Tracker.",
+  "summary": "Free and open-source desktop operating system inspired by BeOS, equipped with a modular preemptive hybrid kernel, the indexed BFS file system and the Deskbar/Tracker desktop environment.",
   "tags": [
     "desktop",
     "beos",
@@ -18,44 +18,44 @@
     "x86-64",
     "x86-32"
   ],
-  "license": "Open Source (Licence MIT avec composants BeOS OpenTracker)",
+  "license": "Open Source (MIT Licence with BeOS OpenTracker components)",
   "last_verified": "2026-10-19",
   "content": {
-    "introduction": "Haiku est un système d'exploitation libre et open source conçu spécifiquement pour l'informatique de bureau personnelle et la création multimédia. Fondé en 2001 sous le nom initial d'OpenBeOS après l'abandon commercial de BeOS par Palm Inc., le projet propose une réimplémentation complète, moderne et indépendante des technologies de BeOS R5. Sans être fondé sur Linux ni sur Unix classique, Haiku propose une expérience utilisateur unifiée, particulièrement légère, rapide et centrée sur la réactivité graphique.",
-    "what_is_it": "Techniquement, Haiku est un système d'exploitation autonome développé de zéro (à l'exception de Tracker et Deskbar libérés par Be Inc. en 2001). Il associe un noyau hybride modulaire préemptif, un système de fichiers journalisé à métadonnées indexées en base de données (BFS), une interface graphique spatiale hautement réactive et une API orientée objet en C++ organisée en kits logiques, offrant une compatibilité binaire avec les logiciels historiques de BeOS sur architecture 32 bits et une compatibilité de code source sur architecture 64 bits.",
-    "kernel_architecture_and_newos": "Le cœur de Haiku est un noyau hybride modulaire préemptif dérivé du noyau NewOS, développé par Travis Geiselbrecht (ancien ingénieur chez Be Inc.). Le noyau assure un multitâche préemptif granulaire, la protection de la mémoire virtuelle, le chargement dynamique de modules de pilotes matériels et une prise en charge complète du multi-traitement symétrique (SMP) sur processeurs multi-cœurs. L'architecture impose le multi-threading intensif : chaque fenêtre d'application dispose par défaut de ses propres threads d'exécution et de rendu graphique, évitant que l'interface ne se fige lorsqu'une tâche consomme des cycles de calcul.",
-    "file_system_bfs_and_live_queries": "La pierre angulaire de l'organisation des données de Haiku est le système de fichiers journalisé 64 bits **BFS** (Be File System), conçu à l'origine par Dominic Giampaolo. BFS traite les fichiers comme des enregistrements structurés : n'importe quel fichier peut intégrer des métadonnées arbitraires typées (par exemple artiste, album et débit pour une musique ; statut et échéance pour un projet), qui sont automatiquement indexées par le système. Les utilisateurs peuvent formuler des requêtes dynamiques persistantes (live queries) qui s'actualisent en temps réel sous forme de dossiers virtuels dès que des fichiers correspondant aux critères sont créés ou modifiés.",
-    "deskbar_tracker_and_object_oriented_api": "L'environnement visuel de Haiku forme un ensemble indivisible et élégant. La **Deskbar** (barre des tâches modulable logée par défaut en haut à droite) donne accès aux applications, aux applets et au contrôle des volumes. Le gestionnaire de fichiers spatial **Tracker** permet de naviguer dans les disques et d'afficher les fichiers sous forme de tables d'attributs personnalisées. Le système de fenêtrage intègre la technologie novatrice *Stack & Tile*, permettant de regrouper et d'empiler plusieurs fenêtres sous forme d'onglets au sein d'un même cadre. Pour les développeurs, l'API Haiku en C++ est structurée en kits modulaires (Application, Interface, Storage, Media, Network), garantissant une programmation objet d'une grande clarté.",
-    "modern_features_and_hardware_support": "Tout en préservant l'esprit de BeOS, Haiku s'est doté d'avancées contemporaines : un système de gestion de paquets innovant (`HaikuPackage`) qui monte les logiciels sous forme de systèmes de fichiers virtuels en lecture seule (`.hpkg`) dans `/system` sans disséminer de fichiers sur le disque, un navigateur web moderne basé sur WebKit (WebPositive), et des pilotes Wi-Fi et réseau portés depuis le noyau de FreeBSD. Haiku est disponible en édition 32 bits (avec double compilateur gcc2/gcc13 pour la compatibilité binaire avec les logiciels BeOS d'époque) et en édition 64 bits (x86-64 moderne pour PC UEFI).",
+    "introduction": "Haiku is a free and open-source operating system designed specifically for personal desktop computing and multimedia creation. Founded in 2001 under the initial name OpenBeOS following the commercial abandonment of BeOS by Palm Inc., the project offers a complete, modern and independent reimplementation of the technologies of BeOS R5. Without being based on Linux or on classic Unix, Haiku offers a unified user experience, particularly lightweight, fast and centred on graphical responsiveness.",
+    "what_is_it": "Technically, Haiku is a stand-alone operating system developed from scratch (with the exception of Tracker and Deskbar released by Be Inc. in 2001). It combines a modular preemptive hybrid kernel, a journalled file system with metadata indexed in a database (BFS), a highly responsive spatial graphical interface and an object-oriented C++ API organised in logical kits, offering binary compatibility with the historical software of BeOS on 32-bit architecture and source code compatibility on 64-bit architecture.",
+    "kernel_architecture_and_newos": "The heart of Haiku is a modular preemptive hybrid kernel derived from the NewOS kernel, developed by Travis Geiselbrecht (a former engineer at Be Inc.). The kernel ensures granular preemptive multitasking, virtual memory protection, dynamic loading of hardware driver modules and complete support for symmetric multiprocessing (SMP) on multi-core processors. The architecture imposes intensive multithreading: each application window has by default its own execution and graphical rendering threads, preventing the interface from freezing when a task consumes computing cycles.",
+    "file_system_bfs_and_live_queries": "The cornerstone of the data organisation of Haiku is the 64-bit journalled file system **BFS** (Be File System), originally designed by Dominic Giampaolo. BFS treats files as structured records: any file can integrate arbitrary typed metadata (for example artist, album and bitrate for a music file; status and deadline for a project), which are automatically indexed by the system. Users can formulate persistent dynamic queries (live queries) that update in real time in the form of virtual folders as soon as files matching the criteria are created or modified.",
+    "deskbar_tracker_and_object_oriented_api": "The visual environment of Haiku forms an indivisible and elegant whole. The **Deskbar** (modular taskbar lodged by default in the top right corner) gives access to applications, applets and volume control. The spatial **Tracker** file manager makes it possible to browse through disks and display files in the form of customised attribute tables. The windowing system integrates the innovative *Stack & Tile* technology, making it possible to group and stack several windows as tabs within a single frame. For developers, the Haiku C++ API is structured in modular kits (Application, Interface, Storage, Media, Network), guaranteeing object programming of great clarity.",
+    "modern_features_and_hardware_support": "While preserving the spirit of BeOS, Haiku has equipped itself with contemporary advances: an innovative package management system (`HaikuPackage`) which mounts software as read-only virtual file systems (`.hpkg`) in `/system` without scattering files on the disk, a modern web browser based on WebKit (WebPositive), and Wi-Fi and network drivers ported from the FreeBSD kernel. Haiku is available in a 32-bit edition (with dual gcc2/gcc13 compiler for binary compatibility with the BeOS software of the period) and in a 64-bit edition (modern x86-64 for UEFI PCs).",
     "release_status_and_installation_media": "At the time of consultation the current release was R1/beta6, dated 26 August 2026, on two supported platforms: x86 in 32-bit and 64-bit builds. The published images can be written to a USB flash drive, an empty disk or DVD media, and are usable in two ways: booted live from the medium without installing, or used to install Haiku to a disk or partition. The same images run in QEMU, VMware or VirtualBox. Distribution relies on a set of donated mirrors, and each release is published with SHA256 checksums and torrent files; upgrade instructions are provided separately for installations of an earlier version.",
     "advantages": [
-      "Système d'exploitation entièrement dédié au poste de travail personnel, offrant une réactivité d'interface utilisateur exceptionnelle.",
-      "Architecture multi-threadée native empêchant le blocage de l'interface lors de calculs lourds ou d'opérations d'E/S.",
-      "Système de fichiers BFS remarquable avec métadonnées indexées et requêtes de recherche dynamiques en temps réel (live queries).",
-      "Fonctionnalités ergonomiques avancées comme *Stack & Tile* pour organiser et regrouper les fenêtres d'applications par onglets.",
-      "Système de paquets moderne `.hpkg` non destructif basé sur le montage de systèmes de fichiers virtuels en lecture seule.",
-      "Licence libre permissive MIT et compatibilité binaire conservée avec les logiciels historiques de BeOS R5 en version 32 bits."
+      "Operating system entirely dedicated to the personal workstation, offering exceptional user interface responsiveness.",
+      "Native multi-threaded architecture preventing the interface from freezing during heavy computations or input/output operations.",
+      "Remarkable BFS file system with indexed metadata and dynamic real-time search queries (live queries).",
+      "Advanced ergonomic features such as *Stack & Tile* to organise and group application windows as tabs.",
+      "Modern non-destructive `.hpkg` package system based on the mounting of read-only virtual file systems.",
+      "Free permissive MIT licence and binary compatibility preserved with the historical software of BeOS R5 in the 32-bit version."
     ],
     "disadvantages": [
-      "Catalogue applicatif plus restreint que celui des grands systèmes généralistes (Linux, Windows, macOS), malgré le portage de logiciels majeurs.",
-      "Compatibilité avec les matériels informatiques très récents (notamment l'accélération 3D matérielle des GPU modernes et le Wi-Fi de dernière génération) encore partielle.",
-      "Le système est encore officiellement en phase de développement pré-1.0 (versions bêtas successives), pouvant présenter des instabilités occasionnelles.",
-      "Absence d'un système multi-utilisateurs cloisonné avec droits d'accès stricts (le système est conçu pour un utilisateur unique sur sa machine personnelle).",
-      "Non adapté aux déploiements de serveurs d'entreprise sans écran ou aux infrastructures de conteneurs de type cloud."
+      "Application catalogue smaller than that of the major general-purpose systems (Linux, Windows, macOS), despite the porting of major software.",
+      "Compatibility with very recent computer hardware (notably hardware 3D acceleration of modern GPUs and latest-generation Wi-Fi) still partial.",
+      "The system is still officially in the pre-1.0 development phase (successive beta versions), and can show occasional instabilities.",
+      "Absence of a partitioned multi-user system with strict access rights (the system is designed for a single user on their personal machine).",
+      "Not suited to enterprise server deployments without a screen or to cloud-type container infrastructures."
     ],
     "who_is_it_for": [
-      "Nostalgiques et passionnés de l'environnement BeOS souhaitant retrouver son élégance, sa rapidité et son ergonomie unique.",
-      "Utilisateurs recherchant un système de bureau personnel extrêmement léger, réactif et épuré pour de la bureautique et de la consultation web.",
-      "Développeurs C++ appréciant la clarté et l'élégance d'une API orientée objet unifiée organisée en kits logiciels cohérents.",
-      "Curieux et passionnés d'architectures alternatives voulant explorer un système d'exploitation non-Unix et non-Windows abouti."
+      "Nostalgics and enthusiasts of the BeOS environment wishing to find again its elegance, its speed and its unique ergonomics.",
+      "Users looking for an extremely lightweight, responsive and refined personal desktop system for office work and web consultation.",
+      "C++ developers appreciating the clarity and elegance of a unified object-oriented API organised in coherent software kits.",
+      "The curious and enthusiasts of alternative architectures wanting to explore a mature non-Unix and non-Windows operating system."
     ],
     "who_is_it_not_for": [
-      "Professionnels dépendant de suites logicielles commerciales fermées (Adobe Creative Cloud, Autodesk, Microsoft Office).",
-      "Joueurs de jeux vidéo PC modernes exigeant DirectX 12, Vulkan avancé et des pilotes graphiques constructeurs propriétaires récents.",
-      "Administrateurs systèmes cherchant un système pour serveurs de production multi-utilisateurs avec gestion fine des permissions d'accès.",
-      "Environnements de développement nécessitant la prise en charge native de conteneurs Linux Docker/Kubernetes."
+      "Professionals depending on closed commercial software suites (Adobe Creative Cloud, Autodesk, Microsoft Office).",
+      "Players of modern PC video games requiring DirectX 12, advanced Vulkan and recent proprietary manufacturer graphics drivers.",
+      "System administrators looking for a system for multi-user production servers with fine-grained access permission management.",
+      "Development environments requiring native support for Linux Docker/Kubernetes containers."
     ],
-    "verdict": "Haiku prolonge l'héritage de BeOS. Propulsé par un noyau hybride, le système de fichiers BFS à métadonnées indexées et une interface graphique ergonomique, il propose une alternative légère pour l'informatique personnelle."
+    "verdict": "Haiku extends the legacy of BeOS. Powered by a hybrid kernel, the BFS file system with indexed metadata and an ergonomic graphical interface, it offers a lightweight alternative for personal computing."
   },
   "components": [
     {
@@ -88,25 +88,25 @@
       "id": "serenityos",
       "name": "SerenityOS",
       "type": "alternative",
-      "note": "Système d'exploitation moderne indépendant conçu pour l'informatique personnelle avec une interface graphique de bureau intégrée en C++."
+      "note": "Modern stand-alone operating system designed for personal computing with an integrated C++ desktop graphical interface."
     },
     {
       "id": "reactos",
       "name": "ReactOS",
       "type": "alternative",
-      "note": "Projet de réimplémentation open source d'un système d'exploitation de bureau historique."
+      "note": "Open-source reimplementation project of a historical desktop operating system."
     },
     {
       "id": "freebsd",
       "name": "FreeBSD",
       "type": "related",
-      "note": "Système d'exploitation Unix libre dont Haiku réutilise et adapte les pilotes matériels et la pile réseau sans fil."
+      "note": "Free Unix operating system whose hardware drivers and wireless network stack Haiku reuses and adapts."
     },
     {
       "id": "macos",
       "name": "Apple macOS",
       "type": "related",
-      "note": "Système d'exploitation de bureau Apple ayant historiquement envisagé le rachat de BeOS en 1996 avant d'opter pour NeXTSTEP comme fondation de macOS."
+      "note": "Apple desktop operating system having historically considered the acquisition of BeOS in 1996 before opting for NeXTSTEP as the foundation of macOS."
     }
   ],
   "variants": [
@@ -117,36 +117,36 @@
   ],
   "links": [
     {
-      "label": "Site officiel du projet Haiku",
+      "label": "Official website of the Haiku project",
       "url": "https://www.haiku-os.org/"
     },
     {
-      "label": "Guide de l'utilisateur officiel Haiku (User Guide)",
+      "label": "Official Haiku user guide (User Guide)",
       "url": "https://www.haiku-os.org/docs/userguide/en/contents"
     },
     {
-      "label": "Foire aux questions officielle (FAQ)",
+      "label": "Official frequently asked questions (FAQ)",
       "url": "https://www.haiku-os.org/about/faq/"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel et foire aux questions techniques Haiku",
+      "title": "Official portal and technical frequently asked questions of Haiku",
       "url": "https://www.haiku-os.org/about/faq/",
       "type": "official_site"
     },
     {
-      "title": "Guide de l'utilisateur et spécifications de l'interface Deskbar/Tracker",
+      "title": "User guide and Deskbar/Tracker interface specifications",
       "url": "https://www.haiku-os.org/docs/userguide/en/contents",
       "type": "documentation"
     },
     {
-      "title": "Documentation d'architecture du système de fichiers BFS (The Be Book)",
+      "title": "BFS file system architecture documentation (The Be Book)",
       "url": "https://www.haiku-os.org/legacy-docs/bebook/TheStorageKit_Overview_FileSystemArchitecture.html",
       "type": "documentation"
     },
     {
-      "title": "Haiku Project — Get Haiku! (R1/beta6, 26 août 2026, plateformes x86, images, sommes SHA256)",
+      "title": "Haiku Project — Get Haiku! (R1/beta6, 26 August 2026, x86 platforms, images, SHA256 sums)",
       "url": "https://www.haiku-os.org/get-haiku/",
       "type": "official_documentation",
       "accessed": "2026-10-18"

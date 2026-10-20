@@ -2,7 +2,7 @@
   "id": "mobian",
   "name": "Mobian",
   "type": "operating_system",
-  "summary": "Surcouche mobile pour Debian GNU/Linux apportant un environnement tactile Wayland et des outils de téléphonie sur ordiphones et tablettes.",
+  "summary": "Mobile overlay for Debian GNU/Linux providing a Wayland touch environment and telephony tools on smartphones and tablets.",
   "tags": [
     "mobile",
     "debian",
@@ -17,62 +17,62 @@
     "armhf",
     "x86_64"
   ],
-  "license": "Open source (GPL, LGPL et licences libres Debian)",
+  "license": "Open source (GPL, LGPL and free Debian licences)",
   "last_verified": "2026-10-19",
   "content": {
-    "introduction": "Mobian est un projet communautaire créé en 2020 par Arnaud Ferraris dont l'objectif est d'adapter la distribution universelle Debian GNU/Linux à l'usage sur appareils mobiles, notamment les ordiphones et tablettes tactiles.",
-    "what_is_it": "Plutôt qu'une distribution dérivée autonome et indépendante, Mobian fonctionne comme une surcouche (« overlay ») au-dessus de Debian. Le projet maintient un nombre restreint de paquets spécifiques tout en réinjectant systématiquement le code amont (« upstreaming ») au sein des dépôts officiels Debian via l'équipe DebianOnMobile.",
-    "origine_et_premieres_versions_stables": "Mobian suit le dépôt *testing* de Debian depuis son origine, et non les versions stables. La première version stable du projet, nommée « Bookworm », a été publiée le 10 juin 2023, en même temps que Debian Bookworm : l'annonce précise que Debian Bullseye n'avait pas été jugée adaptée aux appareils mobiles et que Bookworm est la première version de Debian considérée comme suffisamment utilisable sur écran tactile pour servir de base à une version stable de Mobian. À partir de cette publication, les utilisateurs peuvent choisir entre cette version stable et le dépôt *staging*, qui suit la branche de développement.\n\nLa rétrospective publiée en janvier 2024 précise la politique de maintenance de cette branche : Bookworm continue de recevoir les mises à jour de sécurité, mais aucune nouvelle fonctionnalité ; les évolutions sont développées dans les dépôts *testing* de Debian et de Mobian.",
-    "debian_foundation_and_mobile_overlay": "Mobian s'appuie directement sur les dépôts stables et de test de Debian (Debian 12 Bookworm, Debian 13 Trixie). Le système utilise la bibliothèque standard glibc, le gestionnaire de services et d'initialisation systemd, ainsi que le gestionnaire de paquets binaire APT (dpkg). Les utilisateurs disposent ainsi d'un accès natif à l'ensemble du catalogue Debian fort de plus de 69 000 paquets logiciels. Le système de fichiers racine demeure modifiable en lecture-écriture par défaut, autorisant l'administration système standard d'une machine Debian.",
-    "touch_environment_and_phosh_ecosystem": "L'environnement graphique principal de Mobian est Phosh (Phone Shell), une interface tactile conçue pour les terminaux mobiles au-dessus du compositeur Wayland wlroots, initialement développée par Purism pour le Librem 5 et aujourd'hui hébergée sous l'égide de GNOME. Phosh est associé à Squeekboard, un clavier virtuel à l'écran gérant la disposition multi-langues et les touches modificatrices, et à Feedbackd, un démon système orchestrant les signaux haptiques (vibrations) et sonores. La téléphonie cellulaire, l'envoi de SMS et la gestion des données mobiles sont assurés par ModemManager et NetworkManager, tandis que le routage audio des conversations téléphoniques est pris en charge par Callaudiod et PipeWire, permettant d'exécuter des applications de bureau GNOME adaptatives utilisant les bibliothèques libadwaita et libhandy.",
-    "hardware_support_and_mainline_kernel": "Mobian applique une politique technique stricte : le système repose exclusivement sur le noyau Linux amont (« mainline kernel ») et refuse l'utilisation des noyaux Android modifiés ou des chargeurs d'amorçage propriétaires. Cette orientation limite volontairement le catalogue de matériel pris en charge aux appareils dont l'architecture est documentée et supportée par le noyau Linux officiel : principalement le PinePhone et le PinePhone Pro de Pine64, le Librem 5 de Purism, ainsi que certaines tablettes x86-64 et monocartes d'expérimentation. Mobian suit le cycle de développement continu de Debian Testing (actuellement Trixie), les paquets spécifiques au mobile étant progressivement rétro-portés et intégrés directement dans les dépôts officiels du projet Debian amont.",
-    "technical_constraints_and_hardware_limits": "L'adoption sans compromis du noyau Linux mainline engendre des contraintes pratiques significatives pour l'utilisateur final. L'autonomie sur batterie demeure sensiblement inférieure à celle d'un système Android conventionnel, bien que la gestion de la veille profonde (suspend-to-RAM via le microprogramme Crust sur architecture Allwinner A64) permette d'atteindre plusieurs heures d'inactivité tout en conservant la réception des appels entrants et des SMS. L'accélération matérielle des capteurs photo nécessite des modules de traitement d'image spécifiques (comme Megapixels), et l'écosystème applicatif est celui des logiciels libres de bureau GNU/Linux, excluant l'accès direct aux applications bancaires ou aux services mobiles propriétaires requérant les certifications Android SafetyNet ou Play Integrity.",
-    "images_and_installation": "Les images Mobian sont publiées sur images.mobian.org. L'installation suit la procédure décrite sur la page de chaque appareil dans la liste des appareils pris en charge ; la documentation Debian du projet recense en complément les problèmes connus et limitations logicielles, ainsi que des procédures pour les tâches courantes. Plasma Mobile peut être utilisé à la place de Phosh sur une installation Mobian, et Debian fournit le paquet correspondant.",
+    "introduction": "Mobian is a community project created in 2020 by Arnaud Ferraris whose objective is to adapt the universal Debian GNU/Linux distribution for use on mobile devices, notably smartphones and touch tablets.",
+    "what_is_it": "Rather than an autonomous and independent derived distribution, Mobian works as an overlay on top of Debian. The project maintains a limited number of specific packages while systematically feeding the upstream code (\"upstreaming\") into the official Debian repositories through the DebianOnMobile team.",
+    "origine_et_premieres_versions_stables": "Mobian has followed the Debian *testing* repository since its origin, and not the stable versions. The first stable version of the project, named \"Bookworm\", was published on 10 June 2023, at the same time as Debian Bookworm: the announcement specifies that Debian Bullseye had not been judged suitable for mobile devices and that Bookworm is the first Debian version considered usable enough on a touch screen to serve as the basis for a stable version of Mobian. From this publication onwards, users can choose between this stable version and the *staging* repository, which follows the development branch.\n\nThe retrospective published in January 2024 specifies the maintenance policy of that branch: Bookworm continues to receive security updates, but no new features; developments are made in the *testing* repositories of Debian and of Mobian.",
+    "debian_foundation_and_mobile_overlay": "Mobian relies directly on the stable and testing repositories of Debian (Debian 12 Bookworm, Debian 13 Trixie). The system uses the standard glibc library, the systemd service and init manager, as well as the APT binary package manager (dpkg). Users thus have native access to the whole Debian catalogue, with more than 69,000 software packages. The root file system remains modifiable in read-write mode by default, allowing standard system administration of a Debian machine.",
+    "touch_environment_and_phosh_ecosystem": "Mobian's main graphical environment is Phosh (Phone Shell), a touch interface designed for mobile terminals above the wlroots Wayland compositor, initially developed by Purism for the Librem 5 and today hosted under the aegis of GNOME. Phosh is associated with Squeekboard, an on-screen virtual keyboard handling the multi-language layout and modifier keys, and with Feedbackd, a system daemon orchestrating haptic (vibration) and sound signals. Cellular telephony, SMS sending and mobile data management are ensured by ModemManager and NetworkManager, while the audio routing of telephone conversations is handled by Callaudiod and PipeWire, making it possible to run adaptive GNOME desktop applications using the libadwaita and libhandy libraries.",
+    "hardware_support_and_mainline_kernel": "Mobian applies a strict technical policy: the system relies exclusively on the upstream Linux kernel (\"mainline kernel\") and refuses the use of modified Android kernels or proprietary bootloaders. This orientation deliberately limits the catalogue of supported hardware to devices whose architecture is documented and supported by the official Linux kernel: mainly the PinePhone and the PinePhone Pro from Pine64, the Librem 5 from Purism, as well as certain x86-64 tablets and experimental single-board computers. Mobian follows the continuous development cycle of Debian Testing (currently Trixie), the mobile-specific packages being progressively backported and integrated directly into the official repositories of the upstream Debian project.",
+    "technical_constraints_and_hardware_limits": "The uncompromising adoption of the mainline Linux kernel generates significant practical constraints for the end user. Battery life remains noticeably lower than that of a conventional Android system, although deep sleep management (suspend-to-RAM through the Crust firmware on the Allwinner A64 architecture) makes it possible to reach several hours of inactivity while preserving the reception of incoming calls and SMS. Hardware acceleration of camera sensors requires specific image processing modules (such as Megapixels), and the application ecosystem is that of GNU/Linux desktop free software, excluding direct access to banking applications or to proprietary mobile services requiring the Android SafetyNet or Play Integrity certifications.",
+    "images_and_installation": "Mobian images are published on images.mobian.org. Installation follows the procedure described on the page of each device in the list of supported devices; the project's Debian documentation additionally lists the known problems and software limitations, as well as procedures for common tasks. Plasma Mobile can be used instead of Phosh on a Mobian installation, and Debian provides the corresponding package.",
     "debian_release_tracking_and_signed_archive": "Mobian follows Debian's stable releases. Its current stable was announced on 13 October 2025, about two months after the Debian release, with images built on Phosh 46.0 and Plasma Mobile 6.3 running a 6.12 kernel for almost all supported devices (the Librem 5 remains on 6.6). Stable images are published for the PinePhone, PinePhone Pro, PineTab, Librem 5, Pixel 3a and 3a XL, OnePlus 6 and 6T, and Pocophone F1; images also exist for the Fairphone 4 and 5, the PineTab 2 and the SHIFT6mq, with the project stating that important hardware features such as Wi-Fi or audio do not work on those. Images and the package archive are signed with PGP keys that were rotated at this transition, the previous key having expired since the preceding stable; the project recommends backing up data and flashing a fresh image rather than upgrading in place, and documents the manual upgrade path for users who attempt it.",
-    "avis_de_securite_et_traitement_des_correctifs": "Le 31 août 2023, l'équipe Mobian a publié son premier avis de sécurité. Les images Bookworm publiées plus tôt dans l'année contenaient un petit nombre de fichiers aux permissions d'écriture globales ; deux d'entre eux servant à la configuration du gestionnaire de paquets APT, ils offraient une méthode d'élévation de privilèges locale : un utilisateur local pouvait obtenir l'accès root en modifiant ces fichiers puis en attendant l'installation d'une mise à jour fournie par l'attaquant. L'avis précise que l'attaque exige un appareil déverrouillé ou déjà compromis et qu'aucune voie distante n'existe.\n\nLe correctif est livré par le paquet `mobian-tweaks-common`, en version 0.5.6+deb12u1 pour Bookworm et 0.5.9 pour Trixie et staging ; il installe un script qui corrige les permissions des fichiers concernés. La mise à jour passe par la procédure normale, `sudo apt update && sudo apt upgrade`, ou par GNOME Software ; les paquets sont publiés dans les dépôts `staging` et `bookworm-updates` avant migration vers `trixie` et `bookworm`. L'avis fournit deux indicateurs de compromission : le fichier `/etc/apt/sources.list.d/mobian.list` doit contenir la ligne `deb http://repo.mobian.org/ <distribution> main non-free-firmware`, et `/etc/apt/trusted.gpg.d/mobian.gpg` peut être vérifié par empreinte SHA-256. Le problème a été signalé par un utilisateur crédité sous le pseudonyme @Ove.",
-    "advantages": "Mobian offre l'écosystème Debian complet sur terminal mobile, une intégration continue dans les dépôts amont évitant la fragmentation, un système en lecture-écriture standard administrable par APT, et une indépendance totale vis-à-vis des services commerciaux de Google et Apple.",
-    "disadvantages": "L'autonomie de la batterie en veille et la gestion thermique sont moins optimisées que sous les systèmes Android commerciaux, les pilotes de capteurs photographiques demeurent limités, et le catalogue d'applications purement tactiles natives est réduit par rapport aux plateformes mobiles dominantes.",
-    "who_is_it_for": "Mobian s'adresse aux administrateurs système, développeurs et utilisateurs avancés de Linux souhaitant retrouver un environnement Debian standard et vérifiable sur leur smartphone ou tablette compatible.",
-    "who_is_it_not_for": "Mobian n'est pas adapté aux utilisateurs recherchant une expérience grand public clé en main, une autonomie de plusieurs jours sans configuration, ou un accès garanti aux applications bancaires et aux jeux mobiles exigeant les certifications DRM et SafetyNet de Google.",
-    "verdict": "Mobian constitue une passerelle rigoureuse entre l'écosystème Debian et l'informatique mobile, offrant une plateforme GNU/Linux authentique sur noyau mainline tout en acceptant les compromis inhérents au matériel mobile non conçu spécifiquement pour les pilotes libres."
+    "avis_de_securite_et_traitement_des_correctifs": "On 31 August 2023, the Mobian team published its first security advisory. The Bookworm images published earlier in the year contained a small number of files with world-writable permissions; two of them being used for the configuration of the APT package manager, they offered a local privilege escalation method: a local user could obtain root access by modifying these files and then waiting for the installation of an update supplied by the attacker. The advisory specifies that the attack requires an unlocked or already compromised device and that no remote path exists.\n\nThe fix is delivered by the `mobian-tweaks-common` package, in version 0.5.6+deb12u1 for Bookworm and 0.5.9 for Trixie and staging; it installs a script that corrects the permissions of the files concerned. The update goes through the normal procedure, `sudo apt update && sudo apt upgrade`, or through GNOME Software; the packages are published in the `staging` and `bookworm-updates` repositories before migration to `trixie` and `bookworm`. The advisory provides two indicators of compromise: the file `/etc/apt/sources.list.d/mobian.list` must contain the line `deb http://repo.mobian.org/ <distribution> main non-free-firmware`, and `/etc/apt/trusted.gpg.d/mobian.gpg` can be verified by SHA-256 fingerprint. The problem was reported by a user credited under the pseudonym @Ove.",
+    "advantages": "Mobian offers the complete Debian ecosystem on a mobile terminal, continuous integration into the upstream repositories avoiding fragmentation, a standard read-write system administrable through APT, and total independence from the commercial services of Google and Apple.",
+    "disadvantages": "Battery life in standby and thermal management are less optimised than under commercial Android systems, camera sensor drivers remain limited, and the catalogue of native purely touch applications is reduced compared with the dominant mobile platforms.",
+    "who_is_it_for": "Mobian addresses system administrators, developers and advanced Linux users wishing to find a standard and verifiable Debian environment on their compatible smartphone or tablet.",
+    "who_is_it_not_for": "Mobian is not suited to users looking for a turnkey mainstream experience, a battery life of several days without configuration, or guaranteed access to banking applications and mobile games requiring the DRM and SafetyNet certifications of Google.",
+    "verdict": "Mobian constitutes a rigorous gateway between the Debian ecosystem and mobile computing, offering an authentic GNU/Linux platform on a mainline kernel while accepting the compromises inherent to mobile hardware not specifically designed for free drivers."
   },
   "relations": [
     {
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "note": "Distribution mère fournissant l'ensemble des dépôts de paquets binaires, la gouvernance amont et l'infrastructure de compilation pour Mobian."
+      "note": "Parent distribution providing the whole set of binary package repositories, upstream governance and build infrastructure for Mobian."
     },
     {
       "id": "postmarketos",
       "name": "Nura",
       "type": "peer_mobile_distribution",
-      "note": "Distribution Linux mobile basée sur Alpine Linux partageant avec Mobian la cible du noyau mainline et les interfaces Wayland tactiles."
+      "note": "Mobile Linux distribution based on Alpine Linux sharing with Mobian the mainline kernel target and the Wayland touch interfaces."
     },
     {
       "id": "pureos",
       "name": "PureOS",
       "type": "peer_privacy_distribution",
-      "note": "Système d'exploitation basé sur Debian développé par Purism, à l'origine du développement initial du shell tactile Phosh."
+      "note": "Debian-based operating system developed by Purism, at the origin of the initial development of the Phosh touch shell."
     },
     {
       "id": "ubuntu-touch",
       "name": "Ubuntu Touch",
       "type": "peer_mobile_distribution",
-      "note": "Distribution mobile libre alternative maintenue par UBports, exploitant l'environnement graphique convergent Lomiri."
+      "note": "Alternative free mobile distribution maintained by UBports, using the convergent Lomiri graphical environment."
     }
   ],
   "links": [
     {
-      "label": "Site officiel",
+      "label": "Official website",
       "url": "https://mobian-project.org/"
     },
     {
-      "label": "Wiki Debian Mobian",
+      "label": "Mobian Debian wiki",
       "url": "https://wiki.debian.org/Teams/Mobian"
     },
     {
-      "label": "Forge Salsa Debian",
+      "label": "Debian Salsa forge",
       "url": "https://salsa.debian.org/Mobian-team"
     }
   ],
@@ -88,36 +88,36 @@
       "type": "official_documentation"
     },
     {
-      "title": "Mobian Project — Blog et annonces officielles",
+      "title": "Mobian Project — Blog and official announcements",
       "url": "https://blog.mobian.org/posts/2021/05/17/update-2021-05-17/",
       "type": "official_announcement"
     },
     {
-      "title": "Debian Wiki — Mobian (installation, images, problèmes connus)",
+      "title": "Debian Wiki — Mobian (installation, images, known issues)",
       "url": "https://wiki.debian.org/Mobian",
       "type": "official_documentation",
-      "note": "page consultée le 2026-10-17"
+      "note": "page consulted on 2026-10-17"
     },
     {
-      "title": "Mobian — A new Stable, and rotating keys (13 octobre 2025 : Trixie, noyaux, appareils, signature PGP)",
+      "title": "Mobian — A new Stable, and rotating keys (13 October 2025: Trixie, kernels, devices, PGP signing)",
       "url": "https://blog.mobian.org/posts/2025/10/new-stable-rotating-keys/",
       "type": "project_announcement",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Mobian — The Bookworm has landed! (première version stable, 10 juin 2023)",
+      "title": "Mobian — The Bookworm has landed! (first stable release, 10 June 2023)",
       "url": "https://blog.mobian.org/posts/2023/06/10/bookworm/",
       "type": "official_announcement",
       "date": "2023-06-10"
     },
     {
-      "title": "Mobian Security Update #1 (31 août 2023)",
+      "title": "Mobian Security Update #1 (31 August 2023)",
       "url": "https://blog.mobian.org/posts/2023/08/31/mobian-bookworm-security-update/",
       "type": "security_advisory",
       "date": "2023-08-31"
     },
     {
-      "title": "Mobian — Highlights of 2023 (rétrospective, janvier 2024)",
+      "title": "Mobian — Highlights of 2023 (retrospective, January 2024)",
       "url": "https://blog.mobian.org/posts/2024/01/08/highlights-of-2023/",
       "type": "official_announcement",
       "date": "2024-01-14"

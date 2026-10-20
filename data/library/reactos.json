@@ -2,7 +2,7 @@
   "id": "reactos",
   "name": "ReactOS",
   "type": "operating_system",
-  "summary": "Système d'exploitation libre et open source conçu pour assurer une compatibilité binaire avec l'architecture, les pilotes et les applications Win32 de Microsoft Windows NT.",
+  "summary": "Free and open-source operating system designed to provide binary compatibility with the architecture, drivers and Win32 applications of Microsoft Windows NT.",
   "tags": [
     "windows-nt",
     "win32",
@@ -18,104 +18,104 @@
     "x86-32",
     "x86-64"
   ],
-  "license": "Open Source (GNU GPLv2, LGPLv2.1 et licences BSD pour certains sous-systèmes)",
+  "license": "Open Source (GNU GPLv2, LGPLv2.1 and BSD licences for some subsystems)",
   "last_verified": "2026-10-19",
   "content": {
-    "introduction": "ReactOS est un projet international de système d'exploitation libre et open source visant à réaliser un clone propre et indépendant de l'architecture de Microsoft Windows NT. Initié en 1996 et actif depuis plus de deux décennies, il a pour objectif de permettre aux utilisateurs et aux entreprises d'exécuter leurs logiciels, jeux et pilotes matériels conçus pour Windows sans dépendre de logiciels propriétaires payants ni recourir à une couche d'émulation applicative.",
-    "origine_freewin95_et_lancement_de_reactos": "Le projet trouve son origine dans un groupe formé vers 1996 sous le nom FreeWin95, qui visait un clone de Windows 95 et resta bloqué sur la discussion de la conception du système sans produire de code. Fin 1997, Jason Filby reprend la coordination et rassemble les abonnés encore actifs à la liste de diffusion : la cible est réorientée vers Windows NT et la priorité donnée au code écrit plutôt qu'aux débats de conception. Le projet prend alors le nom ReactOS, que le wiki rattache à l'insatisfaction envers le monopole de Microsoft sur le marché des systèmes d'exploitation, et le développement démarre en février 1998.\n\nLes premières années sont lentes : peu de développeurs savent écrire du code de noyau, puis les pilotes de base, notamment IDE et clavier, sont ajoutés à mesure que le noyau se stabilise. Le wiki indique que le code est écrit depuis zéro depuis 1996 et que les séries de versions vont de 0.0.x à 0.4.x, la compatibilité avec Windows Server 2003 constituant l'objectif de conception.",
-    "what_is_it": "Techniquement, ReactOS n'est ni une distribution Linux ni un système Unix : il constitue la seule réimplémentation complète et fonctionnelle de l'architecture de noyau NT développée en dehors des laboratoires de Microsoft. Il intègre un véritable noyau en anneau 0 (Ring 0), un gestionnaire d'abstraction matérielle (HAL), le sous-système graphique en espace noyau `win32k.sys`, ainsi qu'une reproduction fidèle des bibliothèques dynamiques Win32 (Kernel32, User32, Gdi32) capables de charger nativement des exécutables au format PE/COFF.",
-    "kernel_architecture_and_subsystems": "Le noyau de ReactOS reproduit fidèlement la structure interne de Windows NT 5.2 (Windows Server 2003 / Windows XP x64), tout en incorporant progressivement des interfaces de programmation introduites dans les versions NT 6.x (Windows Vista, 7, 8 et 10). Il intègre les composants exécutifs fondamentaux : le gestionnaire d'objets (Object Manager), le gestionnaire de processus et de threads, le gestionnaire de mémoire virtuelle protégée avec pagination matérielle, le gestionnaire d'entrées/sorties (I/O Manager) et le moniteur de référence de sécurité (SRM). Les pilotes matériels conformes au modèle WDM (Windows Driver Model) peuvent ainsi dialoguer directement avec la couche HAL.",
-    "modele_de_securite_herite_de_nt_et_reglages_par_defaut": "Le wiki du projet décrit Windows NT comme le premier système grand public doté d'une implémentation complète d'un modèle de sécurité souple fondé sur les listes de contrôle d'accès, et rattache ReactOS à cette architecture : les ressources du système, y compris les processus, les threads, les segments de mémoire partagée et la base de registre, sont représentées par des objets porteurs de droits d'accès. Le même texte relève que les réglages par défaut permissifs des versions grand public de Windows, retenus pour faciliter la transition depuis Windows 9x, ont neutralisé une partie de ces mécanismes, et indique que ReactOS appliquera des réglages par défaut conformes au modèle plutôt que ces valeurs héritées.\n\nLa provenance du code est un second point documenté : la FAQ du projet affirme que les développeurs n'ont pas consulté de code source Microsoft divulgué et s'appuient uniquement sur la documentation publique, y compris incomplète, ce qui conditionne la légalité de la réimplémentation. Le wiki rappelle que le code est distribué sous GNU GPL 2.0+, certains modules sous licence BSD.",
-    "synergy_with_wine_and_userland": "Pour enrichir son vaste espace utilisateur Win32 sans réécrire individuellement des dizaines de milliers d'API applicatives, ReactOS entretient une synergie étroite avec le projet Wine. ReactOS utilise une déclinaison adaptée des bibliothèques dynamiques de Wine, configurées pour s'interfacer directement avec le noyau NT de ReactOS par des appels système plutôt que de traduire les requêtes vers l'interface POSIX d'un noyau Unix. Cette collaboration bidirectionnelle permet à ReactOS de synchroniser régulièrement ses composants multimédias (DirectX, GDI), d'intégrer WineVDM pour la rétrocompatibilité 16 bits, et de faire bénéficier Wine en retour de ses corrections de bas niveau.",
-    "filesystems_and_hardware_drivers": "ReactOS prend en charge les systèmes de fichiers de la famille FAT (FAT12, FAT16 et FAT32) grâce à son pilote interne `fastfat`. La gestion du système de fichiers NTFS est assurée en lecture et en écriture partielle via un pilote dédié. De façon innovante, ReactOS intègre le pilote open source WinBtrfs, autorisant l'installation et le démarrage complet du système d'exploitation sur des partitions formatées en Btrfs avec sous-volumes et compression de blocs. La gestion des périphériques couvre les contrôleurs IDE, SATA (AHCI), les bus USB et les cartes réseau Ethernet courantes.",
-    "development_status_and_limitations": "Malgré d'importantes avancées techniques et la capacité d'exécuter des logiciels bureautiques populaires (LibreOffice, Firefox, 7-Zip, VLC) ainsi que divers jeux classiques, ReactOS demeure officiellement au stade de développement Alpha (série 0.4.x). Il ne doit pas être considéré comme un remplacement complet et stable de Windows pour un usage de production quotidien. La prise en charge des matériels récents (contrôleurs USB 3.x, puces Wi-Fi modernes, accélération 3D des cartes graphiques récentes, veille ACPI avancée) reste partielle, et des instabilités peuvent survenir lors d'usages multitâches intensifs. Le système est particulièrement adapté aux environnements virtualisés (QEMU, VirtualBox, VMware) et aux anciens ordinateurs x86.",
-    "release_0_4_16": "La version 0.4.16 a été publiée le 29 août 2026, après environ dix-huit mois de développement. Elle introduit un installateur graphique et fusionne les deux images historiquement séparées : le bootcd d'installation et le livecd de test sont désormais un seul et même fichier. L'installateur propose la gestion des partitions, la copie des fichiers et une étape de configuration graphique. La même version ajoute des améliorations sur les piles vidéo, audio, réseau et stockage, ainsi qu'un nouveau type d'installation.",
-    "driver_stack_and_hardware_support": "La 0.4.16 importe le Kernel-Mode Driver Framework (KMDF), publié en sources ouvertes par Microsoft, pour faire fonctionner un nouveau pilote de bus audio haute définition (sklhdaudbus) qui remplace l'implémentation inachevée d'origine. Un nouveau pilote ATA se substitue à UniATA, utilisé depuis 2009, et permet le démarrage dans Hyper-V en génération 1 ; un pilote réseau DC21X4 complète la couverture matérielle. Sur le plan mémoire, l'augmentation du nombre d'entrées de table de pages système supprime un ralentissement observé avec les pilotes NVIDIA, et ExtEscape a été réécrit pour les pilotes AMD. Le pilote FastFAT importé en 2021 avait cassé la réparation des partitions FAT par chkdsk ; les routines ont été corrigées.",
-    "wine_api_policy_change": "Le projet a abandonné la conformité stricte aux API de Windows Server 2003, qui le limitait aux versions 2.x et 3.x de Wine, puis a engagé la mise à jour de son fork vers Wine 10.0. La 0.4.16 contient une part importante de ce travail, la migration restant en cours. Les composants tiers importés comprennent également le pilote FastFAT et des éléments du framework de pilotes KMDF, utilisés par la pile audio et la pile de stockage.",
-    "installation_types_and_server_core": "ReactOS proposait deux types d'installation, Workstation et Server, qui diffèrent par les options graphiques activées par défaut. La 0.4.16 ajoute Server Core, qui désactive le shell graphique Explorer tout en chargeant le sous-système Win32 complet, sur le modèle de Windows Server Core introduit avec Windows Server 2008. Ce mode s'adresse aux usages serveur et embarqué, et se distingue de l'installation Server classique par l'absence d'interface de bureau.",
-    "catalogue_de_paquets_rapps_et_depot_rapps_db": "ReactOS n'embarque pas de gestionnaire de dépendances comparable à APT ou RPM : les programmes sont installés par leur propre programme d'installation, et le catalogue intégré RAPPS, anciennement Download!, sert à les télécharger, les installer et les mettre à jour depuis une interface unique. RAPPS réside dans `C:\\ReactOS\\System32` et récupère sa liste auprès du serveur public du projet, sous forme d'archives `rappmgr.cab` ou `rappmgr2.cab`, synchronisées au premier lancement puis extraites dans `%appdata%\\RApps\\appdb` au moyen de `cabinet.dll`.\n\nChaque entrée est un fichier texte au format INI, identifié par son nom de fichier et décrivant le programme par des champs tels que `Name`, `Category`, `URLDownload`, `RegName`, `SHA1`, `SizeBytes` et `Version` ; les sections peuvent être déclinées par identifiant de langue et, dans le jeu de champs expérimental, par architecture. Les fichiers sont enregistrés en UTF-16 LE avec des fins de ligne Windows. Le catalogue est maintenu dans le dépôt `reactos/rapps-db` sur GitHub, où les ajouts passent par une demande de fusion après un test local dans le dossier `appdb`.",
-    "development_model_and_contribution_areas": "Le site décrit les domaines ouverts aux contributions : processus système (winlogon, lsass, smss, gestionnaire de contrôle des services), shell (shell32.dll, browseui.dll, explorer, en C++ et COM), API Win32 (kernel32.dll, gdi32.dll, user32.dll) et applications fournies avec le système. Les outils de suivi cités sont le dépôt GitHub, le gestionnaire de tickets Jira, la plateforme de tests Testman, le wiki, le forum et les listes de diffusion.",
+    "introduction": "ReactOS is an international free and open-source operating system project aiming to produce a clean and independent clone of the Microsoft Windows NT architecture. Started in 1996 and active for more than two decades, it seeks to let users and enterprises run their software, games and hardware drivers designed for Windows without depending on paid proprietary software or resorting to an application emulation layer.",
+    "origine_freewin95_et_lancement_de_reactos": "The project originates in a group formed around 1996 under the name FreeWin95, which aimed at a clone of Windows 95 and remained stuck on system design discussion without producing code. At the end of 1997, Jason Filby took over coordination and gathered the still-active subscribers to the mailing list: the target was redirected towards Windows NT and priority given to written code rather than design debates. The project then took the name ReactOS, which the wiki links to dissatisfaction with Microsoft's monopoly on the operating system market, and development began in February 1998.\n\nThe early years were slow: few developers knew how to write kernel code, then the basic drivers, notably IDE and keyboard, were added as the kernel stabilised. The wiki states that the code has been written from scratch since 1996 and that the release series run from 0.0.x to 0.4.x, compatibility with Windows Server 2003 being the design goal.",
+    "what_is_it": "Technically, ReactOS is neither a Linux distribution nor a Unix system: it is the only complete and functional reimplementation of the NT kernel architecture developed outside Microsoft's laboratories. It includes a real ring 0 kernel, a hardware abstraction layer (HAL), the `win32k.sys` kernel-space graphics subsystem, as well as a faithful reproduction of the Win32 dynamic libraries (Kernel32, User32, Gdi32) able to load PE/COFF executables natively.",
+    "kernel_architecture_and_subsystems": "The ReactOS kernel faithfully reproduces the internal structure of Windows NT 5.2 (Windows Server 2003 / Windows XP x64), while progressively incorporating programming interfaces introduced in the NT 6.x versions (Windows Vista, 7, 8 and 10). It includes the fundamental executive components: the Object Manager, the process and thread manager, the protected virtual memory manager with hardware paging, the I/O Manager and the Security Reference Monitor (SRM). Hardware drivers compliant with the WDM (Windows Driver Model) model can therefore talk directly to the HAL layer.",
+    "modele_de_securite_herite_de_nt_et_reglages_par_defaut": "The project wiki describes Windows NT as the first mainstream system with a complete implementation of a flexible security model based on access control lists, and links ReactOS to that architecture: system resources, including processes, threads, shared memory segments and the registry, are represented by objects carrying access rights. The same text notes that the permissive default settings of the consumer versions of Windows, retained to ease the transition from Windows 9x, neutralised part of these mechanisms, and states that ReactOS will apply defaults conforming to the model rather than those inherited values.\n\nThe provenance of the code is a second documented point: the project FAQ asserts that the developers have not consulted leaked Microsoft source code and rely only on public documentation, including incomplete documentation, which conditions the legality of the reimplementation. The wiki recalls that the code is distributed under GNU GPL 2.0+, some modules under BSD licence.",
+    "synergy_with_wine_and_userland": "To enrich its large Win32 user space without individually rewriting tens of thousands of application APIs, ReactOS maintains a close synergy with the Wine project. ReactOS uses an adapted variant of the Wine dynamic libraries, configured to interface directly with the ReactOS NT kernel through system calls rather than translating requests to the POSIX interface of a Unix kernel. This bidirectional collaboration allows ReactOS to synchronise its multimedia components (DirectX, GDI) regularly, to integrate WineVDM for 16-bit backwards compatibility, and to give Wine its low-level fixes in return.",
+    "filesystems_and_hardware_drivers": "ReactOS supports file systems of the FAT family (FAT12, FAT16 and FAT32) through its internal `fastfat` driver. NTFS file system management is provided for reading and partial writing through a dedicated driver. Innovatively, ReactOS includes the open-source WinBtrfs driver, allowing installation and complete boot of the operating system on partitions formatted in Btrfs with subvolumes and block compression. Device management covers IDE controllers, SATA (AHCI), USB buses and common Ethernet network cards.",
+    "development_status_and_limitations": "Despite significant technical advances and the ability to run popular office software (LibreOffice, Firefox, 7-Zip, VLC) as well as various classic games, ReactOS officially remains at the Alpha development stage (0.4.x series). It must not be considered a complete and stable replacement for Windows for daily production use. Support for recent hardware (USB 3.x controllers, modern Wi-Fi chips, 3D acceleration of recent graphics cards, advanced ACPI sleep) remains partial, and instabilities can occur during intensive multitasking. The system is particularly suited to virtualised environments (QEMU, VirtualBox, VMware) and to older x86 computers.",
+    "release_0_4_16": "Version 0.4.16 was published on 29 August 2026, after about eighteen months of development. It introduces a graphical installer and merges the two historically separate images: the installation bootcd and the test livecd are now one and the same file. The installer offers partition management, file copying and a graphical configuration step. The same version adds improvements to the video, audio, network and storage stacks, as well as a new installation type.",
+    "driver_stack_and_hardware_support": "Release 0.4.16 imports the Kernel-Mode Driver Framework (KMDF), released as open source by Microsoft, to run a new high-definition audio bus driver (sklhdaudbus) that replaces the original unfinished implementation. A new ATA driver replaces UniATA, in use since 2009, and allows booting in generation 1 Hyper-V; a DC21X4 network driver completes hardware coverage. On the memory side, increasing the number of system page table entries removes a slowdown observed with NVIDIA drivers, and ExtEscape was rewritten for AMD drivers. The FastFAT driver imported in 2021 had broken FAT partition repair by chkdsk; the routines have been fixed.",
+    "wine_api_policy_change": "The project abandoned strict conformance to the Windows Server 2003 APIs, which limited it to Wine versions 2.x and 3.x, then began updating its fork towards Wine 10.0. Release 0.4.16 contains a significant part of that work, the migration remaining in progress. Imported third-party components also include the FastFAT driver and elements of the KMDF driver framework, used by the audio stack and the storage stack.",
+    "installation_types_and_server_core": "ReactOS offered two installation types, Workstation and Server, which differ in the graphical options enabled by default. Release 0.4.16 adds Server Core, which disables the Explorer graphical shell while loading the complete Win32 subsystem, on the model of Windows Server Core introduced with Windows Server 2008. This mode is intended for server and embedded use, and differs from the classic Server installation by the absence of a desktop interface.",
+    "catalogue_de_paquets_rapps_et_depot_rapps_db": "ReactOS does not embed a dependency manager comparable to APT or RPM: programs are installed by their own installer, and the built-in RAPPS catalogue, formerly Download!, serves to download, install and update them from a single interface. RAPPS resides in `C:\\ReactOS\\System32` and retrieves its list from the project's public server, in the form of `rappmgr.cab` or `rappmgr2.cab` archives, synchronised on first launch and then extracted into `%appdata%\\RApps\\appdb` by means of `cabinet.dll`.\n\nEach entry is a text file in INI format, identified by its file name and describing the program through fields such as `Name`, `Category`, `URLDownload`, `RegName`, `SHA1`, `SizeBytes` and `Version`; sections can be declined per language identifier and, in the experimental field set, per architecture. The files are saved in UTF-16 LE with Windows line endings. The catalogue is maintained in the `reactos/rapps-db` repository on GitHub, where additions go through a merge request after a local test in the `appdb` folder.",
+    "development_model_and_contribution_areas": "The site describes the areas open to contributions: system processes (winlogon, lsass, smss, service control manager), shell (shell32.dll, browseui.dll, explorer, in C++ and COM), Win32 API (kernel32.dll, gdi32.dll, user32.dll) and the applications supplied with the system. The tracking tools cited are the GitHub repository, the Jira ticket manager, the Testman testing platform, the wiki, the forum and the mailing lists.",
     "advantages": [
-      "Compatibilité binaire native avec les applications Win32 et les pilotes Windows NT sans couche de virtualisation.",
-      "Seule réimplémentation complète, libre et ouverte du noyau Windows NT existante dans le monde du logiciel libre.",
-      "Synergie fructueuse et continue avec le projet Wine pour les bibliothèques d'espace utilisateur et DirectX.",
-      "Prise en charge native du système de fichiers moderne Btrfs (via WinBtrfs) en volume d'amorçage système.",
-      "Empreinte mémoire très faible comparativement aux versions commerciales contemporaines de Windows.",
-      "Projet sous licences libres (GNU GPL/LGPL) régi par une fondation à but non lucratif garantissant l'indépendance du code."
+      "Native binary compatibility with Win32 applications and Windows NT drivers without a virtualisation layer.",
+      "The only complete, free and open reimplementation of the Windows NT kernel existing in the free software world.",
+      "Fruitful and continuous synergy with the Wine project for user-space libraries and DirectX.",
+      "Native support for the modern Btrfs file system (through WinBtrfs) as the system boot volume.",
+      "Very low memory footprint compared with contemporary commercial versions of Windows.",
+      "Project under free licences (GNU GPL/LGPL) governed by a non-profit foundation guaranteeing the independence of the code."
     ],
     "disadvantages": [
-      "Statut officiel Alpha impliquant des instabilités système ponctuelles et un risque de blocage ou corruption lors de charges lourdes.",
-      "Compatibilité matérielle limitée sur les configurations d'ordinateurs personnels très récents (Wi-Fi, USB 3, GPU modernes).",
-      "La prise en charge en écriture sur le système de fichiers propriétaire NTFS reste expérimentale.",
-      "Équipe de développement restreinte face à l'immensité de la surface d'API couverte par plusieurs décennies d'évolution de Windows.",
-      "Non adapté à un environnement de production critique en entreprise sans tests préalables approfondis."
+      "Official Alpha status implying occasional system instabilities and a risk of hang or corruption under heavy load.",
+      "Limited hardware compatibility on very recent personal computer configurations (Wi-Fi, USB 3, modern GPUs).",
+      "Write support on the proprietary NTFS file system remains experimental.",
+      "Small development team facing the immensity of the API surface covered by several decades of Windows evolution.",
+      "Not suited to a critical enterprise production environment without extensive prior testing."
     ],
     "who_is_it_for": [
-      "Passionnés d'architecture logicielle et développeurs système souhaitant explorer le fonctionnement intime du noyau Windows NT.",
-      "Utilisateurs désireux de faire fonctionner d'anciens logiciels professionnels ou jeux Windows 32 bits dans des machines virtuelles légères.",
-      "Techniciens et mainteneurs de systèmes industriels ou d'automates pilotés par des exécutables Win32 historiques.",
-      "Défenseurs du logiciel libre et chercheurs en sécurité informatique analysant les mécanismes d'appels système de bas niveau."
+      "Enthusiasts of software architecture and system developers wishing to explore the inner workings of the Windows NT kernel.",
+      "Users wanting to run old professional software or 32-bit Windows games in lightweight virtual machines.",
+      "Technicians and maintainers of industrial systems or controllers driven by historical Win32 executables.",
+      "Free software advocates and computer security researchers analysing low-level system call mechanisms."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs grand public recherchant un système d'exploitation principal pour leur ordinateur de travail quotidien.",
-      "Joueurs de jeux vidéo modernes exigeant DirectX 12, Vulkan avancé et des pilotes graphiques constructeurs récents.",
-      "Entreprises recherchant une alternative commerciale clé-en-main avec garanties contractuelles et support technique 24/7.",
-      "Infrastructures de serveurs de cloud computing exigeant des fonctionnalités de conteneurs Linux ou de haute disponibilité en grappe."
+      "General public users looking for a primary operating system for their daily work computer.",
+      "Modern video game players requiring DirectX 12, advanced Vulkan and recent vendor graphics drivers.",
+      "Enterprises looking for a turnkey commercial alternative with contractual guarantees and 24/7 technical support.",
+      "Cloud computing server infrastructures requiring Linux container features or cluster high availability."
     ],
-    "verdict": "ReactOS est une réimplémentation libre du noyau Windows NT et de l'interface Win32. Le projet reste en phase Alpha et s'adresse à des usages de test, de virtualisation et de préservation logicielle, ainsi qu'à l'étude des interfaces système de Windows."
+    "verdict": "ReactOS is a free reimplementation of the Windows NT kernel and of the Win32 interface. The project remains in the Alpha phase and is intended for testing, virtualisation and software preservation uses, as well as for the study of Windows system interfaces."
   },
   "relations": [
     {
       "id": "windows",
       "name": "Microsoft Windows",
       "type": "alternative",
-      "note": "Système d'exploitation commercial propriétaire dont ReactOS réimplémente l'architecture de noyau NT et les interfaces de programmation Win32."
+      "note": "Proprietary commercial operating system whose NT kernel architecture and Win32 programming interfaces ReactOS reimplements."
     },
     {
       "id": "freedos",
       "name": "FreeDOS",
       "type": "alternative",
-      "note": "Système d'exploitation libre compatible DOS, partageant avec ReactOS la mission de faire fonctionner l'écosystème logiciel PC historique."
+      "note": "Free DOS-compatible operating system, sharing with ReactOS the mission of running the historical PC software ecosystem."
     },
     {
       "id": "haiku",
       "name": "Haiku",
       "type": "alternative",
-      "note": "Système d'exploitation libre indépendant issu de l'héritage d'un système de bureau classique (BeOS)."
+      "note": "Independent free operating system stemming from the legacy of a classic desktop system (BeOS)."
     }
   ],
   "links": [
     {
-      "label": "Site officiel du projet ReactOS",
+      "label": "Official ReactOS project website",
       "url": "https://reactos.org/"
     },
     {
-      "label": "Documentation d'architecture technique ReactOS",
+      "label": "ReactOS technical architecture documentation",
       "url": "https://reactos.org/architecture/"
     },
     {
-      "label": "Dépôt de code source officiel ReactOS (GitHub)",
+      "label": "Official ReactOS source code repository (GitHub)",
       "url": "https://github.com/reactos/reactos"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel et documentation d'architecture ReactOS",
+      "title": "Official portal and architecture documentation of ReactOS",
       "url": "https://reactos.org/architecture/",
       "type": "official_site"
     },
     {
-      "title": "Notes de version officielles et synchronisation Wine de ReactOS",
+      "title": "Official ReactOS release notes and Wine synchronisation",
       "url": "https://reactos.org/project-news/reactos-0416-released/",
       "type": "official_site"
     },
     {
-      "title": "Dépôt officiel du code source et des bibliothèques système ReactOS",
+      "title": "Official ReactOS source code and system libraries repository",
       "url": "https://github.com/reactos/reactos",
       "type": "repository"
     },
     {
-      "title": "Page d'accueil ReactOS (version courante et actualités)",
+      "title": "ReactOS home page (current version and news)",
       "url": "https://reactos.org/",
       "type": "official_site",
       "accessed": "2026-10-18"

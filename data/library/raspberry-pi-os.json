@@ -2,7 +2,7 @@
   "id": "raspberry-pi-os",
   "name": "Raspberry Pi OS",
   "type": "operating_system",
-  "summary": "Système d'exploitation officiel pour les ordinateurs monocartes Raspberry Pi, dérivé de Debian GNU/Linux et optimisé pour les processeurs ARM avec l'interface graphique PIXEL sous Wayland/Labwc et l'outil raspi-config.",
+  "summary": "Official operating system for Raspberry Pi single-board computers, derived from Debian GNU/Linux and optimised for ARM processors with the PIXEL graphical interface under Wayland/Labwc and the raspi-config tool.",
   "tags": [
     "sbc",
     "arm",
@@ -19,155 +19,155 @@
     "ARM64",
     "ARM32"
   ],
-  "license": "Open Source (licences libres Debian avec micrologiciels propriétaires Broadcom)",
+  "license": "Open Source (free Debian licences with proprietary Broadcom firmware)",
   "last_verified": "2026-10-19",
   "content": {
-    "introduction": "Raspberry Pi OS (anciennement connu sous le nom de Raspbian) est le système d'exploitation officiel spécialement conçu et optimisé pour la gamme d'ordinateurs monocartes (SBC) Raspberry Pi. Développé et maintenu par Raspberry Pi Ltd et la communauté libre, il constitue la distribution de référence pour l'apprentissage de l'informatique, le prototypage électronique, l'enseignement des sciences numériques et les déploiements industriels embarqués à base de cartes ARM.",
-    "what_is_it": "Techniquement, Raspberry Pi OS est directement dérivé des versions stables de la distribution Debian GNU/Linux. Il associe la vaste logithèque de paquets de Debian à un noyau Linux sur mesure compilé pour les processeurs Broadcom (SoC BCM2835 à BCM2712), des pilotes graphiques adaptés pour les puces VideoCore, et une panoplie d'outils système développés spécifiquement pour exploiter les broches d'entrées/sorties (GPIO) et les interfaces matérielles des cartes.",
-    "origin_and_history": "Raspbian, sur lequel reposent les images 32 bits de Raspberry Pi OS, est un port non officiel de Debian Wheezy armhf compilé avec des réglages « hard float » adaptés au processeur ARMv6 des premières cartes. Le projet Raspbian attribue ce travail à Mike Thompson (`mpthompson`) et Peter Green (`plugwash`), indique que la compilation initiale de plus de 35 000 paquets a été achevée en juin 2012, et précise qu'il n'est pas affilié à la Raspberry Pi Foundation.\n\nLe 28 mai 2020, la fondation a renommé ses images : la version 32 bits est devenue « Raspberry Pi OS », présentée comme le nouveau nom de Raspbian, tandis qu'une version bêta 64 bits était publiée à partir du port Debian arm64. La version 64 bits est sortie de bêta le 2 février 2022. Les deux constructions restent distinctes : la 32 bits s'appuie sur Raspbian, la 64 bits sur Debian.",
-    "architectures_and_editions": "Le système est distribué en deux architectures matérielles complémentaires : une déclinaison 32 bits (`armhf`) assurant une rétrocompatibilité intégrale avec l'ensemble des modèles de cartes depuis la toute première Raspberry Pi 1 et le Pi Zero (processeurs ARMv6 et ARMv7), et une déclinaison 64 bits (`aarch64` / ARM64) exploitant pleinement la mémoire et les instructions 64 bits des modèles récents (Raspberry Pi 3, 4, 5 et Zero 2 W). Trois éditions officielles sont mises à disposition : l'édition « Lite », dépourvue de serveur graphique pour les usages serveurs et embarqués légers, l'édition « Desktop », proposant l'environnement de bureau complet, et l'édition « Desktop with recommended software », intégrant des environnements de développement (Thonny, Scratch) et la suite bureautique LibreOffice.",
-    "pixel_desktop_and_wayland_transition": "L'environnement graphique officiel de Raspberry Pi OS, baptisé PIXEL (Pi Executive Engineering LXDE), offre un bureau sobre, intuitif et particulièrement économe en mémoire vive. Historiquement basé sur le serveur X11 et le gestionnaire de fenêtres Openbox, l'environnement graphique a opéré une transition majeure vers le protocole moderne Wayland. Initialement propulsé par le compositeur 3D Wayfire dans la branche Bookworm, le bureau a adopté par défaut le compositeur empilable léger Labwc (Lab Wayland Compositor) et l'outil de gestion d'affichage `raindrop`, apportant une fluidité accrue, une réactivité optimale sur les écrans tactiles et une compatibilité ascendante avec les anciennes cartes matérielles via Xwayland.",
-    "hardware_integration_and_raspi_config": "L'un des traits distinctifs de Raspberry Pi OS réside dans son outillage d'administration matérielle dédié. L'utilitaire en mode console et graphique `raspi-config` permet de configurer en toute simplicité les bus de communication électronique (I2C, SPI, UART, interface caméra CSI, écran DSI, bus 1-Wire), d'ajuster le partitionnement, de gérer la mémoire partagée du GPU et de basculer entre backends d'affichage sans modifier manuellement les fichiers de configuration de bas niveau (`config.txt`). L'installation du système est quant à elle automatisée par l'utilitaire officiel Raspberry Pi Imager, permettant d'écrire l'image sur carte microSD, clé USB ou SSD NVMe tout en préconfigurant le réseau sans fil Wi-Fi, le compte utilisateur et les clés SSH.",
-    "package_ecosystem_and_maintenance_lifecycle": "Raspberry Pi OS bénéficie de la richesse logistique des dépôts APT de Debian (plus de 69 000 paquets disponibles) complétés par un dépôt dédié hébergé par Raspberry Pi pour les composants matériels et logiciels spécifiques. Le cycle de maintenance suit fidèlement celui des versions majeures stables de Debian (publiées tous les deux ans). Conformément aux standards récents de Debian, l'environnement de développement Python impose l'isolation des dépendances logicielles installées par `pip` au sein d'environnements virtuels (`venv`), garantissant ainsi l'intégrité et la stabilité à long terme des outils système préinstallés.",
-    "debian_release_names": "Les noms de code Debian servent de repère de version : la version courante de Raspberry Pi OS est basée sur Debian Trixie, la précédente sur Debian Bookworm. Parce que le calendrier est décalé, un même numéro de version de Debian peut correspondre à plusieurs publications de Raspberry Pi OS, et les deux systèmes ne partagent ni la date ni le numéro de leurs versions majeures.",
-    "installation_and_major_upgrades": "L'installation passe par Raspberry Pi Imager, disponible pour Windows, macOS et Linux, ou par l'écriture d'une image disque téléchargée. La documentation précise qu'il ne faut pas effectuer de mise à niveau en place vers une nouvelle version majeure : il faut réinstaller une image récente, après sauvegarde des fichiers importants, l'installation écrasant la carte.",
-    "package_management_and_firmware": "APT est le gestionnaire de paquets par défaut, utilisé en ligne de commande (apt-cache, apt install) comme par l'outil graphique Add / Remove Software. Le firmware est fourni par le paquet raspi-firmware, réinstallable pour revenir à la dernière version stable si une mise à jour de prépublication pose problème. La documentation réserve rpi-update aux tests et au développement.",
-    "security_and_hardening_defaults": "Plusieurs réglages de sécurité sont documentés comme valeurs par défaut. Le serveur SSH est désactivé sur une installation neuve et peut être activé depuis le Control Centre, `raspi-config` ou un fichier `ssh` déposé sur la partition de démarrage. Les commandes `sudo` exigent le mot de passe du compte, réglage activé lors de la configuration initiale.\n\nLe démarrage vérifié, ou secure boot, est une option fondée sur une chaîne de confiance : la clé publique de la boot ROM est inscrite dans le silicium, l'utilisateur génère une paire de clés RSA 2048 bits dont l'empreinte est stockée en mémoire OTP, puis le bootloader EEPROM vérifie la signature `boot.sig` de l'image `boot.img` avant de lancer le noyau. Si la vérification échoue, le bootloader passe au mode de démarrage suivant au lieu d'exécuter le code non vérifié. Le chiffrement de la racine, activé par le même outil de provisionnement, utilise un secret propre à l'appareil conservé en OTP, que l'`initramfs` lit pour déverrouiller le système de fichiers.\n\nLa documentation consacre des pages distinctes à UFW, décrit comme le pare-feu recommandé et laissé désactivé tant qu'il n'est pas configuré, à Fail2Ban, installé par `sudo apt install fail2ban`, et à la gestion des comptes. Elle précise que seule la version majeure la plus récente reçoit l'ensemble des correctifs de sécurité et renvoie aux avis de sécurité, aux rapports CVE et à un SBOM fourni pour chaque édition.",
+    "introduction": "Raspberry Pi OS (formerly known as Raspbian) is the official operating system specially designed and optimised for the range of Raspberry Pi single-board computers (SBC). Developed and maintained by Raspberry Pi Ltd and the free software community, it is the reference distribution for learning computing, electronics prototyping, teaching digital sciences and industrial embedded deployments based on ARM boards.",
+    "what_is_it": "Technically, Raspberry Pi OS is directly derived from the stable versions of the Debian GNU/Linux distribution. It combines the vast package software library of Debian with a custom Linux kernel compiled for Broadcom processors (BCM2835 to BCM2712 SoCs), graphics drivers adapted for the VideoCore chips, and a set of system tools developed specifically to use the input/output pins (GPIO) and the hardware interfaces of the boards.",
+    "origin_and_history": "Raspbian, on which the 32-bit Raspberry Pi OS images rest, is an unofficial port of Debian Wheezy armhf compiled with \"hard float\" settings adapted to the ARMv6 processor of the first boards. The Raspbian project attributes this work to Mike Thompson (`mpthompson`) and Peter Green (`plugwash`), states that the initial build of more than 35,000 packages was completed in June 2012, and specifies that it is not affiliated with the Raspberry Pi Foundation.\n\nOn 28 May 2020, the foundation renamed its images: the 32-bit version became \"Raspberry Pi OS\", presented as the new name of Raspbian, while a 64-bit beta version was published from the Debian arm64 port. The 64-bit version left beta on 2 February 2022. The two builds remain distinct: the 32-bit one relies on Raspbian, the 64-bit one on Debian.",
+    "architectures_and_editions": "The system is distributed in two complementary hardware architectures: a 32-bit variant (`armhf`) ensuring full backwards compatibility with all board models since the very first Raspberry Pi 1 and the Pi Zero (ARMv6 and ARMv7 processors), and a 64-bit variant (`aarch64` / ARM64) fully exploiting the memory and 64-bit instructions of recent models (Raspberry Pi 3, 4, 5 and Zero 2 W). Three official editions are made available: the \"Lite\" edition, without a graphical server for server and lightweight embedded uses, the \"Desktop\" edition, offering the complete desktop environment, and the \"Desktop with recommended software\" edition, including development environments (Thonny, Scratch) and the LibreOffice office suite.",
+    "pixel_desktop_and_wayland_transition": "The official graphical environment of Raspberry Pi OS, called PIXEL (Pi Executive Engineering LXDE), offers a sober, intuitive desktop that is particularly frugal in RAM. Historically based on the X11 server and the Openbox window manager, the graphical environment has carried out a major transition to the modern Wayland protocol. Initially powered by the Wayfire 3D compositor in the Bookworm branch, the desktop has adopted by default the lightweight stacking compositor Labwc (Lab Wayland Compositor) and the display management tool `raindrop`, bringing increased fluidity, optimal responsiveness on touch screens and backwards compatibility with older hardware boards through Xwayland.",
+    "hardware_integration_and_raspi_config": "One of the distinctive traits of Raspberry Pi OS lies in its dedicated hardware administration tooling. The console-mode and graphical utility `raspi-config` makes it simple to configure the electronic communication buses (I2C, SPI, UART, CSI camera interface, DSI display, 1-Wire bus), adjust partitioning, manage the GPU shared memory and switch between display backends without manually modifying low-level configuration files (`config.txt`). Installation of the system is automated by the official Raspberry Pi Imager utility, making it possible to write the image to a microSD card, USB key or NVMe SSD while pre-configuring the Wi-Fi wireless network, the user account and the SSH keys.",
+    "package_ecosystem_and_maintenance_lifecycle": "Raspberry Pi OS benefits from the logistic richness of the Debian APT repositories (more than 69,000 packages available) supplemented by a dedicated repository hosted by Raspberry Pi for specific hardware and software components. The maintenance cycle closely follows that of the stable major versions of Debian (published every two years). In accordance with recent Debian standards, the Python development environment requires the isolation of software dependencies installed by `pip` within virtual environments (`venv`), thus guaranteeing the integrity and long-term stability of the preinstalled system tools.",
+    "debian_release_names": "Debian code names serve as version markers: the current version of Raspberry Pi OS is based on Debian Trixie, the previous one on Debian Bookworm. Because the calendar is offset, one and the same Debian version number can correspond to several Raspberry Pi OS releases, and the two systems share neither the date nor the number of their major versions.",
+    "installation_and_major_upgrades": "Installation goes through Raspberry Pi Imager, available for Windows, macOS and Linux, or through writing a downloaded disk image. The documentation specifies that an in-place upgrade to a new major version must not be carried out: a recent image must be reinstalled, after backing up important files, the installation overwriting the card.",
+    "package_management_and_firmware": "APT is the default package manager, used on the command line (apt-cache, apt install) as well as through the Add / Remove Software graphical tool. The firmware is supplied by the raspi-firmware package, reinstallable to return to the last stable version if a pre-release update causes a problem. The documentation reserves rpi-update for testing and development.",
+    "security_and_hardening_defaults": "Several security settings are documented as default values. The SSH server is disabled on a fresh installation and can be enabled from the Control Centre, `raspi-config` or an `ssh` file placed on the boot partition. `sudo` commands require the account password, a setting enabled during the initial configuration.\n\nVerified boot, or secure boot, is an option founded on a chain of trust: the public key of the boot ROM is inscribed in the silicon, the user generates a 2048-bit RSA key pair whose fingerprint is stored in OTP memory, then the EEPROM bootloader verifies the `boot.sig` signature of the `boot.img` image before launching the kernel. If the verification fails, the bootloader moves to the next boot mode instead of executing the unverified code. Root encryption, enabled by the same provisioning tool, uses a device-specific secret kept in OTP, which the `initramfs` reads to unlock the file system.\n\nThe documentation devotes separate pages to UFW, described as the recommended firewall and left disabled until it is configured, to Fail2Ban, installed by `sudo apt install fail2ban`, and to account management. It specifies that only the most recent major version receives all the security fixes and refers to the security advisories, the CVE reports and an SBOM supplied for each edition.",
     "advantages": [
-      "Optimisation matérielle et logicielle parfaite pour toute la gamme des ordinateurs monocartes Raspberry Pi (du Pi 1 au Pi 5).",
-      "Stabilité remarquable héritée directement du socle éprouvé de Debian GNU/Linux.",
-      "Environnement de bureau PIXEL extrêmement léger, fluide et modernisé sous Wayland et le compositeur Labwc.",
-      "Outils de configuration matérielle dédiés (`raspi-config`, Raspberry Pi Imager) facilitant l'accès aux interfaces électroniques (GPIO, I2C, SPI).",
-      "Immense communauté d'utilisateurs, documentation technique officielle exhaustive et innombrables tutoriels pédagogiques.",
-      "Disponibilité d'éditions 32 bits et 64 bits adaptées tant aux projets d'apprentissage qu'aux serveurs embarqués autonomes (édition Lite)."
+      "Perfect hardware and software optimisation for the whole range of Raspberry Pi single-board computers (from the Pi 1 to the Pi 5).",
+      "Remarkable stability inherited directly from the proven Debian GNU/Linux foundation.",
+      "Extremely light PIXEL desktop environment, fluid and modernised under Wayland and the Labwc compositor.",
+      "Dedicated hardware configuration tools (`raspi-config`, Raspberry Pi Imager) facilitating access to the electronic interfaces (GPIO, I2C, SPI).",
+      "Huge user community, exhaustive official technical documentation and countless educational tutorials.",
+      "Availability of 32-bit and 64-bit editions suited both to learning projects and to autonomous embedded servers (Lite edition)."
     ],
     "disadvantages": [
-      "Système étroitement couplé à l'architecture matérielle des processeurs Broadcom des cartes Raspberry Pi (inapplicable sur PC x86-64 standard sans émulation).",
-      "Présence obligatoire de micrologiciels propriétaires (firmwares binaires fermés du GPU VideoCore) nécessaires au démarrage initial de la carte.",
-      "Les cartes mémoires microSD grand public peuvent présenter une sensibilité à l'usure en cas d'écritures intensives fréquentes (bien que le démarrage sur SSD USB ou NVMe soit pris en charge).",
-      "Performances graphiques 3D et multimédias dépendantes des capacités matérielles du SoC intégré, limitées sur les modèles anciens ou les séries Zero.",
-      "Contraintes de mémoire vive non extensible inhérente à la conception monobloc des cartes Raspberry Pi."
+      "System closely coupled to the hardware architecture of the Broadcom processors of Raspberry Pi boards (inapplicable on a standard x86-64 PC without emulation).",
+      "Mandatory presence of proprietary firmware (closed binary VideoCore GPU firmwares) required for the initial boot of the board.",
+      "Consumer microSD memory cards can show sensitivity to wear in case of frequent intensive writes (although booting from a USB or NVMe SSD is supported).",
+      "3D graphics and multimedia performance dependent on the hardware capabilities of the integrated SoC, limited on older models or the Zero series.",
+      "Non-expandable RAM constraints inherent to the all-in-one design of Raspberry Pi boards."
     ],
     "who_is_it_for": [
-      "Élèves, enseignants, étudiants et formateurs découvrant la programmation informatique, la robotique et les sciences du numérique.",
-      "Makers, électroniciens et bricoleurs développant des objets connectés (IoT), des automates et des stations de mesure exploitant les broches GPIO.",
-      "Utilisateurs de serveurs domestiques légers cherchant à déployer des services réseau (serveur DNS Pi-hole, domotique Home Assistant, serveur d'impression).",
-      "Industriels et bureaux d'études concevant des systèmes embarqués de contrôle ou d'affichage dynamique à base de modules Compute Module."
+      "Pupils, teachers, students and trainers discovering computer programming, robotics and digital sciences.",
+      "Makers, electronics technicians and hobbyists developing connected objects (IoT), controllers and measurement stations using the GPIO pins.",
+      "Users of lightweight home servers seeking to deploy network services (Pi-hole DNS server, Home Assistant home automation, print server).",
+      "Industrial companies and design offices designing embedded control or dynamic display systems based on Compute Module modules."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs cherchant un système d'exploitation pour leur ordinateur de bureau traditionnel ou leur PC portable à processeur x86-64.",
-      "Professionnels exigeant une station de travail pour des calculs lourds, du montage vidéo haute résolution ou des jeux 3D exigeants.",
-      "Puristes du logiciel libre refusant tout composant micrologiciel binaire propriétaire (des systèmes libres stricts comme Trisquel ou Debian libre étant alors préférés).",
-      "Infrastructures de virtualisation lourdes de centres de données nécessitant des hyperviseurs multiprocesseurs x86."
+      "Users looking for an operating system for their traditional desktop computer or their x86-64 laptop.",
+      "Professionals requiring a workstation for heavy computing, high-resolution video editing or demanding 3D games.",
+      "Free software purists refusing any proprietary binary firmware component (strictly free systems such as Trisquel or Debian free being then preferred).",
+      "Heavy virtualisation infrastructures of data centres requiring multiprocessor x86 hypervisors."
     ],
-    "verdict": "Raspberry Pi OS est le système d'exploitation officiel des nano-ordinateurs monocartes Raspberry Pi. Fondé sur Debian et sur une pile graphique Wayland/Labwc, il cible l'éducation, le prototypage électronique et l'informatique embarquée."
+    "verdict": "Raspberry Pi OS is the official operating system of Raspberry Pi single-board nano-computers. Based on Debian and on a Wayland/Labwc graphics stack, it targets education, electronics prototyping and embedded computing."
   },
   "relations": [
     {
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "note": "Distribution Linux dont est directement dérivée la totalité de la base logicielle et des paquets de Raspberry Pi OS."
+      "note": "Linux distribution from which the entire software base and package set of Raspberry Pi OS is directly derived."
     },
     {
       "id": "dietpi",
       "name": "DietPi",
       "type": "alternative",
-      "note": "Distribution alternative minimaliste et hautement optimisée conçue spécifiquement pour les cartes monocartes comme le Raspberry Pi."
+      "note": "Minimalist and highly optimised alternative distribution designed specifically for single-board computers such as the Raspberry Pi."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
       "type": "alternative",
-      "note": "Distribution Linux proposant des images officielles préconfigurées pour Raspberry Pi 4 et 5 avec bureau GNOME."
+      "note": "Linux distribution offering official images preconfigured for Raspberry Pi 4 and 5 with the GNOME desktop."
     },
     {
       "id": "postmarketos",
       "name": "Nura",
       "type": "related",
-      "note": "Distribution Linux orientée mobilité et matériel ARM partageant l'usage de Wayland et des interfaces tactiles."
+      "note": "Linux distribution oriented towards mobility and ARM hardware sharing the use of Wayland and touch interfaces."
     }
   ],
   "links": [
     {
-      "label": "Site officiel de la fondation et société Raspberry Pi",
+      "label": "Official website of the Raspberry Pi foundation and company",
       "url": "https://www.raspberrypi.com/"
     },
     {
-      "label": "Documentation officielle Raspberry Pi OS",
+      "label": "Official Raspberry Pi OS documentation",
       "url": "https://www.raspberrypi.com/documentation/computers/os.html"
     },
     {
-      "label": "Dépôt de documentation officiel (GitHub)",
+      "label": "Official documentation repository (GitHub)",
       "url": "https://github.com/raspberrypi/documentation"
     }
   ],
   "sources": [
     {
-      "title": "Documentation technique officielle et architecture Raspberry Pi OS",
+      "title": "Official technical documentation and architecture of Raspberry Pi OS",
       "url": "https://www.raspberrypi.com/documentation/computers/os.html",
       "type": "documentation"
     },
     {
-      "title": "Annonce de la nouvelle version de Raspberry Pi OS avec le compositeur Labwc",
+      "title": "Announcement of the new Raspberry Pi OS release with the Labwc compositor",
       "url": "https://www.raspberrypi.com/news/a-new-release-of-raspberry-pi-os/",
       "type": "official_site"
     },
     {
-      "title": "Dépôt officiel du code source et de la documentation technique Raspberry Pi",
+      "title": "Official Raspberry Pi source code and technical documentation repository",
       "url": "https://github.com/raspberrypi/documentation",
       "type": "repository"
     },
     {
-      "title": "Raspberry Pi OS : présentation, éditions, architectures et cycle Debian",
+      "title": "Raspberry Pi OS: presentation, editions, architectures and Debian cycle",
       "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/os/rpi-os-introduction.adoc",
       "type": "official_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Raspberry Pi OS : gestion des paquets et du firmware (APT, raspi-firmware)",
+      "title": "Raspberry Pi OS: package and firmware management (APT, raspi-firmware)",
       "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/os/updating.adoc",
       "type": "official_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Raspbian — About (port Debian armhf, auteurs, compilation initiale)",
+      "title": "Raspbian — About (Debian armhf port, authors, initial build)",
       "url": "https://raspbian.org/RaspbianAbout",
       "type": "official_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Raspbian — page d'accueil (compilation initiale de juin 2012)",
+      "title": "Raspbian — home page (initial build of June 2012)",
       "url": "https://raspbian.org/",
       "type": "official_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Raspberry Pi OS — Latest Raspberry Pi OS update, May 2020 (nouveau nom de Raspbian)",
+      "title": "Raspberry Pi OS — Latest Raspberry Pi OS update, May 2020 (new name of Raspbian)",
       "url": "https://www.raspberrypi.com/news/latest-raspberry-pi-os-update-may-2020/",
       "type": "official_site",
       "date": "2020-05-29"
     },
     {
-      "title": "Raspberry Pi OS (64-bit) — sortie de bêta",
+      "title": "Raspberry Pi OS (64-bit) — beta release",
       "url": "https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/",
       "type": "official_site",
       "date": "2022-02-02"
     },
     {
-      "title": "Raspberry Pi Documentation — Security architecture (secure boot, chiffrement)",
+      "title": "Raspberry Pi Documentation — Security architecture (secure boot, encryption)",
       "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/security/security-architecture.adoc",
       "type": "official_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Raspberry Pi Documentation — Operational security (sudo, UFW, Fail2Ban, mises à jour)",
+      "title": "Raspberry Pi Documentation — Operational security (sudo, UFW, Fail2Ban, updates)",
       "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/security/operational-security.adoc",
       "type": "official_documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Raspberry Pi Documentation — SSH (serveur désactivé par défaut)",
+      "title": "Raspberry Pi Documentation — SSH (server disabled by default)",
       "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/remote-access/ssh.adoc",
       "type": "official_documentation",
       "accessed": "2026-10-19"
