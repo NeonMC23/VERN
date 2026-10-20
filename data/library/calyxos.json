@@ -52,6 +52,32 @@
     ],
     "verdict": "CalyxOS provides a balanced, user-friendly approach to mobile privacy on modern Android smartphones. By combining verified boot enforcement, a rootless per-app firewall, and optional microG integration, it bridges the gap between privacy protection and daily functional usability across multiple hardware brands."
   },
+  "components": [
+    {
+      "id": "android-aosp",
+      "name": "Android",
+      "role": "operating_system_kernel",
+      "note": "Base platform: the project describes CalyxOS as an Android mobile operating system; the page does not name AOSP."
+    },
+    {
+      "id": "datura-firewall",
+      "name": "Datura Firewall",
+      "role": "firewall_manager",
+      "note": "Firewall giving fine-grained control over network access for every application, listed among the system features."
+    },
+    {
+      "id": "seedvault",
+      "name": "Seedvault",
+      "role": "system_tool",
+      "note": "Documented as Secure Backup with Seedvault: automatic backups once configured, optional backup to a USB drive or Nextcloud, and client-side encryption."
+    },
+    {
+      "id": "verified-boot",
+      "name": "Verified Boot",
+      "role": "security_technology",
+      "note": "Listed under device security: verified boot ensures that the operating system has not been modified."
+    }
+  ],
   "relations": [
     {
       "id": "android-aosp",

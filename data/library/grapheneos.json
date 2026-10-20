@@ -18,7 +18,7 @@
     "arm64 / aarch64"
   ],
   "license": "GPLv2 (Linux kernel) / Apache License 2.0 & MIT (userspace components)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "GrapheneOS is a free and open-source mobile operating system focused on defensive security engineering and user privacy. Developed as a direct hardened downstream fork of the Android Open Source Project (AOSP), it integrates substantial low-level architectural mitigations designed to prevent and contain software exploit techniques while preserving compatibility with mainstream Android applications.",
     "what_is_it": "GrapheneOS is a production mobile operating system targeting modern Google Pixel devices. It eliminates Google telemetry, proprietary services, and tracking identifiers by default, while replacing critical AOSP userspace and kernel subsystems with heavily hardened equivalents, including a custom memory allocator, enhanced address space layout randomization, and fine-grained hardware permission controls.",
@@ -56,6 +56,38 @@
     ],
     "verdict": "GrapheneOS represents a benchmark in mobile operating system security engineering. By combining deep kernel and memory allocator hardening with an unprivileged compatibility layer for Google Play services, it achieves a high degree of defensive isolation on Google Pixel hardware without severing access to the broader Android application ecosystem."
   },
+  "components": [
+    {
+      "id": "android-aosp",
+      "name": "Android",
+      "role": "operating_system_kernel",
+      "note": "Base platform: the features page documents Android app compatibility and a sandboxed implementation of Google Play; the page does not name AOSP."
+    },
+    {
+      "id": "vanadium",
+      "name": "Vanadium",
+      "role": "web_browser",
+      "note": "Hardened WebView and default browser built by the project."
+    },
+    {
+      "id": "hardened-malloc",
+      "name": "hardened malloc",
+      "role": "memory_allocator",
+      "note": "Memory allocator developed by the project and presented as a defence against heap memory corruption, leveraging modern hardware capabilities."
+    },
+    {
+      "id": "auditor",
+      "name": "Auditor",
+      "role": "security_auditor",
+      "note": "Attestation app and attestation service distributed with the system."
+    },
+    {
+      "id": "sandboxed-google-play",
+      "name": "Sandboxed Google Play",
+      "role": "application_sandboxing_framework",
+      "note": "Sandboxed implementation of Google Play services and the Play Store, listed among the system features; the page does not describe the implementation."
+    }
+  ],
   "relations": [
     {
       "id": "android-aosp",

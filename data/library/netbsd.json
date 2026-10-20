@@ -28,7 +28,7 @@
     "vax"
   ],
   "license": "BSD Licenses (2-clause and 3-clause BSD)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "NetBSD is a free, fast, secure, and highly portable Unix-like operating system descendant of 386BSD and 4.4BSD-Lite. Founded in March 1993, the project is famously guided by the motto 'Of course it runs NetBSD', reflecting its dedication to hardware portability, clean code quality, and architectural modularity across modern multicore workstations and historic or experimental architectures.",
     "what_is_it": "NetBSD is an independent, complete operating system that develops its kernel, device drivers, C runtime library, system toolchain, and core userland utilities in a single unified source tree. Beyond classic desktop and server workloads, NetBSD is also used as a research and embedded platform, notably through its Anykernel technology (rump kernels) and the multiplatform pkgsrc packaging framework.",
@@ -63,6 +63,32 @@
     ],
     "verdict": "NetBSD is an open-source Unix operating system engineered with an explicit focus on cross-platform portability, clean architectural design, and modularity. Its host-independent cross-compilation framework (build.sh), componentized anykernel architecture via Rump Kernels, and extensive multi-platform package ecosystem (pkgsrc) make it an adaptable environment for embedded systems, academic operating system research, and multi-architecture server infrastructure."
   },
+  "components": [
+    {
+      "id": "netbsd-kernel",
+      "name": "NetBSD kernel",
+      "role": "operating_system_kernel",
+      "note": "Kernel built from a configuration file after installing the kernel sources, as described in chapter 34 of the NetBSD Guide, \"Compiling the kernel\"."
+    },
+    {
+      "id": "pkgsrc",
+      "name": "pkgsrc",
+      "role": "package_manager",
+      "note": "Portable package collection presented on pkgsrc.org as the NetBSD package system, usable across several operating systems."
+    },
+    {
+      "id": "rc-d",
+      "name": "rc.d",
+      "role": "init_system",
+      "note": "Startup scripts described in chapter 7 of the NetBSD Guide, with rcorder ordering the scripts at boot."
+    },
+    {
+      "id": "netbsd-build-system",
+      "name": "NetBSD build system",
+      "role": "build_system",
+      "note": "Part VI of the NetBSD Guide, \"Building the system\", covers building the system from source alongside kernel compilation."
+    }
+  ],
   "relations": [
     {
       "id": "openbsd",
@@ -81,6 +107,20 @@
       "name": "Alpine Linux",
       "relation": "alternative",
       "note": "Lightweight, security-oriented Linux alternative sharing a commitment to minimalism, clean code, and embedded deployments."
+    }
+  ],
+  "variants": [
+    {
+      "name": "NetBSD 11.0",
+      "description": "Latest formal release, listed as supported (11.x series) on the NetBSD releases page."
+    },
+    {
+      "name": "NetBSD 10.2",
+      "description": "Previous supported series (10.x), listed on the same page."
+    },
+    {
+      "name": "NetBSD-current",
+      "description": "Development version of NetBSD, described on the releases page as providing more features but without the testing of formal releases."
     }
   ],
   "links": {

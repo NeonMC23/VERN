@@ -59,6 +59,26 @@
     ],
     "verdict": "GNU Hurd est un projet expérimental du projet GNU. En repensant la structure des systèmes d'exploitation au travers d'une constellation de serveurs coopératifs et de son mécanisme de traducteurs, il met en œuvre une architecture micro-noyau. Bien qu'il demeure expérimental face à Linux, il conserve un intérêt éducatif et historique."
   },
+  "components": [
+    {
+      "id": "gnu-mach",
+      "name": "GNU Mach",
+      "role": "operating_system_kernel",
+      "note": "Microkernel on which the Hurd servers run, according to the project page; the page cites patches that landed in GNU Mach."
+    },
+    {
+      "id": "hurd-servers",
+      "name": "Hurd servers",
+      "role": "service",
+      "note": "Collection of servers implementing file systems, network protocols and file access control on top of Mach."
+    },
+    {
+      "id": "translators",
+      "name": "Hurd translators",
+      "role": "filesystem",
+      "note": "User-space translators implementing file systems and other services; the project page cites, among others, an experimental 9P translator."
+    }
+  ],
   "relations": [
     {
       "id": "debian",

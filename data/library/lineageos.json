@@ -18,15 +18,17 @@
     "armv7a"
   ],
   "license": "GPLv2 (Linux kernel) / Apache License 2.0 (AOSP userspace) & BSD/MIT (custom utilities)",
-  "last_verified": "2026-10-17",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "LineageOS is a free and open-source operating system distribution for mobile devices, smartphones, tablets, and set-top boxes based on the Android Open Source Project (AOSP). Created in December 2016 as the direct community successor to CyanogenMod, LineageOS focuses on extending hardware longevity, providing ongoing software maintenance for legacy devices, and enabling system-level customization without proprietary bloatware.",
     "what_is_it": "LineageOS is an independent aftermarket firmware distribution developed entirely by an international community of volunteer contributors. It provides a clean, stock-like Android interface free of commercial bloatware and proprietary services, augmented by a suite of lightweight open-source applications, enhanced hardware controls, and centralized security monitoring.",
+    "origin_from_cyanogenmod_and_2016_2017_launch": "LineageOS was announced on 24 December 2016, after Cyanogen Inc. published the shutdown of its Cyanogen services and the CyanogenMod project published its own announcement; the post states that LineageOS will be a continuation of what CyanogenMod was. A post dated 28 December 2016 lists the infrastructure still missing - build slaves able to complete and upload a build within one hour and to run Docker, and mirrors with at least 1 Gbit connectivity and 500 GB of storage - and states that official builds had not started. The post of 20 January 2017 announces a weekly release cadence by default, official builds signed with a private key, root delivered as a separate flashable zip instead of being included in the ROM, and support for Marshmallow and Nougat devices with a roster of more than 80 devices. It also documents an experimental migration build that accepts installation over cm-13.0 or cm-14.1 and was to be withdrawn after two months. A changelog dated 13 February 2017 records the replacement of AOSP Soundrecorder and CyanogenMod Screen Recorder by the in-house Recorder application. The site footer names LineageOS LLC and states that it is not a 501(c)(3) non-profit organisation.",
     "device_support_charter_and_selinux": "Official LineageOS releases are governed by the strict Device Support Charter, a set of mandatory technical criteria that every supported device tree must fulfill. The charter mandates that SELinux must operate in Enforcing mode across all official builds; permissive SELinux configurations are explicitly banned. Device trees must implement functional hardware-backed encryption, hardware-accelerated media decoding, camera interfaces, sensors, and reliable cellular connectivity, including emergency calling protocols. To construct viable Android builds for proprietary commercial handsets, the LineageOS build system utilizes automated extraction scripts (`extract-files.sh`) to extract proprietary vendor firmware blobs from factory images, integrating them into reproducible AOSP build environments.",
     "base_system_and_bundled_applications": "LineageOS ships as an unencumbered, bloatware-free operating system that excludes Google Mobile Services (GMS), third-party tracking libraries, and carrier modifications. The project maintains an in-house suite of lightweight, open-source utilities designed around Android design guidelines: Aperture, a modern camera application developed using Android's CameraX API that exposes manual ISO, exposure, and video frame rate controls; Eleven, a local audio player; Jelly, a lightweight privacy-focused browser built upon Android System WebView; and Etar, an open-source calendar client. Users requiring Google services can optionally flash third-party GApps packages (such as MindTheGapps) via recovery immediately following operating system installation.",
     "customization_and_trust_interface": "LineageOS balances extensive interface flexibility with user security oversight through the Trust interface, integrated directly into system settings. The Trust dashboard provides a centralized overview of system security health, reporting the real-time status of SELinux enforcement, Android security patch level (SPL) compliance, device encryption, and root access status (which is disabled by default). It includes an SMS rate limiter to prevent rogue background messaging, and Privacy Guard / permission oversight that alerts users when applications access location or contacts in the background. Interface customizations are managed via the LineageSDK, enabling custom status bar styles, quick setting tile configurations, system profiles, and hardware button remapping without modifying the core Android framework.",
     "hardware_breadth_and_ecosystem_impact": "LineageOS supports the broadest catalog of hardware in the open-source mobile ecosystem, providing official and community builds for hundreds of devices across dozens of manufacturers, including Google, Samsung, Motorola, Xiaomi, OnePlus, Sony, and ASUS. Because of its mature hardware trees and Hardware Abstraction Layer (HAL) adaptations, LineageOS frequently serves as the upstream hardware foundation for other specialized mobile distributions, including /e/OS and iodéOS.",
     "updates_and_build_retention": "LineageOS distributes builds through an OTA updater; the project keeps the last three builds per device and states that older builds do not carry the latest security patches. Security updates come from two streams: Android security patches (AOSP SPL) are integrated and shipped for all supported devices, while the vendor patch level depends on the stock firmware from which the proprietary blobs were extracted and cannot be updated by LineageOS itself. The project does not commit to a date or to the availability of the next Android version for a given device. Installation follows a device-specific guide published for each supported model.",
+    "release_branches_and_security_patch_scope": "The project maintains several release branches in parallel. The changelog published on 11 October 2026 states that security patches from August 2025 to October 2026 were merged into LineageOS 18.1 through 24.0, that the security patch level string is changed only on the branches for which Google still distributes bulletins, namely Android 14 (LineageOS 21) and newer, and that the project plans to continue backporting patches to 18.1, 19.1 and 20.0 without modifying that string. Patches through November 2025 were also merged into the legacy branches 15.1, 16.0 and 17.1. The same changelog dates the rebase onto Android 17 to the June release of that version and states that the project will mark ten years on 24 December 2026. It lists updater changes, with updates streamed by default and the recovery partition updated automatically on the boot following a successful update on non-A/B devices, and introduces browser-based WebUSB flash tools for ADB, Fastboot, Amlogic Burn and Samsung Odin at flash.lineageos.org, while stating that the per-device wiki instructions remain the default and supported installation path.",
     "aosp_patch_layers_google_apps_and_updates": "LineageOS is built from AOSP sources and assembles releases per device. The project distinguishes the layers of security maintenance: the Android security patches published by Google, which it integrates, tests and ships for every maintained device; the vendor security patch level, which reflects the stock firmware the proprietary vendor components were taken from and therefore depends on the manufacturer; and its own platform fixes. Google applications are not bundled: the recommended package is sideloaded from recovery before the first boot, and installing it after the initial setup requires a factory reset. The updater stores downloaded builds in /data/lineageos_updates/, and the FAQ states that few devices support relocking the bootloader and that doing so can leave a phone unusable.",
     "installation_failure_modes_and_migration_rules": "The project wiki documents the failure modes behind most installation errors: installing a build for another device or variant, migrating from an unofficial build to an official one without wiping data, a vendor, modem or bootloader partition that is too old or too new, and an outdated recovery. It states that an official build cannot be flashed over an unofficial one without following the device installation guide exactly, and that no support is provided for other installation paths.",
     "first_boot_ordering_and_update_storage": "The first boot performs critical system initialisation, so an additional package such as the recommended Google applications archive has to be sideloaded before it; installing it afterwards can lead to problems that require a factory reset. The updater application stores downloaded packages under /data/lineageos_updates/. The wiki also warns against relocking the bootloader: few devices allow it, even fewer work properly afterwards, and relocking can leave a device unusable.",
@@ -104,6 +106,36 @@
       "type": "official_documentation",
       "note": "page consulted 2026-10-17",
       "accessed": "2026-10-17"
+    },
+    {
+      "title": "LineageOS - Yes, this is us (annonce du 24 décembre 2016)",
+      "url": "https://lineageos.org/Yes-this-is-us/",
+      "type": "official_blog",
+      "date": "2016-12-24"
+    },
+    {
+      "title": "LineageOS - Infrastructure Status and Official Builds (28 décembre 2016)",
+      "url": "https://lineageos.org/Infrastructure-Status-and-Official-Builds/",
+      "type": "official_blog",
+      "date": "2016-12-28"
+    },
+    {
+      "title": "LineageOS - Update and Build Prep (20 janvier 2017)",
+      "url": "https://lineageos.org/Update-and-Build-Prep/",
+      "type": "official_blog",
+      "date": "2017-01-20"
+    },
+    {
+      "title": "LineageOS - Last Week in LineageOS (13 février 2017)",
+      "url": "https://lineageos.org/Last-Week-in-LineageOS/",
+      "type": "official_blog",
+      "date": "2017-02-13"
+    },
+    {
+      "title": "LineageOS - Changelog 32 (11 octobre 2026, branches et correctifs)",
+      "url": "https://lineageos.org/Changelog-32/",
+      "type": "official_blog",
+      "date": "2026-10-11"
     }
   ]
 }

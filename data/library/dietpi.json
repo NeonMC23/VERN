@@ -20,7 +20,7 @@
     "x86-64"
   ],
   "license": "Open Source (GNU GPLv2)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "DietPi est une distribution Linux ultra-légère et hautement épurée dérivée de Debian GNU/Linux. Conçue initialement par Daniel Knight en 2015 et maintenue par MichaIng, elle a pour vocation d'offrir une base d'exécution d'une sobriété maximale pour les ordinateurs monocartes (Single Board Computers - SBC) et les serveurs compacts, réduisant la consommation de mémoire vive au repos à quelques dizaines de mégaoctets.",
     "what_is_it": "Techniquement, DietPi s'appuie sur une image minimale de Debian (ou de Raspberry Pi OS sur le matériel de la fondation), expurgée de tous les composants superflus, des documentations volumineuses et des services résidents non critiques. Le système installe moins de la moitié des paquets habituels d'une distribution généraliste, tout en fournissant une suite d'utilitaires interactifs semi-graphiques (TUI) développés en Bash pour orchestrer l'ensemble de la machine en quelques saisies au clavier.",
@@ -58,6 +58,32 @@
     ],
     "verdict": "DietPi est une distribution minimaliste dérivée de Debian, conçue pour minimiser l'empreinte matérielle sur les ordinateurs monocartes (SBC) et les machines virtuelles x86-64. Grâce à l'automatisation de la configuration système, à la préservation du stockage flash par son système de journalisation en mémoire vive (dietpi-RAMlog) et à un menu interactif d'installation d'applications prêtes à l'emploi (dietpi-software), elle constitue une solution technique efficace pour les serveurs domestiques, l'auto-hébergement et les passerelles réseau légères."
   },
+  "components": [
+    {
+      "id": "debian-base",
+      "name": "Debian",
+      "role": "operating_system_kernel",
+      "note": "Base system: DietPi presents itself as a highly optimised minimal Debian OS; the page does not state the Debian version."
+    },
+    {
+      "id": "dietpi-software",
+      "name": "DietPi-Software",
+      "role": "package_orchestration",
+      "note": "Installs and optimises the selected software ready to run, through lightweight Whiptail menus, according to the project site."
+    },
+    {
+      "id": "dietpi-ramlog",
+      "name": "DietPi-RAMlog",
+      "role": "system_tool",
+      "note": "Logging option that keeps logs in RAM; the site presents it as the performance option, alongside rsyslog and logrotate for log-critical servers."
+    },
+    {
+      "id": "dietpi-config",
+      "name": "DietPi-Config",
+      "role": "configuration_tool",
+      "note": "Configuration utility presented beside DietPi-Software among the project utilities; the page does not detail the available settings."
+    }
+  ],
   "relations": [
     {
       "id": "debian",

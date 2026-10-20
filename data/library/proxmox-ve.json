@@ -19,7 +19,7 @@
     "x86-64"
   ],
   "license": "GNU AGPLv3 (Affero General Public License v3)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Proxmox VE (Proxmox Virtual Environment) est une solution logicielle open source complète de virtualisation d'entreprise développée par la société autrichienne Proxmox Server Solutions GmbH. Conçue pour simplifier la gestion de centres de données et d'infrastructures informatiques virtualisées, elle combine deux technologies de virtualisation majeures — l'hyperviseur KVM et les conteneurs système LXC — au sein d'une interface d'administration web unifiée.",
     "what_is_it": "Techniquement, Proxmox VE s'installe sur du matériel standard x86-64 comme une distribution spécialisée reposant sur le socle Debian GNU/Linux. Elle intègre un noyau Linux personnalisé maintenu par Proxmox (suivant les branches LTS du noyau Ubuntu/Linux amont), optimisé avec les pilotes matériels nécessaires, la prise en charge native d'OpenZFS, de Ceph et de la virtualisation KVM. La plateforme transforme des serveurs physiques individuels en nœuds de calcul et de stockage capables de fonctionner de manière autonome ou groupés en grappes haute disponibilité.",
@@ -63,6 +63,32 @@
     ],
     "verdict": "Proxmox VE est une plateforme de virtualisation et de cloud privé open source. Bâtie sur Debian et l'hyperviseur KVM, elle se distingue par son architecture multi-maître (pmxcfs), son intégration de Ceph et ZFS, et sa console d'administration web, pour les centres de données comme pour les environnements de laboratoire."
   },
+  "components": [
+    {
+      "id": "kvm",
+      "name": "KVM",
+      "role": "bare_metal_hypervisor",
+      "note": "Hypervisor integrated into the platform, according to the product overview."
+    },
+    {
+      "id": "lxc",
+      "name": "LXC",
+      "role": "container_engine",
+      "note": "Linux Containers integrated alongside KVM on the same platform."
+    },
+    {
+      "id": "web-ui",
+      "name": "Web-based user interface",
+      "role": "web_management_console",
+      "note": "Integrated interface used to manage virtual machines and containers, according to the overview."
+    },
+    {
+      "id": "ha-cluster",
+      "name": "High availability cluster",
+      "role": "high_availability_cluster",
+      "note": "High availability for clusters presented as part of the platform on the product overview."
+    }
+  ],
   "relations": [
     {
       "id": "debian",

@@ -25,7 +25,7 @@
     "macppc"
   ],
   "license": "ISC and BSD licenses",
-  "last_verified": "2026-10-15",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "OpenBSD is an independent, open-source Unix-like operating system focused on proactive security, source code correctness, integrated cryptography, and software minimalism. Founded in 1995 by Theo de Raadt following a split from NetBSD, OpenBSD is maintained by an international community of developers. Driven by a culture of continuous source auditing and secure default configurations, it is used for secure networking, cryptographic servers, firewall gateways, and workstation computing.",
     "what_is_it": "Technically, OpenBSD is a complete, self-contained BSD Unix operating system developing its kernel, drivers, standard C library, toolchains, and base daemons within a single synchronized repository. Rather than bolting on security features post hoc, OpenBSD implements structural mitigations across its kernel and memory allocators, including `pledge(2)` for system call restriction, `unveil(2)` for filesystem sandboxing, W^X (Write XOR Execute) memory page protections, randomized memory allocation, and kernel address randomization (KARL). Third-party applications are installed through binary packages (`pkg_add`) or compiled via ports.",
@@ -62,6 +62,38 @@
     "installation_et_supports_d_amorcage": "The OpenBSD installer runs from a ramdisk kernel, `bsd.rd`, which starts a live environment held entirely in memory and contains the installation script together with a small set of utilities. That kernel can be booted from several sources: a CD or DVD, a USB drive, an existing partition, the network through PXE or another network boot method, or a floppy disk. Not every platform supports all of these sources. On a system that already runs OpenBSD, `bsd.rd` is sufficient to reinstall or to upgrade.\n\nFour images are published for the 7.9 release: `install79.img`, a disk image for a USB flash drive that includes the file sets; `miniroot79.img`, which omits the file sets and fetches them from the network or a local disk; `install79.iso`, an ISO 9660 image for a CD or DVD that includes the file sets; and `cd79.iso`, which omits them. The images are published for amd64, riscv64 and sparc64, while the miniroot image adds alpha, armv7, landisk and luna88k, and the ISO image adds hppa and macppc.\n\nA bootable USB drive is written by copying the image to the raw device, for example `dd if=install*.img of=/dev/rsd6c bs=1M` when the target is recognised as sd6. Downloaded files are checked with `sha256` and, beyond accidental corruption, with `signify` and the release public keys. The installer then runs from the ramdisk, asks for the disk layout, and writes the file sets.",
     "cadence_de_publication_et_versions_prises_en_charge": "OpenBSD maintains three flavours at once. A release is the version shipped every six months; -current is the development branch, tagged every six months to become the next release; -stable is a release plus the patches published on its errata page, to which important fixes from -current are backported. The errata pages are published per release, and the security page indexes the advisories release by release, from 2.0 up to 8.0.\n\nThe release pages carry the exact publication dates and the release count: OpenBSD 7.6 is dated 2024-10-08 and is described as the 57th release, while the project's home page gives OpenBSD 7.9 as the current release, published on 2026-05-19 and counted as the 60th. Between two releases, fixes for the supported versions are published as errata rather than as new version numbers, so support for a given release is documented by the errata page associated with it.\n\nUpgrading between releases is handled by the `sysupgrade` utility, and the installation guide notes that the same ramdisk kernel used for a fresh install can perform an upgrade. The published release pages, the errata pages and the advisory index therefore form the documentary chain for version support, independently of the six-month cadence described in the installation flavour documentation."
   },
+  "components": [
+    {
+      "id": "openbsd-kernel",
+      "name": "OpenBSD kernel",
+      "role": "operating_system_kernel",
+      "note": "Kernel built from source together with the userland, as described in FAQ 5, \"Building the System from Source\"."
+    },
+    {
+      "id": "bsd-rd",
+      "name": "bsd.rd",
+      "role": "installer",
+      "note": "Ramdisk kernel executed in memory and bootable from CD/DVD, USB, an existing partition or the network, as described in FAQ 4."
+    },
+    {
+      "id": "pkg-add",
+      "name": "pkg_add",
+      "role": "package_manager",
+      "note": "Binary package tools documented in FAQ 15: pkg_add for installing and updating, pkg_delete, pkg_info and pkg_check."
+    },
+    {
+      "id": "rc-d-rcctl",
+      "name": "rc.d and rcctl",
+      "role": "init_system",
+      "note": "Services started through rc(8) and rc.d(8); rcctl(8) maintains /etc/rc.conf.local, as described in FAQ 10."
+    },
+    {
+      "id": "ports",
+      "name": "Ports collection",
+      "role": "build_system",
+      "note": "Source-based alternative to packages described in FAQ 15, which states that the ports collection does not go through the same security audit as the base system."
+    }
+  ],
   "relations": [
     {
       "id": "freebsd",
@@ -74,6 +106,12 @@
       "name": "Alpine Linux",
       "relation": "alternative",
       "note": "Lightweight, security-conscious Linux distribution sharing a similar philosophy of minimalism, auditable code, and proactive memory protections."
+    }
+  ],
+  "variants": [
+    {
+      "name": "OpenBSD 7.9 (release series)",
+      "description": "Release published on 19 May 2026, the 60th release of OpenBSD, according to the 7.9 release page."
     }
   ],
   "links": {

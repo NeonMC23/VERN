@@ -18,7 +18,7 @@
     "ARM64"
   ],
   "license": "Commercial propriétaire (CLUF Microsoft)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Microsoft Windows est une famille de systèmes d'exploitation commerciaux développée par Microsoft Corporation pour ordinateurs personnels, serveurs et terminaux professionnels, dominante sur le marché de l'informatique de bureau.",
     "what_is_it": "Initié dans sa déclinaison moderne en 1993 avec Windows NT 3.1, Windows repose aujourd'hui sur la branche unifiée du noyau Windows NT (version interne NT 10.0 sur Windows 10 et Windows 11), abandonnant définitivement l'ancienne base MS-DOS 16/32 bits de la série Windows 9x.",
@@ -56,6 +56,32 @@
     ],
     "verdict": "Microsoft Windows est un système d'exploitation grand public et professionnel édité par Microsoft, combinant une rétrocompatibilité logicielle de plusieurs décennies avec le noyau NT et une couche Linux intégrée via WSL2."
   },
+  "components": [
+    {
+      "id": "nt-kernel",
+      "name": "NT kernel",
+      "role": "operating_system_kernel",
+      "note": "Kernel-mode part of the architecture documented by Microsoft in its overview of Windows components, which covers user-mode and kernel-mode components and the I/O manager."
+    },
+    {
+      "id": "win32-api",
+      "name": "Win32 API",
+      "role": "library",
+      "note": "Programming interface documented by Microsoft as the Win32 API reference."
+    },
+    {
+      "id": "windows-update",
+      "name": "Windows Update",
+      "role": "update_tool",
+      "note": "Update service; Microsoft documents the Unified Update Platform (UUP) introduced with Windows 10 as the update model."
+    },
+    {
+      "id": "ntfs",
+      "name": "NTFS",
+      "role": "filesystem",
+      "note": "File system documented by Microsoft, including access control lists and the health and chkdsk model."
+    }
+  ],
   "relations": [
     {
       "id": "macos",
@@ -80,6 +106,20 @@
       "name": "ReactOS",
       "type": "alternative",
       "note": "Projet de réimplémentation libre et ouverte de l'architecture de noyau et des API de Windows NT."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Windows 11 Home",
+      "description": "Edition listed in Microsoft's comparison of Windows 11 Home, Windows 11 Pro and Windows 10."
+    },
+    {
+      "name": "Windows 11 Pro",
+      "description": "Edition compared feature by feature with Windows 11 Home, including BitLocker Drive Encryption and device encryption."
+    },
+    {
+      "name": "Windows 10",
+      "description": "Previous version, whose support ended on 14 October 2025 according to Microsoft."
     }
   ],
   "links": [

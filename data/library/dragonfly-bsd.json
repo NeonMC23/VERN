@@ -18,7 +18,7 @@
     "amd64 / x86_64"
   ],
   "license": "BSD Licenses (2-clause and 3-clause BSD)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "DragonFly BSD is an open-source Unix-like operating system belonging to the BSD family, created in 2003 by Matthew Dillon. Diverging fundamentally from the architectural paths pursued by FreeBSD, NetBSD, and OpenBSD, DragonFly BSD is engineered specifically to maximize multi-core symmetric multiprocessing (SMP) performance through lightweight kernel threading, asynchronous message passing, and state-of-the-art transactional storage.",
     "what_is_it": "DragonFly BSD is a specialized, modern operating system tailored exclusively for high-concurrency 64-bit x86_64 compute and storage systems. Rather than adapting legacy Unix monolithic locking mechanisms to modern hardware, DragonFly implements an innovative kernel concurrency model coupled with HAMMER2, an advanced copy-on-write transactional file system supporting online snapshots, deduplication, and zero-downtime recovery.",
@@ -55,6 +55,38 @@
     "verdict": "DragonFly BSD is an independently developed BSD-derived operating system. By replacing conventional Unix locking with per-CPU lightweight kernel threads and coupling them with the HAMMER2 transactional file system, it targets high-concurrency x86_64 workloads.",
     "source_repositories_package_tree_and_manual_pages": "The project publishes its source tree in a browsable repository at gitweb.dragonflybsd.org and maintains an official mirror in the DragonFlyBSD organisation on GitHub, in the repository DragonFlyBSD/DragonFlyBSD. That repository carries release tags whose names match the versions documented by the project, v6.4.0, v6.4.1 and v6.4.2, and also a v6.5.0 tag at the time of consultation. A second official repository, DragonFlyBSD/DPorts, is described as the dedicated application build system for DragonFly BSD; it was created on 2012-10-29 and was still being updated, with a last push on 2026-03-13.\n\nThe manual pages produced by that build system are published alongside those of the base system. The service at man.dragonflybsd.org serves the manual in the nine conventional sections, from user commands and system calls through devices and kernel services, file formats, games, environments and how-tos, administration and maintenance commands, up to kernel programming, with a search by command name and by section. It also exposes a separate section for the manual pages shipped by DPorts. A query for pkg(8) returns the System Manager's Manual page from section 8, which shows that the on-line service covers the packaging tools as well as the commands described elsewhere in this record.\n\nThree distinct hosts therefore carry the primary material: the historical project domain, the manual page service and the repository host. The two last ones are named here because they hold content produced and maintained by the project itself."
   },
+  "components": [
+    {
+      "id": "dragonfly-kernel",
+      "name": "DragonFly kernel",
+      "role": "operating_system_kernel",
+      "note": "Kernel derived from the FreeBSD-4.8 fork; the features page states that major modifications were made to nearly the entire kernel."
+    },
+    {
+      "id": "hammer",
+      "name": "HAMMER",
+      "role": "filesystem",
+      "note": "Filesystem listed first among the major features on the DragonFly features page."
+    },
+    {
+      "id": "dntpd",
+      "name": "dntpd",
+      "role": "time_synchronization_daemon",
+      "note": "DragonFly Network Time Daemon, listed among the major features."
+    },
+    {
+      "id": "dma",
+      "name": "DragonFly Mail Agent",
+      "role": "service",
+      "note": "Mail agent listed among the major features under the name DMA."
+    },
+    {
+      "id": "swapcache",
+      "name": "swapcache",
+      "role": "storage_subsystem",
+      "note": "Managed SSD support listed among the major features."
+    }
+  ],
   "relations": [
     {
       "id": "freebsd",
@@ -67,6 +99,24 @@
       "name": "OpenBSD",
       "relation": "sister_lineage",
       "note": "Fellow independent BSD Unix system, contrasting DragonFly's SMP concurrency and HAMMER2 with OpenBSD's defensive security focus."
+    }
+  ],
+  "variants": [
+    {
+      "name": "DragonFly 6.4.2",
+      "description": "Latest point release of the 6.4 series, dated 9 May 2025 on the DragonFly releases page."
+    },
+    {
+      "name": "DragonFly 6.4.1",
+      "description": "Point release of the same series, dated 30 April 2025."
+    },
+    {
+      "name": "DragonFly 6.4.0",
+      "description": "First release of the 6.4 series, dated 30 December 2022."
+    },
+    {
+      "name": "DragonFly 6.2.2",
+      "description": "Last point release of the 6.2 series, dated 9 June 2022."
     }
   ],
   "links": {

@@ -19,7 +19,7 @@
     "x86-32"
   ],
   "license": "Open Source (Licence MIT avec composants BeOS OpenTracker)",
-  "last_verified": "2026-10-16",
+  "last_verified": "2026-10-19",
   "content": {
     "introduction": "Haiku est un système d'exploitation libre et open source conçu spécifiquement pour l'informatique de bureau personnelle et la création multimédia. Fondé en 2001 sous le nom initial d'OpenBeOS après l'abandon commercial de BeOS par Palm Inc., le projet propose une réimplémentation complète, moderne et indépendante des technologies de BeOS R5. Sans être fondé sur Linux ni sur Unix classique, Haiku propose une expérience utilisateur unifiée, particulièrement légère, rapide et centrée sur la réactivité graphique.",
     "what_is_it": "Techniquement, Haiku est un système d'exploitation autonome développé de zéro (à l'exception de Tracker et Deskbar libérés par Be Inc. en 2001). Il associe un noyau hybride modulaire préemptif, un système de fichiers journalisé à métadonnées indexées en base de données (BFS), une interface graphique spatiale hautement réactive et une API orientée objet en C++ organisée en kits logiques, offrant une compatibilité binaire avec les logiciels historiques de BeOS sur architecture 32 bits et une compatibilité de code source sur architecture 64 bits.",
@@ -57,6 +57,32 @@
     ],
     "verdict": "Haiku prolonge l'héritage de BeOS. Propulsé par un noyau hybride, le système de fichiers BFS à métadonnées indexées et une interface graphique ergonomique, il propose une alternative légère pour l'informatique personnelle."
   },
+  "components": [
+    {
+      "id": "haiku-kernel",
+      "name": "Haiku kernel",
+      "role": "operating_system_kernel",
+      "note": "Kernel written by the project itself; its presentation states that a single team writes the kernel, drivers, userland services, tool kit and graphics stack."
+    },
+    {
+      "id": "haikudepot",
+      "name": "HaikuDepot",
+      "role": "software_center",
+      "note": "Central application for software packages: browsing and searching repositories, installing and uninstalling, with featured packages shown by default, as described in the user guide."
+    },
+    {
+      "id": "deskbar",
+      "name": "Deskbar",
+      "role": "desktop_panel",
+      "note": "Desktop panel documented in the Haiku user guide (Deskbar page)."
+    },
+    {
+      "id": "tracker",
+      "name": "Tracker",
+      "role": "file_manager",
+      "note": "File and pinboard manager documented in the Haiku user guide."
+    }
+  ],
   "relations": [
     {
       "id": "serenityos",
@@ -81,6 +107,12 @@
       "name": "Apple macOS",
       "type": "related",
       "note": "Système d'exploitation de bureau Apple ayant historiquement envisagé le rachat de BeOS en 1996 avant d'opter pour NeXTSTEP comme fondation de macOS."
+    }
+  ],
+  "variants": [
+    {
+      "name": "Haiku R1 (R1/beta6)",
+      "description": "R1 release series; the Get Haiku page lists R1/beta6 as the current version, released on 26 August 2026 for x86 32-bit and 64-bit."
     }
   ],
   "links": [
