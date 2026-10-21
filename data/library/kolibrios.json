@@ -2,7 +2,7 @@
   "id": "kolibrios",
   "name": "KolibriOS",
   "type": "operating_system",
-  "summary": "Système d'exploitation 32 bits libre et ultra-léger écrit intégralement en assembleur x86, tenant sur une disquette de 1,44 Mo et intégrant une interface graphique multitâche préemptive complète.",
+  "summary": "Free 32-bit operating system, extremely light, written entirely in x86 assembly, fitting on a 1.44 MB floppy disk and including a complete preemptive multitasking graphical interface.",
   "tags": [
     "assembly",
     "fasm",
@@ -17,136 +17,144 @@
   "platforms": [
     "x86-32"
   ],
-  "license": "Open Source (GNU General Public License v2 avec composants sous licences BSD)",
-  "last_verified": "2026-10-19",
+  "license": "Open Source (GNU General Public License v2 with components under BSD licences)",
+  "last_verified": "2026-10-20",
   "content": {
-    "introduction": "KolibriOS est un système d'exploitation libre et graphique pour architecture x86 32 bits, programmé intégralement en langage d'assemblage. Né en 2004 d'une scission communautaire avec MenuetOS (dont il poursuit et perfectionne la branche 32 bits originale sous une gouvernance ouverte), KolibriOS a pour objectif d'explorer les limites ultimes de l'optimisation logicielle. Le système complet — incluant son noyau, ses gestionnaires de périphériques, son interface graphique fenêtrée, une pile réseau et des dizaines d'applications — tient intégralement sur une disquette standard de 1,44 Mo et démarre en quelques secondes sur des configurations disposant de 12 Mo de mémoire vive.",
-    "what_is_it": "Techniquement, KolibriOS n'est ni dérivé d'Unix ni affilié à Linux ou Windows : il s'agit d'un système autonome conçu de zéro exclusivement en assembleur x86 pour le compilateur FASM (Flat Assembler). Contrairement aux systèmes modernes dont les couches d'abstraction logicielles successives induisent une forte consommation mémoire, KolibriOS interagit directement avec le processeur et les registres matériels avec une compacité et une vitesse d'exécution exceptionnelles. Le système est auto-hébergé, le compilateur FASM intégré permettant de modifier et de recompiler n'importe quel composant système directement depuis KolibriOS.",
-    "kernel_architecture_preemption_and_memory": "Le noyau de KolibriOS est un noyau monolithique préemptif 32 bits s'exécutant en mode protégé. Il assure une pagination mémoire matérielle complète, isolant les espaces d'adressage des différentes applications pour prévenir les corruptions accidentelles. L'ordonnanceur préemptif gère le multi-threading avec niveaux de priorités, tandis que les mécanismes de communication inter-processus (IPC) reposent sur des files de messages rapides et des files d'événements matériels (clavier, souris, minuterie). Les appels système sont unifiés et exposés aux applications via l'interruption logicielle `INT 0x40`.",
-    "security_and_privilege_separation": "KolibriOS répartit les privilèges sur deux niveaux : les applications s'exécutent en ring 3, tandis que le noyau et les pilotes partagent le ring 0. Chaque processus possède sa propre table de pages et toutes les applications sont chargées à la même adresse linéaire, la constante `new_app_base` valant 0 dans le noyau « flat » actuel ; la séparation des espaces d'adressage repose donc sur la traduction par table de pages, et non sur des adresses de chargement distinctes.\n\nLe projet documente la conséquence de ce modèle : une erreur dans une application ne bloque que cette application, alors qu'une erreur dans un pilote peut faire tomber le système entier. La même page recommande d'employer l'API applicative, notamment les fonctions matérielles 41 à 46 et 62, lorsque cela suffit, afin de ne pas introduire de code en ring 0 ; elle indique aussi que les pilotes ne peuvent pas être débogués avec `mtdbg`, réservé aux applications.\n\nLe chargement d'un pilote passe par un contrôle de version d'interface : le champ `version` encode la version native de l'interface dans le mot bas et la version minimale requise dans le mot haut, cette dernière devant rester comprise entre les constantes `DRV_COMPAT` et `DRV_CURRENT`. Si le pilote appelle une fonction absente du noyau courant, le noyau refuse de le charger et inscrit « unresolved » sur la carte de messages de débogage. Cette page du wiki est signalée comme dépréciée et les noyaux récents utilisent le format PE à la place de MS COFF.\n\nL'intégrité des données est traitée séparément dans la FAQ : FAT12 sur disquette et FAT32 sont en lecture/écriture, l'écriture NTFS est limitée et sans chiffrement, l'écriture EXT2/3 est expérimentale et à utiliser avec précaution, XFS et CDFS sont en lecture seule.",
-    "filesystems_and_storage_capabilities": "Malgré sa taille microscopique, KolibriOS dispose d'une gestion impressionnante des systèmes de fichiers. Il assure la lecture et l'écriture complète sur les formats FAT12, FAT16 et FAT32, facilitant les échanges de fichiers avec les supports amovibles (disquettes, clés USB, cartes mémoire). Il intègre également des pilotes de lecture seule pour les systèmes de fichiers modernes NTFS, Ext2, Ext3, Ext4, ISO 9660 (disques optiques) et XFS, permettant d'accéder aux données hébergées sur des disques durs partagés avec des distributions Linux ou des installations Windows.",
-    "graphical_interface_multimedia_and_applications": "L'interface utilisateur de KolibriOS est un environnement de bureau graphique complet et réactif. Il comprend une barre des tâches avec zone de notification, un menu démarrer, un gestionnaire de fenêtres avec habillages visuels personnalisables, le glisser-déposer et un rendu fluide des polices vectorielles. La logithèque native fournie par défaut est remarquablement fournie : éditeur de texte avec coloration syntaxique (TinyPad), logiciel de retouche d'images, visionneuse d'images multiformats (Kiv), lecteur vidéo (portage optimisé de MPlayer), lecteurs audio compatibles AC'97 et Intel High Definition Audio (HDA), visionneuses de fichiers PDF et DjVu, jeux vidéo rétro (DOOM, Quake, Démineur) et utilitaires réseau (navigateur web WebView, client IRC, client FTP).",
-    "hardware_support_and_boot_methods": "KolibriOS fonctionne sur n'importe quel microprocesseur compatible x86 (Intel Pentium / i586 ou plus récent, ainsi que sur processeurs 64 bits en mode compatibilité 32 bits). Il prend en charge l'affichage VESA 2.0 ainsi que des pilotes d'accélération 2D spécifiques pour certains contrôleurs graphiques Intel et AMD/ATI. La pile réseau prend en charge plusieurs puces Ethernet courantes (Realtek RTL8139, RTL8169/8111, Intel PRO/1000) et des pilotes USB 1.1/2.0 partiels permettent de gérer les claviers, souris et supports de stockage. KolibriOS peut être amorcé depuis une disquette 1,44 Mo, un CD-ROM LiveCD, une clé USB, une partition de disque dur via GRUB/syslinux, ou sous DOS avec l'outil `mtldr`. Il s'exécute avec une parfaite fluidité dans tous les hyperviseurs courants (QEMU, VirtualBox, Bochs, VMware).",
-    "history_and_independence": "KolibriOS est issu d'une scission de MenuetOS en 2004 et poursuit depuis un développement indépendant, selon la présentation du site officiel. Le projet a été retenu parmi les organisations du Google Summer of Code 2026 et publie à ce titre un ensemble de sujets de travail. Les deux projets restent distincts : KolibriOS poursuit sa propre branche 32 bits avec sa gouvernance et son dépôt, et ne doit pas être confondu avec MenuetOS.",
-    "system_requirements": "Le site officiel annonce trois exigences matérielles : un processeur i586, 12 Mo de mémoire vive et quelques mégaoctets d'espace disque. Il décrit également un démarrage de la mise sous tension à l'interface graphique en quelques secondes, sans étape intermédiaire visible. Ces valeurs concernent la configuration minimale annoncée par le projet ; elles ne préjugent pas du comportement de logiciels plus lourds comme les navigateurs ou les lecteurs multimédias.",
-    "download_channels_and_images": "La page de téléchargement propose quatre formats pour la version 0.7.7.0-9242, dont le build est daté du 18 octobre 2026 : une image disquette (.img), une image LiveCD (.iso), une image hybride UEFI/BIOS (.raw) et une archive .zip pour installation manuelle sur clé USB ou disque. Des sommes de contrôle SHA-256, les versions précédentes et les builds nocturnes sont également publiés. L'image .raw est présentée comme nécessaire aux machines récentes qui ne démarrent qu'en UEFI.",
-    "documentation_and_community": "Le site est disponible en dix langues et regroupe le forum, le wiki et l'accès au dépôt Git. Les canaux communautaires listés en pied de page sont Telegram, Discord, Facebook, Reddit, Matrix et IRC, aux côtés d'une liste de diffusion par courriel. La documentation en ligne reste essentiellement composée du wiki et des pages du site ; aucun manuel système unifié n'est publié sur le portail.",
+    "introduction": "KolibriOS is a free graphical operating system for the 32-bit x86 architecture, programmed entirely in assembly language. Born in 2004 from a community split with MenuetOS (whose original 32-bit branch it continues and improves under open governance), KolibriOS aims to explore the ultimate limits of software optimisation. The complete system — including its kernel, device drivers, windowed graphical interface, a network stack and dozens of applications — fits entirely on a standard 1.44 MB floppy disk and starts in a few seconds on configurations with 12 MB of RAM.",
+    "what_is_it": "Technically, KolibriOS is neither derived from Unix nor affiliated with Linux or Windows: it is a stand-alone system designed from scratch exclusively in x86 assembly for the FASM (Flat Assembler) compiler. Unlike modern systems whose successive software abstraction layers induce high memory consumption, KolibriOS interacts directly with the processor and the hardware registers with exceptional compactness and execution speed. The system is self-hosting, the integrated FASM compiler making it possible to modify and recompile any system component directly from KolibriOS.",
+    "kernel_architecture_preemption_and_memory": "The KolibriOS kernel is a preemptive 32-bit monolithic kernel running in protected mode. It provides full hardware memory paging, isolating the address spaces of the various applications to prevent accidental corruption. The preemptive scheduler manages multithreading with priority levels, while the inter-process communication (IPC) mechanisms rely on fast message queues and hardware event queues (keyboard, mouse, timer). System calls are unified and exposed to applications through the software interrupt `INT 0x40`.",
+    "security_and_privilege_separation": "KolibriOS divides privileges into two levels: applications run in ring 3, while the kernel and drivers share ring 0. Each process has its own page table and all applications are loaded at the same linear address, the `new_app_base` constant being 0 in the current \"flat\" kernel; the separation of address spaces therefore relies on page-table translation, and not on distinct load addresses.\n\nThe project documents the consequence of this model: an error in an application blocks only that application, whereas an error in a driver can bring down the entire system. The same page recommends using the application API, notably hardware functions 41 to 46 and 62, where that suffices, so as not to introduce code in ring 0; it also states that drivers cannot be debugged with `mtdbg`, which is reserved for applications.\n\nLoading a driver goes through an interface version check: the `version` field encodes the native interface version in the low word and the minimum required version in the high word, the latter having to remain between the `DRV_COMPAT` and `DRV_CURRENT` constants. If the driver calls a function absent from the current kernel, the kernel refuses to load it and writes \"unresolved\" on the debug message board. This wiki page is flagged as deprecated and recent kernels use the PE format instead of MS COFF.\n\nData integrity is treated separately in the FAQ: FAT12 on floppy disk and FAT32 are read/write, NTFS writing is limited and without encryption, EXT2/3 writing is experimental and to be used with caution, XFS and CDFS are read-only.",
+    "filesystems_and_storage_capabilities": "Despite its microscopic size, KolibriOS has impressive file system management. It provides full reading and writing on the FAT12, FAT16 and FAT32 formats, easing file exchanges with removable media (floppy disks, USB flash drives, memory cards). It also includes read-only drivers for the modern NTFS, Ext2, Ext3, Ext4, ISO 9660 (optical discs) and XFS file systems, making it possible to access data hosted on hard drives shared with Linux distributions or Windows installations.",
+    "graphical_interface_multimedia_and_applications": "The KolibriOS user interface is a complete and responsive graphical desktop environment. It includes a taskbar with notification area, a start menu, a window manager with customisable visual skins, drag and drop and smooth rendering of vector fonts. The native software library supplied by default is remarkably extensive: text editor with syntax highlighting (TinyPad), image retouching software, multi-format image viewer (Kiv), video player (optimised port of MPlayer), audio players compatible with AC'97 and Intel High Definition Audio (HDA), PDF and DjVu file viewers, retro video games (DOOM, Quake, Minesweeper) and network utilities (WebView web browser, IRC client, FTP client).",
+    "hardware_support_and_boot_methods": "KolibriOS runs on any x86-compatible microprocessor (Intel Pentium / i586 or later, as well as on 64-bit processors in 32-bit compatibility mode). It supports VESA 2.0 display as well as specific 2D acceleration drivers for certain Intel and AMD/ATI graphics controllers. The network stack supports several common Ethernet chips (Realtek RTL8139, RTL8169/8111, Intel PRO/1000) and partial USB 1.1/2.0 drivers allow keyboards, mice and storage media to be handled. KolibriOS can be booted from a 1.44 MB floppy disk, a LiveCD CD-ROM, a USB flash drive, a hard disk partition through GRUB/syslinux, or under DOS with the `mtldr` tool. It runs with perfect smoothness in all common hypervisors (QEMU, VirtualBox, Bochs, VMware).",
+    "history_and_independence": "KolibriOS stems from a split with MenuetOS in 2004 and has since followed independent development, according to the presentation of the official site. The project was selected among the Google Summer of Code 2026 organisations and publishes a set of work topics accordingly. The two projects remain distinct: KolibriOS continues its own 32-bit branch with its own governance and repository, and must not be confused with MenuetOS.",
+    "system_requirements": "The official site announces three hardware requirements: an i586 processor, 12 MB of RAM and a few megabytes of disk space. It also describes a boot from power-on to the graphical interface in a few seconds, with no visible intermediate step. These values concern the minimum configuration announced by the project; they do not prejudge the behaviour of heavier software such as browsers or media players.",
+    "download_channels_and_images": "The download page offers four formats for version 0.7.7.0-9242, whose build is dated 18 October 2026: a floppy image (.img), a LiveCD image (.iso), a hybrid UEFI/BIOS image (.raw) and a .zip archive for manual installation on a USB flash drive or disk. SHA-256 checksums, previous versions and nightly builds are also published. The .raw image is presented as necessary for recent machines that boot only in UEFI.",
+    "documentation_and_community": "The site is available in ten languages and gathers the forum, the wiki and access to the Git repository. The community channels listed in the footer are Telegram, Discord, Facebook, Reddit, Matrix and IRC, alongside an email mailing list. The online documentation remains essentially made up of the wiki and the pages of the site; no unified system manual is published on the portal.",
     "advantages": [
-      "Vitesse d'exécution et réactivité époustouflantes grâce à une programmation 100 % en assembleur x86 pur.",
-      "Compacité extrême : système complet avec interface graphique, pile réseau et applications tenant sur une disquette de 1,44 Mo.",
-      "Consommation de mémoire vive minimale, démarrant et tournant avec 12 Mo de mémoire vive.",
-      "Large prise en charge de systèmes de fichiers (FAT en lecture/écriture, NTFS/Ext2/3/4 en lecture seule).",
-      "Environnement de développement auto-hébergé avec compilateur FASM intégré au système.",
-      "Projet sous licence open source libre (GNU GPLv2) garantissant l'accès permanent au code source."
+      "Astonishing execution speed and responsiveness thanks to 100% programming in pure x86 assembly.",
+      "Extreme compactness: a complete system with graphical interface, network stack and applications fitting on a 1.44 MB floppy disk.",
+      "Minimal RAM consumption, starting and running with 12 MB of RAM.",
+      "Broad file system support (FAT in read/write, NTFS/Ext2/3/4 in read-only).",
+      "Self-hosted development environment with a FASM compiler integrated into the system.",
+      "Project under a free open-source licence (GNU GPLv2) guaranteeing permanent access to the source code."
     ],
     "disadvantages": [
-      "Architecture 32 bits strictement x86 ne pouvant pas être portée facilement sur d'autres architectures processeurs (ARM, RISC-V).",
-      "Écosystème applicatif limité comparativement aux grands systèmes d'exploitation dotés de millions de logiciels.",
-      "Prise en charge matérielle moderne restreinte (pas de Wi-Fi natif, pas d'accélération matérielle 3D Vulkan/DirectX moderne).",
-      "Navigateurs web intégrés limités ne pouvant pas afficher les applications web complexes contemporaines.",
-      "Non conçu pour les infrastructures de serveurs d'entreprise ou les environnements multi-utilisateurs stricts."
+      "Strictly x86 32-bit architecture that cannot easily be ported to other processor architectures (ARM, RISC-V).",
+      "Application ecosystem limited compared with the large operating systems with millions of programs.",
+      "Restricted modern hardware support (no native Wi-Fi, no modern Vulkan/DirectX 3D hardware acceleration).",
+      "Limited built-in web browsers unable to display contemporary complex web applications.",
+      "Not designed for enterprise server infrastructures or strict multi-user environments."
     ],
     "who_is_it_for": [
-      "Programmeurs et passionnés de langage d'assemblage souhaitant étudier ou créer des logiciels ultra-optimisés avec FASM.",
-      "Utilisateurs désireux de redonner vie à de très anciens ordinateurs personnels x86 disposant de ressources matérielles dérisoires.",
-      "Enseignants et étudiants en informatique explorant le fonctionnement intime du mode protégé x86 et de l'interruption INT 0x40.",
-      "Amateurs d'environnements de secours ou de démonstration sur clé USB amorçable en quelques secondes."
+      "Assembly language programmers and enthusiasts wishing to study or create ultra-optimised software with FASM.",
+      "Users wishing to bring very old x86 personal computers with negligible hardware resources back to life.",
+      "Computer science teachers and students exploring the inner workings of x86 protected mode and of the INT 0x40 interrupt.",
+      "Enthusiasts of rescue or demonstration environments on a USB flash drive booting in a few seconds."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs recherchant un système de bureau principal pour la navigation web moderne ou la bureautique collaborative.",
-      "Développeurs dépendant d'écosystèmes logiciels de haut niveau modernes (Node.js, Docker, JVM, Electron).",
-      "Joueurs de jeux vidéo modernes exigeant des pilotes graphiques récents et des bibliothèques 3D avancées.",
-      "Entreprises cherchant des solutions avec support commercial garanti et certifications formelles de conformité."
+      "Users looking for a primary desktop system for modern web browsing or collaborative office work.",
+      "Developers depending on modern high-level software ecosystems (Node.js, Docker, JVM, Electron).",
+      "Modern video game players requiring recent graphics drivers and advanced 3D libraries.",
+      "Enterprises looking for solutions with guaranteed commercial support and formal compliance certifications."
     ],
-    "verdict": "KolibriOS est un système d'exploitation écrit en langage d'assemblage x86. Il intègre un système graphique multitâche dans le volume d'une disquette et fonctionne avec des exigences matérielles minimales, ce qui en fait un support d'étude des systèmes compacts.",
-    "release_history_and_nightly_build_numbering": "Le projet archive ses versions sur archive.kolibrios.org. La page consultée le 2026-10-18 liste la version 0.7.7.0 au 13 décembre 2009, présentée comme version récente, puis la 0.7.5.0 au 31 janvier 2009, la 0.7.1.0 au 23 septembre 2007 et la 0.7.0.0 au 7 juin 2007. Pour chaque version, l'archive publie une image disquette, une image CD (LiveCD), le code source à la date de la version et un kit de développement (SDK).\n\nLes images courantes ne sont pas des versions stables : la page de téléchargement les présente comme des compilations nocturnes (« nightly builds ») qui contiennent les changements les plus récents et peuvent donc être instables, et les fichiers sont compressés en 7zip. Leur numéro reprend la version stable et l'étend par un numéro de construction et un suffixe : lors de la consultation du 18 octobre 2026, la page affichait 0.7.7.0-9244-gb6ad1799 avec la date de compilation 18/10/2026. La fiche relève par ailleurs la construction 0.7.7.0-9242, datée du même jour ; les deux numéros diffèrent, la date affichée est identique.\n\nLe serveur de compilations builds.kolibrios.org publie les images par langue, avec les répertoires en_US, es_ES, et_EE, it_IT et ru_RU, dans un répertoire ci/, aux côtés des répertoires docs/ et doxygen/ et de fichiers tels que active_devs.txt ; l'index consulté liste huit répertoires et trois fichiers.\n\nCes pages ne publient ni calendrier de publication stable, ni durée de support, ni date de fin de vie pour la série 0.7.7.0."
+    "verdict": "KolibriOS is an operating system written in x86 assembly language. It includes a multitasking graphical system within the volume of a floppy disk and runs with minimal hardware requirements, which makes it a medium for studying compact systems.",
+    "release_history_and_nightly_build_numbering": "The project archives its versions on archive.kolibrios.org. The page consulted on 2026-10-18 lists version 0.7.7.0 on 13 December 2009, presented as a recent version, then 0.7.5.0 on 31 January 2009, 0.7.1.0 on 23 September 2007 and 0.7.0.0 on 7 June 2007. For each version, the archive publishes a floppy image, a CD image (LiveCD), the source code as of the version date and a development kit (SDK).\n\nThe current images are not stable releases: the download page presents them as nightly builds that contain the most recent changes and may therefore be unstable, and the files are compressed in 7zip. Their number repeats the stable version and extends it with a build number and a suffix: during the consultation of 18 October 2026, the page displayed 0.7.7.0-9244-gb6ad1799 with the build date 18/10/2026. The entry also notes the build 0.7.7.0-9242, dated the same day; the two numbers differ, the displayed date is identical.\n\nThe build server builds.kolibrios.org publishes the images per language, with the directories en_US, es_ES, et_EE, it_IT and ru_RU, in a ci/ directory, alongside the docs/ and doxygen/ directories and files such as active_devs.txt; the index consulted lists eight directories and three files.\n\nThese pages publish neither a stable release schedule, nor a support period, nor an end-of-life date for the 0.7.7.0 series."
   },
+  "components": [
+    {
+      "id": "kernel-and-drivers",
+      "name": "Kernel and drivers",
+      "role": "operating_system_kernel",
+      "note": "\"the core parts of KolibriOS (kernel and drivers) are written entirely in FASM assembly language\"; the same page states that the system \"offers full support for FAT12/16/32 file systems, read-only access to NTFS, exFAT, ISO9660, and Ext2/3/4, and an extensive set of drivers for popular sound, network, and graphics cards\" (kolibrios.org/en/)."
+    }
+  ],
   "relations": [
     {
       "id": "freedos",
       "name": "FreeDOS",
       "type": "alternative",
-      "note": "Système d'exploitation libre pour microprocesseurs x86 offrant une légèreté maximale et un démarrage instantané sur disquette ou clé USB."
+      "note": "Free operating system for x86 microprocessors offering maximum lightness and instant boot from a floppy disk or USB flash drive."
     },
     {
       "id": "haiku",
       "name": "Haiku",
       "type": "alternative",
-      "note": "Système d'exploitation graphique pour PC personnel axé sur la réactivité de l'interface utilisateur."
+      "note": "Graphical operating system for personal computers focused on the responsiveness of the user interface."
     },
     {
       "id": "serenityos",
       "name": "SerenityOS",
       "type": "alternative",
-      "note": "Système d'exploitation libre indépendant développé de zéro pour ordinateurs de bureau."
+      "note": "Independent free operating system developed from scratch for desktop computers."
     },
     {
       "id": "dietpi",
       "name": "DietPi",
       "type": "alternative",
-      "note": "Système ultra-léger et optimisé conçu pour minimiser l'empreinte matérielle et mémoire."
+      "note": "Ultra-light and optimised system designed to minimise the hardware and memory footprint."
     }
   ],
   "links": [
     {
-      "label": "Site officiel du projet KolibriOS",
+      "label": "Official website of the KolibriOS project",
       "url": "https://kolibrios.org/en/"
     },
     {
-      "label": "Documentation officielle et Wiki de KolibriOS",
+      "label": "Official documentation and wiki of KolibriOS",
       "url": "https://wiki.kolibrios.org/wiki/Main_Page"
     },
     {
-      "label": "Dépôt de code source officiel KolibriOS (Git)",
+      "label": "Official KolibriOS source code repository (Git)",
       "url": "https://git.kolibrios.org/"
     },
     {
-      "label": "Explorateur de code source KolibriOS (WebSVN)",
+      "label": "KolibriOS source code browser (WebSVN)",
       "url": "https://websvn.kolibrios.org/"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel et documentation de KolibriOS",
+      "title": "Official portal and documentation of KolibriOS",
       "url": "https://kolibrios.org/en/",
       "type": "official_site"
     },
     {
-      "title": "Wiki technique et architecture du noyau KolibriOS",
+      "title": "Technical wiki and kernel architecture of KolibriOS",
       "url": "https://wiki.kolibrios.org/wiki/Main_Page",
       "type": "documentation"
     },
     {
-      "title": "Dépôt officiel du code source et des composants KolibriOS",
+      "title": "Official KolibriOS source code and components repository",
       "url": "https://git.kolibrios.org/",
       "type": "repository"
     },
     {
-      "title": "KolibriOS : images de téléchargement, version et sommes de contrôle",
+      "title": "KolibriOS: download images, release and checksums",
       "url": "https://kolibrios.org/en/download",
       "type": "official_site",
       "accessed": "2026-10-18"
     },
     {
-      "title": "KolibriOS - archive des versions publiees",
+      "title": "KolibriOS - archive of published releases",
       "url": "https://archive.kolibrios.org/en/",
       "type": "official",
       "date": "2026-10-18"
     },
     {
-      "title": "KolibriOS - serveur de compilations",
+      "title": "KolibriOS - build server",
       "url": "https://builds.kolibrios.org/",
       "type": "official",
       "date": "2026-10-18"
     },
     {
-      "title": "KolibriOS — FAQ (systèmes de fichiers, image de démarrage)",
+      "title": "KolibriOS — FAQ (file systems, boot image)",
       "url": "https://wiki.kolibrios.org/wiki/FAQ",
       "type": "documentation",
       "accessed": "2026-10-19"
     },
     {
-      "title": "Writing drivers for KolibriOS — privilèges, interface noyau (page dépréciée)",
+      "title": "Writing drivers for KolibriOS — privileges, kernel interface (deprecated page)",
       "url": "https://wiki.kolibrios.org/wiki/Writing_drivers_for_KolibriOS",
       "type": "documentation",
       "accessed": "2026-10-19"

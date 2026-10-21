@@ -100,7 +100,7 @@
       "date": "2026-05-01"
     },
     {
-      "title": "illumos — Security Information (politique de divulgation, CVE, embargo, clé PGP)",
+      "title": "illumos — Security Information (disclosure policy, CVE, embargo, PGP key)",
       "url": "https://illumos.org/docs/security/",
       "type": "official_documentation",
       "accessed": "2026-10-18"

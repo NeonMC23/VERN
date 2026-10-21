@@ -153,7 +153,7 @@
       "date": "2018-07-24"
     },
     {
-      "title": "DragonFly BSD — Download (images live, portée 64 bits)",
+      "title": "DragonFly BSD — Download (live images, 64-bit scope)",
       "url": "https://www.dragonflybsd.org/download/",
       "type": "official_documentation",
       "accessed": "2026-10-18"
@@ -177,13 +177,13 @@
       "date": "2026-10-18"
     },
     {
-      "title": "DragonFlyBSD/DragonFlyBSD - depot officiel",
+      "title": "DragonFlyBSD/DragonFlyBSD - official repository",
       "url": "https://github.com/DragonFlyBSD/DragonFlyBSD",
       "type": "repository",
       "date": "2026-10-18"
     },
     {
-      "title": "DragonFlyBSD/DPorts - systeme de construction des applications",
+      "title": "DragonFlyBSD/DPorts - application build system",
       "url": "https://github.com/DragonFlyBSD/DPorts",
       "type": "repository",
       "date": "2026-10-18"

@@ -15,7 +15,31 @@
 That's it.
 ```
 
-No HTML file, no builder change, no build step, no GitHub Action.
+No HTML file, no build step, no GitHub Action. Nothing in the builder has to be touched for a
+resource to render: a `content` key missing from `SECTION_TITLES` falls back to the humanised key
+name. One optional line in that table is what gives a section an approved English heading.
+
+### Section headings (`SECTION_TITLES`)
+
+`content` keys are structural: they are quoted by the audits under `research/verify/` and the
+conformity measure classifies a section by its key name. Headings are display text, produced at
+one place in `assets/js/library-builder.js` from a table keyed by section name.
+
+- Key present in `SECTION_TITLES` → the table string is rendered.
+- Key absent → `humanize(key)`: underscores become spaces, first letter capitalised, a question
+  phrasing gets its mark. That is the historical behaviour, and it raises no error: an
+  untranslated key simply shows its humanised name.
+
+Procedure when a heading must be added or changed:
+
+1. add or edit **one** entry in `SECTION_TITLES`, keyed by the exact JSON key (lowercase,
+   underscores, ASCII);
+2. leave `data/library/*.json` alone: never rename a `content` key to fix a heading, and never
+   add a heading field to the data for that purpose;
+3. check the syntax (`node --check assets/js/library-builder.js`) and read the rendered heading
+   back from the DOM of `/library/{id}/` — a passing build is not a rendered page;
+4. remember the entry applies to every resource using that key, and that a new key name can move
+   a thematic count in the measure: re-run the measure after adding a resource.
 
 Step 2 is only what makes the resource appear on `/library/`. It is **not**
 required for routing: `/library/firefox/` works the moment
@@ -94,3 +118,54 @@ The dev server is a convenience only: the published site does not need it.
 
 `scripts/build-pages.py` regenerates the HTML pages so navbar and footer stay
 identical everywhere. Optional — the generated files are committed.
+
+## Language guard (`scripts/check-language.js`)
+
+A read-only check that looks for French text in what a visitor would see. It runs the real
+`assets/js/library-builder.js` over every Library resource in a minimal DOM (Node's standard
+library only: `fs`, `path`, `vm`, `crypto`), then examines the rendered text, the section labels
+produced by `SECTION_TITLES` and `humanize()`, the Tracks data, the fixed text of the seven HTML pages, and the
+display strings (`text`, `label`, `title`, `placeholder`, `aria-label`, `emptyMessage`, `error`,
+`heading`) of the six interface scripts. The dev tools under `scripts/` and the Markdown files are
+not part of what a visitor sees, so they are not scanned. Nothing is written: the tool hashes the
+137 files it reads before and after, and reports a mismatch instead of staying quiet.
+
+```bash
+node scripts/check-language.js                    # 110 resources, no options needed
+node scripts/check-language.js --titles           # also the section-label register
+node scripts/check-language.js --only debian      # one resource
+node scripts/check-language.js --help             # options and documented limits
+```
+
+| State | Exit code | Meaning |
+| --- | --- | --- |
+| `CONFORME` | 0 | every target rendered, no French marker found |
+| `DETECTION` | 1 | at least one string carries a French marker; the line shows the file, the key or the page, and the rule that fired |
+| `NON_CONCLUANT` | 2 | missing or unreadable input, a diverging `LIBRARY_RESOURCES` list, a page that failed to render, a label table whose size no longer matches, an unexpected exception |
+
+An incomplete run is never reported as `CONFORME`.
+
+Procedure before a review of changes:
+
+1. run `node scripts/check-language.js --titles` from the repository root;
+2. on `DETECTION`, read the context of each line. Fix the wording in `data/library/<id>.json` or add
+   one `SECTION_TITLES` entry — never rename a `content` key to hide a heading (see *Section
+   headings* above);
+3. on `NON_CONCLUANT`, repair the coverage first: the exit code says the check did not happen;
+4. `CONFORME` is a text check, not a visual one, and not a proof that no French exists anywhere in
+   the repository. Documentation and workshop scripts may hold French, and a French sentence built
+   only from words English shares (`Filtrer les ressources`) is not detected — the lexicon needs an
+   unambiguous word, an accent or an elision. Section labels are checked more strictly than prose,
+   because they are a curated register where no accented proper name is expected.
+
+Optional arguments: `--expect-titles N` (label-table size the check insists on, default 40),
+`--approved-csv FILE` (compare the table with an approved register; asking for it and not finding it
+gives `NON_CONCLUANT`), `--dom DIR` (read a rendered-text sweep), `--json FILE` (machine output — the
+one write the tool can perform, and it is refused with `NON_CONCLUANT` if the path points inside the
+repository), `--root DIR` (check another tree, used by the test campaigns).
+
+Periodic complement, not a replacement: a browser sweep of the running site reads what
+`library-catalog.js` and the Tracks widget produce at execution time. The hardened sweep used in
+phases 110-112 lives at `research/verify/phase111/p111_sweep_dom.sh`; feed its output to
+`node scripts/check-language.js --dom <dir>`. It needs the local server and a browser, so it is run
+occasionally, while the check above is the one for every review.

@@ -2,7 +2,7 @@
   "id": "templeos",
   "name": "TempleOS",
   "type": "operating_system",
-  "summary": "Système d'exploitation 64 bits du domaine public conçu par Terry A. Davis comme un environnement informatique récréatif autonome, exécuté intégralement en Ring 0 avec le langage HolyC et un affichage 640x480 en 16 couleurs.",
+  "summary": "Public domain 64-bit operating system designed by Terry A. Davis as a self-contained recreational computing environment, running entirely in Ring 0 with the HolyC language and a 640x480 display in 16 colours.",
   "tags": [
     "recreational",
     "x86-64",
@@ -17,100 +17,100 @@
   "platforms": [
     "x86-64"
   ],
-  "license": "Public Domain (Domaine public, code source intégralement ouvert et libre de droits)",
+  "license": "Public Domain (fully open source code, free of rights)",
   "last_verified": "2026-10-16",
   "content": {
-    "introduction": "TempleOS est un système d'exploitation x86-64 singulier conçu et programmé intégralement par le développeur américain Terry A. Davis (1969–2018) sur une période d'environ dix ans, jusqu'en 2013. Initialement connu sous les noms de J Operating System, LoseThos puis SparrowOS avant d'adopter son appellation définitive en 2013, le projet a été développé en solitaire et représente plus de 100 000 lignes de code. Conçu comme une réinterprétation spirituelle et numérique de l'informatique directe et non médiée de l'ère du Commodore 64, TempleOS vise à offrir un environnement de programmation et de loisir sans les couches de complexité des systèmes contemporains.",
-    "what_is_it": "Techniquement, TempleOS n'est ni une distribution Linux ni un système d'exploitation de type Unix : il s'agit d'un système 64 bits autonome reposant sur une architecture à espace d'adressage unique (Single Address Space - SAS). L'intégralité du système — noyau, gestionnaires de périphériques, compilateur, environnement graphique et programmes utilisateurs — s'exécute avec les privilèges CPU les plus élevés du mode superviseur (Ring 0). La mémoire physique est directement mise en correspondance avec l'espace mémoire sans protection de pagination ni virtualisation, permettant à n'importe quelle instruction d'accéder sans intermédiaire aux structures internes du matériel.",
-    "kernel_architecture_and_cooperative_multitasking": "Le noyau de TempleOS adopte un modèle multitâche coopératif : chaque tâche détient le processeur jusqu'à ce qu'elle cède volontairement la main au planificateur (`Yield()`), éliminant les surcoûts de synchronisation et de changement de contexte préemptif. L'architecture multi-cœurs repose sur une organisation asymétrique de type Maître-Esclave (Master-Slave) : le cœur de processeur Core 0 orchestre le système et distribue des unités de calcul aux autres cœurs CPU disponibles. Ce modèle garantit une latence d'exécution ultra-faible et des performances prévisibles pour les animations et calculs graphiques temps réel.",
-    "holyc_compiler_and_doldoc_document_architecture": "Le système est articulé autour d'un langage de programmation sur mesure, le **HolyC**, un dialecte typé et compilé dérivé du C/C++. Le compilateur HolyC est intégré au cœur du système et fonctionne en mode JIT (Just-In-Time) et AOT (Ahead-Of-Time). L'interpréteur de commandes du shell est en fait le compilateur HolyC lui-même : chaque commande saisie au clavier est immédiatement compilée en code machine natif x86-64 et exécutée. L'affichage textuel s'appuie sur la technologie **DolDoc**, qui substitue au texte brut ASCII un format riche structuré autorisant des liens hypertextes, des arborescences, des macros et même des modèles 3D vectoriels directement interactifs et rotatifs à l'intérieur du code source.",
-    "graphics_audio_and_redsea_filesystem": "Par principe de conception immuable, TempleOS fige délibérément ses spécifications multimédias : l'affichage graphique est strictement calibré sur une résolution de **640x480 pixels en 16 couleurs** (palette standard VGA) avec un accès direct au tampon vidéo matriciel (framebuffer) à 60 images par seconde. La génération sonore est exclusivement dévolue au haut-parleur interne de la carte mère (PC Speaker 8 bits), le créateur refusant formellement d'intégrer des pilotes complexes de cartes son ou de protocoles MIDI. Le stockage repose sur le système de fichiers natif **RedSea**, un système plat et contigu (sans fragmentation de fichiers) supportant la compression de blocs LZW, complété par la lecture des images disques optiques ISO 9660.",
-    "hardware_requirements_and_historical_context": "TempleOS exige un processeur 64 bits x86-64, un minimum de 512 Mo de mémoire vive, des contrôleurs de disques ATA/IDE et un clavier/souris au protocole PS/2 (natif ou émulé par le BIOS). Par choix délibéré de conception, le système ne dispose d'aucune pile réseau (pas de connexion Internet, pas de TCP/IP) ni de prise en charge des imprimantes. Il s'exécute de façon optimale au sein de machines virtuelles (QEMU, VirtualBox, VMware) ou sur d'anciennes stations physiques à compatibilité BIOS hérité. Placé par Terry A. Davis dans le domaine public, le système est livré avec son code source intégral et constitue un objet d'étude patrimonial majeur dans l'histoire de l'informatique indépendante.",
-    "release_history_and_dating": "Les sources ne s'accordent pas sur la date de début : le site officiel n'en donne aucune, l'article Wikipédia situe le J Operating System en 2005, et la présentation initiale de cette fiche retenait une période d'environ dix ans. La dernière version publiée est la 5.03, datée du 20 novembre 2017 d'après la source secondaire ; aucune version ultérieure n'est référencée, le développement s'étant arrêté avec la mort de son auteur en 2018.",
-    "licensing_and_preservation": "Le site officiel présente TempleOS comme un système d'exploitation 64 bits libre et placé dans le domaine public, et précise que l'ensemble des contenus liés à Terry A. Davis, TempleOS, J Operating System, SparrowOS et LoseThos doit être considéré comme relevant du domaine public. La diffusion repose sur des archives externes : Archive.org, Odysee, un torrent et un lien magnet, ainsi que des rediffusions vidéo. Le domaine templeos.org est maintenu par un tiers et ne constitue pas un dépôt officiel de développement.",
-    "community_and_forks": "Le site recense les communautés actives : Reddit, un serveur Discord, Revolt, le canal IRC #templeos sur Rizon et un serveur Steam, et cite ZealOS parmi les forks du système. Il précise que ces liens ne valent pas approbation. Aucun dépôt de code officiel ni programme de contribution n'est maintenu, le développement étant arrêté depuis la mort de son auteur en 2018.",
-    "differences_with_other_systems": "TempleOS ne sépare pas espace noyau et espace utilisateur : l'ensemble du système s'exécute en anneau 0 dans un espace d'adressage unique, sans pagination protégée, ce qui le distingue des systèmes Unix et Windows. Son ordonnanceur est coopératif et non préemptif, l'affichage est figé en 640x480 pixels sur 16 couleurs et le son est limité au haut-parleur interne. À la différence de FreeDOS, il cible exclusivement le x86-64 et ne fournit aucune pile réseau.",
+    "introduction": "TempleOS is a singular x86-64 operating system designed and programmed entirely by the American developer Terry A. Davis (1969-2018) over a period of about ten years, until 2013. Initially known under the names J Operating System, LoseThos then SparrowOS before adopting its definitive name in 2013, the project was developed alone and represents more than 100,000 lines of code. Designed as a spiritual and digital reinterpretation of the direct and unmediated computing of the Commodore 64 era, TempleOS aims to offer a programming and leisure environment without the layers of complexity of contemporary systems.",
+    "what_is_it": "Technically, TempleOS is neither a Linux distribution nor a Unix-type operating system: it is a stand-alone 64-bit system resting on a single address space (SAS) architecture. The whole system, kernel, device managers, compiler, graphical environment and user programs, runs with the highest CPU privileges of supervisor mode (Ring 0). Physical memory is mapped directly onto the memory space without paging protection or virtualisation, allowing any instruction to access the internal structures of the hardware without an intermediary.",
+    "kernel_architecture_and_cooperative_multitasking": "The TempleOS kernel adopts a cooperative multitasking model: each task holds the processor until it voluntarily hands control back to the scheduler (`Yield()`), eliminating synchronisation and preemptive context switch overheads. The multi-core architecture rests on an asymmetric Master-Slave organisation: processor core Core 0 orchestrates the system and distributes computing units to the other available CPU cores. This model guarantees ultra-low execution latency and predictable performance for real-time animations and graphical computations.",
+    "holyc_compiler_and_doldoc_document_architecture": "The system is articulated around a bespoke programming language, **HolyC**, a typed and compiled dialect derived from C/C++. The HolyC compiler is integrated into the heart of the system and works in JIT (Just-In-Time) and AOT (Ahead-Of-Time) mode. The shell command interpreter is in fact the HolyC compiler itself: each command typed on the keyboard is immediately compiled into native x86-64 machine code and executed. Text display relies on the **DolDoc** technology, which substitutes for plain ASCII text a structured rich format allowing hypertext links, trees, macros and even vector 3D models directly interactive and rotatable inside the source code.",
+    "graphics_audio_and_redsea_filesystem": "By immutable design principle, TempleOS deliberately freezes its multimedia specifications: graphical display is strictly calibrated on a resolution of **640x480 pixels in 16 colours** (standard VGA palette) with direct access to the matrix video buffer (framebuffer) at 60 frames per second. Sound generation is exclusively assigned to the internal speaker of the motherboard (8-bit PC Speaker), the creator formally refusing to integrate complex sound card drivers or MIDI protocols. Storage rests on the native **RedSea** file system, a flat and contiguous system (without file fragmentation) supporting LZW block compression, complemented by reading ISO 9660 optical disk images.",
+    "hardware_requirements_and_historical_context": "TempleOS requires an x86-64 64-bit processor, a minimum of 512 MB of RAM, ATA/IDE disk controllers and a keyboard/mouse with the PS/2 protocol (native or emulated by the BIOS). By deliberate design choice, the system has no network stack (no Internet connection, no TCP/IP) and no printer support. It runs optimally within virtual machines (QEMU, VirtualBox, VMware) or on old physical workstations with legacy BIOS compatibility. Placed in the public domain by Terry A. Davis, the system is delivered with its full source code and constitutes a major heritage study object in the history of independent computing.",
+    "release_history_and_dating": "The sources do not agree on the start date: the official site gives none, the Wikipedia article places the J Operating System in 2005, and the initial presentation of this record retained a period of about ten years. The last published version is 5.03, dated 20 November 2017 according to the secondary source; no later version is referenced, development having stopped with the death of its author in 2018.",
+    "licensing_and_preservation": "The official site presents TempleOS as a free 64-bit operating system placed in the public domain, and specifies that all content related to Terry A. Davis, TempleOS, J Operating System, SparrowOS and LoseThos must be considered as falling within the public domain. Distribution relies on external archives: Archive.org, Odysee, a torrent and a magnet link, as well as video rebroadcasts. The templeos.org domain is maintained by a third party and does not constitute an official development repository.",
+    "community_and_forks": "The site lists the active communities: Reddit, a Discord server, Revolt, the IRC channel #templeos on Rizon and a Steam server, and cites ZealOS among the forks of the system. It specifies that these links do not constitute approval. No official code repository or contribution programme is maintained, development having stopped since the death of its author in 2018.",
+    "differences_with_other_systems": "TempleOS does not separate kernel space and user space: the whole system runs in ring 0 in a single address space, without protected paging, which distinguishes it from Unix and Windows systems. Its scheduler is cooperative and not preemptive, the display is frozen at 640x480 pixels in 16 colours and sound is limited to the internal speaker. Unlike FreeDOS, it targets x86-64 exclusively and provides no network stack.",
     "advantages": [
-      "Œuvre d'ingénierie logicielle remarquable de plus de 100 000 lignes de code écrites de zéro par un seul développeur.",
-      "Accès direct et non médié au matériel informatique en mode superviseur (Ring 0) sans barrière de virtualisation.",
-      "Langage HolyC élégant et compilateur JIT/AOT natif intégré au shell d'une réactivité instantanée.",
-      "Format DolDoc révolutionnaire intégrant des liens hypertextes, macros et modèles 3D directement dans le code source.",
-      "Démarrage quasi instantané et consommation de ressources système extrêmement modeste.",
-      "Code source intégralement ouvert, documenté et placé sans aucune restriction dans le domaine public."
+      "Remarkable software engineering work of more than 100,000 lines of code written from scratch by a single developer.",
+      "Direct and unmediated access to computer hardware in supervisor mode (Ring 0) without a virtualisation barrier.",
+      "Elegant HolyC language and native JIT/AOT compiler integrated into the shell with instant responsiveness.",
+      "Revolutionary DolDoc format integrating hypertext links, macros and 3D models directly into the source code.",
+      "Near-instant boot and extremely modest system resource consumption.",
+      "Source code fully open, documented and placed without any restriction in the public domain."
     ],
     "disadvantages": [
-      "Développement officiel arrêté suite au décès de son créateur en 2018 (système désormais patrimonial).",
-      "Absence totale de protection de mémoire : un pointeur erroné peut corrompre instantanément l'intégralité du système.",
-      "Absence délibérée de pile réseau et de connectivité Internet (impossibilité de naviguer sur le web ou d'échanger des paquets).",
-      "Résolution graphique strictement figée à 640x480 en 16 couleurs et audio limité au PC Speaker.",
-      "Compatibilité matérielle physique restreinte sur les ordinateurs modernes (exige le mode BIOS hérité, ATA et PS/2)."
+      "Official development stopped following the death of its creator in 2018 (system now a heritage item).",
+      "Total absence of memory protection: an erroneous pointer can instantly corrupt the entire system.",
+      "Deliberate absence of a network stack and of Internet connectivity (impossibility of browsing the web or exchanging packets).",
+      "Graphical resolution strictly frozen at 640x480 in 16 colours and audio limited to the PC Speaker.",
+      "Restricted physical hardware compatibility on modern computers (requires legacy BIOS mode, ATA and PS/2)."
     ],
     "who_is_it_for": [
-      "Étudiants et chercheurs en histoire de l'informatique et en architecture des systèmes d'exploitation.",
-      "Développeurs curieux d'expérimenter la programmation directe en HolyC et l'architecture documentaire DolDoc.",
-      "Passionnés d'informatique rétro appréciant la simplicité et le contrôle matériel absolu des micro-ordinateurs des années 1980.",
-      "Enthousiastes de la virtualisation souhaitant explorer un système atypique sous QEMU ou VirtualBox."
+      "Students and researchers in computing history and in operating system architecture.",
+      "Developers curious to experiment with direct programming in HolyC and with the DolDoc documentary architecture.",
+      "Retro computing enthusiasts appreciating the simplicity and absolute hardware control of 1980s microcomputers.",
+      "Virtualisation enthusiasts wishing to explore an atypical system under QEMU or VirtualBox."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs à la recherche d'un système d'exploitation pour le travail de bureau ou la navigation web contemporaine.",
-      "Professionnels et entreprises nécessitant un système multi-utilisateurs sécurisé avec gestion des droits d'accès.",
-      "Joueurs de jeux vidéo modernes exigeant des pilotes graphiques GPU accélérés en 3D.",
-      "Infrastructures de serveurs connectés à Internet ou centres de données infonuagiques."
+      "Users looking for an operating system for contemporary office work or web browsing.",
+      "Professionals and enterprises requiring a secure multi-user system with access rights management.",
+      "Modern video game players requiring 3D-accelerated GPU graphics drivers.",
+      "Internet-connected server infrastructures or cloud data centres."
     ],
-    "verdict": "TempleOS est un système d'exploitation expérimental développé par Terry A. Davis. Dépouillé des abstractions modernes, il comprend son propre langage (HolyC), son shell, son compilateur et un environnement graphique, et constitue un témoignage sur la conception de systèmes d'exploitation non conventionnels."
+    "verdict": "TempleOS is an experimental operating system developed by Terry A. Davis. Stripped of modern abstractions, it includes its own language (HolyC), its shell, its compiler and a graphical environment, and constitutes a testimony on the design of unconventional operating systems."
   },
   "relations": [
     {
       "id": "freedos",
       "name": "FreeDOS",
       "type": "alternative",
-      "note": "Système d'exploitation PC mono-utilisateur historique offrant un accès matériel direct sans couche d'abstraction moderne."
+      "note": "Historical single-user PC operating system offering direct hardware access without a modern abstraction layer."
     },
     {
       "id": "haiku",
       "name": "Haiku",
       "type": "alternative",
-      "note": "Système d'exploitation libre dédié au poste de travail personnel et doté d'une architecture indépendante."
+      "note": "Free operating system dedicated to the personal workstation and equipped with an independent architecture."
     },
     {
       "id": "reactos",
       "name": "ReactOS",
       "type": "alternative",
-      "note": "Système d'exploitation libre indépendant pour architecture PC x86."
+      "note": "Free stand-alone operating system for the x86 PC architecture."
     }
   ],
   "links": [
     {
-      "label": "Site officiel d'archive du projet TempleOS",
+      "label": "Official archive site of the TempleOS project",
       "url": "https://templeos.org/"
     },
     {
-      "label": "Charte officielle et documentation technique de TempleOS",
+      "label": "Official charter and technical documentation of TempleOS",
       "url": "https://templeos.org/Wb/Home/Web/Doc/Charter.html"
     },
     {
-      "label": "Dépôt d'archive du code source TempleOS (CIA-Foundation)",
+      "label": "Archive repository of the TempleOS source code (CIA-Foundation)",
       "url": "https://github.com/cia-foundation/TempleOS"
     }
   ],
   "sources": [
     {
-      "title": "Site officiel d'archive et documentation de TempleOS",
+      "title": "Official archive site and documentation of TempleOS",
       "url": "https://templeos.org/",
       "type": "official_site"
     },
     {
-      "title": "Charte d'architecture et spécifications techniques de TempleOS",
+      "title": "TempleOS architecture charter and technical specifications",
       "url": "https://templeos.org/Wb/Home/Web/Doc/Charter.html",
       "type": "documentation"
     },
     {
-      "title": "Archive patrimoniale officielle de Terry A. Davis sur Internet Archive",
+      "title": "Official heritage archive of Terry A. Davis on Internet Archive",
       "url": "https://archive.org/details/TerryADavis_TempleOS_Archive",
       "type": "repository"
     },
     {
-      "title": "TempleOS (Wikipédia) : chronologie, version 5.03 et caractéristiques techniques",
+      "title": "TempleOS (Wikipedia): chronology, version 5.03 and technical characteristics",
       "url": "https://en.wikipedia.org/wiki/TempleOS",
       "type": "encyclopedia",
       "accessed": "2026-10-18"

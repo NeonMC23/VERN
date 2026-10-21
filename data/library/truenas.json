@@ -2,7 +2,7 @@
   "id": "truenas",
   "name": "TrueNAS",
   "type": "operating_system",
-  "summary": "Système d'exploitation et plateforme de stockage en réseau unifié (NAS/SAN) développé par iXsystems, motorisé par le système de fichiers transactionnel OpenZFS et articulé autour des éditions CORE (FreeBSD) et SCALE (Debian GNU/Linux avec Docker et KVM).",
+  "summary": "Operating system and unified network storage platform (NAS/SAN) developed by iXsystems, powered by the transactional OpenZFS file system and structured around the CORE (FreeBSD) and SCALE (Debian GNU/Linux with Docker and KVM) editions.",
   "tags": [
     "storage",
     "nas",
@@ -18,101 +18,101 @@
   "platforms": [
     "x86-64"
   ],
-  "license": "Open Source (licence BSD 2-Clause pour le cœur FreeNAS/CORE, composants GPL pour l'environnement Linux de SCALE) avec options de support d'entreprise",
+  "license": "Open Source (2-Clause BSD licence for the FreeNAS/CORE core, GPL components for the Linux environment of SCALE) with enterprise support options",
   "last_verified": "2026-10-16",
   "content": {
-    "introduction": "TrueNAS est un système d'exploitation spécialisé et une plateforme de stockage en réseau unifié (NAS/SAN) développée par la société américaine iXsystems. Conçu pour garantir l'intégrité absolue des données et simplifier le partage de fichiers en entreprise comme chez les particuliers, TrueNAS réunit les fonctionnalités avancées du système de fichiers OpenZFS au sein d'un environnement administrable par interface web, disponible sous forme logicielle libre ou intégré dans des appliances matérielles dédiées.",
-    "what_is_it": "Historiquement issu du projet open source FreeNAS créé en 2005 sur socle FreeBSD, le système a été repris par iXsystems en 2009 puis unifié sous la marque TrueNAS en 2020. La plateforme propose deux variantes complémentaires : TrueNAS CORE, s'appuyant sur FreeBSD pour des déploiements centrés sur le stockage pur avec jails et bhyve, et TrueNAS SCALE, reposant sur Debian GNU/Linux avec un noyau Linux 6.x. TrueNAS SCALE constitue le fer de lance de la gamme, apportant la virtualisation KVM, les conteneurs Docker et des fonctionnalités de stockage en grappe étendues.",
-    "openzfs_architecture_and_data_integrity": "L'atout technologique central de TrueNAS est son intégration native et poussée d'OpenZFS, un système de fichiers 128 bits et gestionnaire de volumes logique transactionnel en copie sur écriture (Copy-on-Write). OpenZFS agrège les supports physiques en réserves de stockage (zpools) découpées en périphériques virtuels (vdevs) configurables en miroir, RAIDZ1, RAIDZ2, RAIDZ3 ou dRAID. Chaque bloc de données et de métadonnées est protégé par une somme de contrôle cryptographique (Fletcher4, SHA-256), permettant la détection et la correction automatique des corruptions silencieuses lors des cycles de nettoyage (scrubbing). La plateforme gère également les instantanés (snapshots) instantanés, la réplication asynchrone sécurisée (`zfs send/receive`), le chiffrement natif des jeux de données et la déduplication rapide (Fast Deduplication).",
-    "unified_storage_protocols_and_networking": "TrueNAS délivre une architecture de stockage unifié couvrant les besoins en mode fichier, en mode bloc et en mode objet. Pour le partage réseau de fichiers, il embarque Samba (SMB 2/3) avec une prise en charge complète des listes de contrôle d'accès Windows (NFSv4 ACLs portées par iXsystems sur Linux), NFS (v3, v4.1, v4.2 avec accélération nconnect multi-flux), ainsi que WebDAV. Pour le stockage SAN en mode bloc, il propose une cible iSCSI optimisée (SCST sous Linux, CTL sous FreeBSD) hautement performante pour les hyperviseurs distants. Il intègre également la compatibilité objet compatible Amazon S3 (via MinIO) et la synchronisation vers les fournisseurs cloud via rclone.",
-    "application_ecosystem_and_docker_transition": "Dans ses versions modernes (notamment TrueNAS SCALE 24.10 'Electric Eel'), iXsystems a fait évoluer son architecture applicative en abandonnant la complexité du moteur Kubernetes (k3s/Helm) au profit d'une intégration native de Docker Engine et de Docker Compose. Cette transition majeure permet aux utilisateurs de déployer des applications conteneurisées directement depuis le catalogue officiel ou par la rédaction de fichiers `docker-compose.yml` standards, tout en conservant la capacité de créer des machines virtuelles complètes isolées sous l'hyperviseur KVM.",
-    "administration_webui_and_middleware": "L'administration du système s'opère au travers d'une interface web moderne en Angular, fournissant des tableaux de bord interactifs pour la supervision en temps réel de l'état des disques, de l'état de santé S.M.A.R.T., des températures matérielles et de l'utilisation du cache mémoire ZFS (ARC - Adaptive Replacement Cache). Toutes les fonctions de la plateforme sont pilotables via une API RESTful et WebSocket complète servie par le middleware TrueNAS, facilitant l'automatisation. Les appliances professionnelles TrueNAS Enterprise offrent également une haute disponibilité matérielle actif-passif sans interruption de service (HA dual-controller failover).",
-    "historique_et_transition_du_socle_freebsd_vers_linux": "La filiation de la plateforme se lit dans ses numéros de version autant que dans sa documentation de migration. Les versions construites sur FreeBSD s'arrêtent aux branches 13.0 et 13.3, et la documentation de migration ne les fait communiquer avec la lignée Linux qu'après mise à jour vers leur dernière révision de maintenance. Le passage à un socle Linux commence avec la branche 22.12 ; il peut se faire par une installation propre à partir de l'image ISO de la version cible, ou par le sélecteur de train de mise à jour du système FreeBSD vers la branche 24.04 (Dragonfish) puis, de branche en branche, jusqu'à la version courante. La documentation précise que la migration ne conserve pas la configuration applicative et qu'elle suppose une sauvegarde préalable du fichier de configuration système, réinjecté après installation. Les systèmes Enterprise, eux, sont livrés déjà installés, et la documentation demande aux clients HA de ne pas réinstaller eux-mêmes leurs deux contrôleurs.",
-    "cycle_de_versions_et_profils_de_mise_a_jour": "Deux régimes de numérotation coexistent. Les versions publiées jusqu'à la série 25.x suivent le schéma AA.MM (24.10 Electric Eel, 25.04 Fangtooth, 25.10 Goldeye), avec des révisions de maintenance à quatre champs : 24.10.2.4 datée du 7 août 2025 et 25.04.2.6 datée du 30 octobre 2025. À partir de TrueNAS 27, la documentation annonce un rythme annuel et un format `AA.MINEUR.CORRECTIF`, le numéro majeur reprenant l'année de publication stable. À cette cadence s'ajoutent quatre profils de mise à jour sélectionnables dans l'écran Update : Developer, Early Adopter, General et Mission Critical. Un système communautaire part du profil le plus élevé disponible pour sa version ; un système Enterprise n'a accès qu'à General et Mission Critical, et le profil Mission Critical est celui qui est appliqué à la livraison. La règle de parcours impose de passer par la dernière révision de maintenance de la branche courante avant de changer de branche majeure.",
-    "catalogue_dapplications_et_depots_logiques": "TrueNAS n'expose pas de gestionnaire de paquets généraliste à l'administrateur : le logiciel applicatif arrive par un catalogue d'applications conteneurisées, décrit dans la documentation comme le mécanisme d'installation et de gestion des applications. Le catalogue est publié sur apps.truenas.com et mis à jour quotidiennement ; il définit aussi les niveaux de support associés aux applications. Le système exécute Docker Engine et accepte les fichiers Compose, ce qui permet d'installer une application du catalogue ou une application personnalisée décrite par son propre fichier. La version 25.04 ajoute deux éléments distincts du catalogue : la sélection d'une adresse IP par application lors du déploiement, et un mécanisme expérimental de conteneurs système LXC, réservé aux tests communautaires. Le logiciel système lui-même ne s'actualise pas par dépôt de paquets : l'écran Update interroge le serveur de mises à jour du projet ou accepte un fichier téléversé localement.",
-    "installation_et_verification_des_images": "L'installation part d'une image ISO publiée sur le site du projet, à écrire sur un support amorçable. L'équipe de sécurité d'iXsystems signe ces images, et la documentation décrit deux vérifications indépendantes avant écriture : le contrôle de la signature OpenPGP du fichier `.iso.gpg` ou `.iso.sig` avec `gpg --verify` après import de la clé publique, et le contrôle de l'empreinte SHA-256 fournie à côté de l'image. Les deux peuvent être menées sur la même image, la signature attestant l'origine et l'empreinte l'intégrité du transfert. Le déroulement ensuite est identique sur matériel physique et sur machine virtuelle : démarrage sur le support, installation, puis configuration initiale du réseau par le menu console avant la première connexion à l'interface web. Une migration depuis FreeBSD impose en plus de mettre à jour la branche source vers sa dernière révision de maintenance avant de lancer l'installation.",
+    "introduction": "TrueNAS is a specialised operating system and a unified network storage platform (NAS/SAN) developed by the American company iXsystems. Designed to guarantee absolute data integrity and to simplify file sharing in enterprises and at home, TrueNAS brings together the advanced features of the OpenZFS file system within an environment administered through a web interface, available as free software or integrated into dedicated hardware appliances.",
+    "what_is_it": "Historically derived from the open-source FreeNAS project created in 2005 on a FreeBSD foundation, the system was taken over by iXsystems in 2009 then unified under the TrueNAS brand in 2020. The platform offers two complementary variants: TrueNAS CORE, relying on FreeBSD for pure storage-centred deployments with jails and bhyve, and TrueNAS SCALE, resting on Debian GNU/Linux with a Linux 6.x kernel. TrueNAS SCALE is the flagship of the range, bringing KVM virtualisation, Docker containers and extended clustered storage features.",
+    "openzfs_architecture_and_data_integrity": "The central technological asset of TrueNAS is its native and far-reaching integration of OpenZFS, a 128-bit file system and transactional logical volume manager using copy-on-write. OpenZFS aggregates physical media into storage pools (zpools) divided into virtual devices (vdevs) configurable in mirror, RAIDZ1, RAIDZ2, RAIDZ3 or dRAID. Every data and metadata block is protected by a cryptographic checksum (Fletcher4, SHA-256), allowing automatic detection and correction of silent corruption during scrub cycles. The platform also manages instant snapshots, secure asynchronous replication (`zfs send/receive`), native encryption of datasets and fast deduplication.",
+    "unified_storage_protocols_and_networking": "TrueNAS delivers a unified storage architecture covering file-mode, block-mode and object-mode needs. For network file sharing, it embeds Samba (SMB 2/3) with full support for Windows access control lists (NFSv4 ACLs ported by iXsystems to Linux), NFS (v3, v4.1, v4.2 with multi-stream nconnect acceleration), as well as WebDAV. For block-mode SAN storage, it offers an optimised iSCSI target (SCST under Linux, CTL under FreeBSD) with high performance for remote hypervisors. It also includes Amazon S3-compatible object compatibility (through MinIO) and synchronisation to cloud providers through rclone.",
+    "application_ecosystem_and_docker_transition": "In its modern versions (notably TrueNAS SCALE 24.10 'Electric Eel'), iXsystems has evolved its application architecture by abandoning the complexity of the Kubernetes engine (k3s/Helm) in favour of native integration of Docker Engine and Docker Compose. This major transition allows users to deploy containerised applications directly from the official catalogue or by writing standard `docker-compose.yml` files, while retaining the ability to create complete isolated virtual machines under the KVM hypervisor.",
+    "administration_webui_and_middleware": "System administration takes place through a modern Angular web interface, providing interactive dashboards for real-time supervision of disk status, S.M.A.R.T. health status, hardware temperatures and ZFS memory cache usage (ARC - Adaptive Replacement Cache). All platform functions are controllable through a complete RESTful and WebSocket API served by the TrueNAS middleware, easing automation. TrueNAS Enterprise professional appliances also offer active-passive hardware high availability with no service interruption (dual-controller HA failover).",
+    "historique_et_transition_du_socle_freebsd_vers_linux": "The lineage of the platform can be read in its version numbers as much as in its migration documentation. Versions built on FreeBSD stop at the 13.0 and 13.3 branches, and the migration documentation only connects them with the Linux line after an update to their latest maintenance revision. The move to a Linux foundation begins with the 22.12 branch; it can be done by a clean installation from the ISO image of the target version, or through the update train selector from the FreeBSD system to the 24.04 branch (Dragonfish) then, branch by branch, up to the current version. The documentation specifies that the migration does not preserve the application configuration and that it assumes a prior backup of the system configuration file, re-injected after installation. Enterprise systems, for their part, are delivered already installed, and the documentation asks HA customers not to reinstall their two controllers themselves.",
+    "cycle_de_versions_et_profils_de_mise_a_jour": "Two numbering regimes coexist. The versions published up to the 25.x series follow the AA.MM scheme (24.10 Electric Eel, 25.04 Fangtooth, 25.10 Goldeye), with four-field maintenance revisions: 24.10.2.4 dated 7 August 2025 and 25.04.2.6 dated 30 October 2025. From TrueNAS 27, the documentation announces an annual pace and an `AA.MINOR.PATCH` format, the major number repeating the stable publication year. On top of that cadence come four update profiles selectable in the Update screen: Developer, Early Adopter, General and Mission Critical. A community system starts from the highest profile available for its version; an Enterprise system has access only to General and Mission Critical, and the Mission Critical profile is the one applied on delivery. The progression rule requires going through the latest maintenance revision of the current branch before changing major branch.",
+    "catalogue_dapplications_et_depots_logiques": "TrueNAS does not expose a general-purpose package manager to the administrator: application software arrives through a catalogue of containerised applications, described in the documentation as the mechanism for installing and managing applications. The catalogue is published on apps.truenas.com and updated daily; it also defines the support levels associated with applications. The system runs Docker Engine and accepts Compose files, which allows installing a catalogue application or a custom application described by its own file. Version 25.04 adds two elements distinct from the catalogue: the selection of an IP address per application during deployment, and an experimental mechanism of LXC system containers, reserved for community testing. The system software itself does not update through a package repository: the Update screen queries the project's update server or accepts a locally uploaded file.",
+    "installation_et_verification_des_images": "Installation starts from an ISO image published on the project site, to be written to a bootable medium. The iXsystems security team signs these images, and the documentation describes two independent checks before writing: verification of the OpenPGP signature of the `.iso.gpg` or `.iso.sig` file with `gpg --verify` after importing the public key, and verification of the SHA-256 fingerprint provided next to the image. Both can be carried out on the same image, the signature attesting the origin and the fingerprint the integrity of the transfer. What follows is identical on physical hardware and on a virtual machine: boot from the medium, installation, then initial network configuration through the console menu before the first connection to the web interface. A migration from FreeBSD additionally requires updating the source branch to its latest maintenance revision before starting the installation.",
     "advantages": [
-      "Protection et intégrité maximales des données grâce au système de fichiers transactionnel OpenZFS et à la correction automatique d'erreurs (self-healing).",
-      "Prise en charge unifiée complète des protocoles industriels de stockage : SMB avec ACLs Windows natives, NFS avec nconnect, iSCSI, S3 et WebDAV.",
-      "Transition vers Docker Engine et Docker Compose natifs dans TrueNAS SCALE simplifiant radicalement le déploiement d'applications conteneurisées.",
-      "Capacités de sauvegarde et de reprise d'activité professionnelles via instantanés ZFS programmés, clones légers et réplication distante.",
-      "Interface web ergonomique et réactive accompagnée d'une API RESTful/WebSocket exhaustive pour l'automatisation d'infrastructure.",
-      "Disponibilité sous forme logicielle libre gratuite pour tout matériel x86-64 et en appliances matérielles certifiées pour les entreprises."
+      "Maximum data protection and integrity thanks to the transactional OpenZFS file system and automatic error correction (self-healing).",
+      "Complete unified support for industrial storage protocols: SMB with native Windows ACLs, NFS with nconnect, iSCSI, S3 and WebDAV.",
+      "Transition to native Docker Engine and Docker Compose in TrueNAS SCALE radically simplifying the deployment of containerised applications.",
+      "Professional backup and disaster recovery capabilities through scheduled ZFS snapshots, lightweight clones and remote replication.",
+      "Ergonomic and responsive web interface accompanied by an exhaustive RESTful/WebSocket API for infrastructure automation.",
+      "Availability as free software for any x86-64 hardware and as certified hardware appliances for enterprises."
     ],
     "disadvantages": [
-      "Exigences matérielles rigoureuses pour OpenZFS, nécessitant une quantité importante de mémoire vive (recommandation minimale de 8 à 16 Go de RAM) et de préférence de la mémoire ECC.",
-      "Rigidité historique dans la modification a posteriori de la topologie des zpools (l'extension de vdev RAIDZ disque par disque restant une fonctionnalité récente d'OpenZFS).",
-      "Les deux déclinaisons (CORE sous FreeBSD et SCALE sous Linux) présentent des différences de fonctionnalités et de pilotes pouvant nécessiter une migration réfléchie.",
-      "Consommation énergétique et thermique continue inhérente aux serveurs de stockage multipostes et aux configurations RAID multi-disques.",
-      "La déduplication native de blocs en temps réel exige des ressources processeur et mémoire substantielles sous peine de dégrader les débits d'E/S."
+      "Demanding hardware requirements for OpenZFS, requiring a large amount of RAM (minimum recommendation of 8 to 16 GB of RAM) and preferably ECC memory.",
+      "Historical rigidity in modifying the topology of zpools after the fact (extending a RAIDZ vdev disk by disk remaining a recent OpenZFS feature).",
+      "The two variants (CORE under FreeBSD and SCALE under Linux) present differences in features and drivers that may require a considered migration.",
+      "Continuous energy and thermal consumption inherent to multi-bay storage servers and multi-disk RAID configurations.",
+      "Native real-time block deduplication requires substantial processor and memory resources at the risk of degrading I/O throughput."
     ],
     "who_is_it_for": [
-      "Entreprises, institutions et centres de recherche recherchant une solution de stockage centralisée, sécurisée et souveraine pour leurs volumes critiques.",
-      "Administrateurs systèmes déployant des baies SAN ou des dépôts de sauvegarde fiables pour des grappes d'hyperviseurs VMware, Proxmox ou Hyper-V.",
-      "Créateurs de contenu, studios de post-production et agences manipulant des téraoctets de données vidéo exigeant des débits élevés et un partage multi-utilisateurs SMB/NFS.",
-      "Utilisateurs avancés et passionnés de serveurs domestiques (homelab) voulant héberger leurs données personnelles et leurs services conteneurisés sous Docker."
+      "Enterprises, institutions and research centres looking for a centralised, secure and sovereign storage solution for their critical volumes.",
+      "System administrators deploying SAN arrays or reliable backup repositories for VMware, Proxmox or Hyper-V hypervisor clusters.",
+      "Content creators, post-production studios and agencies handling terabytes of video data requiring high throughput and multi-user SMB/NFS sharing.",
+      "Advanced users and home server enthusiasts (homelab) wanting to host their personal data and containerised services under Docker."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs débutants cherchant un boîtier de partage de fichiers grand public prêt à l'emploi sans connaissances préalables sur le stockage et la redondance RAID.",
-      "Infrastructures informatiques contraintes par du matériel ancien ou sous-dimensionné disposant de moins de 4 à 8 Go de mémoire vive.",
-      "Postes de travail de bureau ou ordinateurs portables personnels (TrueNAS étant un système serveur dédié ne proposant aucun environnement graphique local).",
-      "Déploiements sur architectures matérielles 32 bits ou architectures ARM grand public non prises en charge officiellement."
+      "Beginner users looking for a consumer-ready file sharing box without prior knowledge of storage and RAID redundancy.",
+      "IT infrastructures constrained by old or undersized hardware with less than 4 to 8 GB of RAM.",
+      "Desktop workstations or personal laptops (TrueNAS being a dedicated server system offering no local graphical environment).",
+      "Deployments on 32-bit hardware architectures or consumer ARM architectures not officially supported."
     ],
-    "verdict": "TrueNAS est une plateforme de stockage en réseau unifié (NAS/SAN) open source construite autour du système de fichiers OpenZFS. Elle fournit des services intégrés de partage de fichiers (SMB, NFS, iSCSI), de réplication de données chiffrées et de gestion de volumes RAIDZ via une interface d'administration web. Avec la transition vers TrueNAS SCALE basée sur un noyau Linux Debian et l'intégration de conteneurs applicatifs, la solution s'adapte aussi bien aux infrastructures de stockage d'entreprise qu'aux serveurs de virtualisation et de sauvegarde domestiques."
+    "verdict": "TrueNAS is an open-source unified network storage (NAS/SAN) platform built around the OpenZFS file system. It provides built-in file sharing (SMB, NFS, iSCSI), encrypted data replication and RAIDZ volume management services through a web administration interface. With the transition to TrueNAS SCALE based on a Debian Linux kernel and the integration of application containers, the solution suits enterprise storage infrastructures as well as home virtualisation and backup servers."
   },
   "relations": [
     {
       "id": "freebsd",
       "name": "FreeBSD",
       "type": "upstream_base",
-      "note": "Système d'exploitation Unix libre constituant le socle historique du projet FreeNAS et de l'édition TrueNAS CORE."
+      "note": "Free Unix operating system forming the historical foundation of the FreeNAS project and of the TrueNAS CORE edition."
     },
     {
       "id": "debian",
       "name": "Debian",
       "type": "upstream_base",
-      "note": "Distribution Linux servant de socle pour l'édition moderne TrueNAS SCALE (noyau Linux et espace utilisateur Debian)."
+      "note": "Linux distribution serving as the foundation for the modern TrueNAS SCALE edition (Linux kernel and Debian user space)."
     },
     {
       "id": "proxmox-ve",
       "name": "Proxmox VE",
       "type": "alternative",
-      "note": "Plateforme d'hyperviseur et de virtualisation d'entreprise fréquemment interfacée avec TrueNAS pour le stockage partagé en cluster."
+      "note": "Enterprise hypervisor and virtualisation platform frequently interfaced with TrueNAS for clustered shared storage."
     },
     {
       "id": "openmediavault",
       "name": "OpenMediaVault",
       "type": "alternative",
-      "note": "Distribution NAS légère basée sur Debian, orientée vers les architectures matérielles plus modestes."
+      "note": "Lightweight NAS distribution based on Debian, oriented towards more modest hardware architectures."
     }
   ],
   "links": [
     {
-      "label": "Site officiel de TrueNAS (iXsystems)",
+      "label": "Official TrueNAS website (iXsystems)",
       "url": "https://www.truenas.com/"
     },
     {
-      "label": "Portail de documentation officiel de TrueNAS",
+      "label": "Official TrueNAS documentation portal",
       "url": "https://www.truenas.com/docs/"
     },
     {
-      "label": "Portail du projet OpenZFS amont",
+      "label": "Upstream OpenZFS project portal",
       "url": "https://openzfs.org/"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel et spécifications de stockage TrueNAS",
+      "title": "Official portal and storage specifications of TrueNAS",
       "url": "https://www.truenas.com/",
       "type": "official_site"
     },
     {
-      "title": "Documentation d'architecture et guides de configuration TrueNAS",
+      "title": "TrueNAS architecture documentation and configuration guides",
       "url": "https://www.truenas.com/docs/",
       "type": "documentation"
     },
     {
-      "title": "Notes de version et annonces de migration TrueNAS SCALE",
+      "title": "TrueNAS SCALE release notes and migration announcements",
       "url": "https://www.truenas.com/docs/scale/24.10/gettingstarted/scalereleasenotes/",
       "type": "documentation"
     },

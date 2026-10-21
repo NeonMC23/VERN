@@ -2,7 +2,7 @@
   "id": "sailfish-os",
   "name": "Sailfish OS",
   "type": "operating_system",
-  "summary": "Système d'exploitation mobile européen développé par Jolla, combinant un socle Linux libre, l'interface gestuelle Silica et la compatibilité applicative Android AppSupport.",
+  "summary": "European mobile operating system developed by Jolla, combining a free Linux foundation, the Silica gesture interface and Android AppSupport application compatibility.",
   "tags": [
     "mobile",
     "jolla",
@@ -16,78 +16,78 @@
     "ARM64 (aarch64)",
     "armhf"
   ],
-  "license": "Hybride (socle open source Mer/GPL et interface Silica/AppSupport sous licence propriétaire Jolla)",
+  "license": "Hybrid (open-source Mer/GPL foundation and Silica/AppSupport interface under proprietary Jolla licence)",
   "last_verified": "2026-10-17",
   "content": {
-    "introduction": "Sailfish OS est un système d'exploitation mobile développé par la société finlandaise Jolla Ltd., fondée en 2011 par d'anciens cadres et ingénieurs de Nokia issus du projet MeeGo suite à l'abandon du Nokia N9.",
-    "what_is_it": "Sailfish OS propose une alternative européenne aux systèmes d'exploitation mobiles dominants. Il associe un cœur open source basé sur Linux (Mer Core) à une interface utilisateur propriétaire entièrement pilotée par gestes tactiles et à une couche de compatibilité optionnelle pour l'exécution d'applications Android.",
-    "jolla_governance_and_meego_heritage": "Héritier direct de MeeGo et de la pile mobile Mer, Sailfish OS a d'abord équipé les appareils conçus par Jolla (le Jolla Phone en 2013 et la Jolla Tablet en 2015). Après une phase de diversification auprès d'intégrateurs institutionnels et constructeurs partenaires, Jolla a réaffirmé son positionnement grand public et communautaire avec la sortie du smartphone Jolla C2 Community Phone et de la version majeure Sailfish OS 5.0 (Tampella).",
-    "silica_interface_and_gestural_paradigm": "L'interface graphique de Sailfish OS, baptisée Silica, est conçue en C++ et Qt Quick / QML au-dessus du compositeur Wayland Lipstick. Silica adopte une philosophie ergonomique gestuelle fluide permettant une utilisation intégrale à une seule main sans boutons matériels ou logiciels de navigation. L'écran d'accueil présente les applications actives sous forme de cartes dynamiques (« covers ») affichant des informations en direct et des boutons d'action rapide. Un balayage horizontal depuis l'extérieur de l'écran bascule instantanément vers l'écran d'accueil ou le panneau des événements. L'accès aux options s'effectue par le « pulley menu » (menu à poulie), un glissement vertical continu depuis le haut de l'écran révélant les commandes sans masquer le contenu applicatif principal.",
-    "hybrid_architecture_and_appsupport": "L'architecture de Sailfish OS est scindée en deux strates distinctes : un socle open source (Sailfish Core / Mer) et une surcouche propriétaire développée par Jolla. Le socle libre comprend le noyau Linux standard, la bibliothèque glibc, systemd, Wayland, la pile réseau ConnMan et la gestion des paquets RPM via l'outil Zypper. Sur les appareils compatibles et sous licence commerciale Sailfish X, le système intègre AppSupport (anciennement Alien Dalvik). AppSupport exécute un runtime Android complet dans un conteneur LXC isolé, partageant l'accélération matérielle 3D, le son et les notifications avec le système hôte, permettant ainsi d'exécuter des applications Android courantes aux côtés des applications natives Qt/C++ sans émulation logicielle lente.",
-    "hardware_programs_and_ecosystem_limits": "Le modèle de déploiement de Sailfish OS repose sur les terminaux produits directement par Jolla (comme le Jolla Phone original ou le Jolla C2) et sur le programme officiel de portage Sailfish X, ciblant principalement les smartphones Sony Xperia (gammes Xperia 10 II, III, IV et V) via l'Open Devices Program de Sony. Une version d'essai gratuite donne accès au système d'exploitation de base, tandis qu'une licence commerciale payante débloque AppSupport, la saisie prédictive XT9 et la synchronisation Exchange ActiveSync. Malgré sa maturité technique, Sailfish OS reste contraint par la petite taille de son écosystème applicatif natif et l'absence de certification Google Play Integrity, limitant l'utilisation de certaines applications bancaires ou de services protégés par DRM Widevine L1.",
-    "release_model_and_stop_releases": "Les publications de Sailfish OS sont organisées par versions majeures, chaque série portant un thème finlandais (région de Tampere, patrimoine mondial de l'UNESCO, parcs nationaux, rivières, lacs). La table officielle des versions recense pour la série 5 les publications 5.0.0.5 à 5.0.0.71, la plus récente datée du 30 octobre 2025. Certaines entrées sont marquées « stop release » : la 5.0.0.71 (30 octobre 2025) est associée aux Jolla C2 et Mind2, à AppSupport 13, à microG 0.3.6 et au moteur de navigateur esr91 ; la 4.6.0.15 (20 septembre 2024) ajoute une partition /opt2 pour les XA2 et Xperia 10 et est signalée comme dernière version pour les Jolla C, Tablet, Xperia X et Gemini PDA. Dans les cas recensés ci-dessus, ces marqueurs accompagnent des changements structurels de partition, de pile applicative ou de matériel pris en charge.",
-    "deploiement_et_mises_a_jour": "Le déploiement s'appuie sur la documentation officielle, qui distingue le flashage d'un appareil, l'installation de Sailfish OS, sa réinstallation, la mise à jour du système et la mise à jour de l'image du fournisseur (vendor image). Un mode de récupération est documenté séparément, de même que les procédures de verrouillage de l'appareil et de définition du code de sécurité. Les mises à jour sont publiées sous forme de versions successives, avec des notes de version et une page des problèmes connus tenue par le projet ; les versions dites « stop releases » servent de palier obligatoire avant de passer à la branche suivante.",
-    "securite_systeme_et_confinement": "La sécurité relève de mécanismes documentés au niveau du système : les données utilisateur sont chiffrées, les applications sont confinées par Firejail, la connectivité passe par un pare-feu avec prise en charge native des VPN, et les services du système sont confinés au moyen de systemd. Le projet annonce en outre une capacité de gestion de parc de type MDM au niveau du système d'exploitation, ainsi que des sauvegardes automatiques. La documentation utilisateur couvre en détail le chiffrement des données, le verrouillage de l'appareil et le pare-feu.",
+    "introduction": "Sailfish OS is a mobile operating system developed by the Finnish company Jolla Ltd., founded in 2011 by former Nokia executives and engineers from the MeeGo project following the abandonment of the Nokia N9.",
+    "what_is_it": "Sailfish OS offers a European alternative to the dominant mobile operating systems. It combines an open-source core based on Linux (Mer Core) with a proprietary user interface entirely driven by touch gestures and an optional compatibility layer for running Android applications.",
+    "jolla_governance_and_meego_heritage": "Direct heir of MeeGo and of the Mer mobile stack, Sailfish OS first equipped the devices designed by Jolla (the Jolla Phone in 2013 and the Jolla Tablet in 2015). After a phase of diversification towards institutional integrators and partner manufacturers, Jolla reaffirmed its mainstream and community positioning with the release of the Jolla C2 Community Phone smartphone and of the major version Sailfish OS 5.0 (Tampella).",
+    "silica_interface_and_gestural_paradigm": "The graphical interface of Sailfish OS, called Silica, is designed in C++ and Qt Quick / QML above the Lipstick Wayland compositor. Silica adopts a fluid gesture ergonomic philosophy allowing full one-handed use without hardware or software navigation buttons. The home screen presents the active applications as dynamic cards (\"covers\") displaying live information and quick action buttons. A horizontal swipe from the outside of the screen instantly switches to the home screen or the events panel. Access to the options is obtained through the \"pulley menu\", a continuous vertical slide from the top of the screen revealing the commands without hiding the main application content.",
+    "hybrid_architecture_and_appsupport": "The architecture of Sailfish OS is split into two distinct strata: an open-source foundation (Sailfish Core / Mer) and a proprietary layer developed by Jolla. The free foundation includes the standard Linux kernel, the glibc library, systemd, Wayland, the ConnMan network stack and RPM package management through the Zypper tool. On compatible devices and under the commercial Sailfish X licence, the system includes AppSupport (formerly Alien Dalvik). AppSupport runs a complete Android runtime in an isolated LXC container, sharing 3D hardware acceleration, sound and notifications with the host system, thus making it possible to run ordinary Android applications alongside native Qt/C++ applications without slow software emulation.",
+    "hardware_programs_and_ecosystem_limits": "The deployment model of Sailfish OS rests on terminals produced directly by Jolla (such as the original Jolla Phone or the Jolla C2) and on the official Sailfish X porting programme, targeting mainly Sony Xperia smartphones (Xperia 10 II, III, IV and V ranges) through Sony's Open Devices Program. A free trial version gives access to the base operating system, while a paid commercial licence unlocks AppSupport, XT9 predictive input and Exchange ActiveSync synchronisation. Despite its technical maturity, Sailfish OS remains constrained by the small size of its native application ecosystem and the absence of Google Play Integrity certification, limiting the use of certain banking applications or of services protected by Widevine L1 DRM.",
+    "release_model_and_stop_releases": "Sailfish OS releases are organised by major versions, each series carrying a Finnish theme (Tampere region, UNESCO world heritage, national parks, rivers, lakes). The official version table lists for the 5 series the releases 5.0.0.5 to 5.0.0.71, the most recent dated 30 October 2025. Some entries are marked \"stop release\": 5.0.0.71 (30 October 2025) is associated with the Jolla C2 and Mind2, with AppSupport 13, with microG 0.3.6 and with the esr91 browser engine; 4.6.0.15 (20 September 2024) adds an /opt2 partition for the XA2 and Xperia 10 and is flagged as the last version for the Jolla C, Tablet, Xperia X and Gemini PDA. In the cases listed above, these markers accompany structural changes of partition, application stack or supported hardware.",
+    "deploiement_et_mises_a_jour": "Deployment relies on the official documentation, which distinguishes the flashing of a device, the installation of Sailfish OS, its reinstallation, the update of the system and the update of the vendor image. A recovery mode is documented separately, as are the procedures for locking the device and setting the security code. Updates are published as successive versions, with release notes and a known issues page maintained by the project; the versions called \"stop releases\" serve as a mandatory stage before moving to the next branch.",
+    "securite_systeme_et_confinement": "Security relies on mechanisms documented at system level: user data are encrypted, applications are confined by Firejail, connectivity goes through a firewall with native VPN support, and system services are confined by means of systemd. The project also announces MDM-type fleet management capability at operating system level, as well as automatic backups. The user documentation covers in detail data encryption, device locking and the firewall.",
     "rpm_packaging_and_device_variants": "Native software is packaged as RPM, and the device side uses PackageKit with a libzypp backend to manage the RPM database; binary diffing and delta-rpm upgrades are supported to reduce the bandwidth needed for an update. What distinguishes the model is the device variant: each variant is defined by a pattern file that describes the initial filesystem content and the packages to install, and can differ by region, operator or hardware platform, with segregation enforced both when an image is created and when a device is updated. Updates therefore do not flow from a single public archive to every handset; they are controlled per variant through the SSU and Store services, and vendor-specific content such as licenses and artwork can be preinstalled either as packages or on a dedicated partition. Android applications use the APK format separately, handled by the apkd service that mediates their installation, removal and upgrade.",
-    "advantages": "Sailfish OS propose une navigation gestuelle d'une grande fluidité sans encombrement de boutons à l'écran, un multitâche visuel performant avec cartes interactives, un socle Linux moderne basé sur RPM et Wayland, et une couche de compatibilité Android bien intégrée limitant la dépendance aux écosystèmes propriétaires.",
-    "disadvantages": "L'interface Silica et la technologie AppSupport demeurent fermées et propriétaires, la licence complète Sailfish X pour appareils Sony est payante, et la compatibilité avec les applications Android requérant les services certifiés Google Play n'est pas garantie.",
-    "who_is_it_for": "Sailfish OS est destiné aux utilisateurs de smartphones recherchant une expérience utilisateur tactile alternative et soignée d'origine européenne, tout en conservant la capacité d'exécuter des applications Android usuelles sur matériel officiellement validé (Sony Xperia ou Jolla C2).",
-    "who_is_it_not_for": "Sailfish OS ne convient pas aux utilisateurs exigeant un système 100 % libre et auditable de bout en bout (comme Mobian ou Nura), ni aux détenteurs de smartphones non officiellement pris en charge par Jolla ne souhaitant pas recourir à des ports communautaires.",
-    "verdict": "Porté par l'héritage de Nokia et MeeGo, Sailfish OS se maintient depuis plus d'une décennie comme un système mobile indépendant, associant une interface gestuelle Qt et un pont d'interopérabilité Android dans un cadre logiciel hybride."
+    "advantages": "Sailfish OS offers highly fluid gesture navigation without on-screen button clutter, performant visual multitasking with interactive cards, a modern Linux foundation based on RPM and Wayland, and a well-integrated Android compatibility layer limiting dependence on proprietary ecosystems.",
+    "disadvantages": "The Silica interface and the AppSupport technology remain closed and proprietary, the complete Sailfish X licence for Sony devices is paid, and compatibility with Android applications requiring certified Google Play services is not guaranteed.",
+    "who_is_it_for": "Sailfish OS is intended for smartphone users looking for an alternative touch user experience of European origin and careful design, while retaining the ability to run ordinary Android applications on officially validated hardware (Sony Xperia or Jolla C2).",
+    "who_is_it_not_for": "Sailfish OS is not suited to users requiring a 100% free and end-to-end auditable system (such as Mobian or Nura), nor to owners of smartphones not officially supported by Jolla who do not wish to resort to community ports.",
+    "verdict": "Carried by the legacy of Nokia and MeeGo, Sailfish OS has maintained itself for more than a decade as an independent mobile system, combining a Qt gesture interface and an Android interoperability bridge within a hybrid software framework."
   },
   "relations": [
     {
       "id": "ubuntu-touch",
       "name": "Ubuntu Touch",
       "type": "peer_alternative_mobile_os",
-      "note": "Système d'exploitation mobile libre maintenu par UBports proposant une interface convergente concurrente de Sailfish OS."
+      "note": "Free mobile operating system maintained by UBports offering a convergent interface competing with Sailfish OS."
     },
     {
       "id": "postmarketos",
       "name": "Nura",
       "type": "peer_mobile_distribution",
-      "note": "Distribution Linux mobile basée sur Alpine Linux orientée vers la pérennité matérielle et les composants libres."
+      "note": "Mobile Linux distribution based on Alpine Linux oriented towards hardware longevity and free components."
     },
     {
       "id": "mobian",
       "name": "Mobian",
       "type": "peer_mobile_distribution",
-      "note": "Distribution mobile basée sur Debian utilisant le shell Phosh et le noyau Linux mainline amont."
+      "note": "Debian-based mobile distribution using the Phosh shell and the upstream mainline Linux kernel."
     },
     {
       "id": "lineageos",
       "name": "LineageOS",
       "type": "peer_mobile_os",
-      "note": "Système d'exploitation mobile libre basé sur AOSP, constituant la référence des ROMs alternatives pour téléphones."
+      "note": "Free mobile operating system based on AOSP, constituting the reference for alternative phone ROMs."
     }
   ],
   "links": [
     {
-      "label": "Site officiel Sailfish OS",
+      "label": "Official Sailfish OS website",
       "url": "https://sailfishos.org/"
     },
     {
-      "label": "Portail d'entreprise Jolla",
+      "label": "Jolla enterprise portal",
       "url": "https://jolla.com/"
     },
     {
-      "label": "Programme Sailfish X",
+      "label": "Sailfish X programme",
       "url": "https://jolla.com/sailfishx/"
     }
   ],
   "sources": [
     {
-      "title": "Sailfish OS Documentation — Architecture logicielle",
+      "title": "Sailfish OS Documentation — Software architecture",
       "url": "https://sailfishos.org/",
       "type": "official_documentation"
     },
     {
-      "title": "Jolla Corporation — Annonces Sailfish OS 5.0 et Jolla C2",
+      "title": "Jolla Corporation — Sailfish OS 5.0 and Jolla C2 announcements",
       "url": "https://jolla.com/",
       "type": "official_announcement"
     },
     {
-      "title": "Sailfish OS Forum — Notes de version Sailfish OS 5.0 Tampella",
+      "title": "Sailfish OS Forum — Sailfish OS 5.0 Tampella release notes",
       "url": "https://forum.sailfishos.org/",
       "type": "official_documentation"
     },
@@ -99,7 +99,7 @@
       "accessed": "2026-10-17"
     },
     {
-      "title": "Sailfish OS Documentation — Accueil de la documentation utilisateur (installation, mise à jour, sécurité)",
+      "title": "Sailfish OS Documentation — User documentation home (installation, updating, security)",
       "url": "https://docs.sailfishos.org/",
       "type": "official_documentation",
       "accessed": "2026-10-18"

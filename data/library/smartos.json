@@ -28,7 +28,7 @@
     "deployment_and_datacenter_orchestration": "Guest instances and storage assets on SmartOS are managed through JSON-driven command-line interfaces: `vmadm` for provisioning, querying, updating, and destroying virtual machines and zones, and `imgadm` for discovering and pulling standardized image datasets from image repositories. All persistent data resides exclusively on local OpenZFS storage pools (`zpool`, typically named `zones`), benefiting from end-to-end checksumming, native copy-on-write snapshots, and dataset cloning. In large-scale enterprise environments, SmartOS serves as the foundation compute node operating system for the open-source Triton DataCenter (formerly Joyent SmartDataCenter) orchestration platform, while system introspection is powered by DTrace for non-invasive, live production kernel and application tracing.",
     "platform_image_release_model_and_installation_paths": "SmartOS is not versioned like a general-purpose distribution: the smartos-live repository builds a platform image that bundles the illumos core components, a set of extra third-party software and the SmartOS-specific utilities, and the project asks operators to quote the platform version when reporting a problem. The documented installation paths cover writing a downloaded ISO to a USB key, running SmartOS as a VMware, VirtualBox or UTM guest on Apple Silicon, and a non-interactive installation procedure for automated deployment; the running system is then administered with `vmadm` and `imgadm`, with community images taken from a public image server. The project site records the lineage without ambiguity: SmartOS was built and operated by Joyent, Joyent was acquired by Samsung in 2016, and stewardship became independent in 2022 while the code remained open source.",
     "lineage_and_stewardship": "The project timeline records two ownership changes after the platform was built: Samsung acquired Joyent in 2016, and stewardship changed again in 2022, the platform remaining open source through both transitions. The project links the acquisition announcement and the 2022 post describing the new chapter, and states that Triton Cloud runs on the same platform today.",
-    "zones_networking_model": "Chaque zone dispose de sa propre pile réseau et de ses propres adresses sur le réseau physique. Le projet indique que ce choix supprime la traduction d'adresses, les réseaux superposés et le mappage de ports entre services, chaque zone étant joignable directement.",
+    "zones_networking_model": "Each zone has its own network stack and its own addresses on the physical network. The project states that this choice removes address translation, overlay networks and port mapping between services, each zone being reachable directly.",
     "standalone_and_triton_operation": "Two operating modes are documented. SmartOS standalone is a single host installed and operated with the vmadm and imgadm command-line tools, using community images from a public image server; Triton adds identity, tenancy, networking, image management, VPCs and an API on top of the same platform. Images provision as ZFS clones, and the same kernel and tooling are used in both modes.",
     "security_model_zone_isolation_and_privilege_limits": "SmartOS documents zones as its isolation boundary. The documentation states that processes cannot escape from a zone, cannot observe processes in other zones and cannot signal them, and that user identifiers or port bindings do not conflict across zones. A process in the global zone can observe any zone when it holds the relevant privilege, whereas a zone process runs under a privilege limit: root inside a zone remains bounded by that limit. Filesystems are mounted from the global zone, which can mount them read-only for a zone, and a zone cannot remount them unless the administrator allows it. Each zone has its own IP stack by default on SmartOS, with a shared-stack mode still available, and kernel-managed resources are polyinstantiated so that each zone keeps its own instance, for example of `/tmp`. Zones have no access to physical devices; hardware is presented as virtualised. Service isolation is provided by SMF. Access control inside the global zone can rely on RBAC: the documentation shows turning root into a role with `usermod -R root`, after which direct root login is no longer possible outside single user mode and only users holding the role may run `su root`, with the persistent configuration kept in `/etc/security/policy.conf`, `auth_attr`, `exec_attr` and `prof_attr`. These pages describe configurable mechanisms and default behaviours; they do not publish a vulnerability response process.",
     "platform_build_cadence_and_change_tracking": "SmartOS does not publish numbered platform versions. The download documentation states that a new build appears on average every two weeks and is identified by a UTC timestamp of the form `20120809T221258Z`, given in the page example as 08/09/2012 at 22:12:58 UTC. Each build ships five artefacts: the platform archive `platform-<timestamp>.tgz` holding kernel and boot archive, the live ISO `smartos-<timestamp>.iso`, the USB image `smartos-<timestamp>-usb.img.bz2` presented as the preferred method for production hardware, the VMware image `smartos-<timestamp>.vmwarevm.tar.bz2`, and a `SINGLE_USER_ROOT_PASSWORD` text file used only when booting without mounting the zpool. The documentation points to a change log for the contents of each build. Upgrading a USB-key installation is described as a directory swap: the running `platform` directory is retained as `platform.old` and the new one is copied in, which keeps the previous platform available on the key. The same page lists the supported boot paths, including PXE and virtual machines, and states that the build is delivered as an in-memory image whose platform directory can equally be placed on a local disk or served over the network.",
@@ -55,6 +55,44 @@
     ],
     "verdict": "SmartOS is a type-1 hypervisor built on illumos, combining OpenZFS and Zones with a stateless in-memory delivery model. It provides observability through DTrace and multi-tenant isolation through Zones, and is used as an open-source platform for cloud computing."
   },
+  "components": [
+    {
+      "id": "illumos",
+      "name": "illumos",
+      "role": "operating_system_kernel",
+      "note": "\"SmartOS is an illumos-based operating system built for running clouds. It boots from the network or a USB key into memory, runs containers and virtual machines side by side, and puts ZFS and DTrace in the base system.\" (smartos.org)."
+    },
+    {
+      "id": "zfs",
+      "name": "ZFS",
+      "role": "filesystem",
+      "note": "Named among the building blocks of the platform: the home page states that SmartOS \"puts ZFS and DTrace in the base system\" and lists \"Zones · ZFS · DTrace · KVM · bhyve\" (smartos.org)."
+    },
+    {
+      "id": "dtrace",
+      "name": "DTrace",
+      "role": "tracing_framework",
+      "note": "Named in the same sentence as ZFS on the project home page: the platform \"puts ZFS and DTrace in the base system\", and \"DTrace\" appears in the building-block list \"ILLUMOS · ZONES · ZFS · DTRACE · KVM · BHYVE\" (smartos.org)."
+    },
+    {
+      "id": "zones",
+      "name": "Zones",
+      "role": "container_engine",
+      "note": "\"A zone is a virtualized instance of SmartOS that behaves like an isolated system even when functioning along side other zones on the same machine.\"; \"A zone is similar to a virtual machine, but is distinct in that it shares the base system kernel, whereas each virtual machine runs its own OS kernel.\" The documentation describes zones as \"inspired by FreeBSD jails\" and as \"an inherent part of the operating system\", and the home page lists Zones first among the building blocks (docs.smartos.org/zones, smartos.org)."
+    },
+    {
+      "id": "kvm",
+      "name": "KVM",
+      "role": "bare_metal_hypervisor",
+      "note": "Listed among the building blocks on the project home page, where SmartOS is presented as \"the open-source hypervisor that runs Triton\" and as running \"containers and virtual machines side by side\"; the same page names \"KVM\" and \"bhyve\" in its technology list (smartos.org)."
+    },
+    {
+      "id": "bhyve",
+      "name": "bhyve",
+      "role": "hypervisor",
+      "note": "Named alongside KVM in the technology list on the project home page (\"ILLUMOS · ZONES · ZFS · DTRACE · KVM · BHYVE\"), on a site that presents SmartOS as \"the open-source hypervisor that runs Triton\" (smartos.org)."
+    }
+  ],
   "relations": [
     {
       "id": "illumos",
@@ -101,7 +139,7 @@
       "date": "2026-05-01"
     },
     {
-      "title": "SmartOS Documentation - Zones (isolation, privilèges, pile réseau)",
+      "title": "SmartOS Documentation - Zones (isolation, privileges, network stack)",
       "url": "https://docs.smartos.org/zones/",
       "type": "documentation",
       "date": "2026-10-18"
@@ -113,7 +151,7 @@
       "date": "2026-10-18"
     },
     {
-      "title": "SmartOS Documentation - Download SmartOS (builds et artefacts)",
+      "title": "SmartOS Documentation - Download SmartOS (builds and artefacts)",
       "url": "https://docs.smartos.org/download-smartos/",
       "type": "documentation",
       "date": "2026-10-18"

@@ -59,6 +59,20 @@
     ],
     "verdict": "Feren OS is a user-oriented Linux distribution built on an Ubuntu LTS core with the KDE Plasma desktop. It provides configuration tools such as the Layout Switcher and Web Browser Manager and targets everyday personal computing for users new to KDE Plasma."
   },
+  "components": [
+    {
+      "id": "ubuntu-base",
+      "name": "Ubuntu",
+      "role": "operating_system_kernel",
+      "note": "Base system: \"Feren OS is a British-made Linux Distribution that is based on Ubuntu, one of the most popular Linux Distributions out there and well regarded for rock solid stability.\" (ferenos.weebly.com)."
+    },
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "Announced move to Plasma: \"Feren OS is now moving ship from Cinnamon on Mint to Plasma on Ubuntu\", the community having \"made their call\" in favour of \"using the Plasma Desktop Environment as the next DE\" (ferenos.weebly.com/news/feren-os-is-changing)."
+    }
+  ],
   "relations": [
     {
       "id": "ubuntu",
@@ -141,7 +155,7 @@
       "date": "2026-10-19"
     },
     {
-      "title": "Feren OS User Guide — source repository (branche stable)",
+      "title": "Feren OS User Guide — source repository (stable branch)",
       "url": "https://github.com/feren-OS/Feren-User-Guide",
       "type": "repository",
       "date": "2026-10-19"

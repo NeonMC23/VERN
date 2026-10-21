@@ -53,6 +53,14 @@
     ],
     "verdict": "HardenedBSD is a FreeBSD-derived operating system focused on exploit mitigations. It enforces ASLR, SafeStack, Clang CFI, and SEGVGUARD while retaining OpenZFS and Jails, adding defenses against memory corruption attacks."
   },
+  "components": [
+    {
+      "id": "freebsd-base",
+      "name": "FreeBSD",
+      "role": "operating_system_kernel",
+      "note": "Base system: \"HardenedBSD is a fork of FreeBSD, founded in 2014, that implements exploit mitigations and security hardening technologies.\"; the README adds that \"HardenedBSD exists today as a fork of FreeBSD that closely follow's FreeBSD's source code\" and that \"HardenedBSD syncs with FreeBSD every six hours\" (README, github.com/HardenedBSD/hardenedBSD)."
+    }
+  ],
   "relations": [
     {
       "id": "freebsd",
@@ -111,7 +119,7 @@
       "date": "2026-10-16"
     },
     {
-      "title": "HardenedBSD — README du dépôt hardenedBSD (images signées, contrôles secadm/hbsdcontrol, synchronisation FreeBSD)",
+      "title": "HardenedBSD — hardenedBSD repository README (signed images, secadm/hbsdcontrol checks, FreeBSD synchronisation)",
       "url": "https://github.com/HardenedBSD/hardenedBSD",
       "type": "repository",
       "accessed": "2026-10-18"
@@ -123,19 +131,19 @@
       "date": "2026-10-19"
     },
     {
-      "title": "HardenedBSD — Mirrors (rsync et miroirs de médias d’installation)",
+      "title": "HardenedBSD — Mirrors (rsync and installation media mirrors)",
       "url": "https://hardenedbsd.org/content/mirrors",
       "type": "official_documentation",
       "date": "2026-10-19"
     },
     {
-      "title": "HardenedBSD — usr.sbin/pkg/HardenedBSD.conf (dépôts pkg par défaut, Tor et pkgbase)",
+      "title": "HardenedBSD — usr.sbin/pkg/HardenedBSD.conf (default pkg repositories, Tor and pkgbase)",
       "url": "https://github.com/HardenedBSD/hardenedBSD/blob/hardened/current/master/usr.sbin/pkg/HardenedBSD.conf",
       "type": "repository",
       "date": "2026-10-19"
     },
     {
-      "title": "HardenedBSD — arborescence des artefacts de construction (pub)",
+      "title": "HardenedBSD — build artefacts tree (pub)",
       "url": "https://installers.hardenedbsd.org/pub/",
       "type": "distribution_artifact",
       "date": "2026-10-19"

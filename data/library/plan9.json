@@ -2,7 +2,7 @@
   "id": "plan9",
   "name": "Plan 9 from Bell Labs",
   "type": "operating_system",
-  "summary": "Système d'exploitation distribué de recherche conçu par les créateurs originaux d'Unix aux Bell Labs, unifiant toutes les ressources locales et distantes via le protocole 9P et des espaces de noms privés par processus.",
+  "summary": "Distributed research operating system designed by the original creators of Unix at Bell Labs, unifying all local and remote resources through the 9P protocol and private per-process namespaces.",
   "tags": [
     "distributed",
     "bell-labs",
@@ -20,124 +20,124 @@
     "SPARC",
     "PowerPC"
   ],
-  "license": "Open Source (Licence MIT / Lucent Public License)",
+  "license": "Open Source (MIT Licence / Lucent Public License)",
   "last_verified": "2026-10-16",
   "content": {
-    "introduction": "Plan 9 from Bell Labs est un système d'exploitation distribué de recherche conçu à la fin des années 1980 au sein des prestigieux Bell Labs (AT&T / Lucent Technologies) par l'équipe même qui avait créé Unix et le langage C : Ken Thompson, Rob Pike, Dennis Ritchie, Dave Presotto, Phil Winterbottom et Tom Duff. Le projet visait à dépasser les limites conceptuelles d'Unix en créant un environnement informatique nativement distribué, où la puissance de calcul (serveurs CPU), le stockage de données (serveurs de fichiers) et l'interaction utilisateur (terminaux graphiques) sont répartis sur le réseau et unifiés au travers d'une sémantique d'accès transparente.",
-    "what_is_it": "Techniquement, Plan 9 n'est ni un dérivé d'Unix ni une distribution Linux : il s'agit d'un système autonome qui réinvente les fondations d'Unix en poussant à son paroxysme le principe « tout est fichier ». Dans Plan 9, chaque ressource — processus locaux, périphériques matériels, mémoire, affichage graphique, interfaces réseau TCP/IP et serveurs distants — est exposée sous forme d'une arborescence de fichiers hiérarchique. De façon novatrice, Plan 9 élimine l'arborescence globale unique : chaque processus possède son propre espace de noms privé et dynamique (per-process namespace), qu'il compose librement par des opérations de liaison (bind) et de montage (mount) autorisant la superposition de répertoires (union mounts).",
-    "the_9p_distributed_protocol": "Le cœur architectural et l'élément unificateur de Plan 9 est le protocole de communication standardisé **9P** (également appelé 9P2000 ou Styx). Dans Plan 9, chaque opération sur une ressource (ouverture, lecture, écriture, fermeture, interrogation d'attributs) se traduit par des messages 9P. Ce protocole fonctionne de manière rigoureusement identique, que la ressource soit locale (communication par mémoire partagée ou tubes) ou hébergée sur une machine distante à travers le réseau local ou Internet. L'accès aux fichiers, à la pile réseau ou au serveur graphique d'une machine distante s'effectue ainsi avec les mêmes appels système standards que pour le stockage local, abolissant toute frontière artificielle entre l'informatique locale et distribuée.",
-    "kernel_architecture_and_utf8_encoding": "Le noyau de Plan 9 est remarquablement compact, modulaire et élégant. Il élimine de nombreuses complexités historiques d'Unix : absence de signaux asynchrones complexes (remplacés par des chaînes de notes textuelles transmises aux processus), absence de liens physiques (hard links) et gestion fine de la concurrence par la primitive système `rfork()`. C'est également pour Plan 9 qu'a été inventé en 1992 par Ken Thompson et Rob Pike l'encodage de caractères universel **UTF-8**, qui est utilisé nativement et systématiquement dans l'ensemble du système, des noms de fichiers jusqu'au code source.",
-    "rio_window_manager_and_acme_environment": "L'environnement utilisateur de Plan 9 s'articule autour du gestionnaire de fenêtres **Rio** (successeur de 8½). Rio est lui-même un serveur 9P : chaque fenêtre créée par un utilisateur est un environnement isolé qui expose sa propre entrée clavier, sa souris et son tampon d'affichage matriciel sous forme de fichiers virtuels, autorisant l'exécution récursive de Rio à l'intérieur d'une de ses propres fenêtres. L'écosystème comprend également l'éditeur structural **Sam**, l'environnement de développement intégré textuel novateur **Acme** (entièrement piloté par la souris à trois boutons et transformant chaque mot affiché à l'écran en commande exécutable), ainsi que le shell **rc** conçu par Tom Duff.",
-    "licensing_governance_and_legacy": "Après avoir été distribué sous des licences de recherche universitaires par AT&T, puis sous la Lucent Public License (LPL) et la GNU GPLv2, l'ensemble des droits de propriété intellectuelle et du code source de Plan 9 a été transféré en 2021 par Bell Labs (Nokia) à la fondation à but non lucratif **Plan 9 Foundation**, qui l'a placé sous la licence libre et permissive **Licence MIT**. Si la distribution officielle de Bell Labs demeure aujourd'hui un objet patrimonial et d'étude académique, ses principes continuent de vivre et d'évoluer au travers de projets dérivés actifs, en particulier le fork communautaire **9front**.",
-    "distribution_quatrieme_edition_et_supports_d_installation": "La distribution de référence demeure la quatrième édition de Plan 9, maintenue par le Plan 9 Foundation : elle contient le code source du noyau, des bibliothèques et des commandes pour toutes les architectures prises en charge, ainsi que les binaires complets pour l'architecture x86. L'image CD fournie est simultanément un CD amorçable en direct et un CD d'installation ; le menu d'amorçage laisse choisir entre l'exploration du système et son installation, et une image de disque USB est également proposée. L'installation depuis disquette est décrite comme obsolète, la variante disquette omettant plusieurs pilotes — USB, AHCI, certaines interfaces Ethernet — pour tenir dans le format. La documentation demande de consulter la liste de matériel PC pris en charge avant toute installation, ainsi que les pages de manuel plan9.ini(8) et prep(8).",
-    "security_namespace_isolation_and_capability_model": "Plan 9 répartit le contrôle d'accès entre l'authentification et l'espace de noms. La bibliothèque décrite par `auth(2)` fournit `newns`, qui reconstruit un espace de noms pour un utilisateur à partir de `/lib/namespace`, `addns`, qui applique des commandes à l'espace courant, `amount`, qui monte un système de fichiers en exécutant l'authentification exigée, et `login`, qui change l'identifiant du processus puis recrée l'espace. `procsetuser` modifie l'identifiant sans toucher à l'espace de noms et seul `hostowner` peut attribuer un identifiant autre que `none` ; `noworld` teste l'appartenance au groupe homonyme de `/adm/users` et sert au confinement des sessions `telnetd` et `ftpd`. Après authentification, la structure `AuthInfo` transporte les identités du client et du serveur, une capacité `cap` utilisable avec le périphérique `cap(3)` pour changer l'identifiant d'un processus, et un secret partagé servant à dériver les clés de session. Le service `factotum(4)` gère les clés et ouvre un canal privé à chaque ouverture de `rpc` ; `securenet(8)` documente un jeton matériel à réponse calculée, dont la clé tient en huit nombres octaux à trois chiffres. Les pages consultées décrivent des primitives et des outils ; elles ne fixent ni durée de support ni registre d'avis.",
+    "introduction": "Plan 9 from Bell Labs is a distributed research operating system designed at the end of the 1980s within the prestigious Bell Labs (AT&T / Lucent Technologies) by the very team that had created Unix and the C language: Ken Thompson, Rob Pike, Dennis Ritchie, Dave Presotto, Phil Winterbottom and Tom Duff. The project aimed to go beyond the conceptual limits of Unix by creating a natively distributed computing environment, where computing power (CPU servers), data storage (file servers) and user interaction (graphical terminals) are spread over the network and unified through transparent access semantics.",
+    "what_is_it": "Technically, Plan 9 is neither a derivative of Unix nor a Linux distribution: it is a stand-alone system that reinvents the foundations of Unix by pushing the \"everything is a file\" principle to its extreme. In Plan 9, every resource — local processes, hardware devices, memory, graphical display, TCP/IP network interfaces and remote servers — is exposed in the form of a hierarchical file tree. Innovatively, Plan 9 eliminates the single global tree: each process has its own private and dynamic namespace, which it composes freely through bind and mount operations allowing directory overlays (union mounts).",
+    "the_9p_distributed_protocol": "The architectural heart and unifying element of Plan 9 is the standardised communication protocol **9P** (also called 9P2000 or Styx). In Plan 9, every operation on a resource (open, read, write, close, query of attributes) translates into 9P messages. This protocol works in a rigorously identical way, whether the resource is local (communication through shared memory or pipes) or hosted on a remote machine across the local network or the Internet. Access to the files, the network stack or the graphical server of a remote machine therefore takes place with the same standard system calls as for local storage, abolishing any artificial boundary between local and distributed computing.",
+    "kernel_architecture_and_utf8_encoding": "The Plan 9 kernel is remarkably compact, modular and elegant. It eliminates many historical complexities of Unix: no complex asynchronous signals (replaced by textual note strings passed to processes), no hard links and fine concurrency management through the `rfork()` system primitive. It is also for Plan 9 that the universal character encoding **UTF-8** was invented in 1992 by Ken Thompson and Rob Pike, and it is used natively and systematically throughout the system, from file names to source code.",
+    "rio_window_manager_and_acme_environment": "The Plan 9 user environment is organised around the **Rio** window manager (successor of 8½). Rio is itself a 9P server: each window created by a user is an isolated environment that exposes its own keyboard input, mouse and matrix display buffer as virtual files, allowing the recursive execution of Rio inside one of its own windows. The ecosystem also includes the structural editor **Sam**, the innovative textual integrated development environment **Acme** (entirely driven by the three-button mouse and turning every word displayed on screen into an executable command), as well as the **rc** shell designed by Tom Duff.",
+    "licensing_governance_and_legacy": "After being distributed under academic research licences by AT&T, then under the Lucent Public License (LPL) and the GNU GPLv2, all the intellectual property rights and the source code of Plan 9 were transferred in 2021 by Bell Labs (Nokia) to the non-profit **Plan 9 Foundation**, which placed them under the free and permissive **MIT Licence**. While the official Bell Labs distribution remains today a heritage and academic study object, its principles continue to live and evolve through active derived projects, in particular the community fork **9front**.",
+    "distribution_quatrieme_edition_et_supports_d_installation": "The reference distribution remains the fourth edition of Plan 9, maintained by the Plan 9 Foundation: it contains the source code of the kernel, libraries and commands for all supported architectures, as well as the complete binaries for the x86 architecture. The CD image provided is at once a live bootable CD and an installation CD; the boot menu lets the user choose between exploring the system and installing it, and a USB disk image is also offered. Installation from floppy disk is described as obsolete, the floppy variant omitting several drivers — USB, AHCI, some Ethernet interfaces — to fit the format. The documentation asks the reader to consult the list of supported PC hardware before any installation, as well as the plan9.ini(8) and prep(8) manual pages.",
+    "security_namespace_isolation_and_capability_model": "Plan 9 divides access control between authentication and namespace. The library described by `auth(2)` provides `newns`, which rebuilds a namespace for a user from `/lib/namespace`, `addns`, which applies commands to the current namespace, `amount`, which mounts a file system while performing the required authentication, and `login`, which changes the process identifier and then recreates the namespace. `procsetuser` changes the identifier without touching the namespace and only `hostowner` can assign an identifier other than `none`; `noworld` tests membership of the group of the same name in `/adm/users` and serves for the confinement of `telnetd` and `ftpd` sessions. After authentication, the `AuthInfo` structure carries the client and server identities, a `cap` capability usable with the `cap(3)` device to change the identifier of a process, and a shared secret used to derive the session keys. The `factotum(4)` service manages keys and opens a private channel at each `rpc` opening; `securenet(8)` documents a hardware challenge-response token, whose key fits in eight three-digit octal numbers. The pages consulted describe primitives and tools; they set neither a support period nor an advisory register.",
     "advantages": [
-      "Conception architecturale distribuée d'une pureté et d'une élégance conceptuelle légendaires.",
-      "Généralisation intégrale du modèle « tout est fichier » et espaces de noms privés par processus.",
-      "Protocole 9P unifiant de façon transparente les ressources locales et les services réseau distants.",
-      "Berceau de l'encodage universel UTF-8, intégré nativement à tous les niveaux du système.",
-      "Environnements de développement novateurs (Acme, Sam, Rio) offrant une productivité textuelle remarquable.",
-      "Code source intégralement ouvert, documenté et régi par la licence libre permissive MIT sous l'égide de la Plan 9 Foundation."
+      "Distributed architectural design of legendary purity and conceptual elegance.",
+      "Full generalisation of the \"everything is a file\" model and private per-process namespaces.",
+      "9P protocol transparently unifying local resources and remote network services.",
+      "Birthplace of the universal UTF-8 encoding, natively integrated at all levels of the system.",
+      "Innovative development environments (Acme, Sam, Rio) offering remarkable textual productivity.",
+      "Source code entirely open, documented and governed by the permissive free MIT licence under the aegis of the Plan 9 Foundation."
     ],
     "disadvantages": [
-      "La branche officielle de Bell Labs n'est plus activement maintenue sur les matériels physiques contemporains.",
-      "Incompatibilité avec la vaste majorité des logiciels écrits pour les environnements POSIX modernes sans portage.",
-      "Absence de prise en charge du matériel moderne (Wi-Fi contemporain, GPU 3D récents, NVMe, UEFI sur la branche historique).",
-      "Courbe d'apprentissage exigeante nécessitant de repenser les habitudes de travail forgées sur les systèmes Unix/Linux classiques.",
-      "Réservé à l'étude académique, aux environnements virtuels ou à l'expérimentation de systèmes distribués."
+      "The official Bell Labs branch is no longer actively maintained on contemporary physical hardware.",
+      "Incompatibility with the vast majority of software written for modern POSIX environments without porting.",
+      "No support for modern hardware (contemporary Wi-Fi, recent 3D GPUs, NVMe, UEFI on the historical branch).",
+      "Demanding learning curve requiring a rethink of working habits forged on classic Unix/Linux systems.",
+      "Reserved for academic study, virtual environments or experimentation with distributed systems."
     ],
     "who_is_it_for": [
-      "Chercheurs, enseignants et étudiants en informatique explorant les architectures de systèmes d'exploitation distribués.",
-      "Développeurs et passionnés désireux d'étudier le successeur d'Unix conçu par ses auteurs historiques.",
-      "Programmeurs appréciant l'ergonomie minimaliste et hautement productive de l'environnement textuel Acme.",
-      "Enthousiastes de la virtualisation souhaitant expérimenter un système d'exploitation non conventionnel sous QEMU."
+      "Computer science researchers, teachers and students exploring distributed operating system architectures.",
+      "Developers and enthusiasts wishing to study the successor of Unix designed by its historical authors.",
+      "Programmers appreciating the minimalist and highly productive ergonomics of the Acme textual environment.",
+      "Virtualisation enthusiasts wishing to experiment with an unconventional operating system under QEMU."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs grand public recherchant un système de bureau principal pour la bureautique moderne ou le web multimédia.",
-      "Entreprises cherchant un système de serveurs de production compatible avec les conteneurs Linux (Docker, Kubernetes).",
-      "Développeurs dépendant d'écosystèmes logiciels modernes fermés ou de pilotes graphiques propriétaires 3D.",
-      "Administrateurs système recherchant une conformité stricte avec les normes POSIX/Linux standard."
+      "General public users looking for a primary desktop system for modern office work or multimedia web.",
+      "Enterprises looking for a production server system compatible with Linux containers (Docker, Kubernetes).",
+      "Developers depending on modern closed software ecosystems or proprietary 3D graphics drivers.",
+      "System administrators looking for strict compliance with standard POSIX/Linux norms."
     ],
-    "verdict": "Plan 9 from Bell Labs est un système d'exploitation de recherche développé par Bell Labs. Il repose sur une architecture unifiée par les fichiers, les espaces de noms et le protocole 9P. Sa branche d'origine relève désormais de l'étude historique ; le projet 9front en poursuit une implémentation.",
-    "origine_et_lignee_de_recherche_bell_labs": "Plan 9 est issu du centre de recherche de Bell Labs. Le texte de référence, « Plan 9 from Bell Labs », est signé de Rob Pike, Dave Presotto, Sean Dorward, Bob Flandrena, Ken Thompson, Howard Trickey et Phil Winterbottom, tous rattachés aux Bell Laboratories de Murray Hill, dans le New Jersey. Les auteurs situent la genèse au milieu des années 1980, en réponse à la tendance qui poussait alors les utilisateurs des gros systèmes partagés vers des réseaux de machines personnelles : la surcharge des machines de temps partagé et le désir d'un environnement maîtrisé par l'utilisateur ont conduit à concevoir un système où l'environnement de calcul se reconstruit sur n'importe quelle machine du réseau.\n\nLe texte indique qu'en 1989 le système était suffisamment stable pour que certains membres de l'équipe l'utilisent comme environnement de calcul exclusif. La quatrième édition, documentée par ses notes de version, date d'avril 2002 et a été mise à jour en juin 2003. Ces notes la présentent comme une refonte de tous les niveaux : le protocole 9P, le noyau, les bibliothèques et les applications. La refonte de 9P répond à l'impossibilité de gérer les noms de fichiers longs ; le nouveau serveur de fichiers fossil les prend en charge, tandis que fs et kfs restent limités et sont déclarés obsolètes. La transition est assurée par lnfs, et les serveurs ramfs et u9fs fonctionnent avec les noms longs.",
-    "depot_contrib_et_distribution_du_logiciel": "Plan 9 ne s'appuie pas sur un gestionnaire de paquets central comparable à ceux des distributions Linux. Le logiciel complémentaire est rassemblé dans un arbre appelé contrib, dont l'index est publié sur le site du projet. Cet index qualifie explicitement son contenu : « Everything here is unsupported ». L'installation d'une entrée se fait par la commande `contrib/install user/package`, qui récupère l'arborescence déposée par un contributeur identifié ; le nom du contributeur et le nom du paquet composent le chemin.\n\nLa licence applicable aux éléments de l'arbre est la Lucent Public License, sauf mention contraire portée dans l'entrée elle-même. Cette organisation implique que la qualité, la maintenance et la compatibilité d'une entrée dépendent de son auteur : aucune instance centrale ne valide les mises à jour, ne signe les archives ni ne résout les dépendances. Le système de base, noyau, bibliothèques et commandes, est fourni avec la distribution elle-même ; les ajouts passent par contrib.\n\nLes pages consultées, l'index contrib et les notes de la quatrième édition, ne documentent ni dépôt binaire central, ni outil de type apt ou rpm, ni politique de version par paquet. Cette absence est consignée comme une limite de documentation : elle ne permet pas de conclure que le système ne dispose d'aucun mécanisme de distribution, seulement que les sources primaires consultées n'en décrivent pas."
+    "verdict": "Plan 9 from Bell Labs is a research operating system developed by Bell Labs. It rests on an architecture unified by files, namespaces and the 9P protocol. Its original branch now belongs to historical study; the 9front project continues an implementation of it.",
+    "origine_et_lignee_de_recherche_bell_labs": "Plan 9 originates in the Bell Labs research centre. The reference text, \"Plan 9 from Bell Labs\", is signed by Rob Pike, Dave Presotto, Sean Dorward, Bob Flandrena, Ken Thompson, Howard Trickey and Phil Winterbottom, all attached to the Bell Laboratories in Murray Hill, New Jersey. The authors place the genesis in the mid-1980s, in response to the trend that was then pushing users of large shared systems towards networks of personal machines: the overload of time-sharing machines and the desire for an environment controlled by the user led to the design of a system where the computing environment rebuilds itself on any machine of the network.\n\nThe text states that in 1989 the system was stable enough for some members of the team to use it as their exclusive computing environment. The fourth edition, documented by its release notes, dates from April 2002 and was updated in June 2003. These notes present it as a redesign of all levels: the 9P protocol, the kernel, the libraries and the applications. The 9P redesign responds to the impossibility of handling long file names; the new fossil file server supports them, while fs and kfs remain limited and are declared obsolete. The transition is ensured by lnfs, and the ramfs and u9fs servers work with long names.",
+    "depot_contrib_et_distribution_du_logiciel": "Plan 9 does not rely on a central package manager comparable to those of Linux distributions. Complementary software is gathered in a tree called contrib, whose index is published on the project site. This index explicitly characterises its content: \"Everything here is unsupported\". Installing an entry is done with the command `contrib/install user/package`, which retrieves the tree deposited by an identified contributor; the contributor name and the package name make up the path.\n\nThe licence applicable to the elements of the tree is the Lucent Public License, unless otherwise stated in the entry itself. This organisation implies that the quality, maintenance and compatibility of an entry depend on its author: no central instance validates updates, signs archives or resolves dependencies. The base system, kernel, libraries and commands, is supplied with the distribution itself; additions go through contrib.\n\nThe pages consulted, the contrib index and the fourth edition notes, document neither a central binary repository, nor an apt- or rpm-type tool, nor a per-package version policy. This absence is recorded as a documentation limit: it does not allow the conclusion that the system has no distribution mechanism at all, only that the primary sources consulted describe none."
   },
   "relations": [
     {
       "id": "9front",
       "name": "9front",
       "type": "derivative",
-      "note": "Fork communautaire indépendant et modernisé de Plan 9 adapté aux matériels PC contemporains."
+      "note": "Independent modernised community fork of Plan 9 adapted to contemporary PC hardware."
     },
     {
       "id": "redox-os",
       "name": "Redox OS",
       "type": "alternative",
-      "note": "Système d'exploitation libre moderne fondé sur un micro-noyau Rust reprenant le paradigme de Plan 9 sous la forme d'URIs."
+      "note": "Modern free operating system founded on a Rust microkernel taking up the Plan 9 paradigm in the form of URIs."
     },
     {
       "id": "freebsd",
       "name": "FreeBSD",
       "type": "related",
-      "note": "Système d'exploitation Unix libre dont Plan 9 a cherché à dépasser les limites d'architecture."
+      "note": "Free Unix operating system whose architectural limits Plan 9 sought to go beyond."
     },
     {
       "id": "haiku",
       "name": "Haiku",
       "type": "alternative",
-      "note": "Système d'exploitation alternatif pour micro-ordinateurs axé sur la réactivité."
+      "note": "Alternative operating system for microcomputers focused on responsiveness."
     }
   ],
   "links": [
     {
-      "label": "Portail d'archive officiel de Plan 9 (9p.io)",
+      "label": "Official Plan 9 archive portal (9p.io)",
       "url": "https://9p.io/plan9/"
     },
     {
-      "label": "Wiki et documentation technique Plan 9",
+      "label": "Plan 9 wiki and technical documentation",
       "url": "https://9p.io/wiki/plan9/plan_9_wiki/"
     },
     {
-      "label": "Dépôt de la suite logicielle Plan 9 pour Unix (plan9port)",
+      "label": "Repository of the Plan 9 software suite for Unix (plan9port)",
       "url": "https://github.com/9fans/plan9port"
     }
   ],
   "sources": [
     {
-      "title": "Plan 9 from Bell Labs — document d'architecture (protocole 9P, espaces de noms par processus)",
+      "title": "Plan 9 from Bell Labs — architecture document (9P protocol, per-process name spaces)",
       "url": "https://9p.io/sys/doc/9.html",
       "type": "documentation"
     },
     {
-      "title": "Documentation et manuel technique officiel de Plan 9",
+      "title": "Official documentation and technical manual of Plan 9",
       "url": "https://9p.io/wiki/plan9/plan_9_wiki/",
       "type": "documentation"
     },
     {
-      "title": "Dépôt des logiciels et outils portés de Plan 9",
+      "title": "Repository of ported Plan 9 software and tools",
       "url": "https://github.com/9fans/plan9port",
       "type": "repository"
     },
     {
-      "title": "Plan 9 from Bell Labs — Download and Installation (CD live/installation, image USB, architectures)",
+      "title": "Plan 9 from Bell Labs — Download and Installation (live/installation CD, USB image, architectures)",
       "url": "https://9p.io/plan9/download.html",
       "type": "official_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Plan 9 manual - auth(2), authentification et gestion des espaces de noms",
+      "title": "Plan 9 manual - auth(2), authentication and name space management",
       "url": "https://9p.io/sys/man/2/auth",
       "type": "manual",
       "date": "2026-10-18"
     },
     {
-      "title": "Plan 9 manual - factotum(4), agent d'authentification",
+      "title": "Plan 9 manual - factotum(4), authentication agent",
       "url": "https://9p.io/sys/man/4/factotum",
       "type": "manual",
       "date": "2026-10-18"
     },
     {
-      "title": "Plan 9 manual - securenet(8), jeton d'authentification externe",
+      "title": "Plan 9 manual - securenet(8), external authentication token",
       "url": "https://9p.io/sys/man/8/securenet",
       "type": "manual",
       "date": "2026-10-18"

@@ -191,13 +191,13 @@
       "date": "2026-10-11"
     },
     {
-      "title": "Kicksecure — dépôt APT officiel (index des distributions et des canaux)",
+      "title": "Kicksecure — official APT repository (index of distributions and channels)",
       "url": "https://deb.kicksecure.com/dists/",
       "type": "distribution_artifact",
       "date": "2026-10-19"
     },
     {
-      "title": "kicksecure-meta-packages — README (méta-paquets, clé de signature, ligne de dépôt, construction)",
+      "title": "kicksecure-meta-packages — README (meta-packages, signing key, repository line, build)",
       "url": "https://github.com/Kicksecure/kicksecure-meta-packages",
       "type": "repository",
       "date": "2026-10-19"

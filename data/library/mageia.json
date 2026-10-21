@@ -26,7 +26,7 @@
   "content": {
     "introduction": "Mageia is an independent, community-driven GNU/Linux distribution originating from France. Created in September 2010 as a community fork of Mandriva Linux following financial instability at Mandriva S.A., Mageia was founded by former employees and international community contributors. Supported legally and financially by the non-profit association Mageia.Org, the distribution emphasizes software stability, democratic community governance, user-friendly system administration tools, and an inclusive desktop computing experience.",
     "what_is_it": "Technically, Mageia is an RPM-based distribution featuring an independent package build infrastructure and an expansive software repository. It combines traditional Mandriva-derived administration utilities—notably the Mageia Control Center (MCC / `drakconf`) and the `urpmi` package management ecosystem—with modern Linux engineering standards, including systemd init supervision, PipeWire audio routing, and dual package manager support for both `urpmi` and `dnf`.",
-    "technical_base_kernel_and_system_components": "Les paquets de Mageia 10 portent le suffixe `mga10`. Le noyau fourni est Linux 6.18.35, décliné en `kernel-desktop`, `kernel-server` et `kernel-linus` ; systemd 258.7 assure l'initialisation et la supervision des services, la bibliothèque C est glibc 2.42 et l'interpréteur fourni est Python 3.13.13.\n\nLe format de paquet est RPM, avec rpm 4.20.1. urpmi 8.136 reste publié à côté de dnf5 5.4.0.0 et d'un paquet `dnf` 4.99.0. Le démarrage combine GRUB 2.12 et dracut 109 ; les outils de systèmes de fichiers comprennent btrfs-progs 6.19 et xfsprogs 6.18.0.\n\nLa pile graphique associe plasma-desktop 6.5.5, kwin 6.5.5, Mesa 26.0.8, libdrm 2.4.133 et Wayland 1.24.0 ; SDDM 0.21.0 figure parmi les gestionnaires de connexion publiés et PipeWire 1.6.5 est publié pour la gestion audio. Le dépôt core/release contient également firewalld 2.4.0 et selinux-policy 42.6.\n\nCes numéros de version proviennent de l'arborescence officielle `distrib/10/x86_64/media/core/release/` consultée le 19 octobre 2026 ; ils évoluent avec les mises à jour publiées pour Mageia 10.",
+    "technical_base_kernel_and_system_components": "Mageia 10 packages carry the `mga10` suffix. The kernel provided is Linux 6.18.35, declined as `kernel-desktop`, `kernel-server` and `kernel-linus`; systemd 258.7 provides initialisation and service supervision, the C library is glibc 2.42 and the interpreter provided is Python 3.13.13.\n\nThe package format is RPM, with rpm 4.20.1. urpmi 8.136 remains published beside dnf5 5.4.0.0 and a `dnf` package 4.99.0. Boot combines GRUB 2.12 and dracut 109; the filesystem tools include btrfs-progs 6.19 and xfsprogs 6.18.0.\n\nThe graphics stack combines plasma-desktop 6.5.5, kwin 6.5.5, Mesa 26.0.8, libdrm 2.4.133 and Wayland 1.24.0; SDDM 0.21.0 appears among the published login managers and PipeWire 1.6.5 is published for audio management. The core/release repository also contains firewalld 2.4.0 and selinux-policy 42.6.\n\nThese version numbers come from the official tree `distrib/10/x86_64/media/core/release/` consulted on 19 October 2026; they change with the updates published for Mageia 10.",
     "origin_and_history": "The history of Mageia is directly rooted in the heritage of Mandrake Linux (founded in 1998) and its successor Mandriva Linux. When corporate restructuring and liquidation threatened Mandriva in 2010, community members and former staff established Mageia to preserve the distribution's user-centric engineering ethos and software management tools within a completely non-commercial structure. Releasing its initial version in June 2011, Mageia has published regular major releases, culminating in Mageia 9 (August 2023) and Mageia 10 (June 2026, known as 'The power of 10').",
     "governance_and_organization": "Mageia is governed strictly by its community without corporate control. The non-profit association Mageia.Org provides financial, legal, and asset stewardship under French law. Technical direction and release management are overseen by the Mageia Council, comprising elected team leaders across Packaging, Quality Assurance (QA), System Administration, Documentation, Translation, and Graphic Atelier teams. Democratic community elections ensure broad participation and transparent decision-making.",
     "software_management_urpmi_and_dnf": "Mageia manages RPM packages primarily through `urpmi` (User RPM Installer) and the underlying `perl-URPM` library. The urpmi suite includes `urpmi` for installation and repository upgrades, `urpme` for package removal, `urpmq` for querying dependencies, and `urpmf` for locating files within packages. Urpmi is celebrated for its conservative orphan package detection algorithm that prevents accidental removal of critical system libraries. Starting with recent releases, Mageia also integrates native command-line support for Fedora's `dnf` (and DNF5 in Mageia 10) as an alternative package manager, giving users choice across package workflows.",
@@ -119,19 +119,19 @@
       "date": "2026-04-18"
     },
     {
-      "title": "Mageia Advisories - index des avis MGASA et des CVE",
+      "title": "Mageia Advisories - index of MGASA advisories and CVEs",
       "url": "https://advisories.mageia.org/",
       "type": "security_advisory_index",
       "date": "2026-10-18"
     },
     {
-      "title": "Mageia - Support, mises à jour et cycle de vie des versions",
+      "title": "Mageia - Support, updates and release life cycle",
       "url": "https://www.mageia.org/en/support/",
       "type": "official",
       "date": "2026-10-18"
     },
     {
-      "title": "Mageia 10 — arborescence officielle des paquets core/release (x86_64)",
+      "title": "Mageia 10 — official core/release package tree (x86_64)",
       "url": "https://mirrors.kernel.org/mageia/distrib/10/x86_64/media/core/release/",
       "type": "package_repository",
       "accessed": "2026-10-19"

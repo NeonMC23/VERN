@@ -2,7 +2,7 @@
   "id": "aros",
   "name": "AROS Research Operating System",
   "type": "operating_system",
-  "summary": "Système d'exploitation libre, portable et léger réimplémentant les interfaces de programmation et le multitâche préemptif d'AmigaOS 3.1 sur architectures modernes.",
+  "summary": "Free, portable and lightweight operating system reimplementing the programming interfaces and preemptive multitasking of AmigaOS 3.1 on modern architectures.",
   "tags": [
     "amiga-compatible",
     "desktop",
@@ -21,133 +21,133 @@
     "PowerPC",
     "m68k"
   ],
-  "license": "Open Source (AROS Public License - APL, dérivée de la Mozilla Public License 1.1)",
+  "license": "Open Source (AROS Public License - APL, derived from the Mozilla Public License 1.1)",
   "last_verified": "2026-10-16",
   "content": {
-    "introduction": "AROS Research Operating System (initialement nommé Amiga Research OS, rebaptisé AROS pour des motifs de marque déposée) est un projet international de système d'exploitation libre et open source initié en 1995. Face à la disparition financière de Commodore et au risque d'extinction de la plateforme Amiga, AROS a été conçu pour réimplémenter de manière propre, indépendante et portable l'ensemble des bibliothèques système et des interfaces de programmation (API) d'AmigaOS 3.1 (publié en 1994) sur des architectures matérielles et des microprocesseurs modernes.",
-    "what_is_it": "Techniquement, AROS n'est ni une distribution Linux ni un dérivé d'Unix ou de Windows : il s'agit d'un système autonome conçu de zéro pour faire revivre la philosophie d'ingénierie d'AmigaOS. Son architecture modulaire s'articule autour d'Exec, un micro-noyau multitâche préemptif temps réel gérant l'ordonnancement des tâches avec priorités, les interruptions matérielles et les listes de messages. Comme sur l'Amiga classique, AROS adopte par défaut un modèle de mémoire plate sans protection matérielle entre processus, ce qui lui confère des changements de contexte quasi instantanés et une réactivité exceptionnelle, tout en exigeant une rigueur absolue des logiciels pour éviter les corruptions de mémoire.",
-    "core_subsystems_intuition_and_graphics": "Au-dessus d'Exec, AROS réimplémente les bibliothèques emblématiques du système Amiga : Intuition (le gestionnaire de fenêtrage et d'interface graphique), Graphics (moteur de dessin matriciel et vectoriel 2D, supportant l'accélération matérielle 3D via Gallium3D/Mesa sur certains chipsets graphiques compatibles) et AmigaDOS (gestion des flux d'entrées/sorties et des systèmes de fichiers). L'interface utilisateur par défaut est le bureau graphique Wanderer (clone moderne du Workbench d'AmigaOS). La boîte à outils de construction d'interfaces est Zune, une implémentation orientée objet entièrement compatible au niveau des API avec la bibliothèque MUI (Magic User Interface).",
-    "native_vs_hosted_modes_and_ports": "AROS se distingue par une grande polyvalence dans ses méthodes d'exécution : il existe sous deux formes principales, AROS Native et AROS Hosted. En mode Native, AROS démarre directement sur le matériel nu (bare metal) comme système d'exploitation principal, disponible pour x86 32 bits (IA-32), x86-64, ARM (cartes Raspberry Pi) et PowerPC (cartes Sam440, Efika). En mode Hosted, AROS s'exécute comme un processus fenêtré au-dessus d'un système d'exploitation hôte existant (Linux, FreeBSD, macOS ou Windows), offrant un environnement idéal pour le développement et le débogage applicatif.",
-    "amiga_compatibility_source_vs_binary": "Il convient de distinguer rigoureusement la compatibilité au niveau du code source et la compatibilité binaire. Sur architecture x86 ou ARM, AROS offre une compatibilité d'API (source-compatible) : les logiciels écrits en langage C pour AmigaOS 3.1 peuvent être recompilés et fonctionner nativement. Pour exécuter les anciens logiciels et jeux vidéo historiques Amiga compilés pour processeur Motorola 680x0 (m68k), AROS Native intègre des mécanismes d'émulation transparente (notamment via le sous-système Janus-UAE). En revanche, sur le port dédié AROS m68k (conçu pour les véritables ordinateurs Amiga classiques et cartes accélératrices FPGA comme la Vampire), la compatibilité binaire avec le code m68k est directe et native.",
-    "filesystems_hardware_support_and_limitations": "AROS prend en charge en lecture et écriture les systèmes de fichiers historiques d'Amiga (OFS, FFS, SFS) ainsi que les formats contemporains FAT12/16/32, ISO 9660 et ext2/ext3. S'il s'exécute directement sur les PC compatibles et les hyperviseurs (QEMU, VirtualBox, VMware), AROS demeure un système de passionnés soumis à des limitations matérielles : la prise en charge des puces Wi-Fi récentes, du Bluetooth et de la gestion avancée de l'énergie (ACPI) reste partielle. Le système est distribué sous la licence libre AROS Public License (APL), dérivée de la Mozilla Public License (MPL 1.1), et son développement est hébergé publiquement sur GitHub.",
-    "history_and_project_goals": "Les premières discussions rapportées par le projet remontent à 1993, lorsque des utilisateurs d'Amiga cherchent une réponse aux difficultés de Commodore ; l'équipe date le projet de 1995, année retenue dans la mention de copyright du site. Le nom d'origine, Amiga Research Operating System, a été abandonné au profit du sigle AROS pour des raisons de marque. Les objectifs publiés sont la compatibilité avec AmigaOS 3.1, la portabilité vers x86, PowerPC, Alpha, Sparc et HPPA, la compatibilité binaire sur Amiga et la compatibilité source sur les autres architectures, avec deux modes d'exécution : natif sur le matériel ou hébergé dans une fenêtre du système hôte. Le site résume l'approche par une comparaison explicite : compatibilité au niveau des API, « comme Wine, contrairement à UAE ».",
-    "ports_and_hosted_flavors": "Les ports AROS suivent la nomenclature plateforme-processeur. Le projet distingue deux saveurs : les ports natifs démarrent directement sur le matériel et en prennent le contrôle ; les ports hébergés s'exécutent au-dessus d'un système existant, sans accès direct au matériel, ce qui évite d'écrire des pilotes de bas niveau et permet de développer sans redémarrer la machine. La page officielle des ports recense amiga-m68k, pc-i386, pc-x86_64, pc-x86_64-smp, linux-i386 et linux-x86-64, mingw32-i386, darwin-i386, darwin-x86-64, darwin-ppc, raspi-armhf et sam440-ppc. Le dépôt GitHub ajoute des compilations pour raspi-aarch64, raspi-aarch64-smp, opensbi-riscv64, linux-arm et linux-armhf.",
-    "build_channels_and_toolchains": "La page de téléchargement ne propose pas de version stable numérotée : elle renvoie à des nightly builds et à des instantanés, avec un avertissement indiquant que ces builds sont destinés aux développeurs et aux testeurs, qu'ils ne sont pas toujours stables et qu'il leur manque la plupart des applications d'un usage courant. Le dépôt GitHub décrit la chaîne de compilation employée : GCC 6.5.0 comme configuration de référence, des versions plus récentes (9.5.0, 10.5.0, 13.5.0, 15.2.0, 16.2.0) et des builds LLVM (11.0.0, 20.1.0, 23.1.0), produits par une chaîne Azure Pipelines hébergée dans le dépôt.",
-    "documentation_structure": "La documentation officielle est découpée en manuels distincts : introduction, état d'avancement, ports, licence, téléchargement, installation, utilisation du shell, applications, FAQ, compatibilité matérielle et glossaire. Le guide d'installation détaille les procédures par saveur, jusqu'au démarrage par GRUB, et s'ouvre sur un avertissement de maturité : AROS y est qualifié de logiciel de qualité alpha, destiné à l'expérimentation et au développement plutôt qu'à un usage finalisé. Le code est hébergé sur GitHub dans le dépôt aros-development-team/AROS, et le site maintient une page Contact ainsi qu'une page Développeurs comme points d'entrée.",
-    "licensing_terms": "Le code est distribué sous AROS Public License (APL) version 1.1, dont le texte officiel se présente comme « based on the MPL ». La licence définit l'usage commercial comme la distribution du code couvert à un tiers et encadre les droits concédés sur le code d'origine, les modifications et les brevets. Elle porte sur le code ; les marques citées sur le site restent la propriété de leurs détenteurs, la mention légale précisant qu'Amiga est une marque d'Amiga Inc. et que les autres marques appartiennent à leurs propriétaires respectifs.",
+    "introduction": "AROS Research Operating System (initially named Amiga Research OS, renamed AROS for trademark reasons) is an international free and open-source operating system project started in 1995. Faced with the financial collapse of Commodore and the risk of extinction of the Amiga platform, AROS was designed to reimplement cleanly, independently and portably the whole set of system libraries and programming interfaces (APIs) of AmigaOS 3.1 (published in 1994) on modern hardware architectures and microprocessors.",
+    "what_is_it": "Technically, AROS is neither a Linux distribution nor a derivative of Unix or Windows: it is a stand-alone system designed from scratch to revive the engineering philosophy of AmigaOS. Its modular architecture is organised around Exec, a real-time preemptive multitasking microkernel managing task scheduling with priorities, hardware interrupts and message lists. As on the classic Amiga, AROS adopts by default a flat memory model without hardware protection between processes, which gives it almost instantaneous context switches and exceptional responsiveness, while requiring absolute rigour from software to avoid memory corruption.",
+    "core_subsystems_intuition_and_graphics": "Above Exec, AROS reimplements the emblematic libraries of the Amiga system: Intuition (the windowing and graphical interface manager), Graphics (2D matrix and vector drawing engine, supporting hardware 3D acceleration through Gallium3D/Mesa on certain compatible graphics chipsets) and AmigaDOS (management of input/output streams and file systems). The default user interface is the Wanderer graphical desktop (modern clone of the AmigaOS Workbench). The toolkit for building interfaces is Zune, an object-oriented implementation fully API-compatible with the MUI (Magic User Interface) library.",
+    "native_vs_hosted_modes_and_ports": "AROS stands out for its great versatility in its execution methods: it exists in two main forms, AROS Native and AROS Hosted. In Native mode, AROS boots directly on bare metal as the main operating system, available for 32-bit x86 (IA-32), x86-64, ARM (Raspberry Pi boards) and PowerPC (Sam440, Efika boards). In Hosted mode, AROS runs as a windowed process on top of an existing host operating system (Linux, FreeBSD, macOS or Windows), offering an ideal environment for application development and debugging.",
+    "amiga_compatibility_source_vs_binary": "A rigorous distinction must be made between source-level compatibility and binary compatibility. On the x86 or ARM architecture, AROS offers API compatibility (source-compatible): software written in the C language for AmigaOS 3.1 can be recompiled and work natively. To run the historical Amiga software and video games compiled for the Motorola 680x0 (m68k) processor, AROS Native includes transparent emulation mechanisms (notably through the Janus-UAE subsystem). On the dedicated AROS m68k port (designed for real classic Amiga computers and FPGA accelerator boards such as the Vampire), on the other hand, binary compatibility with m68k code is direct and native.",
+    "filesystems_hardware_support_and_limitations": "AROS supports reading and writing the historical Amiga file systems (OFS, FFS, SFS) as well as the contemporary FAT12/16/32, ISO 9660 and ext2/ext3 formats. While it runs directly on compatible PCs and hypervisors (QEMU, VirtualBox, VMware), AROS remains an enthusiast system subject to hardware limitations: support for recent Wi-Fi chips, Bluetooth and advanced power management (ACPI) remains partial. The system is distributed under the free AROS Public License (APL), derived from the Mozilla Public License (MPL 1.1), and its development is publicly hosted on GitHub.",
+    "history_and_project_goals": "The first discussions reported by the project go back to 1993, when Amiga users were looking for an answer to Commodore's difficulties; the team dates the project to 1995, the year retained in the site copyright notice. The original name, Amiga Research Operating System, was dropped in favour of the acronym AROS for trademark reasons. The published goals are compatibility with AmigaOS 3.1, portability to x86, PowerPC, Alpha, Sparc and HPPA, binary compatibility on Amiga and source compatibility on the other architectures, with two execution modes: native on the hardware or hosted in a window of the host system. The site sums up the approach with an explicit comparison: API-level compatibility, \"like Wine, unlike UAE\".",
+    "ports_and_hosted_flavors": "AROS ports follow the platform-processor nomenclature. The project distinguishes two flavours: native ports boot directly on the hardware and take control of it; hosted ports run on top of an existing system, without direct access to the hardware, which avoids writing low-level drivers and allows development without rebooting the machine. The official ports page lists amiga-m68k, pc-i386, pc-x86_64, pc-x86_64-smp, linux-i386 and linux-x86-64, mingw32-i386, darwin-i386, darwin-x86-64, darwin-ppc, raspi-armhf and sam440-ppc. The GitHub repository adds builds for raspi-aarch64, raspi-aarch64-smp, opensbi-riscv64, linux-arm and linux-armhf.",
+    "build_channels_and_toolchains": "The download page offers no numbered stable version: it refers to nightly builds and snapshots, with a warning stating that these builds are intended for developers and testers, that they are not always stable and that they lack most of the applications of everyday use. The GitHub repository describes the build chain employed: GCC 6.5.0 as the reference configuration, more recent versions (9.5.0, 10.5.0, 13.5.0, 15.2.0, 16.2.0) and LLVM builds (11.0.0, 20.1.0, 23.1.0), produced by an Azure Pipelines chain hosted in the repository.",
+    "documentation_structure": "The official documentation is divided into separate manuals: introduction, progress status, ports, licence, download, installation, use of the shell, applications, FAQ, hardware compatibility and glossary. The installation guide details the procedures per flavour, up to booting through GRUB, and opens with a maturity warning: AROS is described there as alpha-quality software, intended for experimentation and development rather than for finished use. The code is hosted on GitHub in the aros-development-team/AROS repository, and the site maintains a Contact page and a Developers page as entry points.",
+    "licensing_terms": "The code is distributed under AROS Public License (APL) version 1.1, whose official text presents itself as \"based on the MPL\". The licence defines commercial use as the distribution of the covered code to a third party and frames the rights granted over the original code, the modifications and the patents. It covers the code; the trademarks cited on the site remain the property of their holders, the legal notice specifying that Amiga is a trademark of Amiga Inc. and that the other trademarks belong to their respective owners.",
     "advantages": [
-      "Réimplémentation libre, moderne et open source des interfaces de programmation et de l'esprit d'AmigaOS 3.1.",
-      "Multitâche préemptif ultra-réactif et démarrage quasi instantané sur microprocesseurs contemporains.",
-      "Grande portabilité grâce aux modes d'exécution Native (bare metal) et Hosted (au-dessus de Linux, macOS ou Windows).",
-      "Bureau graphique Wanderer et boîte à outils Zune compatible avec les interfaces MUI d'AmigaOS.",
-      "Émulation transparente m68k intégrée (Janus-UAE) permettant de lancer des logiciels et jeux Amiga historiques.",
-      "Code source ouvert régi par la licence libre AROS Public License (APL)."
+      "Free, modern and open-source reimplementation of the programming interfaces and the spirit of AmigaOS 3.1.",
+      "Ultra-responsive preemptive multitasking and almost instant boot on contemporary microprocessors.",
+      "Great portability thanks to the Native (bare metal) and Hosted (on top of Linux, macOS or Windows) execution modes.",
+      "Wanderer graphical desktop and Zune toolkit compatible with the MUI interfaces of AmigaOS.",
+      "Built-in transparent m68k emulation (Janus-UAE) making it possible to launch historical Amiga software and games.",
+      "Open source code governed by the free AROS Public License (APL)."
     ],
     "disadvantages": [
-      "Absence par défaut de protection matérielle de mémoire entre processus (un plantage applicatif peut figer le système).",
-      "Prise en charge matérielle moderne restreinte sur les ordinateurs physiques récents (Wi-Fi, Bluetooth, GPU 3D récents).",
-      "La compatibilité binaire m68k sur x86 nécessite une émulation logicielle intermédiaire (Janus-UAE).",
-      "Écosystème applicatif principalement orienté vers le rétrogaming et la préservation patrimoniale.",
-      "Non adapté à un environnement de serveurs multi-utilisateurs sécurisé ou à la bureautique d'entreprise moderne."
+      "Absence by default of hardware memory protection between processes (an application crash can freeze the system).",
+      "Restricted modern hardware support on recent physical computers (Wi-Fi, Bluetooth, recent 3D GPUs).",
+      "m68k binary compatibility on x86 requires an intermediate software emulation (Janus-UAE).",
+      "Application ecosystem mainly oriented towards retrogaming and heritage preservation.",
+      "Not suited to a secure multi-user server environment or to modern enterprise office work."
     ],
     "who_is_it_for": [
-      "Nostalgiques, passionnés et développeurs de l'écosystème Amiga souhaitant faire perdurer l'esprit d'AmigaOS.",
-      "Développeurs curieux d'expérimenter une programmation système multitâche préemptive sans lourdeur d'abstraction.",
-      "Amateurs d'émulation et de rétrogaming Amiga utilisant des distributions prêtes à l'emploi comme Icaros Desktop.",
-      "Enthousiastes de la virtualisation explorant des systèmes d'exploitation alternatifs sous QEMU ou VirtualBox."
+      "Nostalgic users, enthusiasts and developers of the Amiga ecosystem wishing to keep the spirit of AmigaOS alive.",
+      "Developers curious to experiment with preemptive multitasking system programming without heavy abstraction.",
+      "Amiga emulation and retrogaming enthusiasts using ready-to-use distributions such as Icaros Desktop.",
+      "Virtualisation enthusiasts exploring alternative operating systems under QEMU or VirtualBox."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs grand public recherchant un système principal pour la bureautique moderne ou la navigation web complexe.",
-      "Entreprises et centres de données nécessitant des environnements multi-utilisateurs stricts avec gestion des droits d'accès.",
-      "Joueurs de jeux vidéo modernes exigeant des pilotes graphiques Vulkan ou DirectX récents.",
-      "Développeurs dépendant d'outils de conteneurisation modernes (Docker, Kubernetes)."
+      "General public users looking for a primary system for modern office work or complex web browsing.",
+      "Enterprises and data centres requiring strict multi-user environments with access rights management.",
+      "Modern video game players requiring recent Vulkan or DirectX graphics drivers.",
+      "Developers depending on modern containerisation tools (Docker, Kubernetes)."
     ],
-    "verdict": "AROS Research Operating System est une réimplémentation libre d'AmigaOS 3.1 : il en reproduit les API et l'architecture multitâche préemptive sur des architectures matérielles modernes, ce qui maintient l'héritage logiciel d'Amiga indépendamment du matériel propriétaire d'origine.",
-    "installation_media_and_boot_targets": "Le guide d’installation officiel recommande le CD-ROM comme support de démarrage et décrit l’installation sur disque dur comme cible principale, soit en système unique, soit aux côtés d’un autre système déjà installé (Windows, Linux ou autre). Une disquette de démarrage reste documentée comme support d’amorçage. La configuration minimale indiquée est un PC-AT à bus PCI doté d’un processeur i486 ou supérieur, de 24 Mo de mémoire vive, d’un clavier PS/2, AT ou USB et, de préférence, d’une carte graphique VESA. Les images de démarrage ont été converties à grub-mkrescue afin de démarrer aussi bien sur les machines à firmware BIOS que sur celles à firmware EFI.",
-    "firewall_and_security_hardening": "Le rapport d’activité publié par le projet le 29 juillet 2026 recense les travaux de sécurité de l’année écoulée : une passe systématique de renforcement de la sûreté mémoire et de la sécurité sur l’ensemble de la pile réseau, l’ajout d’un pare-feu compatible Roadshow (ipf/ipnat) doté d’une interface graphique Firewall dédiée, la prise en charge des SYN cookies et de la randomisation des numéros de séquence initiaux dans la pile TCP, ainsi qu’un générateur de nombres aléatoires cryptographiques adossé à entropy.resource. Le même rapport mentionne le durcissement du gestionnaire NTFS et la correction de cas limites de l’allocateur mémoire."
+    "verdict": "AROS Research Operating System is a free reimplementation of AmigaOS 3.1: it reproduces its APIs and its preemptive multitasking architecture on modern hardware architectures, which maintains the Amiga software heritage independently of the original proprietary hardware.",
+    "installation_media_and_boot_targets": "The official installation guide recommends the CD-ROM as the boot medium and describes installation on hard disk as the main target, either as a single system or alongside another system already installed (Windows, Linux or other). A boot floppy remains documented as a boot medium. The minimum configuration indicated is a PC-AT with a PCI bus equipped with an i486 or higher processor, 24 MB of RAM, a PS/2, AT or USB keyboard and, preferably, a VESA graphics card. The boot images were converted with grub-mkrescue in order to boot both on machines with BIOS firmware and on those with EFI firmware.",
+    "firewall_and_security_hardening": "The activity report published by the project on 29 July 2026 lists the security work of the past year: a systematic hardening pass of memory safety and security across the whole network stack, the addition of a Roadshow-compatible firewall (ipf/ipnat) with a dedicated Firewall graphical interface, support for SYN cookies and for the randomisation of initial sequence numbers in the TCP stack, as well as a cryptographic random number generator backed by entropy.resource. The same report mentions the hardening of the NTFS manager and the correction of edge cases in the memory allocator."
   },
   "relations": [
     {
       "id": "haiku",
       "name": "Haiku",
       "type": "alternative",
-      "note": "Système d'exploitation libre dédié au poste de travail personnel réimplémentant un écosystème multimédia classique (BeOS)."
+      "note": "Free operating system dedicated to the personal workstation reimplementing a classic multimedia ecosystem (BeOS)."
     },
     {
       "id": "reactos",
       "name": "ReactOS",
       "type": "alternative",
-      "note": "Système d'exploitation libre réimplémentant une architecture propriétaire (Windows NT) sur microprocesseurs x86."
+      "note": "Free operating system reimplementing a proprietary architecture (Windows NT) on x86 microprocessors."
     },
     {
       "id": "freedos",
       "name": "FreeDOS",
       "type": "alternative",
-      "note": "Système d'exploitation libre préservant un écosystème logiciel PC historique."
+      "note": "Free operating system preserving a historical PC software ecosystem."
     },
     {
       "id": "serenityos",
       "name": "SerenityOS",
       "type": "alternative",
-      "note": "Système d'exploitation libre indépendant de type Unix conçu pour les postes de travail."
+      "note": "Independent free Unix-type operating system designed for workstations."
     }
   ],
   "links": [
     {
-      "label": "Site officiel du projet AROS Research Operating System",
+      "label": "Official website of the AROS Research Operating System project",
       "url": "http://aros.org/"
     },
     {
-      "label": "Manuel et documentation d'architecture AROS (Wikibooks)",
+      "label": "AROS manual and architecture documentation (Wikibooks)",
       "url": "https://en.wikibooks.org/wiki/Aros"
     },
     {
-      "label": "Dépôt de code source officiel AROS (GitHub)",
+      "label": "Official AROS source code repository (GitHub)",
       "url": "https://github.com/aros-development-team/AROS"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel et présentation générale d'AROS",
+      "title": "Official portal and general presentation of AROS",
       "url": "http://aros.org/",
       "type": "official_site"
     },
     {
-      "title": "Documentation d'architecture et de programmation système AROS",
+      "title": "AROS architecture and system programming documentation",
       "url": "https://en.wikibooks.org/wiki/Aros",
       "type": "documentation"
     },
     {
-      "title": "Dépôt officiel du code source et des composants système AROS",
+      "title": "Official AROS source code and system components repository",
       "url": "https://github.com/aros-development-team/AROS",
       "type": "repository"
     },
     {
-      "title": "Présentation et objectifs du projet AROS (site officiel)",
+      "title": "Presentation and goals of the AROS project (official site)",
       "url": "http://aros.org/introduction/index.html",
       "type": "official_site",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Ports natifs et hébergés d'AROS (site officiel)",
+      "title": "Native and hosted AROS ports (official site)",
       "url": "http://aros.org/introduction/ports.html",
       "type": "official_site",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Guide d'installation AROS (avertissement de maturité)",
+      "title": "AROS installation guide (maturity warning)",
       "url": "http://aros.org/documentation/installation.html",
       "type": "documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Page de téléchargement AROS (builds nocturnes et instantanés)",
+      "title": "AROS download page (nightly and snapshot builds)",
       "url": "http://aros.org/download.html",
       "type": "official_site",
       "accessed": "2026-10-18"
     },
     {
-      "title": "Licence publique AROS 1.1 (texte officiel)",
+      "title": "AROS Public License 1.1 (official text)",
       "url": "http://aros.org/license.html",
       "type": "license",
       "accessed": "2026-10-18"

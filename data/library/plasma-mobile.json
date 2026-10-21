@@ -2,7 +2,7 @@
   "id": "plasma-mobile",
   "name": "Plasma Mobile",
   "type": "operating_system",
-  "summary": "Interface tactile libre et écosystème d'applications mobiles développés par la communauté KDE, fondés sur le compositeur KWin Wayland et les bibliothèques Qt/Kirigami.",
+  "summary": "Free touch interface and mobile application ecosystem developed by the KDE community, founded on the KWin Wayland compositor and the Qt/Kirigami libraries.",
   "tags": [
     "mobile",
     "kde",
@@ -17,104 +17,118 @@
     "ARM64",
     "x86-64"
   ],
-  "license": "Open Source (GPL, LGPL et licences libres KDE)",
+  "license": "Open Source (GPL, LGPL and free KDE licences)",
   "last_verified": "2026-10-19",
   "content": {
-    "introduction": "Plasma Mobile est une initiative libre de la communauté internationale KDE visant à fournir une interface utilisateur tactile et un environnement applicatif complet pour smartphones et tablettes.",
-    "what_is_it": "Développé depuis 2015 sur les fondations de l'environnement de bureau KDE Plasma, Plasma Mobile adapte la pile graphique et logicielle KDE aux facteurs de forme mobiles sans rupture avec l'écosystème Linux traditionnel.",
-    "desktop_heritage_and_wayland_stack": "Plasma Mobile adapte les technologies éprouvées de KDE Plasma Desktop aux contraintes ergonomiques et matérielles des téléphones intelligents et des tablettes tactiles. L'environnement s'exécute nativement au-dessus du compositeur KWin Wayland, configuré pour gérer les protocoles d'interaction tactile modernes (wl_touch, text-input-v3 pour la saisie virtuelle avec Maliit Keyboard) et le basculement dynamique d'orientation d'écran. Le shell mobile présente une interface articulée autour d'un panneau supérieur rétractable (regroupant les notifications système et les réglages rapides), d'une barre de navigation inférieure avec gestionnaire de tâches sous forme de cartes d'aperçu d'applications, et d'un lanceur d'applications paginé.",
-    "kirigami_framework_and_adaptive_apps": "Au cœur de l'écosystème Plasma Mobile se trouve Kirigami, une bibliothèque de composants d'interface utilisateur basée sur Qt Quick / QML développée par la communauté KDE. Kirigami est conçu pour créer des applications convergentes capables d'adapter dynamiquement leur présentation entre un format compact sur écran de smartphone et un affichage étendu sur moniteur ou tablette lorsque l'appareil est connecté à une station d'accueil. L'écosystème comprend une collection d'applications natives coordonnées : le navigateur web Angelfish, le gestionnaire de fichiers Index, le lecteur audio Elisa, la galerie d'images Koko, l'agenda Kalendar, ainsi que les clients de messagerie NeoChat (Matrix) et Tokodon (Mastodon), bénéficiant tous de la cohérence visuelle Breeze.",
-    "telephony_audio_and_hardware_integration": "Pour la gestion des fonctionnalités téléphoniques et sans fil, Plasma Mobile s'interface avec les couches logicielles sous-jacentes du monde Linux embarqué. La téléphonie vocale, l'envoi de SMS et la connectivité cellulaire sont gérés par le démon ModemManager (ou oFono selon la distribution) et l'application Plasma Phonebook / Dialler. Le routage et le contrôle des flux audio (commutation entre écouteur interne, haut-parleur principal, casque filaire et profil Bluetooth HSP/HFP) sont assurés par le serveur multimédia PipeWire et son gestionnaire de sessions WirePlumber. La gestion de l'alimentation électrique s'appuie sur le démon power-profiles-daemon et des mécanismes de veille profonde (suspend-to-RAM assisté par microcontrôleur Crust sur les puces Allwinner), cruciaux pour préserver l'autonomie sur batterie des terminaux mobiles.",
-    "technical_constraints_and_limits": "Il est important de distinguer Plasma Mobile (qui est un environnement d'interface utilisateur et une suite applicative) du système d'exploitation complet qui l'héberge. Plasma Mobile n'est pas distribué sous la forme d'un système autonome, mais est packagé par des distributions Linux mobiles indépendantes telles que Nura (ex-postmarketOS, sur socle Alpine Linux avec noyaux mainline), Mobian (sur socle Debian GNU/Linux) et Manjaro ARM. Si le projet fonctionne de façon mature sur des appareils de développement communautaires comme le PinePhone, le PinePhone Pro et le Volla Phone, son utilisation quotidienne sur des smartphones grand public portés depuis Android (OnePlus 6/6T, Xiaomi Pocophone F1) demeure sujette à des limitations matérielles : consommation d'énergie élevée en veille, pilotes d'accélération matérielle de l'appareil photo encore expérimentaux et absence d'écosystème bancaire ou d'applications commerciales propriétaires dépendantes des services Google Play.",
-    "distribution_and_installation": "Plasma Mobile est distribué sous forme de paquets ou d'images par plusieurs distributions, recensées sur la page officielle « Getting Plasma Mobile ». Nura (ex-postmarketOS) fournit des images préconstruites et, pour les appareils non couverts, une installation manuelle via pmbootstrap. Debian et Mobian publient des images flashables avec Plasma Mobile, en version stable et en images hebdomadaires issues de testing ; le paquet `plasma-mobile` est disponible dans Debian et Arch Linux. openSUSE fournit des constructions Tumbleweed pour PinePhone, Fedora un spin officiel KDE Mobile, et KDE neon une image destinée aux tablettes Intel non-Android, aux PC et aux machines virtuelles. Les images personnalisées peuvent être testées dans QEMU.",
-    "release_trains_and_independent_software_releases": "Le billet du 8 juillet 2025 accompagnant les versions indépendantes de juillet précise que l'essentiel des logiciels de Plasma Mobile est désormais publié dans le cadre des cycles de publication de Plasma ou de KDE Gear, et que les archives de ces versions sont signées. Les publications sont datées par les annonces KDE de Plasma 6.4 le 17 juin 2025, Plasma 6.5 le 21 octobre 2025, Plasma 6.6 le 17 février 2026 et Plasma 6.7 le 16 juin 2026. Le billet « Plasma Mobile 6.5 », daté du 10 novembre 2025, détaille les changements apportés aux composants mobiles après la sortie de Plasma 6.5 : configuration et activation du conteneur Waydroid depuis l'application de réglages et le panneau de réglages rapides, chargement du verrouillage par réutilisation des processus de la barre d'état et du tiroir d'actions, double appui pour verrouiller sur l'écran d'accueil Folio. Les billets de novembre 2025 et de décembre 2025 documentent les versions indépendantes de Plasma Camera et de Plasma Settings, avec leurs archives publiées séparément. Le billet du 14 août 2024 annonce la sortie de Plasma Dialer 24.08, fondée sur Qt6, avec un paquet déposé sur download.kde.org et signé par une clé GPG.",
-    "security_advisory_and_disclosure_flow": "Les questions de sécurité relatives aux logiciels produits par KDE, dont les composants de Plasma Mobile, sont traitées selon la politique de sécurité de KDE. La page kde.org/info/security consultée le 19 octobre 2026 demande de les adresser à security@kde.org, réserve sysadmin@kde.org aux logiciels utilisés mais non produits par KDE, et indique que les problèmes signalés sont vérifiés avec l'auteur ou le mainteneur du code concerné. La politique précise que les coordinateurs de publication et les distributeurs qui empaquettent le logiciel sont informés dès qu'un correctif est disponible, afin qu'ils préparent leurs paquets binaires, puis que des alertes de sécurité sont publiées sur kde.org/info/security, avec les correctifs sous forme de source et les binaires disponibles. La page consultée précise également que KDE ne dispose pas de programme de prime aux bogues. Les avis recensés au 19 octobre 2026 sont classés par produit : deux avis de 2018 désignent Plasma Desktop et Plasma, aucun ne désigne nommément Plasma Mobile, Plasma Camera, Plasma Settings, Plasma Dialer ou Plasma Phonebook.",
+    "introduction": "Plasma Mobile is a free initiative of the international KDE community aiming to provide a touch user interface and a complete application environment for smartphones and tablets.",
+    "what_is_it": "Developed since 2015 on the foundations of the KDE Plasma desktop environment, Plasma Mobile adapts the KDE graphical and software stack to mobile form factors without breaking with the traditional Linux ecosystem.",
+    "desktop_heritage_and_wayland_stack": "Plasma Mobile adapts the proven technologies of KDE Plasma Desktop to the ergonomic and hardware constraints of smartphones and touch tablets. The environment runs natively above the KWin Wayland compositor, configured to handle modern touch interaction protocols (wl_touch, text-input-v3 for virtual input with Maliit Keyboard) and dynamic screen orientation switching. The mobile shell presents an interface articulated around a retractable top panel (grouping system notifications and quick settings), a bottom navigation bar with a task manager in the form of application preview cards, and a paginated application launcher.",
+    "kirigami_framework_and_adaptive_apps": "At the heart of the Plasma Mobile ecosystem lies Kirigami, a user interface component library based on Qt Quick / QML developed by the KDE community. Kirigami is designed to create convergent applications capable of dynamically adapting their presentation between a compact format on a smartphone screen and an extended display on a monitor or tablet when the device is connected to a docking station. The ecosystem includes a collection of coordinated native applications: the Angelfish web browser, the Index file manager, the Elisa audio player, the Koko image gallery, the Kalendar agenda, as well as the NeoChat (Matrix) and Tokodon (Mastodon) messaging clients, all benefiting from the Breeze visual consistency.",
+    "telephony_audio_and_hardware_integration": "For the management of telephony and wireless features, Plasma Mobile interfaces with the underlying software layers of the embedded Linux world. Voice telephony, SMS sending and cellular connectivity are managed by the ModemManager daemon (or oFono depending on the distribution) and the Plasma Phonebook / Dialler application. The routing and control of audio flows (switching between internal earpiece, main speaker, wired headset and Bluetooth HSP/HFP profile) are ensured by the PipeWire multimedia server and its WirePlumber session manager. Electrical power management relies on the power-profiles-daemon daemon and deep sleep mechanisms (suspend-to-RAM assisted by microcontroller Crust on Allwinner chips), crucial for preserving the battery life of mobile terminals.",
+    "technical_constraints_and_limits": "It is important to distinguish Plasma Mobile (which is a user interface environment and an application suite) from the complete operating system that hosts it. Plasma Mobile is not distributed in the form of a stand-alone system, but is packaged by independent mobile Linux distributions such as Nura (ex-postmarketOS, on an Alpine Linux foundation with mainline kernels), Mobian (on a Debian GNU/Linux foundation) and Manjaro ARM. If the project works maturely on community development devices such as the PinePhone, the PinePhone Pro and the Volla Phone, its daily use on consumer smartphones ported from Android (OnePlus 6/6T, Xiaomi Pocophone F1) remains subject to hardware limitations: high power consumption in standby, camera hardware acceleration drivers still experimental and absence of a banking ecosystem or of proprietary commercial applications dependent on Google Play services.",
+    "distribution_and_installation": "Plasma Mobile is distributed in the form of packages or images by several distributions, listed on the official \"Getting Plasma Mobile\" page. Nura (ex-postmarketOS) provides prebuilt images and, for devices not covered, a manual installation through pmbootstrap. Debian and Mobian publish flashable images with Plasma Mobile, in stable version and in weekly images taken from testing; the `plasma-mobile` package is available in Debian and Arch Linux. openSUSE provides Tumbleweed builds for the PinePhone, Fedora an official KDE Mobile spin, and KDE neon an image intended for non-Android Intel tablets, PCs and virtual machines. Custom images can be tested in QEMU.",
+    "release_trains_and_independent_software_releases": "The post of 8 July 2025 accompanying the July independent releases specifies that most of the Plasma Mobile software is from now on published within the framework of the Plasma or KDE Gear release cycles, and that the archives of these versions are signed. The releases are dated by the KDE announcements of Plasma 6.4 on 17 June 2025, Plasma 6.5 on 21 October 2025, Plasma 6.6 on 17 February 2026 and Plasma 6.7 on 16 June 2026. The post \"Plasma Mobile 6.5\", dated 10 November 2025, details the changes brought to the mobile components after the release of Plasma 6.5: configuration and activation of the Waydroid container from the settings application and the quick settings panel, loading of the lock screen by reusing the processes of the status bar and of the actions drawer, double tap to lock on the Folio home screen. The posts of November 2025 and December 2025 document the independent versions of Plasma Camera and Plasma Settings, with their archives published separately. The post of 14 August 2024 announces the release of Plasma Dialer 24.08, based on Qt6, with a package deposited on download.kde.org and signed by a GPG key.",
+    "security_advisory_and_disclosure_flow": "Security questions relating to the software produced by KDE, including the Plasma Mobile components, are handled according to the KDE security policy. The page kde.org/info/security consulted on 19 October 2026 asks for them to be addressed to security@kde.org, reserves sysadmin@kde.org for software used but not produced by KDE, and indicates that the reported problems are checked with the author or the maintainer of the code concerned. The policy specifies that release coordinators and distributors packaging the software are informed as soon as a fix is available, so that they prepare their binary packages, then that security advisories are published on kde.org/info/security, with the fixes as source and the binaries available. The page consulted also specifies that KDE does not have a bug bounty programme. The advisories listed as of 19 October 2026 are classified by product: two advisories from 2018 designate Plasma Desktop and Plasma, none designates by name Plasma Mobile, Plasma Camera, Plasma Settings, Plasma Dialer or Plasma Phonebook.",
     "advantages": [
-      "Interface utilisateur entièrement libre et modulaire issue de la communauté KDE",
-      "Pile d'affichage Wayland native pilotée par le compositeur KWin avec accélération matérielle",
-      "Framework applicatif Kirigami offrant la convergence entre environnements mobile et bureau",
-      "Compatibilité avec les applications Linux de bureau et support des conteneurs Android via Waydroid",
-      "Absence de télémétrie propriétaire et auditabilité intégrale du code source"
+      "Fully free and modular user interface stemming from the KDE community",
+      "Native Wayland display stack driven by the KWin compositor with hardware acceleration",
+      "Kirigami application framework offering convergence between mobile and desktop environments",
+      "Compatibility with desktop Linux applications and support for Android containers through Waydroid",
+      "Absence of proprietary telemetry and full auditability of the source code"
     ],
     "disadvantages": [
-      "Dépendance vis-à-vis des distributions hôtes et du support matériel des pilotes noyau Linux",
-      "Consommation énergétique accrue en veille par rapport aux systèmes mobiles fermés du marché",
-      "Écosystème d'applications tactiles natives plus restreint que les plateformes commerciales dominantes",
-      "Intégration des capteurs photo complexes et du matériel audio cellulaire encore variable selon les appareils"
+      "Dependence on host distributions and on the hardware support of the Linux kernel drivers",
+      "Increased energy consumption in standby compared with closed mobile systems on the market",
+      "Native touch application ecosystem smaller than the dominant commercial platforms",
+      "Integration of complex camera sensors and cellular audio hardware still variable depending on the devices"
     ],
     "who_is_it_for": [
-      "Utilisateurs de téléphones Linux autonomes (PinePhone, PinePhone Pro, Librem 5, terminaux Nura (ex-postmarketOS))",
-      "Développeurs Qt, QML et KDE souhaitant concevoir des applications convergentes multiplateformes",
-      "Administrateurs et passionnés de logiciel libre recherchant une pile mobile ouverte et inspectable"
+      "Users of stand-alone Linux phones (PinePhone, PinePhone Pro, Librem 5, Nura (ex-postmarketOS) terminals)",
+      "Qt, QML and KDE developers wishing to design convergent multiplatform applications",
+      "Administrators and free software enthusiasts looking for an open and inspectable mobile stack"
     ],
     "who_is_it_not_for": [
-      "Utilisateurs exigeant la prise en charge immédiate de l'ensemble des services bancaires sous DRM Google Play Protect",
-      "Personnes dépendantes d'une autonomie de batterie standard de plusieurs jours sans configuration",
-      "Utilisateurs recherchant un appareil prêt à l'emploi garanti sans configuration de distribution"
+      "Users requiring immediate support for all banking services under Google Play Protect DRM",
+      "People depending on a standard battery life of several days without configuration",
+      "Users looking for a ready-to-use device guaranteed without distribution configuration"
     ],
-    "verdict": "Plasma Mobile est un environnement mobile ouvert pour le monde Linux, qui transpose l'écosystème KDE sur ordiphones avec une architecture Wayland et un framework convergent."
+    "verdict": "Plasma Mobile is an open mobile environment for the Linux world, which transposes the KDE ecosystem onto smartphones with a Wayland architecture and a convergent framework."
   },
+  "components": [
+    {
+      "id": "kde-plasma",
+      "name": "KDE Plasma",
+      "role": "desktop_environment",
+      "note": "\"Plasma Mobile is an open-source project to create a mobile shell and application ecosystem for Linux, based on KDE Plasma.\" (plasma-mobile.org)."
+    },
+    {
+      "id": "kwin",
+      "name": "KWin",
+      "role": "window_manager_and_compositor",
+      "note": "\"The interface is using KWin over Wayland and is now mostly stable, albeit a little rough around the edges in some areas.\" (plasma-mobile.org/about)."
+    }
+  ],
   "relations": [
     {
       "id": "postmarketos",
       "name": "Nura",
       "type": "related",
-      "note": "Distribution Linux mobile basée sur Alpine proposant officiellement l'interface Plasma Mobile."
+      "note": "Alpine-based mobile Linux distribution officially offering the Plasma Mobile interface."
     },
     {
       "id": "mobian",
       "name": "Mobian",
       "type": "related",
-      "note": "Distribution Debian pour appareils mobiles intégrant des images avec l'environnement Plasma Mobile."
+      "note": "Debian distribution for mobile devices integrating images with the Plasma Mobile environment."
     },
     {
       "id": "kde-neon",
       "name": "KDE neon",
       "type": "related",
-      "note": "Distribution de référence du projet KDE partageant le socle applicatif et les composants Plasma."
+      "note": "Reference distribution of the KDE project sharing the application foundation and the Plasma components."
     },
     {
       "id": "ubuntu-touch",
       "name": "Ubuntu Touch",
       "type": "alternative",
-      "note": "Système d'exploitation mobile alternatif issu de Canonical maintenu par la fondation UBports."
+      "note": "Alternative mobile operating system stemming from Canonical maintained by the UBports foundation."
     }
   ],
   "links": [
     {
-      "label": "Site officiel Plasma Mobile",
+      "label": "Official Plasma Mobile website",
       "url": "https://plasma-mobile.org/"
     },
     {
-      "label": "Documentation développeur Kirigami",
+      "label": "Kirigami developer documentation",
       "url": "https://develop.kde.org/docs/kirigami/"
     },
     {
-      "label": "Dépôt GitLab KDE Plasma Mobile",
+      "label": "KDE Plasma Mobile GitLab repository",
       "url": "https://invent.kde.org/plasma/plasma-mobile"
     }
   ],
   "sources": [
     {
-      "title": "Portail officiel du projet KDE Plasma Mobile",
+      "title": "Official portal of the KDE Plasma Mobile project",
       "url": "https://plasma-mobile.org/",
       "type": "official_site"
     },
     {
-      "title": "Documentation d'architecture et Kirigami de la communauté KDE",
+      "title": "Architecture and Kirigami documentation from the KDE community",
       "url": "https://develop.kde.org/frameworks/kirigami/",
       "type": "documentation"
     },
     {
-      "title": "Notes de publication KDE Plasma et feuille de route mobile",
+      "title": "KDE Plasma release notes and mobile roadmap",
       "url": "https://kde.org/announcements/",
       "type": "release_notes"
     },
     {
-      "title": "Plasma Mobile — Getting Plasma Mobile (canaux de distribution et d'installation)",
+      "title": "Plasma Mobile — Getting Plasma Mobile (distribution and installation channels)",
       "url": "https://plasma-mobile.org/get/",
       "type": "official_documentation",
-      "note": "page consultée le 2026-10-17"
+      "note": "page consulted on 2026-10-17"
     },
     {
       "title": "Plasma Mobile - July Software Releases: Plasma Camera & Plasma Settings",
@@ -135,43 +149,43 @@
       "date": "2025-12-05"
     },
     {
-      "title": "Plasma Mobile - Plasma Mobile 6.5 (10 novembre 2025)",
+      "title": "Plasma Mobile - Plasma Mobile 6.5 (10 November 2025)",
       "url": "https://plasma-mobile.org/2025/11/10/plasma-6-5/",
       "type": "official_blog",
       "date": "2025-11-10"
     },
     {
-      "title": "Plasma Mobile - Plasma Dialer 24.08 is out (14 août 2024)",
+      "title": "Plasma Mobile - Plasma Dialer 24.08 is out (14 August 2024)",
       "url": "https://plasma-mobile.org/2024/08/14/plasma-dialer-24.08/",
       "type": "official_blog",
       "date": "2024-08-14"
     },
     {
-      "title": "KDE - annonce Plasma 6.4 (17 juin 2025)",
+      "title": "KDE - Plasma 6.4 announcement (17 June 2025)",
       "url": "https://kde.org/announcements/plasma/6/6.4.0/",
       "type": "release_notes",
       "date": "2025-06-17"
     },
     {
-      "title": "KDE - annonce Plasma 6.5 (21 octobre 2025)",
+      "title": "KDE - Plasma 6.5 announcement (21 October 2025)",
       "url": "https://kde.org/announcements/plasma/6/6.5.0/",
       "type": "release_notes",
       "date": "2025-10-21"
     },
     {
-      "title": "KDE - annonce Plasma 6.6 (17 février 2026)",
+      "title": "KDE - Plasma 6.6 announcement (17 February 2026)",
       "url": "https://kde.org/announcements/plasma/6/6.6.0/",
       "type": "release_notes",
       "date": "2026-02-17"
     },
     {
-      "title": "KDE - annonce Plasma 6.7 (16 juin 2026)",
+      "title": "KDE - Plasma 6.7 announcement (16 June 2026)",
       "url": "https://kde.org/announcements/plasma/6/6.7.0/",
       "type": "release_notes",
       "date": "2026-06-16"
     },
     {
-      "title": "KDE - avis de sécurité (canal de signalement et publication des avis)",
+      "title": "KDE - security advisories (reporting channel and advisory publication)",
       "url": "https://kde.org/info/security/",
       "type": "official_documentation",
       "accessed": "2026-10-19"

@@ -2,7 +2,7 @@
   "id": "chromeos",
   "name": "ChromeOS",
   "type": "operating_system",
-  "summary": "Système d'exploitation commercial développé par Google, dérivé de ChromiumOS et du noyau Linux, articulé autour du navigateur Chrome, d'un démarrage vérifié immuable et de sous-systèmes de conteneurs Linux et Android isolés.",
+  "summary": "Commercial operating system developed by Google, derived from ChromiumOS and the Linux kernel, structured around the Chrome browser, immutable verified boot and isolated Linux and Android container subsystems.",
   "tags": [
     "commercial",
     "proprietary",
@@ -18,121 +18,121 @@
     "x86-64",
     "ARM64"
   ],
-  "license": "Commercial propriétaire (CLUF Google) avec composants amont open source ChromiumOS (licence BSD)",
+  "license": "Proprietary commercial (Google EULA) with upstream open-source ChromiumOS components (BSD licence)",
   "last_verified": "2026-10-16",
   "content": {
-    "introduction": "ChromeOS est un système d'exploitation commercial développé par Google, initialement lancé en 2011 pour équiper les ordinateurs portables de type Chromebook. Conçu selon un paradigme centré sur le web et les services en nuage, le système privilégie la simplicité de déploiement, la rapidité d'initialisation, des mises à jour transparentes sans intervention manuelle et un cloisonnement strict des données et des processus.",
-    "what_is_it": "Techniquement, ChromeOS est dérivé du projet open source ChromiumOS. Son environnement repose sur une distribution Linux spécialisée dont la chaîne de compilation et les recettes logicielles ont été adaptées à partir de Gentoo Linux (système de paquets Portage et ebuilds). Le système intègre un noyau Linux monolithique officiel enrichi de correctifs constructeurs pour la gestion d'énergie et l'ordonnancement par cgroups, surmonté d'un espace utilisateur simplifié où le navigateur Google Chrome fait office d'environnement de bureau et d'interface utilisateur principale.",
-    "verified_boot_and_immutable_storage": "L'architecture de sécurité de ChromeOS s'articule autour de la technologie Verified Boot (démarrage vérifié) couplée à une puce matérielle de sécurité (Google Titan C ou H1). Une portion du micrologiciel en lecture seule (Coreboot/depthcharge) établit la racine de confiance matérielle, vérifiant à chaque étape la signature cryptographique du micrologiciel inscriptible, du noyau Linux et des paramètres de sécurité. La partition racine (`rootfs`) est montée en lecture seule stricte et protégée au niveau bloc par le pilote noyau dm-verity. Les mises à jour s'exécutent en arrière-plan sans interruption via un système de double partitionnement A/B, avec permutation atomique au redémarrage et retour automatique à la partition saine en cas d'échec.",
-    "graphical_stack_and_user_experience": "Contrairement aux distributions Linux de bureau traditionnelles, ChromeOS n'intègre pas de serveur X11 standard dans sa couche système native. L'affichage s'appuie sur la pile Freon, qui dialogue directement avec les pilotes DRM/KMS du noyau Linux pour le rendu matériel OpenGL ES et Vulkan. L'environnement visuel est pris en charge par le gestionnaire de fenêtres Aura et le shell Ash (Aura Shell), tandis que le compositeur Wayland intégré (Exo) prend en charge le fenêtrage et la composition fluide des applications natives, des applications web progressives (PWA) et des surfaces graphiques provenant des environnements virtualisés.",
-    "virtualization_subsystems_crostini_and_arcvm": "Pour étendre ses capacités au-delà de l'environnement web, ChromeOS intègre un moniteur de machine virtuelle léger écrit en Rust appelé crosvm, fonctionnant au-dessus de l'hyperviseur KVM du noyau. Grâce à crosvm et à des bacs à sable Minijail stricts (seccomp, espaces de noms Linux), ChromeOS fournit le sous-système Crostini (machine virtuelle Termina hébergeant des conteneurs Linux LXD/Incus sous Debian) pour les développeurs, ainsi que le sous-système ARCVM (Android Runtime for Chrome in a VM) exécutant l'écosystème d'applications Android en totale isolation du système hôte.",
-    "management_and_cloud_ecosystem": "ChromeOS est optimisé pour la gestion de flottes centralisée en entreprise et dans le secteur éducatif au travers de la console d'administration Google Workspace (Chrome Enterprise Upgrade). Les administrateurs peuvent appliquer des centaines de stratégies de sécurité, restreindre l'installation d'extensions, gérer des modes kiosque et provisionner les identités de manière instantanée. Une déclinaison intitulée ChromeOS Flex permet de convertir d'anciens PC et Mac en terminaux légers, qui se distingue des appareils ChromeOS par l'absence des puces de sécurité Google et du démarrage vérifié, et par l'indisponibilité des applications Google Play gérées.",
-    "release_channels_and_cadence": "ChromeOS propose trois canaux. Le canal stable reçoit les modifications mineures environ toutes les deux à trois semaines et les changements majeurs toutes les quatre semaines ; le canal bêta est mis à jour chaque semaine, ses évolutions majeures arrivant environ un mois avant le canal stable ; le canal de développement reçoit une à deux mises à jour par semaine. Le changement de canal est réservé au propriétaire de l'appareil et peut être bloqué sur un appareil géré par une entreprise ou un établissement scolaire.",
-    "chromeos_flex_scope": "ChromeOS Flex n'est officiellement supporté que sur les modèles certifiés, choisis parmi les PC et Mac courants des dix dernières années. Google documente deux différences avec les appareils ChromeOS : les puces de sécurité conçues par Google et le démarrage vérifié d'une part, l'accès aux applications Google Play gérées d'autre part. La gestion de flotte requiert une licence ChromeOS Enterprise ou Education, et le déploiement à grande échelle peut passer par des outils de gestion de parc existants.",
-    "security_design_principles": "La documentation de conception de ChromiumOS expose les principes de sécurité du système : défenses en profondeur, sécurité par défaut, moindre privilège et cloisonnement des processus. Elle décrit aussi les mécanismes correspondants : bac à sable, démarrage vérifié et mise à jour automatique sécurisée. ChromeOS, version commerciale, s'appuie sur ce socle ; les puces de sécurité et le démarrage vérifié font partie des éléments cités par Google comme propres aux appareils ChromeOS par rapport à ChromeOS Flex.",
-    "documentation_and_resources": "Trois ensembles documentaires coexistent : la documentation de conception ChromiumOS sur chromium.org pour l'architecture et la sécurité du socle open source, chromeos.dev pour les développeurs (environnements Linux, applications Android, web), et le centre d'aide Google pour les canaux de version et les fonctions destinées aux utilisateurs. Les pages d'assistance précisent les cadences de mise à jour par canal.",
-    "origine_du_projet_et_lignee_googlebook": "ChromeOS est présenté par Google comme un système disponible depuis 2011, entretenu par mises à jour automatiques portant à la fois sur le système, le navigateur et le matériel. La documentation administrateur situe la ligne de produits actuelle dans une transition : une nouvelle famille d'appareils, les Googlebooks, a été annoncée, et une page datée du 23 septembre 2026 précise ce que cette annonce implique pour les parcs existants. Elle indique que les appareils ChromeOS continueront de recevoir des mises à jour et des correctifs de sécurité jusqu'au milieu de l'année 2034, que les licences ChromeOS Enterprise et Education déjà associées aux appareils sont maintenues, et que des chemins de migration vers Googlebook OS sont prévus pour les appareils dont le cycle de dix ans dépasse cette échéance. Le nom du système n'est donc pas séparé du matériel qu'il équipe : les dates de support sont publiées par modèle et par plateforme matérielle, non par version logicielle seule.",
-    "update_duration_and_hardware_platform_lifecycle": "La politique officielle fixe la durée de mise à jour à dix ans à compter de la date de sortie de la plateforme, une plateforme étant l'ensemble des composants qu'un fabricant assemble pour un appareil donné. Google indique travailler toutes les deux semaines avec les fabricants de composants pour tester les versions sur chaque appareil, ce qui rattache la cadence de publication à la validation matérielle plutôt qu'à un calendrier de versions. Les dates sont publiées par modèle dans un tableau qui va des premiers appareils, une AC700 dont les mises à jour se sont arrêtées en août 2016, à des Chromebase d'entreprise maintenues jusqu'en juin 2028. Pour les appareils antérieurs à 2021, l'accès aux dix années complètes suppose une activation par l'administrateur, appelée mises à jour étendues ; cette activation ne conserve pas l'accès au Play Store ni aux applications Android, alors que les appareils sortis en 2021 ou après reçoivent ces dix années automatiquement. Après la dernière mise à jour, le système conserve son mode sécurisé : à chaque démarrage il s'auto-contrôle et restaure son état d'origine s'il détecte une altération.",
-    "linux_terminal_and_package_management": "Le système de base ne s'administre pas par un gestionnaire de paquets accessible à l'utilisateur : les composants du système et du navigateur arrivent par les mises à jour automatiques décrites par la politique de support, et non par une sélection de paquets. Un second ensemble logiciel est en revanche documenté séparément. L'environnement de développement Linux, désactivé par défaut, s'active depuis Paramètres, À propos de ChromeOS, Développeurs ; son installation demande une dizaine de minutes et ouvre un terminal sur une distribution Debian, dans laquelle les outils supplémentaires s'installent avec le gestionnaire APT. La commande de mise à jour citée par l'aide officielle est `sudo apt-get update && sudo apt-get dist-upgrade`. Les applications Linux partagent un même bac à sable : une application nuisible peut affecter les autres applications Linux, mais pas le reste du système, et les fichiers partagés avec l'environnement Linux sont accessibles à toutes ces applications. L'accès à cet environnement peut être interdit par l'administrateur sur un appareil géré.",
+    "introduction": "ChromeOS is a commercial operating system developed by Google, initially launched in 2011 to equip Chromebook-type laptops. Designed around a web- and cloud-service-centred paradigm, the system favours simplicity of deployment, fast start-up, transparent updates without manual intervention, and strict partitioning of data and processes.",
+    "what_is_it": "Technically, ChromeOS is derived from the open-source ChromiumOS project. Its environment rests on a specialised Linux distribution whose build chain and software recipes were adapted from Gentoo Linux (Portage package system and ebuilds). The system includes an official monolithic Linux kernel extended with vendor patches for power management and cgroup-based scheduling, topped by a simplified user space in which the Google Chrome browser acts as the desktop environment and main user interface.",
+    "verified_boot_and_immutable_storage": "The ChromeOS security architecture is built around the Verified Boot technology coupled with a hardware security chip (Google Titan C or H1). A read-only portion of the firmware (Coreboot/depthcharge) establishes the hardware root of trust, verifying at each stage the cryptographic signature of the writable firmware, of the Linux kernel and of the security settings. The root partition (`rootfs`) is mounted strictly read-only and protected at block level by the dm-verity kernel driver. Updates run in the background without interruption through an A/B dual-partition system, with atomic switching at reboot and automatic return to the healthy partition in case of failure.",
+    "graphical_stack_and_user_experience": "Unlike traditional Linux desktop distributions, ChromeOS does not include a standard X11 server in its native system layer. Display relies on the Freon stack, which talks directly to the Linux kernel DRM/KMS drivers for OpenGL ES and Vulkan hardware rendering. The visual environment is provided by the Aura window manager and the Ash shell (Aura Shell), while the built-in Wayland compositor (Exo) handles windowing and smooth composition of native applications, progressive web applications (PWAs) and graphical surfaces coming from virtualised environments.",
+    "virtualization_subsystems_crostini_and_arcvm": "To extend its capabilities beyond the web environment, ChromeOS includes a lightweight virtual machine monitor written in Rust called crosvm, running on top of the kernel KVM hypervisor. Through crosvm and strict Minijail sandboxes (seccomp, Linux namespaces), ChromeOS provides the Crostini subsystem (Termina virtual machine hosting LXD/Incus Linux containers under Debian) for developers, as well as the ARCVM subsystem (Android Runtime for Chrome in a VM) running the Android application ecosystem in complete isolation from the host system.",
+    "management_and_cloud_ecosystem": "ChromeOS is optimised for centralised fleet management in enterprises and the education sector through the Google Workspace administrative console (Chrome Enterprise Upgrade). Administrators can apply hundreds of security policies, restrict the installation of extensions, manage kiosk modes and provision identities instantly. A variant called ChromeOS Flex makes it possible to convert old PCs and Macs into thin clients; it differs from ChromeOS devices by the absence of Google security chips and of verified boot, and by the unavailability of managed Google Play applications.",
+    "release_channels_and_cadence": "ChromeOS offers three channels. The stable channel receives minor changes roughly every two to three weeks and major changes every four weeks; the beta channel is updated every week, with its major changes arriving about a month before the stable channel; the development channel receives one or two updates per week. Changing channel is reserved to the device owner and can be blocked on a device managed by an enterprise or an educational institution.",
+    "chromeos_flex_scope": "ChromeOS Flex is officially supported only on certified models, chosen among mainstream PCs and Macs of the last ten years. Google documents two differences with ChromeOS devices: the security chips designed by Google and verified boot on the one hand, access to managed Google Play applications on the other. Fleet management requires a ChromeOS Enterprise or Education licence, and large-scale deployment can go through existing fleet management tools.",
+    "security_design_principles": "The ChromiumOS design documentation sets out the security principles of the system: defence in depth, secure by default, least privilege and process partitioning. It also describes the corresponding mechanisms: sandboxing, verified boot and secure automatic update. ChromeOS, the commercial version, relies on this foundation; the security chips and verified boot are among the elements cited by Google as specific to ChromeOS devices compared with ChromeOS Flex.",
+    "documentation_and_resources": "Three documentation sets coexist: the ChromiumOS design documentation on chromium.org for the architecture and security of the open-source foundation, chromeos.dev for developers (Linux environments, Android applications, web), and the Google help centre for release channels and user-facing features. The support pages specify the update cadences per channel.",
+    "origine_du_projet_et_lignee_googlebook": "Google presents ChromeOS as a system available since 2011, maintained by automatic updates covering the system, the browser and the hardware at once. The administrator documentation places the current product line in a transition: a new family of devices, the Googlebooks, has been announced, and a page dated 23 September 2026 sets out what this announcement implies for existing fleets. It states that ChromeOS devices will continue to receive updates and security fixes until mid-2034, that ChromeOS Enterprise and Education licences already associated with devices are maintained, and that migration paths to Googlebook OS are planned for devices whose ten-year cycle extends beyond that deadline. The name of the system is therefore not separated from the hardware it equips: support dates are published per model and per hardware platform, not per software version alone.",
+    "update_duration_and_hardware_platform_lifecycle": "The official policy sets the update period at ten years from the platform release date, a platform being the set of components that a manufacturer assembles for a given device. Google states that it works every two weeks with component manufacturers to test versions on each device, which ties the release cadence to hardware validation rather than to a release calendar. Dates are published per model in a table ranging from the earliest devices, an AC700 whose updates stopped in August 2016, to enterprise Chromebase units maintained until June 2028. For devices released before 2021, access to the full ten years requires an activation by the administrator, called extended updates; this activation does not preserve access to the Play Store or to Android applications, whereas devices released in 2021 or later receive these ten years automatically. After the last update, the system keeps its secure mode: at each boot it self-checks and restores its original state if it detects tampering.",
+    "linux_terminal_and_package_management": "The base system is not administered through a package manager accessible to the user: system and browser components arrive through the automatic updates described by the support policy, and not through a package selection. A second software set is however documented separately. The Linux development environment, disabled by default, is enabled from Settings, About ChromeOS, Developers; its installation takes about ten minutes and opens a terminal on a Debian distribution, in which additional tools are installed with the APT package manager. The update command cited by the official help is `sudo apt-get update && sudo apt-get dist-upgrade`. Linux applications share a single sandbox: a harmful application can affect the other Linux applications, but not the rest of the system, and files shared with the Linux environment are accessible to all these applications. Access to this environment can be forbidden by the administrator on a managed device.",
     "advantages": [
-      "Initialisation et démarrage du système en quelques secondes grâce à une séquence firmware et noyau optimisée.",
-      "Sécurité renforcée par conception : racine immuable en lecture seule via dm-verity, Verified Boot et puce de sécurité matérielle.",
-      "Mises à jour entièrement silencieuses et sans interruption de session via partitionnement redondant A/B.",
-      "Capacités d'exécution polyvalentes grâce aux sous-systèmes isolés Crostini (Linux Debian) et ARCVM (applications Android).",
-      "Gestion de parc et d'identités hautement centralisée via la console d'administration Google Workspace pour les parcs d'entreprise et éducatifs.",
-      "Politique de maintenance étendue avec jusqu'à 10 ans de mises à jour de sécurité et de fonctionnalités garanties sur les matériels récents."
+      "System initialisation and boot in a few seconds thanks to an optimised firmware and kernel sequence.",
+      "Security reinforced by design: immutable read-only root via dm-verity, Verified Boot and hardware security chip.",
+      "Fully silent updates with no session interruption through A/B redundant partitioning.",
+      "Versatile execution capabilities thanks to the isolated Crostini (Debian Linux) and ARCVM (Android applications) subsystems.",
+      "Highly centralised fleet and identity management through the Google Workspace administrative console for enterprise and education fleets.",
+      "Extended maintenance policy with up to 10 years of guaranteed security and feature updates on recent hardware."
     ],
     "disadvantages": [
-      "Dépendance structurelle forte à l'écosystème commercial de Google et à la connectivité aux services en nuage.",
-      "Système d'exploitation propriétaire non librement modifiable sans recompiler en amont le projet ChromiumOS.",
-      "Absence d'accès administrateur de bas niveau en mode normal (le mode développeur désactivant le démarrage vérifié et effaçant les données).",
-      "Compatibilité matérielle restreinte aux configurations certifiées par Google (particulièrement pour l'accélération graphique sous Crostini/ARCVM).",
-      "ChromeOS Flex ne prend pas en charge les applications Android et nécessite du matériel x86-64 standard."
+      "Strong structural dependence on Google's commercial ecosystem and on connectivity to cloud services.",
+      "Proprietary operating system not freely modifiable without rebuilding the ChromiumOS project upstream.",
+      "No low-level administrator access in normal mode (developer mode disabling verified boot and erasing data).",
+      "Hardware compatibility restricted to configurations certified by Google (particularly for graphical acceleration under Crostini/ARCVM).",
+      "ChromeOS Flex does not support Android applications and requires standard x86-64 hardware."
     ],
     "who_is_it_for": [
-      "Élèves, étudiants et enseignants évoluant dans les environnements éducatifs pilotés par Google Workspace for Education.",
-      "Professionnels, télétravailleurs et entreprises recherchant des postes de travail légers, sécurisés et facilement administrables à distance.",
-      "Utilisateurs recherchant un terminal d'accès web fluide, nécessitant un entretien système minimal et immunisé contre les altérations de fichiers système.",
-      "Développeurs web et cloud exploitant les outils de développement Linux natifs via le sous-système Crostini."
+      "Pupils, students and teachers working in educational environments managed by Google Workspace for Education.",
+      "Professionals, remote workers and enterprises looking for lightweight, secure workstations that are easy to administer remotely.",
+      "Users looking for a smooth web access terminal, requiring minimal system maintenance and immune to tampering with system files.",
+      "Web and cloud developers using native Linux development tools through the Crostini subsystem."
     ],
     "who_is_it_not_for": [
-      "Utilisateurs exigeant une station de travail hors-ligne permanente ou refusant toute synchronisation avec un compte commercial en ligne.",
-      "Professionnels dépendant de suites logicielles lourdes natives Windows ou macOS (CAO/DAO avancée, montage audiovisuel professionnel multi-pistes lourd).",
-      "Joueurs intensifs sur PC recherchant une prise en charge complète et directe des bibliothèques DirectX et des périphériques de simulation spécifiques.",
-      "Administrateurs systèmes exigeant un contrôle granulaire direct sur le noyau et la structure du système de fichiers hôte."
+      "Users requiring a permanently offline workstation or refusing any synchronisation with an online commercial account.",
+      "Professionals depending on heavy native Windows or macOS software suites (advanced CAD/CAM, heavy professional multi-track audio and video editing).",
+      "Intensive PC gamers looking for full and direct support for DirectX libraries and specific simulation peripherals.",
+      "System administrators requiring direct granular control over the kernel and the host file system structure."
     ],
-    "verdict": "ChromeOS repose sur une architecture client léger, combinant le noyau Linux, un système de fichiers immuable en lecture seule vérifié cryptographiquement et des environnements virtualisés sous KVM (Crostini et ARCVM). Il est conçu pour la bureautique connectée, l'enseignement et les déploiements industriels standardisés, et impose en contrepartie une dépendance aux services de Google ainsi qu'une séparation stricte entre l'espace utilisateur et les composants de bas niveau de la machine."
+    "verdict": "ChromeOS rests on a thin-client architecture, combining the Linux kernel, a cryptographically verified immutable read-only file system and virtualised environments under KVM (Crostini and ARCVM). It is designed for connected office work, education and standardised industrial deployments, and imposes in return a dependence on Google services as well as a strict separation between user space and the low-level components of the machine."
   },
   "relations": [
     {
       "id": "debian",
       "name": "Debian",
       "type": "related",
-      "note": "Distribution Linux servant d'image de conteneur standard par défaut dans l'environnement de développement Crostini."
+      "note": "Linux distribution serving as the default standard container image in the Crostini development environment."
     },
     {
       "id": "gentoo",
       "name": "Gentoo",
       "type": "upstream_origin",
-      "note": "Distribution Linux dont le gestionnaire de paquets Portage et les ebuilds forment le socle historique du système de compilation de ChromiumOS."
+      "note": "Linux distribution whose Portage package manager and ebuilds form the historical basis of the ChromiumOS build system."
     },
     {
       "id": "android-aosp",
       "name": "Android / AOSP",
       "type": "related",
-      "note": "Système d'exploitation mobile dont l'environnement d'exécution et les applications sont virtualisés dans ChromeOS via ARCVM."
+      "note": "Mobile operating system whose runtime and applications are virtualised in ChromeOS through ARCVM."
     },
     {
       "id": "windows",
       "name": "Microsoft Windows",
       "type": "alternative",
-      "note": "Système d'exploitation de bureau commercial concurrent développé par Microsoft pour postes de travail et ordinateurs personnels."
+      "note": "Competing commercial desktop operating system developed by Microsoft for workstations and personal computers."
     },
     {
       "id": "macos",
       "name": "Apple macOS",
       "type": "alternative",
-      "note": "Système d'exploitation de bureau commercial développé par Apple sur socle Darwin/UNIX pour ordinateurs Mac."
+      "note": "Commercial desktop operating system developed by Apple on a Darwin/UNIX foundation for Mac computers."
     }
   ],
   "links": [
     {
-      "label": "Site officiel de Google ChromeOS",
+      "label": "Official Google ChromeOS website",
       "url": "https://www.google.com/chromebook/chrome-os/"
     },
     {
-      "label": "Portail de documentation technique ChromiumOS",
+      "label": "ChromiumOS technical documentation portal",
       "url": "https://www.chromium.org/chromium-os/"
     },
     {
-      "label": "Documentation officielle du projet Crostini et crosvm",
+      "label": "Official documentation of the Crostini and crosvm project",
       "url": "https://chromium.googlesource.com/chromiumos/docs/+/refs/heads/main/containers_and_vms.md"
     }
   ],
   "sources": [
     {
-      "title": "Portail développeur officiel ChromeOS (Google) — environnements Linux et Android",
+      "title": "Official ChromeOS developer portal (Google) — Linux and Android environments",
       "url": "https://chromeos.dev/en",
       "type": "official"
     },
     {
-      "title": "Documentation d'architecture et de sécurité ChromiumOS",
+      "title": "ChromiumOS architecture and security documentation",
       "url": "https://www.chromium.org/chromium-os/chromiumos-design-docs/security-overview/",
       "type": "documentation"
     },
     {
-      "title": "Spécifications techniques de virtualisation crosvm et conteneurs Crostini",
+      "title": "Technical specifications of crosvm virtualisation and Crostini containers",
       "url": "https://chromium.googlesource.com/chromiumos/docs/+/refs/heads/main/containers_and_vms.md",
       "type": "documentation"
     },
     {
-      "title": "ChromeOS : canaux stable, bêta et développement (aide Google)",
+      "title": "ChromeOS: stable, beta and development channels (Google help)",
       "url": "https://support.google.com/chromebook/answer/1086915",
       "type": "vendor_documentation",
       "accessed": "2026-10-18"
     },
     {
-      "title": "ChromeOS Flex : differences avec ChromeOS, modèles certifiés et cycle de publication",
+      "title": "ChromeOS Flex: differences with ChromeOS, certified models and release cycle",
       "url": "https://chromeos.google/products/chromeos-flex/",
       "type": "vendor_documentation",
       "accessed": "2026-10-18"
