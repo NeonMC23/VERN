@@ -59,7 +59,7 @@
     {
       "id": "illumos",
       "name": "illumos",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "\"SmartOS is an illumos-based operating system built for running clouds. It boots from the network or a USB key into memory, runs containers and virtual machines side by side, and puts ZFS and DTrace in the base system.\" (smartos.org)."
     },
     {

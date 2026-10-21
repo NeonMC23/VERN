@@ -57,7 +57,7 @@
     {
       "id": "illumos",
       "name": "illumos",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: the description carried on every page consulted reads \"illumos based server OS with ZFS, Bhyve, DTrace, Crossbow, SMF and Linux zone support\" (omnios.org)."
     },
     {

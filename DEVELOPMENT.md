@@ -48,6 +48,78 @@ required for routing: `/library/firefox/` works the moment
 The list holds **ids only** — never documentation. Every value shown on a
 catalog card is read from that resource's own JSON at runtime.
 
+### Component roles (`operating_system_kernel`, `upstream_base`)
+
+`role` on a `components` entry is a free-form string. There is no enum, no schema and no
+automatic check of its value: it is humanised for display and nothing else reads it, so a wrong
+role raises no error — it simply states something false on the page. The convention below is
+therefore editorial, and it is applied by reading sources, not by trusting a field name.
+
+- `operating_system_kernel` — the kernel the documented system actually runs or ships: a
+  software component built or packaged by that system.
+- `upstream_base` — a system or base upstream from which the documented system derives. It is
+  not the kernel of the documented system, even when that upstream also publishes a kernel.
+
+Four rules follow:
+
+1. An upstream distribution or system is **not** automatically the kernel used by its
+   derivative. The kernel of the derivative is whatever that derivative builds or ships.
+2. A source tree that bundles the kernel with drivers, libraries and utilities is not a kernel.
+   Calling it `operating_system_kernel` requires evidence that the entry designates the kernel
+   itself, not the tree that contains it.
+3. A `relations` entry (`upstream_base`, `upstream`, `downstream_of`…) neither turns a base into
+   a kernel nor settles how a component is classified: the two fields answer different
+   questions, and both have to be right.
+4. Verify what the component really is — project documentation, build or packaging
+   documentation, source repository — before choosing a role. A project name, a repository name
+   or a filename is not proof of what the entry designates.
+
+Examples, illustrating the distinction at one point in time rather than acting as a rule of
+their own: OmniOS builds its system from its own fork `illumos-omnios`, SmartOS from
+`illumos-joyent` (which carries the core kernel, libraries and user commands), while
+`illumos-gate` is a source tree that *contains* the kernel alongside drivers and utilities. The
+same word can therefore name an upstream base in one context and something of another nature
+next to it; only the documentation of the system at hand decides, case by case.
+
+Two prohibitions: never change a role merely to make labels look uniform, and never resolve an
+uncertain case by picking a role anyway. When the sources do not settle the question, leave the
+uncertainty visible and report it instead of asserting a classification they do not support.
+
+### `operating_system_core` (VΞRN convention)
+
+`operating_system_core` designates the core software set of an operating system: the kernel
+together with essential userland components — device drivers, core libraries and system
+utilities, for instance — when they are built and treated as one coherent set. It applies to a
+source tree or a software set of that nature, and neither to the kernel alone nor to the complete
+operating system.
+
+This role is a **classification convention internal to this corpus**, added to close the case that
+rule 2 above raises. It is not the official name of a category used by OpenIndiana or illumos: the
+sources consulted describe the object in their own words, and no stable official term for it was
+found. It must not be presented as an external standard, and it must not be reused for another
+kind of object on the strength of its name alone.
+
+How it relates to the roles already in use:
+
+- `kernel` — a kernel, in the corpus's existing usage.
+- `operating_system_kernel` — a component that is the kernel of an operating system, per the
+  convention above.
+- `operating_system_core` — a core set wider than the kernel alone, which may include essential
+  userland components.
+- `upstream_base` — an upstream system or distribution from which another system derives. It is not
+  to be used merely because a source tree happens to be maintained upstream.
+- `core_utilities`, `system_libraries` — narrower components; they must not be taken automatically
+  for the core software set defined here.
+- `build_system` — build infrastructure or a build system; it must not be confused with the product
+  or with the source tree it builds.
+
+Example: `openindiana:illumos-gate` applies the convention. The OpenIndiana documentation consulted
+describes `illumos-gate` as including the illumos kernel along with many of the device drivers, core
+libraries and system utilities, and the build documentation lists it as "Kernel and core userland
+components". The entry is therefore `operating_system_core`, not `operating_system_kernel`. This
+states nothing about the boundary between `illumos-gate` and `oi-userland`: the sources consulted do
+not settle it at the level of individual files.
+
 ## How `/library/{id}/` works
 
 ```text
