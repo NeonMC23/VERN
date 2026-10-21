@@ -68,19 +68,19 @@
     {
       "id": "windows",
       "name": "Microsoft Windows",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Proprietary commercial operating system whose NT kernel architecture and Win32 programming interfaces ReactOS reimplements."
     },
     {
       "id": "freedos",
       "name": "FreeDOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free DOS-compatible operating system, sharing with ReactOS the mission of running the historical PC software ecosystem."
     },
     {
       "id": "haiku",
       "name": "Haiku",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Independent free operating system stemming from the legacy of a classic desktop system (BeOS)."
     }
   ],

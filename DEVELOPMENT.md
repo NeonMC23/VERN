@@ -120,6 +120,107 @@ components". The entry is therefore `operating_system_core`, not `operating_syst
 states nothing about the boundary between `illumos-gate` and `oi-userland`: the sources consulted do
 not settle it at the level of individual files.
 
+### Components and relations side by side (`upstream_base`)
+
+A `components` entry describes an element of the documented system, and may describe the base that
+system uses. A `relations` entry describes a link between the current resource and another
+resource. Both can carry the value `upstream_base`, and that shared value does not make the two
+entries interchangeable: the field they belong to is what says which question is answered.
+
+Rule 3 above still applies: the two fields answer different questions, and both have to be right.
+Their coexistence in one resource is legitimate when the two entries document different aspects —
+for instance a component attesting what the base is for this system, next to a relation pointing to
+the upstream resource. Coexistence is not required either: nothing here states that a component
+`upstream_base` must be accompanied by a relation of the same value, or the reverse. Neither
+direction has been turned into a rule, because the editorial intention behind individual resources
+has not been formalised.
+
+**What the current rendering does** — a description of the code as it stands, not a guarantee.
+`assets/js/library-builder.js` qualifies every reference card through the same mechanism, reading
+`role`, `type` and `relation` in that order and humanising the value it finds. A component and a
+relation can therefore both display `Upstream base`. They are nevertheless rendered in two distinct
+sections, "Components" and "Related / Alternatives", and a shared label does not by itself mean that
+the two entries describe the same object. Nothing here promises that the labels will stay identical,
+and nothing here is a compatibility contract. That shared mechanism is display only: `role`, `type`
+and `relation` are not interchangeable at the semantic level — see *Relation fields* below.
+
+**References whose target is not documented.** A reference id with no `data/library/<id>.json` is
+served without an active link, and its card carries the tooltip `Not documented yet`. That
+presentation says nothing about the correctness of the reference: it records that the target
+resource does not exist in the corpus. It does not justify creating a resource on its own — a new
+library resource follows the usual source-verification and documentation rules above, and is added
+because it can be documented, not because a link looks missing.
+
+**Editorial check before contributing.**
+
+1. Verify that the component describes the element it names, and not the upstream system as a whole
+   merely because the names coincide.
+2. Verify that the relation describes the documented filiation or link, with sources to support it.
+3. Ask whether the two entries bring different information. If they do, keeping both is allowed; if
+   they do not, the duplication is a reason to go back to the sources, not a reason to delete either
+   entry on the spot.
+4. Check the ids against `data/library/` and the claims against the sources of the resource itself.
+5. Never remove a component or a relation because its label resembles another entry's label.
+6. Never rename two ids to make cards clickable before checking the structure and the meaning of
+   each entry: pointing an id at an existing resource changes what the page links to.
+7. When an ambiguity remains, document it and ask for an arbitration. The rendering cannot settle
+   it, and no conclusion is inferred from a label alone.
+
+**What this section does not settle.** It does not say that resources carrying both entries contain
+errors; it does not say that every coexistence is correct; it does not describe how the stylesheets
+render two similar cards in every context, since the audit behind this section read the rendered
+DOM and not the CSS; it does not ask for undocumented targets to be removed or completed; and it
+does not settle the relation field names, which are described in *Relation fields* below. On the key
+itself the convention is now stated: `relation` is the canonical key, and the entries written with
+the historical `type` remain accepted until an explicit decision is taken on whether they are
+converted. A key normalisation does not, by itself, justify changing a value. That question is
+distinct from this section.
+
+### Relation fields (`relation`, `type`)
+
+A `relations` entry carries its qualifier under a key. Two keys exist in the corpus, and they do not
+play the same role.
+
+- `relation` — **the canonical key**. It is what a new entry is written with, and what any later
+  normalisation explicitly authorised would use.
+- `type` — the historical key for the same qualifier. Entries written with it are still accepted and
+  still rendered: their presence is not an error the build can catch, and it is not treated as one
+  here. It is not the convention to follow for anything new.
+
+The corpus was not converted in one go, and no schedule is attached to the part that still uses
+`type`. Whether those entries are converted is an explicit decision, taken on a named scope and
+approved before it is applied. Nothing in this document announces or promises that conversion.
+
+**A key and its value are two different questions.** Renaming a key does not alter the value it
+carries, and settles nothing about that value's meaning or validity. Changing a value — mapping a
+historical value onto another, reversing the direction of a filiation, merging two near-synonyms —
+is a separate editorial decision, taken on sources and explicitly approved. A normalised entry must
+be read as "same value, new key", never as "value approved".
+
+**`type` exists at two levels, and they never meet.** At the top level of a resource, `type` is a
+required field of the schema (`operating_system`, `project`…) rendered as the header kicker; it is
+current and must be present. Inside a `components` or `relations` entry, `type` is the historical
+name of the card qualifier described above. The two sit at different depths and are read by
+different code: a statement about one says nothing about the other, and a rule about relation keys
+never applies to a resource's own type — nor the reverse.
+
+**A shared label is not a shared meaning.** The rendering can turn `role`, `type` and `relation`
+into similar-looking labels on a card. That mechanism is display, not semantics: the three keys
+answer different questions, and identical wording on two cards never establishes an equivalence
+between what they designate.
+
+Rules when writing or editing an entry:
+
+1. Use `relation` for every new `relations` entry. Not `type`, even though the rendering reads both.
+2. When a key is normalised, keep the value unchanged. A key change is not an occasion to reword a
+   value, to adjust a note or to retarget an id.
+3. Treat any change of value as a separate decision: it needs sources, an explicit approval, and a
+   scope that names the entries concerned.
+4. Mind the depth. A top-level field and a field inside a `relations` or `components` entry are
+   different objects, even when they carry the same name.
+5. Never infer a semantic equivalence from an identical rendered label, nor from an identical value
+   string alone: check the entry, its target and the sources behind it.
+
 ## How `/library/{id}/` works
 
 ```text

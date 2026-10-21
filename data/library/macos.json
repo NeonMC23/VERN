@@ -59,25 +59,25 @@
     {
       "id": "windows",
       "name": "Microsoft Windows",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Competing commercial desktop operating system developed by Microsoft on a Windows NT foundation."
     },
     {
       "id": "freebsd",
       "name": "FreeBSD",
-      "type": "related",
+      "relation": "related",
       "note": "Free Unix operating system whose BSD system layer was integrated into the Darwin foundation and the XNU kernel."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Linux distribution for workstations and servers offering an alternative open-source environment."
     },
     {
       "id": "fedora",
       "name": "Fedora",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Avant-garde Linux distribution for workstations adopting the open standards of the free software world."
     }
   ],

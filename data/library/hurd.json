@@ -83,25 +83,25 @@
     {
       "id": "debian",
       "name": "Debian",
-      "type": "related",
+      "relation": "related",
       "note": "Major Linux distribution providing the most complete official port of the GNU user space with the Hurd kernel (Debian GNU/Hurd)."
     },
     {
       "id": "freebsd",
       "name": "FreeBSD",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free Unix operating system with a monolithic kernel representing the traditional approach compared with the microkernel architecture of Hurd."
     },
     {
       "id": "redox-os",
       "name": "Redox OS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Modern free operating system founded on a microkernel architecture."
     },
     {
       "id": "linux-from-scratch",
       "name": "Linux From Scratch",
-      "type": "related",
+      "relation": "related",
       "note": "Project documenting the step-by-step construction of the GNU operating system with an independent kernel."
     }
   ],

@@ -75,25 +75,25 @@
     {
       "id": "hurd",
       "name": "GNU Hurd",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Official operating system of the GNU project articulated around a multi-server microkernel architecture on GNU Mach."
     },
     {
       "id": "redox-os",
       "name": "Redox OS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free modern operating system founded on a microkernel architecture and written in Rust."
     },
     {
       "id": "haiku",
       "name": "Haiku",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free operating system focused on modularity and on the responsiveness of the graphical interface."
     },
     {
       "id": "serenityos",
       "name": "SerenityOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free modern stand-alone operating system developed from scratch for desktop computers."
     }
   ],

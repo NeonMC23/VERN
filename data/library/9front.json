@@ -66,25 +66,25 @@
     {
       "id": "plan9",
       "name": "Plan 9 from Bell Labs",
-      "type": "related",
+      "relation": "related",
       "note": "Distributed research operating system designed by Bell Labs, of which 9front is the active community fork."
     },
     {
       "id": "redox-os",
       "name": "Redox OS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Rust microkernel system sharing ideals of unified architecture."
     },
     {
       "id": "openbsd",
       "name": "OpenBSD",
-      "type": "related",
+      "relation": "related",
       "note": "BSD system renowned for its code rigour and philosophical independence."
     },
     {
       "id": "serenityos",
       "name": "SerenityOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Contemporary free operating system developed independently."
     }
   ],

@@ -68,25 +68,25 @@
     {
       "id": "debian",
       "name": "Debian",
-      "type": "upstream_base",
+      "relation": "upstream_base",
       "note": "Linux distribution providing the base packages and the runtime environment of the network system."
     },
     {
       "id": "pfsense",
       "name": "pfSense",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Open-source firewall and router system based on FreeBSD offering a web graphical interface for enterprise networks."
     },
     {
       "id": "opnsense",
       "name": "OPNsense",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Firewall and routing solution based on HardenedBSD/FreeBSD equipped with a modern web interface."
     },
     {
       "id": "openwrt",
       "name": "OpenWrt",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Lightweight embedded network operating system oriented mainly towards consumer routers and wireless networks."
     }
   ],

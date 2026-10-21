@@ -74,25 +74,25 @@
     {
       "id": "debian",
       "name": "Debian",
-      "type": "upstream_base",
+      "relation": "upstream_base",
       "note": "Linux distribution from which the entire software base and package set of Raspberry Pi OS is directly derived."
     },
     {
       "id": "dietpi",
       "name": "DietPi",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Minimalist and highly optimised alternative distribution designed specifically for single-board computers such as the Raspberry Pi."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Linux distribution offering official images preconfigured for Raspberry Pi 4 and 5 with the GNOME desktop."
     },
     {
       "id": "postmarketos",
       "name": "Nura",
-      "type": "related",
+      "relation": "related",
       "note": "Linux distribution oriented towards mobility and ARM hardware sharing the use of Wayland and touch interfaces."
     }
   ],

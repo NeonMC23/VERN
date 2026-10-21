@@ -67,19 +67,19 @@
     {
       "id": "ios",
       "name": "iOS",
-      "type": "related",
+      "relation": "related",
       "note": "Mobile operating system for the iPhone from which iPadOS was formally separated in 2019 to develop productive features suited to large screens."
     },
     {
       "id": "macos",
       "name": "Apple macOS",
-      "type": "related",
+      "relation": "related",
       "note": "Apple's desktop operating system, from which iPadOS borrows ergonomic concepts (dynamic pointer, Stage Manager window management, desktop-class Safari)."
     },
     {
       "id": "android-aosp",
       "name": "Android / AOSP",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Alternative mobile system powering competing touch tablets."
     }
   ],

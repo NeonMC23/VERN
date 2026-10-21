@@ -104,25 +104,25 @@
     {
       "id": "debian",
       "name": "Debian",
-      "type": "upstream_base",
+      "relation": "upstream_base",
       "note": "Reference Linux distribution serving as the fundamental foundation for the operating system and the software packages."
     },
     {
       "id": "truenas",
       "name": "TrueNAS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Competing network storage platform powered by OpenZFS, more demanding in hardware resources."
     },
     {
       "id": "proxmox-ve",
       "name": "Proxmox VE",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Debian-based virtualisation and containerisation platform, often associated or compared for home server infrastructures."
     },
     {
       "id": "dietpi",
       "name": "DietPi",
-      "type": "related",
+      "relation": "related",
       "note": "Lightweight distribution for single-board computers integrating an installation script optimised for OpenMediaVault."
     }
   ],
