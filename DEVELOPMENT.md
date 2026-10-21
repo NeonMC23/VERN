@@ -197,12 +197,14 @@ historical value onto another, reversing the direction of a filiation, merging t
 is a separate editorial decision, taken on sources and explicitly approved. A normalised entry must
 be read as "same value, new key", never as "value approved".
 
-**`type` exists at two levels, and they never meet.** At the top level of a resource, `type` is a
-required field of the schema (`operating_system`, `project`…) rendered as the header kicker; it is
-current and must be present. Inside a `components` or `relations` entry, `type` is the historical
-name of the card qualifier described above. The two sit at different depths and are read by
-different code: a statement about one says nothing about the other, and a rule about relation keys
-never applies to a resource's own type — nor the reverse.
+**`type` names three different things, and they never meet.** At the top level of a resource, `type`
+is a required field of the schema (`operating_system`, `project`…) rendered as the header kicker; it
+is current and must be present. Inside a `components` or `relations` entry, `type` is the historical
+name of the card qualifier described above. Inside a `sources` entry, `type` names the kind of source
+(`documentation`, `repository`…) — a current and expected field, unrelated to the two others. The
+three sit at different depths and are read by different code: a statement about one says nothing about
+the others, and a rule about relation keys never applies to a resource's own type — nor to a source's
+kind, nor the reverse.
 
 **A shared label is not a shared meaning.** The rendering can turn `role`, `type` and `relation`
 into similar-looking labels on a card. That mechanism is display, not semantics: the three keys
