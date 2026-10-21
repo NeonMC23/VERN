@@ -56,7 +56,7 @@
     {
       "id": "android-aosp",
       "name": "Android",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base platform: the project describes CalyxOS as an Android mobile operating system; the page does not name AOSP."
     },
     {

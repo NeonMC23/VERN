@@ -64,7 +64,7 @@
     {
       "id": "ubuntu-base",
       "name": "Ubuntu",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: the project describes Rhino Linux as an Ubuntu-based rolling release that follows the Ubuntu devel branch instead of LTS or interim releases."
     },
     {

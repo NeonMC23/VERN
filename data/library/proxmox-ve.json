@@ -67,7 +67,7 @@
     {
       "id": "kvm",
       "name": "KVM",
-      "role": "bare_metal_hypervisor",
+      "role": "hypervisor",
       "note": "Hypervisor integrated into the platform, according to the product overview."
     },
     {

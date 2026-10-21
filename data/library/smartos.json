@@ -83,7 +83,7 @@
     {
       "id": "kvm",
       "name": "KVM",
-      "role": "bare_metal_hypervisor",
+      "role": "hypervisor",
       "note": "Listed among the building blocks on the project home page, where SmartOS is presented as \"the open-source hypervisor that runs Triton\" and as running \"containers and virtual machines side by side\"; the same page names \"KVM\" and \"bhyve\" in its technology list (smartos.org)."
     },
     {

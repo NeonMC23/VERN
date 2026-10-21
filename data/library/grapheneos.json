@@ -60,7 +60,7 @@
     {
       "id": "android-aosp",
       "name": "Android",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base platform: the features page documents Android app compatibility and a sandboxed implementation of Google Play; the page does not name AOSP."
     },
     {

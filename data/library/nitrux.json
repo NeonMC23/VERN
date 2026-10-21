@@ -64,7 +64,7 @@
     {
       "id": "debian-base",
       "name": "Debian",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base distribution: \"Nitrux is a 64-bit-only Linux desktop distribution built from Debian.\"; the same page adds that Nitrux is \"up to date, thanks to recent Debian releases and the performance-oriented kernel configurations we chose\" (nxos.org/home/nx)."
     },
     {

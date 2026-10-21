@@ -63,7 +63,7 @@
     {
       "id": "ubuntu-base",
       "name": "Ubuntu",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: \"Feren OS is a British-made Linux Distribution that is based on Ubuntu, one of the most popular Linux Distributions out there and well regarded for rock solid stability.\" (ferenos.weebly.com)."
     },
     {

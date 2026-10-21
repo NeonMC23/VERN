@@ -66,7 +66,7 @@
     {
       "id": "debian-base",
       "name": "Debian",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: \"Raspberry Pi OS is based on the Debian Linux distribution and supports over 69,000 Debian packages.\"; the same page adds that the latest version \"is based on Debian Trixie\" and that \"Releases happen roughly once every two years.\" (documentation/asciidoc/computers/os/rpi-os-introduction.adoc, github.com/raspberrypi/documentation)."
     }
   ],

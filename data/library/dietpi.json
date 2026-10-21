@@ -62,7 +62,7 @@
     {
       "id": "debian-base",
       "name": "Debian",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: DietPi presents itself as a highly optimised minimal Debian OS; the page does not state the Debian version."
     },
     {

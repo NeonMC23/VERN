@@ -65,7 +65,7 @@
     {
       "id": "debian-base",
       "name": "Debian",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base distribution: the feature table lists \"Debian Sid + Deb Multimedia\", with packages \"curated, patched and compiled together\" and \"optimised across our base repositories\"; the hero line summarises the system as \"Debian Sid · Custom kernel · Latest packages and GPU stack\" (pika-os.com)."
     },
     {
@@ -93,6 +93,28 @@
       "name": "Bazzite",
       "relation": "alternative",
       "note": "Containerized, immutable gaming-focused operating system based on Fedora Silverblue / Universal Blue."
+    }
+  ],
+  "variants": [
+    {
+      "name": "PikaOS GNOME Edition",
+      "description": "Official desktop edition listed under \"Pick your edition\" on pika-os.com, published as a Standard ISO and as an NVIDIA ISO for RTX cards and GTX 1650 or newer. The site describes it as \"Focused, calm and a good first stop if you want the computer to stay out of your way\" and states that \"Every edition gets the same PikaOS base\" (pika-os.com)."
+    },
+    {
+      "name": "PikaOS KDE Plasma Edition",
+      "description": "Official desktop edition listed under \"Pick your edition\" on pika-os.com, published as a Standard ISO and as an NVIDIA ISO. Described on the same page as \"Familiar, deeply adjustable and happy to become exactly your desktop\" (pika-os.com)."
+    },
+    {
+      "name": "PikaOS Hyprland Edition",
+      "description": "Official desktop edition listed under \"Pick your edition\" on pika-os.com, published as a Standard ISO and as an NVIDIA ISO. Described on the same page as \"A polished tiling setup with the motion and flexibility already dialled in\" (pika-os.com)."
+    },
+    {
+      "name": "PikaOS Niri Edition",
+      "description": "Official desktop edition listed under \"Pick your edition\" on pika-os.com, published as a Standard ISO and as an NVIDIA ISO. Described on the same page as \"Scrollable tiling for keyboard-first work, preconfigured so you can learn by using it\" (pika-os.com)."
+    },
+    {
+      "name": "PikaOS COSMIC Edition",
+      "description": "Official desktop edition listed under \"Pick your edition\" on pika-os.com, published as a Standard ISO and as an NVIDIA ISO. Described on the same page as \"A modern Rust-built desktop with tiling, workspaces and room to grow\" (pika-os.com)."
     }
   ],
   "links": {

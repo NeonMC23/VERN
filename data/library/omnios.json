@@ -93,7 +93,7 @@
     {
       "id": "smf",
       "name": "SMF",
-      "role": "service_supervision",
+      "role": "init_system",
       "note": "Named in the description carried on every page of the site: \"illumos based server OS with ZFS, Bhyve, DTrace, Crossbow, SMF and Linux zone support\" (omnios.org, meta description and home page)."
     },
     {
