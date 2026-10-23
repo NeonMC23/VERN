@@ -67,7 +67,7 @@
     {
       "id": "kvm",
       "name": "KVM",
-      "role": "bare_metal_hypervisor",
+      "role": "hypervisor",
       "note": "Hypervisor integrated into the platform, according to the product overview."
     },
     {
@@ -93,25 +93,25 @@
     {
       "id": "debian",
       "name": "Debian",
-      "type": "upstream_base",
+      "relation": "upstream_base",
       "note": "Linux distribution serving as the fundamental foundation for the operating system and base packages of Proxmox VE."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
-      "type": "related",
+      "relation": "related",
       "note": "Linux distribution whose LTS kernel versions serve as the tracking basis for the custom Linux kernel of Proxmox VE."
     },
     {
       "id": "truenas",
       "name": "TrueNAS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Unified network storage operating system based on OpenZFS, frequently associated with Proxmox VE or used as an alternative storage solution."
     },
     {
       "id": "openmediavault",
       "name": "OpenMediaVault",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Network storage solution based on Debian GNU/Linux offering simplified management of shares and lightweight services."
     }
   ],

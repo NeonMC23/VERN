@@ -64,25 +64,25 @@
     {
       "id": "freebsd",
       "name": "FreeBSD",
-      "type": "upstream_base",
+      "relation": "upstream_base",
       "note": "Free Unix operating system forming the historical foundation of the FreeNAS project and of the TrueNAS CORE edition."
     },
     {
       "id": "debian",
       "name": "Debian",
-      "type": "upstream_base",
+      "relation": "upstream_base",
       "note": "Linux distribution serving as the foundation for the modern TrueNAS SCALE edition (Linux kernel and Debian user space)."
     },
     {
       "id": "proxmox-ve",
       "name": "Proxmox VE",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Enterprise hypervisor and virtualisation platform frequently interfaced with TrueNAS for clustered shared storage."
     },
     {
       "id": "openmediavault",
       "name": "OpenMediaVault",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Lightweight NAS distribution based on Debian, oriented towards more modest hardware architectures."
     }
   ],

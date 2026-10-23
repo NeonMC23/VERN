@@ -83,7 +83,7 @@
     {
       "id": "system-initialization",
       "name": "Init System (SysVinit or systemd)",
-      "role": "service_supervision",
+      "role": "init_system",
       "note": "Service manager and process supervisor selected by the user via corresponding book editions."
     },
     {

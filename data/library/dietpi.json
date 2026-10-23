@@ -62,7 +62,7 @@
     {
       "id": "debian-base",
       "name": "Debian",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: DietPi presents itself as a highly optimised minimal Debian OS; the page does not state the Debian version."
     },
     {
@@ -88,25 +88,25 @@
     {
       "id": "debian",
       "name": "Debian",
-      "type": "upstream_base",
+      "relation": "upstream_base",
       "note": "Linux distribution from which the entire system base and package manager of DietPi are directly derived."
     },
     {
       "id": "raspberry-pi-os",
       "name": "Raspberry Pi OS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Official operating system for Raspberry Pi boards to which DietPi offers an ultra-lightweight and resource-efficient alternative."
     },
     {
       "id": "alpine-linux",
       "name": "Alpine Linux",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Independent Linux distribution focused on extreme minimalism and a reduced memory footprint."
     },
     {
       "id": "openmediavault",
       "name": "OpenMediaVault",
-      "type": "related",
+      "relation": "related",
       "note": "Network storage solution whose automated installation is offered directly within the DietPi software catalogue."
     }
   ],

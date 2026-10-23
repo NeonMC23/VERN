@@ -67,19 +67,19 @@
     {
       "id": "haiku",
       "name": "Haiku",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free operating system dedicated to the personal workstation and designed around a responsive graphical interface."
     },
     {
       "id": "redox-os",
       "name": "Redox OS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Modern free Unix-like operating system rewriting the system stack with innovative architectural guarantees."
     },
     {
       "id": "freebsd",
       "name": "FreeBSD",
-      "type": "related",
+      "relation": "related",
       "note": "Free Unix operating system from which SerenityOS draws inspiration for certain file system and tool design principles."
     }
   ],

@@ -57,7 +57,7 @@
     {
       "id": "illumos-gate",
       "name": "illumos-gate",
-      "role": "operating_system_kernel",
+      "role": "operating_system_core",
       "note": "\"illumos-gate includes the illumos kernel, along with many of the device drivers, core libraries, and system utilities\"; \"To form a complete distribution, the OpenIndiana project combines illumos-gate with oi-userland, and with other free and open-source software\" (About OpenIndiana, docs.openindiana.org/misc/openindiana/)."
     },
     {

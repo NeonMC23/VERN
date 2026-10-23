@@ -343,6 +343,11 @@ Both fields reference **other Library resources by ID**:
 
 `role`, `type`, `relation` and `note` are optional qualifiers shown on the card. Relation types are rendered **generically** — the humanised value is displayed as-is, so `based_on` shows "Based on". Adding a new relation type requires no code change.
 
+Those three key names are not interchangeable, even though one mechanism displays them: a new
+reference uses `relation`, the canonical key, while `type` is a historical spelling still accepted in
+older entries. Normalising a key changes neither the value nor its meaning. The full rule, and what it
+does not settle, is in `DEVELOPMENT.md` under *Relation fields*.
+
 **Never duplicate the referenced resource's documentation.** A reference is a pointer, not a copy.
 
 ### When a referenced ID does not exist

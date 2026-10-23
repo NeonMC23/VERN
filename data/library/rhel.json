@@ -68,13 +68,13 @@
     {
       "id": "almalinux",
       "name": "AlmaLinux",
-      "type": "derivative",
+      "type": "downstream_derivative",
       "note": "Community-managed enterprise Linux distribution binary compatible with RHEL."
     },
     {
       "id": "rocky-linux",
       "name": "Rocky Linux",
-      "type": "derivative",
+      "type": "downstream_derivative",
       "note": "Community enterprise Linux distribution offering binary compatibility with RHEL."
     },
     {

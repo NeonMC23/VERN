@@ -68,7 +68,7 @@
     {
       "id": "debian-base",
       "name": "Debian",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base distribution: the portal describes Devuan as \"a fork of Debian without systemd\", and the packages page states that \"Devuan package repositories are exclusive. Other repositories, including Debian, Ubuntu, Mint etc, should not be used directly.\" The release table maps each Devuan suite to a Debian suite (devuan.org/os/, devuan.org/os/packages, devuan.org/os/releases)."
     },
     {

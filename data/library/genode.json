@@ -67,25 +67,25 @@
     {
       "id": "helenos",
       "name": "HelenOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free multi-server microkernel operating system exploring strict isolation of services."
     },
     {
       "id": "redox-os",
       "name": "Redox OS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free modern microkernel operating system developed in Rust."
     },
     {
       "id": "hurd",
       "name": "GNU Hurd",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Official kernel of the GNU project articulated around a multi-server microkernel architecture."
     },
     {
       "id": "qubes-os",
       "name": "Qubes OS",
-      "type": "related",
+      "relation": "related",
       "note": "Operating system secured by hardware compartmentalisation and virtualisation."
     }
   ],

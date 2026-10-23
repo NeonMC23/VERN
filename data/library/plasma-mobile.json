@@ -72,25 +72,25 @@
     {
       "id": "postmarketos",
       "name": "Nura",
-      "type": "related",
+      "relation": "related",
       "note": "Alpine-based mobile Linux distribution officially offering the Plasma Mobile interface."
     },
     {
       "id": "mobian",
       "name": "Mobian",
-      "type": "related",
+      "relation": "related",
       "note": "Debian distribution for mobile devices integrating images with the Plasma Mobile environment."
     },
     {
       "id": "kde-neon",
       "name": "KDE neon",
-      "type": "related",
+      "relation": "related",
       "note": "Reference distribution of the KDE project sharing the application foundation and the Plasma components."
     },
     {
       "id": "ubuntu-touch",
       "name": "Ubuntu Touch",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Alternative mobile operating system stemming from Canonical maintained by the UBports foundation."
     }
   ],

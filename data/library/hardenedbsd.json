@@ -57,7 +57,7 @@
     {
       "id": "freebsd-base",
       "name": "FreeBSD",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: \"HardenedBSD is a fork of FreeBSD, founded in 2014, that implements exploit mitigations and security hardening technologies.\"; the README adds that \"HardenedBSD exists today as a fork of FreeBSD that closely follow's FreeBSD's source code\" and that \"HardenedBSD syncs with FreeBSD every six hours\" (README, github.com/HardenedBSD/hardenedBSD)."
     }
   ],

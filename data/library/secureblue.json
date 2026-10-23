@@ -82,9 +82,9 @@
     },
     {
       "id": "secureblue-kernel",
-      "name": "Hardened Linux Kernel & Policy",
+      "name": "Hardened Linux Kernel",
       "role": "operating_system_kernel",
-      "note": "Custom Fedora-derived kernel implementing KSPP settings, module blacklists, and Yama ptrace restrictions."
+      "note": "Kernel package built, patched and signed by secureblue from Fedora's kernel package, published through the project's COPR with a .secureblue.N build identifier. The system image separately provides hardening configuration, including kernel arguments, sysctl values, module blacklists and SELinux policies."
     },
     {
       "id": "secureblue-run0",

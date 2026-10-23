@@ -63,19 +63,19 @@
     {
       "id": "freedos",
       "name": "FreeDOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Historical single-user PC operating system offering direct hardware access without a modern abstraction layer."
     },
     {
       "id": "haiku",
       "name": "Haiku",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free operating system dedicated to the personal workstation and equipped with an independent architecture."
     },
     {
       "id": "reactos",
       "name": "ReactOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Free stand-alone operating system for the x86 PC architecture."
     }
   ],

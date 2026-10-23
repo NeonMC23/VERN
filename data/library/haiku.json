@@ -87,25 +87,25 @@
     {
       "id": "serenityos",
       "name": "SerenityOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Modern stand-alone operating system designed for personal computing with an integrated C++ desktop graphical interface."
     },
     {
       "id": "reactos",
       "name": "ReactOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Open-source reimplementation project of a historical desktop operating system."
     },
     {
       "id": "freebsd",
       "name": "FreeBSD",
-      "type": "related",
+      "relation": "related",
       "note": "Free Unix operating system whose hardware drivers and wireless network stack Haiku reuses and adapts."
     },
     {
       "id": "macos",
       "name": "Apple macOS",
-      "type": "related",
+      "relation": "related",
       "note": "Apple desktop operating system having historically considered the acquisition of BeOS in 1996 before opting for NeXTSTEP as the foundation of macOS."
     }
   ],

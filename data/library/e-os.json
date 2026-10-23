@@ -60,7 +60,7 @@
     {
       "id": "lineageos-aosp",
       "name": "LineageOS / AOSP",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: \"/e/OS consists of: An installable mobile operating system for smartphones, which is forked from LineageOS/AOSP, and completely 'deGoogled'\"; the same page states that \"/e/OS is a fork of Android and in particular of the LineageOS flavor of Android\" (doc.e.foundation/os/product-description)."
     }
   ],

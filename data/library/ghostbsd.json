@@ -54,7 +54,7 @@
     {
       "id": "freebsd-base",
       "name": "FreeBSD",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: the project describes GhostBSD as a FreeBSD-based operating system."
     },
     {

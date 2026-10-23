@@ -66,7 +66,7 @@
     {
       "id": "debian-base",
       "name": "Debian",
-      "role": "operating_system_kernel",
+      "role": "upstream_base",
       "note": "Base system: \"Raspberry Pi OS is based on the Debian Linux distribution and supports over 69,000 Debian packages.\"; the same page adds that the latest version \"is based on Debian Trixie\" and that \"Releases happen roughly once every two years.\" (documentation/asciidoc/computers/os/rpi-os-introduction.adoc, github.com/raspberrypi/documentation)."
     }
   ],
@@ -74,25 +74,25 @@
     {
       "id": "debian",
       "name": "Debian",
-      "type": "upstream_base",
+      "relation": "upstream_base",
       "note": "Linux distribution from which the entire software base and package set of Raspberry Pi OS is directly derived."
     },
     {
       "id": "dietpi",
       "name": "DietPi",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Minimalist and highly optimised alternative distribution designed specifically for single-board computers such as the Raspberry Pi."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Linux distribution offering official images preconfigured for Raspberry Pi 4 and 5 with the GNOME desktop."
     },
     {
       "id": "postmarketos",
       "name": "Nura",
-      "type": "related",
+      "relation": "related",
       "note": "Linux distribution oriented towards mobility and ARM hardware sharing the use of Wayland and touch interfaces."
     }
   ],

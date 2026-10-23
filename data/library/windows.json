@@ -86,25 +86,25 @@
     {
       "id": "macos",
       "name": "Apple macOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Competing commercial desktop operating system developed by Apple on a Darwin/UNIX foundation."
     },
     {
       "id": "ubuntu",
       "name": "Ubuntu",
-      "type": "related",
+      "relation": "related",
       "note": "Reference Linux distribution commonly deployed within the Windows Subsystem for Linux (WSL2)."
     },
     {
       "id": "debian",
       "name": "Debian",
-      "type": "related",
+      "relation": "related",
       "note": "Linux distribution supported as a container and user-space environment in WSL."
     },
     {
       "id": "reactos",
       "name": "ReactOS",
-      "type": "alternative",
+      "relation": "alternative",
       "note": "Project for a free and open reimplementation of the kernel architecture and APIs of Windows NT."
     }
   ],
