@@ -126,7 +126,10 @@ var LIBRARY_RESOURCES = [
   "genode",
   "rhel",
   "cachyos",
-  "nitrux"
+  "nitrux",
+  "mozilla-firefox",
+  "google-chrome",
+  "microsoft-edge"
 ];
 
 (function () {
