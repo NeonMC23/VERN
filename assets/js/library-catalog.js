@@ -129,7 +129,31 @@ var LIBRARY_RESOURCES = [
   "nitrux",
   "mozilla-firefox",
   "google-chrome",
-  "microsoft-edge"
+  "microsoft-edge",
+  "opera-browser",
+  "vivaldi-browser",
+  "brave-browser",
+  "safari-browser",
+  "chromium-browser",
+  "tor-browser",
+  "gnome-web",
+  "falkon",
+  "floorp",
+  "zen-browser",
+  "waterfox",
+  "pale-moon",
+  "librewolf",
+  "ungoogled-chromium",
+  "mullvad-browser",
+  "duckduckgo-browser",
+  "firefox-focus",
+  "orion-browser",
+  "google-search",
+  "bing",
+  "yahoo-search",
+  "yandex",
+  "baidu",
+  "duckduckgo-search"
 ];
 
 (function () {

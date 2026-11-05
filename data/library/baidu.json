@@ -1,0 +1,145 @@
+{
+  "id": "baidu",
+  "name": "Baidu Search",
+  "type": "application",
+  "summary": "Chinese-language web search engine operated by Baidu, Inc., with a crawler-based index built in tiers, a ranking approach described by its operator in terms of four evaluation dimensions rather than weights, a documented set of named penalty algorithms, and advertising sold through the separate Baidu Marketing platform.",
+  "tags": [
+    "search engine",
+    "web",
+    "crawling",
+    "indexing",
+    "ranking",
+    "advertising",
+    "chinese language",
+    "proprietary",
+    "baidu",
+    "web search",
+    "spider",
+    "content policy"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service; no source licence published for the search engine, and no end-user licence for search was located among the documents consulted",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Baidu Search is the web search service of Baidu, Inc., the company listed on Nasdaq since August 2005 and dual-listed in Hong Kong since March 2021. The operating entity named in the privacy policy is Beijing Baidu Netcom Science and Technology Co., Ltd., described there as the controller for the group's products and services. Three boundaries need stating at the outset. Search is one product inside what the company calls its mobile ecosystem, a portfolio that the investor overview lists as including the Baidu App, ERNIE Bot, Haokan and Baidu Post, alongside cloud, autonomous driving and the iQIYI video segment. Advertising is a separate business, sold through Baidu Marketing, and it is described as such rather than as part of the engine. And the assistant products built on the same models, including the conversational assistant the company markets separately, are not the search engine, however closely the app bundles them.",
+    "origin_and_history": "No document consulted for this entry dates the launch of the search service, so no launch date is asserted here. The dated material is instead documentary and corporate. The investor pages establish the listing history and state that the company has been investing in artificial intelligence since 2010, with its own deep-learning framework and its ERNIE foundation models described as the technological base of the products. The publisher documentation is dated at the level of individual articles: a general explanation of how the engine works published on 2023-12-21, a question-and-answer piece on the crawler published on 2022-08-19, an account of ranking principles published on 2020-12-18, a review of algorithm compliance published on 2021-01-13 and a quality-content guide published on 2020-04-01. The privacy policy carries an update date of 2022-04-26 and an effective date of 2022-05-03. Read together, they show a documentation set that is maintained but updated irregularly rather than continuously.",
+    "rendering_engine_and_technical_architecture": "The published description of the pipeline is short and three-part: crawl the web, build an index database, then present results by extracting candidate documents and ordering them. Crawling is attributed to Baiduspider, described as an automatic program that starts from seed addresses, follows hyperlinks to discover new addresses and keeps previously fetched pages up to date. The same documentation states that crawl frequency is adjusted automatically according to how often a site changes and how much load its server can take, and that a site can throttle it through a crawl-rate instrument in the webmaster platform. Indexing is presented as a filtering stage that assigns pages to tiers, with valuable pages placed in an important index, ordinary pages in a normal one and weaker pages in a lower tier that the documentation says has less chance of being displayed. Nothing beyond that is published: no index format, no serving architecture, no model names for ranking.",
+    "interface_and_documented_features": "The documented user-facing surface is the results page plus a separate advanced-search form whose fields are enumerated: all of the words, the exact phrase, any of the words, none of the words, the number of results per page at ten, twenty or fifty, a time window of one day, week, month or year, a language restriction to simplified or traditional Chinese, a file type among PDF, Word, Excel, PowerPoint and RTF, a keyword position limited to the title or the URL, and a site restriction. The home page carries a search box and links into the company's other properties, including news, maps, video, images, cloud storage, documents, the question-and-answer service and the encyclopaedia. Results pages carry organic links together with the commercial placements described in the next sections. What the consulted pages do not document is a published query language comparable to the operator lists other engines publish, nor a settings surface described feature by feature.",
+    "installation_and_distribution": "On the web nothing is installed: the service is reached at baidu.com from any browser. The packaged form is the Baidu application, and the store records give the identifiers. In the Chinese App Store the application is listed as Baidu - AI search, identifier 382201985, seller Beijing Baidu Netcom Science and Technology Co., Ltd., version 15.82.2, updated on 2026-11-02 as recorded by the store's lookup interface. On Google Play the listing is package com.baidu.searchbox. A second, lighter application is distributed under identifier 1281873118 under the same seller, and the group's other applications, including maps, cloud storage and the input method, are separate products with separate identifiers. Distribution is uneven by store and region, and no document consulted states which markets receive which client, so nothing is claimed here about availability outside the stores named.",
+    "platforms_and_hardware_architectures": "The platforms established by the consulted pages are the web, Android and iOS. The web service is the primary surface, and the documentation that describes it, from advanced search to the crawler question-and-answer page, is written in Chinese and served without a translated equivalent on the pages consulted. The mobile applications are distributed through the two stores named above. No minimum operating-system version, device architecture or hardware requirement is published in the documents read, and none is inferred. One platform detail is documented rather than assumed: the crawler is identified by user-agent strings that separate a general crawler from a rendering crawler, which indicates that a rendering path exists for pages whose content depends on scripts, though the pages consulted do not describe that path in detail. On the client side the results page is ordinary HTML rendered by the user's browser.",
+    "extensions_and_add_on_store": "There is no extension system and no add-on store for the search engine. The counterpart that does exist is a publisher platform, the Baidu Search Resource Platform, whose declared sections are resource submission, data statistics, search presentation, optimisation and maintenance, and a documentation area. Under submission it lists fast crawling, ordinary inclusion, mobile adaptation and dead-link submission. Under statistics it lists index volume, traffic and keywords, crawl frequency, crawl diagnosis, crawl exceptions and a robots tool. Under presentation it lists site sublinks and site properties, and under maintenance a site-redesign instrument. A question-and-answer article adds that a site whose crawl frequency is too high for its server can adjust it, and that spoofed crawlers should be identified by reverse DNS because genuine crawler hostnames resolve under the baidu.com and baidu.jp domains. The platform describes itself as aimed at managers of Chinese-language internet properties.",
+    "privacy_and_security_model": "Privacy is governed by a group policy updated on 2022-04-26 and effective from 2022-05-03, with Beijing Baidu Netcom Science and Technology Co., Ltd. as the controller. The categories enumerated are broad: account data, device attributes and identifiers including advertising identifiers and Android identifiers, connection data, log data such as IP address and visited addresses, and location. The policy describes aggregation of data into labelled profiles, automated decision-making and personalised recommendation, with a stated right to an explanation and to refuse decisions taken solely automatically. It also shares data with affiliates under the same account system and, for video, with the group's streaming subsidiary. For search specifically, the policy states that when a query is entered the engine looks for results along dimensions it names as relevance, timeliness, authority and page quality, then orders them. The disclaimer page adds a narrower point that deserves to be quoted rather than paraphrased: keywords typed into the engine are not treated as private personal information.",
+    "update_channels_and_release_cadence": "No version numbering, changelog or release cadence is published for the engine, and the documentation in the resource platform has no feed that announces algorithm changes. What exists is a set of named algorithms announced in dated articles, which is a partial substitute. The review published on 2021-01-13 names algorithms addressing site networks and scraping, business-to-business spam, low-value aggregation pages, misleading titles and downloads, mobile landing-page experience and pagination traps. The ranking-principles article is dated 2020-12-18, and the compiled specification of algorithm rules states a latest chapter date of 2020-06-18. The privacy policy has not been revised since 2022 according to its own date line, and the corporate material is updated as investor disclosure rather than as product documentation. The honest summary is that change is announced irregularly, in prose, at the level of policy rather than of engineering.",
+    "licensing_and_governance": "The engine is a proprietary service operated by a listed company, and no source licence exists. What governs the relationship with users in the documents read is the disclaimer page rather than a dedicated search licence: it states that results are generated automatically from the keywords typed, that Baidu does not endorse the linked pages, that it makes no warranty as to the safety, correctness, timeliness or legality of results, and that a site which does not wish to be included should say so or apply the robots exclusion protocol, failing which it will be treated as includable. Governance of content is published as a rulebook: the compliance article states that the algorithms assess four dimensions, content quality, satisfaction of user need, user experience and search fairness, and the compiled specification organises the same four into chapters. The quality-content guide adds the criteria used to judge whether content deserves prominence. These are the operator's own rules, stated by the operator.",
+    "limitations_and_scope": "The first limit is linguistic: every primary document consulted is in Chinese, including the disclaimer, the privacy policy, the resource platform and the ranking articles, and the English material available is corporate rather than operational. The second is structural: the operator describes dimensions and named penalty algorithms, but publishes no weights, no factor list and no mechanism, so nothing here explains why one page outranks another. The third concerns figures. Advertising material states a monthly active user count for the Baidu App and a daily query volume; those are vendor claims made to attract advertisers, they are not audited, and no independent measurement was made for this file. The fourth is coverage: no transparency report, Digital Services Act statement or appeal procedure for ranking was located among the documents read, and no public search API is documented there. Finally, no end-user terms of service specific to search were found, and this file therefore describes governance through the disclaimer and the content rulebook only.",
+    "who_is_it_for": "It suits users who search in Chinese and want coverage of Chinese-language material, including the encyclopaedic, question-and-answer and document properties the engine surfaces. It suits site owners publishing Chinese content, because the publisher platform documents the tools rather than merely advertising them: crawler identification with user-agent strings and reverse-DNS checks, crawl-rate control, index volume, crawl diagnosis, mobile adaptation and dead-link submission. It suits analysts who want a documented statement of ranking dimensions from the operator itself, since the engine publishes its four dimensions and the names of its penalty algorithms, which is more than many proprietary engines disclose. And it suits readers studying how a large search business documents its own governance, because the rulebook, the quality guide and the compliance review are public, dated and internally consistent.",
+    "who_is_it_not_for": "It is not for anyone who does not read Chinese, since the operational documentation, the policies and the interface are Chinese-language and no translated equivalent appeared in the pages consulted. It is not for anyone who needs the ranking system as an inspectable specification: the published material names dimensions and penalties and stops there. It is not for users who need an appeal route with published procedure, because no such procedure was located, nor for anyone who needs a programmatic interface to the index, since none is documented in the material read. It is not for those who need independent verification of the engine's quality or of its privacy claims, because the documents are the operator's own statements and no audit was consulted. And it is not for users who need documented behaviour outside the Chinese-language market, because the pages consulted do not describe it.",
+    "verdict": "Baidu Search is a large proprietary engine whose public documentation is substantial in one direction and thin in another. Substantial: the operator publishes how crawling and tiered indexing are described, a four-dimension account of what ranking is meant to reward, a named set of penalty algorithms with dated announcements, a quality-content guide, a full publisher toolchain and a privacy policy that goes into unusual detail on profiling. Thin: there is no weighting, no factor list, no changelog, no transparency reporting for ranking and no end-user search terms among the documents read, and all of it is in Chinese. The separation this library insists on applies with full force here. Descriptions of quality, fairness and user experience are the claims of the operator about its own system, not findings of an audit, and none of them was independently verified for this entry. What can be said with confidence is that the publisher-facing documentation is usable, dated and specific, and that the ranking itself remains closed."
+  },
+  "links": {
+    "homepage": "https://www.baidu.com/",
+    "how_search_works": "https://ziyuan.baidu.com/college/articleinfo?id=3541",
+    "crawler_faq": "https://ziyuan.baidu.com/college/articleinfo?id=3457",
+    "ranking_principles": "https://ziyuan.baidu.com/college/articleinfo?id=3155",
+    "algorithm_compliance": "https://ziyuan.baidu.com/college/articleinfo?id=3166",
+    "algorithm_specification": "https://ziyuan.baidu.com/college/documentinfo?id=2988",
+    "quality_content_guide": "https://ziyuan.baidu.com/college/articleinfo?id=2947",
+    "advanced_search": "https://www.baidu.com/gaoji/advanced.html",
+    "disclaimer": "https://www.baidu.com/duty/",
+    "privacy_policy": "https://privacy.baidu.com/policy/PrivacyPolicy",
+    "baidu_marketing": "https://e.baidu.com/",
+    "company_overview": "https://ir.baidu.com/company-overview",
+    "ios_app": "https://apps.apple.com/cn/app/id382201985"
+  },
+  "sources": [
+    {
+      "title": "How Baidu Search works (百度搜索的工作原理) - dated 2023-12-21; crawl, index and presentation; Baiduspider starting from seed addresses; crawl frequency adjusted by update rate and server load; tiered index; relevance, authority, timeliness and content quality named as ordering dimensions",
+      "url": "https://ziyuan.baidu.com/college/articleinfo?id=3541",
+      "type": "official_documentation",
+      "publisher": "Baidu Search Resource Platform",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Baiduspider question-and-answer collection (搜索问答剧场) - dated 2022-08-19; crawler defined as an automatic program building the index; user-agent strings for Baiduspider/2.0 and Baiduspider-render/2.0; reverse-DNS verification under baidu.com and baidu.jp; crawl-rate instrument",
+      "url": "https://ziyuan.baidu.com/college/articleinfo?id=3457",
+      "type": "official_documentation",
+      "publisher": "Baidu Search Resource Platform",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search ranking principles reviewed (搜索排序原则解读) - dated 2020-12-18; ordering by degree of satisfaction of user need; four examined dimensions of content quality, authority, browsing experience and timeliness; relevance and primary versus secondary intent as basic requirements; excluded content categories",
+      "url": "https://ziyuan.baidu.com/college/articleinfo?id=3155",
+      "type": "official_documentation",
+      "publisher": "Baidu Search Resource Platform",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Common algorithm compliance problems (搜索算法违规问题) - dated 2021-01-13; four assessed dimensions of content quality, need satisfaction, user experience and search fairness; named algorithms covering site networks and scraping, aggregation pages, misleading titles and downloads, mobile landing-page experience and pagination traps",
+      "url": "https://ziyuan.baidu.com/college/articleinfo?id=3166",
+      "type": "official_documentation",
+      "publisher": "Baidu Search Resource Platform",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Compiled specification of search algorithm rules (百度搜索算法规范详解) - latest chapter dated 2020-06-18; chapters on page content quality, satisfaction of user need, user experience and search fairness with user safety",
+      "url": "https://ziyuan.baidu.com/college/documentinfo?id=2988",
+      "type": "official_documentation",
+      "publisher": "Baidu Search Resource Platform",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Baidu Search quality content guide (百度搜索优质内容指南) - dated 2020-04-01; stated dimensions used to judge quality content and page-level standards for content pages",
+      "url": "https://ziyuan.baidu.com/college/articleinfo?id=2947",
+      "type": "official_documentation",
+      "publisher": "Baidu Search Resource Platform",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Advanced search form - field list for all words, exact phrase, any and none of the words, results per page, time window, simplified or traditional Chinese, file type, keyword position and site restriction",
+      "url": "https://www.baidu.com/gaoji/advanced.html",
+      "type": "official_documentation",
+      "publisher": "Baidu",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Disclaimer and rights notices (免责声明) - results generated automatically from entered keywords, no endorsement or warranty as to linked third-party pages, robots exclusion acknowledged, keywords stated not to be treated as private personal data",
+      "url": "https://www.baidu.com/duty/",
+      "type": "legal_document",
+      "publisher": "Baidu",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Baidu Privacy Policy (百度隐私政策总则) - updated 2022-04-26, effective 2022-05-03; Beijing Baidu Netcom Science and Technology Co., Ltd. as controller; device identifiers, logs and location; profiling, automated decision-making and personalised recommendation; search described as looking for results along relevance, timeliness, authority and page quality",
+      "url": "https://privacy.baidu.com/policy/PrivacyPolicy",
+      "type": "legal_document",
+      "publisher": "Baidu",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Baidu Marketing advertising platform - search promotion listed among advertising products; stated monthly active users of the Baidu App and stated daily search volume, presented as advertising claims",
+      "url": "https://e.baidu.com/",
+      "type": "official_product_page",
+      "publisher": "Baidu",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Company Overview - Baidu, Inc.; listing on Nasdaq since August 2005 and dual listing in Hong Kong since March 2021; AI investment since 2010; PaddlePaddle and ERNIE; mobile ecosystem including Baidu App, ERNIE Bot, Haokan and Baidu Post",
+      "url": "https://ir.baidu.com/company-overview",
+      "type": "official_corporate_page",
+      "publisher": "Baidu, Inc.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Baidu application listing in the Chinese App Store - identifier 382201985, seller Beijing Baidu Netcom Science and Technology Co., Ltd., version 15.82.2 updated 2026-11-02 as recorded by the store lookup interface",
+      "url": "https://apps.apple.com/cn/app/id382201985",
+      "type": "app_store_listing",
+      "publisher": "Apple App Store",
+      "accessed": "2026-11-05"
+    }
+  ]
+}
