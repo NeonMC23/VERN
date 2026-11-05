@@ -1,0 +1,151 @@
+{
+  "id": "brave-browser",
+  "name": "Brave",
+  "type": "application",
+  "summary": "Web browser published by Brave Software as a Chromium fork, with ads and trackers blocked by default through Brave Shields.",
+  "tags": [
+    "browser",
+    "web",
+    "brave",
+    "chromium",
+    "shields",
+    "mpl"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android",
+    "iOS"
+  ],
+  "license": "MPL-2.0",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Brave is a web browser published by Brave Software. It is distributed for Windows, macOS and Linux, for Android and for iOS, and the publisher describes it as a Chromium fork whose deviations from the upstream code are applied as patches. This entry documents the browser itself: its engine and code lineage, the shielding features it enables by default, the platforms and requirements the publisher states, and the licence and privacy documents it publishes. It does not evaluate the publisher's search engine, its advertising programme or its comparative performance claims.\n\nAt the time of writing the published release notes listed version 1.97.57 for desktop, dated 14 October 2026 and built on Chromium 155.0.8059.80, with Android on 1.97.59 dated 16 October 2026 and iOS on 1.96.62 dated 6 October 2026.",
+    "origin_and_history": "Brave Software publishes the browser, and the privacy policy identifies the company as Brave Software Inc. The publisher describes the lineage plainly: the desktop and Android browsers are a Chromium fork that removes privacy-harming features, while the iOS build is built on Apple's WebKit.\n\nThe recent chronology comes from the published release notes. On desktop, 1.97.56 was published on 7 October 2026 with Chromium 155.0.8059.40, and 1.97.57 on 14 October 2026 with Chromium 155.0.8059.80; the Android line reached 1.97.59 on 16 October 2026 with Chromium 155.0.8059.85, and the iOS line was at 1.96.62 on 6 October 2026. A help centre article states that Release builds land approximately every two weeks.\n\nThe founding date of the company and the first public release of the browser are not stated on the pages read and are not asserted here. What is documented is the code structure: the support documentation states that the desktop browser is built on top of the open-source Chromium project, that Brave adds features and removes code, and that these deviations are applied through patches to the Chromium core, with the Chromium tag and the browser's own code pinned in the project's public configuration.",
+    "rendering_engine_and_technical_architecture": "Brave renders pages with Blink and executes JavaScript in V8, because it is built on Chromium. Chromium is the project whose rendering engine is Blink and whose JavaScript engine is V8, as the Chrome platform documentation describes; Brave's own support pages state that its builds fetch the Chromium source at a pinned tag and apply patches to it.\n\nThe relationship between browser and engine is documented rather than implied. Brave publishes an article describing how a build is assembled: the Chromium source is fetched at the tag recorded in the project's package configuration, the browser-specific code lives in a separate repository, hooks apply the patches, and the article notes explicitly that Chromium is not the same as Google Chrome and links to the Chromium project's own note on the difference. The same article lists the upstream features Brave disables or removes.\n\nOn iOS the engine constraint applies. Apple's App Review Guidelines, section 2.5.6, require applications that browse the web to use WebKit and WebKit's JavaScript, with an entitlement for an alternative engine available for the European Union and Japan. Brave states in its own documentation that its iOS build is built on WebKit, which makes it the one browser in this phase whose publisher names the iOS engine directly.",
+    "interface_and_documented_features": "Brave's interface follows the Chromium layout — tabs, an address bar, bookmarks, history, downloads, a password manager, printing, profiles and a settings surface at brave://settings — with additions the publisher lists: a sidebar, vertical tabs, split-view tabs, a customisable toolbar, translation, a reader mode, and integrations for the Wayback Machine and IPFS. Private windows are documented, including a private window routed through Tor.\n\nThe feature that defines the product is Brave Shields, documented as enabled by default. The publisher's description is specific: ads and trackers are blocked in a Standard mode, which is the default, and an Aggressive mode that accepts more breakage for more blocking; problematic resource scripts are blocked and replaced; CNAME cloaking is uncloaked so that trackers disguised as first-party subdomains are caught; third-party cookies and storage are blocked with an ephemeral-storage fallback so that sites keep working; fingerprinting is countered by randomising browser APIs and blocking language and font fingerprinting; and phishing is flagged. The page also names the filter list sources: EasyList, EasyPrivacy, lists from the uBlock Origin project, and lists Brave generates itself.\n\nA help centre article adds HTTPS upgrading, script blocking, per-site shield settings, configurable global defaults, an element blocker and custom filter lists. Promotional superlatives on the shields page are publisher claims and are not treated as measurements here.",
+    "installation_and_distribution": "Brave is distributed from the publisher's download page, which offers the desktop build and links the pre-release channels and the mobile applications; Android is distributed through Google Play and iOS through the App Store. Release notes for all three platforms are published on one page that separates desktop, Android and iOS entries.\n\nThree channels are documented. The Release build is the official version, described as receiving new releases approximately every two weeks; Beta is an early preview described as ready for daily use; Nightly is the testing and development build, updated every night, which may contain bugs that cause data loss and which sends crash reports automatically. The release notes add the progression: features appear in Nightly first, move to Beta for final checks, then merge into the Release build.\n\nThe publisher states that the browser is open source and available for review on GitHub. Source, patches and packaging are published, while the builds themselves are signed binaries delivered through the publisher's update service.",
+    "platforms_and_hardware_architectures": "Brave publishes a support article listing explicit minimums. On Windows the stated minimum is Windows 10 or later on an ARM64 processor or a 64-bit Intel or AMD processor meeting a capability requirement the article writes as SS3-capable. On macOS the minimum is Ventura 13 or later. On Linux the documented baseline is 64-bit Ubuntu 18.04 or later, Mint 19 or later, Debian 10 or later, openSUSE 15 or later, Fedora 28 or later and Rocky 9 or later, with the same processor requirement as on Windows. On mobile the minimums are Android 10 or later and iOS 18 or later.\n\nBecause the same processor condition is attached to both Windows and Linux, the requirement is architectural rather than tied to a particular processor model. The Linux installation page states that both 64-bit AMD/Intel and ARM64 architectures are supported. Windows 7 and 8.1 have a separate end-of-support article in the same help centre and are not in the requirements list, so they are outside the documented range.\n\nThese are the publisher's support statements. Configurations below those versions are outside the documented range even where an older build would still run.",
+    "extensions_and_add_on_store": "Brave does not operate its own extension store; it uses the Chrome Web Store. A help centre article states that Brave offers support for nearly all extensions compatible with Chromium. Installation is documented from the store listing, with a notification listing the data and permissions the extension requests, and management takes place on the browser's extensions page.\n\nThe same article records a deliberate exception for the older extension format: Brave has committed to continue supporting some Manifest V2 extensions, specifically AdGuard, NoScript, uBlock Origin and uMatrix, while noting that with Shields in place ad-blocking extensions are not necessary.\n\nThe pages read make no per-extension compatibility promise and publish no list of supported extension APIs. Browser-specific internal pages such as the extensions and settings surfaces use the brave:// scheme, which is recorded here as a documented detail rather than as a compatibility claim.",
+    "privacy_and_security_model": "Brave publishes a browser privacy policy, dated 23 September 2026, that describes each feature which may process personal data. It states at the outset that the company does not collect or retain a user's browsing history. The documented flows include update checks, counted in aggregate; Safe Browsing, which uses Google's service with URL hashes stored locally and only a partial hash sent when a site is potentially unsafe, proxied on desktop so that the IP address is not shared with Google, delegated to the operating system service on Android and to the Safari implementation on iOS, where Apple proxies requests to Google and, depending on region, Tencent; and Sync, which stores data in an encrypted file with the hosting provider while the decryption key stays on the user's devices and unused sync chains expire after twelve months.\n\nFurther documented flows are translation, which uses third-party translation software hosted on Brave's infrastructure, with page content not collected and text deleted after translation, and Brave News, which delivers headlines through a common file per region and images through a proxy that removes IP addresses.\n\nThe security posture is documented as a set of deviations from upstream Chromium rather than as a set of promises. A support article lists what Brave disables or removes, including the Privacy Sandbox APIs, Google account integration, metrics reporting, DNS prefetching, background sync, the ping attribute, the Battery API, the Web Bluetooth API and several reporting and telemetry paths, and explains that these deviations are applied as patches to the Chromium source.\n\nPrivacy, security and anonymity are kept separate here. Shields and the removed upstream features concern what is blocked and collected; Safe Browsing and phishing warnings concern protection; Tor windows change the network path without making a user anonymous. Statements that the browser offers the strongest protections of any browser are publisher claims, while the list of removed features and the privacy policy's per-feature descriptions are what this entry records.",
+    "update_channels_and_release_cadence": "Three channels are documented: Release, Beta and Nightly. A help centre article describes the progression from Nightly to Beta to Release and states that Release builds land approximately every two weeks. Nightly is updated every night and sends crash reports automatically; Beta is offered as an early preview suitable for daily use; Nightly is described as not recommended as a daily driver.\n\nChromium upgrades appear in every release note entry. On desktop, 1.97.56 of 7 October 2026 carried Chromium 155.0.8059.40 and 1.97.57 of 14 October 2026 carried 155.0.8059.80; on Android, 1.97.59 of 16 October 2026 carried 155.0.8059.85.\n\nThe two-week figure is the publisher's own statement about Release builds. It is not a Chromium milestone cadence, and this entry does not infer one cadence from the other: the notes show Chromium security updates arriving inside Brave's own release rhythm.",
+    "licensing_and_governance": "The browser source is open. The browser repository publishes the Mozilla Public License, version 2.0, as its licence file, and a help centre article states that Brave is open source and available for review on GitHub. MPL 2.0 is a file-level copyleft licence: modifications to covered files must remain under the MPL when distributed, larger works may be distributed under other terms, and the licence can be combined with the GNU GPL, LGPL and AGPL as secondary licences.\n\nThat licence covers the browser code Brave publishes, not the whole product surface. The publisher's documentation shows a build composed of upstream Chromium, fetched at a pinned tag and governed by Chromium's own licence, the three-clause BSD licence recorded in the Chromium repository, and the browser-specific code that defines Brave, distributed in a separate repository. The iOS build is a different case again, since it runs on WebKit under Apple's platform rules.\n\nGovernance sits with Brave Software Inc, which operates the release service, the shields filter lists, the sync service and the help centre, and which publishes the release notes that carry the version and Chromium numbers quoted here.",
+    "limitations_and_scope": "The documented floor excludes older systems: Windows before 10, macOS before 13 Ventura, Android before 10 and iOS before 18 are outside the support statement. The processor capability condition is stated on both Windows and Linux. On iOS the engine is WebKit, so the Blink behaviour documented for desktop does not transfer. Extension support depends on the Chrome Web Store, with some Manifest V2 extensions retained by policy.\n\nShields are on by default and can break sites, which is why the publisher documents a per-site toggle and an Aggressive mode with more blocking and more risk. The privacy policy documents that Safe Browsing is delegated to other implementations on Android and iOS, so the desktop proxying arrangement does not apply there. This entry covers the browser and does not document the publisher's search engine, its advertising and rewards programme, its paid VPN, or its comparative speed claims.",
+    "who_is_it_for": "The documentation addresses users who want ads and trackers blocked by default without installing extensions, who want an open-source browser codebase they can audit, and who accept an iOS build constrained to WebKit.",
+    "who_is_it_not_for": "It is not documented for Windows 7 or 8.1, for macOS before 13 Ventura, for Android before 10 or for iOS before 18, and it is not intended for users who expect every site to render unchanged with Shields at their default setting.",
+    "verdict": "Brave is a Chromium fork whose documented identity is a stated deviation from upstream: Blink and V8 underneath, a published list of disabled Chromium features, Shields with named filter-list sources enabled by default, code under MPL 2.0 with a documented build process, Release builds approximately every two weeks, and an iOS build on WebKit. The performance and privacy superlatives on the publisher's pages are claims, not measurements."
+  },
+  "links": {
+    "homepage": "https://brave.com/",
+    "downloads": "https://brave.com/download/",
+    "release_notes": "https://brave.com/latest/",
+    "help_centre": "https://support.brave.app/",
+    "shields": "https://brave.com/shields/",
+    "source_code": "https://github.com/brave/brave-browser"
+  },
+  "sources": [
+    {
+      "title": "Brave Release Notes — desktop, Android and iOS versions with Chromium numbers",
+      "url": "https://brave.com/latest/",
+      "type": "official_release_notes",
+      "publisher": "Brave Software",
+      "date": "2026-10-16",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "What is Brave? — Chromium fork on desktop and Android, WebKit on iOS",
+      "url": "https://brave.com/about/",
+      "type": "official_product_page",
+      "publisher": "Brave Software",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Brave Shields — default protection, modes and filter list sources",
+      "url": "https://brave.com/shields/",
+      "type": "official_documentation",
+      "publisher": "Brave Software",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Download Brave — channels and mobile distribution",
+      "url": "https://brave.com/download/",
+      "type": "official_product_page",
+      "publisher": "Brave Software",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Brave Browser Privacy Policy — per-feature data flows",
+      "url": "https://brave.com/privacy/browser/",
+      "type": "privacy_policy",
+      "publisher": "Brave Software Inc",
+      "date": "2026-09-23",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "What are the system requirements to install Brave?",
+      "url": "https://support.brave.app/hc/en-us/articles/360021357112-What-are-the-system-requirements-to-install-Brave",
+      "type": "official_documentation",
+      "publisher": "Brave Software",
+      "date": "2026-08-12",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "What is the difference between Nightly, Beta and Release builds?",
+      "url": "https://support.brave.app/hc/en-us/articles/360017916752-What-is-the-difference-between-Nightly-Beta-and-Release-builds",
+      "type": "official_documentation",
+      "publisher": "Brave Software",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "How can I add extensions to Brave? — Chrome Web Store and Manifest V2 policy",
+      "url": "https://support.brave.app/hc/en-us/articles/360017909112-How-can-I-add-extensions-to-Brave",
+      "type": "official_documentation",
+      "publisher": "Brave Software",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "What are all the features Brave Browser offers? — documented feature inventory",
+      "url": "https://support.brave.app/hc/en-us/articles/15872271230221-What-are-all-the-features-Brave-Browser-offers",
+      "type": "official_documentation",
+      "publisher": "Brave Software",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "What does Brave remove from the Chromium engine? — patching process and disabled features",
+      "url": "https://support.brave.app/hc/en-us/articles/10742158329613-What-does-Brave-remove-from-the-Chromium-engine",
+      "type": "official_documentation",
+      "publisher": "Brave Software",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "brave-browser — LICENSE (Mozilla Public License 2.0)",
+      "url": "https://raw.githubusercontent.com/brave/brave-browser/master/LICENSE",
+      "type": "license",
+      "publisher": "Brave Software",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Blink — the rendering engine used by Chromium-based browsers",
+      "url": "https://developer.chrome.com/docs/web-platform/blink",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "chromium/src — LICENSE file (three-clause BSD licence)",
+      "url": "https://chromium.googlesource.com/chromium/src/+/main/LICENSE",
+      "type": "license",
+      "publisher": "The Chromium Authors",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "App Review Guidelines, section 2.5.6 (WebKit requirement for browsers)",
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "type": "official_guideline",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

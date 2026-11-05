@@ -1,0 +1,211 @@
+{
+  "id": "ublock-origin",
+  "name": "uBlock Origin",
+  "type": "application",
+  "summary": "Free GPLv3 wide-spectrum MV2 content-blocking extension with EasyList-derived static filters, custom dynamic rules, cosmetic and scriptlet mechanisms, diagnostic tools and browser-specific capabilities and availability.",
+  "tags": [
+    "browser extension",
+    "content blocker",
+    "ad filtering",
+    "tracker blocking",
+    "filter lists",
+    "static filtering",
+    "dynamic filtering",
+    "cosmetic filtering",
+    "scriptlets",
+    "manifest v2",
+    "privacy",
+    "open source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Firefox",
+    "Firefox for Android",
+    "Microsoft Edge",
+    "Opera",
+    "Chromium MV2-compatible browsers",
+    "Thunderbird"
+  ],
+  "license": "GNU General Public License v3.0 (GPLv3; AMO: v3.0 only)",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "uBlock Origin (uBO) is a free, open-source browser extension for wide-spectrum content blocking. It is not a browser, a standalone firewall or merely a cosmetic ad hider. Its static filtering engine consumes built-in and external lists, while custom filters, cosmetic rules, scriptlets and optional dynamic rules provide additional control. The default selection documented by the project includes uBO's own lists, EasyList, EasyPrivacy, Peter Lowe's ad and tracking server list and the Online Malicious URL Blocklist. The current source manifests describe a Manifest V2 architecture with blocking webRequest access, so availability now depends sharply on the browser's extension policy. Firefox desktop and Android remain documented distribution targets, whereas Chrome has removed MV2 listings and current Chrome versions no longer support this architecture. Edge is following a separate transition. On 2026-11-05, AMO and GitHub identified 1.75.4 as the stable release, while GitHub also listed a newer prerelease; those labels are a dated distribution snapshot, not a uniform version across every channel.",
+    "origin_and_history": "The project's historical wiki records version 0.1.0.0 on 23 June 2014 as the first release. Current manifests name Raymond Hill and contributors, and release pages identify Raymond Hill in the release history. Early entries already show translation work and rapid fixes; later development added the present static and dynamic filtering models, procedural cosmetic filters, scriptlets and platform-specific capabilities. The recent repository changelog is not a complete history: its consulted portion begins with modern 1.x releases and records, among other changes, differential list updates in 1.54.0 and a Firefox minimum of 115 in 1.69.0. In 2026, maintenance also had to address browser policy rather than filtering alone. Google's MV2 retirement removed uBO's Chrome Web Store distribution, while Microsoft announced a gradual Edge transition with a different timetable. Contribution is organised through separate channels for extension defects, filter-list problems and translations. This history therefore combines an actively maintained filtering engine with changing host-browser constraints, not a single unchanged product across all platforms.",
+    "rendering_engine_and_technical_architecture": "uBO does not supply an HTML rendering engine; it extends the host browser through WebExtensions APIs. The Chromium and Firefox source manifests are MV2 and declare a background page, webRequest, webRequestBlocking, storage, navigation and broad site access. Static network filters are parsed from lists and hosts files using most of the EasyList syntax plus uBO extensions. Cosmetic filtering hides or alters page elements, procedural operators address more complex DOM cases, and scriptlet injection can modify selected page behaviour. Dynamic filtering is a separate, advanced firewall-like layer whose rules override static outcomes according to their action and specificity. Firefox MV2 documentation describes facilities that are not portable by assumption: DNS-based CNAME uncloaking, IP-address conditions and response-body filtering through Firefox APIs. The Firefox manifest consequently includes DNS and publicSuffix permissions absent from the Chromium manifest. The source manifests are build inputs with internal version placeholders, not proof of the version or permission set in every published package.",
+    "interface_and_documented_features": "The ordinary popup is designed for install-and-forget use, with a power control and per-site switches for functions such as cosmetic filtering, remote fonts, JavaScript, popups and large media where supported. Element zapper mode removes a selected element temporarily; the element picker is intended to create a more durable cosmetic filter. The logger exposes requests and filtering decisions for diagnosis. In the dashboard, users can select lists, import external sources, update outdated assets and edit “My filters.” Advanced-user mode adds the dynamic-filtering matrix with global and local columns. A block rule denies the selected class of request, noop punches a hole only through broader dynamic rules, and allow can also override static block filters. Local rules take precedence over global ones. New installations have no dynamic rules, and changes are temporary unless persisted with the padlock or the documented shortcut. This separation lets users experiment, but an allow rule can materially reduce protection and should not be confused with noop.",
+    "installation_and_distribution": "The official installation table directs Firefox desktop and Android users to AMO and provides development builds through GitHub. On the consultation date, AMO offered stable 1.75.4, updated on 3 November 2026; GitHub marked 1.75.4 as latest stable and also displayed 1.75.5rc4 as a prerelease on 5 November. GitHub provides signed packages for manual installation, but the README warns that Chromium and Thunderbird packages installed this way usually do not auto-update. Edge Add-ons and Opera Add-ons remain listed, subject to their own browser policies. The Chrome Web Store entry is marked removed on 31 August 2026, so a manual package must not be presented as a supported route around Chrome's MV2 disablement. Thunderbird is a special case: uBO filters feeds rather than email, the store listing is stuck at 1.49.2, and later versions require GitHub releases. No extension package was installed, sideloaded or exercised during this documentation phase.",
+    "platforms_and_hardware_architectures": "Compatibility is determined primarily by browser extension APIs and store policy, not by a published CPU-architecture matrix. The Firefox source manifest declares strict minima of 115 for Gecko and Gecko Android, while the Chromium source manifest declares Chrome 98; these are source-tree minima, not a promise that every later browser still accepts MV2. Google's timeline says MV2 is disabled in Chrome 138 and ceases to function from Chrome 139. Existing MV2 installations on Chrome 138 or earlier can continue under the stated conditions but cannot receive store updates or be reinstalled after removal. Microsoft's August 2026 announcement instead describes gradual Edge disablement, a consumer target at the end of 2026 and enterprise deprecation in early 2027. Opera is listed by uBO, but no equivalent future-support guarantee was established here. The official table does not list a current Safari package. Firefox for Android is explicitly supported; no general Chrome-on-Android extension claim is made. No independent device, architecture or performance test was performed.",
+    "extensions_and_add_on_store": "uBO has no internal marketplace for arbitrary add-ons. Its extensibility comes mainly from filter lists, hosts files, custom static filters, dynamic rules and packaged redirect or scriptlet resources. The Filter lists pane can enable bundled lists, subscribe to external URLs and show when assets were last updated. Hosts-file syntax is supported, and “My filters” accepts user-authored rules using the documented EasyList-derived and extended syntax. These mechanisms can change network requests, DOM presentation and page behaviour; they are not all interchangeable, and an imported list is a trust and compatibility decision. Duplicate filters may be discarded, so the number reported as used can differ from the number present in a source list. More lists also increase the chance of site breakage. Browser stores distribute the extension itself, whereas list infrastructure distributes filtering data on a separate update path. This distinction matters when assessing supply-chain exposure, update timing and the effect of disabling network access.",
+    "privacy_and_security_model": "The project's privacy policy states that uBO collects no data, has no home server and embeds no analytics or telemetry. Those are publisher declarations, not findings of an independent code or infrastructure audit. The same policy says remote connections are made to update filter lists and related assets; disabling automatic updates prevents those connections unless the user manually requests an update for outdated assets. Broad permissions are needed for the documented blocking model: webRequest and webRequestBlocking inspect and cancel requests, tabs and navigation support the popup and logger, and site access allows filtering across pages. The privacy permission is used to disable prefetching and hyperlink auditing so blocked resources are not contacted through those mechanisms. Unlimited storage holds downloaded assets, compiled data and launch caches locally. Firefox's DNS permission supports canonical-name resolution; the permissions guide clarifies that server IP information is not the user's own IP address. Custom lists and advanced rules still require careful trust and security decisions.",
+    "update_channels_and_release_cadence": "Extension updates and list updates follow different mechanisms. AMO and browser stores deliver their respective packages, while GitHub distinguishes stable releases from development or prerelease builds. Manual Chromium and Thunderbird packages usually lack automatic extension updates according to the README. Independently, uBO can automatically download selected lists and related resources. The list guide says expiry comes from differential-update directives, a list's Expires header, the updateAfter asset setting or a five-day default, with periodic update sessions and emergency handling for long-overdue lists. Differential updates can shorten the interval for compatible lists; forcing a manual update can postpone differential behaviour until the next automatic cycle. Consequently, a stable extension version does not imply a fixed filtering-data version. The 1.75.4 stable and 1.75.5rc4 prerelease observations are dated snapshots only. Chrome's store removal also means that an old installed package cannot simply rely on future store maintenance, even if list updates remain technically possible.",
+    "licensing_and_governance": "The repository presents uBO as free and open source under GPLv3, and AMO labels the listing GNU GPL v3.0 only. This entry does not infer an “or later” grant that the consulted store metadata does not state. The project manifesto places blocking choices with the user and rejects participation in an “Acceptable Ads” programme; it does not make every list or website subject to uBO's licence. No donations or other financing are sought in the project README and privacy policy. Governance is centred on the maintainer and public repositories, with separate destinations for different work: uBlock-issues for extension defects, uAssets for filter-list and website-breakage reports, and Crowdin for translations. The main repository's own issue tracker is deprecated in favour of those channels. Release pages also credit contributors. These arrangements document how to participate, but they are not a foundation charter, a security audit or a guarantee that external list maintainers follow the same governance rules.",
+    "limitations_and_scope": "The largest current limitation is platform dependence. uBO's MV2 implementation cannot be treated as a current Chrome extension simply because a source package exists, and Edge's remaining distribution is subject to an announced transition. Opera, Thunderbird and manually installed packages have their own constraints. Filtering capabilities also vary: Firefox-specific CNAME, IP and response-body features must not be assigned to Chromium. Advanced rules can overblock or weaken protection; allow overrides static blocks, while noop only cancels broader dynamic filtering. Adding lists increases breakage risk, and cosmetic hiding alone does not provide the network-privacy effect of preventing a connection. The project advises against running uBO with another content blocker because interference can defeat filtering or anti-blocking behaviour. No independent benchmark was conducted, so relative speed and memory claims remain outside this entry's verified scope. Finally, source manifests, store packages and development builds are different artefacts; their versions, permissions and support windows should not be collapsed into one compatibility statement.",
+    "who_is_it_for": "uBO suits users who want a wide-spectrum blocker with substantial control over network requests, advertisements, trackers, annoyances and selected malicious resources. Its default lists and simple popup support non-technical use on a compatible browser, while the logger, custom filters and dynamic matrix serve experienced users who need to diagnose or shape traffic precisely. Filter authors benefit from EasyList-derived syntax, extended operators and per-platform preprocessing. Firefox desktop and Android users can obtain the documented AMO package, and organisations can evaluate the source and release artefacts for managed deployment. It is also relevant to people who prefer a project that seeks no donations and rejects paid acceptable-ad whitelisting. The advanced layer is most appropriate when the user understands the difference between static and dynamic rules, persists changes deliberately and is willing to repair site breakage through narrow exceptions rather than broad allowances.",
+    "who_is_it_not_for": "uBO is not a suitable recommendation for someone using current Chrome who expects a supported MV2 extension from the Chrome Web Store. Nor is it for a user who assumes the same filtering options exist on Firefox, Chromium, Edge, Opera, Thunderbird and Safari. People unwilling to trust broad extension permissions, evaluate external lists or handle occasional website breakage may prefer a narrower tool or different defaults. The dynamic firewall is inappropriate for anyone likely to create global allow rules without understanding that these can override list-based protection. Users expecting anonymous browsing, a VPN, a complete malware solution or a guarantee against every tracking technique are outside its documented scope. Manual GitHub packages are a poor fit for those who require automatic updates on channels where the README says they are normally absent. Finally, anyone seeking an independently audited privacy or performance guarantee should treat the project's declarations as documentation to assess, not as such an audit.",
+    "verdict": "uBlock Origin remains a highly configurable, actively maintained wide-spectrum content blocker whose defining strength is the combination of list-driven static filtering, custom rules, cosmetic and scriptlet mechanisms, diagnostic tools and an optional dynamic firewall. Its design gives users unusually direct control, but that control includes the ability to cause breakage or override protective filters. The decisive qualification in November 2026 is platform support: Firefox desktop and Android are documented targets, current Chrome no longer supports its MV2 architecture, and Edge is in a separate transition. Firefox-only capabilities must not be generalised. The project's no-collection and no-telemetry statements, broad permissions and list-update connections are documented here as claims and mechanisms, not as independent audit results. For a compatible browser and a user willing to choose lists and exceptions carefully, uBO offers extensive filtering control. It should not be presented as a uniform cross-browser package, an automatic replacement for every setup or a guarantee of anonymity."
+  },
+  "links": {
+    "readme": "https://raw.githubusercontent.com/gorhill/uBlock/master/README.md",
+    "manifesto": "https://raw.githubusercontent.com/gorhill/uBlock/master/MANIFESTO.md",
+    "early_changelog": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Change-log.md",
+    "recent_changelog": "https://raw.githubusercontent.com/gorhill/uBlock/master/CHANGELOG.md",
+    "contributing": "https://raw.githubusercontent.com/gorhill/uBlock/master/CONTRIBUTING.md",
+    "static_syntax": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Static-filter-syntax.md",
+    "dynamic_filtering": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Dynamic-filtering:-quick-guide.md",
+    "filter_lists": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Dashboard:-Filter-lists.md",
+    "my_filters": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Dashboard:-My-filters.md",
+    "popup_guide": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Quick-guide:-popup-user-interface.md",
+    "site_switches": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Per-site-switches.md",
+    "firefox_capabilities": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/uBlock-Origin-works-best-on-Firefox.md",
+    "privacy_policy": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Privacy-policy.md",
+    "permissions": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Permissions.md",
+    "chromium_manifest": "https://raw.githubusercontent.com/gorhill/uBlock/master/platform/chromium/manifest.json",
+    "firefox_manifest": "https://raw.githubusercontent.com/gorhill/uBlock/master/platform/firefox/manifest.json",
+    "amo_listing": "https://addons.mozilla.org/firefox/addon/ublock-origin/",
+    "releases": "https://github.com/gorhill/uBlock/releases",
+    "chrome_mv2_timeline": "https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline",
+    "edge_mv3_transition": "https://blogs.windows.com/msedgedev/2026/08/07/moving-the-microsoft-edge-extensions-ecosystem-forward-with-manifest-version-3/"
+  },
+  "sources": [
+    {
+      "title": "uBlock Origin README - wide-spectrum scope, default lists, installation channels and current MV2 distribution constraints",
+      "url": "https://raw.githubusercontent.com/gorhill/uBlock/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin manifesto - user control over blocking choices and rejection of Acceptable Ads",
+      "url": "https://raw.githubusercontent.com/gorhill/uBlock/master/MANIFESTO.md",
+      "type": "official_project_statement",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock historical wiki changelog - first release 0.1.0.0 dated 23 June 2014 and early development",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Change-log.md",
+      "type": "official_project_history",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock repository CHANGELOG - recent 1.x changes including differential updates and Firefox minimum 115",
+      "url": "https://raw.githubusercontent.com/gorhill/uBlock/master/CHANGELOG.md",
+      "type": "official_changelog",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock contribution guide - Crowdin translations and separate extension, uBOL and uAssets issue channels",
+      "url": "https://raw.githubusercontent.com/gorhill/uBlock/master/CONTRIBUTING.md",
+      "type": "official_contribution_guide",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock static filter syntax - EasyList-derived syntax, hosts files, extended network and cosmetic filters, scriptlets and platform limits",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Static-filter-syntax.md",
+      "type": "official_technical_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Dynamic filtering quick guide - global and local block, noop and allow rules, precedence and temporary defaults",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Dynamic-filtering:-quick-guide.md",
+      "type": "official_technical_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Dashboard Filter lists guide - bundled and imported lists, hosts files, duplicate handling and update mechanisms",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Dashboard:-Filter-lists.md",
+      "type": "official_user_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Dashboard My filters guide - user-authored static filters and interaction with list-provided filtering",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Dashboard:-My-filters.md",
+      "type": "official_user_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Popup user interface guide - basic and advanced controls, element zapper, element picker and logger access",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Quick-guide:-popup-user-interface.md",
+      "type": "official_user_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Per-site switches documentation - cosmetic filtering, fonts, JavaScript, popups and large-media controls with support caveats",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Per-site-switches.md",
+      "type": "official_user_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Why uBO works best on Firefox - CNAME uncloaking, response filtering, IP conditions and browser-launch behaviour",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/uBlock-Origin-works-best-on-Firefox.md",
+      "type": "official_platform_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin privacy policy - publisher statements on collection, telemetry and remote list-update connections",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Privacy-policy.md",
+      "type": "official_privacy_policy",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin permissions explainer - site access, tabs, navigation, privacy settings, DNS and local storage",
+      "url": "https://raw.githubusercontent.com/wiki/gorhill/uBlock/Permissions.md",
+      "type": "official_permission_documentation",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Chromium source manifest - MV2 background architecture, Chrome source minimum and requested permissions",
+      "url": "https://raw.githubusercontent.com/gorhill/uBlock/master/platform/chromium/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Firefox source manifest - MV2, Gecko and Gecko Android minima, DNS and publicSuffix permissions",
+      "url": "https://raw.githubusercontent.com/gorhill/uBlock/master/platform/firefox/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Firefox Add-ons uBlock Origin listing - stable 1.75.4, distribution metadata, permissions and GPLv3-only label",
+      "url": "https://addons.mozilla.org/firefox/addon/ublock-origin/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin GitHub releases - stable 1.75.4 and prerelease 1.75.5rc4 snapshot with manual packages",
+      "url": "https://github.com/gorhill/uBlock/releases",
+      "type": "official_release_channel",
+      "publisher": "uBlock Origin project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Chrome Manifest V2 support timeline - Chrome 138 and 139 behaviour and Web Store removal on 31 August 2026",
+      "url": "https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline",
+      "type": "browser_vendor_documentation",
+      "publisher": "Google Chrome",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Microsoft Edge MV3 transition announcement dated 7 August 2026 - gradual consumer and enterprise timetable",
+      "url": "https://blogs.windows.com/msedgedev/2026/08/07/moving-the-microsoft-edge-extensions-ecosystem-forward-with-manifest-version-3/",
+      "type": "browser_vendor_announcement",
+      "publisher": "Microsoft Edge Team",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

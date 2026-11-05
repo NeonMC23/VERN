@@ -1,0 +1,143 @@
+{
+  "id": "duckduckgo-search",
+  "name": "DuckDuckGo Search",
+  "type": "application",
+  "summary": "Web search engine operated by Duck Duck Go, Inc., combining results sourced largely from Bing for traditional links and images with its own crawler, its own indexes and partner-supplied instant answers, presented without user profiles and funded mainly by advertising delivered through Microsoft's ad network.",
+  "tags": [
+    "search engine",
+    "web",
+    "privacy",
+    "instant answers",
+    "bangs",
+    "advertising",
+    "proprietary",
+    "duckduckgo",
+    "web search",
+    "no tracking"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service; no source licence published for the search engine itself",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "DuckDuckGo Search is the web search engine of Duck Duck Go, Inc., the company that writes its name in commerce as Duck Duck Go, Inc. and markets the product as DuckDuckGo Private Search. The distinction this entry has to hold is the one between the engine and the rest of the estate. The DuckDuckGo browser for Mac, Windows, iOS and Android, the browser extension, Email Protection, the Duck.ai chat product, the paid subscription bundling a VPN, personal-information removal and identity restoration, and the password manager are separate products with their own documentation, even though the company presents them together. The search engine itself is a results page reachable at duckduckgo.com and settable as the default engine in other browsers, and its distinguishing claim is that it stores no search history tied to a user. It is also, unlike the subject of most entries in this library, an engine built partly on someone else's index.",
+    "origin_and_history": "The company states that it has been independent since its founding in 2008, and the same document describes the business as having started as a search engine before the applications and extensions extended it beyond search. The bang shortcuts carry a date of their own: the help page says they have existed since 2008 as part of the company's stated geek lineage, and that the directory now holds thousands of them. No page consulted gives a launch date for the search engine as such, nor a chronology of its index sourcing, so no such chronology is asserted here. What the dated material does support is a shape rather than a timeline: an independent company founded in 2008, a search product that has always been composite in its sources, and a documentation set written as help pages without dates or version numbers, which is itself a fact about how the operator documents change.",
+    "rendering_engine_and_technical_architecture": "The architecture is documented at exactly one level of detail, and it is the level that matters for anyone assessing the engine. DuckDuckGo states that it maintains its own crawler, DuckDuckBot, and many indexes to support its results, that traditional links and images are largely sourced from Bing, and that instant answers are assembled from specialised sources, with a weather or sports answer coming from a dedicated provider rather than from a general index. The synthesis of those streams into one page is presented as the product. Two technical commitments follow from that design and are documented. Requests sent to partners are proxied through DuckDuckGo's servers so that partners see the request as coming from DuckDuckGo, and no unique identifier such as an IP address is passed along. Local results use a randomised nearby location so that the precise position is not disclosed. What is not published is how the composite ranking is computed.",
+    "interface_and_documented_features": "The results page is documented through its features rather than its layout: regular links, images, videos, news, sports, weather, stocks and quick facts are named as included, with instant answers appearing above or among the links. Query refinement is documented twice over. The advanced syntax page lists exact-phrase quotes, a minus sign for fewer results, a plus sign for more, filetype restrictions to pdf, word, spreadsheet, presentation and html files, site and negative-site operators, intitle and inurl, an experimental semantically-similar form, and a leading backslash that opens the first result directly. The settings surface is exposed as URL parameters, with a published table covering region, safe search levels, instant answers, image autoload, results autoload, favicons, full addresses, autosuggest, redirect and HTTPS behaviour, video playback, colours, themes, font sizes, width, placement, underlining, pagination and an advertisements switch. The same page notes that the branding and advertising parameters must not be removed when the parameters are used beyond individual use.",
+    "installation_and_distribution": "Nothing is installed to use the engine on the web; distribution consists of making it the default search engine of a browser or of a mobile application, and the help pages are organised around that task by browser and by platform. The packaged form is the DuckDuckGo application, which is a browser that includes the engine rather than a search-only client. In the App Store it is listed under identifier 663592361, seller Duck Duck Go, Inc., bundle com.duckduckgo.mobile.ios, version 7.244.0, updated on 2026-11-02 as recorded by the store lookup interface. On Google Play the package is com.duckduckgo.mobile.android. Extensions for Chrome, Firefox, Edge and Opera are listed separately, and the help pages distinguish between the extension, the browser and the search engine as three different things to obtain. No search-only mobile application from this operator was found in either store.",
+    "platforms_and_hardware_architectures": "The platforms established by the consulted pages are the web, Android and iOS, with the browser application additionally distributed for Mac and Windows through the company's own download pages and the Microsoft Store. The engine is platform-neutral in the sense that matters: it is a results page delivered over HTTPS to whatever browser the user has, and the rendering engine belongs to that browser. No minimum system version or hardware requirement is published for the search service, and none is asserted here. Two platform details are documented and worth recording. The region parameter enumerates roughly sixty locales, from Arabia to Vietnam, with a no-region value, which is the clearest public statement of the service's intended reach. And the connection is described as encrypted so that the internet provider cannot see the queries, which is a network property rather than a platform one.",
+    "extensions_and_add_on_store": "The engine has no add-on store of its own, but it has something more unusual: a keyword directory. Bangs are shortcuts beginning with an exclamation mark that hand a query to another site's own search, with the directory page displaying a count of 13,566 entries at the time of consultation and a submission form for new ones. The documentation is explicit that a bang executes the search on the other site, so that site's policies and data collection then apply, and the syntax page repeats the warning next to the examples. A second, quieter form of extension is the URL parameter surface, which lets a user or an integrator preconfigure region, filtering, appearance and advertising behaviour by building addresses, within the stated condition that branding and advertising must not be stripped outside individual use. The browser extensions distributed by the operator belong to the browser product and are documented separately.",
+    "privacy_and_security_model": "The privacy policy is short enough to be summarised without distortion, and it is the strongest published commitment in this file. The company states that it does not save or share search, chat or browsing history, that it does not store an IP address alongside a query, and that it does not log identifiers to disk that could be tied to a search; queries may be retained in anonymous form, disconnected from identifiers, to analyse search trends. It states that the information a device sends automatically, such as address, browser type and language, is used temporarily to deliver content and for bot defence. Content fetched on the user's behalf is proxied, and local results use a randomised location. The policy also states the exception plainly: when a user clicks a Microsoft-provided advertisement, the click passes through Microsoft Advertising's platform, which uses the full IP address and user-agent string to process the click and charge the advertiser, under a commitment not to associate the click with a user profile. The internet provider still sees the connection and the address.",
+    "update_channels_and_release_cadence": "No version number, changelog or release cadence is published for the engine, and the help pages consulted carry no dates and no revision identifiers. The only observable versioning is at the level of the applications, where the store listings record a version and an update date, 7.244.0 and 2026-11-02 in the App Store at the time of consultation. Change in the search product is otherwise communicated through help pages and blog posts rather than through release notes, and the syntax documentation contains a rare admission of that model of change: it states that some of the advanced syntax is not operating correctly on all queries, attributes this to the composite sourcing of results, and says the issue is being worked on. That sentence is more informative about cadence than any version number would be, because it describes a product where features can regress and be acknowledged in prose.",
+    "licensing_and_governance": "The service is proprietary, and no source licence for the engine is published in the pages consulted. Governance runs through two documents and one business statement. The privacy policy is the central instrument and is written as a policy with commitments rather than a contract of service. The advertising arrangement with Microsoft is documented jointly by the two parties on a single help page described as composed by both, which is an unusual and useful artefact: it states what DuckDuckGo proxies, what Microsoft receives at click time, and what Microsoft undertakes not to do with it. The business statement is the revenue explanation, which says that most revenue comes from advertising on the search page, that ads are selected from the results page being viewed rather than from a profile, that a similar arrangement exists with TripAdvisor, and that subscription fees add a second stream. There is no published ranking rulebook, no webmaster guideline and no appeal procedure for inclusion.",
+    "limitations_and_scope": "Three limits shape everything above. First, ranking is undocumented: the operator explains where results come from but not how the composite order is produced, so no statement here explains a ranking outcome. Second, because traditional links and images are largely sourced from Bing, the coverage of those results inherits properties of a third-party index that DuckDuckGo does not control and does not describe, which is a real limitation on any assessment of recall or freshness. Third, the privacy claims are the operator's own commitments, published by the party that benefits from them; no independent audit of the engine's logging behaviour was consulted or performed for this entry. Two smaller gaps are worth recording. No webmaster or site-owner documentation was found, so there is no published route for a publisher to request crawling, removal or correction. And no terms of service for the search service itself were located among the pages read.",
+    "who_is_it_for": "It suits everyday users who want a general engine that behaves conventionally, answers common questions in place, and does not require an account or a profile. It suits people who value the absence of stored search history enough to accept a composite index, and who understand that a click on an advertisement leaves the anonymous path. It suits users who like keyboard-level control, since the parameter table exposes region, filtering, theme and layout settings that most engines keep in a settings dialog. It suits anyone who wants to hand a query to another site quickly, because the bang directory is broad and the mechanism is documented with its privacy consequence attached. And it suits readers who want to compare privacy claims at the level of mechanism, since the proxying design, the randomised local location and the advertising exception are all described in implementable terms.",
+    "who_is_it_not_for": "It is not for publishers and search-engine optimisers who need documented crawling, indexing or removal procedures, because no such documentation was found. It is not for anyone who needs the ranking system described, because it is not described. It is not for users who expect advanced operators to work uniformly, since the operator itself warns that some syntax does not work on all queries. It is not for people whose threat model excludes advertising and content partners entirely: the engine proxies requests and strips identifiers, but a click on a Microsoft-provided ad passes through Microsoft's platform with the full address and user-agent, and an executed bang hands the query to another site under that site's policy. And it is not for anyone who needs an independent audit of the privacy claims, because none is cited in the pages consulted.",
+    "verdict": "DuckDuckGo Search is best understood as a privacy-designed front end over a composite index rather than as an independent crawler of the scale of the large engines. That is not a criticism; it is what the operator documents. The engine's public documentation is honest about its sourcing, unusually clear about the mechanics of anonymity, and candid about the limits of its own advanced syntax. What it does not provide is any account of how results are ordered, any publisher-facing procedure, or any third-party validation of its logging behaviour, and this entry does not supply them. The commercial and privacy statements quoted here are the operator's claims about its own product and are marked as such throughout. Judged on what can be verified, the service does what it says at the level of architecture; judged on what a researcher would want, it is deliberately opaque about ranking and dependent on an index it does not own."
+  },
+  "links": {
+    "homepage": "https://duckduckgo.com/",
+    "search_results_help": "https://duckduckgo.com/duckduckgo-help-pages/results",
+    "where_results_come_from": "https://duckduckgo.com/duckduckgo-help-pages/results/sources",
+    "advanced_syntax": "https://duckduckgo.com/duckduckgo-help-pages/results/syntax",
+    "url_parameters": "https://duckduckgo.com/duckduckgo-help-pages/settings/params",
+    "bangs": "https://duckduckgo.com/bangs",
+    "privacy_policy": "https://duckduckgo.com/privacy",
+    "search_privacy": "https://duckduckgo.com/duckduckgo-help-pages/search-privacy",
+    "how_it_makes_money": "https://duckduckgo.com/duckduckgo-help-pages/company/how-duckduckgo-makes-money",
+    "ads_by_microsoft": "https://duckduckgo.com/duckduckgo-help-pages/company/ads-by-microsoft-on-duckduckgo-private-search",
+    "about": "https://duckduckgo.com/duckduckgo-help-pages/company",
+    "ios_app": "https://apps.apple.com/app/duckduckgo-private-browser/id663592361",
+    "android_app": "https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android"
+  },
+  "sources": [
+    {
+      "title": "DuckDuckGo Search Results - features listed as regular links, images, videos, news, sports, weather, stocks and quick facts",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/results",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Where do DuckDuckGo search results come from? - own crawler DuckDuckBot and many indexes, traditional links and images largely sourced from Bing, instant answers from specialised partners, partner requests proxied with no unique identifiers passed",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/results/sources",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How to use advanced syntax - quoted phrases, exclusion and inclusion signs, filetype, site and negative-site, intitle and inurl operators, backslash shortcut, bangs; operator warning that some syntax is not operating correctly on all queries",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/results/syntax",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "URL parameters for changing search settings - region, safe search levels, instant answers, images and results autoload, favicons, full addresses, autosuggest, redirect and HTTPS, video playback, colours, themes, fonts, width, placement, pagination and advertisements",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/settings/params",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "DuckDuckGo !Bangs - shortcut directory displaying 13,566 entries, bangs existing since 2008, submission form; warning that the query is executed on the other site under that site's policies",
+      "url": "https://duckduckgo.com/bangs",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "DuckDuckGo Privacy Policy - Duck Duck Go, Inc. independent since its founding in 2008; no saved search, chat or browsing history; no IP address stored with queries; anonymous query retention for trend analysis; encrypted connection; ad clicks through Microsoft Advertising with full IP address and user-agent string",
+      "url": "https://duckduckgo.com/privacy",
+      "type": "legal_document",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "DuckDuckGo Search Privacy Protection - the engine does not track users, and the encrypted connection keeps queries from the internet provider",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/search-privacy",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How does DuckDuckGo make money? - most revenue from private ads on the search engine; ads based on the results page rather than a profile; most ad clicks managed by Microsoft's ad network with a similar arrangement with TripAdvisor; subscription fees as a second stream",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/company/how-duckduckgo-makes-money",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Ads By Microsoft on DuckDuckGo Private Search - page described as composed by DuckDuckGo and Microsoft; proxying of partner requests; full IP address and user-agent string used at ad-click time; commitment not to associate click behaviour with a user profile",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/company/ads-by-microsoft-on-duckduckgo-private-search",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo and Microsoft",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "About DuckDuckGo - built-in search engine described as never tracking searches; browsing protections separated from the engine; revenue from search advertising",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/company",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "DuckDuckGo application listing in the App Store - identifier 663592361, seller Duck Duck Go, Inc., bundle com.duckduckgo.mobile.ios, version 7.244.0 updated 2026-11-02 as recorded by the store lookup interface",
+      "url": "https://apps.apple.com/app/duckduckgo-private-browser/id663592361",
+      "type": "app_store_listing",
+      "publisher": "Apple App Store",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "DuckDuckGo application listing on Google Play - package com.duckduckgo.mobile.android",
+      "url": "https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android",
+      "type": "app_store_listing",
+      "publisher": "Google Play",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "id": "falkon",
+  "name": "Falkon",
+  "type": "application",
+  "summary": "Lightweight Qt web browser made by KDE, rendering pages with QtWebEngine and shipping an ad blocker and a password manager enabled by default.",
+  "tags": [
+    "browser",
+    "web",
+    "kde",
+    "qt",
+    "qtwebengine",
+    "linux",
+    "open source",
+    "gpl"
+  ],
+  "status": "active",
+  "platforms": [
+    "Linux",
+    "Windows"
+  ],
+  "license": "GNU General Public License, version 3 (repository COPYING file)",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "Falkon is a web browser built on Qt and developed within KDE. It renders pages with QtWebEngine and is designed to be light rather than feature-heavy: the KDE application catalogue describes it as \"a new and very fast Qt web browser\" that \"aims to be a lightweight web browser available through all major platforms\".\n\nThe version landmark used here is 26.08.2, published on 8 October 2026 and listed on the application page together with the preceding 26.08.1 (10 September 2026) and 26.08.0 (20 August 2026). Falkon is released as part of KDE Gear, the set of KDE applications published together; the KDE Gear 26.08.2 announcement is dated 8 October 2026 and states that over 180 applications are released simultaneously.\n\nFalkon's declared origins are modest — the project says it was \"originally started only for educational purposes\" before growing \"into a feature-rich browser\" — and its documentation emphasises privacy defaults and integration with the KDE Plasma desktop rather than a large product surface.",
+    "origin_and_history": "The documentation read does not publish a creation date or a full chronology, and this entry does not supply one. What it does document is a continuous release line, visible both on the KDE application page and in the Falkon announcements.\n\nThe KDE application page lists monthly patch releases grouped by cycle: 26.08.2 on 8 October 2026, 26.08.1 on 10 September 2026, 26.08.0 on 20 August 2026, 26.04.3 on 2 July 2026, 26.04.2 on 4 June 2026, 26.04.1 on 7 May 2026, 26.04.0 on 16 April 2026, and earlier cycles back to 23.08.5 in February 2024. That page also offers nightly installers built from the development branch.\n\nThe project site publishes announcements that date features and fixes. In December 2024, the 24.12 release notes mention fixes for the GreaseMonkey user script support, vertical tabs, the security icon of the navigation bar, printing, and that the browser no longer advertises FTP support. In September 2024, the 24.08 notes focus on the SiteSettings feature. In April 2025, the 25.04 notes list new features and fixes for AdBlock and vertical tabs, stability fixes, usability changes and translation updates. In May 2025, 25.04.1 is described as a bugfix release with a crash fix, a general fix and Wayland fixes, naming a bookmark toolbar crash and corrections to SiteSettings and cookie permission editing, plus two Wayland-specific fixes for the location bar and the tab bar tooltip.\n\nThe project's own statement about its beginning — educational purposes first, feature-rich browser afterwards — is the only historical framing the documentation offers, and it is quoted rather than elaborated.",
+    "rendering_engine_and_technical_architecture": "Falkon does not implement its own rendering engine. The project README states the architecture in one line: \"Falkon is a KDE web browser. It uses QtWebEngine rendering engine.\"\n\nThe Qt documentation describes what that dependency implies. Qt WebEngine provides APIs for rendering and embedding web content into Qt applications, with C++ classes and QML types; its core is based on the Chromium project, which brings its own network and painting engines. Page rendering and JavaScript execution are separated from the graphical process into a dedicated process, which is precisely the isolation property a browser needs. The Chromium version embedded is the one used by the latest stable Chrome at the time of the Qt feature freeze for the current Qt WebEngine version, and additional security patches are cherry-picked from newer Chrome releases at each patch release; the documentation adds that Qt WebEngine is based on Chromium but does not contain or use the services or add-ons that may be part of Google Chrome.\n\nThat architecture has three consequences worth stating separately. First, Falkon's web platform behaviour follows QtWebEngine and therefore a Chromium version chosen by Qt, not by Falkon: a site compatibility issue can require a Qt upgrade rather than a Falkon upgrade. Second, Falkon itself is the browser layer — interface, bookmarks, history, tabs, extensions, ad blocking, password storage — and the sources describe those as its own features. Third, because KDE Gear releases are coordinated, the Falkon patch releases listed on the application page are the moment when engine-level security patches reach users of the packaged build.\n\nFalkon is a Qt application rather than a KDE Frameworks-only one: the KDE page lists Windows as an additional platform, and the project site describes integration with Plasma as a feature of the desktop environment rather than a requirement of the browser.",
+    "interface_and_documented_features": "The KDE application page summarises the feature set: bookmarks, history and tabs, with bookmarks and history also available in a sidebar, an included RSS feed reader, ad blocking through a built-in AdBlock plugin, blocking of Flash content with Click2Flash, and an SSL manager to edit the local CA certificates database. The Falkon site adds that an ad blocker is enabled by default alongside a password manager, that the browser supports theming so the user can choose how it looks, and that several extensions are available to adapt the browser.\n\nRelease notes add features and confirm their dates. SiteSettings, a per-site configuration, is the focus of the 24.08 cycle. Vertical tabs and the GreaseMonkey user script support receive fixes in 24.12, which means both existed before that release. AdBlock and vertical tabs receive features and fixes in 25.04. Wayland-specific behaviour appears in the 25.04.1 notes, with fixes for input methods in the location bar completion popup and for tooltips in the tab bar.\n\nThe project site also describes integration with Plasma: Falkon is said to integrate inside Plasma and to follow Plasma theming preferences. That is a documented feature of the product, not a requirement: the application page lists Windows as another platform.\n\nWhat the sources do not provide is a complete, current feature matrix. The site's front page describes four areas — privacy defaults, customisation, Plasma integration, open source status — and the release notes describe only what changed. This entry therefore lists what the documentation names and does not claim the list is exhaustive.",
+    "installation_and_distribution": "On Linux, installation is documented first through the distributions: the download page directs users to the KDE application catalogue, to an AppStream install button usable with Discover and other AppStream stores, and to the distribution's package manager. Two cross-distribution formats are documented as well — a Snap package from Snapcraft and a Flatpak from Flathub.\n\nOn Windows, the application page lists Windows among the platforms and the catalogue links to Windows downloads; nightly Windows builds are published from the KDE continuous integration server and described as intended for testing.\n\nThe source code is available on KDE's GitLab instance and can be cloned over HTTPS. Building is documented in the README with CMake: create a build directory, run `cmake ..`, then `make && make install`. The README adds a caveat for a custom installation prefix: the `XDG_DATA_DIRS` environment variable may need to be extended so the installed browser finds its data, and it shows the commands for that case.\n\nDistribution follows KDE Gear. The application belongs to KDE Applications and KDE Gear, which the download page says are \"released typically 3 times a year en-masse\", with new releases announced on the KDE site. In practice a user therefore receives either a distribution package updated on the distribution's own schedule, or one of the two cross-distribution formats, or a build from source.",
+    "platforms_and_hardware_architectures": "Two platforms are documented. Linux is the primary target: every installation route on the download page — distributions, AppStream, Snap, Flatpak — is a Linux route, and Plasma integration is described on the project site. Windows appears as an additional platform on the KDE application page, which links to a Windows platform page, and Windows nightly builds are published from the KDE continuous integration infrastructure.\n\nNo macOS build appears in the sources read, and the KDE application page lists only Windows as an other platform, so this entry records macOS as not documented rather than as unsupported in principle.\n\nProcessor architectures are not set out in a support matrix by the project. The Linux routes rely on what each packager builds — distribution repositories, Snapcraft and Flathub each publish their own architecture set — and the sources read do not enumerate them. The same holds for minimum system requirements: the project publishes none, and the practical floor is the Qt and QtWebEngine version required by the Falkon release in question, which the distributions and packagers resolve.\n\nThis entry therefore states what is documented — Linux and Windows as platforms — and marks architectures and minimum versions as not published rather than guessing values.",
+    "extensions_and_add_on_store": "Falkon has an extension mechanism of its own rather than relying on a store inherited from its engine. The project site states that \"multiple extensions are also available to help you make Falkon adapt to you\", and the release notes name several of them over time: the AdBlock plugin, Click2Flash for Flash content, an SSL manager for the local CA certificate database, SiteSettings for per-site configuration, vertical tabs, and GreaseMonkey support for user scripts.\n\nThe download and development pages do not describe a central catalogue with a review process, and the sources read do not publish a count of available extensions. What they do show is that extensions are part of the product's documented surface — announced, fixed and extended in release notes — rather than an afterthought.\n\nBecause Falkon draws pages from QtWebEngine, it is worth separating two questions that are often merged: browser extensions written for Falkon, which the sources describe, and Chrome Web Store compatibility, which no source read for this entry documents. This entry claims only the former. Anyone who needs a specific Chrome extension should verify compatibility rather than assume it, since the documentation read says nothing about that path.",
+    "privacy_and_security_model": "The project leads with privacy defaults. Its front page states that \"Falkon cares a lot about the security of your data\" and that the browser \"ships with an ad blocker enabled by default as well as a password manager\", adding that additional configurations allow users to improve security and privacy further.\n\nThe security-relevant surface named in the documentation is concrete: an ad blocker enabled by default, a password manager, an SSL manager for editing the local CA certificate database, Click2Flash blocking of Flash content, and SiteSettings for per-site permissions including cookies. Version 25.04.1 fixed an issue in editing SiteSettings and cookie permissions, which shows the permission model in operation rather than only on paper.\n\nUnderneath, security depends on the engine. QtWebEngine separates page rendering and JavaScript execution into its own process, and Qt documents that security patches are cherry-picked from newer Chrome releases at each patch release, with the patch release accelerated if Chrome ships a critical fix outside the release window. For a Falkon user, that means engine security updates arrive with QtWebEngine updates, which arrive through distribution packaging or the Flatpak and Snap builds, on their own schedules.\n\nThree reservations belong here. The ad blocker and password manager are documented as enabled by default, but the sources read do not describe a threat model or an audit. Telemetry and data collection are not described either way in the sources read, so this entry makes no claim about them. And the browser's privacy posture is not an anonymity posture: nothing in the documentation read promises resistance to network-level observation.",
+    "update_channels_and_release_cadence": "Falkon has no release cadence of its own: it follows KDE Gear. The download page states that Falkon is part of KDE Applications and KDE Gear, which \"are released typically 3 times a year en-masse\", and that new releases are announced on the KDE site.\n\nWithin each cycle, patch releases are frequent. The application page lists 26.08.0 on 20 August 2026, 26.08.1 on 10 September 2026 and 26.08.2 on 8 October 2026 — roughly monthly — and the same monthly rhythm holds for the 26.04 and 25.12 cycles before it. Patch releases are bugfix releases: the 25.04.1 notes name a bookmark toolbar crash and two Wayland fixes, and the KDE Gear 26.08.2 announcement describes updated translations and bugfix source releases across the applications.\n\nTwo testing channels exist and are documented as such. The application page publishes nightly installers from the KDE CDN, stating that \"these versions are intended for testing purpose\", with an unstable Flatpak built from the latest development branch and Windows builds. The project site's download page points to the same infrastructure.\n\nHow quickly a given user receives a release depends on their route: distribution repositories move on the distribution's schedule, Flathub and Snapcraft on theirs, and a source build on the user. The project does not publish a support window for older branches in the sources read, so this entry does not state one.",
+    "licensing_and_governance": "Falkon is free software under the GNU General Public License, version 3: the repository's COPYING file contains the version 3 text of that licence, dated 29 June 2007. The project site presents open source status as one of its four headline properties, stating that the source can be browsed, edited and shared, and identifying the browser as \"Made By KDE\", a community that builds projects free to use.\n\nGovernance is KDE's. Development takes place on KDE's GitLab instance, where the source, merge requests and issue tracking live; the development page says code review is done through merge requests there. Communication is documented through a mailing list, an IRC channel on Libera Chat and a Matrix room, and bugs and feature requests are filed in KDE Bugzilla under the Falkon product. The download page ties the release schedule to KDE Gear's coordinated releases.\n\nThat structure explains two properties a reader might otherwise find surprising. First, quality gates are community ones — review on GitLab, bug tracking on Bugzilla — rather than a single vendor's release process. Second, the browser's release timing is decided collectively with the rest of KDE Gear, so a Falkon fix waits for the coordinated cycle or for the next patch release inside it.",
+    "limitations_and_scope": "The most important limitation is architectural: Falkon does not control its engine. Page rendering comes from QtWebEngine, whose Chromium version is fixed at Qt's feature freeze and then patched; a web platform change or an engine-level fix therefore depends on Qt's release schedule, not on Falkon's. The documentation read does not state which Chromium version a given Falkon release embeds.\n\nThe feature scope is that of a light browser. The sources describe an ad blocker, a password manager, bookmarks, history, tabs and vertical tabs, an RSS reader, Click2Flash, an SSL manager, SiteSettings, GreaseMonkey user scripts and theming. They describe no extension marketplace, no account or sync service, and no published list of supported architectures or minimum system versions. This entry records those absences as documentary facts.\n\nPlatform coverage is narrower than the project's own ambition: the application page calls it a browser \"available through all major platforms\", while the platform entries it lists are Linux and Windows, with no macOS build in the sources read. That gap between the stated aim and the published artefacts is noted rather than resolved.\n\nFinally, the sources read publish no creation date, no support window for older branches and no threat model. This entry supplies none of these, and an absence here should be read as undocumented rather than as non-existent.",
+    "who_is_it_for": "Falkon suits users who want a light Qt browser on Linux, packaged by their distribution or available as Flatpak and Snap, with an ad blocker and a password manager working from the first launch. It is a natural choice inside KDE Plasma, where theming and desktop integration are documented, and a reasonable one on Windows for users who want the same feature set without a Chromium-based vendor account.\n\nIt also suits people who prefer per-site configuration and user scripts to a large extension marketplace, since SiteSettings and GreaseMonkey support are documented features rather than add-ons to install.",
+    "who_is_it_not_for": "It is not intended for users who need a browser independent of its engine's schedule: page rendering follows QtWebEngine, so platform upgrades depend on Qt. It is not aimed at people who rely on a large extension catalogue with a review process, since no such catalogue is documented. It is not a fit for anyone who needs a documented sync or account service, which the sources do not describe, nor for macOS users, for whom no build appears in the sources read. And it is not an anonymity tool: the documented privacy features reduce tracking and flash content, they do not claim to hide the user from the network.",
+    "verdict": "Falkon is a lean Qt browser whose documentation is unusually explicit about its architecture: Falkon is the browser layer, QtWebEngine is the engine, and KDE Gear is the release vehicle. That clarity is the entry's main value — it explains why the browser's web platform behaviour follows Qt rather than Falkon, why security patches arrive through Qt and through coordinated KDE releases, and why the release line shown on the application page moves in a monthly patch rhythm inside a three-releases-a-year cycle. The documented feature set is deliberately modest and privacy-first: ad blocker and password manager on by default, SiteSettings, an SSL manager, vertical tabs, GreaseMonkey scripts, theming and Plasma integration. What the documentation does not offer — an extension marketplace, a sync service, a published architecture matrix, a creation date — is recorded here as scope rather than filled in, which keeps the entry comparable with browsers that trade the same simplicity for a much larger surface."
+  },
+  "links": {
+    "homepage": "https://www.falkon.org/",
+    "download": "https://www.falkon.org/download/",
+    "development": "https://www.falkon.org/development/",
+    "kde_app_page": "https://apps.kde.org/falkon/",
+    "source": "https://invent.kde.org/network/falkon",
+    "issues": "https://bugs.kde.org/enter_bug.cgi?product=Falkon",
+    "license": "https://invent.kde.org/network/falkon/-/raw/master/COPYING",
+    "flathub": "https://flathub.org/apps/details/org.kde.falkon"
+  },
+  "sources": [
+    {
+      "title": "Falkon — project home page: ad blocker and password manager by default, theming, Plasma integration, open source",
+      "url": "https://www.falkon.org/",
+      "type": "official_site",
+      "publisher": "The Falkon project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Download — Falkon: distributions, AppStream, Snap, Flatpak, source code, KDE Gear release model",
+      "url": "https://www.falkon.org/download/",
+      "type": "official_documentation",
+      "publisher": "The Falkon project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Development — Falkon: GitLab repository, merge requests, mailing list, IRC and Matrix, KDE Bugzilla",
+      "url": "https://www.falkon.org/development/",
+      "type": "official_documentation",
+      "publisher": "The Falkon project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Falkon — KDE Applications page: description, Windows platform, release list, nightly installers",
+      "url": "https://apps.kde.org/falkon/",
+      "type": "official_site",
+      "publisher": "KDE Community",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "falkon — README: QtWebEngine rendering engine, CMake build instructions, custom install prefix",
+      "url": "https://invent.kde.org/network/falkon/-/raw/master/README.md",
+      "type": "official_documentation",
+      "publisher": "KDE Community",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "falkon — COPYING file (GNU General Public License, version 3)",
+      "url": "https://invent.kde.org/network/falkon/-/raw/master/COPYING",
+      "type": "license",
+      "publisher": "KDE Community",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Falkon 25.04.1 release notes — crash fix, SiteSettings and cookie permissions, Wayland fixes",
+      "url": "https://www.falkon.org/posts/2025/2025-05-08-falkon-25-04-1-release-notes/",
+      "type": "release_notes",
+      "publisher": "The Falkon project",
+      "date": "2025-05-08",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Qt WebEngine Overview — Chromium-based core, separate web process, cherry-picked security patches",
+      "url": "https://doc.qt.io/qt-6/qtwebengine-overview.html",
+      "type": "official_documentation",
+      "publisher": "The Qt Company",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "KDE Gear 26.08.2 — coordinated release of over 180 applications, bugfix source releases and updated translations",
+      "url": "https://kde.org/announcements/gear/26.08.2/",
+      "type": "release_announcement",
+      "publisher": "KDE Community",
+      "date": "2026-10-08",
+      "accessed": "2026-10-29"
+    }
+  ]
+}

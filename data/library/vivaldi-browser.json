@@ -1,0 +1,168 @@
+{
+  "id": "vivaldi-browser",
+  "name": "Vivaldi",
+  "type": "application",
+  "summary": "Web browser published by Vivaldi Technologies, built on Chromium, with a proprietary interface on top of published Chromium changes.",
+  "tags": [
+    "browser",
+    "web",
+    "vivaldi",
+    "chromium",
+    "blink",
+    "customization"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary (Vivaldi EULA); changes to Chromium published under a BSD licence",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Vivaldi is a web browser published by Vivaldi Technologies, a company based in Norway. Builds are distributed for Windows, macOS and Linux, for Android and for iOS. This entry documents the product as the publisher describes it, the Chromium base it is built on, the platforms and package formats it ships in, and the licence, privacy and security documents it publishes. Marketing comparisons with other browsers are not reproduced.\n\nAt the time of writing the stable desktop line was Vivaldi 8.2, build 4133.94, published on 3 September 2026 on Chromium 152.0.7977.80, with minor updates following through October 2026.",
+    "origin_and_history": "Vivaldi is published by Vivaldi Technologies. The end user licence agreement names Vivaldi Technology AS and places its headquarters in Oslo; the privacy policy names Vivaldi Technologies AS as the party responsible for processing. The registered name therefore appears in two forms across the publisher's own documents, a discrepancy recorded here rather than resolved.\n\nThe release blog supplies the recent chronology and one anchor for the company's age: the announcement of Vivaldi 8.2 states that the company had been founded thirteen years earlier, which places its founding around 2013. Vivaldi 8.1 for desktop was published on 9 July 2026, Vivaldi 8.2 for desktop on 3 September 2026, and the mobile line reached 8.2 on 10 September 2026.\n\nThe publisher states on its download page that the browser has more than 4.3 million active users and no external investors. Those are publisher declarations and are recorded as such. Milestones earlier than the 8.x line, including the first public release, are not documented on the pages read and are not reconstructed.",
+    "rendering_engine_and_technical_architecture": "Vivaldi is built on Chromium and renders pages with Blink. The publisher states this in its own technical writing: it explains that it relies on the Chromium engine, that a browser engine renders web pages, that inside Chromium there is an engine called Blink, and that Blink was forked from WebKit in 2013. The changelog of version 8.2 records the Chromium version shipped, 152.0.7977.80, and later minor updates record 152.0.7977.170.\n\nThe boundary between engine and product is documented in unusual detail, because the publisher describes its own code layers. Chromium is the foundation; a layer of C++ backend code supports features such as the ad blocker and notes; and the desktop interface is written in HTML, CSS and JavaScript. The publisher states that changes made to the Chromium code are published under a BSD licence, that the C++ feature code is published as part of those changes, and that the interface layer is the part kept closed.\n\nOn iOS the engine cannot be chosen freely. Apple's App Review Guidelines, section 2.5.6, require applications that browse the web to use WebKit and WebKit's JavaScript, with an entitlement for an alternative engine available for the European Union and Japan. Vivaldi publishes an iOS build and documents its features, but the pages read here do not name the engine of that build, so this entry records the Apple constraint without asserting Vivaldi's implementation beyond it.",
+    "interface_and_documented_features": "Vivaldi's documented interface is organised around tab management and customisation, and the 8.2 changelog shows which components the desktop browser ships: tabs and tab stacks, vertical tab bars, workspaces, panels and web panels, Quick Commands, mail, calendar, feeds, reader view, themes, Break Mode and translation. Version 8.2 added a calculator in the address field, whose results the publisher states are not stored even in history, and an install icon for progressive web applications, with the browser's own applications page at vivaldi://apps.\n\nMobile features follow the same pattern. The announcement of the 8.2 mobile release states that full extension support reaches the Android browser, and the iOS product page documents a tab bar in the desktop style, speed dials, notes, a reading list, search engine nicknames, and a built-in tracker and ad blocker.\n\nThe protective features are documented in the help centre and in the privacy and security pages rather than only in marketing copy: an integrated ad blocker and tracker blocker, and settings that expose the Google-related services the browser integrates. Where the publisher describes the browser as powerful, personal and private, that phrasing is a seller description; what this entry records is the feature list and the document in which each item appears.",
+    "installation_and_distribution": "Vivaldi publishes installers on its download page for Windows on 64-bit Intel and AMD, on ARM64 and on a 32-bit build the publisher labels as legacy, for macOS as a universal disk image labelled for macOS 13 and later, and for Linux as .deb and .rpm packages for both x86-64 and ARM64. A Snap package is offered, the help centre documents a Flatpak build maintained outside the company's own support, and installation through the Microsoft Store is documented as an alternative on Windows.\n\nMobile distribution is broader than one store. The Android build is offered through Google Play with a direct download of the application package, and through the Samsung Galaxy Store, Uptodown and Huawei AppGallery; the iOS build is distributed through the App Store. Release artefacts are also published on the project's own download host, which is where the version numbers in this entry come from.\n\nThe help centre documents the installation modes offered by the Windows installer, including installation for all users, for a single user and in standalone form, and requires acceptance of the end user licence agreement during installation.",
+    "platforms_and_hardware_architectures": "Vivaldi publishes minimum operating system versions. On Windows the browser installs on Windows 10 and later; Windows 7, 8 and 8.1 are documented as supported only up to Vivaldi 5.6, and Windows XP only up to Vivaldi 1.0. On macOS the minimum is macOS 13 Ventura. On Linux the documented baseline is 64-bit Ubuntu 24.04 or later, Debian 13 or later, openSUSE 16 or later and Fedora 43 or later, a newer baseline than some other Chromium browsers publish.\n\nArchitecture coverage is visible in the file list rather than stated as a matrix: 64-bit and ARM64 Linux packages, 64-bit, ARM64 and legacy 32-bit Windows installers, and a universal macOS image. No processor requirement beyond those labels is published in the pages read, and no minimum Android or iOS version is stated there either, so neither is claimed here.\n\nThese are the publisher's support statements. A machine below those versions is outside the documented range even where an older release of the browser would still install.",
+    "extensions_and_add_on_store": "Vivaldi does not operate its own extension catalogue. The help centre states that because Vivaldi is built using the Chromium project, extensions available in the Chrome Web Store can be installed in Vivaldi, that some Chrome extensions behave differently once installed, and that an extension missing from the store can be loaded manually as an unpacked extension in developer mode. Extensions can also be imported from other Chromium-based browsers.\n\nOne enabling condition is documented: the option allowing the Web Store must be enabled in the privacy settings, otherwise the install button is not displayed. The same page documents management of installed extensions, and the 8.2 changelog records interface fixes for extension icons and popups.\n\nThe pages read make no per-extension compatibility promise and publish no list of supported extension APIs. The mobile side is newer: the 8.2 Android release is announced as bringing full extension support to the mobile browser, while the arrangement described above is what the desktop help documents.",
+    "privacy_and_security_model": "Vivaldi publishes a privacy policy and a security page. The privacy policy, whose own last modification date is 15 December 2023, states what the browser transmits: each installation profile receives a unique identifier stored on the device, and Vivaldi sends that identifier, the version, the CPU architecture, the screen resolution and the time since the last message to servers in Iceland every 24 hours, after removing the last octet of the IP address on the client side, in order to count active users and estimate their distribution. The same document states that browsing history, typed searches and downloads remain in the local profile and are not accessible to the company; that crash reports are sent only if the user opts in, that only a stack trace and the active URL are retained, and for 60 days; and that part of the revenue comes from partner bookmarks.\n\nThird-party processing is named rather than implied. On desktop and Android, Vivaldi integrates Google's Safe Browsing to check visited sites against lists of suspected phishing and malware sites, and offers a setting to turn it off on desktop. Google's form autofill is enabled by default and can be disabled. Search suggestions, when enabled, are sent to the search engine the user selected. Sync data is documented as encrypted end to end and hosted on the publisher's own premises in Iceland.\n\nPrivacy and security are treated as separate questions here. The security page documents process rather than guarantees: a security group handles incoming reports and reviews new technology, Vivaldi tracks Chromium's Extended Stable channel so that it receives the same security patches on a different version number, out-of-band patches are issued when required, responsible disclosure is described with a hall of fame, and reports generated by artificial intelligence or language models are explicitly not accepted. Statements that the browser does not track or profile its users are the publisher's own claims; the concrete data flows listed above come from its policy.",
+    "update_channels_and_release_cadence": "Vivaldi documents two desktop streams: Stable, the numbered release line, and Snapshot, its pre-release builds published on the blog, whose current build numbers are listed in the blog sidebar alongside the Android and iOS equivalents.\n\nServicing within a stable line is documented as a sequence of minor updates. For 8.2 the publisher shipped successive minor updates between September and October 2026, each naming the Chromium version it carries, from 152.0.7977.80 at release to 152.0.7977.170 on 22 October 2026, some of them bringing security fixes inherited from newer Chromium releases. The security page explains the underlying policy: Chromium's Extended Stable channel follows even-numbered milestones and receives a feature update every eight weeks, and a lower Chromium version number in Vivaldi therefore does not mean missing patches.\n\nThe pages read do not state a fixed interval between Vivaldi's own major releases, and none is asserted. What is documented is the security integration cadence and the flow of minor updates.",
+    "licensing_and_governance": "The product is proprietary while a large part of its code is open. The end user licence agreement, dated 26 November 2025, governs use of the executable form, grants a limited, non-exclusive, non-transferable and non-sublicensable licence, forbids modification, derivative works and reverse engineering except where the law permits, and places the company's headquarters in Oslo under Norwegian law and the jurisdiction of the Oslo City Court. The same agreement points to the source code used under open-source licences.\n\nThe split is documented by the publisher rather than by third parties. The help centre states that Vivaldi is not made available under one unified open-source licence, that it contains Chromium source with the changes needed for the HTML, CSS and JavaScript interface, that all changes to the Chromium code are published under a BSD licence, and that third-party licences are listed in the source package and at vivaldi://credits. A technology post quantifies the split at roughly 92 per cent Chromium code, 3 per cent the publisher's own open-source code and 5 per cent closed interface code.\n\nVivaldi is therefore partly open source, not open source, and this entry uses that formulation. Governance is concentrated in the publishing company, which runs the sync service, the update service, the bug tracker and the security process, and states on its download page that it has no external investors.",
+    "limitations_and_scope": "The documented floor is higher than for some competitors: Windows 10, macOS 13 and recent Linux distributions only, with Windows 7, 8 and 8.1 frozen at Vivaldi 5.6 and Windows XP at version 1.0. No minimum Android or iOS version and no processor requirement beyond the architecture labels are published in the pages read. On iOS the Apple guideline constrains the engine and the publisher does not name the engine of that build.\n\nThe Flatpak package is documented as maintained outside the company's own support. Extension support depends on the Chrome Web Store, with the possibility of different behaviour and with the store option that must be enabled first. Each installation profile is counted through a daily message described in the privacy policy, which matters to a reader looking for a browser that transmits nothing. Statements calling the browser private are publisher claims; the data flows listed in this entry come from the policy itself.",
+    "who_is_it_for": "The documentation addresses users who value tab management and interface customisation, who want mail, calendar, feeds and notes inside the browser, and who accept a proprietary interface in exchange for published changes to Chromium.",
+    "who_is_it_not_for": "It is not documented for Windows 7, 8 or 8.1 beyond version 5.6, nor for macOS releases before 13 Ventura, and it is not an open-source browser: the interface layer is closed and the licence agreement forbids modification and reverse engineering outside what the law permits.",
+    "verdict": "Vivaldi is a Chromium-based browser whose documented identity is the separation between an inherited engine and an own interface: Blink on Chromium's Extended Stable track underneath, a large built-in feature set on top, changes to Chromium published under a BSD licence while the interface stays closed, and a privacy policy that describes both a daily usage message and the third-party services the browser relies on. The comparison marketing on the product site is not treated as evidence here."
+  },
+  "links": {
+    "homepage": "https://vivaldi.com/",
+    "downloads": "https://vivaldi.com/download/",
+    "release_notes": "https://vivaldi.com/blog/",
+    "help_centre": "https://help.vivaldi.com/",
+    "security": "https://vivaldi.com/security/",
+    "source_code": "https://vivaldi.com/source/"
+  },
+  "sources": [
+    {
+      "title": "Vivaldi 8.2 for desktop — release announcement",
+      "url": "https://vivaldi.com/blog/vivaldi-on-desktop-8-2/",
+      "type": "official_release_notes",
+      "publisher": "Vivaldi Technologies",
+      "date": "2026-09-03",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Changelog Vivaldi browser 8.2 (Chromium 152.0.7977.80, desktop components)",
+      "url": "https://vivaldi.com/changelog-vivaldi-browser-8-2/",
+      "type": "official_release_notes",
+      "publisher": "Vivaldi Technologies",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Vivaldi blog — desktop, Android and iOS releases and minor updates",
+      "url": "https://vivaldi.com/blog/",
+      "type": "official_release_notes",
+      "publisher": "Vivaldi Technologies",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Download Vivaldi — packages, architectures, user count and funding statement",
+      "url": "https://vivaldi.com/download/",
+      "type": "official_product_page",
+      "publisher": "Vivaldi Technologies",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Install the Vivaldi browser — documented system requirements",
+      "url": "https://help.vivaldi.com/desktop/install-update/install-the-vivaldi-browser/",
+      "type": "official_documentation",
+      "publisher": "Vivaldi Technologies",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Built using Chromium, but different from Chrome — engine and interface layers",
+      "url": "https://vivaldi.com/blog/vivaldi-different-from-chrome/",
+      "type": "official_documentation",
+      "publisher": "Vivaldi Technologies",
+      "date": "2021-02-22",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Why isn't Vivaldi browser open-source? — code layers and the 92/3/5 split",
+      "url": "https://vivaldi.com/blog/technology/why-isnt-vivaldi-browser-open-source/",
+      "type": "official_documentation",
+      "publisher": "Vivaldi Technologies",
+      "date": "2022-03-14",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Vivaldi browser and open-source — publication of C++ backend code",
+      "url": "https://vivaldi.com/blog/vivaldi-browser-open-source/",
+      "type": "official_documentation",
+      "publisher": "Vivaldi Technologies",
+      "date": "2022-08-30",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Is Vivaldi Open Source? — no unified open-source licence",
+      "url": "https://help.vivaldi.com/desktop/privacy/is-vivaldi-open-source/",
+      "type": "official_documentation",
+      "publisher": "Vivaldi Technologies",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Using Extensions in Vivaldi — Chrome Web Store compatibility",
+      "url": "https://help.vivaldi.com/desktop/appearance-customization/extensions/",
+      "type": "official_documentation",
+      "publisher": "Vivaldi Technologies",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Vivaldi Browser privacy policy — usage message, Safe Browsing, autofill, Sync",
+      "url": "https://vivaldi.com/privacy/browser/",
+      "type": "privacy_policy",
+      "publisher": "Vivaldi Technologies",
+      "date": "2023-12-15",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Vivaldi End User License Agreement",
+      "url": "https://vivaldi.com/privacy/vivaldi-end-user-license-agreement/",
+      "type": "license",
+      "publisher": "Vivaldi Technology AS",
+      "date": "2025-11-26",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Security and Vivaldi — Extended Stable tracking and disclosure process",
+      "url": "https://vivaldi.com/security/",
+      "type": "security_policy",
+      "publisher": "Vivaldi Technologies",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Vivaldi on iOS — documented mobile features",
+      "url": "https://vivaldi.com/ios/",
+      "type": "official_product_page",
+      "publisher": "Vivaldi Technologies",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "chromium/src — LICENSE file (three-clause BSD licence)",
+      "url": "https://chromium.googlesource.com/chromium/src/+/main/LICENSE",
+      "type": "license",
+      "publisher": "The Chromium Authors",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "App Review Guidelines, section 2.5.6 (WebKit requirement for browsers)",
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "type": "official_guideline",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

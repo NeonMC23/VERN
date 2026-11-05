@@ -1,0 +1,141 @@
+{
+  "id": "google-search",
+  "name": "Google Search",
+  "type": "application",
+  "summary": "Web search engine operated by Google LLC, built on automated crawling, a central index and ranked retrieval, documented through publisher-facing guidance and privacy and advertising policies while the ranking system itself remains proprietary.",
+  "tags": [
+    "search engine",
+    "web",
+    "crawling",
+    "indexing",
+    "ranking",
+    "advertising",
+    "personalisation",
+    "privacy",
+    "proprietary",
+    "google",
+    "web search",
+    "generative ai"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service (no source licence published); Google developer documentation is published under CC BY 4.0 with code samples under Apache 2.0",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Google Search is the web search engine operated by Google LLC. It is a service, not a downloadable browser: users reach it through a web page, the Google app on mobile, or a search box configured to use it. The engine is fully automated according to Google's own developer documentation: software crawlers discover pages across the web, the pages are analysed and stored in an index, and results are returned for a query in a fraction of a second. Three distinctions frame this entry. First, the search engine is one service inside a much larger corporate portfolio; advertising, the Chrome browser, Android and the Gemini models are adjacent products with their own terms, and their properties are not automatically properties of Search. Second, the engine is proprietary: Google publishes extensive documentation about how to be found, but not the ranking code. Third, the documentation that does exist is written for site owners and describes mechanisms at a level of abstraction Google chooses; it is a statement of the publisher's principles, not a specification of the algorithm.",
+    "origin_and_history": "The pages consulted for this entry document current behaviour and publishing rules, not corporate history, and no founding date, launch date or ownership chronology appears on them. What they do record is a set of dated policy and product documents. The Google Terms of Service carry an effective date of 2026-07-30. The Google Privacy Policy carries an effective date of 2026-10-16. The Search Essentials documentation page states that it was last updated on 2025-12-10. The product page for Search presents a current generation built around AI Mode, AI Overviews, Lens and Search Live, and it links to a Google I/O announcement describing a redesigned search box; the page does not date the launch of those features, so this entry does not either. A history of the engine before 2025 would have to come from sources outside this set and is therefore not attempted.",
+    "rendering_engine_and_technical_architecture": "Search has no user-facing rendering engine of its own: the results page is a web page delivered to whatever browser the user chose, and the same infrastructure is exposed through the Google app. The architecture that matters for documentation is the indexing pipeline, and Google describes it as three stages through which not every page passes. Crawling is the discovery and fetching step: Googlebot finds URLs from pages it already knows, from links, or from sitemaps a site owner submits, and an algorithmic process decides which sites to crawl, how often and how many pages to fetch. Indexing is the analysis step, in which text, images and video are processed and stored in a large database. Serving is the retrieval step, in which results are returned for a query. During the crawl, Google renders the page and runs the JavaScript it contains using a recent version of Chrome, so content that only exists after client-side execution may still be seen. The crawler also throttles itself in response to server signals such as HTTP 500 errors. Google states plainly that it does not guarantee crawling, indexing or serving even for pages that follow its published guidance.",
+    "interface_and_documented_features": "The documented surface is a results page plus a set of retrieval modes. Results can be narrowed to content types such as images, videos, news and shopping, and further by tools for date, colour, size or type. Beyond the classic results list, the current product page presents AI Mode for follow-up conversational searching, AI Overviews for a summary with links to sources, Lens for visual queries, and Search Live for a spoken back-and-forth session; the same page notes that responses should be checked for accuracy and that such features are available in select countries and languages. Personalisation is a documented layer rather than a mode: Google's help page explains that personalised recommendations may reorder results or the blocks of content on the page, that the page footer states whether results are personalised, and that a \"Try without\" link shows the non-personalised version without changing settings. Even with personalisation off, Google states that it still uses context such as location, language, device type and the current query. SafeSearch and per-account history controls sit alongside these features in the same help corpus.",
+    "installation_and_distribution": "Nothing is installed to use Search on the web: it is a page reached at google.com or through the search box of a browser or operating system configured to use it. The Google app is the packaged form, distributed through Google Play under the application identifier com.google.android.googlequicksearchbox and through the App Store under identifier 284815942; Google's app page also describes Lens, voice input, AR and Discover as capabilities of that app. Distribution of the default search position is a separate question from distribution of the software, and the pages consulted do not describe the commercial agreements that place Google as the default engine in third-party browsers or devices. There is no self-hosted edition, no on-premises index and no published package: the service is operated by Google LLC and consumed remotely. Site owners participate through Google Search Console and through sitemaps rather than by installing anything.",
+    "platforms_and_hardware_architectures": "The platforms established by the consulted pages are the web, Android and iOS. The web surface is the results page itself; the mobile surfaces are the Google app on Google Play and the App Store. Google's help material is organised by platform, with separate instructions for computer and for Android devices, which confirms that the settings surface differs between them. No hardware architecture is relevant to a remote service, and none is documented. Two asymmetries should be stated rather than smoothed over. Feature availability is not uniform: the product page warns that AI features are available only in selected countries and languages, so a capability described on a marketing page may be absent for a given user. And the mobile app and the web page are not the same product with a different frame: the app adds camera, voice and Discover entry points, and its settings are managed separately, as the Android app-settings article shows. Desktop browsers, mobile browsers and embedded web views all reach the same back end, but only the surfaces named above are documented as Google products.",
+    "extensions_and_add_on_store": "Search has no extension system of its own. It is a service consumed by browsers, and any extension behaviour a user experiences comes from the browser, not from the search engine: the consulted pages document Chrome and other browsers as separate products. Google does operate a marketplace for the Chrome browser, but that is outside the scope of this entry and is not documented on any page consulted here. For site owners the equivalent of an add-on channel is the publisher tooling: sitemaps and Search Console for submission and diagnostics, structured data for appearance features, and the Search Essentials rules for eligibility. Google's developer documentation also states its own licensing terms, which are a useful reminder of what is and is not open in this stack: the prose of the documentation is published under a Creative Commons Attribution 4.0 licence and its code samples under the Apache 2.0 licence, while the search service they describe remains proprietary. Nothing in the consulted pages suggests a plugin interface into ranking or into the index.",
+    "privacy_and_security_model": "Privacy here is a documented data-governance model rather than a claim about anonymity. Google's privacy policy, effective 2026-10-16, states that when a user is not signed in, collected information is stored with unique identifiers tied to the browser, application or device, which allows preferences and personalisation to persist across sessions. The advertising technology page adds concrete retention detail: server logs typically include the request, IP address, browser type and language, timestamp and cookies, and Google anonymises that log data by removing part of the IP address after nine months and cookie information after eighteen months. The Safety Center states that auto-delete is the default for core activity settings, with account-linked activity deleted after eighteen months, that sensitive categories such as health, race, religion and sexual orientation are not used to tailor ads, and that ad personalisation is not applied to users known to be under eighteen. Turning personalisation off does not remove ads: Google states that ads may still be based on general location derived from IP address, browser type and search terms. All of this is Google's own account; no independent audit of these practices was located in the sources consulted.",
+    "update_channels_and_release_cadence": "There is no release channel to observe, because Search is a continuously updated remote service. Google describes the improvement process in terms of experiments and measurement rather than versions: the ranking page states that hundreds of thousands of experiments are run each year, and it discusses latency budgets, noting that any increase caused by a new feature must be offset elsewhere. The visible markers of change are therefore policy and product documents, each carrying its own date: the Terms of Service effective 2026-07-30, the Privacy Policy effective 2026-10-16, the Search Essentials page last updated 2025-12-10, and advertising pages that are revised when practices change. Site owners are given a documentation set to re-read rather than a changelog of the ranking system. No version number, build identifier or published cadence for algorithm updates appears on the pages consulted, and this entry does not infer one from industry commentary.",
+    "licensing_and_governance": "Google Search is a proprietary service provided by Google LLC, organised under the laws of the State of Delaware, under terms effective 2026-07-30. The terms cover acceptable use, content ownership and dispute resolution, and they extend across Google services generally rather than being specific to Search. Governance of what appears in results is split across several published instruments: the Search Essentials set out technical requirements, spam policies and best practices that determine eligibility; the ranking pages describe the kinds of signals used; the advertising pages govern paid placement, which Google states is confined to clearly marked ad sections and cannot buy organic position; and transparency instruments such as the Ads Transparency Center and advertiser identity verification describe who is behind an ad. Google also states that political leanings do not influence ranking and cites external academic studies to that effect, a claim this entry records as Google's own assertion rather than as a finding it verified. The same advertising documentation also states that in 2022 Google Search and its sibling products supported $701 billion of economic activity for American businesses. Removal and legal-compliance processes are referenced through the terms and policy pages but are not documented in detail on the pages consulted.",
+    "limitations_and_scope": "The most important limit is epistemic: Google publishes the vocabulary of ranking signals but not the algorithm. The public pages name categories - meaning of the query, relevance, quality, usability and context - and state that the weight of each varies by query, which is a description of intent, not a reproducible specification. The one quantified claim on the ranking pages is narrow: Google states that its query-understanding system took over 5 years to develop and improves results in over 30% of searches across languages, which describes an outcome, not a mechanism. Anyone claiming to know the current weights from an official source is going beyond what Google publishes. Second, the documentation is written for site owners and is consequently silent on many engineering questions: no process model, no index size, no data-centre detail. Third, feature availability is explicitly variable by country, language and platform, so a capability described in a marketing page may not exist for a given user. Fourth, every privacy, security and quality claim in this entry is Google's own; no independent audit, regulator finding or third-party measurement was consulted. Finally, the documentation set carries an open licence while the service does not, which means the descriptions can be quoted but the behaviour cannot be inspected.",
+    "who_is_it_for": "It is the default choice for general web research: broad index coverage, a results page that most users already know how to operate, and a documented set of narrowing tools for images, video, news and shopping. It suits people who value AI-assisted summaries with links back to sources, and users who are signed in and want personalisation they can inspect and switch off per query. It is the reference target for site owners, if only because the published eligibility rules are the ones most tools and agencies optimise against.",
+    "who_is_it_not_for": "It is not for anyone who needs to audit the ranking system or reproduce it: the algorithm is closed, the weights are not published, and the documentation is guidance rather than a specification. It is not a privacy-first engine in the sense used elsewhere in this library, since the model is built on account-linked and device-linked data with retention windows rather than on retention avoidance, and disabling personalisation does not remove advertising. It is not a self-hostable component: there is no package, no offline index and no on-premises edition. Users who need source code they can rebuild, contractual guarantees about ranking, or a documented crawler policy they can negotiate should look elsewhere, and site owners who want guaranteed inclusion will not find it here, because Google explicitly does not promise to crawl, index or serve any given page.",
+    "verdict": "Google Search is best documented as a large automated retrieval system with unusually thorough publishing rules and deliberately limited disclosure about its core. The public documentation is genuinely useful on the parts it covers - crawling and indexing stages, eligibility, ad labelling, retention periods, personalisation controls - and those parts are stated precisely enough to be checked against a site owner's own observations. What remains outside the documentation is the thing most people ask about, namely why one page outranks another, and the gap is closed by marketing rather than by specification. Read the privacy numbers as published commitments with dates attached, read the quality and independence statements as the operator's position, and treat any account of the ranking system that is more specific than Google's own pages as unsourced."
+  },
+  "links": {
+    "homepage": "https://www.google.com/",
+    "about_search": "https://search.google/",
+    "how_search_works": "https://www.google.com/search/howsearchworks/",
+    "search_essentials": "https://developers.google.com/search/docs/essentials",
+    "ranking_results": "https://www.google.com/intl/en_us/search/howsearchworks/how-search-works/ranking-results/",
+    "ads_on_search": "https://www.google.com/intl/en_us/search/howsearchworks/our-approach/ads-on-search/",
+    "privacy_policy": "https://policies.google.com/privacy",
+    "terms_of_service": "https://policies.google.com/terms",
+    "google_app": "https://search.google/google-app/"
+  },
+  "sources": [
+    {
+      "title": "Google Search - What Is Google Search And How Does It Work — approach pages, 'we only sell ads', no payment for inclusion in the index or for ranking",
+      "url": "https://www.google.com/search/howsearchworks/",
+      "type": "official_site",
+      "publisher": "Google",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "In-depth guide to how Google Search works — crawling, indexing and serving; Googlebot; rendering with a recent version of Chrome; no payment to crawl or rank",
+      "url": "https://developers.google.com/search/docs/fundamentals/how-search-works",
+      "type": "official_documentation",
+      "publisher": "Google Search Central",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How Google determines ranking results — query meaning, relevance, quality, usability and context; weights vary by query; hundreds of thousands of experiments per year",
+      "url": "https://www.google.com/intl/en_us/search/howsearchworks/how-search-works/ranking-results/",
+      "type": "official_site",
+      "publisher": "Google",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Google Search Essentials — technical requirements, spam policies, best practices, free inclusion; page last updated 10 December 2025; documentation licence terms",
+      "url": "https://developers.google.com/search/docs/essentials",
+      "type": "official_documentation",
+      "publisher": "Google Search Central",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How ads work on Google Search — ads clearly labelled, no purchase of organic placement, Ads Transparency Center, My Ad Center controls",
+      "url": "https://www.google.com/intl/en_us/search/howsearchworks/our-approach/ads-on-search/",
+      "type": "official_site",
+      "publisher": "Google",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Advertising — how Google uses cookies in advertising; server log contents; IP data anonymised after 9 months and cookie information after 18 months; ads still shown when personalisation is off",
+      "url": "https://policies.google.com/technologies/ads",
+      "type": "privacy_policy",
+      "publisher": "Google",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Google Privacy Policy — effective 16 October 2026; signed-out data stored with unique identifiers tied to browser, application or device",
+      "url": "https://policies.google.com/privacy",
+      "type": "privacy_policy",
+      "publisher": "Google",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Google Terms of Service — effective 30 July 2026; provider Google LLC, a Delaware company; terms covering all Google services",
+      "url": "https://policies.google.com/terms",
+      "type": "terms_of_service",
+      "publisher": "Google",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Google Search - A new kind of help — AI Mode, AI Overviews, Lens, Search Live; availability limited to selected countries and languages; check AI responses for accuracy",
+      "url": "https://search.google/",
+      "type": "official_site",
+      "publisher": "Google",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Ads that respect your privacy — Safety Center: no sale of personal information, auto-delete default of 18 months, sensitive categories excluded from ad tailoring, advertiser identity verification",
+      "url": "https://safety.google/safety/ads-data/",
+      "type": "official_documentation",
+      "publisher": "Google Safety Center",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Personalization & Google Search results — personalisation may reorder results or content blocks; 'Try without' link; context still used when personalisation is off; Search customization when signed out",
+      "url": "https://support.google.com/websearch/answer/12410098",
+      "type": "official_documentation",
+      "publisher": "Google Search Help",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Google App — Play and App Store distribution (com.google.android.googlequicksearchbox, App Store id 284815942), Lens, voice, AR and Discover",
+      "url": "https://search.google/google-app/",
+      "type": "official_site",
+      "publisher": "Google",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "id": "ublock-origin-lite",
+  "name": "uBlock Origin Lite",
+  "type": "application",
+  "summary": "Separate GPLv3 MV3 content-filtering extension using browser-evaluated declarativeNetRequest rules, four filtering modes, local ruleset compilation, constrained cosmetic and scriptlet features, packaged lists and explicit external subscriptions.",
+  "tags": [
+    "browser extension",
+    "content blocker",
+    "ad filtering",
+    "tracker blocking",
+    "manifest v3",
+    "declarativenetrequest",
+    "dnr",
+    "filter lists",
+    "custom filters",
+    "cosmetic filtering",
+    "scriptlets",
+    "open source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome",
+    "Chromium-based browsers",
+    "Firefox",
+    "Firefox for Android",
+    "Microsoft Edge",
+    "Safari",
+    "Opera compatibility documented but untested by project"
+  ],
+  "license": "GNU General Public License v3.0 (GPLv3; AMO: v3.0 only)",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "uBlock Origin Lite (uBOL) is a free, open-source Manifest V3 content-filtering extension maintained as a separate project from uBlock Origin (uBO), not an automatic migration of the same extension. Its defining architecture uses the browser's declarativeNetRequest (DNR) API: the browser evaluates declarative network rules rather than requiring a persistent MV2 blocking webRequest listener. uBOL also supplies dashboard and popup code, local ruleset compilation, cosmetic filtering and constrained scriptlet injection. Four filtering modes are documented—no filtering, basic, optimal and complete—with optimal as the current documented global default. Built-in lists, custom filters and explicitly added external subscriptions serve different update paths. Browser evaluation does not imply identical DNR features or limits on Chromium, Firefox and Safari, and some network and cosmetic capabilities depend on site access. AMO, the Chrome Web Store and Apple's App Store displayed version 2026.1103.1743 on 2026-11-05. That shared label is a channel snapshot, not evidence of functional parity, and the repository's older Firefox manifest remains a different artefact.",
+    "origin_and_history": "uBOL emerged from the same maintainer's effort to design a content blocker around MV3 rather than treating it as a renamed uBO package. The repository's salvage file preserves early release notes: on 20 September 2022, “uBO Minus” was renamed “uBO Lite,” and notes dated 10 October 2022 describe the introduction of no-filtering, basic, optimal and complete modes. Those entries are historical; the quick-start guide now identifies optimal, rather than basic, as the default. Later development added an administration policy for default modes, element-zapper and element-picker tools, and more user-controlled filtering. A changelog entry dated 21 June 2026 is especially important because it documents custom filters and external filter-list subscriptions without requiring developer mode. Earlier absolute descriptions of zero network activity therefore need to be read with this later functionality and the current privacy policy. The project remains distinct from uBO, with its own repository, manifests, release notes and declarative limitations rather than a shared feature checklist.",
+    "rendering_engine_and_technical_architecture": "uBOL does not render web pages; it plugs into the host browser's WebExtensions and DNR facilities. DNR rules are evaluated by the browser, which can also precompile rulesets. The Chromium source manifest is MV3, declares no persistent background service worker for request-by-request filtering and combines declarative network rules with scripting, offscreen, userScripts, storage and other permissions. Filtering data includes enabled and disabled rulesets, while the popup, dashboard, compiler and administration interfaces execute extension code when needed. Custom filters and external lists are fetched where applicable, parsed and compiled locally into DNR rules, then cached. Scriptlet and CSS resources can be injected through declared extension facilities, but imported custom scriptlets may only invoke resources already embedded in the package. This differs technically from uBO's MV2 blocking webRequest design; it does not establish that one is categorically superior. DNR rule types, quotas and header or response capabilities vary by browser, so declarative architecture is not a claim of universal feature equivalence.",
+    "interface_and_documented_features": "The popup offers the four filtering modes as site-specific settings, while the dashboard establishes the global default. The guide now documents optimal as the default; disabling filtering for the current site selects no filtering. Basic and optimal do not require the optional host access used by the more intrusive modes. In optimal or complete, the toolbar can expose the zapper for temporary removal and the picker for a permanent cosmetic filter. Picker-created rules are listed with other custom filters in the dashboard's Custom filters pane. That pane is not merely a legacy setting: current release notes and permission documentation describe compilation of user-authored network filters and subscription content. Complete mode additionally enables generic cosmetic filtering on sites where the user grants the required access. Mode changes affect permissions and capabilities, so the interface should be read as a graduated control rather than four labels with identical internals. Administration policy can set a managed default, but that does not make an enterprise policy equivalent to an individual user's per-site choice.",
+    "installation_and_distribution": "The official README links release packages through the Chrome Web Store, Firefox Add-ons, Edge Add-ons and Apple's App Store, with Safari support documented through the Safari Web Extension package. On 3 November 2026, AMO, Chrome and Apple listings displayed 2026.1103.1743. The Chrome listing attributes the offer to Raymond Hill and shows extensive permissions and DNR warning text; the Apple listing supplies platform-specific compatibility and privacy metadata. These are distribution declarations, not installation tests performed here. The source repository also documents development workflows and separate platform directories, but building from source is not required to use the store packages and was not attempted in this phase. Opera users are addressed in the FAQ through Chromium-extension compatibility, with an explicit note that this compatibility has not been tested by the project. Store availability does not guarantee that every browser receives identical code, rules or updates. In particular, the repository's Firefox manifest is an older source snapshot and must not override the newer AMO package metadata.",
+    "platforms_and_hardware_architectures": "The Chromium source manifest declares Chrome 122 as a minimum and the Firefox source manifest declares Gecko and Gecko Android 114; both are source-tree snapshots, not a universal compatibility matrix. The Firefox file still carries version 2024.9.22.986 and a smaller permission set, whereas AMO displays the newer 2026 package, so current store functionality cannot be inferred from that old manifest alone. Apple's listing states iOS and iPadOS 18.5 or later, macOS 13.5 or later and visionOS 2.5 or later in its compatibility block. Its release notes also mention conversion of updated DNR rulesets to Safari's format, illustrating a platform-specific step. Edge is distributed through its own add-ons channel and follows Microsoft's extension policies; Chrome timelines should not simply be transferred to it. No native CPU architecture requirement is published in the consulted source manifests. This entry makes no claim of tested support on every Chromium derivative, every mobile browser or every listed operating-system version.",
+    "extensions_and_add_on_store": "uBOL does not host a general-purpose extension ecosystem inside the extension. Its expansion points are rulesets and filters. The package includes default lists for advertising, tracking, annoyances and malicious domains, with additional optional lists that users can enable. Custom filters allow user-authored network rules, and external subscriptions can be added explicitly. The compiler converts supported syntax into browser DNR rules; custom scriptlet calls are restricted to resources shipped with the package, which limits arbitrary imported script execution but also constrains advanced filters. Packaged rulesets and downloaded subscriptions must be distinguished: built-in rules update with the extension, while a subscription supplies remote list content that is compiled and cached locally. Safari adds another conversion path. Browser add-on stores distribute the extension and enforce their own review and permission displays, but they do not turn every subscribed list into a reviewed browser extension. List provenance, syntax support and update timing therefore remain part of the user's trust and maintenance decisions.",
+    "privacy_and_security_model": "The current privacy policy states that uBOL collects no data, has no home server and embeds no analytics or telemetry. It also documents an important exception to any absolute no-network interpretation: explicitly added external filter lists are downloaded from their remote locations, then compiled and cached locally. The permission guide gives the same explanation. DNR itself is evaluated by the browser, but the extension needs site access for modes and tools that inspect or modify pages, userScripts for scriptlet injection, offscreen facilities for local work, and storage for lists and caches. The Chromium source manifest includes broad host permissions, alarms, unlimitedStorage and related capabilities; actual optional access can vary with the selected mode and browser. These permissions are documented reasons, not proof that all are exercised continuously. No independent network capture, permissions audit or review of subscription infrastructure was conducted. Users should also recognise that an external list is both a filtering input and a remote update relationship chosen by the user.",
+    "update_channels_and_release_cadence": "Built-in filter lists are compiled into the extension package and receive updates when a new extension version is installed. This packaged route does not require each list to be contacted independently. Explicitly subscribed external lists follow a different path: the extension downloads their content, compiles it locally and keeps a cached copy, so filtering data can change without an extension-store release. The changelog documents differential updates for rulesets and later remote-subscription support, while release notes track individual versions. The three consulted storefronts showed 2026.1103.1743 on 3 November 2026, but the same number does not prove simultaneous review, identical binaries or feature parity. Safari's notes describe conversion after DNR ruleset changes, and Firefox's old source manifest demonstrates why repository and package snapshots must be dated. No fixed release cadence is promised by the evidence consulted. For reproducibility, the extension version, enabled packaged rulesets, subscription revisions and browser version should be recorded separately rather than treating “uBOL is up to date” as one measurable state.",
+    "licensing_and_governance": "AMO identifies the uBOL package as free and open source under GNU GPL v3.0 only, and the project links its public source, release and documentation resources. This entry does not extend that statement into a licence claim for third-party filter lists, browser code or subscribed content. Maintenance is organised around the uBOL-home repository and related project issue channels; the contribution documentation distinguishes extension defects from filter-list or website-breakage work handled through uAssets. Release notes, changelogs, platform manifests and the permissions guide make the implementation inspectable, while managed-settings documentation exposes an administrative configuration surface. The privacy policy says the project seeks no donations or other financing. These facts describe the project's stated model, not an independent assessment of governance diversity or security review. Users can inspect and build the source, but a store package may be reviewed, converted or versioned through a channel-specific process. Accordingly, licensing and openness of the repository should not be confused with identical release artefacts or control over external subscriptions.",
+    "limitations_and_scope": "DNR imposes the central limitations. Rule quotas, supported conditions and available actions differ among browsers, and uBOL cannot reproduce every uBO MV2 mechanism. The FAQ identifies limits around strict first- or third-party rules, entity-based domains, redirect-rule options, regular-expression removeparam operations, response-header or response-body dependent filtering and CNAME-related behaviour. Newer Chromium APIs may provide only partial alternatives and do not establish parity elsewhere. Optimal and complete features require different site access; disabling a permission can disable associated cosmetic or scriptlet behaviour. Custom filters and scriptlets support only the conversion paths and embedded resources documented by the project. Safari conversion and Firefox's distinct DNR implementation require separate evaluation. The FAQ's older absolute no-network wording conflicts with its June 2026 correction and current subscription documentation; the exception must be retained. Finally, no controlled CPU, memory or blocking-effectiveness benchmark was run, so uBOL's declarative design is not presented here as proof that it is universally faster, safer or more effective than uBO.",
+    "who_is_it_for": "uBOL suits users on a supported MV3 browser who want list-driven content filtering with a declarative network engine, a relatively constrained default mode and optional per-site expansion. It is relevant to Chrome users who can no longer use MV2 uBO and want a separate tool designed for that extension architecture, without assuming the two products are identical. The basic and optimal modes support users who prefer not to grant broad optional access everywhere, while complete mode and the picker serve those willing to grant site access for additional cosmetic control. Administrators can use the documented policy mechanism, and advanced users can add supported custom filters or explicit subscriptions while understanding DNR conversion limits. People who value inspectable local compilation and clear separation between packaged and remote lists may also find the design useful. The right choice depends on the browser's DNR support and the user's required filters, not on a general ranking against uBO.",
+    "who_is_it_not_for": "uBOL is not for users who require uBO's full MV2 dynamic-filtering model, every extended filter option or identical behaviour on all supported browsers. It is a poor fit when a necessary list depends on unsupported DNR conversions, arbitrary custom scriptlets, response-body inspection or browser-specific CNAME capabilities. Users who interpret declarative filtering as zero extension code or zero network activity will be disappointed by the documented interface code and explicitly subscribed remote-list downloads. Those unwilling to manage per-site permissions may find complete-mode features unavailable or inconsistent. A Safari, Firefox or Chromium user should not assume that a feature seen on another platform has been ported without checking that platform's implementation. Likewise, anyone expecting a verified performance advantage, a guarantee against all tracking or a general anonymity tool is outside the evidence and scope. Finally, the older Firefox source manifest should not be used by deployers as a substitute for reviewing the actual current package they intend to install.",
+    "verdict": "uBlock Origin Lite is a distinct MV3 filtering project whose core network decisions are delegated to the browser's DNR engine, supplemented by local compilation, a four-mode interface and constrained cosmetic and scriptlet features. It offers packaged lists, user-authored filters and explicitly chosen remote subscriptions, each with different network and update implications. The design is particularly relevant where MV2 is unavailable, but it does not reproduce every uBO capability and should not be judged through an unsourced superiority claim. Current documentation establishes meaningful differences in permissions and DNR support across Chromium, Firefox and Safari; matching storefront version labels do not erase them. The privacy policy's no-collection statement is a publisher declaration, and remote subscriptions are a documented exception to simplistic no-network descriptions. uBOL is a coherent option for users whose browser and filtering needs fit declarative rules, provided they review mode-specific access, list provenance and platform limits rather than expecting a feature-identical uBO replacement."
+  },
+  "links": {
+    "readme": "https://raw.githubusercontent.com/uBlockOrigin/uBOL-home/main/README.md",
+    "faq": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Frequently-asked-questions-(FAQ).md",
+    "quick_guide": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Quick-guide.md",
+    "develop_guide": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Dashboard:-Develop.md",
+    "managed_settings": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Managed-settings.md",
+    "permissions": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Justification-for-the-declared-permissions.md",
+    "privacy_policy": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Privacy-policy.md",
+    "chromium_manifest": "https://raw.githubusercontent.com/uBlockOrigin/uBOL-home/main/chromium/manifest.json",
+    "firefox_manifest": "https://raw.githubusercontent.com/uBlockOrigin/uBOL-home/main/firefox/manifest.json",
+    "changelog": "https://github.com/uBlockOrigin/uBOL-home/releases",
+    "release_notes": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Release-notes-(salvaged).md",
+    "amo_listing": "https://addons.mozilla.org/firefox/addon/ublock-origin-lite/",
+    "chrome_listing": "https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh",
+    "app_store_listing": "https://apps.apple.com/app/ublock-origin-lite/id6745342698",
+    "mdn_dnr": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/declarativeNetRequest",
+    "chrome_blocking_requests": "https://developer.chrome.com/docs/extensions/develop/migrate/blocking-web-requests"
+  },
+  "sources": [
+    {
+      "title": "uBlock Origin Lite README - separate MV3 project, browser DNR filtering and official distribution links",
+      "url": "https://raw.githubusercontent.com/uBlockOrigin/uBOL-home/main/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin Lite FAQ - project distinction, DNR limitations, filtering modes, browser compatibility and historical no-network caveat",
+      "url": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Frequently-asked-questions-(FAQ).md",
+      "type": "official_faq",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin Lite quick-start guide - current optimal default, per-site modes, zapper, picker and custom-filter interface",
+      "url": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Quick-guide.md",
+      "type": "official_user_documentation",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin Lite Develop pane documentation - advanced filtering-mode and custom DNR rule controls with security warnings",
+      "url": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Dashboard:-Develop.md",
+      "type": "official_development_documentation",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin Lite managed settings - administrative default filtering mode and enterprise configuration context",
+      "url": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Managed-settings.md",
+      "type": "official_administration_documentation",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin Lite permissions explainer - local compilation, cache, offscreen, userScripts and remote-list network exception",
+      "url": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Justification-for-the-declared-permissions.md",
+      "type": "official_permission_documentation",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin Lite privacy policy - no-collection declarations and network retrieval of explicitly subscribed external lists",
+      "url": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Privacy-policy.md",
+      "type": "official_privacy_policy",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBOL Chromium source manifest - MV3, Chrome 122 minimum, DNR permissions and version 2026.1103.1743 snapshot",
+      "url": "https://raw.githubusercontent.com/uBlockOrigin/uBOL-home/main/chromium/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBOL Firefox source manifest - MV3, Gecko 114 minimum and older 2024.9.22.986 source snapshot",
+      "url": "https://raw.githubusercontent.com/uBlockOrigin/uBOL-home/main/firefox/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBlock Origin Lite release channel - current packages, custom filters and external subscriptions from June 2026, ruleset and platform changes",
+      "url": "https://github.com/uBlockOrigin/uBOL-home/releases",
+      "type": "official_release_channel",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "uBOL salvaged release notes - September and October 2022 renaming and four-mode history",
+      "url": "https://raw.githubusercontent.com/wiki/uBlockOrigin/uBOL-home/Release-notes-(salvaged).md",
+      "type": "official_release_history",
+      "publisher": "uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Firefox Add-ons uBlock Origin Lite listing - current package version, distribution metadata and declared permissions",
+      "url": "https://addons.mozilla.org/firefox/addon/ublock-origin-lite/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Chrome Web Store uBlock Origin Lite listing - version 2026.1103.1743, offered-by metadata and permission disclosures",
+      "url": "https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Apple App Store uBlock Origin Lite listing - Safari distribution, platform minima, privacy declarations and version",
+      "url": "https://apps.apple.com/app/ublock-origin-lite/id6745342698",
+      "type": "official_store_listing",
+      "publisher": "Apple App Store / uBlock Origin Lite project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MDN declarativeNetRequest API - browser-evaluated rules, permissions, rulesets and cross-browser implementation differences",
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/declarativeNetRequest",
+      "type": "browser_api_documentation",
+      "publisher": "MDN Web Docs",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Chrome extension documentation on blocking web requests - MV3 DNR model and limits on intercepting or modifying request content",
+      "url": "https://developer.chrome.com/docs/extensions/develop/migrate/blocking-web-requests",
+      "type": "browser_vendor_documentation",
+      "publisher": "Google Chrome",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

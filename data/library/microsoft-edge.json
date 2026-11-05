@@ -1,0 +1,150 @@
+{
+  "id": "microsoft-edge",
+  "name": "Microsoft Edge",
+  "type": "application",
+  "summary": "Web browser distributed by Microsoft, built on the Chromium project and rendering pages with Blink and V8.",
+  "tags": [
+    "browser",
+    "web",
+    "microsoft",
+    "chromium",
+    "blink",
+    "enterprise"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary (Microsoft Edge Software License Terms)",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Microsoft Edge is a web browser distributed by Microsoft. Microsoft publishes builds for Windows, macOS, Linux, Android and iOS, and the browser is built on the Chromium open-source project. This entry documents the published product, the engine it renders with, the operating systems Microsoft supports, the enterprise channels that govern its updates, and the licence, privacy and security material Microsoft publishes. It does not repeat the promotional claims of the product page and does not compare Edge with other browsers.\n\nAt the time of writing the Stable channel served Microsoft Edge 156.0.4314.42, released on 22 October 2026, with version 157 in beta and due to reach Stable in the week of 5 November 2026.",
+    "origin_and_history": "Microsoft Edge is built on Chromium. Microsoft's extension documentation states this directly, describing Edge as based on the Chromium open-source browser project and listing the other browsers that share that base. The same documentation notes that Chromium-based browsers use the same extension APIs and the same packaging, which is the practical consequence of that lineage.\n\nThe recent version history is documented in the Stable channel release notes. Version 155 appeared as 155.0.4283.45 on 8 October 2026 and again as 155.0.4283.62 on 16 October 2026, and version 156 as 156.0.4314.42 on 22 October 2026; the beta of 157 was published on 20 October 2026. Microsoft's release schedule page places the 157 Stable release in the week of 5 November 2026.\n\nThe history before these milestones, including the release year of the current product line, is not documented on the pages read during this phase and is not asserted here.",
+    "rendering_engine_and_technical_architecture": "Edge renders pages with Blink and executes JavaScript in V8. Google's web platform documentation describes Blink as the rendering engine used by browsers built on Chromium and names Microsoft Edge among them, and it describes V8 as the engine for JavaScript and WebAssembly. The Chromium architecture documentation therefore applies to Edge as well: a browser process manages renderer processes that use Blink, and those renderers run inside a sandbox that limits their access to the network, file system, display and input.\n\nEdge is not Blink, and Blink is not Edge. The engine is a shared component of the Chromium project, while Edge is the product Microsoft packages around it, adding its own update and servicing model, enterprise policy surface, settings, and add-ons catalogue. On iOS the picture differs: Apple's App Store Review Guidelines, section 2.5.6, require browsing applications to use WebKit and WebKit's JavaScript engine, with an entitlement allowing an alternative engine only in the European Union and Japan. The iOS build of Edge is therefore subject to that constraint, and whether Microsoft uses the entitlement is not documented in the sources read, so no claim is made about it.",
+    "interface_and_documented_features": "The interface follows the shape familiar from Chromium browsers: tabs and vertical tab grouping, an address bar that also searches, favourites, history, downloads, a password manager, printing, a PDF viewer, profiles and a settings surface for privacy, search and services. The Stable release notes document the features that are changing: a rebuilt site permissions experience, an enriched autofill flow, the removal of the Windows Account Manager sign-in path in version 157, deprecation of XSLT with the feature turned off by default for testing in 157 and shipped off by default in version 159, and migration of the edge://tracing page to Perfetto.\n\nMicrosoft's product page describes further features in promotional terms: a Copilot assistant that works across tabs, a scareware blocker, Edge Secure Network, sleeping tabs, startup boost, energy saver, password management, cross-device synchronisation and an in-game browser for Game Bar. The page also states that feature availability and functionality vary by device type, market and browser version. Those descriptions are publisher claims and are recorded as such rather than as verified behaviour.\n\nTwo security features are documented in the enterprise documentation rather than the product page. Microsoft Defender SmartScreen is on by default and performs reputation checks on visited addresses and downloaded files, sending the relevant address or file information to the service over TLS and storing the result locally. Enhanced security mode reduces exposure to memory-corruption exploits by disabling just-in-time JavaScript compilation and enabling operating system mitigations such as hardware-enforced stack protection and arbitrary code guard, in a Balanced or Strict setting.",
+    "installation_and_distribution": "Microsoft distributes Edge as a download for Windows, macOS and Linux, with mobile applications for Android and iOS from their respective stores, and the product page states that downloading Edge means agreeing to the Microsoft Edge Software License Terms. For organisations, the enterprise documentation covers deployment through Microsoft's administrative templates and policies, including the group policy path that switches an installation to the Extended Stable channel.\n\nUnlike a browser obtained from a single vendor download, Edge is also updated through the operating system's own update mechanism on Windows, which is why the enterprise documentation treats channels as a policy decision: administrators can keep broad deployments on Stable, validate on Beta, and pin specific machines to Extended Stable. This entry does not describe the default installation state of Edge on Windows, because the pages read in this phase do not state it.",
+    "platforms_and_hardware_architectures": "Microsoft's supported operating systems page, updated on 31 August 2026, lists Windows 10 Semi-Annual Channel version 1709 or later, Windows 10 LTSC 2015, 2016, 2019 and 2021, Windows 11, and Windows Server 2016 through 2025. On macOS the page is explicit about version pairing: macOS 11 is served by Edge 129 to 138, macOS 12 by Edge 139 to 150, and macOS 13 or later is required for Edge 151 and later. iOS 18 or later is required, Android 10 or later on ARM devices, and Linux in 64-bit builds on the same four distributions Chrome lists — Ubuntu 18.04, Debian 10, openSUSE 15.5 and Fedora 39 or later.\n\nTwo hardware and life-cycle statements stand out. Chromebooks are not supported. Devices without SSE3 stopped receiving updates from version 128 onwards. Microsoft also states that Edge and WebView2 on Windows 10 version 22H2 will be supported until at least October 2028 through the extended security update programme.\n\nThe list is a support statement, not a description of what may run unofficially. Configurations outside it receive no documented updates, and the macOS pairing shows that support is tied to specific Edge versions rather than to the operating system alone.",
+    "extensions_and_add_on_store": "Extensions for Edge are published and installed from the Microsoft Edge Add-ons site, which Microsoft describes as covering both extensions and themes; users search the catalogue from that site, and developers publish there through the Edge add-ons developer programme. The developer documentation states that a Chromium extension can be written once and adapted per browser, that Chromium-based browsers share the extension APIs and packaging, and that API parity is not universal — identity and payment APIs are named as areas where browsers differ.\n\nMicrosoft's own comparison table places Edge and Chrome in the Chromium-based column and Firefox in the other one, pointing developers of Firefox extensions to Mozilla's WebExtensions documentation. Edge users can install extensions that were written for Chromium browsers, subject to those API differences; the pages read in this phase do not document a supported consumer route outside the Edge Add-ons site, so none is described.",
+    "privacy_and_security_model": "Microsoft publishes a privacy article that describes, feature by feature, what data Edge sends to Microsoft and how each item can be controlled. Address bar suggestions are the worked example: typed characters are sent to the default search provider to obtain suggestions, and when that provider is Bing a resettable identifier unique to the browser installation accompanies the data; the article documents the toggle that stops typed characters being sent and states that Edge does not send text it identifies as sensitive, such as credentials, local file names or URL data that is normally encrypted. Optional diagnostic data, including addresses and titles of visited pages, is described as opt-in and stored on Microsoft servers.\n\nOn the security side, two mechanisms are documented in the enterprise documentation. Microsoft Defender SmartScreen builds a reputation check from visited addresses and downloaded files, returns a verdict over TLS and stores it locally, and the documentation states that the data held by the service is used for Microsoft security services and is not used to identify or target users. Enhanced security mode, available in Balanced and Strict variants, disables just-in-time compilation on sites it applies to and adds operating system mitigations; Microsoft notes that WebAssembly is supported in that mode on x64 Windows, macOS, Linux and on ARM64, and warns developers that the WebAssembly interpreter may not deliver expected performance.\n\nThese are descriptions of published behaviour. The product page's security language is marketing and is not treated as evidence here.",
+    "update_channels_and_release_cadence": "Microsoft documents five servicing options. Stable is intended for broad deployment and receives new features about every two weeks, with security and quality updates as needed, and a Stable release is serviced until the next one is available. Beta follows the same two-week rhythm and is supported; Dev updates weekly and Canary daily, and Microsoft documents both as unsupported for production use. Extended Stable is not a separate application: it is an enterprise release option for the Stable browser that provides an eight-week major release cycle, receiving feature updates every fourth Stable release — starting on version 152, the next feature updates are 156 and 160 — with security and critical fixes delivered as needed in between.\n\nMicrosoft's release schedule page states that the two-week cadence applies from Stable version 152. For the current cycle it records the beta of 157 on 20 October 2026 and the Stable release in the week of 5 November 2026, and the Stable release notes record 156.0.4314.42 on 22 October 2026 for both the Stable and the Extended Stable channels.\n\nThe cadence changed during 2026, so older descriptions of a four-week cycle describe a state that no longer applies to Edge. The dates above are taken from Microsoft's own schedule rather than inferred from version numbers.",
+    "licensing_and_governance": "Edge is distributed under the Microsoft Edge Software License Terms: the download page states that downloading Edge constitutes agreement to those terms. This phase did not find, on the pages read, an official statement that Microsoft distributes Edge itself under an open-source licence, and it does not assert one.\n\nThe Chromium project that Edge is built on is a different matter. Chromium publishes its source under the three-clause BSD licence, which allows redistribution of source and binary forms provided the copyright notice and conditions travel with them and provided the names of the copyright holder and contributors are not used to endorse derived products. Microsoft's extension documentation states plainly that Edge is based on that project.\n\nGovernance of the product sits with Microsoft: the servicing model, the policy surface, the add-ons catalogue, the privacy article and the security documentation are all published and operated by Microsoft, and the release schedule that fixes the dates quoted above is Microsoft's own.",
+    "limitations_and_scope": "The support statement has edges that matter. macOS versions are paired with specific Edge ranges, so a machine on macOS 11 or 12 stops receiving the current version at some point rather than immediately. Chromebooks are not supported at all. Processors without SSE3 stopped receiving updates from version 128. Windows 10 version 22H2 support runs to at least October 2028 only through the extended security update programme, which is a bounded commitment rather than an open-ended one.\n\nFeature availability is version-dependent and explicitly market-dependent: the product page states that functionality varies by device type, market and browser version, and the release notes record features that are deprecated or removed, such as the Windows Account Manager sign-in path in 157 and default-off XSLT moving to Stable in 159. Enterprise controls can override user settings, and installations pinned to Extended Stable delay feature updates by design. The pages read in this phase document no supported consumer route for extensions outside the Edge Add-ons site.",
+    "who_is_it_for": "The documented audience is organisations that deploy a Chromium browser under policy control — with Stable, Beta and the eight-week Extended Stable option — alongside users on the Windows, macOS, Linux, Android and iOS versions Microsoft lists.",
+    "who_is_it_not_for": "It is not supported on Chromebooks, on processors without SSE3 beyond version 128, or on macOS releases older than those paired with the current Edge version; and it is not the browser to choose if a rendering engine other than WebKit is required on iOS.",
+    "verdict": "Edge is a Chromium-based browser whose documented identity is its servicing model rather than its feature list: Blink and V8 for rendering, a five-option channel structure that includes an enterprise Extended Stable line, operating system support defined version by version, and a licence that applies to the distributed product while the underlying Chromium source stays BSD-licensed. The feature claims on the product page are publisher statements and are not repeated as findings."
+  },
+  "links": {
+    "homepage": "https://www.microsoft.com/en-us/edge",
+    "release_notes": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel",
+    "release_schedule": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-release-schedule",
+    "supported_operating_systems": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems",
+    "add_ons": "https://microsoftedge.microsoft.com/",
+    "privacy_article": "https://learn.microsoft.com/en-us/legal/microsoft-edge/privacy"
+  },
+  "sources": [
+    {
+      "title": "Microsoft Edge release notes for Stable Channel",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel",
+      "type": "official_release_notes",
+      "publisher": "Microsoft",
+      "date": "2026-10-22",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Microsoft Edge release schedule",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-release-schedule",
+      "type": "official_documentation",
+      "publisher": "Microsoft",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Microsoft Edge supported operating systems",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-supported-operating-systems",
+      "type": "official_documentation",
+      "publisher": "Microsoft",
+      "date": "2026-08-31",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Overview of the Microsoft Edge channels",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-channels",
+      "type": "official_documentation",
+      "publisher": "Microsoft",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Microsoft Edge support for Microsoft Defender SmartScreen",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-security-smartscreen",
+      "type": "official_documentation",
+      "publisher": "Microsoft",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Browse more safely with Microsoft Edge (enhanced security mode)",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-security-browse-safer",
+      "type": "official_documentation",
+      "publisher": "Microsoft",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "User data and privacy in Microsoft Edge",
+      "url": "https://learn.microsoft.com/en-us/legal/microsoft-edge/privacy",
+      "type": "official_documentation",
+      "publisher": "Microsoft",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Overview of Microsoft Edge extensions",
+      "url": "https://learn.microsoft.com/en-us/microsoft-edge/extensions/",
+      "type": "official_documentation",
+      "publisher": "Microsoft",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Get to Know Microsoft Edge (download page and Edge Software License Terms statement)",
+      "url": "https://explore.microsoft.com/en-us/edge/",
+      "type": "official_product_page",
+      "publisher": "Microsoft",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chromium project home (open-source browser project)",
+      "url": "https://www.chromium.org/Home/",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Multi-process architecture",
+      "url": "https://www.chromium.org/developers/design-documents/multi-process-architecture/",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Blink (Chrome for Developers, web platform documentation)",
+      "url": "https://developer.chrome.com/docs/web-platform/blink",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chromium source tree — LICENSE (BSD 3-clause)",
+      "url": "https://chromium.googlesource.com/chromium/src/+/main/LICENSE",
+      "type": "license",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "App Store Review Guidelines (section 2.5.6, browser engines)",
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "type": "official_documentation",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

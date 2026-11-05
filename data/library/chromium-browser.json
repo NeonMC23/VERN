@@ -1,0 +1,114 @@
+{
+  "id": "chromium-browser",
+  "name": "Chromium",
+  "type": "application",
+  "summary": "Browser of the Chromium open source project, a technical base for several commercial browsers rather than a consumer product.",
+  "tags": [
+    "browser",
+    "web",
+    "chromium",
+    "blink",
+    "open source",
+    "bsd"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "ChromiumOS"
+  ],
+  "license": "BSD-3-Clause (repository LICENSE), third-party components under their own licences",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Chromium is the browser of the open source project of the same name. It differs from the other entries in this series on one essential point: it is not a product downloaded from a vendor with a signed release and automatic updates, but published code that third parties build, package and distribute. This entry describes the project, the binaries it makes available itself, the engine, and what separates it from the browsers that derive from it.\n\nThe version landmark used here is the one shared with Chrome: Chromium Dash lists a Stable release 157.0.8103.15 published on 22 October 2026, the previous one being 156.0.8078.49.",
+    "origin_and_history": "The project presents itself as an open source browser project and publishes design documentation, testing information and contribution guides for those who want to build or study the code.\n\nThe relationship between Chromium and Google Chrome is documented by the project itself, on a page devoted to the differences under Linux: Google Chrome is the Chromium open source project built, packaged and distributed by Google. The same page lists what Google adds to its own builds — logo, optional crash reports, optional usage metrics, extra audio and video codecs, an always-on sandbox, a single package, Google API keys, testing before rollout — and what characterises Chromium: no crash reporting, no usage metrics, fewer codecs, sandbox and packaging depending on the distribution.\n\nThe documentation read does not publish a creation date for the project, and this entry does not supply one. It dates what can be verified: releases. The page about old builds gives a worked example — Chrome stable 44.0.2403.157 corresponds to repository position 330231, and a Chromium 44.x build corresponds roughly to that release — and Chromium Dash places milestone 157 in October 2026.",
+    "rendering_engine_and_technical_architecture": "Chromium renders pages with Blink, described by the project as the rendering engine used by Chromium, whose code lives under `src/third_party/blink`. The project page adds an architectural nuance: Blink is implemented on top of an abstract platform and cannot run by itself; Chromium's content module provides the implementation it needs.\n\nThe JavaScript side is handled by V8, which its project describes as an open source JavaScript and WebAssembly engine written in C++, used by Chrome and by Node.js, running on Windows, macOS and Linux for x64, IA-32 and ARM processors.\n\nSecurity architecture is documented separately. Chromium places pages from different sites in different processes, each in a sandbox that limits what the process can do, and prevents cross-site data from being delivered to a process that is not allowed to receive it: this mechanism is documented as Site Isolation. The same page states two limits: on Android only a subset of sites is isolated, to contain the cost, and detection and killing of a faulty renderer process by the browser process currently applies to desktop platforms only.\n\nFour layers remain to be distinguished: Blink and V8 are the engines; the Chromium project is the upstream project; Chromium is the reference product built from that code; and each derivative browser adds its own layers, services and policies. Behaviour observed in Chromium therefore does not automatically describe a derivative.",
+    "interface_and_documented_features": "Chromium carries the interface of the reference browser: tabs, address bar, bookmarks, history, downloads, password manager, and internal diagnostic and settings pages. That interface is the upstream one; it does not include the additions of commercial browsers, which graft their services, catalogues and features onto it.\n\nThe project documentation emphasises differences in behaviour rather than a feature list. Chromium builds never report crashes and do not send usage metrics; the absence of symbols in test builds is presented as a hindrance to crash analysis rather than a security property; the sandbox depends on the packager and can be checked on the dedicated internal page; available codecs vary, because Chromium does not ship by default all the proprietary codecs Google adds to its builds.\n\nThis entry therefore does not describe a marketing catalogue, which does not exist for this product, but a documented technical base whose properties vary with the distribution.",
+    "installation_and_distribution": "Chromium has no single official installer. The project documents several routes, including a command `npx @puppeteer/browsers install chrome@stable` to fetch the latest Chrome for Testing build from the stable channel, a community script for Linux, and an archive of continuous builds organised by platform and build number, the latest published number being recorded in the `LAST_CHANGE` file.\n\nThose builds are explicitly provided on a best-effort basis, from arbitrary revisions that do not necessarily match the Chrome releases meant for users. The project contrasts them with Chrome for Testing builds, which do not auto-update either but follow Chrome's release process and cover all of its channels.\n\nActual distribution therefore usually goes through third parties: Linux distributions package Chromium, and the page on differences with Chrome states that packaging, sandbox configuration, testing before rollout, codecs and Google API keys all depend on the packager. The project also advises against portable builds offered by third-party sites, on security grounds. Installing \"Chromium\" thus means installing a given packager's Chromium.",
+    "platforms_and_hardware_architectures": "The continuous build archive offers four platform entries — Mac, Win, Linux and ChromiumOS — as the project's download procedure shows. Chrome's channels add their own distributions on top, Chrome Canary for instance being offered for Windows and Mac.\n\nProcessor architectures are not covered by a published support matrix: the download page does not list them, and since builds are best-effort, availability can vary from one revision to the next and from one packager to another. No minimum system version is published for Chromium either: that frame is set by distributions and packagers, not by the project.\n\nThat absence should be read as a documentary fact rather than an omission. It follows from the product's status: nobody publishes a minimum configuration for a browser that is not distributed as consumer software by a single entity.",
+    "extensions_and_add_on_store": "Chromium implements the upstream extension system on which the derivative browsers' catalogues rely. The reference catalogue for that system is the Chrome Web Store, which Google's documentation describes as an online marketplace where users browse for extensions and themes.\n\nThat marketplace is a Google service, not a Chromium project service: the page on differences with Chrome notes that Google API keys depend on the distribution, which bears directly on account-linked Google services and on access to the catalogue.\n\nNo page read documents an extension store specific to Chromium, nor an extension installation procedure specific to the project. The entry therefore describes none, and does not claim that a given Chromium build accepts extensions from a particular catalogue: that depends on how it was built and configured. This is an acknowledged documentation limit, consistent with the product's status — derivative browsers are the ones that define and support an extension model for their users. Under Linux the profile is documented at `~/.config/chromium`.",
+    "privacy_and_security_model": "Chromium's model is first read in the negative, on the page comparing it with Chrome: no crash reports, never any usage metrics, no Google API keys added by the project, fewer codecs. Those are documented as deliberate differences between the two products built from the same code.\n\nOn security, the project documents its architecture: separate processes, a sandbox per process, Site Isolation, with the two nuances already noted — partial isolation on Android and faulty-process detection limited to desktop for now. Project builds also lack symbols, which the documentation presents as an obstacle to crash analysis rather than a security property.\n\nTwo reservations apply. The absence of crash reports and metrics is not a privacy guarantee: other flows may exist, and they depend on the build and on the packager. And Chromium is not a hardened product: the technical base should not be confused with the policies of the browsers using it, which add, remove or configure features on their own terms. Privacy, security and anonymity remain three distinct questions, and none is guaranteed by the mere fact of using Chromium.",
+    "update_channels_and_release_cadence": "Chromium has no stable channel of its own. The project publishes continuous and test builds that do not update themselves: the download page states this plainly for Chrome for Testing as well as for Chromium, adding that those builds have no symbols and are mainly useful to check whether a claimed fix actually works.\n\nThe documented channels — Stable, Beta, Dev, Canary — are Chrome's. Chrome Canary is offered for Windows and Mac and updates daily; the Dev and Beta channels are documented separately; Chrome for Testing covers every channel. Google does not offer old Chrome builds, for lack of up-to-date security fixes, and points to the corresponding Chromium builds for debugging.\n\nThe cadence therefore has two levels: that of the milestones, shared with Chrome, and that of each packager's builds, decided by whoever rebuilds and ships. The entry cannot state a cadence for \"Chromium\" in general, and does not.",
+    "licensing_and_governance": "Chromium's code is published under the three-clause BSD licence: the repository LICENSE file allows redistribution of source and binary forms provided the copyright notice is kept and the names of contributors are not used for promotion. That file is the project's own; the code also embeds many third-party components under their own licences, which the project documentation flags in the tree.\n\nGovernance is that of an open source project with tooling: code of conduct, contribution guide, a mailing list dedicated to platform changes, public tracking of bugs and feature requests. The Blink page even documents the process for launching and removing web features, step by step.\n\nThat organisation differs from the derivatives': Google builds, packages and distributes Chrome from this code, which the project documentation states explicitly. The practical consequence is a frequent asymmetry — a derivative browser can be proprietary while its engine and base are free. Chromium is the reference that makes it possible to tell open from non-open.",
+    "limitations_and_scope": "Chromium is not a consumer product. It has no single official installer, no automatic updates for project builds, no user support and no published minimum configuration. Its codecs are fewer than Chrome's, its sandbox and packaging depend on the packager, and Google API keys vary with the distribution.\n\nBuilds published by the project are explicitly best-effort and cut from arbitrary revisions: they are not a sensible base for daily use, the download page preferring Chrome for Testing builds for testing and Chrome releases for everyday use. The project also advises against third-party portable builds.\n\nFinally, the entry documents neither an extension catalogue of its own, nor a sync service, nor a privacy feature specific to Chromium: those belong to derivative browsers, and their absence here follows from the product's scope rather than being an omission.",
+    "who_is_it_for": "The documentation addresses developers, distributions and teams that need the free base, the diagnostic pages, test builds or the multi-process architecture, as well as readers who want to understand what derivative browsers add to a shared engine.",
+    "who_is_it_not_for": "Chromium is not intended for everyday use by the general public: no official installer, no automatic updates, no support, fewer codecs and features that vary with the packager.",
+    "verdict": "Chromium is the reference browser of an open source project under the BSD licence, more a technical base than a finished product. Its documentation establishes the engines — Blink for rendering, V8 for JavaScript —, the security architecture — separate processes, sandbox, Site Isolation with its limits on Android and on faulty-process detection —, the nature of the published builds, best-effort and without automatic updates, and the list of deliberate differences with Chrome. That distinction between an open base and a distributed product is what makes the entry useful: it explains why proprietary browsers can rest on free code without the product being free."
+  },
+  "links": {
+    "homepage": "https://www.chromium.org/Home/",
+    "download": "https://www.chromium.org/getting-involved/download-chromium/",
+    "differences_from_chrome": "https://chromium.googlesource.com/chromium/src/+/main/docs/chromium_browser_vs_google_chrome.md",
+    "site_isolation": "https://www.chromium.org/Home/chromium-security/site-isolation/",
+    "blink": "https://www.chromium.org/blink/",
+    "license": "https://chromium.googlesource.com/chromium/src/+/main/LICENSE",
+    "releases": "https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Windows&num=1"
+  },
+  "sources": [
+    {
+      "title": "Chromium — overview of the open source project",
+      "url": "https://www.chromium.org/Home/",
+      "type": "official_site",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Download Chromium — best-effort builds, Chrome for Testing, platform entries and no automatic updates",
+      "url": "https://www.chromium.org/getting-involved/download-chromium/",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "The Difference between Google Chrome and Chromium on Linux — codecs, sandbox, Google API keys",
+      "url": "https://chromium.googlesource.com/chromium/src/+/main/docs/chromium_browser_vs_google_chrome.md",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "chromium/src — LICENSE file (three-clause BSD licence)",
+      "url": "https://chromium.googlesource.com/chromium/src/+/main/LICENSE",
+      "type": "license",
+      "publisher": "The Chromium Authors",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chromium Dash — Stable channel release feed",
+      "url": "https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Windows&num=1",
+      "type": "official_api",
+      "publisher": "Chromium project",
+      "date": "2026-10-22",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Site Isolation — per-site processes, limits on Android and on desktop",
+      "url": "https://www.chromium.org/Home/chromium-security/site-isolation/",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Blink — rendering engine used by Chromium, dependent on the content module",
+      "url": "https://www.chromium.org/blink/",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "V8 — open source JavaScript and WebAssembly engine used by Chrome",
+      "url": "https://v8.dev/",
+      "type": "official_site",
+      "publisher": "V8 project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chrome Web Store — extensions and themes marketplace, developer documentation",
+      "url": "https://developer.chrome.com/docs/webstore",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

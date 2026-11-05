@@ -1,0 +1,145 @@
+{
+  "id": "yandex",
+  "name": "Yandex Search",
+  "type": "application",
+  "summary": "Web search engine operated by YANDEX LLC, reachable at yandex.com and the regional Yandex domains, with a crawled and tiered index, machine-learning ranking documented at the level of metrics rather than factors, generative AI answers inside the results page, and advertising sold separately through Yandex Direct.",
+  "tags": [
+    "search engine",
+    "web",
+    "crawling",
+    "indexing",
+    "ranking",
+    "advertising",
+    "personalisation",
+    "privacy",
+    "proprietary",
+    "yandex",
+    "indexnow",
+    "web search",
+    "ai answers"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service, free of charge for personal non-commercial use under the Yandex Search licence; the Alice AI Search Pretrain model released separately under the Apache 2.0 licence",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Yandex Search is the web search service operated by YANDEX LLC, a company incorporated under Russian law with its head office in Moscow, and by affiliated entities of the same group. The licence document calls the product the Yandex Search Engine and places it at yandex.com, while the privacy policy lists the group's regional sites, among them yandex.ru, yandex.by, yandex.kz, yandex.com.tr and yandex.co.il, as part of the same estate. Three boundaries matter here. The search engine is one service, not the company: Yandex also operates maps, mail, a browser, a translation service, cloud infrastructure and the Alice assistant, and none of their properties is transferred to the engine by association. Advertising is sold through a separate system, Yandex Direct, and the licence states that positions in the organic results are never sold. And the answers produced by generative models inside the results page are a feature of the service with their own disclaimers, not a separate engine.",
+    "origin_and_history": "None of the pages consulted for this entry dates the launch of the engine, and this file therefore asserts no founding date. What the pages do establish is documentary rather than historical. The company site carries a copyright line reading 1997 to 2026 Yandex, which indicates the span the company claims over the material, not the date a search service opened to the public. The licence for the search engine was published on 2025-12-29 and links an archive of earlier versions, including texts dated 2025-04-18 and 2022-10-05, so the contractual layer of the product is versioned and dateable even where the product itself is not. The privacy policy is a separate instrument with an effective date of 2025-08-26. On the technical side, the most recent dated development found in the consulted pages is an AI release notice from 2026-09-14 stating that the fine-tuned Alice AI Search model has been running in Yandex Search since July 2026.",
+    "rendering_engine_and_technical_architecture": "Yandex describes four stages before a page can appear in results: crawling the site, loading and processing the data in what it calls indexing, building a database of the pages eligible to take part in search, and generating the results themselves. Discovery is not left to links alone: the documentation names the list of already known pages built from internal and external links, sitemaps, Yandex Metrica data and robots.txt directives, and it states that pages larger than 10 MB are not indexed. The indexing robots are described as many, and their HTTP/2 support is presented as a performance matter that does not affect crawl frequency or ranking. Pages whose content is produced by JavaScript can be rendered, with Webmaster offering three settings whose default lets the robot decide, and a window.YandexRotorSetting object lets a site declare delayed loading. What the documents do not describe is the internal architecture: no index layout, no shard design, no model names, no weighting scheme.",
+    "interface_and_documented_features": "The documented interface is a results page reached from a search box, with a help section devoted to narrowing queries rather than to the page layout. Advanced filters allow a document-language restriction, and a query language provides operators whose names are published, among them url, host and rhost for addresses and mime for file type, with the instruction to use the primary site address when the hostname is a parameter. Search settings are organised in tabs for the interface and theme, location, home page and result filtering, and the documentation notes that settings follow a Yandex ID when signed in and are otherwise stored in the browser's cookies. Results can be filtered in three modes: no filter, a moderate filter that is the default, and family mode that removes sexual content even for an explicit query. Above the organic list the page can carry rich answer blocks and AI answers, which the licence requires to be visually separated from the results and describes as reference material that must be double-checked at the source.",
+    "installation_and_distribution": "Nothing is installed to search on the web: yandex.com and the regional domains serve the results page to any browser. The packaged forms are mobile applications, and the store listings give the identifiers rather than the marketing narrative. On Google Play the listing is package com.yandex.searchapp, titled in Russian, with Direct Cursus Computer Systems Trading LLC named as the developer. In the App Store the corresponding application is listed as Yandex with Alice AI with identifier 1050704155 under the same seller name, version 26.11.0.1942, updated on 2026-11-04 as recorded by the store's lookup interface. Those two listings are the search application; the Yandex Browser, the Maps application and the standalone Alice assistant are distributed under separate identifiers and are different products. Distribution in either store is region-dependent, and the licence warns that some functions may not be accessible depending on the region in which the service is provided.",
+    "platforms_and_hardware_architectures": "The platforms established by the consulted documents are the web, Android and iOS. The web side covers the international and regional domains named in the privacy policy, and the licence places the service at yandex.com while the same documents apply to the group's other country sites. The mobile side is covered by the two store listings described above. No hardware requirement, minimum operating-system version or device architecture is published in the pages consulted, and none is asserted here. Platform-independence on the client side is real in one respect worth noting: the results page is ordinary HTML delivered to whatever browser is used, so the rendering engine belongs to the browser and not to Yandex, while the mobile applications ship their own interface. Settings are tied to a Yandex ID when signed in and to browser cookies otherwise, which means the same account produces the same configuration across devices while an anonymous session does not.",
+    "extensions_and_add_on_store": "Yandex Search has no extension system of its own, and no add-on store is documented for it. What the documentation does describe is a publisher-side toolchain, and that is where the closest analogue lies. Yandex Webmaster holds the site-level instruments: crawl statistics, a reindex request form, a URL status check, a robots.txt analyser and a sitemap validator. The IndexNow protocol is supported directly, with a verification key placed on the site and requests sent by GET for a single URL or POST for several to yandex.com/indexnow, and the documentation states explicitly that this does not guarantee indexing. Sitemaps, robots.txt directives including Clean-param and Crawl-delay, Schema.org markup and a Metrica tag used for crawl discovery complete the declared surface. Browser extensions exist in the Yandex estate, but they belong to the Yandex Browser, not to the search service, and no document consulted presents them as part of the engine.",
+    "privacy_and_security_model": "Privacy for the service is governed by a policy effective 2025-08-26, with YANDEX LLC as a controller and EU Digital Partners SRL, a Romanian entity, named as the representative within the European Economic Area for the limited purpose of Article 27 of the GDPR. The categories listed include account data, electronic data such as IP address, cookies and browser information, search history, activity data and location. The stated purposes include delivering results that take preferences and search history into account and personalising advertising, and the policy points to a settings page where personalised advertising can be managed or turned off. Sensitive data is said not to be actively collected, with the caveat that a user may disclose it through a query. The policy also states that the group does not carry out profiling with significant effects. On the security side, automated clients reaching the search page and the support index during this collection were served a SmartCaptcha instead of content, which is an observed behaviour of the service rather than a documented policy.",
+    "update_channels_and_release_cadence": "There is no version number for the engine and no release channel to observe, and the documentation does not promise a cadence. Change is described at three different levels instead. At the ranking level, the quality page states that every change must satisfy the search development principles and is evaluated with two named metrics, Proxima for page quality and Proficit for the usability of results, before an online experiment on randomly divided users decides whether it ships. At the documentary level, the help system carries revision identifiers and offers Markdown and full-text indexes for machine reading, which makes revisions observable even without a changelog. At the contractual level, the licence and the privacy policy are dated instruments with archived previous versions. For the AI layer the only dated statement found is the 2026-09-14 release notice, which places the running model in production since July 2026 without describing a schedule.",
+    "licensing_and_governance": "The service is proprietary and is licensed, not sold. The licence document grants use free of charge and restricts the service to personal, non-commercial use, states that result ordering is fully automatic under relevance criteria that Yandex may change, that positions are never sold and are not guaranteed to stay stable, and that search spam may be demoted or excluded without notification or deadline. Governance of the ranking system is described as algorithmic and auditable internally: the quality page states that results cannot be reordered manually, that assessors annotate pages but never affect ranking directly, and that every change is attributable and measured before release. Two external layers sit on top. Under the Digital Services Act the licence discloses 4.6 million average monthly active users in the European Union for the six-month period ending June 2026, names the same EEA representative and gives a contact address for DSA matters. Separately, the base model behind the AI answers was released as Alice AI Search Pretrain under the Apache 2.0 licence, which opens the model weights and not the service.",
+    "limitations_and_scope": "The limits here are documentary. Yandex publishes metrics and principles, and names some of the inputs to ranking, but it publishes no weights, no factor list and no algorithmic detail, so no statement in this file goes beyond what the pages say. Two of them name an unusual amount, Proxima and Proficit, and it would be a mistake to read that as an audit: both are described by their owner and neither has been verified independently for this entry. Language and geographic availability are documented only partially, through the list of regional domains, the store availability and the licence clause about functions that may not be accessible depending on region; no page consulted states which markets receive which features. No public search API is documented on the pages read. Finally, the search page itself and the support index answered automated clients with a captcha, so the interface was observed only indirectly and the documentation was read through the official Markdown versions of the same pages.",
+    "who_is_it_for": "It suits users who search in Russian or in the languages of the markets the regional domains serve, and who want a general engine with a heavily used answer layer above the links. It suits site owners because the publisher-side documentation is unusually complete for a large engine: crawl statistics, reindex requests, robots and sitemap validation, IndexNow support with a published request format, and a written statement of what the quality metrics measure. It suits researchers who want a rare case of an operator naming its evaluation metrics and describing how changes are tested before release, and who may also want to read the released base model behind the AI answers. It suits anyone who needs the contract in writing, since the licence and the privacy policy are dated, archived and explicit about the non-commercial restriction and the no-sale-of-positions rule.",
+    "who_is_it_not_for": "It is not for anyone who needs the ranking system as a specification, because none exists publicly and the documentation deliberately stops at named metrics and general principles. It is not for users who require English-language documentation of every feature: the help system is available in several languages, but coverage of product behaviour is thinnest outside the publisher documentation and the legal texts. It is not for anyone who needs a documented API to query the index, since no such interface appears on the pages consulted, and the licence restricts use to personal, non-commercial purposes. It is not for those who treat AI answers as sourced fact: the licence states that they must be verified at the source and that Yandex does not guarantee their accuracy. And it is not for anyone who needs to know, before searching, which features work in their market, since the pages consulted leave that to the region clause.",
+    "verdict": "Yandex Search is a large proprietary engine whose documentation is more explicit than most about how quality is measured and how changes are approved, and equally explicit about what it will not disclose. The readable parts cover crawling and discovery, a page-size ceiling, JavaScript rendering controls, the two evaluation metrics, the no-manual-reordering rule, the licence's ban on selling positions, and a Digital Services Act disclosure with a figure. The unreadable parts are the ranking function, the index composition and the model weights of the answer layer, and this file does not pretend otherwise. The distinction between operator statements and verified fact has to be kept firmly in view: the metric definitions are the operator's own description of its own system. Read with that reservation, it is one of the better-documented engines in this library for site owners and one of the least transparent for anyone who wants to know why a given page ranked where it did."
+  },
+  "links": {
+    "homepage": "https://yandex.com/",
+    "how_search_works": "https://yandex.com/support/webmaster/en/yandex-indexing/site-indexing.html",
+    "search_quality": "https://yandex.com/support/webmaster/en/search-quality.html",
+    "additional_signals": "https://yandex.com/support/webmaster/en/yandex-indexing/service-quality.html",
+    "indexnow": "https://yandex.com/support/webmaster/en/indexing-options/index-now.html",
+    "yandex_ai": "https://yandex.com/support/webmaster/en/yandex-ai.html",
+    "javascript_rendering": "https://yandex.com/support/webmaster/en/yandex-indexing/rendering.html",
+    "search_settings": "https://yandex.com/support/search/en/search-results/settings.html",
+    "family_filter": "https://yandex.com/support/search/en/additional-features/adult-filter.html",
+    "privacy_policy": "https://yandex.com/legal/confidential/en/",
+    "terms_of_service": "https://yandex.com/legal/termsofuse/en/",
+    "android_app": "https://play.google.com/store/apps/details?id=com.yandex.searchapp"
+  },
+  "sources": [
+    {
+      "title": "How does Yandex search work? - four stages from crawling to result generation, discovery sources, pages over 10 MB not indexed, HTTP/2 support stated not to affect ranking",
+      "url": "https://yandex.com/support/webmaster/en/yandex-indexing/site-indexing.html",
+      "type": "official_documentation",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How to measure and improve Search quality - Proxima page-quality metric, Proficit usability metric, assessor annotations not used directly in ranking, results cannot be reordered manually, online experiments",
+      "url": "https://yandex.com/support/webmaster/en/search-quality.html",
+      "type": "official_documentation",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Additional signals to rank sites in Yandex search results - company-integrity signals combined with cross-verification, described as part of the ranking algorithm",
+      "url": "https://yandex.com/support/webmaster/en/yandex-indexing/service-quality.html",
+      "type": "official_documentation",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "IndexNow protocol support - key verification, GET and POST requests to yandex.com/indexnow, CMS plug-ins, explicit statement that submission does not guarantee indexing",
+      "url": "https://yandex.com/support/webmaster/en/indexing-options/index-now.html",
+      "type": "official_documentation",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search with Yandex AI - generative answers built from indexed pages, references to sources, follow-up search box, opt-out through the YandexAdditionalBot user agent",
+      "url": "https://yandex.com/support/webmaster/en/yandex-ai.html",
+      "type": "official_documentation",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Indexing pages with JavaScript (beta) - rendering management in Yandex Webmaster, default setting lets the bot decide, window.YandexRotorSetting parameters",
+      "url": "https://yandex.com/support/webmaster/en/yandex-indexing/rendering.html",
+      "type": "official_documentation",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search settings - interface language and theme, location, home page, three result-filtering modes, settings tied to Yandex ID and to browser cookies",
+      "url": "https://yandex.com/support/search/en/search-results/settings.html",
+      "type": "official_documentation",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Filter adult content - no filter, moderate filter as the default, family mode; also configurable through Yandex DNS and the hosts file",
+      "url": "https://yandex.com/support/search/en/additional-features/adult-filter.html",
+      "type": "official_documentation",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Policy - effective date 2025-08-26; YANDEX LLC as controller; EU Digital Partners SRL as EEA representative; search history, personalisation and targeted advertising among the stated purposes; advertising settings page",
+      "url": "https://yandex.com/legal/confidential/en/",
+      "type": "legal_document",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "License to use Yandex Search Engine - publication date 2025-12-29 with archived previous versions; free personal non-commercial use; automatic ordering; positions not sold; Neuro mode disclaimers; DSA disclosure of 4.6 million average monthly active users in the EU for the six months ending June 2026",
+      "url": "https://yandex.com/legal/termsofuse/en/",
+      "type": "legal_document",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Yandex application listing on Google Play - package com.yandex.searchapp, developer Direct Cursus Computer Systems Trading LLC",
+      "url": "https://play.google.com/store/apps/details?id=com.yandex.searchapp",
+      "type": "app_store_listing",
+      "publisher": "Google Play",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Yandex open-sources the language model behind its AI answers in Search - dated 2026-09-14; Alice AI Search running in Yandex Search since July 2026; Alice AI Search Pretrain released under the Apache 2.0 licence",
+      "url": "https://yandex.com/company/news/2026-09-14-01",
+      "type": "official_release_note",
+      "publisher": "Yandex",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "id": "tor-browser",
+  "name": "Tor Browser",
+  "type": "application",
+  "summary": "Browser from the Tor Project, derived from Firefox ESR and hardened for routing over the Tor network and resistance to fingerprinting.",
+  "tags": [
+    "browser",
+    "web",
+    "tor",
+    "privacy",
+    "anonymity",
+    "gecko"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android"
+  ],
+  "license": "Tor software licence; Firefox ESR under MPL-2.0; NoScript under GPL",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Tor Browser is the browser of the Tor Project. It is based on Firefox ESR, Mozilla's extended support release, modified for use with the Tor network, and it explicitly targets resistance to tracking and to browser fingerprinting.\n\nAs of 24 October 2026 the published stable release is Tor Browser 15.0.26, announced on 21 October 2026, alongside an alpha release 16.0a14. This entry describes the distributed product, the base it rests on, the supported platforms, the documented protections and the accepted limits.",
+    "origin_and_history": "The Tor Project presents itself as a non-profit organisation with 501(c)(3) status since 2006, maintaining Tor's development. Its history page places the origin of onion routing in the mid-1990s at the US Naval Research Lab, then describes the initial deployment of the Tor network in October 2002, with code released under a free licence from that date.\n\nThe same page places the start of Tor Browser's development in 2008. The support documentation confirms the technical lineage: Tor Browser is based on Firefox ESR, with patches and additional features aimed at privacy and security, which makes it fundamentally different from Firefox.\n\nThe recent chronology is read in the release announcements and on the download page: the 15.0 series as stable, with 15.0.26 on 21 October 2026, and the 16.0 series as alpha, with 16.0a14. The documentation on legacy systems adds a structuring landmark: the 13.5 branch, maintained for abandoned systems, ended with release 13.5.29 in March 2026.",
+    "rendering_engine_and_technical_architecture": "Tor Browser has no engine of its own: it derives from Firefox ESR, which uses Gecko. Mozilla's documentation describes Gecko as Mozilla's rendering engine for the web — HTML parsing and rendering, networking, JavaScript, IPC, DOM, widget abstractions — and names SpiderMonkey as its JavaScript engine.\n\nThe rest of the architecture belongs to the product. Traffic goes through three relays chosen in the Tor network, the download page describing encryption of traffic and its routing through three locations. The browser isolates each site visited, clears cookies and history on exit, and applies the fingerprinting countermeasures described below.\n\nThree layers therefore stand apart: Gecko and SpiderMonkey are the engines; Firefox ESR is Mozilla's upstream product; Tor Browser is the Tor Project's product, adding Tor routing, patches and protections. The Android release follows the same principle, the project documentation presenting the mobile application as a distinct product with its own files. No release is distributed for iOS, for a documented reason: the download page points to another piece of software, Onion Browser, and publishes no iOS build of Tor Browser.",
+    "interface_and_documented_features": "Tor Browser keeps Firefox's interface with additional settings, the most visible being the security level. Three levels are documented. Standard enables all browser and site features and is the default. Safer disables site features that are often dangerous: JavaScript is disabled on non-HTTPS sites, some fonts and mathematical symbols are disabled, HTML5 audio and video become click-to-play. Safest enables only the features needed by static sites and basic services: JavaScript is disabled by default on all sites, part of the fonts, icons, symbols and images is disabled, and audio and video remain click-to-play. The same three levels exist on Android.\n\nFingerprinting protections are described in detail. The content window is rounded to a multiple of 200 by 100 pixels, and letterboxing adds margins on resize so that users stay within a small number of size classes. The User-Agent string is normalised: all Windows versions appear as Windows 10, all macOS as OS X 10.15, all Android as Android 10, and other systems, including Linux distributions, BSDs, Tails and Qubes, are grouped as \"Linux running X11\". The documentation states that the user cannot choose the system they appear to run, that choice being deliberately absent to avoid creating more singular profiles. Canvas image extraction blocking, NoScript and per-site isolation come on top.\n\nBy default the browser keeps no browsing history and cookies last only for a session. .onion addresses are documented as a feature in their own right, with the note that some sites work only through them.",
+    "installation_and_distribution": "Distribution is direct and documented. For desktop the project publishes a portable executable for Windows in 32 and 64 bits, a universal disk image for macOS and an archive for GNU/Linux in 32 and 64 bits; the alpha series adds a Linux archive for aarch64. Each file comes with a signature, and a support page describes the verification procedure.\n\nOn Android the application is available from Google Play, from the Guardian Project's F-Droid repository and through direct APK downloads for four architectures: aarch64, armv7, x86 and x86_64. The alpha series publishes no x86 APK.\n\nTwo absences are documented rather than assumed. There is no Tor Browser for iOS: the download page recommends another piece of software, Onion Browser, written by an independent developer and the Guardian Project. There is no Chrome OS release either; the installation documentation suggests running the Android application there, noting that it has not been audited on that system and that sites will be displayed in their mobile version.",
+    "platforms_and_hardware_architectures": "System requirements are published platform by platform. On Windows the documentation lists Windows 10 and Windows 11. On macOS it states macOS 10.15 and later. On Linux it describes support for any modern Linux system, and the legacy page adds that most recent distributions using glibc 2.17 or later are compatible. On Android the stated minimum is Android 5.0, with the aarch64, Arm, x86_64 and x86 architectures.\n\nTwo end-of-life decisions are documented. Windows 8.1 and earlier, and macOS 10.14 and earlier, are no longer supported since the 14 series: their users stayed on the 13.5 branch until it ended in March 2026 with release 13.5.29. Support for 32-bit Linux systems is to end with release 16.0, the page noting that most distributions no longer support them and that Mozilla has stopped supporting them.\n\nNo processor requirement other than the architecture of the published files is documented, no minimum amount of memory is published, and no minimum version exists for Chrome OS, where the product is not offered.",
+    "extensions_and_add_on_store": "Tor Browser has no extension catalogue and does not recommend installing any. The download page states ground rules, one of them being not to add add-ons; a separate support page covers plug-ins and add-ons.\n\nNoScript, by contrast, is built into the product and named in the fingerprinting documentation, alongside canvas blocking and per-site isolation. Script control is therefore part of the browser rather than an extension added by the user.\n\nThe entry cannot claim that a Firefox add-on will work in Tor Browser: no page read guarantees it, and the official recommendation points the other way. The consequence is accepted: a user who needs a particular extension leaves the product's documented scope.",
+    "privacy_and_security_model": "The documentation describes a three-part model. The network separates identity from destination: traffic is encrypted and routed through three relays, so an observer of the local connection sees Tor usage without seeing the sites visited, and sites see a connection originating from the network. The browser then provides isolation: each site is isolated, cookies last one session, history is not kept. Finally, countermeasures limit fingerprinting: letterboxing, User-Agent normalisation, canvas extraction blocking, built-in NoScript and per-site isolation.\n\nThree reservations come with the model. The documentation itself states rules that must be followed for the protections to hold: no separate VPN with Tor, no add-ons, no torrenting over Tor. The higher security levels deliberately degrade site behaviour, presented as a trade-off rather than a defect. And the product does not exist on iOS, which means iPhone users do not benefit from this model.\n\nPrivacy, security and anonymity remain distinct: Tor Browser targets network anonymity, which guarantees neither confidentiality towards a site one identifies with, nor immunity to every attack. Security levels belong to browser security; the network belongs to anonymity.",
+    "update_channels_and_release_cadence": "Two channels are published: the stable 15.0 series and the alpha 16.0 series. The download page lists files from both series with their signatures, giving a dated reference: 15.0.26 and 16.0a14 on 24 October 2026, the 15.0.26 announcement being dated 21 October 2026.\n\nUpdating is documented as an obligation: the documentation states that the browser must be kept up to date at all times, that an outdated version exposes users to serious flaws, and that the browser signals an available update in its menu. Two procedures exist, automatic and manual, the latter consisting in installing the new release. On Android, updates go through stores, the project site or an APK file.\n\nNo page read states a contractual cadence. The entry therefore limits itself to dated releases and to what announcements publish: 15.0.26 is presented as a security update, notably about compromised intermediate certificate authorities.",
+    "licensing_and_governance": "The Tor software is free software, and the Tor Project documents the consequences: redistribution, modified or not, for free or for a fee, is allowed without prior permission, provided the Tor software LICENSE file is respected and included with what is distributed. The same page states that Tor Browser includes Firefox ESR, published under the Mozilla Public License, and NoScript, published under the GNU General Public License, and that their licences must be respected too — the simplest way being to include the source code of those programs wherever packages are distributed.\n\nThere is therefore no single licence for Tor Browser: the entry describes an assembly of components under distinct licences, with a licence specific to the Tor software, an MPL licence for the Firefox ESR base and a GPL licence for NoScript. That is an important difference from a single-licence product, and it is documented by the publisher itself.\n\nGovernance is that of a non-profit organisation, the Tor Project, 501(c)(3) since 2006, publishing releases, announcements and support documentation. The project also applies a trademark policy distinct from software licences: freedom to redistribute the code does not extend to the use of names and logos.",
+    "limitations_and_scope": "The limits are numerous and documented. Tor Browser does not exist on iOS; it does not exist on Chrome OS, where only the Android application is offered, unaudited on that system. Support for 32-bit Linux ends with release 16.0, and Windows 8.1 and earlier as well as macOS 10.14 and earlier are out of scope since the 14 series, the 13.5 maintenance branch having ended in March 2026.\n\nHigher security levels degrade site behaviour, and installing add-ons is discouraged. The documentation also lists practices to avoid — a separate VPN, torrenting over Tor — without which the expected protections do not hold.\n\nFinally, Tor Browser is not an ordinary browsing product: performance depends on the relay network, some sites block it or require extra checks, and the anonymity it targets concerns the network, not the identity a user provides to a service. The entry reproduces neither performance figures nor invulnerability claims, none of the pages read publishing an independent measurement.",
+    "who_is_it_for": "The documentation addresses people who need a browser designed for the Tor network, with a set of tracking and fingerprinting protections enabled by default, and who accept stricter settings and sometimes degraded behaviour in exchange.",
+    "who_is_it_not_for": "Tor Browser is not intended for use where compatibility and speed come first, it does not exist on iOS, and it does not suit anyone who wants to add extensions or combine Tor with a VPN, two practices the documentation explicitly discourages.",
+    "verdict": "Tor Browser is a browser derived from Firefox ESR and hardened for the Tor network. Its documentation establishes three things precisely: the technical base — Firefox ESR, hence Gecko, with its own patches and SpiderMonkey as JavaScript engine —, the protections implemented at browser level — per-site isolation, clearing at session end, letterboxing, User-Agent normalisation, security levels — and the composite licence framework governing redistribution. Its limits are documented too: no iOS release, no Chrome OS release, a scheduled end for 32-bit Linux, extensions discouraged. It is a product whose main purpose is network anonymity, distinct from browsing privacy alone."
+  },
+  "links": {
+    "homepage": "https://www.torproject.org/download/",
+    "desktop_builds": "https://download.torproject.org/tor-browser-for-desktop/",
+    "android_builds": "https://download.torproject.org/tor-browser-for-android/",
+    "support": "https://support.torproject.org/tor-browser/",
+    "blog": "https://blog.torproject.org/",
+    "history": "https://www.torproject.org/about/history/"
+  },
+  "sources": [
+    {
+      "title": "Tor Browser for Desktop — published files, architectures, stable and alpha series",
+      "url": "https://download.torproject.org/tor-browser-for-desktop/",
+      "type": "official_product_page",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Tor Browser for Android — Google Play, F-Droid, per-architecture APKs and pointer to Onion Browser for iOS",
+      "url": "https://download.torproject.org/tor-browser-for-android/",
+      "type": "official_product_page",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "About Tor Browser — Firefox ESR lineage, no history, per-site isolation",
+      "url": "https://support.torproject.org/tor-browser/getting-started/about-tor-browser/",
+      "type": "official_documentation",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Installing — per-platform system requirements and absence of a Chrome OS release",
+      "url": "https://support.torproject.org/tor-browser/getting-started/installing/",
+      "type": "official_documentation",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Updating — automatic and manual updates, updating on Android",
+      "url": "https://support.torproject.org/tor-browser/getting-started/updating/",
+      "type": "official_documentation",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Security levels — Standard, Safer and Safest on desktop and Android",
+      "url": "https://support.torproject.org/tor-browser/features/security-levels/",
+      "type": "official_documentation",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Fingerprinting protections — letterboxing, User-Agent normalisation, canvas and NoScript",
+      "url": "https://support.torproject.org/tor-browser/features/fingerprinting-protections/",
+      "type": "official_documentation",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Legacy OS support — end of support, 13.5 branch and end of 32-bit Linux",
+      "url": "https://support.torproject.org/tor-browser/security/legacy-os/",
+      "type": "official_documentation",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Distributing Tor — licences of the Tor software, Firefox ESR and NoScript",
+      "url": "https://support.torproject.org/about-tor/using-and-sharing/distributing/",
+      "type": "license",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Tor Project — History (501(c)(3) status, network deployment in 2002, Tor Browser in 2008)",
+      "url": "https://www.torproject.org/about/history/",
+      "type": "official_documentation",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Tor Blog — dated release announcements",
+      "url": "https://blog.torproject.org/",
+      "type": "official_release_notes",
+      "publisher": "The Tor Project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "New Release: Tor Browser 15.0.26",
+      "url": "https://blog.torproject.org/new-release-tor-browser-15026/",
+      "type": "official_release_notes",
+      "publisher": "The Tor Project",
+      "date": "2026-10-21",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Gecko — Mozilla's rendering engine and the SpiderMonkey JavaScript engine",
+      "url": "https://firefox-source-docs.mozilla.org/overview/gecko.html",
+      "type": "official_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

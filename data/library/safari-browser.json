@@ -1,0 +1,128 @@
+{
+  "id": "safari-browser",
+  "name": "Safari",
+  "type": "application",
+  "summary": "Apple's web browser, built on the WebKit engine and bundled with macOS, iPadOS, iOS and visionOS.",
+  "tags": [
+    "browser",
+    "web",
+    "safari",
+    "apple",
+    "webkit",
+    "privacy"
+  ],
+  "status": "active",
+  "platforms": [
+    "macOS",
+    "iOS",
+    "iPadOS",
+    "visionOS"
+  ],
+  "license": "Proprietary (Apple software licence agreements); the WebKit engine is open source",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Safari is Apple's web browser. It ships with the company's operating systems and is documented for macOS, iOS, iPadOS and visionOS. This entry describes the distributed product, the engine behind it, the supported platforms, the extension model, the documented privacy features and the release cadence.\n\nThe documentation consulted puts the current state at 24 October 2026: Safari 27, published on 14 September 2026 as build 20625.1.29, a 27.2 beta dated 13 October 2026 as build 20625.2.8, and version 26.6 of 27 July 2026 as build 20624.4.5. Benchmarks published by the vendor are reported as vendor statements and are not reproduced as measurements.",
+    "origin_and_history": "Safari is published by Apple. The release notes present it as an application built on WebKit and record its changes for iOS, iPadOS, macOS and visionOS. The chronology available in the pages read is recent: Safari 26.6 on 27 July 2026, Safari 27 on 14 September 2026, then a 27.2 beta on 13 October 2026.\n\nThe version numbers follow those of the operating systems: Apple's security release list records Safari 27 on 14 September 2026 alongside macOS 27.0.1 and iOS and iPadOS 27.0.1, both dated 28 September 2026. The same release notes state that Safari 27 is available for iOS 27, iPadOS 27, visionOS 27, macOS 27, macOS 26 and macOS Sequoia.\n\nThe origins of the product, its first public release and the steps before the 26 series do not appear in the pages consulted. This entry therefore does not assert them and stays within the period Apple documents.",
+    "rendering_engine_and_technical_architecture": "Safari runs on WebKit. The release notes say so explicitly, and the project site describes WebKit as an open source rendering engine used by Safari, Mail, the App Store and many other applications on macOS, iOS and Linux.\n\nThree layers have to be kept apart. WebKit is the engine and an open source project. Safari is the product Apple assembles around that engine: interface, privacy features, extension model, and distribution bound to the operating system. Associated services such as iCloud Private Relay belong to neither layer: they are optional infrastructure services tied to a subscription and covering browsing in Safari.\n\nOn iOS and iPadOS the choice of engine is constrained by a platform rule. Section 2.5.6 of Apple's App Review Guidelines requires apps that browse the web to use the WebKit framework and WebKit JavaScript, with the possibility of applying for an entitlement to use an alternative browser engine, available for the European Union and Japan. Safari of course complies with that rule; the consequence is about the market — on those systems a third-party vendor cannot ship a different engine without an entitlement.",
+    "interface_and_documented_features": "The user guide documents the ordinary objects of the browser and their settings: tabs, bookmarks and bookmark folders, private browsing, cookie handling, pop-up windows. Those pages describe specific commands, and that is the level this entry retains.\n\nApple's product page presents a second set, of a different nature: third-party cookies blocked by default, on-device processing to limit cross-site tracking, IP address masking against known trackers, extensions that cannot see browsing, passkeys, profiles and web apps. These are vendor descriptions published in a promotional setting, alongside numerical comparisons with other browsers. The entry lists them for what they are — statements documented by Apple — without turning them into independent measurements and without reproducing the speed or battery figures.\n\nNo authoritative feature inventory exists beyond those two sources, so the entry does not claim to be exhaustive and adds no function observed elsewhere.",
+    "installation_and_distribution": "Safari is not distributed as a standalone download: it ships with macOS, iPadOS, iOS and visionOS and is updated through the system mechanisms. Apple's security release list confirms this by publishing entries specific to Safari with their own dates — Safari 27 on 14 September 2026 — next to system updates dated 28 September 2026 for macOS 27.0.1 and iOS and iPadOS 27.0.1.\n\nNo Safari installer download is documented in the pages read, and no Windows or Linux version appears there: WebKit does run on Linux, but that is the engine, not the Safari browser. Distribution is therefore inseparable from Apple's platforms, both for installation and for fixes.\n\nFor developers, Apple's documentation provides a parallel track: web technologies are documented separately from the product, with their own release notes, which lets a feature be followed before it reaches a public Safari release.",
+    "platforms_and_hardware_architectures": "The Safari 27 release notes name four system families: iOS 27, iPadOS 27, visionOS 27 and macOS 27, the last also being offered for macOS 26 and macOS Sequoia. The user guide confirms the pattern of a version bound to the system, with separate pages for macOS 27 Golden Gate, macOS 26 Tahoe, macOS Sequoia 15, macOS Sonoma 14, macOS Ventura 13 and macOS Monterey 12.\n\nA user therefore does not choose a Safari version: they receive the one their system supports. That is a difference in kind from an installable browser whose releases follow one another independently of the operating system.\n\nProcessor architectures are not documented as a Safari-specific requirement. Support follows the system, and no page read states a minimum processor, a minimum amount of memory or a machine model required for the browser alone. The entry invents none and simply records that absence.",
+    "extensions_and_add_on_store": "Safari has no extension catalogue of its own: extensions go through the App Store. The developer documentation distinguishes two families. Content blockers filter certain categories of resources without access to page content. Web extensions can read and modify page content and communicate with a native application, which gives them a much wider scope.\n\nPublication is framed and documented: extensions are built with Xcode, can be converted from a format used by another browser with a command-line tool, then submitted through App Store Connect, with Apple reviewing every extension and every update. The documentation also notes that packaging is possible without a Mac, through an online service.\n\nTwo points are retained about guarantees. Apple's review applies to all extensions, updates included. And Apple states on its product page that extensions cannot see default browsing; that is a vendor statement, not an independent measurement. No list of supported APIs and no guarantee of compatibility with another browser's extensions are published in the pages read.",
+    "privacy_and_security_model": "Privacy is documented at two levels. At browser level, Apple describes on-device processing to limit cross-site tracking, third-party cookies blocked by default, IP address masking against known trackers and extensions that cannot see browsing. Private browsing is treated in the user guide as a distinct mode with its own settings. All of this comes from the vendor and is therefore description rather than measurement.\n\nAt service level, iCloud Private Relay is described by Apple as part of an iCloud+ subscription that protects browsing in Safari. Requests pass through two relays operated by different entities: the first knows the IP address but not the site visited, the second knows the site but not the IP address and gives the destination a generalised identity and location. The service also encrypts unencrypted traffic leaving the device and DNS queries. It is available only on iOS, iPadOS, visionOS and macOS, it can be turned off, including for a single Wi-Fi network, and Apple states that it is not offered in every country and region. It is not a VPN for all device traffic: it is a service tied to Safari and to name resolution.\n\nSecurity follows a separate track, documented on its own: Apple publishes dated security release lists with the systems concerned. Privacy, security and anonymity remain three distinct questions — tracking is a privacy matter, fixes are a security matter, and Private Relay does not provide the anonymity of a distributed relay network, since a relay operator holds part of the information and the subscription is tied to an account.",
+    "update_channels_and_release_cadence": "The main channel is the one delivered with Apple's systems, complemented by developer betas such as 27.2 on 13 October 2026. Security updates are published separately with their own dates, such as Safari 27 on 14 September 2026 and the system updates of 28 September 2026.\n\nThe dates read give three recent reference points: 27 July 2026 for 26.6, 14 September 2026 for 27.0 and 13 October 2026 for the 27.2 beta. Observed intervals run from about seven weeks to two months between published releases, with a beta one month after the major version.\n\nNone of the pages read states a contractual cadence, a quantified support period or a publication calendar. The entry presents those dates as observations rather than a vendor commitment, and does not infer a support duration from the succession of releases.",
+    "licensing_and_governance": "Safari is proprietary software. Apple publishes a page that gathers, for each version of its systems, a separate software licence agreement — macOS 27, iOS 27 and the others — and that framework governs use of the bundled browser. No licence document specific to the Safari application, and no open source text about it, appears in the pages read.\n\nThe engine is a separate open source project: WebKit is described as an open source engine used by several Apple applications. The boundary is therefore clear — an open engine, a proprietary browser — and the entry states it that way instead of calling Safari open source.\n\nGovernance is centralised at Apple: distribution through the system, updates through the system, extensions reviewed and distributed by the App Store, security notices published by the company. No shared governance structure, external committee or public roadmap is documented for Safari in the pages read.",
+    "limitations_and_scope": "Several limits are established by the documentation. Safari exists only on Apple platforms: no Windows or Linux version is documented, and WebKit running on Linux does not imply a Safari browser there. The available version depends on the installed system, the 27 release notes naming macOS 27, macOS 26 and macOS Sequoia, which leaves older systems out of scope. Extensions must go through the App Store and a review. Private Relay requires an iCloud+ subscription, is not available everywhere and covers neither all traffic nor every Apple system.\n\nOn iOS and iPadOS, guideline 2.5.6 frames the whole browser market: comparing engines there is structurally impossible without an entitlement. That is a scope limit documented by Apple itself, not an observation about comparative performance.\n\nThe comparative claims on the product page — speed, battery life, strongest protection — are Apple's own measurements, produced with its own protocols and footnotes. They are not reproduced here as established facts, and no independent measurement was consulted.",
+    "who_is_it_for": "The documentation addresses people using Apple devices who want the browser supplied with the system, with the built-in privacy features, keychain-based syncing and integration with system settings, without a separate installation.",
+    "who_is_it_not_for": "Safari is not documented for Windows or Linux, it is not open source software, it offers no extension catalogue outside the App Store, and it provides no network anonymity mechanism comparable to a relay network: iCloud Private Relay is tied to a subscription, to Safari and to limited geographic coverage.",
+    "verdict": "Safari is Apple's browser, built on the open source WebKit engine and distributed with the company's systems. Its documentation establishes four things: the engine and its open project status, the dated list of versions and security updates, an extension model that always goes through the App Store, and a set of privacy features — on-device anti-tracking processing, third-party cookie blocking, private browsing, extensions without access to browsing — completed by an optional two-relay service limited to four systems and to some countries. The speed and protection claims are vendor statements, measured by the vendor, and are not reproduced as results."
+  },
+  "links": {
+    "homepage": "https://www.apple.com/safari/",
+    "release_notes": "https://developer.apple.com/documentation/safari-release-notes",
+    "user_guide": "https://support.apple.com/guide/safari/welcome/mac",
+    "extensions": "https://developer.apple.com/safari/extensions/",
+    "webkit": "https://webkit.org/",
+    "security_releases": "https://support.apple.com/en-us/100100"
+  },
+  "sources": [
+    {
+      "title": "Safari — product page (privacy features and numerical comparisons)",
+      "url": "https://www.apple.com/safari/",
+      "type": "official_product_page",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Safari Release Notes — dated index of releases",
+      "url": "https://developer.apple.com/documentation/safari-release-notes",
+      "type": "official_release_notes",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Safari 27 Release Notes — version 27.0 (build 20625.1.29) and supported systems",
+      "url": "https://developer.apple.com/documentation/safari-release-notes/safari-27-release-notes",
+      "type": "official_release_notes",
+      "publisher": "Apple",
+      "date": "2026-09-14",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Apple security releases — dated list of updates, including Safari 27 and system fixes",
+      "url": "https://support.apple.com/en-us/100100",
+      "type": "official_documentation",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Safari Extensions — content blockers, web extensions, Xcode and App Store distribution",
+      "url": "https://developer.apple.com/safari/extensions/",
+      "type": "official_documentation",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Safari User Guide for Mac — tabs, bookmarks, private browsing, cookies, pop-up windows",
+      "url": "https://support.apple.com/guide/safari/welcome/mac",
+      "type": "official_documentation",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "WebKit — open source rendering engine used by Safari, Mail and the App Store",
+      "url": "https://webkit.org/",
+      "type": "official_site",
+      "publisher": "WebKit project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "About iCloud Private Relay — two-hop relay design, availability and settings",
+      "url": "https://support.apple.com/en-us/102602",
+      "type": "official_documentation",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "iCloud Private Relay & Privacy — scope of the service and systems concerned",
+      "url": "https://www.apple.com/legal/privacy/data/en/icloud-relay/",
+      "type": "privacy_policy",
+      "publisher": "Apple",
+      "date": "2025-12-12",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Software License Agreements — licence agreements for Apple operating systems",
+      "url": "https://www.apple.com/legal/sla/",
+      "type": "license",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "App Review Guidelines, section 2.5.6 — WebKit requirement for apps that browse the web",
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "type": "official_guideline",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

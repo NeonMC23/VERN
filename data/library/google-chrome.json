@@ -1,0 +1,157 @@
+{
+  "id": "google-chrome",
+  "name": "Google Chrome",
+  "type": "application",
+  "summary": "Web browser distributed by Google, built on the Chromium project and rendering pages with Blink and V8.",
+  "tags": [
+    "browser",
+    "web",
+    "google",
+    "chromium",
+    "blink",
+    "v8"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary (Chromium source: BSD-3-Clause)",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Chrome is a web browser distributed by Google. Builds are published for Windows, macOS, Linux, Android and iOS, and the browser is built on the open-source Chromium project. This entry documents the published product, its rendering engine, its supported platforms, its extension and update mechanisms, and the licence and privacy terms Google states for it. It does not repeat the promotional framing of the product pages and does not rank Chrome against other browsers.\n\nAt the time of writing the Stable channel served Chrome 157.0.8103.15 on Windows, with 156.0.8078.49 as the previous Stable build.",
+    "origin_and_history": "Chrome is built on Chromium, which its project site describes as an open-source browser project providing design documents, architecture overviews and the source code itself. Google distributes the resulting browser as a product under its own terms, and the additional terms of service for Chrome state that most of the source code for Chrome is available free of charge under open source licence agreements listed at the internal chrome://credits page.\n\nThe version history recorded here is the recent one. Chrome 153 reached Stable on 8 September 2026 and Chrome 154 on 22 September 2026; Google's release notes are published on Chrome Status from Chrome 155 onwards. Milestone 157 was current at the time of writing per the Chromium Dash release feed for the Stable channel on Windows.\n\nEarlier milestones, including the first public release year, are not documented on the pages read during this phase and are not asserted here.",
+    "rendering_engine_and_technical_architecture": "Chrome renders pages with Blink, which Google's web platform documentation describes as the rendering engine used by browsers built on Chromium, and executes JavaScript in V8, which also runs WebAssembly.\n\nChromium's multi-process architecture documentation describes how the browser process manages renderer processes that use Blink to interpret and lay out HTML. Renders communicate with the browser through Mojo or the legacy IPC system, each renderer process hosts one or more frames, and the sandbox restricts what a renderer may reach: network access only through the network service, file system access through operating system permissions, and no arbitrary access to the display or input. A crashed renderer is detected through its process handles and shows the familiar error page.\n\nThe browser and the engine are distinct objects. Blink is a component of Chromium that other browsers also use, while Chrome is the product Google packages around it, with its own updater, settings, service integrations and extension store. On iOS the engine is not Blink: Apple's App Store Review Guidelines, section 2.5.6, require browsing applications to use WebKit and WebKit's JavaScript engine, allowing an alternative engine through an entitlement only in the European Union and Japan. The iOS build is therefore documented here as a WebKit build, and whether Google uses that entitlement is not stated in the sources read.",
+    "interface_and_documented_features": "The documented surface of the browser is broad and is described by Google in product and developer documentation: a tab strip with tab groups, an address bar that doubles as a search field, bookmarks, history, a download manager, a password manager, print and save-to-PDF, a PDF viewer, profiles, and a settings surface split between privacy, security and site settings. The extension platform can add a side panel, toolbar actions, context menu items, notifications, keyboard shortcuts, and pages that replace the new tab or history pages.\n\nSecurity-relevant behaviour is documented in the help centre rather than the marketing pages. Chrome offers three Safe Browsing levels: Standard protection, which is on by default and checks sites, downloads and extensions against lists of known dangerous items; Enhanced protection, which warns about previously unknown dangers and, per the help page, sends the address of a visited site with a small sample of page content, extension activity and system information for security purposes only; and no protection, which the page does not recommend. Under Standard protection Chrome sends an obfuscated portion of visited addresses through privacy servers so that neither Google nor the operator of that server sees the address and the visitor's address at the same time.\n\nNot every documented feature exists on every platform. Site Isolation isolates all sites on desktop, whereas Google's own description notes that only a subset of sites is isolated on Android to limit overhead.",
+    "installation_and_distribution": "Google publishes Chrome as a download for Windows, macOS and Linux, and distributes the mobile builds through Google Play on Android and the App Store on iOS. On Linux the download page offers 64-bit .deb packages for Debian and Ubuntu and 64-bit .rpm packages for Fedora and openSUSE, each also in an ARM variant, and states that installing Google Chrome adds Google's package repository so that the browser stays current; the same page explains that touching /etc/default/google-chrome before installation suppresses that repository.\n\nChannel builds are distributed separately. The release channels page lists Stable, Beta, Dev and Canary downloads for Windows, macOS and Linux, notes that on those systems all channels may be installed in parallel because they use distinct directories and user data directories, and gives separate download routes for Android and for iOS, where the beta is distributed through TestFlight. ChromeOS is covered by the same additional terms of service page as Chrome, but this entry does not describe that operating system.",
+    "platforms_and_hardware_architectures": "Google's system requirements page states Windows 10 or later and Windows Server 2016 or later on processors with SSE3, and Windows 11 or later for ARM machines. macOS 13 Ventura or later is required. On Linux, 64-bit builds are supported on Ubuntu 18.04 or later, Debian 10 or later, openSUSE 15.5 or later and Fedora 39 or later, and ARM builds are accepted. Android 10 or later is the mobile minimum.\n\nOlder Windows versions are frozen rather than supported: Google documents Windows 7, Windows 8 and Windows 8.1 as remaining on Chrome 109, released on 10 January 2023, and receiving no further updates. The iOS build exists, but the engine constraint described above means that it is a WebKit application; the system requirements page read in this phase does not state a minimum iOS version, so none is claimed here.\n\nArchitecture details appear in the same documents as the operating system lists: 64-bit x86 builds on the desktop platforms, ARM builds on Windows 11, Linux and Android. The requirements are the publisher's statement of supported configurations, not a claim that the browser fails elsewhere.",
+    "extensions_and_add_on_store": "Extensions and themes for Chrome are published and installed through the Chrome Web Store, which Google describes as an online marketplace for browser extensions and themes, paired with a developer dashboard for publishing and managing items. The developer documentation covers preparation of extension files, developer registration, listing, the privacy fields of a listing, the review process, updates, rollbacks and the programmatic Publish API.\n\nExtensions are built on the manifest format and the extension APIs documented at developer.chrome.com, which the developer guide groups into user interface surfaces, control of the browser and control of the web. Chromium-based browsers share those APIs and the same packaging, as Microsoft's Edge extension documentation notes when it explains that a Chromium extension can be produced once and adapted per browser, while warning that API parity does not always hold — identity and payment APIs are given as examples.\n\nExtensions distributed outside the Chrome Web Store are not documented as a supported consumer installation route in the pages read here, so this entry does not describe one.",
+    "privacy_and_security_model": "Google no longer publishes a separate Chrome privacy notice. The address that used to host it now states that the Chrome Privacy Notice is no longer available, that personal information continues to be handled under the Google Privacy Policy, and that the help centre maintains a Privacy in Chrome section organised by topic.\n\nOn the security side, the documented mechanisms are structural. Chromium's multi-process architecture places page content in sandboxed renderer processes whose access to the network, file system, display and input is restricted. Site Isolation puts pages from different sites into different processes, withholds cross-site data unless the server allows it through CORS, and lets the browser process detect and terminate a misbehaving renderer; Google describes this as a defence that assumes a renderer will eventually be compromised. Safe Browsing adds the reputation layer described above, with a selectable level and a documented description of what each level sends.\n\nThese are descriptions of published behaviour. This entry does not assert how much data Google collects in practice, and it does not treat statements on the product page as findings.",
+    "update_channels_and_release_cadence": "Chrome is distributed through four channels. Stable is the tested build, Beta receives features about three weeks before Stable per Google's announcement of the new cadence, Dev receives builds once or twice a week, and Canary is built twice a day with automated testing only. The channels page adds that early access builds are only partly translated.\n\nGoogle announced on 3 March 2026 that the Stable channel would move to a two-week release cycle starting with Chrome 153 on 8 September 2026, on all platforms, with Beta spending three weeks ahead of Stable and the Dev and Canary channels unchanged. The Extended Stable option remains on an eight-week cycle for managed environments. The same channels page, however, still describes Stable as updated every four weeks for major releases and Beta as spending about a month before promotion, and the platform requirements page still carries the four-week wording. Those sentences are older than the announcement; the cadence recorded in this entry is the announced two-week cycle, and the inconsistency between the two official pages is recorded as an anomaly rather than resolved here.\n\nVersion numbers are tracked publicly: the Chromium Dash feed for the Stable channel on Windows reported 157.0.8103.15 at the time of writing, with 156.0.8078.49 as the preceding build.",
+    "licensing_and_governance": "The executable form of Chrome is governed by Google's terms: the Chrome, ChromeOS and GooglebookOS Additional Terms of Service, last modified on 30 September 2025, state that using Chrome means agreeing to the Google Terms of Service and to those additional terms, and that the additional terms apply to the executable code version of Chrome.\n\nThe source is a separate matter. The same terms state that most of the source code for Chrome is available free of charge under open source software licence agreements listed at chrome://credits, and the Chromium source tree publishes its own licence file, which is the three-clause BSD licence: redistribution of source must keep the copyright notice and conditions, redistribution in binary form must reproduce them in the documentation, and the names of the copyright holder and contributors may not be used to endorse derived products.\n\nThe distinction matters for describing the browser: Chromium, the project, is open source under that licence, while Chrome, the product Google distributes, carries the additional terms above. Google operates the update service, the Web Store and the release notes that document the product.",
+    "limitations_and_scope": "Support boundaries are explicit. Windows 7, 8 and 8.1 remain on Chrome 109 from 10 January 2023 and no longer receive updates, and macOS older than 13 Ventura is not supported. On Android, Site Isolation protects only a subset of sites. The iOS build cannot use Blink because of Apple's guideline, so its engine differs from the desktop product and any statement about Blink behaviour does not transfer to it. On Linux the browser depends on the distributions listed by Google; other distributions are served, if at all, by community packages the download page links to rather than by Google's own support statement.\n\nThe setting surface also has consequences that the help pages state plainly: Enhanced protection sends more information than Standard protection, and disabling Safe Browsing removes the reputation warnings altogether. The pages read in this phase document no supported way to install consumer extensions other than the Web Store.",
+    "who_is_it_for": "The documented audience is broad: users on the desktop platforms Google lists, Android 10 or later, and iOS, including managed environments that can select the eight-week Extended Stable option instead of the two-week cycle.",
+    "who_is_it_not_for": "It is not an option for Windows 7, 8 or 8.1 users expecting updates, for macOS releases before 13 Ventura, or for anyone who needs the same rendering engine on iOS as on the desktop, since Apple requires WebKit there.",
+    "verdict": "Chrome is a Chromium-based browser whose documented identity rests on four pieces: the Blink engine and V8, a sandboxed multi-process architecture with Site Isolation, four update channels whose cadence Google changed in 2026, and a licence split between the open-source Chromium source and the executable distributed under Google's additional terms. Feature claims on product pages are publisher statements and are not carried into this entry."
+  },
+  "links": {
+    "homepage": "https://www.google.com/chrome/",
+    "release_notes": "https://developer.chrome.com/release-notes",
+    "release_channels": "https://www.chromium.org/getting-involved/chrome-release-channels/",
+    "system_requirements": "https://support.google.com/chrome/a/answer/7100626",
+    "web_store": "https://chromewebstore.google.com/",
+    "chromium_project": "https://www.chromium.org/Home/"
+  },
+  "sources": [
+    {
+      "title": "Chrome release notes index (Chrome for Developers)",
+      "url": "https://developer.chrome.com/release-notes",
+      "type": "official_release_notes",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chromium Dash — releases feed, Stable channel, Windows",
+      "url": "https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Windows",
+      "type": "official_api",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chrome adopts a two-week release cycle",
+      "url": "https://developer.chrome.com/blog/chrome-two-week-release",
+      "type": "official_announcement",
+      "publisher": "Google",
+      "date": "2026-03-03",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chrome Release Channels",
+      "url": "https://www.chromium.org/getting-involved/chrome-release-channels/",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chrome browser system requirements (enterprise and education)",
+      "url": "https://support.google.com/chrome/a/answer/7100626",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Multi-process architecture",
+      "url": "https://www.chromium.org/developers/design-documents/multi-process-architecture/",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Site Isolation",
+      "url": "https://www.chromium.org/Home/chromium-security/site-isolation/",
+      "type": "official_documentation",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Blink (Chrome for Developers, web platform documentation)",
+      "url": "https://developer.chrome.com/docs/web-platform/blink",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chrome/ChromeOS/GooglebookOS Additional Terms of Service",
+      "url": "https://www.google.com/chrome/terms/?hl=en",
+      "type": "license",
+      "publisher": "Google",
+      "date": "2025-09-30",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chromium source tree — LICENSE (BSD 3-clause)",
+      "url": "https://chromium.googlesource.com/chromium/src/+/main/LICENSE",
+      "type": "license",
+      "publisher": "Chromium project",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chrome Browser Privacy Policy page (Chrome Privacy Notice withdrawn)",
+      "url": "https://www.google.com/chrome/privacy/?hl=en",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Choose your Safe Browsing protection level in Chrome",
+      "url": "https://support.google.com/chrome/answer/9890866?hl=en",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Chrome Web Store (developer documentation)",
+      "url": "https://developer.chrome.com/docs/webstore",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Extensions — Develop (Chrome for Developers)",
+      "url": "https://developer.chrome.com/docs/extensions/develop",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "App Store Review Guidelines (section 2.5.6, browser engines)",
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "type": "official_documentation",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "id": "opera-browser",
+  "name": "Opera",
+  "type": "application",
+  "summary": "Web browser published by Opera Norway AS, built on Chromium and distributed for desktop, Android, iOS and Chromebooks.",
+  "tags": [
+    "browser",
+    "web",
+    "opera",
+    "chromium",
+    "blink",
+    "vpn"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android",
+    "iOS",
+    "ChromeOS"
+  ],
+  "license": "Proprietary (Opera EULA for Computers)",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Opera is a web browser published by Opera Norway AS. The publisher distributes it for Windows, macOS and Linux, for Android and iOS, and for Chromebooks through the Android application catalogue. This entry documents the product the publisher currently ships, the rendering engine it runs on, the platforms and download routes the publisher lists, and the privacy, extension and update mechanisms Opera documents itself. Promotional framing from the download pages is not reproduced.\n\nAt the time of writing the Stable channel carried Opera 138, published on 20 October 2026 and built on Chromium 154.0.8037.99.",
+    "origin_and_history": "Opera is published by Opera Norway AS, a Norwegian company whose address in Oslo appears in the desktop end user licence agreement. That agreement states that it governs the executable code of the desktop application and carries the date 16 October 2020; the privacy statement carries the date 2 October 2026.\n\nThe engine history is documented in two separate places. Opera's archived version history, whose own last update is dated February 2013, records that the 11 and 12 series ran on the Presto rendering engine, versions 2.6 to 2.12, with the Carakan JavaScript engine, and its entries stop with Opera 12.15 in April 2013. The current release announcements state instead that each desktop release is built on a named Chromium version, which is what places the present product in the Chromium family rather than on Presto.\n\nThe pages read for this entry document the release line from Opera 134 onwards. Earlier milestones such as the year of the first public build, or the date on which Chromium replaced Presto, were not stated there and are not asserted.",
+    "rendering_engine_and_technical_architecture": "Opera renders web pages with Blink and executes JavaScript in V8. The reasoning is explicit rather than inferred from resemblance: Opera states the Chromium version each release is built on — Chromium 150 for Opera 134, 152.0.7977.120 for Opera 136, 154.0.8037.99 for Opera 138 — and Chromium is the project whose rendering engine is Blink and whose JavaScript engine is V8, as the Chromium and Chrome platform documentation describes.\n\nOpera is not Chromium, and Chromium is not Opera. Chromium is the open-source project whose engine Opera inherits; Opera is the product the publisher assembles around it, with its own interface, its advertising-funded business model, its own add-ons catalogue, its own VPN service and its own update service. The desktop licence agreement reflects that separation when it states that source code for open-source third-party components delivered with the software can be obtained from a page Opera operates.\n\nOne platform is an exception and is documented as such. Apple's App Review Guidelines, section 2.5.6, require applications that browse the web to use the WebKit framework and WebKit's JavaScript, with an entitlement for an alternative engine available for the European Union and Japan. Opera's own pages read here do not name the engine of the iOS build, so this entry states the Apple constraint and does not claim Blink on iOS.",
+    "interface_and_documented_features": "Opera documents a desktop interface organised around tabs it calls Tab Islands, separate Workspaces for groups of tabs, a split screen that shows two tabs side by side, a sidebar holding built-in messengers and pinned sites, a snapshot tool, a video pop-out window, a unit converter, a music player, a battery saver and themes. Opera Sync keeps browser data across the publisher's own clients, and Flow sends files and links between the user's own devices.\n\nThe protective features are documented in the help centre together with the settings that control them. The built-in ad blocker is switched on in the privacy protection settings and works from filter lists: EasyList and NoCoin are enabled by default, EasyPrivacy and language-specific lists can be added, and the lists update automatically or on demand. Tracker blocking is documented in the same place. The VPN is free with unlimited data and is enabled in the advanced feature settings. Private windows clear browsing history, cache and cookies when the last one is closed; the same page states that AI features are unavailable in private browsing because page content is not processed there.\n\nThe publisher's product pages describe the browser as built for a changing web and summarise its features in promotional terms. Those sentences are seller descriptions and are recorded here as such, not as measurements. Availability is not uniform: the VPN is a service, several features exist on some builds and not others, and the AI features are excluded from private windows.",
+    "installation_and_distribution": "Opera publishes installers on its download page for Windows in 64-bit, 32-bit and ARM builds, for macOS as a universal build with a separate offline installer, and for Linux as .deb packages for Ubuntu and Debian, .rpm packages for Fedora and openSUSE, and a Snap package. Mobile builds are distributed through Google Play and the App Store, with a direct download of the Android application for devices without Google Play; the same Android application is the route offered for Chromebooks. An Opera Developer build is published alongside the stable one, with the same list of desktop packages.\n\nRedistribution is contractually restricted rather than merely technical. The licence agreement permits redistribution only as part of an application repository for a desktop open-source operating system distribution, and only without modification, free of charge to end users and with a copy of the agreement; it excludes embedded open-source operating systems and forbids changing the default search engine either at distribution time or after installation.\n\nNeither the download page nor the help centre pages read for this entry publish a minimum operating system version for the desktop builds, and no such figure is claimed here.",
+    "platforms_and_hardware_architectures": "The publisher documents six targets. On Windows the download page offers 64-bit, 32-bit and ARM installers. On macOS it offers one universal build, the packaging Apple uses for a binary containing both Intel and Apple silicon code. On Linux it offers .deb and .rpm packages and a Snap package. Android and iOS are served by the mobile application, and Chromebooks are served by the Android application through Google Play.\n\nWhat is absent from those pages is as informative as what is present. No minimum Windows, macOS or Linux version is published, and no processor requirement is stated beyond the architecture label attached to each installer. The existence of a 32-bit Windows build and of an ARM build is documented by the file list itself, not by a support matrix.\n\nThis entry therefore records the platforms and architectures for which Opera publishes installers, and records the absence of a published minimum operating system statement instead of inferring one from the Chromium version in use.",
+    "extensions_and_add_on_store": "Opera operates its own add-ons catalogue at addons.opera.com, which presents extensions and wallpapers made for the Opera browser and lists extensions such as content blockers, password managers and userscripts. The publisher's browser page adds that users can choose Opera add-ons and Google Chrome extensions.\n\nThe compatibility claim is bounded by the same distinctions as the engine. Extensions written for Chromium browsers share packaging and APIs, and Opera presents the Chrome catalogue as an available source while also running its own catalogue. What the pages read here do not provide is a per-extension compatibility statement, a list of supported extension APIs, or any guarantee that an extension published for Chrome behaves identically in Opera, and none of those is asserted.\n\nNo supported consumer route outside those two catalogues is documented in the pages read, and this entry describes none.",
+    "privacy_and_security_model": "The privacy statement, dated 2 October 2026, is where the publisher describes its model. It names Opera Norway AS as the responsible company, states that the services are funded primarily by advertising sold inside the applications themselves and that users' personal data are not sold, and lists the legal bases it relies on: consent, performance of a contract and legitimate interest. An Opera account is optional, can be created with an external identity provider, and sync data is described as not associated with the random identifier attached to an installation. The statement also includes supplements for Californian law.\n\nThe help centre documents what the protections do rather than what they promise. The ad blocker and the tracker blocker work from named filter lists and can be configured or extended. The free VPN is documented with unlimited data. Private windows clear browsing history, cache and cookies on close, and because page content is not processed in them, the AI features are switched off there.\n\nThe separation the project documentation insists on holds here: privacy is about what is collected, security about what is defended, and anonymity is a third, separate question. Opera's help pages describe a VPN, which changes the apparent origin of traffic, alongside an explicit set of settings; they do not describe the browser as anonymous, and statements on the product pages that describe it as one of the most secure browsers are publisher claims rather than evidence.",
+    "update_channels_and_release_cadence": "Two desktop channels are documented. The download page offers the Stable browser and an Opera Developer build that carries new features and experiments before they reach the stable one, for the same platforms and in the same package formats.\n\nThe published dates give the recent rhythm: Opera 134 on 6 August 2026, 135 on 20 August, 136 on 17 September, 137 on 7 October and 138 on 20 October, with point updates between them, for example 136.0.6008.80 on 30 September and 137.0.6036.63 on 14 October. The gaps between major stable releases in that window run from about two to about four weeks, and developer builds appeared on 1, 14 and 21 October 2026.\n\nThe pages read here do not state a release cadence as a policy. The intervals above are measured from published dates and are presented as an observation, not as a schedule the publisher commits to. Each stable announcement also names the Chromium version carried, which is how the engine base can be followed release by release.",
+    "licensing_and_governance": "The distributed browser is proprietary. The licence agreement for computers grants a personal, limited, non-exclusive, non-transferable and non-sublicensable licence to use the executable code, forbids decompilation, reverse engineering and derivative works, and states that the software is licensed and not sold. Its section on third-party components states that open-source components may carry their own terms and that their source can be obtained from a page Opera operates. No source licence for Opera's own code is published in the documents read: the public legal documents are the licence agreement, the terms of service and the privacy statement.\n\nGovernance is therefore commercial and centralised. The same company publishes the browser, operates the update service, runs the add-ons catalogue, provides the VPN and sells the advertising that funds the product; the licence agreement states the advertising model as a condition of use, and the privacy statement describes it.\n\nWhere open source applies, it applies to the inherited components. Chromium, which Opera builds on, is published by the Chromium project under the three-clause BSD licence recorded in its repository's LICENSE file; the Opera interface, services and packaging are not described as open source in any document read here.",
+    "limitations_and_scope": "Several limits are documented rather than inferred. The desktop builds have no published minimum operating system version, so the download page alone does not tell a user whether a given machine is supported. Redistribution is limited by the licence agreement to unmodified, free-of-charge use inside desktop open-source distribution repositories, with no change to the default search engine. The VPN is a service included with the browser, not an anonymity guarantee, and the private mode preserves data the user deliberately saved while disabling the AI features. On iOS the Apple guideline constrains the engine, and Opera does not document which engine its iOS build uses.\n\nExtension compatibility with the Chrome catalogue is presented as available but comes without a per-extension guarantee or a published list of supported APIs. The publisher also offers other browser products for specific audiences; this entry documents the flagship browser offered on the download page and does not describe those sibling products.",
+    "who_is_it_for": "The documentation addresses users who want a Chromium-based browser with an ad blocker and a free VPN integrated into the interface, and who accept an advertising-funded product whose privacy statement describes that model openly.",
+    "who_is_it_not_for": "It is not documented for machines below an unpublished minimum operating system version, it is not an option for anyone who requires an open-source browser, and on iOS it cannot provide an engine other than the one Apple permits.",
+    "verdict": "Opera is a Chromium-based browser whose documented identity rests on four verifiable elements: Blink and V8 underneath, a named Chromium version in every release announcement, a proprietary licence paired with an openly advertising-funded model, and a protective feature set described in the help centre with its settings. Its earlier engine is documented separately, with Presto and Carakan for the 11 and 12 series. Claims of speed and security leadership are publisher statements and are not carried into this entry."
+  },
+  "links": {
+    "homepage": "https://www.opera.com/",
+    "downloads": "https://www.opera.com/download",
+    "release_notes": "https://blogs.opera.com/desktop/",
+    "help_centre": "https://help.opera.com/en/latest/",
+    "add_ons": "https://addons.opera.com/en/extensions/",
+    "privacy_statement": "https://www.opera.com/legal/privacy"
+  },
+  "sources": [
+    {
+      "title": "Opera Desktop blog — release announcements and dates (138 on 20 October 2026, Chromium 154.0.8037.99)",
+      "url": "https://blogs.opera.com/desktop/",
+      "type": "official_release_notes",
+      "publisher": "Opera",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Download Opera (desktop packages and mobile builds)",
+      "url": "https://www.opera.com/download",
+      "type": "official_product_page",
+      "publisher": "Opera",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Opera browsers — product overview and feature list",
+      "url": "https://www.opera.com/browsers",
+      "type": "official_product_page",
+      "publisher": "Opera",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Security and privacy (Opera Help) — ad blocker lists, VPN, private windows",
+      "url": "https://help.opera.com/en/latest/security-and-privacy/",
+      "type": "official_documentation",
+      "publisher": "Opera",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Opera Help — automatic updates and desktop settings",
+      "url": "https://help.opera.com/en/latest/",
+      "type": "official_documentation",
+      "publisher": "Opera",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Opera Privacy Statement",
+      "url": "https://www.opera.com/legal/privacy",
+      "type": "privacy_policy",
+      "publisher": "Opera Norway AS",
+      "date": "2026-10-02",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "EULA: Opera for Computers",
+      "url": "https://www.opera.com/legal/eula-computers",
+      "type": "license",
+      "publisher": "Opera Norway AS",
+      "date": "2020-10-16",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Opera legal documents — index",
+      "url": "https://www.opera.com/legal",
+      "type": "official_site",
+      "publisher": "Opera",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Opera archived version history 1-12 — Presto and Carakan",
+      "url": "https://help.opera.com/en/operas-archived-history/",
+      "type": "official_documentation",
+      "publisher": "Opera",
+      "date": "2013-02-05",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Opera add-ons — extensions catalogue",
+      "url": "https://addons.opera.com/en/extensions/",
+      "type": "official_site",
+      "publisher": "Opera",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Blink — the rendering engine used by Chromium-based browsers",
+      "url": "https://developer.chrome.com/docs/web-platform/blink",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "chromium/src — LICENSE file (three-clause BSD licence)",
+      "url": "https://chromium.googlesource.com/chromium/src/+/main/LICENSE",
+      "type": "license",
+      "publisher": "The Chromium Authors",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "App Review Guidelines, section 2.5.6 (WebKit requirement for browsers)",
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "type": "official_guideline",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

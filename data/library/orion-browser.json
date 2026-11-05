@@ -1,0 +1,113 @@
+{
+  "id": "orion-browser",
+  "name": "Orion Browser",
+  "type": "application",
+  "summary": "WebKit-based, closed-source browser for macOS, iOS and iPadOS developed by Kagi, native on Apple platforms, with advertising and tracker blocking enabled by default, WebExtensions-compatible extension support through Chrome and Firefox stores, and funding from users via the optional Orion+ tier.",
+  "tags": [
+    "browser",
+    "web",
+    "webkit",
+    "apple",
+    "macos",
+    "ios",
+    "ipados",
+    "privacy",
+    "tracker-blocking",
+    "ad-blocking",
+    "extensions",
+    "proprietary"
+  ],
+  "status": "active",
+  "platforms": [
+    "macOS",
+    "iOS",
+    "iPadOS"
+  ],
+  "license": "Proprietary (closed source); selected components published on GitHub",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "Orion Browser is a WebKit-based browser for Apple platforms, developed by Kagi, the company behind the Kagi search engine. Its pitch is unusual in the current browser market: instead of forking Chromium or shipping a Firefox-derived tree, it builds natively on macOS, iOS and iPadOS, reuses the same rendering engine as Safari, blocks advertising and tracking by default, and supports browser extensions written for Chrome and Firefox. It is free to download and is funded entirely by its users through an optional paid tier, Orion+, offered as a subscription or a one-time lifetime licence, with the company stating that it takes no advertising and no third-party deals. The product is closed source, although parts of it are published. Two framing points are worth stating up front. Orion is Apple-only today: no Windows, Linux or Android build is distributed, and the company described Android as not currently being worked on. And the browser makes strong performance and privacy claims that are the publisher's own; this entry separates what is documented from what would require independent measurement.",
+    "origin_and_history": "Orion's public documentation frames its origin as an engineering decision rather than a market gap: the company describes forking WebKit, porting hundreds of APIs and writing a browser application from scratch as the difficult part of the project, and says its small team found properly maintaining an open-source project beyond its resources. The documentation set itself is still labelled beta, with the project stating that not every feature has been documented yet. The release notes show a continuous line of work through 2026: version 1.1.1 (149) on 26 June 2026, version 1.1.2 (150) on 17 August 2026 followed by a hotfix build, and version 1.1.3 (152) on 28 September 2026. The company refers readers to a November 2025 blog post for a preview of Linux and Windows work, and its FAQ states that Linux and Windows versions are in progress while an Android version is not being worked on at all, because the resources required are described as far greater than those available. This entry does not date Orion's first release: no consulted page states it.",
+    "rendering_engine_and_technical_architecture": "Orion renders with WebKit. The FAQ says the browser shares much of Safari's technology, including the WebKit rendering engine, and the documentation describes Orion as 100% native on macOS, iOS and iPadOS. Native is defined there in operational terms: the application uses Apple's frameworks, interface guidelines and system services rather than reimplementing them, with Keychain cited as the place passwords are stored and Live Text cited as an example of a system capability the browser inherits. The company also states that it forks WebKit and ports APIs onto it, which is a stronger claim than merely embedding a system web view: extension support in particular requires exposing browser extension APIs that WebKit does not provide. The browser's own compatibility tooling is consistent with that: a per-site compatibility mode suspends running extensions when a site misbehaves, and the FAQ tells users to compare a failing site against Safari before reporting a bug, which implies the team treats Safari's rendering as the reference point. Process isolation, sandboxing details and the exact WebKit revision in use are not documented on the pages consulted, so none of them is asserted here.",
+    "interface_and_documented_features": "The documented feature list is long and oriented toward power users. On macOS it includes Containers for separating identities, Profile Isolation, Tab Groups with a tab-group switcher, a unified sidebar, vertical tree-style tabs, pinned tabs, Focus Mode which hides the toolbars entirely, Float on Top, Low Power Mode, programmable toolbar buttons, an overflow menu, Link Preview, reader mode, a PDF reader, picture-in-picture, a password manager backed by Keychain, per-site settings, and translation both in-page and, from macOS 26, offline. On iPhone and iPad the product page documents edge-to-edge browsing, gesture controls, a flexible toolbar, a tab switcher, deep link control over which apps may open links, background audio, a PDF reader, complete page capture, Internet Archive lookup for dead links, a desktop-mode switch and per-site settings. Cross-device sync and password sync are documented as extending across platforms. One feature, the Browser Border, is marked as exclusive to the paid Orion+ tier, which is the clearest documented boundary between the free browser and the paid product.",
+    "installation_and_distribution": "On macOS, Orion is distributed by direct download, and the platform page lists download options segmented by operating system version, running from macOS 27.0 down to macOS 10.14, so older systems are served by dedicated builds rather than by a single universal requirement. On iPhone and iPad it is distributed through the App Store, with the download button on the product page pointing at an App Store destination. There is no Microsoft Store, Mac App Store, Flathub or distribution-repository listing on the pages consulted. The update mechanism is documented in more detail than usual: previous builds are retrievable from a predictable content-delivery URL of the form cdn.kagi.com/updates/{OS}/{version}.zip, and the FAQ gives concrete examples for Sonoma, Ventura, Monterey, Big Sur, Catalina and Mojave with a numbered build. That is a deliberate choice to make rollback possible without a store, and it is worth noting because most browsers do not publish a rollback path at all.",
+    "platforms_and_hardware_architectures": "The established platforms are macOS, iOS and iPadOS. The macOS download matrix goes down to 10.14 and up to 27.0, which shows an unusually long support tail for a small-team browser and also confirms that the company ships per-version builds rather than one binary for all systems. The iOS product page describes the iPhone and iPad application as the same browser experience refined for touch, and the App Store listing referenced by the FAQ covers both. Windows and Linux are not available: the FAQ says work is in progress on both, with newsletter sign-ups offered as the way to follow it, and the documentation homepage describes the browser as being for Mac and iOS with Linux \"soon\". Android is out of scope by the company's own statement. Hardware architectures are not documented on the pages consulted — neither Apple silicon and Intel coverage nor minimum memory is stated — so this entry does not infer them from the operating system version matrix.",
+    "extensions_and_add_on_store": "Extension support is Orion's most distinctive technical claim and the one best documented. The FAQ states that Orion supports extensions built on the open WebExtensions APIs — the same APIs behind Chrome and Firefox extensions — and that this works on macOS, iOS and iPadOS. The product page puts it more bluntly, describing Orion as the only browser supporting Safari, Chrome and Firefox extensions. There is no Orion-operated store: the extension gallery on the product site is a curated selection of extensions described as guaranteed working, with entries such as uBlock Origin, 1Password, iCloud Passwords, Mullvad VPN, Dark Reader, Tampermonkey and Consent-O-Matic, and the links lead to the Firefox Add-ons site and the Chrome Web Store rather than to a Kagi-hosted catalogue. The FAQ adds a practical note: where an extension exists in both a Chrome and a Firefox version, users can install either and keep the one that works better. The documented count of curated extensions is twenty, which is a statement about what the vendor has verified, not about what the browser can run.",
+    "privacy_and_security_model": "Orion blocks advertising and tracking by default, and the FAQ is explicit that this covers both first-party and third-party ads and trackers, that it may occasionally break a site, and that the blocker can be disabled per site through the toolbar settings. The company states that the browser has no built-in telemetry and cannot phone home, and it invites users to verify that claim themselves by running a proxy such as Proxyman, mitmproxy or Charles and observing that no unexpected requests appear. That invitation is the strongest form of the claim available here, but it is still a claim: no independent audit, no third-party review and no published network trace were located in the pages consulted. The security posture is inherited in large part from Apple: WebKit for rendering, Keychain for stored passwords, and system services for capabilities such as text recognition. Because the source is closed, the honest formulation is that the privacy properties are asserted by the vendor, that the funding model removes the obvious monetisation incentive, and that no evidence independent of the vendor was verified for this entry.",
+    "update_channels_and_release_cadence": "Updates are delivered by the application itself on macOS and through the App Store on iOS and iPadOS. The release-notes page is the authoritative public record, and it is unusually detailed: each build lists fixed issues with links to the public feedback tracker, and versions carry both a marketing number and a build number alongside a date. The observed sequence in 2026 — 1.1.1 (149) on 26 June, 1.1.2 (150) on 17 August with a hotfix build, 1.1.3 (152) on 28 September — shows an irregular but continuous cadence rather than a fixed schedule. The FAQ documents how to install a previous build from the content-delivery URL, and it also documents a release-candidate channel, since it gives separate instructions for the RC build's preference domain. No long-term support policy, no extended-support release and no published security-response timeline appear in the pages consulted; the company states only that it ships updates constantly and documents them.",
+    "licensing_and_governance": "Orion is closed source. The FAQ answers the question directly — the project is not open source, the company says it is working on it, and some components have been published on GitHub while more are intended to follow — and it argues that openness alone does not settle whether a browser respects its users, pointing instead at data collection and at how the company earns money. The published components are separate small projects rather than the browser itself. Governance is corporate: Orion is developed by Kagi, the company behind the Kagi search engine, and product decisions are made by that company. User input is channelled through a public feedback site that requires registration and supports upvoting, and the FAQ states that non-native feature requests are prioritised according to the support they gather there. Funding comes from users: Orion+ is sold as a subscription or a one-time lifetime licence, and the company states that it will not resort to advertising or other such funding methods. That is a commitment about business model, not a licence term or a governance guarantee.",
+    "limitations_and_scope": "Four limitations are documented and one is structural. Documented: the browser exists only for Apple platforms, with Windows and Linux described as in progress and Android explicitly not being worked on; the documentation itself is labelled beta and incomplete; the ad blocker can break sites and must be disabled per site; and the source is closed, so the privacy claims can be tested only by observation. Structural: extension compatibility is aspirational in practice — the vendor guarantees a curated set of about twenty extensions and describes the wider ecosystem as supported through WebExtensions APIs, which is not the same as saying that any Chrome or Firefox extension will work. Performance claims deserve the same discipline. The product page states that Orion uses half the memory of Safari and that benchmarks show it outperforming other browsers while blocking ads, and one page states a figure of four million users on iOS and iPadOS; none of these figures is accompanied, on the pages consulted, by a reproducible method, and this entry reports them as vendor claims rather than as measurements.",
+    "who_is_it_for": "It suits Mac, iPhone and iPad users who want a Safari-compatible browser without Safari's defaults: ad and tracker blocking on from the start, a dense set of power-user features such as containers, tab groups and vertical tabs, and extension support that reaches beyond Apple's own ecosystem. It suits people who are willing to pay for a browser and who prefer that to being the product, and users who value being able to roll back to an earlier build without a store. It also suits anyone who needs a specific Firefox or Chrome extension — uBlock Origin is the obvious example — on a WebKit-based browser and is prepared to check that their particular extension is on the verified list.",
+    "who_is_it_not_for": "It is not for Windows, Linux or Android users, because there is no build to install and Android is not on the roadmap. It is not for anyone who requires open-source software they can audit and rebuild: Orion is closed source, and the published components do not change that. It is not for users who need an extension ecosystem rather than a curated list, nor for those who need documented enterprise deployment controls, an LTS channel or a published security-response policy. And it is not for users who need independently verified performance or privacy figures before adopting a browser; nothing in the pages consulted supplies them.",
+    "verdict": "Orion is a credible attempt to build a differently-shaped browser on Apple's stack: native applications, WebKit underneath, extension support that Safari lacks, blocking enabled by default, and a funding model in which the user is the customer. The engineering is documented in enough detail to be checked at the edges — release notes with issue links, a rollback path, an invitation to inspect network traffic — and the maintenance record in 2026 is continuous. The reservations are equally concrete: closed source, Apple-only, no Android in sight, a documented curated extension list that is much narrower than the marketing sentence implies, and performance and user-count claims with no published method behind them. Within those bounds it is a strong option for a Mac or iPad user who wants WebKit and extensions together; outside them, it is not yet an option at all."
+  },
+  "links": {
+    "homepage": "https://orionbrowser.com/",
+    "platform_macos": "https://orionbrowser.com/platforms/macos",
+    "platform_ios": "https://orionbrowser.com/platforms/ios",
+    "extensions": "https://orionbrowser.com/extensions",
+    "documentation": "https://help.kagi.com/orion/",
+    "faq": "https://help.kagi.com/orion/faq/faq.html",
+    "release_notes": "https://orionbrowser.com/updates/orion-release-notes.html",
+    "published_components": "https://github.com/OrionBrowser",
+    "feedback": "https://orionfeedback.org/"
+  },
+  "sources": [
+    {
+      "title": "Orion Browser — product page: WebKit, zero-telemetry claim, default ad and tracker blocking, Chrome/Firefox/Safari extensions, curated gallery, platforms, user funding, iOS user figure",
+      "url": "https://orionbrowser.com/",
+      "type": "official_site",
+      "publisher": "Kagi",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Orion Browser for macOS — download matrix from macOS 27.0 to 10.14 and documented macOS feature list",
+      "url": "https://orionbrowser.com/platforms/macos",
+      "type": "official_site",
+      "publisher": "Kagi",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Orion Browser for iOS — iPhone/iPad feature list, desktop extensions on mobile, performance and memory claims, Orion+ funding",
+      "url": "https://orionbrowser.com/platforms/ios",
+      "type": "official_site",
+      "publisher": "Kagi",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Orion Browser extensions — curated gallery described as guaranteed working, with links to Firefox Add-ons and the Chrome Web Store",
+      "url": "https://orionbrowser.com/extensions",
+      "type": "official_site",
+      "publisher": "Kagi",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Orion User Guide — WebKit-based browser for Mac, iOS and \"soon Linux\"; documentation labelled beta",
+      "url": "https://help.kagi.com/orion/",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Orion FAQ — WebKit basis, no telemetry, WebExtensions support, not open source, Orion+ funding, previous builds via cdn.kagi.com, Linux/Windows in progress, no Android",
+      "url": "https://help.kagi.com/orion/faq/faq.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Orion macOS release notes — 1.1.1 (149) 26 June 2026, 1.1.2 (150) 17 August 2026 plus hotfix, 1.1.3 (152) 28 September 2026",
+      "url": "https://orionbrowser.com/updates/orion-release-notes.html",
+      "type": "release_notes",
+      "publisher": "Kagi",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "OrionBrowser GitHub organisation — published components (for example Notes and DarkMode under the MIT licence), separate from the browser itself",
+      "url": "https://api.github.com/orgs/OrionBrowser/repos",
+      "type": "source_repository",
+      "publisher": "GitHub (OrionBrowser organisation)",
+      "accessed": "2026-10-29"
+    }
+  ]
+}

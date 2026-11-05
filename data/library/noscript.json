@@ -1,0 +1,196 @@
+{
+  "id": "noscript",
+  "name": "NoScript",
+  "type": "application",
+  "summary": "Per-site active-content security suite with temporary and permanent permissions, custom capabilities and contextual policies; Firefox MV2 and Chromium MV3 packages provide different request enforcement and protection coverage.",
+  "tags": [
+    "browser extension",
+    "script blocking",
+    "active content",
+    "site permissions",
+    "temporary trust",
+    "contextual policies",
+    "xss filtering",
+    "lan protection",
+    "tabguard",
+    "manifest v2",
+    "manifest v3",
+    "open source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Firefox",
+    "Firefox for Android",
+    "Tor Browser",
+    "Chrome",
+    "Microsoft Edge",
+    "Brave",
+    "Vivaldi"
+  ],
+  "license": "GNU General Public License v3.0 or later (source headers); packages contain GPL v3 text; AMO listing: v2.0 only",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "NoScript Security Suite is a free, open-source browser extension maintained by Giorgio Maone. Its central function is to control where scripts and other active web content may execute, using per-site permissions and capability policies rather than a single global script switch. Users can keep unknown sites restricted, grant temporary or persistent trust, customise individual capabilities and apply different permissions according to the top-level site. Additional protections include cross-site scripting filters, local-network request controls and tab-to-tab protection, but availability differs between Firefox and Chromium. On 2026-11-05, Firefox Add-ons and GitHub offered stable version 13.6.37, while the Chrome Web Store still showed 13.6.34. The Firefox and Chromium packages also use different extension architectures. NoScript can reduce exposure to active-content attacks and unwanted execution, but it is not an anonymity service, a guarantee against every XSS technique or a replacement for browser and website security updates.",
+    "origin_and_history": "NoScript's source headers identify Giorgio Maone and a copyright history beginning in 2005; that header is not being used here as an exact first-release date. The project became closely associated with Firefox's per-site script-control model and later expanded beyond a single browser engine. The current documentation describes NoScript 13 as a cross-browser generation supporting Firefox, Firefox for Android, Tor Browser and Chromium-based browsers, while older NoScript Classic releases remain available only as unsupported legacy software. Recent development has involved Manifest V3, declarative request rules, worker handling and browser-specific security features. GitHub published stable 13.6.37 on 27 October 2026, and repository metadata showed a last push on 1 November 2026. The Chrome Web Store displayed 13.6.34 from 22 September 2026, demonstrating that release channels can lag rather than move in lockstep. Development builds with additional numeric suffixes are release candidates, not newer stable versions merely because their suffix is larger.",
+    "rendering_engine_and_technical_architecture": "NoScript extends the host browser and has no rendering engine of its own. Static inspection of the GitHub Firefox 13.6.37 package found Manifest V2, a persistent background page, blocking webRequest, response filtering and broad host access. RequestGuard evaluates request types and policy capabilities; on Mozilla platforms it can enforce blocking through webRequest and content-security-policy handling. Content-side code observes blocked elements, policy violations and placeholders, while background policy code determines the active permissions. The Chromium 13.6.37 package instead uses Manifest V3, a service worker, declarativeNetRequest and the debugger permission for worker-related control. The development manifest on the main branch is also MV3 and carries a release-candidate version, but it must not be assigned to the stable Firefox package. Site matching distinguishes origin keys from domain keys and can walk from a subdomain towards parent domains when finding a policy. These implementation differences explain why identical version numbers do not imply identical enforcement or protection coverage.",
+    "interface_and_documented_features": "NoScript's popup lists sites involved with the current page and exposes presets such as DEFAULT, Temp. TRUSTED, TRUSTED, UNTRUSTED and CUSTOM. CUSTOM permits fine-grained choices for capabilities including scripts, objects, media, frames, fonts, WebGL and network fetches. A temporary permission survives ordinary page reloads but is revoked when the browser closes or when the user removes it; a permanent permission persists across sessions. Private-browsing and Tor Browser contexts impose stricter amnesic behaviour for site customisations. Contextual policies can grant a site different capabilities depending on which top-level page embeds it, which is useful for content that should run only in a limited context. Onboarding offers stricter and easier starting configurations, while the interface also contains bulk actions and a potentially dangerous global option. Newly loaded third-party domains may require another decision after the first permission, so trust is not a one-click guarantee that a complex page will immediately work.",
+    "installation_and_distribution": "The official download page directs Firefox and Firefox for Android users to AMO, Chromium users to the Chrome Web Store, and also links GitHub releases and Tor Browser integration. AMO and the GitHub latest-release endpoint identified stable 13.6.37 on 27 October 2026. The Chrome Web Store separately showed 13.6.34 updated on 22 September 2026. GitHub provides both a Firefox XPI and a Chromium ZIP for 13.6.37; this review downloaded and inspected them statically but did not install them, execute their code or compare them byte-for-byte with store packages. The download page also lists release candidates with suffixes such as .902 and old NoScript Classic versions. Candidates are intended for testing and should not be confused with stable store releases, while Classic is explicitly outside current support. Store review, direct downloads and Tor Browser's bundled integration are distinct distribution paths with potentially different versions and update timing.",
+    "platforms_and_hardware_architectures": "The official download guidance covers Firefox 115 or later on desktop and Android, Tor Browser, and Chromium 128 or later in browsers including Chrome, Edge, Vivaldi and Brave. The stable Firefox manifest sets a strict Gecko minimum of 115 and includes a Gecko Android section. It remains MV2 with blocking webRequest, whereas the stable Chromium package is MV3 with DNR and a service worker. No native processor architecture matrix is declared; these are JavaScript and WebExtension packages whose practical requirements come from the browser. The broad Chromium list does not establish identical behaviour on every fork, because extension policy and API support can vary. NoScript Classic 5.x downloads are for obsolete browser environments and are not a current Android or Chromium option. Most importantly, the documentation identifies protection differences: the XSS Injection Checker is Mozilla-only, TabGuard is unavailable on Chromium, and local-network protection there is limited to numeric IP addresses rather than all hostname forms.",
+    "extensions_and_add_on_store": "NoScript does not expose an internal marketplace for arbitrary executable plug-ins. Its extensibility lies in policy configuration: site and origin permissions, parent-domain matching, temporary or persistent trust, custom capability sets and contextual rules. Users can maintain a personalised security policy without subscribing to a conventional advertising filter list, and browser stores handle distribution of the extension itself. Tor Browser integration adds another policy layer, including interaction with the browser's security-level model rather than a separate add-on store. These controls can be combined with other browser protections, but overlapping script or request blockers can still make diagnosis more complicated. NoScript's permissions are not endorsements of a domain's safety: TRUSTED describes what the user allows, while UNTRUSTED forces restrictions even where a broader configuration might otherwise permit content. The absence of an internal plug-in ecosystem does not limit the project's own source-level contribution and release workflow.",
+    "privacy_and_security_model": "NoScript requests extensive access because it must observe requests, apply site policies and modify active-content behaviour. The inspected Firefox package includes all URLs, tabs, navigation, storage, scripting, webRequest, blocking and response filtering, and DNS. The Chromium package separates all-URL host access and includes DNR, webRequest, DNS and debugger; its documentation warns that browser debugging notifications can be associated with worker control. These permissions are security-sensitive even though the developer's AMO privacy declaration says no data is collected. That declaration is not an independent audit. The optional Site Info feature sends a domain to noscript.net only after a user action and prompt; documentation about WAN IP disclosure explicitly concerns old NoScript 2.0rc5–5.x versions, not current Quantum or Chromium releases. XSS filtering, LAN protection and TabGuard address different threats and should not be merged into an absolute safety claim. NoScript also does not hide the user's IP address or make a trusted site trustworthy in every respect.",
+    "update_channels_and_release_cadence": "Stable updates arrive through AMO, the Chrome Web Store, GitHub releases or the distribution mechanism of a browser that bundles NoScript. These channels are not synchronised: 13.6.37 was the stable AMO and GitHub version on 27 October 2026, while Chrome displayed 13.6.34 from 22 September. The main-branch manifest showed 13.6.37.902, a release-candidate suffix also documented on the download page, so it represents development state rather than a newer stable release. Repository metadata recorded a push on 1 November 2026 and showed that the project was not archived. There is no fixed release cadence established by these observations. Security-sensitive maintenance may occur quickly, but a project's response goal is not a measured service-level guarantee. This review did not install a package, trigger an automatic update or test a candidate. Users should check both version and browser architecture, because an MV2 Firefox stable package and an MV3 development manifest can coexist in the public sources.",
+    "licensing_and_governance": "The source headers and README identify NoScript as GNU General Public License version 3 or later, and both inspected 13.6.37 packages contain the text of GPL version 3. AMO instead displays “GNU General Public License v2.0 only.” This is a visible metadata divergence; the entry does not silently harmonise it or offer a legal conclusion about which store label should apply. Development is led by Giorgio Maone, with public source and releases on GitHub and community support through the project's forum. The README provides a private security-report address and a PGP key, separating vulnerability disclosure from ordinary public feature discussion. Public source enables inspection of policy and browser-specific behaviour, but no exhaustive licence review of every bundled component was performed here. The GPL terms for NoScript do not relicense the websites it visits or turn third-party browser components into project-owned code.",
+    "limitations_and_scope": "Restricting active content can break navigation, menus, media, authentication, payments and embedded services. A page may load additional domains after one permission is granted, requiring further decisions and making troubleshooting iterative. Permanent trust increases convenience but broadens the code allowed in future visits; temporary trust reduces persistence but does not make the currently allowed code safe. Global allow or disable options can undermine the protective model and are explicitly dangerous choices. Chromium lacks the Mozilla XSS Injection Checker and TabGuard, and its LAN defence does not cover every hostname representation. Even on Firefox, anti-XSS heuristics can have false positives, false negatives and browser-specific constraints; they are not a guarantee against known or unknown attacks. Numeric-IP-only LAN matching is another documented boundary. No runtime attack suite or website compatibility test was performed for this entry, and store packages were not proven byte-identical to the inspected GitHub assets. NoScript should therefore be deployed with realistic compatibility and coverage expectations.",
+    "who_is_it_for": "NoScript suits users who want deliberate, granular control over scripts and active content rather than relying solely on browser defaults. Security-conscious Firefox users can combine per-site permissions with the Mozilla-specific XSS Injection Checker, LAN controls and TabGuard. People who need temporary trust for a one-off task can avoid creating a permanent exception, while advanced users can tailor capabilities or apply contextual permissions to embedded services. Tor Browser users may value its integration with the browser's security model, provided they understand the implications of changing defaults. Administrators and contributors can inspect public source, release packages and a private vulnerability-reporting route. The extension is most effective for someone willing to make trust decisions, diagnose broken pages and distinguish script control from broader privacy needs such as tracker blocking, encrypted transport or anonymity.",
+    "who_is_it_not_for": "NoScript is not for users who want every website to work without configuration or who are unwilling to evaluate new domains and occasional breakage. It is also unsuitable as a stand-alone anonymity tool, a guarantee that all XSS is prevented or a substitute for security updates and cautious browsing. Chromium users expecting every Firefox protection, including the Injection Checker and TabGuard, will not obtain feature parity merely from the same product name. People alarmed by broad host access or Chromium's debugger-related notification should review those requirements before installing. Legacy-browser users should not treat unsupported NoScript Classic downloads as maintained security fixes. Finally, organisations that need identical behaviour across browsers must test each package and policy separately rather than relying on the shared 13.6.x version family or assuming that temporary and permanent trust have identical persistence everywhere.",
+    "verdict": "NoScript is a mature and actively maintained active-content security extension whose central strength is granular, context-aware permission control. Temporary and persistent trust, custom capabilities, domain matching and presets give users substantially more control than a single script on/off switch. Firefox 13.6.37 retains an MV2 blocking-webRequest and response-filtering architecture, while the inspected Chromium 13.6.37 package uses MV3, DNR and a service worker; those differences directly affect available protections. The XSS filter, LAN controls and TabGuard are valuable documented layers where supported, not absolute guarantees. Channel versions also differ, with Chrome behind AMO and GitHub at the consultation date. NoScript is a strong option for users prepared to manage trust and compatibility explicitly. It is less suitable for zero-configuration browsing, for anyone expecting full Firefox features on Chromium, or as a substitute for anonymity, tracker protection and timely software updates."
+  },
+  "links": {
+    "project_home": "https://noscript.net/",
+    "usage_guide": "https://noscript.net/usage/",
+    "download_guide": "https://noscript.net/getit/",
+    "faq": "https://noscript.net/faq/",
+    "amo_listing": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
+    "chrome_listing": "https://chromewebstore.google.com/detail/noscript/doojmbjmlfjjnbmnoijecmcbfeoakpjm",
+    "privacy": "https://addons.mozilla.org/en-US/firefox/addon/noscript/privacy/",
+    "readme": "https://raw.githubusercontent.com/hackademix/noscript/main/README.md",
+    "development_manifest": "https://raw.githubusercontent.com/hackademix/noscript/main/src/manifest.json",
+    "request_guard": "https://raw.githubusercontent.com/hackademix/noscript/main/src/bg/RequestGuard.js",
+    "xss_filter": "https://raw.githubusercontent.com/hackademix/noscript/main/src/xss/XSS.js",
+    "site_matching": "https://raw.githubusercontent.com/hackademix/nscl/main/common/Sites.js",
+    "content_script": "https://raw.githubusercontent.com/hackademix/noscript/main/src/content/content.js",
+    "security_defaults": "https://raw.githubusercontent.com/hackademix/noscript/main/src/bg/Defaults.js",
+    "repository_metadata": "https://api.github.com/repos/hackademix/noscript",
+    "latest_release_metadata": "https://api.github.com/repos/hackademix/noscript/releases/latest",
+    "firefox_package": "https://github.com/hackademix/noscript/releases/download/13.6.37/noscript-13.6.37.xpi",
+    "chromium_package": "https://github.com/hackademix/noscript/releases/download/13.6.37/noscript-13.6.37-chrome.zip"
+  },
+  "sources": [
+    {
+      "title": "NoScript official site - active-content security purpose and current project positioning",
+      "url": "https://noscript.net/",
+      "type": "official_project_site",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript usage guide - presets, temporary and permanent permissions, capabilities and contextual policies",
+      "url": "https://noscript.net/usage/",
+      "type": "official_usage_documentation",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript official download guide - supported browsers, stable/candidate channels and legacy-version caveats",
+      "url": "https://noscript.net/getit/",
+      "type": "official_download_documentation",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript FAQ - XSS, Site Info, browser differences, privacy questions and legacy WAN-IP scope",
+      "url": "https://noscript.net/faq/",
+      "type": "official_project_faq",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Firefox Add-ons NoScript listing - stable 13.6.37, permission summary and GPL-2.0-only metadata label",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Chrome Web Store NoScript listing - version 13.6.34 and 22 September 2026 channel update",
+      "url": "https://chromewebstore.google.com/detail/noscript/doojmbjmlfjjnbmnoijecmcbfeoakpjm",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript AMO privacy policy - developer declaration concerning data collection",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/noscript/privacy/",
+      "type": "official_privacy_policy",
+      "publisher": "Mozilla Add-ons / NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript README - supported browser families, GPL-3.0-or-later badge and private security-reporting route",
+      "url": "https://raw.githubusercontent.com/hackademix/noscript/main/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript main-branch development manifest - MV3 release-candidate state, not the stable Firefox manifest",
+      "url": "https://raw.githubusercontent.com/hackademix/noscript/main/src/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript RequestGuard source - request capabilities, Mozilla blocking path and Chromium policy separation",
+      "url": "https://raw.githubusercontent.com/hackademix/noscript/main/src/bg/RequestGuard.js",
+      "type": "official_source_code",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript XSS source - Mozilla-only asynchronous request listener and cross-site filtering implementation",
+      "url": "https://raw.githubusercontent.com/hackademix/noscript/main/src/xss/XSS.js",
+      "type": "official_source_code",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript Sites library - origin and domain keys, secure-site rules and parent-domain matching",
+      "url": "https://raw.githubusercontent.com/hackademix/nscl/main/common/Sites.js",
+      "type": "official_source_code",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript content-side source - blocked-element reporting, CSP violation handling and placeholders",
+      "url": "https://raw.githubusercontent.com/hackademix/noscript/main/src/content/content.js",
+      "type": "official_source_code",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript security defaults - XSS enabled and TabGuard private-browsing default",
+      "url": "https://raw.githubusercontent.com/hackademix/noscript/main/src/bg/Defaults.js",
+      "type": "official_source_code",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript repository metadata - default branch, archive status and 1 November 2026 last push",
+      "url": "https://api.github.com/repos/hackademix/noscript",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "NoScript latest GitHub release metadata - stable 13.6.37 and 27 October 2026 publication",
+      "url": "https://api.github.com/repos/hackademix/noscript/releases/latest",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Official GitHub NoScript 13.6.37 Firefox XPI - statically inspected MV2 manifest, permissions and licence file",
+      "url": "https://github.com/hackademix/noscript/releases/download/13.6.37/noscript-13.6.37.xpi",
+      "type": "official_distribution_package",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Official GitHub NoScript 13.6.37 Chromium ZIP - statically inspected MV3 manifest, DNR, debugger and licence file",
+      "url": "https://github.com/hackademix/noscript/releases/download/13.6.37/noscript-13.6.37-chrome.zip",
+      "type": "official_distribution_package",
+      "publisher": "NoScript project",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

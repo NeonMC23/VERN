@@ -1,0 +1,208 @@
+{
+  "id": "searxng",
+  "name": "SearXNG",
+  "type": "application",
+  "summary": "Community-developed AGPL metasearch software for self-hosted or third-party instances, aggregating configurable external engines with category syntax, optional HTTP API formats, privacy-oriented request handling and operator-controlled security and maintenance.",
+  "tags": [
+    "metasearch",
+    "search engine",
+    "self hosting",
+    "privacy",
+    "open source",
+    "agpl",
+    "python",
+    "docker",
+    "valkey",
+    "search api",
+    "decentralization"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Linux",
+    "Docker",
+    "Podman"
+  ],
+  "license": "GNU Affero General Public License v3.0 (AGPLv3)",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "SearXNG is free, open-source metasearch software that aggregates results from external search services and databases. It is not accurately represented as one centrally operated search website: the official documentation directs users either to independently operated instances or to an installation they control. Consequently, the software's privacy design, default configuration and API capabilities must be distinguished from the behaviour of any particular public server. SearXNG provides a Web interface, OpenSearch integration, configurable engine categories and an HTTP API whose non-HTML formats can be disabled by an administrator. Private, group, single-user and public deployments are all contemplated. The documentation read on 2026-11-05 displayed version 2026.11.5+3e95f6cd2 and a snapshot of 261 supported engines, 81 enabled by default; neither the documentation version nor those counts describe every running instance. The project is licensed under GNU AGPL v3.0 and developed by an open community.",
+    "origin_and_history": "The official source for the documentation homepage says SearXNG development began in the middle of 2021 as a fork of the searx project. Its user guide describes searx in turn as a metasearch project inspired by Seeks, but SearXNG's own governance is organised around an open community rather than a claim that one company operates every deployment. Contribution channels include the GitHub repository, Matrix discussions and Weblate translations, with documentation built through Sphinx. The maintenance guide defines a rolling-release model in which every commit to `master` is a release, so the project's history is not a sequence of identical packages installed on all instances. Public and private administrators choose when and how to update, and their configurations can diverge. The 2026.11.5+3e95f6cd2 documentation identifier is therefore a precise consultation snapshot, not evidence that a third-party server runs that revision.",
+    "rendering_engine_and_technical_architecture": "SearXNG is a Python Web application placed between a user and configured search services. Engine definitions map names to implementation modules, shortcuts, categories, timeouts, weights, language settings and network options; some engines need API keys or private access tokens. A request can query several enabled engines and aggregate their responses, but SearXNG does not own those upstream indexes. Reference deployments can put the application behind uWSGI and a reverse proxy, while the container documentation exposes Granian-related settings. Valkey supports the limiter's dynamic IP controls, and an optional image proxy routes images through the instance. The `public_instance` setting enables public-oriented bot protection and the image proxy. Outgoing requests can use per-engine proxies or Tor. Engine failures, CAPTCHA responses and rate limits can temporarily suspend sources, so architecture and result availability remain dependent on external services as well as local administration.",
+    "interface_and_documented_features": "The configured-engine snapshot lists 261 supported engines and 81 enabled by default, with substantial differences in paging, locale, SafeSearch and time-range support. Default interface tabs are general, images, videos, news, map, music, it, science, files and social media; engines outside those tabs appear under `other`, and a tab disappears when it has no active engine. A `!` prefix selects engines or categories, such as `!wp` or `!images`, and modifiers can be chained. A colon prefix selects a language. Double-bang syntax can invoke an external DuckDuckGo bang or redirect to the first result, with explicit warnings that SearXNG cannot protect privacy after such a redirect. Special queries provide functions such as UUID generation or averages where enabled. SafeSearch levels are none, moderate and strict, while autocomplete, language, time range and result filters depend on both instance settings and each upstream engine's capabilities.",
+    "installation_and_distribution": "The installation overview recommends either containers or the installation script when the administrator has no special preference, and presents step-by-step installation as an illustration of how an instance is built. Official container images are mirrored on DockerHub and GHCR, with Docker or Podman as prerequisites and Compose as the recommended container deployment. The manual route documents distribution packages, a dedicated `searxng` user, a repository clone, Python virtual environment, Python dependencies and uWSGI. Initial configuration normally resides at `/etc/searxng/settings.yml` or at `SEARXNG_SETTINGS_PATH`; a unique `server.secret_key` is the minimum highlighted setting. Reference configuration enables the limiter and image proxy, requiring appropriate Valkey and proxy-header setup for public use. Administrators exposing a service must also configure their HTTP reverse proxy and base URL. These are documented deployment paths only: no SearXNG installation, container build or public instance was launched during this documentation phase.",
+    "platforms_and_hardware_architectures": "End users interact with SearXNG through a Web browser and can add an instance through OpenSearch; no particular mobile or desktop client is required by the documented model. Administrators can deploy on the Linux families covered by the step-by-step package instructions or use Docker or Podman containers. There is no single official hardware envelope: requirements depend on traffic, enabled engines, image-proxy memory use, Valkey, reverse-proxy architecture and whether the deployment serves one user, a trusted group or the public. A local single-user instance gives the operator direct control over code, logs and preferences, whereas a private instance can be restricted to friends or an organisation, including access through a VPN. Public instances introduce abuse resistance and trust considerations. Container volumes preserve configuration and persistent data, but running the same image does not guarantee the same engines, formats or privacy settings across deployments.",
+    "extensions_and_add_on_store": "SearXNG's extension model is based on configurable engines, plugins and modifications to the open codebase rather than a central consumer add-on store. Its HTTP Search API accepts GET and POST on `/` and `/search`; GET uses URL parameters and POST uses form data. The `q` parameter is required, while categories, language, page number, time range, SafeSearch, output format and theme are optional within documented constraints. HTML, JSON, CSV and RSS are possible formats, but an administrator must enable them under `search.formats`. Requesting a format that is not enabled returns HTTP 403, and the documentation warns that many public instances disable non-HTML formats. Themes are likewise instance-dependent. Upstream query syntax is passed through only to the extent that each external service supports it, so an operator such as `site:` is not universally meaningful. Thus the software has an API, but no particular third-party instance promises JSON access or uniform automation capacity.",
+    "privacy_and_security_model": "SearXNG's documented privacy design removes cookies from requests to external engines and generates a random browser profile for each request, causing upstream services to see the instance's IP address rather than the end user's directly. Proxy or Tor routing can be configured. The reference software does not serve advertising or tracking content and attempts to hide both the referring page and query from visited result sites. Nevertheless, the search query is sent to external services to obtain results, and optional autocomplete or other external features introduce their own dependencies. GET is the default request method; POST can reduce browser-history exposure in some browsers but has usability costs and does not prevent server logging. A public-instance administrator can log, aggregate or disclose requests without the user knowing, so trust in that administrator remains essential. External bangs and automatic first-result redirects leave SearXNG's protection entirely. Self-hosting offers greater control but does not automatically secure a misconfigured server.",
+    "update_channels_and_release_cadence": "SearXNG uses rolling releases: the maintenance guide states that every commit to `master` is a release. Update procedure depends on deployment method, with an `instance update` command for script-based installations and image or template updates for containers. Administrators are told to review migration notes because code updates can also require new services, reconfiguration or removal of obsolete components; the transition to the Valkey-backed limiter is an example. Container users must review revised Compose and environment templates rather than only pulling an image. External engines can independently change their HTML, APIs, rate limits or CAPTCHA behaviour, so updating SearXNG does not guarantee uninterrupted results. The documentation's 2026.11.5+3e95f6cd2 identifier records the version read for this entry, not a supported-version promise for other servers. Regular maintenance is therefore part of operating an instance, and no fixed long-term-support cadence is inferred.",
+    "licensing_and_governance": "The repository license is GNU Affero General Public License v3.0. Its network-use copyleft condition requires making the corresponding source of a modified licensed work available when it is provided as a network service, subject to the license's full terms; upstream websites, indexes and result content do not become AGPL-licensed merely because SearXNG queries them. Governance is community-based, with contributions through GitHub, discussion through Matrix and translations through Weblate. The contribution guide names privacy-by-design and hackability as prime directives, asks for focused commits, PEP8 with a 120-character line limit, tests where applicable, author attribution and pull requests. Documentation contributions use Sphinx. Responsible security reports are accepted at `security@searxng.org`, ideally with reproduction details and the relevant project URL. These project processes do not make the upstream team responsible for an unknown third party's deployment, configuration, logs or legal compliance.",
+    "limitations_and_scope": "The most important limitation is variability between software and instances. Counts of 261 supported and 81 default-enabled engines are a current documentation snapshot, not a guarantee of coverage or availability on a chosen server. Administrators can remove engines, alter weights and themes, disable API formats, change code or keep logs. Upstream services can require keys, unsupported syntax can be ignored, and CAPTCHA, access-denied or rate-limit responses can reduce results. SearXNG does not provide true multilingual search simply through its language selector; documentation suggests separately configured engines as a workaround. External redirects bypass its privacy protections, and no independent audit of public-instance logging, security or result quality was performed. The installation and API descriptions were read but not executed against a deployed server. Custom container images are not officially supported, and a 403 response for JSON, CSV or RSS may reflect disabled formats rather than a defect or nonexistent API.",
+    "who_is_it_for": "SearXNG suits technically capable users and organisations that want to control a metasearch deployment, choose external engines and set their own logging, proxy and access policies. A single-user installation can reduce reliance on an unknown administrator, while a private group instance can centralise preferences for friends or a team. Users who cannot self-host can still consider a public instance operated by someone they trust. Researchers benefit from category and engine selection across general Web, media, science, software and other sources when the relevant upstreams are enabled. Developers can integrate the HTTP API where the administrator exposes JSON, CSV or RSS and where automation is acceptable. Contributors who value AGPL licensing, privacy-by-design and hackable Python code have documented routes for engine, plugin, translation and documentation work. It is particularly appropriate where configurability matters more than a uniform hosted experience.",
+    "who_is_it_not_for": "SearXNG is not for users who expect one official central service with identical privacy, engines and API behaviour everywhere. A public instance is a poor choice for someone unable to trust its administrator or assess its configuration, and self-hosting is unsuitable for someone unwilling to maintain secrets, updates, reverse-proxy headers and abuse controls. Organisations needing guaranteed upstream coverage, universal operator support, permanent JSON access or a fixed engine count will not find those assurances. Users requiring an offline crawler-owned index should look elsewhere because ordinary metasearch depends on external services. External-bang and automatic-redirect users must accept the destination's own privacy terms. Finally, teams without the resources to manage Valkey when required, container templates or rolling migrations should not treat installation as a one-time, maintenance-free deployment.",
+    "verdict": "SearXNG is best characterised as configurable, community-governed metasearch software rather than a single privacy search provider. Its strengths are broad engine support, explicit category and language syntax, self-hosting options, an administrator-controlled HTTP API and AGPL-licensed code with active contribution channels. Its privacy design reduces identifying information sent upstream, but it cannot prevent a public-instance operator from logging and cannot protect users after an external redirect. The documented 261-engine and 81-default figures, output formats, themes and filters are configuration snapshots rather than universal promises. Successful operation also depends on external services, API keys where required, Valkey-backed abuse controls and regular rolling-release maintenance. SearXNG is therefore an excellent fit for users who value control and transparency, provided they either administer the instance responsibly or choose a trusted operator and verify the capabilities actually exposed."
+  },
+  "links": {
+    "documentation": "https://docs.searxng.org/",
+    "origin_source": "https://raw.githubusercontent.com/searxng/searxng/master/docs/index.rst",
+    "about": "https://docs.searxng.org/user/about.html",
+    "private_instance": "https://docs.searxng.org/own-instance.html",
+    "configured_engines": "https://docs.searxng.org/user/configured_engines.html",
+    "search_syntax": "https://docs.searxng.org/user/search-syntax.html",
+    "settings": "https://docs.searxng.org/admin/settings/settings.html",
+    "search_settings": "https://docs.searxng.org/admin/settings/settings_search.html",
+    "server_settings": "https://docs.searxng.org/admin/settings/settings_server.html",
+    "engine_settings": "https://docs.searxng.org/admin/settings/settings_engines.html",
+    "category_tabs": "https://docs.searxng.org/admin/settings/settings_categories_as_tabs.html",
+    "installation": "https://docs.searxng.org/admin/installation.html",
+    "container_installation": "https://docs.searxng.org/admin/installation-docker.html",
+    "step_by_step": "https://docs.searxng.org/admin/installation-searxng.html",
+    "maintenance": "https://docs.searxng.org/admin/update-searxng.html",
+    "limiter": "https://docs.searxng.org/admin/searx.limiter.html",
+    "search_api": "https://docs.searxng.org/dev/search_api.html",
+    "contribution": "https://docs.searxng.org/dev/contribution_guide.html",
+    "license_text": "https://github.com/searxng/searxng/blob/master/LICENSE",
+    "security_policy": "https://github.com/searxng/searxng/blob/master/SECURITY.md"
+  },
+  "sources": [
+    {
+      "title": "SearXNG documentation homepage version 2026.11.5+3e95f6cd2 - metasearch scope, instances and documentation map",
+      "url": "https://docs.searxng.org/",
+      "type": "official_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Official documentation index source - development begun in mid-2021 as a searx fork and open-community framing",
+      "url": "https://raw.githubusercontent.com/searxng/searxng/master/docs/index.rst",
+      "type": "official_source_configuration",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "About SearXNG - open community, GitHub, Matrix, Weblate, OpenSearch and the distinction between project and instances",
+      "url": "https://docs.searxng.org/user/about.html",
+      "type": "official_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Why use a private instance - request privacy, proxy or Tor, local preferences and explicit trust risks of public administrators",
+      "url": "https://docs.searxng.org/own-instance.html",
+      "type": "official_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Configured Engines - 261 supported and 81 default-enabled engines in the consulted snapshot, with heterogeneous capabilities",
+      "url": "https://docs.searxng.org/user/configured_engines.html",
+      "type": "official_configuration_reference",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "SearXNG search syntax - engine and category bangs, language selector, external redirects and special queries",
+      "url": "https://docs.searxng.org/user/search-syntax.html",
+      "type": "official_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "settings.yml reference - configuration locations, defaults, engine merging, removal and keep-only controls",
+      "url": "https://docs.searxng.org/admin/settings/settings.html",
+      "type": "official_configuration_reference",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search settings - SafeSearch, autocomplete, languages, output formats, pagination and upstream-error suspension",
+      "url": "https://docs.searxng.org/admin/settings/settings_search.html",
+      "type": "official_configuration_reference",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Server settings - base URL, secret, GET or POST, headers, limiter, public-instance mode and image proxy",
+      "url": "https://docs.searxng.org/admin/settings/settings_server.html",
+      "type": "official_configuration_reference",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Engine settings - modules, categories, weights, API keys, private tokens, network options and multilingual-search limitation",
+      "url": "https://docs.searxng.org/admin/settings/settings_engines.html",
+      "type": "official_configuration_reference",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Categories as tabs - ten default interface tabs, other engines and the effect of disabling every engine in a category",
+      "url": "https://docs.searxng.org/admin/settings/settings_categories_as_tabs.html",
+      "type": "official_configuration_reference",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "SearXNG installation overview - recommended container or script routes, step-by-step alternative and migration warning",
+      "url": "https://docs.searxng.org/admin/installation.html",
+      "type": "official_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Container installation - Docker or Podman, official registries, Compose, volumes, environment and public reverse-proxy considerations",
+      "url": "https://docs.searxng.org/admin/installation-docker.html",
+      "type": "official_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Step-by-step installation - service user, Python virtual environment, uWSGI, settings, secret, limiter and local checks",
+      "url": "https://docs.searxng.org/admin/installation-searxng.html",
+      "type": "official_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "SearXNG maintenance - rolling releases, method-specific updates, migration work and post-installation checks",
+      "url": "https://docs.searxng.org/admin/update-searxng.html",
+      "type": "official_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "SearXNG limiter - bot and IP rate controls, proxy headers, Valkey dependency and upstream CAPTCHA or blocking risks",
+      "url": "https://docs.searxng.org/admin/searx.limiter.html",
+      "type": "official_configuration_reference",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "SearXNG Search API - GET and POST endpoints, parameters, optional JSON, CSV and RSS, and 403 for disabled formats",
+      "url": "https://docs.searxng.org/dev/search_api.html",
+      "type": "official_api_documentation",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How to contribute - privacy-by-design, hackability, coding conventions, tests, pull requests, translations and Sphinx documentation",
+      "url": "https://docs.searxng.org/dev/contribution_guide.html",
+      "type": "official_contribution_guide",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "SearXNG LICENSE - GNU Affero General Public License v3.0, copyleft and network-use source-availability conditions",
+      "url": "https://github.com/searxng/searxng/blob/master/LICENSE",
+      "type": "official_license",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "SearXNG Security Policy - responsible vulnerability reports, contact address and requested reproduction details",
+      "url": "https://github.com/searxng/searxng/blob/master/SECURITY.md",
+      "type": "security_policy",
+      "publisher": "SearXNG project",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

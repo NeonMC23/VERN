@@ -1,0 +1,159 @@
+{
+  "id": "startpage",
+  "name": "Startpage",
+  "type": "application",
+  "summary": "Privacy-oriented search service operated by Surfboard Holding BV, acting as an intermediary to Google, Bing and other providers rather than maintaining its own web index, with unprofiled results, contextual advertising and an Anonymous View proxy.",
+  "tags": [
+    "search engine",
+    "web",
+    "privacy",
+    "metasearch",
+    "google results",
+    "bing results",
+    "anonymous view",
+    "instant answers",
+    "advertising",
+    "proprietary",
+    "startpage"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service; no source licence published for the search service itself",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Startpage is a privacy-oriented web search service operated by Surfboard Holding BV from The Hague in the Netherlands. It is not a browser and, importantly, it is not presented by its operator as an independently crawling general web index. Startpage acts as an intermediary between the user and external result providers, principally Google and Bing, applying its own query-handling and privacy commitments before returning results. The Startpage Private Browser for Android and iOS is a separate mobile application that includes Startpage as its default engine; the web engine itself needs no such application. Anonymous View is a linked proxy feature rather than a second search engine. Accounts and subscriptions are also optional additions around the service. This entry concerns Startpage.com search, its provider dependence, settings, advertising and proxy behaviour, and does not treat the wider product family or its parent company System1 as the engine itself.",
+    "origin_and_history": "Startpage's institutional help page says that the company was founded in the Netherlands in 2006. That date describes the organisation's origin; the page does not provide a detailed, versioned chronology of the search service or of every provider arrangement. Two later milestones are documented more precisely. Startpage retired the related Ixquick websites and application in April 2018 to concentrate on Startpage, and a company support article states that Startpage became part of System1 in December 2018 while remaining a Dutch-headed business unit. The operator says contractual arrangements leave privacy decisions and privacy-affecting technical changes under the Netherlands-based team's control. These are company statements about governance, not an external assessment. The present service is consequently best understood as a long-running private-search intermediary whose ownership and product boundaries have changed, rather than as a newly independent index project.",
+    "rendering_engine_and_technical_architecture": "The architectural fact is explicit: Startpage says it does not maintain its own index of websites and is fully dependent on results received from Google and Bing. It submits an anonymised query on the user's behalf, so the provider sees Startpage rather than the individual user, and returns the provider's feed without modifying those results. A direct search at Google or Bing can therefore differ because the partner feed itself may differ, not because Startpage has re-ranked it. This also means that Startpage publishes no general organic ranking algorithm of its own. Region, search language, SafeSearch and local-result settings shape the request or presentation, but do not create an independent index. Specialised modules add other sources: Instant Answers can use Wikipedia, OpenWeatherMap and MapQuest, among others. Anonymous View follows a different path, fetching a selected page through Startpage's proxy and rewriting active content, rather than simply redirecting the browser to the result.",
+    "interface_and_documented_features": "The service provides web, image, video and news results, with sponsored links identified separately. Its advanced-search help lists exact phrases, exclusion, site and domain restrictions, filetype, intitle, before and after operators, while warning that advanced searches are not comprehensive and that Google and Bing syntax differs. Instant Answers include time, weather, maps, knowledge panels, direct answers, calculations, package tracking, unit and currency conversion, translation, dictionaries and stocks; they are enabled by default and can be disabled. The settings page exposes interface and search languages, region and optional search location, suggestions, new-tab opening, several themes, 10 or 20 results per page, date and temperature formats, three SafeSearch levels, GET or POST requests and EU, US or closest-server selection. Preferences can be stored in a cookie or encoded in a settings URL. The current homepage also states that Startpage.com has no AI summaries or AI chatbots.",
+    "installation_and_distribution": "Ordinary use requires no download: Startpage.com can be opened directly or selected as a browser's default search engine. The operator publishes browser-specific setup instructions and offers a desktop extension as a convenience, but neither is a separate search index. On mobile, the Startpage app is explicitly described as a private web browser, not a search-only client, and is available for Android and iOS with Startpage preselected. That application has its own browsing history, diagnostics and product-analytics provisions, which must not be confused with the data model of a web query. Basic search is free and advertising-supported. Current terms and settings also describe optional accounts and subscription features, including an ad-free offering whose availability can depend on region; this does not make an account necessary for ordinary search. No offline package, source distribution or search-only desktop application is published in the consulted material.",
+    "platforms_and_hardware_architectures": "The engine's platform is the web, accessible through desktop and mobile browsers without a published processor, memory or storage requirement. Android and iOS enter the picture through the separate Private Browser application, not because the search engine itself is a native mobile runtime. Startpage's settings provide a concrete form of regional control: users can choose a search region, a search language and an optional location, and can select closest, EU or US servers for their Startpage connection. The help text says the server choice does not itself change search results. POST can keep a query out of the visible URL and browser tab, whereas GET includes it; this is a transport and local-history distinction, not a difference in index coverage. Local results are opt-in and can use an entered place or anonymised IP-derived information. The documented language and region menus describe available choices, not a guarantee of identical result quality or service availability everywhere.",
+    "extensions_and_add_on_store": "Startpage has no general extension marketplace for the engine. Its most distinctive extension of the results page is Anonymous View, available through a mask icon beside results. Startpage retrieves the destination and supporting resources through its own servers, rewrites JavaScript, cleans identifying headers and isolates site cookies on randomly generated proxy subdomains. This can reduce direct exposure to the destination but can also alter appearance or functionality; it is not a promise that every page, form or download will work. A second extension mechanism is the cookie-free settings URL, which lets a user bookmark preferences without keeping the ordinary preferences cookie. Browser extensions merely make the engine easier to select. Instant Answers similarly extend the results page through specialised providers rather than third-party plug-ins installed by the user. No public consumer search API or webmaster submission programme is documented in the pages consulted, and the Terms of Use prohibit automated scraping of the service.",
+    "privacy_and_security_model": "Startpage's policy says that ordinary searches are not logged, that IP addresses are not recorded, and that identifying metadata is stripped before queries are sent to search and content providers. There is an express anti-abuse exception: an address associated with robotic high-volume querying can be registered and blocked. The ordinary preferences cookie expires after 90 days without a visit, while a security-check cookie can last up to 7 days. Startpage says its analytics are aggregate and anonymous. Sponsored links are selected from the current query rather than a behavioural profile; limited non-identifying system information may be shared for click-fraud prevention. Clicking an ordinary result or advertisement leaves Startpage's protection, while Anonymous View is presented as the proxied alternative. Optional accounts change the data inventory for sign-in and billing, not the stated separation of account data from searches; the supplemental policy was updated on 2026-08-13. All of these points are operator commitments, not observations from an independent server audit.",
+    "update_channels_and_release_cadence": "There is no public version number or release cadence for Startpage's search engine, and no comprehensive changelog of provider feeds, ranking behaviour or Instant Answers was found. The support centre and settings page are living documents, so a help-page statement is not a build identifier. Legal documents do provide useful revision points: the Terms of Use and the account and subscription supplement to the privacy policy both display 2026-08-13 as their last-update date. That date applies to those documents, not to the search algorithm or the entire service. Product boundaries can also change independently of the engine, as shown by the current introduction of account and ad-free subscription features. Mobile application updates belong to the Private Browser and should not be used as search-engine version evidence. The most reliable way to date a particular statement is therefore to record the consultation date and any date printed in the relevant policy, without inferring an unpublished release schedule.",
+    "licensing_and_governance": "Startpage's search service is proprietary, and no source licence for its query-processing system is published in the sources consulted. The controller and operator named in the privacy policy and Terms of Use is Surfboard Holding BV, based in The Hague. System1 is the United States parent described by the company; Startpage says its Dutch unit retains contractual control over privacy decisions. The Terms of Use were last updated on 2026-08-13, are governed by Dutch law, require parental consent for users under 16, prohibit scraping and disclaim responsibility for third-party content. They also cover optional accounts and subscriptions separately from basic search. Advertising supplies the main revenue for free search, while ad-free subscriptions add another model. Because results originate upstream, Startpage's right-to-be-forgotten help directs requesters to Google or Bing for removal from those providers' results. This allocation of control is central to governance: Startpage governs its own interface and data handling, but not the source index or the third-party destination page.",
+    "limitations_and_scope": "The first limitation is structural: with no maintained web index of its own, Startpage cannot guarantee coverage, freshness, inclusion, removal or organic ordering independently of Google, Bing and other providers. It expressly says that it cannot change the results it receives and that partner feeds may differ from direct searches. Second, the privacy claims are Startpage's own; no independent audit was consulted or performed, and the anti-abuse IP exception must be retained alongside the general no-IP-logging statement. Third, Anonymous View involves aggressive rewriting. Startpage acknowledges imperfect rendering, possible circumvention attempts, residual download risk, and that Canvas and WebGL are not blocked. Ordinary outbound clicks receive no continuing Startpage protection. Fourth, advanced operators are not comprehensive, and no public base-ranking specification exists to evaluate. Finally, optional accounts and payment processing involve personal data even though the company says those records remain separate from searches; a privacy assessment must distinguish anonymous web search from those subscription services.",
+    "who_is_it_for": "Startpage suits users who want familiar Google- and Bing-derived results through an intermediary that says it removes identifying metadata and does not build a search history. It is useful to people who prefer conventional linked results and practical Instant Answers without AI summaries or chatbots on the main site. The detailed settings page serves users who need explicit control over region, language, SafeSearch, request method, server region or cookie-free preferences. Anonymous View can be valuable for reading a public result without making an ordinary direct connection to the destination, provided its compatibility limits are acceptable. It also suits organisations that want a search option with published Dutch and European governance and clear documentation of provider relationships. Finally, it is appropriate for users who understand that upstream result quality can be desirable precisely because Startpage does not operate a separate general web index.",
+    "who_is_it_not_for": "It is not for users or developers who require an independently owned and crawled index, direct control over organic ranking, or a publisher submission channel operated by the engine itself. It is not for anyone whose threat model excludes every anti-abuse IP register, every advertising partner or every optional account processor; those cases are documented separately and should not be hidden by a no-data slogan. Anonymous View is unsuitable for tasks that depend on flawless JavaScript, sensitive forms, unrestricted downloads or complete blocking of every fingerprinting surface. Users who want AI-generated answers on the results page will not find them on the current Startpage.com product. Organisations needing a public search API, an offline index, a source-available consumer engine or independently audited no-logging evidence must look beyond the material Startpage publishes. Nor should a user expect Startpage alone to remove a page from an upstream provider's index.",
+    "verdict": "Startpage is best described as a privacy-designed search intermediary, not as an independent-index competitor to Brave or a browser with a search box attached. Its public documentation is clear about the central trade-off: Google and Bing supply the general results, Startpage handles the query and presentation, and the company says it does not alter the feed it receives. Around that core it adds unusually granular preferences, practical Instant Answers and an ambitious but inherently imperfect Anonymous View proxy. The result is useful precisely because its architecture is different from that of a crawler-based engine. The privacy commitments are detailed enough to evaluate, including their anti-abuse, advertising and account exceptions, but they remain publisher statements rather than audited facts. Startpage is therefore a strong candidate for users who value unprofiled access to external result providers, and a poor substitute for anyone who needs index sovereignty, publisher-side control or a fully documented ranking system."
+  },
+  "links": {
+    "homepage": "https://www.startpage.com/en/",
+    "about": "https://support.startpage.com/hc/en-us/articles/4455217128212-What-is-Startpage",
+    "result_providers": "https://support.startpage.com/hc/en-us/articles/4521418101524-How-to-use-Startpage-more-effectively",
+    "advanced_search": "https://support.startpage.com/hc/en-us/articles/4521473758228-Advanced-Search-on-Startpage",
+    "settings": "https://www.startpage.com/do/settings",
+    "instant_answers": "https://support.startpage.com/hc/en-us/articles/5319208151444-Instant-Answers",
+    "anonymous_view": "https://support.startpage.com/hc/en-us/articles/4455317663764-How-does-Anonymous-View-work",
+    "anonymous_view_technical": "https://support.startpage.com/hc/en-us/articles/4455540212116-The-Anonymous-View-proxy-technical-details",
+    "local_results": "https://support.startpage.com/hc/en-us/articles/12989340969364-Local-Search-Results",
+    "privacy_policy": "https://www.startpage.com/en/privacy-policy/",
+    "terms_of_use": "https://www.startpage.com/en/terms-of-service/",
+    "system1_relationship": "https://support.startpage.com/hc/en-us/articles/4521498779156-What-it-means-for-Startpage-now-that-System1-is-a-publicly-traded-company",
+    "mobile_app": "https://support.startpage.com/hc/en-us/articles/26200911319316-Startpage-App-FAQ",
+    "search_removal": "https://support.startpage.com/hc/en-us/articles/4455542393108-How-does-Startpage-handle-search-removal-requests-under-Data-Protection-law-in-Europe-The-Right-to-be-Forgotten-"
+  },
+  "sources": [
+    {
+      "title": "Startpage homepage: current product boundaries, private search, local results and the statement that Startpage.com has no AI summaries or chatbots",
+      "url": "https://www.startpage.com/en/",
+      "type": "official_product_page",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "What is Startpage? - founding in the Netherlands in 2006, provider partnerships, features, Dutch operation and System1 ownership",
+      "url": "https://support.startpage.com/hc/en-us/articles/4455217128212-What-is-Startpage",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How to use Startpage more effectively - no maintained web index, dependence on Google and Bing, unmodified feeds, region, language and SafeSearch controls",
+      "url": "https://support.startpage.com/hc/en-us/articles/4521418101524-How-to-use-Startpage-more-effectively",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Advanced Search on Startpage - phrase, exclusion, site, filetype, intitle, before and after syntax, with a warning that support is not comprehensive",
+      "url": "https://support.startpage.com/hc/en-us/articles/4521473758228-Advanced-Search-on-Startpage",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Startpage settings - interface and search languages, regions, suggestions, themes, result counts, SafeSearch, GET or POST, server region and cookie-free settings URL",
+      "url": "https://www.startpage.com/do/settings",
+      "type": "official_product_page",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Instant Answers - time, weather, maps, knowledge panels, direct answers, calculations, conversion, translation, dictionary, stocks and specialised providers",
+      "url": "https://support.startpage.com/hc/en-us/articles/5319208151444-Instant-Answers",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How does Anonymous View work? - proxied retrieval, supporting resources, cleaned user agent, JavaScript rewriting, cookie isolation and rendering limitations",
+      "url": "https://support.startpage.com/hc/en-us/articles/4455317663764-How-does-Anonymous-View-work",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Anonymous View proxy technical details - header sanitisation, fingerprinting countermeasures, JavaScript redefinition, HTTPS, residual compatibility and download risks",
+      "url": "https://support.startpage.com/hc/en-us/articles/4455540212116-The-Anonymous-View-proxy-technical-details",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Local Search Results - opt-in entered location or anonymised IP-derived information, local storage of preferences and exclusion from the settings URL",
+      "url": "https://support.startpage.com/hc/en-us/articles/12989340969364-Local-Search-Results",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Startpage Privacy Policy - query and IP handling, anti-abuse exception, preference and security cookies, analytics, advertising, proxy and account distinctions",
+      "url": "https://www.startpage.com/en/privacy-policy/",
+      "type": "legal_document",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Startpage Terms of Use - Surfboard Holding BV, Dutch law, age and scraping rules, third-party content, accounts and subscriptions; last updated 2026-08-13",
+      "url": "https://www.startpage.com/en/terms-of-service/",
+      "type": "legal_document",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Startpage and System1 - Dutch business unit since December 2018 and publisher-described contractual control of privacy decisions",
+      "url": "https://support.startpage.com/hc/en-us/articles/4521498779156-What-it-means-for-Startpage-now-that-System1-is-a-publicly-traded-company",
+      "type": "official_company_statement",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Startpage App FAQ - explicit distinction between the search engine and the Android and iOS Private Browser application",
+      "url": "https://support.startpage.com/hc/en-us/articles/26200911319316-Startpage-App-FAQ",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search removal and the right to be forgotten - direction of removal requests to Google and Microsoft Bing as the originators of results",
+      "url": "https://support.startpage.com/hc/en-us/articles/4455542393108-How-does-Startpage-handle-search-removal-requests-under-Data-Protection-law-in-Europe-The-Right-to-be-Forgotten-",
+      "type": "official_documentation",
+      "publisher": "Startpage",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

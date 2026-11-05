@@ -1,0 +1,139 @@
+{
+  "id": "mozilla-firefox",
+  "name": "Mozilla Firefox",
+  "type": "application",
+  "summary": "Web browser published by Mozilla, running on the Gecko rendering engine and distributed for desktop, Android and iOS.",
+  "tags": [
+    "browser",
+    "web",
+    "mozilla",
+    "gecko",
+    "spidermonkey",
+    "mpl"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android",
+    "iOS"
+  ],
+  "license": "MPL-2.0 (Mozilla licensing policy)",
+  "last_verified": "2026-10-24",
+  "content": {
+    "introduction": "Firefox is a web browser published by Mozilla. Mozilla distributes desktop builds for Windows, macOS and GNU/Linux, and mobile builds for Android and iOS. This entry describes the published product, the rendering engine it runs on, the platforms the publisher documents, and the privacy, extension and update mechanisms that Mozilla documents. It does not compare Firefox with other browsers and does not restate promotional material from the download pages.\n\nAt the time of writing Mozilla's Release channel served Firefox 158.0.1, first offered to Release channel users on 20 October 2026. A separate Extended Support Release channel is maintained for organisations that need a slower moving version.",
+    "origin_and_history": "Mozilla is the publisher of Firefox: the Firefox Privacy Notice, the add-ons site and the download pages are all operated by Mozilla, and Mozilla describes itself there as the organisation that builds the browser. The current version line is 158. Version 158.0 was published on 13 October 2026 and version 158.0.1 followed on 20 October 2026; the second release replaced the OneCRL certificate block list, so that compromised intermediate certificates stay blocked even where Remote Settings is disabled by policy or unreachable from the user's network, and it carried further security fixes published as advisory MFSA 2026-111.\n\nThe earlier milestones of the project — the years of the first public builds and the successive renamings — are not stated on the pages read during this phase. They are therefore left out rather than recalled from memory.",
+    "rendering_engine_and_technical_architecture": "The rendering engine of Firefox is Gecko. Mozilla's engine documentation presents Gecko as the part of the platform that parses and lays out HTML and CSS, executes script, and provides the surrounding machinery: network code through necko and NSS, the DOM with its WebIDL bindings, the style system, layout, graphics and inter-process communication. JavaScript itself runs in SpiderMonkey, a distinct component with its own documentation, and internal services are reached through XPCOM.\n\nGecko is not a synonym for Firefox. The browser is the application Mozilla assembles around the engine, adding its own user interface, settings, update service, account integration and extension support. Mozilla also documents Fission, an isolation design introduced in 2021 in which pages from different sites are placed in different processes, as part of the platform's security architecture.\n\nOn iOS the engine cannot be chosen freely: Apple's App Store Review Guidelines, section 2.5.6, require applications that browse the web to use WebKit and WebKit's JavaScript engine, with an entitlement that allows an alternative engine only in the European Union and Japan. Firefox for iOS is therefore a WebKit-based build rather than a Gecko build, and this entry does not claim otherwise.",
+    "interface_and_documented_features": "Firefox ships a desktop interface with tabs, a combined address and search bar, bookmarks, a download manager, a password manager, a built-in PDF viewer with editing, and a configurable new tab page; the Privacy Notice refers to these features directly when it explains which data stays on the device. The protections panel, opened as about:protections, reports what the browser blocked for the current site.\n\nThe release notes for 158.0 list the changes of that version: a Smart Window feature that fills in forms and is rolled out progressively, PDF output with accessibility tagging, support for JPEG XL images, a wallpaper library, translation support for Albanian, Belarusian and Filipino, and non-pixel-rounded scrolling. Version 158.0.1 then fixed a page that scrolled back to the top while text was selected, a crash on Windows when printing with a screen reader running, window placement on multi-monitor Linux setups, a case where files dragged from other applications were not dropped on the page on macOS, and a failure that prevented the built-in VPN feature from starting for some users.\n\nFeature availability varies by platform. Smart Window is described as a progressive rollout, the built-in VPN requires a Mozilla account signed in on the browser, and the iOS build does not share the engine of the desktop builds; none of these behaviours is generalised to every platform here.",
+    "installation_and_distribution": "Mozilla publishes installers on its download pages for Windows 64-bit, Windows ARM64/AArch64, Windows 32-bit in both stub and MSI form, macOS, Linux 64-bit and Linux ARM64/AArch64. The same pages document an APT repository for Debian and Ubuntu based distributions, and link the Android build on Google Play and the iOS build on the App Store. The channel page offers Beta, Developer Edition and Nightly builds through the same download service.\n\nFor machines the Release channel no longer supports, Mozilla points users to the Extended Support Release: the download page states that the current Firefox is no longer supported on Windows 8.1 and below and on macOS 10.14 and below, and offers an ESR installer in place of the regular one. Distribution through GNU/Linux distribution repositories exists as well, but Mozilla warns on its system requirements page that distributors may ship packages with different requirements, so a distribution package is not evidence of Mozilla's own support statement.",
+    "platforms_and_hardware_architectures": "Mozilla publishes system requirements for the version it currently serves. On Windows the stated minimum is Windows 10 or later, on both 32-bit and 64-bit builds. On macOS the minimum is macOS 10.15 or later, on a Mac with an Intel x86 processor or Apple silicon. On GNU/Linux the browser will not start without glibc 2.17 or higher (2.28 or higher on arm64), GTK+ 3.14 or higher, libglib 2.42 or higher, libstdc++ 4.8.1 or higher (6.0 or higher on arm64) and X.Org 1.0 or higher, with X.Org 1.7 recommended.\n\nRecommended hardware on Windows is a processor or system on a chip at 1 gigahertz or faster, 1 GB of RAM, or 2 GB for the 64-bit build, and 500 MB of disk space. On macOS Mozilla recommends 512 MB of RAM and 200 MB of disk space. The optional components listed for GNU/Linux — DBus 1.0, NetworkManager 0.7 and PulseAudio — are recommended for full functionality rather than required to start the browser.\n\nThe system requirements page covers desktop platforms only. Minimum Android and iOS versions are not stated on it, so no version number is claimed for the mobile builds in this entry.",
+    "extensions_and_add_on_store": "Extensions and themes for Firefox are distributed through addons.mozilla.org, the add-ons site Mozilla operates. That site describes extensions as additions that give the browser new capabilities and lists them by category, alongside themes, which change the appearance of the browser rather than its behaviour.\n\nOn the developer side, the extension platform is WebExtensions: Microsoft's Edge documentation, in the table it keeps of browser extension documentation, records Firefox as not Chromium-based and points readers to Mozilla's WebExtensions documentation on MDN, which is the documented reference for the manifest format and the extension APIs. Extensions are therefore not interchangeable with Chromium extensions without modification, in contrast with the browsers that share the Chromium extension APIs.\n\nThe add-ons site is the catalogue Mozilla documents; this phase did not verify any other supported installation path for extensions, so none is described.",
+    "privacy_and_security_model": "Mozilla documents three levels of Enhanced Tracking Protection: Standard, Strict and Custom. Standard is the default and blocks trackers using the Disconnect list, covering social trackers, cross-site cookies, fingerprinters, cryptominers and tracking content; Total Cookie Protection is on by default in that mode. Strict adds Bounce Tracking Protection, which clears the state a site stores when it redirects a visitor on to another site. The protections panel reports what was blocked per site.\n\nOther documented protections are structural. Fission keeps pages from different sites in separate processes. OneCRL maintains a block list of revoked intermediate certificates, distributed through Remote Settings, which is why the 158.0.1 release shipped a refreshed copy of that list in the application itself. Mozilla also publishes security advisories for each release, and the 158.0 and 158.0.1 notes both point to advisories rather than to individual fixes.\n\nThe Firefox Privacy Notice, effective 4 May 2026, states how data is handled by these features. Features such as page translation and alt-text suggestions in PDFs run local models on the device and, per the notice, page content, PDFs, images and tab URLs stay on the device unless the user consents otherwise. The VPN feature available to signed-in users proxies Firefox traffic through an intermediary, does not cover other applications on the device, and, in Mozilla's wording, does not by itself make browsing fully anonymous.",
+    "update_channels_and_release_cadence": "Mozilla documents several channels. The Release channel carries the current stable version, 158.0.1 at the time of writing. Beta is described as the most stable pre-release build, Developer Edition is presented as a build aimed at developers, and Nightly updates approximately once or twice a day and is described as an unstable testing platform. Release notes are published per version.\n\nThe Extended Support Release follows a different rule. Mozilla's support article on the ESR cycle states that an ESR line is maintained for more than a year, that successive ESR lines overlap for at least 12 weeks so that organisations can migrate, and that ESR point releases carry only high-impact security fixes rather than new features. The 158.0.1 release illustrates the same servicing model on the Release channel: a security-driven point release one week after 158.0.\n\nThe number of weeks between two major Release versions is not stated on the pages read during this phase. It is therefore not given here, even though the ESR article fixes the length of the ESR windows.",
+    "licensing_and_governance": "Mozilla is the custodian of the Mozilla Public License and states on its licensing page that most of its software projects use the MPL, while some use different terms, and that the licence headers attached to each file are the authoritative record for existing code. MPL 2.0 itself is a file-level copyleft licence: modifications to covered files must stay under the MPL when they are distributed, larger works may be distributed under other terms, and the licence can be combined with the GNU GPL, LGPL and AGPL as secondary licences.\n\nThe licensing page does not name Firefox individually, and this phase did not inspect the licence headers of the Firefox source tree. The licence recorded in this entry's metadata follows Mozilla's policy statement, not a file-by-file check, and that distinction is deliberate.\n\nGovernance follows the same publisher model: Mozilla operates the download service, the add-ons site, the release notes and the security advisory feed, and the privacy notice names Mozilla as the party that processes the data described there.",
+    "limitations_and_scope": "The published system requirements bound the browser to Windows 10 or later and macOS 10.15 or later; machines below those versions are directed to the Extended Support Release, and Mozilla states that the current release is no longer supported there. GNU/Linux support depends on system libraries and may differ when a distribution packages the browser itself.\n\nMobile coverage is narrower in documentation than on the desktop: the system requirements page says nothing about Android or iOS minima, and the iOS build runs on WebKit because of Apple's guideline, so its engine differs from the desktop build. Extensions are distributed through the add-ons site Mozilla operates, and this phase verified no other installation route. Tightening privacy settings changes behaviour: Strict mode adds Bounce Tracking Protection and can break sites that depend on the state such redirects leave behind, which is why the modes are selectable rather than fixed.",
+    "who_is_it_for": "Readers who want a browser whose engine, update channels and privacy controls are documented by a single non-advertising publisher, and organisations that need a slower, security-only servicing line through the Extended Support Release, are the audience the documentation addresses.",
+    "who_is_it_not_for": "It is not a suitable answer for machines below Windows 10 or macOS 10.15 unless the Extended Support Release is acceptable, nor for iOS users who expect the desktop rendering engine, since Apple requires WebKit there.",
+    "verdict": "Firefox is best described by the artefacts Mozilla publishes: Gecko as the rendering engine, SpiderMonkey for JavaScript, four desktop and mobile distribution routes, an add-ons catalogue Mozilla operates, and two servicing lines whose windows are stated in Mozilla's own documents. Claims about speed or privacy leadership are publisher statements and are not repeated here."
+  },
+  "links": {
+    "homepage": "https://www.firefox.com/en-US/",
+    "downloads": "https://www.firefox.com/en-US/channel/desktop/",
+    "release_notes": "https://www.firefox.com/en-US/firefox/158.0.1/releasenotes/",
+    "documentation": "https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop",
+    "add_ons": "https://addons.mozilla.org/en-US/firefox/",
+    "privacy_notice": "https://www.mozilla.org/en-US/privacy/firefox/"
+  },
+  "sources": [
+    {
+      "title": "Firefox 158.0.1 Release Notes",
+      "url": "https://www.firefox.com/en-US/firefox/158.0.1/releasenotes/",
+      "type": "official_release_notes",
+      "publisher": "Mozilla",
+      "date": "2026-10-20",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Firefox 158.0 Release Notes",
+      "url": "https://www.firefox.com/en-US/firefox/158.0/releasenotes/",
+      "type": "official_release_notes",
+      "publisher": "Mozilla",
+      "date": "2026-10-13",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Firefox System Requirements (158.0.1)",
+      "url": "https://www.firefox.com/en-US/firefox/158.0.1/system-requirements/",
+      "type": "official_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Download and test future releases of Firefox (Beta, Developer Edition, Nightly)",
+      "url": "https://www.firefox.com/en-US/channel/desktop/",
+      "type": "official_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Firefox ESR release cycle",
+      "url": "https://support.mozilla.org/en-US/kb/firefox-esr-release-cycle",
+      "type": "official_documentation",
+      "publisher": "Mozilla Support",
+      "date": "2026-08-17",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Enhanced Tracking Protection in Firefox for desktop",
+      "url": "https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop",
+      "type": "official_documentation",
+      "publisher": "Mozilla Support",
+      "date": "2026-09-24",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Gecko overview (Firefox Source Docs)",
+      "url": "https://firefox-source-docs.mozilla.org/overview/gecko.html",
+      "type": "official_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Firefox Privacy Notice",
+      "url": "https://www.mozilla.org/en-US/privacy/firefox/",
+      "type": "privacy_policy",
+      "publisher": "Mozilla",
+      "date": "2026-05-04",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Mozilla Public License (licensing overview)",
+      "url": "https://www.mozilla.org/en-US/MPL/",
+      "type": "official_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Mozilla Public License, version 2.0 (text)",
+      "url": "https://www.mozilla.org/en-US/MPL/2.0/",
+      "type": "official_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "Add-ons for Firefox",
+      "url": "https://addons.mozilla.org/en-US/firefox/",
+      "type": "official_site",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-24"
+    },
+    {
+      "title": "App Store Review Guidelines (section 2.5.6, browser engines)",
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "type": "official_documentation",
+      "publisher": "Apple",
+      "accessed": "2026-10-24"
+    }
+  ]
+}

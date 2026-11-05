@@ -1,0 +1,166 @@
+{
+  "id": "metager",
+  "name": "MetaGer",
+  "type": "application",
+  "summary": "Nonprofit German metasearch service operated by SUMA-EV, combining third-party indexes with small proprietary ones, transparent re-ranking, key-funded ad-free access, anonymous-use mechanisms, Android applications and OpenSearch or widget integration.",
+  "tags": [
+    "search engine",
+    "metasearch",
+    "web",
+    "privacy",
+    "nonprofit",
+    "suma-ev",
+    "open source",
+    "anonymous proxy",
+    "tokens",
+    "android",
+    "opensearch"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android"
+  ],
+  "license": "GNU Affero General Public License v3 for MetaGer's own code unless otherwise indicated; hosted-service terms apply separately",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "MetaGer is a metasearch service developed and operated by SUMA-EV, a nonprofit association based in Hannover. It combines results from several external search indexes with what its transparency statement calls small indexes of its own, then evaluates and orders the combined results using its own criteria. The current service is organised around a randomly generated MetaGer key and prepaid tokens rather than a conventional named account; the landing page presents ad-free search and anonymous browsing after credit is added. Web access is complemented by an Android application, browser extensions, OpenSearch setup and a website widget. MetaGer's source code is public under GNU AGPL v3 for its own code unless otherwise indicated, but that licence does not make third-party indexes or the hosted service's payment terms open-source products. This entry distinguishes upstream results, MetaGer's own smaller sources, the hosted service and optional privacy mechanisms.",
+    "origin_and_history": "MetaGer's official timeline attributes the idea to German engineer Dr. Wolfgang Sander-Beuermann at CeBIT in March 1996 and dates the first launch to the end of that year as a research project involving the University of Hannover and the regional computing centre of Lower Saxony. On 1 October 2012, sponsorship transferred to SUMA-EV while cooperation with the university continued. An English interface arrived on 29 August 2013, Tor access in December 2013 and the ‘Open Anonymously’ proxy in March 2014. The source code was released under GNU AGPL on 16 August 2016. Ad-free key-based search was introduced for SUMA-EV members in December 2017 and expanded to everyone on 26 April 2023, alongside more source choices and anonymous tokens. These milestones explain the current model; they do not show that MetaGer was always advertisement-free or always used its present set of upstream indexes.",
+    "rendering_engine_and_technical_architecture": "MetaGer's transparency statement explains that a metasearch engine uses other engines' indexes rather than maintaining one comprehensive crawler-built index, while MetaGer is not a ‘pure’ metasearch engine because it also uses small proprietary indexes. Its source overview currently lists Mojeek, Brave, Serper using Google, and Staan for Web; additional profiles cover Images, News, Products and Science, including Pixabay, TootNews, BASE and TUBdok. TootNews is identified as maintained by SUMA-EV. The page warns that the overview is not constantly updated and all information is without guarantee, so it is not a live routing table for every query. For aggregation, MetaGer weighs source rankings and converts them to scores, adds or subtracts points for query terms in URLs and snippets and excessive special characters, and applies a blocking list. Thus upstream ranking, MetaGer re-ranking and any small proprietary index are distinct layers.",
+    "interface_and_documented_features": "The main interface documents Web, Images and News foci, with filters that vary by focus and optional settings for enabling or disabling particular search engines. Users can maintain a personal domain blacklist, hide a result domain, start a new search on that domain, toggle dark mode and choose whether results open in a new tab. Quotation marks enforce individual words or exact multi-word phrases, a leading minus excludes terms, `-url:` excludes matching text in result links, and `site:` restricts results to a domain. MetaGer also supports a limited form of `!bang`: a supported bang creates a Quicktip requiring an additional click rather than immediately redirecting. The guide says only the bang, not the full query, is sent to DuckDuckGo for this mechanism. Search suggestions are disabled by default; provider choice and delay are configurable, and provider-dependent costs can differ. The source overview also catalogs product and science sources beyond the three main foci.",
+    "installation_and_distribution": "MetaGer's hosted Web service does not require a local search installation. The current landing flow generates a key without requesting a name or email address, and a one-time payment adds token credit that activates the advertised features. The same key can be used on multiple devices or shared, while the terms distinguish transfer of a key from transfer of individual purchased tokens. Browser setup is available through the plugin page and OpenSearch-compatible configuration; extensions can preserve settings when browser data is cleared and enable anonymous tokens. The application page currently advertises only an Android MetaGer app, distributed through F-Droid and Google Play as well as manual and Obtainium installation routes. A separate MetaGer Maps Android app integrates the OpenStreetMap-based map service. These clients access the hosted system; they are not independent offline indexes, and no native iOS app is advertised on that page.",
+    "platforms_and_hardware_architectures": "MetaGer's documented end-user platforms are the Web and Android, with Chrome and Firefox extensions providing additional browser integration. No processor, memory or storage requirement applies to ordinary hosted searching, and the Android packages do not imply an offline search database. The current private-browsing feature runs on MetaGer's servers rather than requiring a local browser installation, which shifts both computational work and trust to the hosted infrastructure. Search settings can be stored in a non-personally-identifying plaintext cookie, while the extension offers an alternative storage route and supports anonymous tokens. Available engines, filters, suggestion providers and their token costs can differ by focus and configuration, so platform access does not guarantee an identical result set or price for every query. Source code availability does not remove the hosted service's dependence on external indexes, and the app page's Android-only statement is not evidence that no unrelated third-party client exists elsewhere.",
+    "extensions_and_add_on_store": "MetaGer does not document a general third-party ranking-plugin store. Its integration surfaces are browser extensions, OpenSearch, a documented browser search URL and a widget for searching either the Web or one domain from another website. The widget's own conditions forbid presenting MetaGer as the site's own service or removing the MetaGer logo. These integration routes should not be confused with a public general-purpose JSON Search API: none was established in the official pages consulted, so no response schema, API quota or developer redistribution right is asserted. Hosted use is instead metered through keys and tokens, with one token charged for a default Web search and source or suggestion choices capable of changing cost. The privacy policy also discloses that received results and the query are retained for display for a few hours. Consequently, automation must consider upstream availability, token balance and service terms rather than treating an OpenSearch URL as an unrestricted API endpoint.",
+    "privacy_and_security_model": "The privacy policy dated 30 October 2026 says IP address and user agent are not saved or shared for ordinary Web search, but the query is transmitted to search partners and received results, including the query, are kept for display for a few hours. Some preferences are stored non-personally for statistics. Optional address-bar suggestions require server-side settings associated with a temporary pseudonymised identifier derived from IP address, user agent and Accept-Language; the feature is off by default. ‘Open Anonymously’ uses a MetaGer proxy, and the current homepage additionally describes a private browser running on MetaGer servers with session deletion afterwards. Android and supported browser extensions can replace the repeatedly sent key with locally generated one-time anonymous tokens using blind RSA signatures; the project presents this as provable unlinkability, not independently re-audited here. Self-hosted GlitchTip error reports are retained for 30 days without IP addresses, while payment, membership, contact and tax records have separate processing and retention rules.",
+    "update_channels_and_release_cadence": "MetaGer publishes no consumer search version number or fixed release cadence in the sources consulted. Its timeline records product milestones, while the public repository exposes ongoing development rather than a single version shared by the website, applications and upstream providers. The privacy policy supplies a precise revision date, 2026-10-30, and the token terms say August 2026; those dates apply to documents, not to the ranking system. The search-source overview expressly disclaims continuous updating, making it unsuitable as a permanent inventory or as proof that every named provider participates in every search. The 26 April 2023 expansion of key-based access and anonymous tokens is a dated product change, not the birth of MetaGer itself. Application, extension and server-side private-browsing features can evolve on separate schedules. The verification date in this entry therefore records research performed on 2026-11-05, not a MetaGer software release or an upstream-index snapshot guaranteed afterwards.",
+    "licensing_and_governance": "SUMA-EV, Association for Free Access to Knowledge, operates MetaGer and related services. The token terms identify its Hannover registration as VR200033 at Amtsgericht Hannover and apply German law to consumer token-purchase relationships. The English page is expressly a translation; the German terms are legally binding and German is the contract language. Purchased tokens are valid for two calendar years, and unused credit can be refunded within 30 days where the payment method supports it, excluding cash transactions. Use beyond the usual household scope must be reported to MetaGer. The repository's German README, translated for this entry, puts MetaGer's own code under GNU AGPL v3 unless otherwise indicated and points to a separate list of third-party licences. It also says external changes are not yet being accepted, although tickets are welcome. Current funding comes from token purchases, memberships and donations rather than third-party search advertising; most token revenue is said to flow to queried search services, with personnel, infrastructure, payment fees and taxes also covered.",
+    "limitations_and_scope": "The source catalogue is explicitly not continuously updated, and neither it nor the transparency page quantifies the small proprietary indexes or proves which sources answered a particular query. MetaGer's re-ranking criteria are public at a high level, but upstream coverage, failures, provider terms and result quality remain external dependencies. ‘No logging’ on the landing page must be read with query transmission, temporary display retention, optional suggestions, error reports and payment or membership records; it is not a zero-data guarantee. Anonymous tokens reduce repeated-key linkability according to the project's cryptographic description, but their implementation, proxy, server-side browser and infrastructure were not independently audited here. Payment anonymity also depends on the chosen method. External bang destinations and opened websites have their own policies. The homepage says no advertising, while settings separately mention optional subtle promotion of MetaGer's own services. Finally, no public general JSON API or unlimited free usage is inferred from OpenSearch, widget or source-code availability.",
+    "who_is_it_for": "MetaGer suits users who value a nonprofit operator, a public explanation of metasearch aggregation and the ability to inspect or disable particular sources. Its phrase, exclusion, URL and site operators, blacklist and per-engine controls support deliberate research without requiring a locally maintained crawler. People willing to prepay small token packages can use the current ad-free model and choose sources with an understanding that selection can affect cost. Android users and supported browser-extension users can additionally adopt anonymous tokens rather than sending the same key with every search. The proxy and server-side private browser are relevant to people who want an extra separation from destination sites while accepting trust in MetaGer. Organisations interested in auditable source code, OpenSearch integration or a clearly branded website widget also have documented routes, and supporters can contribute through SUMA-EV membership or donations.",
+    "who_is_it_not_for": "MetaGer is not for users seeking unlimited free searches under the current landing model, because token credit activates the advertised service and different source choices can consume different amounts. It does not satisfy a requirement for one wholly independent MetaGer-owned index, nor for searches whose queries never leave the operator for upstream partners. Those unwilling to trust a proxy or server-side private browser should open results directly and assess the remaining upstream disclosures separately. Developers needing a documented public JSON Search API, unrestricted automated access or fixed response quotas should not substitute OpenSearch or widget endpoints. Users requiring a native iOS application will not find one advertised on the official app page. The service is also unsuitable where two-year token expiry, German consumer terms, possible payment records, changing upstream sources or independently unverified privacy cryptography are unacceptable.",
+    "verdict": "MetaGer is a nonprofit, source-transparent metasearch service with limited proprietary indexes and its own re-ranking layer, not a federation in which every listed index belongs to SUMA-EV. Its strongest documented characteristics are per-engine controls, established search operators, public code and a key model that avoids a conventional identity account. The current token system funds ad-free search and can be combined with locally generated anonymous tokens, but it introduces cost, expiry and payment considerations. Privacy needs the detailed 2026-10-30 policy rather than the ‘no logging’ slogan alone: queries go to partners, display data is retained briefly, and optional or administrative contexts have separate records. MetaGer is therefore a strong candidate for users who value nonprofit governance and configurable aggregation while accepting paid usage, external index dependencies and privacy mechanisms whose guarantees were documented but not independently tested in this phase."
+  },
+  "links": {
+    "homepage": "https://metager.org/",
+    "about": "https://metager.org/about",
+    "transparency": "https://metager.org/transparency",
+    "search_sources": "https://metager.org/search-engine",
+    "main_help": "https://metager.org/hilfe/hauptseiten",
+    "search_functions": "https://metager.org/hilfe/funktionen",
+    "search_tips": "https://metager.org/tips",
+    "android_apps": "https://metager.org/app",
+    "browser_plugin": "https://metager.org/plugin",
+    "website_widget": "https://metager.org/widget",
+    "privacy_policy": "https://metager.org/datenschutz",
+    "anonymous_tokens": "https://metager.org/hilfe/anonyme-token",
+    "prices": "https://metager.org/preise",
+    "token_terms": "https://metager.org/agb",
+    "source_repository": "https://gitlab.metager.de/open-source/MetaGer"
+  },
+  "sources": [
+    {
+      "title": "MetaGer homepage - current key and token model, ad-free search, server-side private browsing, clients and nonprofit funding",
+      "url": "https://metager.org/",
+      "type": "official_product_page",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "About MetaGer - SUMA-EV and dated milestones from the 1996 idea through open source, proxy access and the 2023 key expansion",
+      "url": "https://metager.org/about",
+      "type": "official_company_page",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer transparency statement - metasearch, small proprietary indexes, source-rank weighting, scoring, blocking and anonymous access",
+      "url": "https://metager.org/transparency",
+      "type": "transparency_report",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "About MetaGer's search engines - Web, Images, News, Products and Science source profiles with an explicit update disclaimer",
+      "url": "https://metager.org/search-engine",
+      "type": "official_documentation",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer main-page help - search foci, filters, engine selection, blacklist, suggestions, settings and anonymous opening",
+      "url": "https://metager.org/hilfe/hauptseiten",
+      "type": "official_documentation",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer search functions - exclusions, URL filters, quoted words and phrases, limited bangs and browser search URL",
+      "url": "https://metager.org/hilfe/funktionen",
+      "type": "official_documentation",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+      {
+      "title": "MetaGer hints - site operator, result origins and interface controls; mixed-age page not used for current retention or advertising claims",
+      "url": "https://metager.org/tips",
+      "type": "official_documentation",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer Apps - Android MetaGer and Maps applications with store, manual and Obtainium distribution routes",
+      "url": "https://metager.org/app",
+      "type": "official_documentation",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer browser plugin - default-search and start-page configuration for supported browsers",
+      "url": "https://metager.org/plugin",
+      "type": "official_documentation",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer Widget - Web or single-domain website integration and attribution conditions",
+      "url": "https://metager.org/widget",
+      "type": "official_documentation",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer Privacy Policy dated 2026-10-30 - search transfers, temporary display retention, suggestions, proxy, errors, payments and rights",
+      "url": "https://metager.org/datenschutz",
+      "type": "legal_document",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Anonymous tokens - locally generated one-time passwords, blind RSA signatures and key separation in apps and browser extensions",
+      "url": "https://metager.org/hilfe/anonyme-token",
+      "type": "official_documentation",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer prices - token charging, packages, two-year validity, source-dependent costs, revenue allocation and payment methods",
+      "url": "https://metager.org/preise",
+      "type": "official_product_page",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "General Terms for Token Top-Up dated August 2026 - publisher's English translation, German controlling text, refunds, validity and liability",
+      "url": "https://metager.org/agb",
+      "type": "legal_document",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MetaGer source repository and German README - GNU AGPL v3 and contribution statement rendered here in English translation",
+      "url": "https://gitlab.metager.de/open-source/MetaGer",
+      "type": "official_source_repository",
+      "publisher": "SUMA-EV",
+      "accessed": "2026-11-05"
+    }
+  ]
+}
