@@ -1,0 +1,139 @@
+{
+  "id": "firefox-focus",
+  "name": "Firefox Focus",
+  "type": "application",
+  "summary": "Mozilla's minimal privacy-first mobile browser for Android and iOS that blocks advertising and social trackers by default and erases history, passwords and cookies on demand or on exit; it is a separate product from Firefox for desktop and from Firefox for Android, with no extension system and no desktop build.",
+  "tags": [
+    "browser",
+    "web",
+    "mozilla",
+    "privacy",
+    "tracker-blocking",
+    "mobile",
+    "android",
+    "ios",
+    "ipados",
+    "open source",
+    "mpl",
+    "ad-blocking"
+  ],
+  "status": "active",
+  "platforms": [
+    "Android",
+    "iOS",
+    "iPadOS"
+  ],
+  "license": "Mozilla Public License 2.0",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "Firefox Focus is Mozilla's privacy-first mobile browser: a small application for Android and iOS whose defining behaviour is that it keeps nothing. It opens on a search field rather than a start page, blocks trackers and advertising trackers by default, and erases history, passwords, cookies and other session data either on demand or when the app closes. Mozilla markets it as \"simply private mobile browsing\" and as a companion to a main browser rather than a replacement for one. Two clarifications matter before anything else. Firefox Focus is not Firefox for desktop and not Firefox for Android: it is a separate product with its own interface, its own feature set and its own stores, and it deliberately omits features that those browsers have. It is also not the same product it was when it launched in 2015, when it was a content blocker that plugged into Safari rather than a browser that rendered pages itself; the current application is the later form of that project.",
+    "origin_and_history": "Focus started as an iOS content blocker. Mozilla announced \"Focus by Firefox\" on 8 December 2015 as a free content blocker for Safari users on iOS 9, able to block categories of trackers used for advertising, analytics and social media, and able to reduce page weight by blocking web fonts. It used a blocklist supplied by Disconnect, and Mozilla stressed at the time that the product was free and not monetised in other ways. A constraint of the period shaped the product: content blocking worked with Safari but not with Firefox for iOS, because Apple did not make content blocking available to third-party browsers, and Mozilla said so explicitly. By June 2017, when the Android version launched, Mozilla described Focus as \"a new browser for the iPhone and iPad\" introduced the previous year, which marks the shift from a blocker attached to another browser to a standalone browser. The Android launch on 20 June 2017 added an ad-tracker counter, a switch to disable the tracker blocker per site, a notification reminder that the app was still running, and support for being set as the default browser, including custom tabs. Later work moved both code bases into Mozilla's shared mobile repositories.",
+    "rendering_engine_and_technical_architecture": "The pages consulted do not name the rendering engine of either build, and this entry therefore does not state one. What the developer documentation does establish is the shape of the Android project: the archived repository builds with Gradle and defines separate variants for ARM, x86 and ARM64, and its development workflow refers to Mozilla's Android Components and Application Services projects, which is consistent with a browser assembled from Mozilla's shared mobile stack rather than from a platform web view alone. The iOS application is written in Swift and is distributed through the App Store, which on that platform means the rendering layer comes from the system rather than being shipped by Mozilla. Both repositories are archived rather than deleted: the Android project's description says development continued in the Firefox for Android repository, and that repository's own description now says the work is maintained as part of Mozilla Central, while the iOS project points to the Firefox for iOS repository. Architecture questions beyond that — process model, sandboxing, engine version — are not documented on the pages consulted.",
+    "interface_and_documented_features": "The interface is deliberately minimal, and the documented features are correspondingly few. The app opens directly on a search and address field with the keyboard raised; there is no start page listing recent history or frequently visited sites. An erase button clears history, passwords and cookies, and the store listings describe the same action as one tap to delete everything. Up to four shortcuts can be pinned to the home screen for quick access. Trackers are blocked by default, covering advertising and social trackers, and the blocker can be turned off for individual sites that break. On Android the documentation adds an ad-tracker counter per site, the ability to open a page in Firefox for Android or in another browser, and settings under Privacy and Security that toggle each protection individually. Mozilla's support material also states that total cookie protection, which blocks cross-site cookies, is enabled by default. Features do not map one to one between platforms: multiple private tabs are documented for Android, while the iOS listing still presents Focus as a browser with no tabs, and the site-specific blocker switch and the tracker counter are documented on the Android side only.",
+    "installation_and_distribution": "Distribution is entirely through mobile stores and direct artefacts. On Android the app is on Google Play as Firefox Focus worldwide and as Firefox Klar in Germany, Austria and Switzerland, and the project publishes APKs through its GitHub releases page. A pre-release channel exists as a separate Play listing reached by joining a Google Group and opting in. On iOS the app is on the App Store as Firefox Focus: Privacy browser. No desktop build, no Linux package and no browser extension version of Focus are offered on any page consulted; the product page links only to the two mobile stores. Store metadata gives a sense of scale without documenting requirements: Google Play reports more than ten million downloads and an update dated 22 October 2026, while the App Store listing reports a 103.4 MB download, an age rating of 16+ and availability in English plus 82 further localisations. Minimum operating system versions for either platform could not be established from the pages consulted and are not asserted here.",
+    "platforms_and_hardware_architectures": "The established platforms are Android, iOS and iPadOS, and nothing else. The product page offers exactly two download destinations, the Android project documents ARM, x86 and ARM64 build variants, and the iOS listing states support for iPhone and iPad. Because Focus for Android is built from Mozilla's shared mobile codebase, its platform floor is set by that codebase rather than by the app's own release notes, and no page consulted states a minimum Android version. The same gap exists on iOS. Two consequences follow and are worth stating separately. First, the absence of a desktop version is a documented absence, not an oversight of this entry: Focus is positioned by Mozilla as a mobile companion, and Firefox for desktop is a different product. Second, the two mobile platforms are not feature-identical — tabs, the tracker counter and the per-site blocker switch are documented for Android and not for iOS — so a user switching platforms should expect a different feature surface rather than the same app with a different store.",
+    "extensions_and_add_on_store": "Focus has no extension system. No page consulted describes an extension store, an add-on catalogue or a supported extension list for either platform, and the absence is consistent with the product design: the app exists to do a small number of things without configuration. Where extensions do appear in the documentation, it is in the other direction. The product traces its blocking lists to a third-party blocklist provider used at launch, and the Android project is built on shared Mozilla components that other Mozilla browsers extend in ways Focus does not. On iOS the historical role is inverted: between 2015 and the shift to a standalone browser, Focus was itself a content-blocking extension for Safari, which is why the launch announcement spends its time explaining what Safari would and would not allow. A user who needs extensions, userscripts or per-site configuration beyond a single blocker switch should read that as a hard limit of the product rather than as a missing feature that a later release is expected to add.",
+    "privacy_and_security_model": "The privacy model is subtraction: keep no state, and the state cannot be leaked. Focus has no persistent session to protect — history, passwords, cookies and other browsing data are erased on request and, in the default configuration, when the app is closed — and blocking happens before requests leave the device rather than after. Tracking protection is on by default, including social trackers, and cookie protection that blocks cross-site cookies is documented as enabled by default. Google Play's data-safety section, as declared by the developer, states that no data is shared with third parties, that the app may collect app activity and app performance information, that data is encrypted in transit and that users can request deletion; that is a store declaration, not an audit result, and it should be read as such. Mozilla describes the product as backed by a non-profit and as not selling user data, which is a corporate commitment rather than a technical guarantee. No independent security audit of Focus, no published incident history and no bug bounty documentation were located in the pages consulted. Blocking also has a cost that the documentation acknowledges: some sites break, which is why the per-site switch exists.",
+    "update_channels_and_release_cadence": "Updates reach users through the stores: Google Play for the stable Android builds, the separate Play listing for the pre-release Android channel, and the App Store for iOS. The Android project also publishes signed APKs and describes Nightly, Beta and Release variants being published to Google Play, so the release train is Mozilla's rather than a store-specific fork. No release schedule, version history page or cadence commitment is published on the pages consulted, and no current version number could be established from a primary source; the store listings show that the Android app was updated on 22 October 2026, which indicates active maintenance without implying an interval. Because both codebases were folded into larger Mozilla mobile repositories, release notes for Focus are no longer published on the original repository pages, and this entry does not attempt to reconstruct them from third-party trackers.",
+    "licensing_and_governance": "Focus is free software under the Mozilla Public License 2.0. Both archived repositories carry MPL-2.0 in their licensing metadata, and the Android project's README reproduces the standard MPL 2.0 notice. The licence covers the source code, which is public; the applications as distributed through the stores are Mozilla's builds of it, and the trademarks remain Mozilla's. Governance is centralised inside Mozilla: the product is developed by Mozilla staff and contributors in Mozilla-owned repositories, the roadmap is not set by an elected body, and the move of both codebases into shared mobile repositories — and then, for Android, into Mozilla Central — makes Focus a component of Mozilla's mobile platform rather than an independent project. Community participation is documented through contribution guides and issue trackers rather than through a foundation charter. The product's stated independence from advertising revenue is a business commitment made by Mozilla, not a licensing term.",
+    "limitations_and_scope": "Several limits are documented, and a few are simply not documented anywhere this entry could reach. Documented limits: there is no desktop version; there is no extension system; the iOS build has no tab support, while the Android build does; blocker behaviour occasionally breaks sites and must be disabled per site; and the minimal interface means there is no persistent history, bookmark library or account-based data store to fall back on. Undocumented, and therefore unverified: the rendering engine of either platform, the minimum Android and iOS versions, the current version number and the release cadence. One structural caveat belongs here rather than in a footnote: Focus protects a session, not an identity. It blocks trackers while the app is open with the protections enabled, but it does not conceal the IP address, does not prevent a site from recognising a returning device through other signals, and does not replace a VPN or a hardened desktop browser. Mozilla's own support pages describe the blocker as targeting advertising trackers specifically, which is narrower than \"blocks all tracking\".",
+    "who_is_it_for": "It suits people who want a second, disposable browser for searches and links they would rather not leave in a main browser: a phone used for quick lookups, a device shared with others, a session on a site that does not need to remember anything. It suits users on older or low-end Android hardware who value a small, fast app over a full browser, and users who want tracking protection on by default without configuring anything. It also suits anyone who wants the behaviour of private browsing as the only mode rather than as a toggle they must remember to switch on.",
+    "who_is_it_not_for": "It is not for anyone who wants one browser for everything: no desktop build exists, and there is no extension system, no tabbed workflow on iOS and no persistent history or bookmarks to build a library on. It is not a substitute for Firefox for desktop or Firefox for Android, which are different products with different feature sets. It is not an anonymity tool: it does not hide the IP address, and its protection is aimed at advertising trackers. Users who need per-site configuration, password reuse across sessions, extension-based workflows or documented release engineering will find it intentionally insufficient rather than merely limited.",
+    "verdict": "Firefox Focus does one thing and refuses to grow out of it: it gives a mobile session with trackers blocked and nothing retained. The design is coherent, the code is MPL-2.0 and public, and the product has been maintained for a decade, with store updates continuing into October 2026. The honest reading of its limits is that they are the product: no extensions, no tabs on iOS, no desktop counterpart, and a feature set that has been allowed to differ between platforms rather than levelled. Its privacy claims are Mozilla's own and the store data-safety entries are developer declarations, not audits; both should be treated as such. As a companion browser for short private sessions it is a good fit, and as a primary browser it is deliberately not one."
+  },
+  "links": {
+    "homepage": "https://www.firefox.com/en-US/mobile/focus/",
+    "google_play": "https://play.google.com/store/apps/details?id=org.mozilla.focus",
+    "google_play_klar": "https://play.google.com/store/apps/details?id=org.mozilla.klar",
+    "app_store": "https://apps.apple.com/us/app/firefox-focus-privacy-browser/id1055677337",
+    "support_android": "https://support.mozilla.org/en-US/kb/what-firefox-focus-android",
+    "source_android": "https://github.com/mozilla-mobile/focus-android",
+    "source_ios": "https://github.com/mozilla-mobile/focus-ios"
+  },
+  "sources": [
+    {
+      "title": "Firefox Focus — product page: private mobile browsing, default tracking protection, one-button erase, four shortcuts, store links",
+      "url": "https://www.firefox.com/en-US/mobile/focus/",
+      "type": "official_site",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Announcing Focus by Firefox, a Content Blocker for iOS — launch on 8 December 2015, Disconnect blocklist, Safari-only limitation",
+      "url": "https://blog.mozilla.org/press/2015/12/announcing-focus-by-firefox-a-content-blocker-for-ios/",
+      "type": "official_blog",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Firefox Focus – Content Blocking for the Open Web — rationale, tracker categories, web-font blocking, no monetisation",
+      "url": "https://blog.mozilla.org/press/2015/12/focus-by-firefox-content-blocking-for-the-open-web/",
+      "type": "official_blog",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Firefox Focus New to Android — Android launch on 20 June 2017, tracker counter, blocker switch, notification reminder, default-browser support",
+      "url": "https://blog.mozilla.org/blogarchive/blog/2017/06/20/firefox-focus-new-to-android-blocks-annoying-ads-and-protects-your-privacy/",
+      "type": "official_blog",
+      "publisher": "Mozilla",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "What is Firefox Focus for Android? — usage, erase action (history, passwords, bookmarks, cookies), per-protection settings",
+      "url": "https://support.mozilla.org/en-US/kb/what-firefox-focus-android",
+      "type": "official_documentation",
+      "publisher": "Mozilla Support",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Get familiar with Firefox Focus — total cookie protection enabled by default, multiple private tabs on Android, Firefox Klar naming",
+      "url": "https://support.mozilla.org/en-US/kb/get-familiar-firefox-focus",
+      "type": "official_documentation",
+      "publisher": "Mozilla Support",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Firefox Focus: Privacy browser — App Store listing: iPhone and iPad, no tabs, erase button, four shortcuts, ratings, size, age rating",
+      "url": "https://apps.apple.com/us/app/firefox-focus-privacy-browser/id1055677337",
+      "type": "app_store_listing",
+      "publisher": "Apple App Store",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Firefox Focus: No Fuss Browser — Google Play listing: update date 22 October 2026, 10M+ downloads, data-safety declarations",
+      "url": "https://play.google.com/store/apps/details?id=org.mozilla.focus",
+      "type": "app_store_listing",
+      "publisher": "Google Play",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Firefox Focus for Android — README: Google Play and Klar identifiers, APK downloads, Nightly testing channel, ARM/x86/ARM64 variants, MPL 2.0 notice",
+      "url": "https://raw.githubusercontent.com/mozilla-mobile/focus-android/main/README.md",
+      "type": "source_repository",
+      "publisher": "GitHub (mozilla-mobile)",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "mozilla-mobile/focus-android repository metadata — created 2016-12-09, last push 2022-12-13, archived, Kotlin, MPL-2.0, moved to firefox-android",
+      "url": "https://api.github.com/repos/mozilla-mobile/focus-android",
+      "type": "source_repository",
+      "publisher": "GitHub (mozilla-mobile)",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "mozilla-mobile/focus-ios repository metadata — created 2015-11-09, last push 2024-03-05, archived, Swift, MPL-2.0, moved to firefox-ios",
+      "url": "https://api.github.com/repos/mozilla-mobile/focus-ios",
+      "type": "source_repository",
+      "publisher": "GitHub (mozilla-mobile)",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "mozilla-mobile/firefox-android repository metadata — archived; description states Firefox for Android, Focus for Android and Android Components are maintained in Mozilla Central",
+      "url": "https://api.github.com/repos/mozilla-mobile/firefox-android",
+      "type": "source_repository",
+      "publisher": "GitHub (mozilla-mobile)",
+      "accessed": "2026-10-29"
+    }
+  ]
+}

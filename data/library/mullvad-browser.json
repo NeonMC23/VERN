@@ -1,0 +1,100 @@
+{
+  "id": "mullvad-browser",
+  "name": "Mullvad Browser",
+  "type": "application",
+  "summary": "Privacy-focused Firefox-derived browser developed by the Tor Project for Mullvad VPN, built for fingerprinting resistance and uniformity across users, with private browsing by default, no telemetry and no DRM.",
+  "tags": [
+    "browser",
+    "web",
+    "firefox",
+    "gecko",
+    "mozilla",
+    "privacy",
+    "anti-fingerprinting",
+    "open source",
+    "mpl"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux"
+  ],
+  "license": "Mozilla Public License 2.0",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "Mullvad Browser is a privacy-focused web browser developed by the Tor Project in collaboration with Mullvad VPN, and its own documentation describes it in one sentence: a Tor Browser without the Tor Network. It uses the same anti-fingerprinting work as Tor Browser and connects to the internet directly, or through a VPN of the user's choosing, rather than through Tor. The purpose is stated as an ambition rather than a feature list: all of its users should appear as one, so that fingerprinting has nothing distinctive to single anyone out. That goal shapes every default — private browsing is the only mode, no cookies survive a session, uBlock Origin is the only content blocker because installing more would make users unique, DoH is pinned to Mullvad without fallback, telemetry is stripped at compile time, and no feature reaches the browser until it has been audited upstream. It is free of charge, open source, and usable with or without a Mullvad subscription. The browser is available for Windows, macOS and Linux, and there is no mobile edition.",
+    "origin_and_history": "The project is recent and its institutional arrangement is unusual in this library: a privacy-oriented VPN company commissioned a browser from a non-profit, and the non-profit builds it. Mullvad's own account is that the company asked the Tor Project to develop a browser designed to minimise tracking and fingerprints, because masking an IP address with a VPN does not by itself prevent browser-based identification. The public source repository was created in September 2022, and the codebase is maintained as branches and tags of the Tor Browser source. The Tor Project develops the browser, Mullvad funds and distributes it, and Mullvad states that it earns no money from the browser itself, its income coming from the VPN service. The project publishes two channels — a stable release and an alpha — and the stable line was at version 15.0.26, released on 21 October 2026, while the alpha line was at 16.0a14 at the time of consultation. Releases are signed by the Tor Browser Developers, and the tag 15.0.26 carries a verified GPG signature from a Tor Project developer.",
+    "rendering_engine_and_technical_architecture": "Mullvad Browser is a Firefox-derived browser built from Tor Browser source, and its documentation says so directly: like Tor Browser, it \"is based on Firefox\", and new Firefox features are audited and reviewed before being considered for inclusion. It therefore runs the Gecko engine and inherits Mozilla's multiprocess architecture, sandboxing and site isolation, with Tor Browser's patches layered on top minus the Tor Network components. The build differences are published as compiler options rather than prose: the crash reporter, parental controls, Encrypted Media Extensions, system policies, background tasks, the update agent and — on Windows — the default-browser agent are all disabled at compile time, bundled fonts are enabled, and proxy-bypass protection is turned on. The runtime configuration is a long list of preferences that the project publishes in full, of which the most consequential is `privacy.resistFingerprinting` set to true with letterboxing, randomised canvas extraction data, reduced timer precision and a target video resolution of 480. WebGL content cannot be read back because the `readPixel` function is disabled, OS CA certificates are discarded, speculative connections are disabled, and system administrators' Firefox policies are deliberately ignored so that the user retains control of the browser's configuration.",
+    "interface_and_documented_features": "The interface is Firefox's with Tor Browser's conventions and a security-level control. Three levels are documented. Standard enables all browser and website features. Safer disables features that are often dangerous: JavaScript is off on non-HTTPS sites, some fonts and maths symbols are disabled, and HTML5 audio and video become click-to-play. Safest allows only what static sites and basic services need, with JavaScript disabled by default, images and icons restricted and media click-to-play. A New Identity control closes all tabs and windows and clears cookies and history so that subsequent activity cannot be linked to what preceded it, with the documented caveat that it does not change the IP address, which requires switching VPN server. Letterboxing is the visible signature of the browser: the content area is padded so that window dimensions fall into common size buckets, producing the grey margins users notice. Search is DuckDuckGo by default with no search suggestions as the user types, because suggestions would leak keystrokes to the search engine before the query is submitted.",
+    "installation_and_distribution": "Distribution is vendor-operated and centralised. Downloads are served from Mullvad's own site per platform, with GitHub releases as the mirror, and each download is accompanied by a detached GPG signature and a published verification guide; the README states that Mullvad Browser is signed by the Tor Browser Developers. No account, subscription or Mullvad VPN connection is required: the browser is free for anyone. On Linux, `.deb` and `.rpm` packages are offered through Mullvad's own repositories in addition to the download page's tarball-style artefacts. The project also publishes a Firefox extension for Mullvad VPN users. Two channels are exposed: the stable release, and an alpha for early adopters which the site warns may be broken and does not carry the same privacy and security guarantees; the alpha can be installed alongside the stable version and used independently. No Microsoft Store, Mac App Store, Flathub or Snap package appears among the official options consulted, and no third-party binary is presented as official.",
+    "platforms_and_hardware_architectures": "Three desktop platforms are supported and each has a documented floor. Windows requires Windows 10 or later and is 64-bit only. macOS requires Sonoma, version 14, or later. Linux is supported on 64-bit systems, with `.deb` and `.rpm` packages for the major distribution families through Mullvad's repositories. That newness of the macOS floor is notable: unlike most browsers in this library, Mullvad Browser does not claim support for older systems, and the Windows floor excludes anything before Windows 10. The download pages consulted publish per-platform installers and their signatures but no memory, disk-space or processor instruction requirement, and no architecture matrix beyond the 64-bit-only statements. Mobile is not offered: no Android or iOS build appears on the download pages, and the project describes the browser as a desktop product for Linux, macOS and Windows. Hardware acceleration and media decoding follow the Firefox stack, with the qualification that the fingerprinting configuration restricts several hardware-exposing APIs and disables WebGL readback by design.",
+    "extensions_and_add_on_store": "Mullvad Browser installs Firefox extensions but discourages adding them, and that position is central rather than incidental. The project's argument is that installing extra privacy extensions can defeat the purpose by making a user distinguishable from the rest of the user base, so it ships exactly two: uBlock Origin and NoScript. uBlock Origin is extended beyond its defaults with the AdGuard URL Tracking Protection list, which strips tracking parameters from query strings, and EasyList Cookie, which removes cookie banners. NoScript is the engine behind the security levels and adds cross-site scripting filtering; its icon is hidden by default, as in Tor Browser, and can be restored from the toolbar customisation menu. A third component, the Mullvad Browser Extension, is a convenience layer for VPN users: it shows connection details, checks for IP, WebRTC and DNS leaks, recommends HTTPS-Only and uBlock Origin, and can route traffic through one of Mullvad's SOCKS5 proxy servers in a single click. There is no Mullvad extension store and no curated catalogue beyond these bundled components; users can reach Mozilla's add-on site, but the documented recommendation is to change as little as possible.",
+    "privacy_and_security_model": "The privacy model is anti-fingerprinting by uniformity. `privacy.resistFingerprinting` is enabled with letterboxing, randomised canvas extraction, reduced timer precision and a fixed target video resolution, so that the browser reports a UTC timezone, a common version and operating system, a disguised language and keyboard layout, disguised camera and microphone capabilities and misleading media statistics, while zoom preferences are ignored and the WebSpeech, gamepad, sensor and performance APIs are disabled. Private browsing is the default and the only documented mode, with no history, form entries, download list, cookies or cached content surviving the session, while bookmarks and extension settings persist. Third-party cookies are isolated in first-party containers during the session. Network behaviour is pinned: DoH goes to Mullvad without fallback, HTTPS-Only mode is enabled in all windows, Do Not Track is deliberately switched off as itself a fingerprinting signal, OS CA certificates are discarded. Telemetry and crash reporting are disabled at compile time and the pingsender executable is removed, and the project publishes the complete list of connections the browser makes on its own — updates, filter lists, DoH, certificates. Two protections common elsewhere are absent on purpose: there is no password manager and no phishing or malware protection, the latter because it would phone home to Mozilla and Google. No independent audit of Mullvad Browser itself was found in the pages consulted; the project's own claim is that features are inherited from an audited base.",
+    "update_channels_and_release_cadence": "Two channels exist, stable and alpha, and the project's own documentation lists browser updates as one of the few automatic connections the browser makes, with update metadata served by Mullvad. The stable line was at 15.0.26, released on 21 October 2026, with the alpha at 16.0a14. The stable release consulted carries only a maintenance entry — an update to CA intermediates and other settings dumps inherited from the Tor Browser tree — which is consistent with a browser that follows the Tor Browser release train rather than defining its own feature cadence. Every download is signed by the Tor Browser Developers and verified through a published procedure, and the README directs users to the verification guide rather than leaving them with a checksum alone. The project publishes no long-term-support branch, no end-of-life policy and no fixed release interval on the pages consulted; an updater is built into the browser and its privilege-elevation path is disabled in the code per the published compile options.",
+    "licensing_and_governance": "Mullvad Browser is released under the Mozilla Public License 2.0, as stated in its README and consistent with a product built on Mozilla source. Governance is a two-organisation collaboration with an unusually clear division of responsibility: the Tor Project develops the browser and hosts equivalent source on its GitLab, Mullvad funds, reviews and distributes it, and Mullvad states that it makes no money from the browser, its revenue coming from the VPN service. The README is explicit that the `main` branch of the GitHub repository contains only a readme, and that the source is obtained from specific branches and tags or from the Tor Project's GitLab — a distribution model inherited from Tor Browser, whose build instructions the project tells users to follow. Feedback goes to the repository's issue tracker or to a support address. The browser is free of charge and requires no account, which is part of the stated model rather than a promotional detail: no subscription, no telemetry and no data collection. No formal foundation, board or published decision process for the browser exists beyond the two organisations named,.",
+    "limitations_and_scope": "The limitations are deliberate and numerous. There is no mobile version. There is no multi-language support, a difference the project itself lists against Tor Browser, which means the browser is effectively English-only. There is no DRM, because Encrypted Media Extensions are disabled at compile time, so protected streaming services do not work. There is no password manager and no phishing or malware protection. Third-party code injection by antivirus products and other applications is disabled, which can surprise users whose security software expects to hook the browser. Letterboxing reduces usable window space. Security levels beyond Standard break websites by design. Any extension added by the user weakens the uniformity the browser exists to provide. The documentation is candid that fingerprints are \"nearly identical\", not identical, across users on one operating system. Beyond the project's statements, the following are not published on the pages consulted: the exact Firefox or Gecko base version of the current release, memory and disk requirements, a per-architecture matrix beyond 64-bit-only statements, an accessibility conformance statement, and any independent audit of the Mullvad Browser build itself.",
+    "who_is_it_for": "Mullvad Browser is for desktop users who want Tor Browser's fingerprinting protections without routing their traffic through Tor: journalists, researchers, activists and privacy-conscious individuals who already use a trustworthy VPN, or who accept that their IP address is not hidden. It suits people who value a small, auditable feature surface and who are content to leave the defaults alone, because the design only works if users resemble each other. It also suits anyone who wants a Firefox-based browser with no telemetry, no password manager and no vendor account.",
+    "who_is_it_not_for": "It is not for users who need streaming services that require DRM, nor for anyone who wants browser-based video conferencing or rich web applications that depend on JavaScript on plain HTTP. It is not for mobile users, for non-English speakers who need a localised interface, or for users who rely on many extensions and a personalised setup — every addition moves them away from the anonymity set the browser provides. It is not for anyone who wants their session, history or cookies to persist. And it is a poor fit for organisations requiring published minimum requirements, a support lifetime or an independent audit of the specific build.",
+    "verdict": "Mullvad Browser is the most coherent expression of the anonymity-set philosophy in this library: it optimises for users being indistinguishable from one another, and it accepts real costs — no mobile, no localisation, no DRM, no password manager, no extra extensions, reduced window space — to purchase that. The execution is credible because the Tor Project builds it, the configuration is published in full, the build disables telemetry at compile time, and the binaries are signed and verifiable. The trade is explicit: it protects against tracking and fingerprinting, not against IP-level identification, which it leaves to the VPN. Users who want a flexible, fully localised everyday browser will find it restrictive; those willing to use it as designed will find few better options."
+  },
+  "links": {
+    "homepage": "https://mullvad.net/en/browser",
+    "download": "https://mullvad.net/en/download/browser",
+    "hard_facts": "https://mullvad.net/en/browser/hard-facts",
+    "source": "https://github.com/mullvad/mullvad-browser",
+    "upstream_source": "https://gitlab.torproject.org/tpo/applications/mullvad-browser/",
+    "releases": "https://github.com/mullvad/mullvad-browser/releases"
+  },
+  "sources": [
+    {
+      "title": "Mullvad Browser — product page: purpose, Tor Project development, uBlock Origin, fingerprinting resistance, private browsing by default, no telemetry, platform list, business model",
+      "url": "https://mullvad.net/en/browser",
+      "type": "official_site",
+      "publisher": "Mullvad VPN",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Mullvad Browser — hard facts: published preference and compile-option list, letterboxing, security levels, New Identity, DoH, extensions, automatic connections, differences with Tor Browser (last updated 2026-01-12)",
+      "url": "https://mullvad.net/en/browser/hard-facts",
+      "type": "official_documentation",
+      "publisher": "Mullvad VPN",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Mullvad Browser — how it works: anonymity-set rationale, resist-fingerprinting, per-domain cookie jars, uBlock Origin, telemetry removal, comparison with Tor Browser",
+      "url": "https://mullvad.net/en/browser/mullvad-browser",
+      "type": "official_documentation",
+      "publisher": "Mullvad VPN",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Mullvad Browser — Windows download page: stable 15.0.26 and alpha 16.0a14, Windows 10 or later 64-bit, GPG signatures, GitHub mirror",
+      "url": "https://mullvad.net/en/download/browser/windows",
+      "type": "official_download_page",
+      "publisher": "Mullvad VPN",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "mullvad/mullvad-browser — README: Tor Project collaboration, supported platforms and floors, signature by the Tor Browser Developers, source availability on branches and tags, MPL 2.0",
+      "url": "https://raw.githubusercontent.com/mullvad/mullvad-browser/main/README.md",
+      "type": "repository",
+      "publisher": "Mullvad VPN",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "GitHub REST API — repository metadata for mullvad/mullvad-browser: creation date 2022-09-21, default branch main, language, counters on 2026-10-29",
+      "url": "https://api.github.com/repos/mullvad/mullvad-browser",
+      "type": "metadata",
+      "publisher": "GitHub",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "GitHub — release tag 15.0.26: release date 21 October 2026, verified Tor Browser Developers signature, change entry and asset count",
+      "url": "https://github.com/mullvad/mullvad-browser/releases/tag/15.0.26",
+      "type": "official_release_notes",
+      "publisher": "Mullvad VPN",
+      "accessed": "2026-10-29"
+    }
+  ]
+}

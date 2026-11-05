@@ -1,0 +1,106 @@
+{
+  "id": "waterfox",
+  "name": "Waterfox",
+  "type": "application",
+  "summary": "Independently maintained Firefox fork with built-in ad blocking, private tabs, DNS over Oblivious HTTP, tree tabs and a customisable interface, distributed by its vendor for Windows, macOS and Linux and as a separate Android application.",
+  "tags": [
+    "browser",
+    "web",
+    "firefox",
+    "gecko",
+    "mozilla",
+    "privacy",
+    "open source",
+    "mpl"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android"
+  ],
+  "license": "Mozilla Public License 2.0 for most of the source code, with other free licences for bundled parts (in-tree licensing page); repository metadata declares \"Other\"",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "Waterfox is an independently maintained, open source desktop and mobile web browser derived from Mozilla Firefox. Its own description is a browser \"focused on privacy out of the box and customisation to your taste\", with built-in ad blocking, private and anonymised DNS, no telemetry and no data collection. Where many Firefox derivatives compete on interface redesign, Waterfox competes on defaults: a content blocker enabled out of the box, a DNS path that separates the identity of the caller from the query, private tabs that coexist with normal ones rather than replacing the whole window, tree-style tabs in the sidebar, a restored status bar and a choice of browser chrome designs and colour palettes. The browser is distributed as versioned desktop installers for Windows, macOS and Linux, plus a separate Android application released under its own version series. It is a distinct product with its own release cadence, its own feature set and a company behind it, built on the Firefox codebase and its Gecko engine.",
+    "origin_and_history": "Waterfox has one of the longer continuous histories among Firefox derivatives. The project's own blog marks 27 March 2011 as the date of its first release, initially posted on a hardware forum, and it celebrated fifteen years of existence in March 2026. Its founder, Alex Kontos, describes the project as having grown from a side project into a maintained browser. The ownership history is documented publicly and has moved twice: in February 2020 Waterfox joined System1, which provided funding and a development team, and in July 2023 the project announced that it was independent again, under the founder's control. The company now operating the browser is BrowserWorks Ltd, which the site describes as a holding company wholly owned by the founder. A separate legacy line, Waterfox Classic, was documented as having diverged from the current generation in 2021. The source repository's own creation date, 13 October 2014, is later than the product's first release.",
+    "rendering_engine_and_technical_architecture": "Waterfox uses the same Gecko engine as Firefox. The project states this directly in its comparison with Firefox, and the release notes name the engine version the browser is built on: the desktop release 6.7.7 of 27 October 2026 is associated with the Mozilla security advisory MFSA 2026-120 covering Gecko 153.6 ESR, and the Android line reached Gecko 159.0 with version 1.2.10 on 22 October 2026. The architectural consequence is that Waterfox inherits Gecko's multiprocess design, its sandboxing, its JavaScript engine and its networking stack, and that it receives Mozilla's security fixes rather than producing its own engine patches. The project describes its update model as following the Firefox ESR scheme. On top of the engine, Waterfox adds its own layers: the content blocker, the DNS path built on Oblivious HTTP, the private-tab container, the tree-tab sidebar, the feed manager and reader, and the interface themes. Recent releases show deliberate engineering choices beyond rebasing: version 6.7.7 replaced the C implementation of Brotli compression with a Rust implementation, which the notes justify as a memory-safety decision after memory corruption vulnerabilities in the C code, and version 6.7.4 changed the bundled JPEG XL decoder.",
+    "interface_and_documented_features": "The browser's interface is positioned as configurable rather than fixed. The site presents an interactive demonstration in which browser chrome, colour palette and tab layout are switchable, offering three chrome designs (Nova, Proton and Photon), ten colour palettes and a choice between horizontal and vertical tabs, which documents these as shipped options. Four features carry most of the identity. The built-in blocker prevents adverts, trackers, pop-ups and overlays from loading, is enabled by default, and exposes filter-list management, site exceptions and control of search partner ads. Private tabs run inside a separate private container in the same window, and site data is cleared when the last private tab is closed while the normal session continues. Tree tabs nest each page under the page that opened it, so a branch can be collapsed or dragged as a unit. The status bar shows the full target URL on hover along with loading progress and keyboard shortcuts. Release notes add further documented features: a feed manager with folders and a built-in reader introduced in 6.7.5, restoration of RSS and Atom discovery in 6.7.4, a setting to disable AI answers in search results that is enabled by default, auto-hiding vertical tabs in 6.7.3, and, on Android, configurable homepage shortcuts rows, bookmark export and separate appearance settings.",
+    "installation_and_distribution": "Desktop builds are direct downloads from the project's content delivery domain: a universal disk image for macOS, installers for Windows on x64 and ARM64, and Linux packages built by the vendor. On Linux the recommended route is the BrowserWorks package repository hosted on the openSUSE Build Service, which the download page documents for Ubuntu 22.04 through 26.04, Debian 13 and unstable, Fedora 39 through 44 and Rawhide, and Mageia 8 and 9, with the repository signing key published as a GPG fingerprint for verification; a generic tarball is offered as the alternative. The Android edition is distributed through Google Play under the identifier `net.waterfox.android.release`, and the site recommends the native application over a browser shortcut for start-up speed and extension support. Version 6.7.7 of 27 October 2026 was the current desktop release at the time of consultation, with a 163.8 MiB universal macOS image, a 101.2 MiB Windows x64 installer and a 98.4 MiB Windows ARM64 installer. No Microsoft Store, Mac App Store, Flathub or Snap package appears among the options documented by the project, and no third-party package is presented as official.",
+    "platforms_and_hardware_architectures": "The supported platforms are Windows, macOS, Linux, which the homepage lists together, and Android, which has its own download page and its own application on Google Play. Architectures are documented by what is published rather than by a specification page: a single universal macOS disk image covering Intel and Apple silicon, x64 and ARM64 Windows installers, and Linux packages for the distributions enumerated above. No minimum operating system version, minimum memory, minimum disk space or processor instruction requirement is published on the pages consulted, and the browser does not state which Windows or macOS releases it supports. Since Waterfox tracks the Firefox ESR code base, practical floor requirements are presumably those of the corresponding ESR release, but the project publishes no such mapping and this fiche does not infer one. Hardware acceleration and media decoding follow the Gecko stack; the release notes record platform-specific work for Linux profile paths and dictionary discovery, for Windows Group Policy compatibility and media-key overlays, and for macOS file drag-and-drop behaviour, which shows that all three desktop targets receive platform-specific work.",
+    "extensions_and_add_on_store": "Waterfox relies on Mozilla's add-on ecosystem rather than operating its own. The site states that Firefox WebExtensions are supported, and that Chrome-only extensions do not transfer automatically, which is the expected consequence of a Gecko-based browser. Data migration is offered in the other direction as well: the browser can import common browser data, with the caveat that what is transferred depends on the source browser and its version. No Waterfox-branded extension store, no proprietary add-on format and no curated catalogue are documented. On Android, the project advertises full extension support in the native application, and the 1.2.9 release notes record manual extension update checks and fixes to extension language support. Extension behaviour on the desktop follows upstream Firefox, including the add-ons manager inherited from the Gecko tree; the project publishes no policy of its own on extension review beyond the inherited Mozilla processes.",
+    "privacy_and_security_model": "Privacy claims are the core of the product and are stated in absolute terms: no telemetry and no data collection. The concrete mechanisms documented on the site are a content blocker enabled by default that stops adverts and trackers before they load, private tabs isolated in a separate container whose site data is discarded when the last private tab closes, and a DNS path that encrypts lookups and sends them through an Oblivious HTTP relay, so that the relay sees who connected but not the query and the resolver sees the query but not who sent it. The project credits a partnership with Fastly for that relay. Two related product names appear in the release notes: Waterfox Ultra Protection, mentioned in a startup hang fix, and Ultra DNS, which was disabled by default in an Android emergency update after website loading failures. Security maintenance is inherited: the project incorporates Mozilla security fixes following the Firefox ESR model, and each desktop release publishes the corresponding Mozilla advisory and its list of CVEs. On Android the 1.2.10 release removed the Sentry component and now keeps crash records on the device without upload prompts. No independent security audit, bug bounty programme or formal vulnerability-disclosure policy was found in the pages consulted.",
+    "update_channels_and_release_cadence": "Updates are frequent and time-based rather than tied to a long support train. The desktop line moved from 6.7.3 on 12 September 2026 to 6.7.4 on 22 September, 6.7.5 on 30 September, 6.7.6 on 12 October and 6.7.7 on 27 October 2026, an interval of roughly one to two weeks per release. The Android application follows a separate series, with 1.2.8 on 17 September 2026, an emergency 1.2.8.1 the same day to disable Ultra DNS by default, 1.2.9 on 17 October and 1.2.10 on 22 October 2026, each carrying its own Gecko base version. Releases are announced on a public changelog and each entry links to a dedicated release-notes page, which in turn references the Mozilla security advisory covering the Gecko base, for example MFSA 2026-120 with 145 CVEs for desktop 6.7.7. No long-term-support branch, extended-support edition or beta channel is documented for Waterfox itself; the project ships a single stable line per platform.",
+    "licensing_and_governance": "The licence position is unusual and worth stating precisely. The repository's top-level LICENSE file does not contain a licence text: it points to an in-tree licensing page and states that no rights are granted to the trademarks of the Mozilla Foundation, including the Firefox name and logo. That in-tree page states that most of the source code is available under the Mozilla Public License 2.0, with the remainder under a variety of other free and open source licences, and it enumerates them. GitHub's own metadata for the repository reports the licence as \"Other\", which is a consequence of that structure rather than a contradiction. Governance is corporate but small: the browser is developed and operated by BrowserWorks Ltd, described as wholly owned by the founder, Alex Kontos. Funding comes from search partnerships, from optional subscriptions to Waterfox Private Search, and from donations; the site states that there is no premium tier and no account requirement, and that personal data is neither collected nor sold. The project is a member of the Browser Choice Alliance. Repository metadata records that pull requests are restricted to collaborators, so the development model is open source but not open contribution.",
+    "limitations_and_scope": "The most important limitation is documentary rather than technical: Waterfox publishes remarkably little specification. No minimum operating system versions, no hardware requirements and no supported-platform matrix are given, so users cannot verify compatibility before installing. The licence metadata is ambiguous at repository level, requiring the reader to open the in-tree licensing page to learn that most code is MPL 2.0. No independent security audit, no published disclosure policy and no third-party performance measurement were found, and the privacy claims are stated by the vendor without a published methodology. The desktop and Android editions are versioned and maintained separately, with different Gecko bases, which complicates any statement about \"the current engine\". The product names appearing in release notes, Ultra Protection and Ultra DNS, are not defined on the pages consulted, and one of them had to be disabled by default in an emergency Android update. Waterfox is also a browser that inherits Firefox's WebExtension model, so its extensibility is bounded by what Mozilla's platform allows; the project publishes no statement on accessibility conformance.",
+    "who_is_it_for": "Waterfox fits users who want the Firefox engine and the Mozilla extension ecosystem but not Mozilla's default configuration: people who expect a content blocker and a private browsing mode that does not require a separate window, who care about DNS privacy enough to want an Oblivious HTTP relay, and who want a browser whose interface can be rearranged and restyled. The status bar, tree tabs and feed reader also appeal to users with habits formed on older browsers. Because desktop builds are ordinary installers plus a vendor repository for Linux, it suits users who prefer direct vendor distribution over platform stores.",
+    "who_is_it_not_for": "It is not a choice for organisations that require published system requirements, a formal security disclosure process or an independently audited product, because none of those is documented. It is not the right browser for users who need a platform-store installation on Windows or macOS, or a Flathub or Snap package, none of which the project offers. Users who want to contribute code will find contributions gated to collaborators rather than open pull requests. And users who want Chrome extensions are excluded by architecture: only WebExtensions for Gecko are supported, and Chrome-only extensions do not carry over.",
+    "verdict": "Waterfox is a mature fork with a clear and narrow thesis: keep the Firefox engine, remove telemetry, add privacy defaults and give the interface back to the user. Fifteen years of continuous existence, a vendor-run Linux repository with signed packages, a maintained Android application and releases roughly every one to two weeks indicate a project that ships rather than experiments. The engineering is not passive either, as the switch of Brotli to a Rust implementation shows. What it lacks is documentation discipline: requirements, auditability, governance details and definitions of its own branded features are largely absent from its public pages, and its licence is readable only through an in-tree file. For a user who values privacy defaults and interface control over Firefox, that trade is reasonable; for an auditor or a managed fleet, the missing specifications are the deciding factor against it."
+  },
+  "links": {
+    "homepage": "https://www.waterfox.com/",
+    "download": "https://www.waterfox.com/download/",
+    "release_notes": "https://www.waterfox.com/releases/",
+    "blog": "https://www.waterfox.com/blog/",
+    "source": "https://github.com/BrowserWorks/Waterfox"
+  },
+  "sources": [
+    {
+      "title": "Waterfox — home page: privacy defaults, built-in ad blocking, private tab, DNS over Oblivious HTTP, tree tabs, status bar, interface designs, FAQ on funding and ownership",
+      "url": "https://www.waterfox.com/",
+      "type": "official_site",
+      "publisher": "BrowserWorks Ltd",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Waterfox — download page: desktop 6.7.7 of 27 October 2026, per-platform assets and sizes, BrowserWorks Linux repository and signing-key fingerprint, Android on Google Play",
+      "url": "https://www.waterfox.com/download/",
+      "type": "official_download_page",
+      "publisher": "BrowserWorks Ltd",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Waterfox — changelog index listing desktop and Android releases with dates and engine versions",
+      "url": "https://www.waterfox.com/releases/",
+      "type": "official_release_notes",
+      "publisher": "BrowserWorks Ltd",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Waterfox 6.7.7 release notes — JPEG XL changes, Brotli rewritten in Rust, update fixes, MFSA 2026-120 security advisory on Gecko 153.6 ESR",
+      "url": "https://www.waterfox.com/releases/6.7.7/",
+      "type": "official_release_notes",
+      "publisher": "BrowserWorks Ltd",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Waterfox blog index — project history entries: first release in 2011, System1 in 2020, return to independence in 2023, fifteen years of forking, position on AI",
+      "url": "https://www.waterfox.com/blog/",
+      "type": "official_blog",
+      "publisher": "BrowserWorks Ltd",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Waterfox source repository — top-level LICENSE file: defers to the in-tree licensing page, excludes Mozilla trademarks",
+      "url": "https://raw.githubusercontent.com/BrowserWorks/Waterfox/current/LICENSE",
+      "type": "licence",
+      "publisher": "BrowserWorks Ltd",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Waterfox source tree — in-tree licensing page: most source under MPL 2.0, remainder under enumerated free and open source licences",
+      "url": "https://raw.githubusercontent.com/BrowserWorks/Waterfox/current/toolkit/content/license.html",
+      "type": "licence",
+      "publisher": "BrowserWorks Ltd",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "GitHub REST API — repository metadata for BrowserWorks/Waterfox: creation date, licence declared as Other, default branch, language, counters on 2026-10-29",
+      "url": "https://api.github.com/repos/BrowserWorks/Waterfox",
+      "type": "metadata",
+      "publisher": "GitHub",
+      "accessed": "2026-10-29"
+    }
+  ]
+}

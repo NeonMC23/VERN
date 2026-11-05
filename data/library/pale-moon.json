@@ -1,0 +1,129 @@
+{
+  "id": "pale-moon",
+  "name": "Pale Moon",
+  "type": "application",
+  "summary": "Independent Firefox-derived browser running the Goanna engine on the Unified XUL Platform, with XUL add-ons, complete themes, NPAPI plugins, no telemetry, no DRM and a deliberately partial approach to modern web standards.",
+  "tags": [
+    "browser",
+    "web",
+    "goanna",
+    "uxp",
+    "xul",
+    "open source",
+    "mpl",
+    "privacy"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "FreeBSD"
+  ],
+  "license": "Mostly Mozilla Public License 2.0 with hybrid licensing for bundled parts (about:license); released binaries under the Pale Moon binary redistribution licence",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "Pale Moon is an open source web browser built on its own maintained platform and rendering engine, Goanna, and distributed for Windows, macOS and Linux with community-contributed support for other systems. It is a descendant of the Firefox code line that has been carried forward independently since 2012, and its identity rests on three deliberate positions: deep customisation through XUL-based add-ons, complete themes and legacy NPAPI plugins; a privacy stance expressed as zero telemetry, no advertising, no data collection, no DRM and no AI integration; and a single-process architecture that its project presents as a security and resource-use advantage rather than a technical debt. Pale Moon is explicitly not a Firefox rebuild: it has its own engine fork, its own release schedule, its own add-on repository and its own compatibility policy, which accepts a balanced subset of web standards and purposefully excludes some draft features and Web APIs. The project acknowledges that this makes parts of the modern, Chrome-oriented web fail, and users are expected to accept that trade.",
+    "origin_and_history": "The project began as an experiment in producing custom Windows builds of Firefox during the 1.5.x era, and its own history page records that the first public release, built on Firefox 3.5.2 and chosen as the best compromise between speed, features and usability, was published on 4 October 2009. Early releases were optimised builds with a build variant for older Athlon processors and a portable edition, and the interface was modified when the Firefox 4 cycle changed layout and navigation controls, because the project judged those changes to reduce usable feedback. For a period the 3.6.x legacy branch and a next-generation branch were maintained in parallel, the legacy line being discontinued in summer 2012. The decisive break came in April 2012 with version 12, when Pale Moon stopped following Mozilla's rapid release schedule and became fully independently developed and released. The rendering engine was subsequently forked under the name Goanna, and the browser now sits on the Unified XUL Platform, a shared code base from which other applications are also built. Source repositories for both the browser and the platform were made public again in late March 2022.",
+    "rendering_engine_and_technical_architecture": "Pale Moon does not use Gecko. It uses Goanna, described by the project as an open source layout and rendering engine forked from Gecko and used by Unified XUL Platform applications, of which Pale Moon is the main one. The project explains the rename as a matter of accuracy and trademark: Gecko is a registered trademark licensed exclusively to Mozilla, and continued independent development made the \"Gecko\" label misleading. Goanna is not available as a stand-alone library; it is an integral part of UXP, whose source is published on the project's own Gitea instance, alongside the browser repository. The Goanna page documents version 6 as the engine shipped with Pale Moon 32 and states that engine versions advance with the platform independently of the products built on it; the engine version current at 35.0.3 is not stated on the pages consulted. Architecturally the most consequential choice is the single-process model: the project argues that keeping everything in one process avoids the messaging surface that multi-process browsers expose, and that it reduces memory and process count. Everything else follows the UXP tree, including the XUL interface layer, the add-on APIs and the networking code, where the project states that it deliberately avoids 0-RTT and QUIC and uses native DNS rather than DNS over HTTPS.",
+    "interface_and_documented_features": "The interface is presented as a deliberately conventional desktop browser: a menu bar, a navigation toolbar and a tab strip whose arrangement and controls can be customised more extensively than in mainstream browsers, with a user-selectable graphical tab switcher including quick search and enhanced security indicators covering padlock, styling, domain and IDN display. The documented supported content is unusually broad for a modern browser: JPEG XL alongside JPEG, PNG, WebP and GIF; SVG and canvas; CSS downloadable fonts; XSLT transformations; RSS and Atom feeds; and the FTP protocol, all of which the project frames as preserving the diversity of the web. NPAPI plugins, including Java and Flash, remain supported. Complete themes and Personas are supported as first-class customisation mechanisms, and extension developers are offered low-level API access that the project says allows add-ons to modify or redefine core browser functions. Recovery tooling includes a safe mode and a recovery dialog with several repair options. Several features are absent by design rather than by omission, among them WebRTC, an integrated PDF reader, parental controls and support for specialised accessibility input and display hardware.",
+    "installation_and_distribution": "Distribution is direct from the project's own mirrors. The download page offers Windows installers for 64-bit and 32-bit systems, both requiring Windows 7 with service pack 1 or later, with detached GPG signatures and public keys published separately; a Microsoft Store listing as an alternative for Windows; Linux 64-bit tarballs for GTK3 and for the legacy GTK2 toolchain; macOS disk images for Intel and for Apple silicon; and beta FreeBSD 14 tarballs for GTK3 and GTK2. Additional formats include 7-Zip-packed Windows builds, explicitly described as unpack-and-run packages that are not portable because they store data in the normal user folders, and true portable Windows editions. Language packs are distributed through the add-ons site rather than the main download. Other operating systems and distributions are served by community-maintained builds, which the project links but does not present as official. Linux 32-bit binaries have been discontinued by the project, although distributions may still package them at their own discretion.",
+    "platforms_and_hardware_architectures": "The documented platforms are Windows, macOS and Linux, with FreeBSD as a beta target and other systems left to contributed builds. The architecture floor is unusually explicit. Official 64-bit builds require a processor with AVX support, while the 32-bit Windows build requires SSE2; memory requirements are 2 GB of free RAM, with 4 GB recommended; a screen of 720p or more is expected. On Linux the browser requires a reasonably modern distribution, GTK 2.24 or GTK 3.22+ depending on the build, GLib 2.56 or higher, Pango 1.42 or higher, libstdc++ 6.0.26 or higher and dbus-glib, and GTK4 is explicitly not supported. Windows support starts at Windows 7 with service pack 1, with Vista and XP excluded. macOS support is stated as OS X 10.7 or later for Intel and 11.0 or later for Apple silicon. FreeBSD requires a 64-bit Intel machine running FreeBSD 14 or later. The project states plainly that it is optimised for current processors and \"will not run on museum-grade systems\", a deliberate narrowing that it presents as the price of efficiency.",
+    "extensions_and_add_on_store": "Pale Moon runs its own add-ons ecosystem rather than Mozilla's. The add-ons site hosts extensions, complete themes, Personas, search plugins, language packs and dictionaries, and provides a self-service submission panel for developers, built on software the project calls Project Phoebus. Extensions are written in XUL, which is what allows them to modify or redefine browser interface and behaviour to a degree the project describes as impossible in mainstream browsers; ad blocking is given as an example of an ordinary use. Compatibility with historical Firefox extensions is partial: the project states that many legacy extensions work, that compatibility with extensions written before the Australis interface cannot be guaranteed because Pale Moon is not Firefox, and that unsupported ones receive no official support. WebExtensions, the modern Firefox extension model, are not part of the documented ecosystem. NPAPI plugins extend the same surface further, with a dedicated Flash protected-mode tool among the project's utilities. Tooling published alongside includes Pale Moon Commander for advanced preferences and a profile backup utility.",
+    "privacy_and_security_model": "The privacy model is stated in negative terms: no telemetry, no advertising, no data-gathering, no DRM module and no AI integration. The project also documents its default services, which is unusual and useful: DuckDuckGo as the default search engine, IP-API for geolocation, and start.me for the start page, all changeable, with the stated intent of avoiding Big Tech services and preferring in-house options where possible. Native DNS is used instead of DNS over HTTPS, a choice the project justifies as preserving decentralisation. Security is maintained through regular updates addressing applicable CVEs and through what the project calls defence-in-depth work; the release notes mark such fixes explicitly, distinguishing them from actively exploitable defects. The single-process design is presented as a security argument. The browser does not update silently in the background and installs no maintenance service, so patches are applied when the user chooses to act on them. Several features with security relevance are simply absent: there is no in-browser DRM, no WebRTC, and users are advised to open PDF documents in an external reader rather than in the browser. No independent security audit or bug bounty programme is documented beyond a developer bounty page, and no published vulnerability-disclosure policy was found in the pages consulted.",
+    "update_channels_and_release_cadence": "Releases follow the project's own schedule, not Mozilla's. The 35.x series shows a rhythm of milestone releases followed by fast corrective builds: 35.0.0 on 17 September 2026, presented as a milestone focused on web compatibility with compatibility shims and polyfills enabled by default, the CSS revert-layer keyword, CSSStyleSheet replaceSync, the :has() pseudo-class and adoptedStyleSheets; 35.0.1 on 22 September fixing a performance problem in the new :has() implementation; 35.0.2 on 6 October, which disabled :has() by default for performance reasons behind a preference and tightened form handling in HTML tables; and 35.0.3 on 27 October 2026, a security release that removed compromised eMudhra certificates from the certificate store and updated SQLite to 3.54.1. Each release publishes notes listing the CVEs addressed, including defence-in-depth items. The project publishes no fixed interval and no support-lifetime commitment for a given branch on the pages consulted, so the cadence is observable but not contractual.",
+    "licensing_and_governance": "Pale Moon is open source with a hybrid licensing model that the project takes care to describe. The source code is, for the most part, covered by the Mozilla Public License 2.0, while various included parts and libraries carry different licences, collectively documented in the in-tree licence page reachable as about:license. Binaries released by the project are distributed under a separate binary redistribution licence, and helper applications may use other terms. Trademarks are protected separately from the code: the Pale Moon name, the slogan, and the Goanna name and logo are enforced, so modified builds may not carry official branding. The project describes itself as community-driven but owned and led by one person, Mr M.C. Straver, writing under the Moonchild name and operating through Moonchild Productions, with a list of named contributors credited for Linux builds, themes, the status bar, ruby annotations and platform maintenance. Development happens on the project's own Gitea instance, with the browser and UXP repositories public, a developer site carrying build instructions and a bounty programme, and support channelled through a community forum rather than a commercial help desk.",
+    "limitations_and_scope": "The limitations are stated by the project and are substantial. Pale Moon accepts a balanced subset of web standards, so some sites built for Chrome-centric platforms will not work out of the box and users may need a secondary browser. AVIF images are unsupported, the project arguing that the format \"falls technically short\"; WebRTC is absent, which removes browser-based video conferencing; DRM-protected streaming is absent; there is no integrated PDF reader; parental controls and specialised accessibility hardware support are disabled by design; and updates are never silent. Only AVX-capable 64-bit processors are supported by official builds, which excludes a large installed base of older machines the browser's philosophy might otherwise appeal to. The single-process architecture diverges from the multi-process isolation mainstream browsers adopted after years of exploitation, and the project's claim that this is safer is an argument rather than a measured result. Beyond the project's own statements, this fiche records what is not published: the engine version current in 35.x, a support-lifetime commitment, an independent security audit, and any accessibility conformance statement beyond the claim that the interface attempts to follow WCAG guidelines.",
+    "who_is_it_for": "Pale Moon is for users who treat the browser as a tool to be shaped: people who rely on XUL extensions and complete themes, who want NPAPI plugins, who value FTP, feed reading and XSLT, and who prefer a conventional desktop interface with a deep preferences surface. It also suits users on modern 64-bit hardware who want no telemetry, a documented set of default services and full control over when updates are applied, and who are willing to keep a second browser for sites that assume Chrome.",
+    "who_is_it_not_for": "It is not suitable for users who need video conferencing in the browser, DRM-protected streaming, AVIF images or an integrated PDF viewer, all of which are absent by design. It is not for anyone on pre-AVX hardware, since official 64-bit builds require it, nor for users who want silent automatic updates. It is not aimed at enterprises that need a published support lifetime, a formal disclosure process and third-party audit evidence. And it is not a drop-in replacement for Firefox: modern WebExtensions do not run, historical extensions are only partially compatible, and site compatibility with the mainstream web is explicitly incomplete.",
+    "verdict": "Pale Moon is the most ideologically distinct browser in its cohort: it keeps a forked engine alive, maintains its own add-on ecosystem and refuses several features its project considers harmful or wasteful. That independence is real and sustained, with regular security releases through 2026 and a published, if partial, account of every change. The costs are equally real: a subset-of-the-standards compatibility policy, an extension model that mainstream development has abandoned, an explicit hardware floor, and a single-process architecture whose security benefit rests on argument rather than evidence. It is a defensible choice for a modern machine, a conventional workflow and a user who wants to own the configuration; it is a poor fit for anyone who needs the current web to simply work."
+  },
+  "links": {
+    "homepage": "https://www.palemoon.org/",
+    "download": "https://www.palemoon.org/download.shtml",
+    "release_notes": "https://www.palemoon.org/releasenotes.shtml",
+    "technical_details": "https://www.palemoon.org/technical.shtml",
+    "add_ons": "https://addons.palemoon.org/",
+    "source": "https://repo.palemoon.org/MoonchildProductions/Pale-Moon",
+    "platform_source": "https://repo.palemoon.org/MoonchildProductions/UXP"
+  },
+  "sources": [
+    {
+      "title": "Pale Moon — home page: Goanna engine, customisation, privacy stance, single-process rationale, supported content types, standards position",
+      "url": "https://www.palemoon.org/",
+      "type": "official_site",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — download page: Windows, Linux, macOS and FreeBSD builds, GPG signatures, 7-Zip and portable variants, contributed builds",
+      "url": "https://www.palemoon.org/download.shtml",
+      "type": "official_download_page",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — technical details: enabled and disabled features, supported processors, differences from Mozilla products",
+      "url": "https://www.palemoon.org/technical.shtml",
+      "type": "official_documentation",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — release notes: 35.0.0 to 35.0.3 with dates, changes and CVEs addressed",
+      "url": "https://www.palemoon.org/releasenotes.shtml",
+      "type": "official_release_notes",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — project history: first release on 4 October 2009 from Firefox 3.5.2, independent schedule from version 12 in April 2012",
+      "url": "https://www.palemoon.org/history.shtml",
+      "type": "official_documentation",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — system requirements: AVX and SSE2 processor floors, memory, Windows, Linux, macOS and FreeBSD requirements",
+      "url": "https://www.palemoon.org/systemrequirements.shtml",
+      "type": "official_documentation",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — Goanna engine page: fork of Gecko, part of Unified XUL Platform, version 6 shipped with Pale Moon 32, trademark position",
+      "url": "https://www.palemoon.org/tech/goanna.shtml",
+      "type": "official_documentation",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — source code page: public Gitea repositories for Pale Moon and UXP since late March 2022, build hints",
+      "url": "https://www.palemoon.org/sourcecode.shtml",
+      "type": "official_documentation",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — legal considerations: hybrid licensing, mostly MPL 2.0, binary redistribution licence, trademark enforcement",
+      "url": "https://www.palemoon.org/legal.shtml",
+      "type": "legal",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon — general information: project ownership and leadership, named contributors, extension compatibility caveats",
+      "url": "https://www.palemoon.org/info.shtml",
+      "type": "official_documentation",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Pale Moon Add-ons Site — extensions, themes, Personas, search plugins, language packs and developer submission panel",
+      "url": "https://addons.palemoon.org/",
+      "type": "official_add_on_repository",
+      "publisher": "Moonchild Productions",
+      "accessed": "2026-10-29"
+    }
+  ]
+}

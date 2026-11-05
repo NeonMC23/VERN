@@ -1,0 +1,135 @@
+{
+  "id": "zen-browser",
+  "name": "Zen Browser",
+  "type": "application",
+  "summary": "Open source Firefox-based browser built around vertical tabs, workspaces with container isolation, split view and a CSS mod system, developed by a small independent team and distributed as a desktop-only beta.",
+  "tags": [
+    "browser",
+    "web",
+    "firefox",
+    "gecko",
+    "mozilla",
+    "open source",
+    "mpl",
+    "vertical tabs"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux"
+  ],
+  "license": "Mozilla Public License 2.0 (repository licence metadata)",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "Zen Browser is an open source desktop web browser derived from Mozilla Firefox, positioned by its project as \"a calmer internet\" and described in its own repository as \"a firefox-based browser with the aim of pushing your productivity to a new level\". Its design departs from the mainstream tab strip: the sidebar, vertical tabs and workspaces are the organising principle of the whole interface, and the project states that horizontal tabs will not be supported \"in the near future\" because the entire experience is built around the vertical arrangement. Zen is distributed as a desktop application for Windows, macOS and Linux, and the download page declares the browser to be in beta at the time of writing. It remains a distinct product with its own release schedule and interface layer, built on the Firefox codebase.",
+    "origin_and_history": "The project's public development history is short and recent. The source repository was created on 28 March 2024, and the changelog published by the project runs from version 1.0.0-a.1 onwards, which places the first public builds after that date. Development is concentrated in a single repository, `zen-browser/desktop`, whose default branch is `dev`; releases are cut from that branch and built by a GitHub Actions workflow labelled \"Zen Release builds\". On 29 October 2026 the repository reported roughly 45,400 stars, about 1,900 forks and roughly 800 open issues, figures that describe the scale of the community around the browser rather than the size of its core team. The project repeatedly describes itself as a small team: the FAQ explains that reports and feature requests may take time to be reviewed because the team is \"currently very small\", and asks users to be patient and to check for duplicates before filing.",
+    "rendering_engine_and_technical_architecture": "Zen does not implement its own engine. It is built on Mozilla Firefox, which means it inherits the Gecko rendering engine along with its layout, JavaScript, networking and graphics subsystems, and the project's documentation describes the browser as being \"built on the latest version of Firefox\". The base version is published openly: the repository README states which Firefox release each channel is built on, and at the time of consultation it listed Firefox 158.0 for the Release channel and Firefox RC 158.0 for Twilight. The project also states that it tracks upstream closely, updating to a new Firefox release within 0 to 72 hours, and that it tests upcoming versions on the Twilight branch about one week before the corresponding official Firefox release. The browser therefore follows Firefox's multiprocess architecture and inherits its site isolation and sandboxing design rather than defining an alternative one. Zen's own additions sit in the user interface and session layer: the sidebar and vertical tab strip, workspaces, Split View, Glance, Boosts and the Space Routing feature that routes links to a designated workspace. The repository is predominantly C++ according to its language metadata, and the project publishes build instructions for compiling it from source.",
+    "interface_and_documented_features": "The product pages group Zen's features into four headline capabilities. Workspaces organise tabs into separate sets for different projects and allow switching between them; the user manual adds that each workspace can carry a default container tab so that accounts and projects stay isolated, and that workspaces can be given their own names and icons. Containers are described as derived from the Firefox feature: they separate cookie jars within a single profile, and the documentation notes explicitly that they do not separate browsing history or extensions. Compact Mode hides the tab bar when it is not needed to reclaim screen space. Glance opens a preview of a site on top of the current tab, described in the manual as previewing websites over the active page. Split View places several tabs side by side; the FAQ explains that tabs are selected with Ctrl or Shift, that the context menu offers a \"Split x Tabs\" entry and that the layout is changed from a button in the address bar. Beyond these, the release notes document Boosts (per-site customisation, with a focus mode added in 1.23.4b), Space Routing for external links, a Library panel for downloads and history, window sync between open windows, picture-in-picture, and a command palette.",
+    "installation_and_distribution": "Zen is distributed as a direct download from the project and through Flathub. The download page offers a universal macOS disk image, Windows installers for x86_64 and ARM64, and Linux tarballs for x86_64 and aarch64, with a Flathub listing under the identifier `app.zen_browser.zen`. Every desktop download link resolves to an asset attached to the latest GitHub release, so the packaging is produced by the project's own build workflow rather than by a distribution. Two channels are exposed on the same page: the stable Release build and Twilight, described on the site as pre-release builds carrying experimental features and updates. The download page states plainly that Zen is in beta. No mobile edition is offered: the FAQ states that the team does not have the time or resources to develop Android or iOS versions, that its features do not translate well to the mobile form factor, and that there are no current plans for one. No distribution-repository packaging is documented beyond Flathub, and no Microsoft Store or Mac App Store listing appears in the pages consulted.",
+    "platforms_and_hardware_architectures": "The supported desktop platforms are Windows, macOS and Linux, which is the complete list given by the download page. Architectures are documented per platform by the assets offered: x86_64 and ARM64 installers for Windows, a single universal disk image for macOS covering both Intel and Apple silicon, and x86_64 plus aarch64 tarballs for Linux. The project publishes no minimum operating system version, no minimum memory requirement and no processor instruction requirement on the pages consulted, and no statement on which Windows or macOS releases are supported or excluded. Because the browser follows the Firefox release it is built on, the practical floor for each platform is presumably the one set by that upstream release, but Zen does not publish such a mapping itself and this fiche does not infer one. Graphics and media behaviour are inherited from the Firefox and Gecko stack; the release notes record platform-specific fixes for printing, multi-monitor placement, Windows High Contrast themes and flatpak printer access.",
+    "extensions_and_add_on_store": "Zen does not run an extension store of its own, and it does not need to: the documentation states that because Zen is based on Mozilla Firefox, extensions are installed from the same source, `addons.mozilla.org`. Firefox themes, however, are explicitly not supported, the documentation citing fundamental differences in the way Zen does theming. In their place the project maintains a separate system called Zen Mods, published through a Mods Registry: mods are written in CSS and affect only the browser interface, whereas extensions are written in HTML, CSS and JavaScript and generally affect the sites visited. Installation of a mod is a single click from the registry, and the project publishes submission guidelines for mod authors. Extension management is done through the standard Add-ons Manager, reachable from the address bar settings button, the main menu or the keyboard shortcut; the documentation describes per-extension toggles for automatic updates, for running in private windows (off by default) and for running on sites restricted by Mozilla (off by default), together with the permission list and configurable shortcuts.",
+    "privacy_and_security_model": "Zen's security documentation is explicit that the browser reuses Firefox's foundations rather than substituting its own. Saved passwords, cookies and cache are managed by Firefox, and passwords are described as automatically encrypted. On top of that base the project lists a set of enabled-by-default or user-selectable protections: OCSP checking of certificate validity, an HTTPS-Only mode that can be applied to all windows or to private windows only, deceptive-content and dangerous-software protection using URL filters and real-time checks, and SSL handling that treats unsafe negotiation as broken by default and blocks the connection. Privacy settings include tracking protection with three levels (Standard, Strict, Custom) and DNS over HTTPS with three levels (Default, Increased, Max protection). Sync uses a Mozilla Account, which means that account data and sync traffic are handled by Mozilla's service rather than by the Zen project. The project's own answer to \"how do I know Zen is safe\" rests on the openness of the source repository and on the fact that the codebase derives from Firefox. No independent security audit of Zen, no bug bounty programme and no published incident history were found in the pages consulted, and the browser's beta status applies to its security posture as much as to its interface.",
+    "update_channels_and_release_cadence": "Two update channels exist. Release builds are the stable line; Twilight builds are described on the site as pre-release builds carrying the latest experimental features and updates, and the README states that Twilight tracks a Firefox release candidate while Release tracks the shipped Firefox version. The cadence is fast: the public changelog lists 1.23.1b on 6 October 2026, 1.23.2b on 9 October, 1.23.3b on 15 October and 1.23.4b on 20 October 2026, which amounts to roughly one build per week during that period. Version numbers carry a `b` suffix throughout the 1.23 series, consistent with the beta status advertised on the download page. The latest GitHub release at the time of consultation was tagged 1.23.4b, published on 21 October 2026 and announced in the changelog under 20 October 2026, and it moved the Firefox base to 158.0.1. Updates are announced with release notes that link each entry to the corresponding GitHub issue, and the release notes also carry the Mozilla security advisories inherited through the Firefox base, including the OneCRL block of compromised eMudhra intermediate certificates distributed in 1.23.4b.",
+    "licensing_and_governance": "The Zen Browser source code is published under the Mozilla Public License 2.0, the licence reported in the repository metadata and declared in the header of the project's README. The project is hosted in the `zen-browser` GitHub organisation and is developed in the open: issues are triaged in the public tracker, feature requests are collected in GitHub Discussions, and translations are managed through Crowdin. Governance is informal rather than corporate. The FAQ describes a small team relying on community contributions and donations, and the site lists sponsors (Blacksmith, Crowdin and Tuta at the time of consultation) alongside direct donation channels via Patreon and Ko-fi. No legal entity, foundation, board or published decision-making process was found in the pages consulted, and no trademark policy specific to Zen was located. The project publishes a code of conduct and contribution guidelines, which are the only formal documents of governance visible from the public site. Redistribution of code is therefore governed by the MPL 2.0, while name and visual identity are not addressed in the documentation consulted.",
+    "limitations_and_scope": "Several limitations are stated by the project itself and are not temporary accidents. Zen is in beta and its version numbers carry a beta suffix. Horizontal tabs are excluded by design. There is no mobile edition and none is planned. DRM-protected playback does not work: the FAQ explains that Zen has no Widevine licence, that a licence request is pending with Google, and that services such as Netflix, Spotify, Disney+, HBO Max, Amazon Prime Video, Apple Music and Google Play Movies cannot be streamed in the browser, an issue the project limits to Windows and macOS. Firefox themes are not supported, so visual customisation runs through Zen Mods instead. Container tabs separate cookies but not history or extensions. Beyond the project's own statements, this fiche records what the sources do not publish: no minimum system requirements, no supported-OS matrix, no independent security audit, no accessibility conformance statement and no formal governance document. The documentation warns that the user manual is in early stages and may become outdated as the browser evolves, which is a caveat on the durability of any feature description, including this one.",
+    "who_is_it_for": "Zen targets desktop users who value a keyboard- and sidebar-driven workflow over the conventional tab strip: people who keep many tabs open across several projects, who want those contexts separated by workspace and container, and who prefer to compare pages side by side. It suits users already inside the Firefox ecosystem: extensions come from Mozilla's store, data can be carried over with Firefox Sync and the underlying engine is the same. It also suits users who enjoy visual customisation through CSS mods and who accept a fast-moving beta in exchange for a distinctive interface.",
+    "who_is_it_not_for": "Zen is not a suitable choice for anyone who depends on streaming services that require DRM, since the project states that such content cannot be played. It is not for users who need a mobile browser that shares history and tabs with the desktop, because no Android or iOS version exists or is planned. It is not for users who require horizontal tabs, or who expect a stable, long-supported release: the project describes the browser as beta and ships weekly builds. It is unsuitable for managed or audited environments that require published minimum system requirements, accessibility conformance statements or a formal governance and trademark policy, none of which the project publishes. Finally, users who want Firefox themes or a store-managed theming ecosystem will not find that model here.",
+    "verdict": "Zen Browser is a young, fast-moving Firefox derivative whose identity comes entirely from its interface model: vertical tabs, workspaces bound to containers, Split View, Glance and a CSS mod registry. Technically it is conservative, inheriting Gecko, Firefox's security architecture and Mozilla's extension store, and it tracks upstream aggressively, updating within days of each Firefox release and testing release candidates on a pre-release branch. Its openness is real: MPL 2.0 code, a public repository, public release notes tied to public issues. Its immaturity is equally real: beta versioning, a very small team, no mobile edition, no DRM playback, no published hardware baseline and no formal governance. It is best understood as a carefully designed interface layer over a browser someone else maintains, aimed at desktop power users who want context separation and accept the instability that comes with weekly builds."
+  },
+  "links": {
+    "homepage": "https://zen-browser.app/",
+    "download": "https://zen-browser.app/download/",
+    "documentation": "https://docs.zen-browser.app/",
+    "release_notes": "https://zen-browser.app/release-notes/",
+    "mods_registry": "https://zen-browser.app/mods",
+    "source": "https://github.com/zen-browser/desktop",
+    "issues": "https://github.com/zen-browser/desktop/issues"
+  },
+  "sources": [
+    {
+      "title": "Zen Browser — home page: workspaces, compact mode, glance, split view, core values, sponsors",
+      "url": "https://zen-browser.app/",
+      "type": "official_site",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Zen Browser — download page: macOS universal image, Windows x86_64/ARM64 installers, Linux tarballs, Flathub, beta status, Twilight channel",
+      "url": "https://zen-browser.app/download/",
+      "type": "official_download_page",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Zen Browser — release notes and changelog from 1.0.0-a.1 to 1.23.4b, with Firefox base versions",
+      "url": "https://zen-browser.app/release-notes/",
+      "type": "official_release_notes",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Zen Browser documentation — documentation index: user manual, mods registry, build from source, FAQ, security",
+      "url": "https://docs.zen-browser.app/",
+      "type": "official_documentation",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Zen Browser documentation — FAQ: vertical tabs by design, no mobile version, DRM/Widevine absence, Firefox Sync, issue reporting",
+      "url": "https://docs.zen-browser.app/faq",
+      "type": "official_documentation",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Zen Browser documentation — Privacy & Security: Firefox-managed credentials, update tracking, OCSP, HTTPS-Only, tracking protection levels, DNS over HTTPS",
+      "url": "https://docs.zen-browser.app/security",
+      "type": "official_documentation",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Zen Browser documentation — Extensions: addons.mozilla.org source, Firefox themes unsupported, difference between extensions and Zen Mods",
+      "url": "https://docs.zen-browser.app/user-manual/extensions",
+      "type": "official_documentation",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Zen Browser documentation — Workspaces and container tabs, including the documented container limitation",
+      "url": "https://docs.zen-browser.app/user-manual/workspaces",
+      "type": "official_documentation",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Zen Browser — Mods Registry information page: installation and submission of mods",
+      "url": "https://docs.zen-browser.app/themes-store/themes-marketplace",
+      "type": "official_documentation",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "zen-browser/desktop — README on the dev branch: Firefox versions per channel, contribution channels, MPL header",
+      "url": "https://raw.githubusercontent.com/zen-browser/desktop/dev/README.md",
+      "type": "repository",
+      "publisher": "Zen Browser project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "GitHub REST API — repository metadata for zen-browser/desktop: creation date, MPL-2.0 licence, default branch, language, counters on 2026-10-29",
+      "url": "https://api.github.com/repos/zen-browser/desktop",
+      "type": "metadata",
+      "publisher": "GitHub",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "GitHub REST API — latest release of zen-browser/desktop: tag 1.23.4b, published 2026-10-21, per-platform assets",
+      "url": "https://api.github.com/repos/zen-browser/desktop/releases/latest",
+      "type": "metadata",
+      "publisher": "GitHub",
+      "accessed": "2026-10-29"
+    }
+  ]
+}

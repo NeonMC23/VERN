@@ -1,0 +1,139 @@
+{
+  "id": "yahoo-search",
+  "name": "Yahoo Search",
+  "type": "application",
+  "summary": "Web search service operated by Yahoo Inc. and embedded in its portal, presenting algorithmic, partner and paid results together, with documented filters, three-level SafeSearch and a removal process, while the underlying index and ranking system are not described in Yahoo's own documentation.",
+  "tags": [
+    "search engine",
+    "web",
+    "portal",
+    "advertising",
+    "personalisation",
+    "privacy",
+    "proprietary",
+    "yahoo",
+    "web search",
+    "safesearch"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service (no licence published for the service, its results or any index component)",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Yahoo Search is the web search service operated by Yahoo Inc., reached at search.yahoo.com, through the Yahoo Search application, or as the default engine of a browser. It is a service inside a portal rather than a standalone engine company: Yahoo's own site presents search alongside mail, news, finance, sports and shopping, and the search results page links back into those properties. Two distinctions frame this entry, and both are unusual in this batch. First, Yahoo does not present its search stack as an independent crawling and indexing operation: its help pages describe results as coming from a variety of sources, including algorithmic web search, partner and provider content and paid placements, without naming the supplier of the underlying index on any page consulted. Second, the product is explicitly a hybrid of algorithmic results, partner content and advertising, and Yahoo's own documentation states that partner content is not always labelled when Yahoo has not been paid to place it. That is a materially different transparency model from the two engines documented alongside it.",
+    "origin_and_history": "The pages consulted document current practice and legal terms, not the company's history; no founding date, launch date or ownership chronology appears on them, and this entry asserts none. Several dated statements do appear. The Yahoo Privacy Policy carries a \"last updated\" date of 2026-03, and it describes Yahoo as \"previously known as Verizon Media\", which is the only ownership information on the pages consulted. The Yahoo Terms of Service record that on 2025-05-06 the contracting entity for users in the relevant region changed name from Yahoo EMEA Limited to Yahoo International Limited, and the same document carries the additional terms required by the EU Digital Services Act. Yahoo's DSA help article states that the DSA took effect on 2023-08-25 and that Yahoo International Limited publishes a DSA transparency report as part of its compliance. The corporate site describes Yahoo as having served users for 30 years and counting, which is the only age statement encountered; this entry records it as marketing copy rather than as a dated milestone.",
+    "rendering_engine_and_technical_architecture": "Yahoo Search is a remote service and publishes no browser engine of its own; results are delivered as a web page to whatever browser the user runs, and the mobile application is a separate client. Beyond that, the architecture is largely undocumented on the pages consulted, and the gap is itself an important finding. Yahoo does not publish crawler documentation, an indexing pipeline description or ranking-system guidance comparable to what Google and Microsoft publish. The help page about ads instead describes result composition in editorial terms: content on the results page comes from algorithmic web searches, from provider content relevant to the query, from advertisers who pay to appear, and from other partners with which Yahoo may have a financial relationship. Content removal guidance adds that Yahoo displays web results from Yahoo sites and non-Yahoo sites, and that refresh of that index takes up to ten to twelve weeks. Widely repeated secondary sources state that Yahoo's web results are supplied under an arrangement with Microsoft; no Yahoo or Microsoft page consulted for this entry states that, so it is recorded here as a secondary claim and not as an established fact.",
+    "interface_and_documented_features": "The documented interface is a results page organised around filters, settings and an assistant. Yahoo's help describes selecting a filter at the top of the page - All, News, Images, Videos, Local, Shopping, or a timeframe - to narrow results. SafeSearch is documented with three levels: Strict, which excludes adult content, Moderate, which excludes images and video, and Off, which does not filter; the setting is changed from the signed-in Search settings under Preferences on both desktop and mobile. The landing page also shows trending searches and a prominent \"Ask Scout\" entry point, and Yahoo Scout has its own address at search.yahoo.com/scout, where it is labelled beta and offers conversational questions with an option to sign in to save chat history. Language and region settings are documented separately, and the help corpus includes a removal process for results, including a route for personal information that appears on third-party sites. Filtering, SafeSearch and removal are the three levers Yahoo documents for controlling what appears; none of them is a ranking control.",
+    "installation_and_distribution": "Nothing is installed to use Yahoo Search on the web. The packaged form is the Yahoo Search application, promoted through a help article that links to a Yahoo download page, alongside instructions for bookmarking search.yahoo.com and for setting Yahoo Search as the default engine in Firefox, Chrome, Safari and an Android browser. Distribution of the default position is a separate matter and is commercially significant for Yahoo: its partner-facing site sells Yahoo Hosted Search and Yahoo Partner Ads to businesses that want to offer search to their own audiences, which means the same search stack is also delivered under partner branding. The pages consulted do not describe which third-party browsers or devices ship Yahoo as a default, and this entry does not assert any. There is no self-hosted edition, no public index and no developer search API documented on the pages consulted; the developer-adjacent relationship is the partner programme rather than an API.",
+    "platforms_and_hardware_architectures": "The platforms established by the consulted pages are the web, Android and iOS. The web surface is the results page; the mobile surface is the Yahoo Search application advertised in Yahoo's help material; and the bookmarking and default-engine instructions are written separately for Android browsers and for Safari and Chrome on iOS, which confirms that both mobile platforms are supported while showing that the steps differ. No hardware architecture is meaningful for a remote service, and none is documented. Two asymmetries deserve to be stated. Settings are account-bound in places: SafeSearch is described as being changed while signed in, so a user who is not signed in has less control than the documentation implies. And the mobile application is a distinct product with its own tips - editor picks, scores, breaking news, nearby stores - rather than the web page in a smaller window, so features documented for one surface should not be assumed on the other.",
+    "extensions_and_add_on_store": "Yahoo Search has no extension system. It is a service consumed by browsers, and the browser extensions a user encounters belong to those browsers. What Yahoo documents instead is a set of contractual restrictions and a publisher relationship, both of which belong in this section because they govern how third-party software may interact with the service. The Terms of Service prohibit making available code designed to limit the functionality of the Services, expressly including the use of any ad-blocking technology, and they prohibit accessing or collecting data by automated means such as robots, spiders, scrapers or data-mining tools without prior permission; they also forbid building a competing aggregated data source from the content. On the publishing side there is no webmaster programme documented on the pages consulted: no Yahoo crawler documentation, no submission protocol and no site-owner diagnostics tool. A site's route to appearing in Yahoo results runs through whichever index supplies the results, which Yahoo's own documentation declines to name.",
+    "privacy_and_security_model": "Privacy at Yahoo is documented as an advertising-and-personalisation model with controls, under a policy last updated in March 2026. The policy states that Yahoo Inc. acts as data controller and describes collection of information the user provides, device information including IP address, cookie information, mobile and advertising identifiers, browser and operating system details, location information from several sources, and information gathered through cookies, web beacons and similar technologies both on and off Yahoo services. It states that Yahoo may recognise devices to provide personalised experiences and advertising across them, and that data may be combined with information obtained from third parties. Controls are listed rather than described in detail: account information, marketing preferences, location data and search history can be managed through a privacy dashboard, and the search page links directly to that dashboard. On advertising transparency Yahoo states that paid placements are labelled \"Ad\" or \"Sponsored\", and adds the qualification discussed above: where Yahoo is not paid to place partner content in a specific position, that content may not be labelled. All of this is Yahoo's own account; no independent audit was consulted.",
+    "update_channels_and_release_cadence": "Yahoo Search is a continuously operated service with no published version numbers, changelog or release channel. Change is visible through dated legal and help documents rather than through product announcements: the privacy policy dated 2026-03, the terms recording the 2025-05-06 change of contracting entity, and the DSA compliance article describing obligations that took effect on 2023-08-25. The experimental surface is the exception: Yahoo Scout is explicitly labelled beta on its own page, which is the only development-stage signal in the documentation. The results themselves are refreshed on a schedule Yahoo does not publish beyond an upper bound, since its removal guidance says that a change on a third-party site is reflected after the next refresh cycle, up to ten to twelve weeks. That figure is the closest thing to a cadence statement on any page consulted, and it concerns index freshness rather than feature releases. This entry therefore asserts no update schedule.",
+    "licensing_and_governance": "Yahoo Search is a proprietary service governed by the Yahoo Terms of Service and the Yahoo Privacy Policy; no licence is published for the service, its results or any index component, and no source code or data set is offered. Governance is corporate and legal rather than technical. Yahoo Inc. is the contracting entity described in the privacy policy, while the terms identify the entities providing the services by region, including Yahoo International Limited, whose name replaced Yahoo EMEA Limited on 2025-05-06. For users in the European Union a regulatory layer is documented explicitly: the Digital Services Act, in force since 2023-08-25, and the obligations Yahoo describes as transparency and accountability, with a single point of contact for users and authorities and a published DSA transparency report. The terms also set out liability limits and, for users in the United States, a binding arbitration agreement with class-action and jury-trial waivers, which is a governance fact that affects what a user can do about a dispute. Content policy beyond the removal process and SafeSearch is not documented on the pages consulted.",
+    "limitations_and_scope": "The defining limitation of this entry is that the engine underneath Yahoo Search is not described by Yahoo. There is no crawler documentation, no indexing pipeline description, no list of ranking parameters and no webmaster programme on the pages consulted. A reader who wants to know how a page reaches Yahoo results, or why one result precedes another, cannot answer those questions from Yahoo's own documentation. The help pages name only broad factors: relevance of the content to the query, geographic location when location services are enabled, the user's interactions with Yahoo products, and Yahoo's relationship with the content provider together with the availability of quality content. Three further limits are documented rather than inferred. Non-Yahoo content is outside Yahoo's control, so removals from the index depend on the publisher or on the refresh cycle, which may take up to ten to twelve weeks. Partner content may appear unlabelled when no payment was made for its position. And the service is contractual in ways that constrain third-party tooling, including an express prohibition on ad-blocking technology and on automated collection of data. Every statement about privacy and safety here is Yahoo's own.",
+    "who_is_it_for": "It suits users who want search embedded in a portal: results that link naturally into news, finance, sports and mail, plus an assistant entry point for conversational questions. It suits people who value a familiar results page with simple filters and a documented three-level SafeSearch, and households that want explicit filtering controls they can set once while signed in. For advertisers and partners the partner-facing stack - Yahoo Hosted Search and Yahoo Partner Ads - is the documented route to delivering search under another brand. It is also a reasonable secondary engine for users who deliberately want a second index and a different interface for the same query.",
+    "who_is_it_not_for": "It is not for anyone who needs to understand or influence the retrieval stack, because Yahoo publishes no crawler, indexing or ranking documentation and names no index supplier. It is not a privacy-first engine: the model is built on device identifiers, cookies, location and cross-device recognition, with controls rather than avoidance as the mechanism, and personalised advertising is central to the business. It is not for developers seeking a supported search API, since none is documented, and not for site owners who want submission tooling or diagnostics, since no webmaster programme is offered. Users who rely on ad-blocking software or on automated data collection should note that the terms expressly prohibit both, and users who need a contractual route to dispute a decision should note the arbitration and class-action waiver provisions that apply in the United States.",
+    "verdict": "Yahoo Search is best understood as a front end and a commercial layer over an index it does not describe. The documented product is coherent on its own terms - filters, three-level SafeSearch, a removal process with a stated refresh window, a beta assistant and a partner programme - and the legal documentation is unusually explicit about entity names, the 25 August 2023 DSA obligations and the arbitration terms that bind US users. The gap is upstream: nothing in Yahoo's own material explains how results are gathered or ordered, and the widely repeated claim that the index comes from Microsoft is, on the pages consulted, a secondary report rather than a documented arrangement. The most consequential disclosure in the documentation is also the least reassuring: partner content may appear without a label when Yahoo was not paid for its position. Read this entry as a description of a portal-integrated search product, not as documentation of a search engine."
+  },
+  "links": {
+    "homepage": "https://search.yahoo.com/",
+    "search_help": "https://help.yahoo.com/kb/search-for-desktop",
+    "ads_in_results": "https://help.yahoo.com/kb/search/sln2244.html",
+    "scout": "https://search.yahoo.com/scout",
+    "mobile": "https://help.yahoo.com/kb/search-for-mobile-web/yahoo-search-mobile-device-sln15524.html",
+    "privacy_policy": "https://guce.yahoo.com/privacy-policy?locale=en-US",
+    "terms_of_service": "https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html",
+    "company": "https://www.yahooinc.com/",
+    "search_partners": "https://search.yahooinc.com/"
+  },
+  "sources": [
+    {
+      "title": "Yahoo Search — results landing page: search box, Ask Scout entry point, trending searches, footer links to help, terms, privacy dashboard and ad policy",
+      "url": "https://search.yahoo.com/",
+      "type": "official_site",
+      "publisher": "Yahoo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Ads in Yahoo Search results — result sources (algorithmic, provider, advertiser, partner), factors influencing content, ad labelling and unlabelled partner content",
+      "url": "https://help.yahoo.com/kb/search/sln2244.html",
+      "type": "official_documentation",
+      "publisher": "Yahoo Help",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Filter and refine your search results on Yahoo — All, News, Images, Videos, Local, Shopping and timeframe filters",
+      "url": "https://help.yahoo.com/kb/search-for-desktop/SLN2206.html",
+      "type": "official_documentation",
+      "publisher": "Yahoo Help",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Select your settings for Yahoo SafeSearch — Strict, Moderate and Off levels; Preferences under signed-in settings",
+      "url": "https://help.yahoo.com/kb/search-for-desktop/select-settings-yahoo-safesearch-sln2247.html",
+      "type": "official_documentation",
+      "publisher": "Yahoo Help",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Remove search results from Yahoo Search — results from Yahoo and non-Yahoo sites, publisher-first route, refresh window of up to 10-12 weeks, personal information requests",
+      "url": "https://help.yahoo.com/kb/search/sln4530.html",
+      "type": "official_documentation",
+      "publisher": "Yahoo Help",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Get Yahoo Search on your mobile device — Yahoo Search app, bookmarking and default-engine instructions for Android browsers, Chrome and Safari on iOS",
+      "url": "https://help.yahoo.com/kb/search-for-mobile-web/yahoo-search-mobile-device-sln15524.html",
+      "type": "official_documentation",
+      "publisher": "Yahoo Help",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "The EU Digital Services Act and you — DSA in force 25 August 2023, Yahoo International Limited as EU entity, single points of contact, DSA transparency report",
+      "url": "https://help.yahoo.com/kb/search-for-desktop/digital-services-sln36611.html",
+      "type": "official_documentation",
+      "publisher": "Yahoo Help",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Yahoo Privacy Policy — last updated March 2026; Yahoo Inc. as data controller, device and location data, cross-device recognition, privacy dashboard controls",
+      "url": "https://guce.yahoo.com/privacy-policy?locale=en-US",
+      "type": "privacy_policy",
+      "publisher": "Yahoo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Yahoo Terms of Service — entity change from Yahoo EMEA Limited to Yahoo International Limited on 6 May 2025, DSA additional terms, ad-blocking and automated-collection prohibitions, US arbitration and class-action waiver",
+      "url": "https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html",
+      "type": "terms_of_service",
+      "publisher": "Yahoo",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Yahoo Inc. — corporate site: portfolio including Yahoo Search among Mail, News, Sports and Finance; Yahoo Ads and Yahoo DSP as advertising offerings",
+      "url": "https://www.yahooinc.com/",
+      "type": "official_site",
+      "publisher": "Yahoo Inc.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Yahoo Search | Search Partners — Yahoo Hosted Search, Yahoo Partner Ads and Yahoo App Distribution offered to partner businesses",
+      "url": "https://search.yahooinc.com/",
+      "type": "official_site",
+      "publisher": "Yahoo Inc.",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Yahoo Scout — assistant interface labelled beta, conversational prompts, optional sign-in to save chat history",
+      "url": "https://search.yahoo.com/scout",
+      "type": "official_site",
+      "publisher": "Yahoo",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

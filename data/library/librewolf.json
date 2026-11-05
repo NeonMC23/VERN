@@ -1,0 +1,108 @@
+{
+  "id": "librewolf",
+  "name": "LibreWolf",
+  "type": "application",
+  "summary": "Independent, community-built Firefox variant hardened for privacy and fingerprinting resistance, without telemetry, Safe Browsing or DRM, distributed for Windows, macOS, Linux and OpenBSD by package managers, Flatpak and AppImage.",
+  "tags": [
+    "browser",
+    "web",
+    "firefox",
+    "gecko",
+    "mozilla",
+    "privacy",
+    "open source",
+    "mpl"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "Linux",
+    "OpenBSD"
+  ],
+  "license": "Mozilla Public License 2.0 (licence file in the source repository)",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "LibreWolf is an independent, community-built variant of Mozilla Firefox whose stated goals are privacy, security and user freedom. It is not a rebranding: the project applies its own preference set and a patch set to current Firefox stable source and ships the result as a separate browser with its own release numbering. The design brief is explicit — increase resistance to tracking and to browser fingerprinting, remove telemetry, data collection and commercial content, and disable features the project considers hostile to user freedom, among them DRM. LibreWolf competes on defaults: fingerprinting resistance is switched on, WebGL is off, cookies and site data are deleted on close, uBlock Origin ships with curated filter lists, and the project publishes a deliberately short list of the settings it changes. The browser is available for Windows, macOS, Linux and OpenBSD, and there is no mobile edition. It is maintained by volunteers organised around a self-hosted Forgejo instance and a Matrix room, and it accepts no donations.",
+    "origin_and_history": "LibreWolf began as a privacy-hardened Firefox build and has remained a project of the same shape: rather than forking the engine or reworking the interface, it maintains settings, patches and build recipes applied on top of upstream Firefox source. That model explains its versioning. Source releases carry tags of the form `<Firefox version>-<revision>`, so the tag `159.0-1`, published on 27 October 2026, denotes the first LibreWolf revision built on Firefox 159.0; the two preceding source releases in the public list are `158.0.1-2` of 21 October 2026 and `158.0.1-1` of 20 October 2026. The project's documentation describes the browser as \"a custom and independent version of Firefox\" and insists on the independence: LibreWolf has its own settings stack, its own build system (a Docker-based tool the project calls bsys6), its own issue tracker and its own release cadence, and it is not reviewed or endorsed by Mozilla. Development is visible on a self-hosted Forgejo instance at `librewolf.dev`, with the source archive mirrored from Codeberg, and contributions arrive as merge requests or well-documented issues. The project publishes a list of core contributors and credits past contributors, but no founding date, corporate owner or legal entity appears on the pages consulted.",
+    "rendering_engine_and_technical_architecture": "LibreWolf runs the Gecko engine because it is compiled from Firefox source; it does not maintain an engine fork. The project states that it is \"always built from the latest Firefox stable source\", and its FAQ sets the expectation explicitly: LibreWolf is based on the latest Firefox version and updates usually land within three days of each upstream stable release, sometimes the same day. The technical identity of the browser therefore lies in three layers applied above the engine. The first is a preference overlay, exposed to users through `librewolf.overrides.cfg` and through about:config, which the documentation uses for every example it gives, including the DoH switches. The second is a patch set that changes behaviour the preferences cannot reach, such as removing the Pocket integration and Mozilla VPN advertisements at compile time. The third is the build system: bsys6 is described as easy and Docker-based so that \"everyone can build from source in few steps and without local dependencies\", which matters because LibreWolf distributes source and relies on packagers for binaries. Being built from Firefox source, it inherits Gecko's multiprocess architecture, sandboxing and site isolation and adds no process-model change of its own.",
+    "interface_and_documented_features": "The interface is Firefox's, with an added settings surface. The project describes \"LibreWolf specific UI that exposes the most important privacy and security settings\", so that users can control them without editing configuration files. Documented privacy behaviour includes deletion of cookies and website data on close, use of only privacy-respecting search engines with DuckDuckGo as default, uBlock Origin preinstalled with custom default filter lists, tracking protection in strict mode, stripping of tracking elements from URLs both natively and through uBlock Origin, enabling dFPI (Total Cookie Protection), enabling resistFingerprinting (RFP), always reporting the user language as en-US, disabling WebGL, blocking OS location services in favour of Mozilla's location API, limiting ICE candidate generation to a single interface during calls, forcing DNS and WebRTC inside the proxy when one is used, trimming cross-origin referrers, disabling search and form history and autofill, disabling link prefetching and speculative connections, disabling the disk cache, and using CRLs rather than OCSP for revocation. Annoyance removal is equally enumerated: no window resizing from scripts, no media autoplay, no search suggestions or urlbar advertisements, no sponsored home-page content, no Pocket, no extension recommendations and Firefox Sync disabled unless the user explicitly enables it.",
+    "installation_and_distribution": "LibreWolf is distributed through package managers and vendor download pages rather than through a single installer. The installation documentation is organised per platform: Windows, Arch Linux, Debian-based systems (Debian, Ubuntu, Mint), Gentoo, RHEL-family distributions (Fedora, AlmaLinux, Rocky Linux), openSUSE (Leap, Tumbleweed, Slowroll), other Linux, macOS and OpenBSD. For distributions without a native package the project documents two routes: Flatpak from Flathub under the identifier `io.gitlab.librewolf-community` and an AppImage published per release, with `librewolf-159.0-1-linux-x86_64-appimage.AppImage` being the current file at the time of consultation. The Linux page also discusses the security consequence of the Flatpak route honestly: the bubblewrap sandbox prevents Firefox's own sandbox from being used for process isolation, and processes are instead isolated through nested seccomp filters. On Windows the project documents package-manager installation and a separate updater and portable build. Crucially, the FAQ states that LibreWolf has no auto-update capability and therefore relies on package managers or users to apply updates.",
+    "platforms_and_hardware_architectures": "The documented platforms are Windows, macOS, Linux and OpenBSD, each with its own installation page. Linux coverage is the most granular and names Arch, Debian-based, Gentoo, RHEL-family and openSUSE families explicitly, with a generic route for everything else. The published binaries and release artefacts consulted are x86_64: the AppImage filename carries `x86_64`, and no ARM build appears in the pages consulted. The project says it will help anyone contributing a build for a currently unsupported system. No minimum operating system version, minimum memory, disk-space requirement or processor instruction requirement is published on the pages consulted; because the browser is rebuilt from current Firefox stable, the practical floor is presumably the one set by that upstream release, but the project publishes no mapping and this fiche does not infer one. Mobile is explicitly out of scope: asked whether an Android version will exist, the FAQ answers that nobody is working on it, that it is not something the project has considered investing time in, and that it recommends IronFox instead.",
+    "extensions_and_add_on_store": "LibreWolf uses Mozilla's add-on infrastructure. Extensions are installed from `addons.mozilla.org`, and the project takes a position on that dependency rather than hiding it: the FAQ addresses users who cannot reach Mozilla's store and recommends downloading uBlock Origin from its GitHub releases page instead, with the warning not to download extensions from random websites. One extension is preinstalled — uBlock Origin, bundled with custom default filter lists — and the documentation treats that bundle as part of the browser's default protection rather than as an optional add-on. An \"optional extension firewall\" is described among the security features, disabled by default and manually enabled. Extension recommendations are disabled, and Firefox Sync, which would carry extensions between devices, is off unless the user turns it on. The project publishes no add-on store of its own and no curated catalogue beyond the bundled filter lists; there is no documented policy on extension review beyond Mozilla's inherited process.",
+    "privacy_and_security_model": "The privacy model is stated as a set of deliberate defaults rather than as an audited guarantee. Fingerprinting resistance is enabled through Firefox's RFP mechanism, which the project describes as \"best in class\" and as part of the Tor Uplift project; the user language is always reported as en-US, WebGL is disabled as a fingerprinting vector, and only privacy-respecting search engines are shipped. Tracking is addressed at several layers: strict tracking protection, uBlock Origin with custom lists, URL parameter stripping and dFPI. Data retention is minimised: cookies and site data are deleted on close, the disk cache is disabled and temporary files are cleared. Security posture includes HTTPS-Only mode, stricter TLS/SSL negotiation rules, forced user interaction for download locations, disabled scripting in the built-in PDF reader, IDN homograph protection, reverting user-triggered TLS downgrades at session end, and CRL-based revocation. Two choices are explicitly political rather than technical: Google Safe Browsing is disabled over censorship concerns and to avoid a Google developer key being required to build from source, and DRM is disabled as a limitation on user freedom. The project states that it collects no data of any kind and that it lacks the infrastructure to do so; no independent audit or bug bounty programme was found in the pages consulted.",
+    "update_channels_and_release_cadence": "Releases follow upstream Firefox: the FAQ says LibreWolf is always based on the latest Firefox version and that updates usually arrive within three days of each upstream stable release, sometimes the same day. The public source release list bears this out, with `158.0.1-1` on 20 October 2026, `158.0.1-2` the next day and `159.0-1` on 27 October 2026. Each source release publishes signed tarballs with SHA-256 and SHA-512 checksums and a detached signature, and binary artefacts such as the AppImage are published per revision. There is no self-update: the FAQ states plainly that LibreWolf does not have auto-update capabilities and relies on package managers or users. That makes the practical update path depend on the distribution chosen — a repository or Flathub handles it automatically, an AppImage requires the user to act, and the Windows portable and updater builds follow their own logic. There is no beta, nightly or extended-support branch documented; the project ships one stable line aligned with upstream Firefox.",
+    "licensing_and_governance": "LibreWolf is released under the Mozilla Public License 2.0; the licence file in the source repository is the MPL 2.0 text, which is consistent with a product built from Firefox source. Governance is community-based and deliberately lightweight. The project describes itself as \"a largely community-driven project\" and points contributors to Matrix, Reddit and Lemmy; the website lists core contributors with named roles — project administration and Linux maintenance, webmastery, packaging for Gentoo, Chocolatey and winget, the Windows updater and portable build, settings maintenance, CI and infrastructure, and community support — alongside a list of past contributors. Development happens on the project's own Forgejo instance, with an external issue tracker and contribution guidelines requiring that the FAQ and settings documentation be read and existing issues searched before filing. The project refuses donations on principle, explaining that it does not want the administration, the dependency or the expectations that funding creates, which also means that no commercial entity stands behind the browser.",
+    "limitations_and_scope": "The project's own limits are numerous and stated. There is no Android version and none is planned. There is no auto-update, so security depends on the user or the package manager. Google Safe Browsing and DRM are disabled by design, which removes phishing protection and protected streaming. DoH is disabled by default, an explicit trade-off the FAQ explains as the browser refusing to choose between a single cloud resolver seeing all DNS traffic and local networks logging it. The Flatpak build cannot use Firefox's own process sandbox. The documentation also contains an unreconciled point: the feature list presents CRLs as the default revocation mechanism \"while disabling OCSP\", yet the same list includes an OCSP hard-fail setting; this fiche reports both without resolving them. Beyond the project's statements, the following are not published on the pages consulted: minimum system requirements, an ARM build, an independent security audit, an accessibility conformance statement, a formal trademark policy, and any governance document beyond contributor lists. As with every Firefox rebuild, users inherit upstream Firefox behaviour that LibreWolf does not document.",
+    "who_is_it_for": "LibreWolf suits users who want Firefox with a privacy posture they do not have to assemble themselves: fingerprinting resistance already on, uBlock Origin already installed and configured, cookies discarded at close, telemetry and sponsored content absent. It fits people who are comfortable with the consequences of hardened defaults — sites that break without WebGL, logins that do not persist, DRM video that will not play — and who install software from their distribution's package manager or Flathub and let it handle updates. It is also a reasonable choice for users who want a browser whose changes are published as an explicit list they can audit.",
+    "who_is_it_not_for": "LibreWolf is not for anyone who needs streaming services protected by DRM, nor for users who expect phishing and malware warnings from Safe Browsing. It is not for people who want automatic updates without a package manager, for mobile users, or for anyone on ARM hardware if no packaged build exists for their system. It is not suitable for environments that require published system requirements, an independent audit, a formal disclosure process or a vendor accountable under contract — there is no company behind it and it accepts no funding. Finally, users who depend on persistent sessions, form autofill or Sync without configuration will find the defaults actively inconvenient.",
+    "verdict": "LibreWolf is one of the cleanest expressions of the privacy-fork genre: no engine fork, no interface redesign, a published list of changed settings, a small patch set, a reproducible build path and a version number that tells you exactly which Firefox you are running. Its discipline is visible in what it refuses — donations, Safe Browsing, DRM, DoH by default, autoplay, sponsored content — and in the honesty of its documentation, which states that it has no auto-update and that its Flatpak build weakens process isolation. The costs are equally concrete: protection that depends on the user applying updates, a smaller platform matrix than mainstream browsers, no mobile edition, and fingerprinting resistance that intentionally makes the browser less convenient. For a desktop user who accepts those trade-offs, it is one of the most coherent hardened Firefox builds available; for anyone needing DRM, mobile, or a vendor with a support contract, it is the wrong tool."
+  },
+  "links": {
+    "homepage": "https://librewolf.net/",
+    "install": "https://librewolf.net/installation/",
+    "documentation": "https://librewolf.net/docs/faq/",
+    "features": "https://librewolf.net/docs/features/",
+    "source": "https://librewolf.dev/librewolf/source",
+    "releases": "https://librewolf.dev/librewolf/source/releases",
+    "issues": "https://librewolf.dev/librewolf/issues/issues"
+  },
+  "sources": [
+    {
+      "title": "LibreWolf — home page: project definition, main features, core contributors, communication channels",
+      "url": "https://librewolf.net/",
+      "type": "official_site",
+      "publisher": "LibreWolf project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "LibreWolf — FAQ: update cadence within three days, no auto-update, no Android, DoH disabled by default, no donations, Safe Browsing rationale",
+      "url": "https://librewolf.net/docs/faq/",
+      "type": "official_documentation",
+      "publisher": "LibreWolf project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "LibreWolf — features: enumerated privacy, security, annoyance and other defaults, including RFP, dFPI, WebGL and CRL choices",
+      "url": "https://librewolf.net/docs/features/",
+      "type": "official_documentation",
+      "publisher": "LibreWolf project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "LibreWolf — installation index: per-platform installation pages for Windows, Arch, Debian, Gentoo, RHEL, openSUSE, other Linux, macOS and OpenBSD",
+      "url": "https://librewolf.net/installation/",
+      "type": "official_documentation",
+      "publisher": "LibreWolf project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "LibreWolf — other Linux installation: Flathub identifier, AppImage artefact for 159.0-1, Flatpak sandbox caveat, build from source",
+      "url": "https://librewolf.net/installation/linux/",
+      "type": "official_documentation",
+      "publisher": "LibreWolf project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "LibreWolf — source archive repository metadata on the project's Forgejo instance: default branch, external issue tracker, topics",
+      "url": "https://librewolf.dev/api/v1/repos/librewolf/source",
+      "type": "metadata",
+      "publisher": "LibreWolf project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "LibreWolf — source releases API: tags 159.0-1 (2026-10-27), 158.0.1-2 (2026-10-21), 158.0.1-1 (2026-10-20) with signed tarballs and checksums",
+      "url": "https://librewolf.dev/api/v1/repos/librewolf/source/releases?limit=3",
+      "type": "metadata",
+      "publisher": "LibreWolf project",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "LibreWolf — licence file in the source repository: Mozilla Public License Version 2.0",
+      "url": "https://librewolf.dev/librewolf/source/raw/branch/main/LICENSE",
+      "type": "licence",
+      "publisher": "LibreWolf project",
+      "accessed": "2026-10-29"
+    }
+  ]
+}

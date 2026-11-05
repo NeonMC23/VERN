@@ -1,0 +1,130 @@
+{
+  "id": "duckduckgo-browser",
+  "name": "DuckDuckGo Browser",
+  "type": "application",
+  "summary": "Privacy-focused browser published by DuckDuckGo, built as a native shell around the host operating system's rendering engine (WebKit on macOS, WebView2/Blink on Windows), with tracker, fingerprinting and cookie protections enabled by default, a one-click data eraser and no general extension system.",
+  "tags": [
+    "browser",
+    "web",
+    "privacy",
+    "tracker-blocking",
+    "anti-fingerprinting",
+    "webkit",
+    "blink",
+    "webview2",
+    "macos",
+    "windows",
+    "ios",
+    "android",
+    "cross-platform",
+    "sync",
+    "email-protection",
+    "ai-assistant"
+  ],
+  "status": "active",
+  "platforms": [
+    "Windows",
+    "macOS",
+    "iOS",
+    "Android"
+  ],
+  "license": "Apache License 2.0 (published macOS source repository); licence of the distributed binaries not documented",
+  "last_verified": "2026-10-29",
+  "content": {
+    "introduction": "DuckDuckGo Browser is the browsing application published by DuckDuckGo, the company best known for its private search engine. The distinction matters more here than for most entries in this library: the search engine and the browser are two different products with two different distribution paths. The search engine is a website and a set of apps that answer queries without building a search history; the browser is a separate desktop and mobile application that embeds that engine as its default search provider and adds protection while the user visits other sites. DuckDuckGo's own help pages describe the browser as a privacy-protecting alternative to Google Chrome that ships with tracker blocking, HTTPS upgrading, Email Protection and the company's search engine built in. The company's stated position is that the protections should be on by default rather than exposed as a menu of levels, so the product is defined less by configuration than by what it does before the user touches a setting.",
+    "origin_and_history": "The desktop browser came after the mobile apps. DuckDuckGo announced a Mac browser in April 2022 with a waitlist beta, and opened that beta to the public in October 2022 with the app at version 0.30. The announcement described a rendering approach rather than a feature list: instead of forking Chromium, the Mac app calls the WebKit API that macOS provides and writes everything else itself. A Windows browser followed the same logic and reached public beta in June 2023, using the operating system's own rendering path on that platform. In both announcements the company framed the missing pieces as work in progress — extension support, tab pinning, bookmark import and private syncing were all described as future work at the time. The published macOS source repository records the same timeline from the code side: it was created in August 2020 and the last push to it dates from July 2025, after which the repository was archived, which is consistent with development continuing elsewhere rather than with the product being withdrawn.",
+    "rendering_engine_and_technical_architecture": "DuckDuckGo Browser is a shell around the rendering engine that the host operating system already provides. For macOS, the April 2022 announcement states that the browser does not fork Chromium or anything else, that it uses the rendering engine that comes with macOS — the same engine Safari uses — and that it reaches it through an API rather than by copying code. For Windows, the June 2023 announcement states that page rendering goes through a Windows WebView2 call, which uses the Blink engine underneath. In both cases everything around rendering — tabs, bookmarks, the new tab page, the password manager, the tracking protections — is described as written by DuckDuckGo's own engineers. The Windows post adds an implementation detail that bears on privacy rather than performance: the team states it worked on WebView2-specific issues such as keeping crash reports from being sent to Microsoft. The practical consequence, stated plainly in the same post, is that the security of the rendering layer follows the operating system's updates rather than the browser's own release cycle.",
+    "interface_and_documented_features": "The feature set documented across DuckDuckGo's help pages is a stack of protections plus a small number of everyday tools. On the protection side the company documents third-party tracker loading protection, which stops most tracking requests before they load; third-party and first-party cookie protections; CNAME cloaking protection; fingerprinting protection; link and referrer tracking protection; embedded social media protection; and several Google-specific protections covering AMP pages, Topics, the Protected Audience API and sign-in pop-ups. Smarter Encryption upgrades connections to HTTPS where it can. Ad blocking is presented as a consequence of tracker blocking, extended to most video ads including those on YouTube, with the whitespace left by removed ads cleaned up. Duck Player opens YouTube videos in a distraction-free player that does not feed the viewing history that shapes recommendations. The Fire Button clears recent browsing data in one click, with a per-site exception list. Cookie pop-ups are handled automatically, selecting the most private option available. On the everyday side there is a built-in password manager with autofill, Email Protection with @duck.com addresses, an optional Duck.ai assistant that the user can disable, and end-to-end encrypted Sync & Backup for bookmarks, passwords and Duck.ai chats.",
+    "installation_and_distribution": "Distribution is direct download plus the two mobile stores, with no Linux package and no Microsoft Store listing documented on the pages consulted. The Mac build is offered both as a direct download from DuckDuckGo and through the Mac App Store, and the help page warns that the two are not identical: the App Store build does not include the Bitwarden integration and cannot open local files, so users who need either are told to download directly. The Windows build is installed from the download page as an application package, and the help page gives a direct MSIX bundle URL for users who hit an \"Error parsing application package\" message. The same page sets the Windows floor at Windows 10 (May 2020) or later and announces the end of x86 support after version 0.170.0, with x64 Windows 10 or Windows 11 required to keep receiving updates. On macOS the floor is macOS 12.3 or later. The iOS and Android builds are distributed through the App Store and Google Play respectively.",
+    "platforms_and_hardware_architectures": "The pages consulted establish four platforms: macOS, Windows, iOS and Android, and nothing else. The help pages list exactly those four, and the Mac and Windows pages give their minimum operating system versions. On Windows the architecture story is explicitly documented only in the negative: the x86 build stops receiving updates after 0.170.0, leaving x64 Windows 10 and Windows 11 as the supported configurations. On macOS the help pages give a version floor but no architecture matrix. The iOS and Android pages consulted describe store distribution without stating minimum OS versions, so no version floor is claimed for mobile here. Cross-device continuity is a separate question from platform support: Sync & Backup is documented as a browser feature, not as a platform guarantee, and no matrix states which desktop and mobile builds can sync which data. Features are not documented as identical across platforms. The Windows announcement of June 2023 describes that build as approaching parity with the Mac build, which is a statement about a moving target rather than a promise that the two are the same today.",
+    "extensions_and_add_on_store": "DuckDuckGo Browser has no general extension system documented, and the company has said so directly. The June 2023 Windows announcement states that the browser did not have extension support yet, that support was planned, and that in the meantime the browser shipped features meant to cover the two most common reasons people install extensions: ad blocking and password management. The April 2022 Mac announcement makes the same argument in different words, describing a wait for \"browser extension support that meets our high standards of privacy and quality\". None of the help pages consulted since then describes an extension store, a side-loading path or a list of supported extensions for the browser, What does exist is partial openness at the component level: the tracker blocklists and the Tracker Radar crawler that feed the protections are published as repositories, so the filtering logic can be inspected even though the browser does not accept third-party extensions. A reader should treat the absence of an extension store as a documented position from 2022-2023 and not as a verified description of the current build, since no consulted page confirms or retracts it for the most recent release.",
+    "privacy_and_security_model": "The privacy model is built around blocking requests before they leave the browser, and the documentation is organised to make that the central claim. DuckDuckGo argues that cookie and fingerprinting protections alone act only after a tracking request has already exposed an IP address and other identifiers, and that stopping the request at the network layer is therefore the more meaningful protection; this is the stated reason third-party tracker loading protection sits at the top of the stack. The trackers themselves are identified by crawling with Tracker Radar and published as a blocklist, so the list is inspectable. Smarter Encryption upgrades connections to HTTPS where the destination supports it. Email Protection intercepts trackers in messages and offers @duck.com aliases. Sync & Backup is documented as end-to-end encrypted, with the company stating that it has no access to the synced data or to the encryption key. The search engine is claimed not to build a search history, and the company states that it earns from search ads rather than from selling data. Two limits belong in the same paragraph. These are publisher statements, not the results of an independent audit, and no audit report was located in the pages consulted.",
+    "update_channels_and_release_cadence": "Updates arrive through the channel the copy was installed from: the Mac App Store or the direct download on macOS, the application package installer on Windows, the App Store on iOS and Google Play on Android. DuckDuckGo does not publish a release schedule, a version history page or a cadence commitment on the pages consulted, so no interval is claimed here. What the documentation does expose is version numbers at particular moments rather than as a series: the Mac beta was at 0.30 when it opened publicly in October 2022, and the Windows help page states that x86 support ends after version 0.170.0. The second is the more useful: it confirms the 0.x.y numbering and that the Windows build has passed 0.170.0. Because rendering is delegated to the operating system, a meaningful part of the security surface moves with OS updates rather than with browser releases, a point the company makes itself when discussing WebView2. Nightly or beta channels are not documented on the pages consulted, and no current stable version number could be established from a primary source.",
+    "licensing_and_governance": "Licensing is split between source and binary, and the pages consulted only settle the first. DuckDuckGo states in its tracking-protection documentation that most of its apps and extensions are open source, and the archived macOS browser repository is published under the Apache License 2.0. The April 2022 Mac announcement said the app would be open-sourced after the beta period and carries an editorial note confirming that this happened. The iOS and Android applications are referred to on the same pages as open-source projects in the company's GitHub organisation, and the tracker blocklists and Tracker Radar are published as separate repositories. What is not documented on any consulted page is the licence that governs the distributed browser binaries themselves, or the terms attached to the optional subscription. Governance is corporate and centralised: DuckDuckGo the company controls the roadmap, the blocklists and the stores, there is no foundation, no elected body and no public governance document referenced, and contribution happens through repositories the company owns.",
+    "limitations_and_scope": "Three limits are worth stating before the recommendation. First, no independent verification: every protection described in this entry is described by DuckDuckGo, and no third-party audit of the browser was located in the pages consulted, so claims about what is blocked and what is not are publisher claims. Second, platform asymmetry is real but not fully documented: the company describes the Windows build as moving toward parity with the Mac build, which implies that features listed on a help page may not exist on every platform, and the pages consulted do not carry a per-platform feature matrix. Third, several ordinary facts simply are not published where this entry could reach them: the current stable version, the release cadence, the licence of the distributed binaries and the minimum mobile OS versions. Two further points are structural rather than uncertain. The browser is deliberately not extensible, so users who depend on extensions are served by built-in substitutes only. And because rendering comes from the operating system, the browser cannot fix engine-level vulnerabilities on its own schedule; it waits for the platform.",
+    "who_is_it_for": "It fits people who want strong tracking protection without configuring anything, who accept a small feature set in exchange for defaults that are already private, and who live on macOS, Windows, iOS or Android rather than on Linux. It suits users who want the search engine and the browser from the same vendor and who value the Fire Button as a habit rather than a menu. It is a reasonable choice for less technical users precisely because there is no level to pick: the protections are on, and the interface does not ask them to understand the difference between cookie, tracker and fingerprint protection.",
+    "who_is_it_not_for": "It is not for users who need extensions; the browser does not offer an extension system in the documentation consulted, and the built-in password manager and ad blocking are offered as substitutes rather than as equivalents. It is not for Linux users, who are not served at all. It is not for anyone who needs a published release cadence, a per-platform feature matrix or an audited privacy claim, because none of those is available. It is a poor fit for users who need the Mac App Store build specifically while also needing Bitwarden integration or local file access, since the help pages state that combination is not available.",
+    "verdict": "DuckDuckGo Browser is best understood as a deliberately narrow product: a native shell with a well-documented protection layer around an operating-system rendering engine, distributed free and funded by search advertising. The engineering choice is coherent and openly explained. The costs are equally explicit: no extensions, no Linux, feature parity between desktop builds described as a work in progress, and a documentation set that gives versions and dates only in passing. Users who want privacy that requires no decisions will find the defaults unusually complete; users who measure a browser by extensibility or by published release engineering will find it thin. Treat the security and privacy claims as the publisher's own until an independent audit appears."
+  },
+  "links": {
+    "homepage": "https://duckduckgo.com/browser",
+    "download_mac": "https://duckduckgo.com/mac",
+    "download_windows": "https://duckduckgo.com/windows",
+    "help_browser": "https://duckduckgo.com/duckduckgo-help-pages/get-duckduckgo/browser",
+    "source_macos": "https://github.com/duckduckgo/macos-browser",
+    "tracker_blocklists": "https://github.com/duckduckgo/tracker-blocklists",
+    "app_store": "https://apps.apple.com/us/app/duckduckgo-optional-duck-ai/id663592361"
+  },
+  "sources": [
+    {
+      "title": "How To Get The DuckDuckGo Browser on Windows — Windows 10 (May 2020) or later, MSIX bundle, end of x86 support after 0.170.0",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/get-duckduckgo/get-duckduckgo-browser-on-windows",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "How To Get the DuckDuckGo Browser on Mac — macOS 12.3 or later, direct download vs Mac App Store, App Store build limitations",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/get-duckduckgo/get-duckduckgo-browser-on-mac",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "DuckDuckGo Web Tracking Protections — catalogue of protections, Tracker Radar, published tracker blocklists, open-source statement",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/privacy/web-tracking-protections",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Ad Blocking in DuckDuckGo Browsers — ad and YouTube blocking, Duck Player, supported platforms",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/ad-blocking",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "DuckDuckGo Sync & Backup — end-to-end encrypted syncing of bookmarks, passwords and Duck.ai chats",
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/sync-and-backup",
+      "type": "official_documentation",
+      "publisher": "DuckDuckGo",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "Meet DuckDuckGo for Mac: A Private, Fast, Secure Browser — no Chromium fork, macOS rendering engine via WebKit API, open-sourcing of the app, future Linux ambition",
+      "url": "https://spreadprivacy.com/introducing-duckduckgo-for-mac/",
+      "type": "official_blog",
+      "publisher": "DuckDuckGo (Spread Privacy)",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "The wait is over: DuckDuckGo for Mac beta open to the public — version 0.30, Duck Player, Bitwarden integration, no extension support yet",
+      "url": "https://spreadprivacy.com/duckduckgo-for-mac-open-beta/",
+      "type": "official_blog",
+      "publisher": "DuckDuckGo (Spread Privacy)",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "DuckDuckGo's Windows browser now available in public beta — WebView2/Blink rendering, in-house shell, no extension support, crash reports not sent to Microsoft",
+      "url": "https://spreadprivacy.com/windows-browser-open-beta/",
+      "type": "official_blog",
+      "publisher": "DuckDuckGo (Spread Privacy)",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "duckduckgo/macos-browser repository metadata — Swift, created 2020-08-13, last push 2025-07-17, archived, Apache-2.0",
+      "url": "https://api.github.com/repos/duckduckgo/macos-browser",
+      "type": "source_repository",
+      "publisher": "GitHub (DuckDuckGo organisation)",
+      "accessed": "2026-10-29"
+    },
+    {
+      "title": "DuckDuckGo, optional Duck.ai — App Store listing: iPhone/iPad/Mac, feature list, subscription contents",
+      "url": "https://apps.apple.com/us/app/duckduckgo-optional-duck-ai/id663592361",
+      "type": "app_store_listing",
+      "publisher": "Apple App Store",
+      "accessed": "2026-10-29"
+    }
+  ]
+}
