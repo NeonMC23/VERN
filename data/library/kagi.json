@@ -1,0 +1,191 @@
+{
+  "id": "kagi",
+  "name": "Kagi",
+  "type": "application",
+  "summary": "Subscription-funded web search service operated by Kagi Inc., combining its Teclis and TinyGem indexes with external providers, domain personalisation, Lenses, Bangs, cited AI answers and separately priced APIs.",
+  "tags": [
+    "search engine",
+    "web",
+    "privacy",
+    "subscription",
+    "teclis",
+    "tinygem",
+    "lenses",
+    "bangs",
+    "privacy pass",
+    "search api",
+    "kagi"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android"
+  ],
+  "license": "Proprietary service; no source licence published for the core search engine",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Kagi is a general web search service operated by Kagi Inc., a United States company organised as a Delaware public benefit corporation. It is not merely a subscription wrapper around one named index: Kagi says it combines its own Teclis web index and TinyGem news index with anonymised calls to major search providers, specialised engines and vertical-data APIs. Ordinary use is account-based after a free trial, and the consumer service is funded by subscriptions rather than search advertising. Its interface adds Lenses, per-domain ranking controls, Bangs and optional AI features to conventional linked results. Orion is a separate browser, not a prerequisite for Kagi Search, and Kagi Assistant, Translate and the developer APIs are adjacent products with their own limits. This entry concerns the search service and its documented source, account, privacy and pricing model, not the entire Kagi product family.",
+    "origin_and_history": "Kagi's 2025 retrospective records Kagi Inc.'s incorporation in March 2022 and the public beta of Kagi Search and Orion Browser in June 2022. It dates the transition to a public benefit corporation to January 2024, the official Android application to October 2024, and Privacy Pass and the Tor onion service to February 2025. The same retrospective places Fair Pricing in February 2025 and records 50,000 paying members in June 2025 as a publisher-reported milestone, not a current audited subscriber count. Kagi's current privacy page states the public-benefit purpose of a more human-centric and sustainable web. These milestones establish a recent product history but do not provide a complete chronology of Teclis, TinyGem or changes among external result providers. No historic ranking version is reconstructed from the retrospective.",
+    "rendering_engine_and_technical_architecture": "Kagi describes Teclis as its own web index and TinyGem as its own news index, with particular emphasis on non-commercial sites and small-web discussions. It also says a typical query calls roughly a dozen sources simultaneously, including anonymised API requests to major result providers, Marginalia and vertical sources such as Wolfram Alpha, Apple, Wikipedia, Open Meteo, Yelp and TripAdvisor. Exact source selection and weighting for an individual query are not published. Kagi says its algorithms down-rank pages with many ads or trackers and promote independent, ad-free and personal websites; that is the operator's ranking policy, not an independently reproduced quality measure. Quick Answer uses language models to summarise returned pages with references, while maps, calculations, weather, flights, podcasts and other modules can use specialised providers. The architecture is therefore hybrid across both ordinary results and enrichments.",
+    "interface_and_documented_features": "Kagi provides Web, Images, Videos, News and Maps routes, with additional filters and widgets documented in its quick-start guide. Search operators include `filetype:`, `site:`, `inurl:`, `intitle:`, quoted phrases, parentheses, `AND`, `OR`, plus and minus terms, and the `*` wildcard. Bangs use forms such as `!w` for an external site, `!i` for Images and regional forms such as `!fr`; external-site Bangs are not counted as searches for billing. Lenses constrain results by region, included or excluded sites and keywords, file type and dates, while built-in Lenses cover Forums, Programming, Academic and Small Web among others. A result's shield menu can block, lower, normalise, raise or pin a domain, and personalisation can be disabled for one search. Quick Answer produces a referenced summary and can be triggered by a question mark or disabled from automatic activation. Sharing creates a link that non-subscribers can open.",
+    "installation_and_distribution": "Kagi Search is used through kagi.com and normally requires an account once the trial has been exhausted; it is not distributed as an offline index. Official guides explain how to select it as a browser's default engine, sometimes through an extension. A private Session Link can authenticate address-bar searches in private windows, but it contains a login token and must be treated as a credential: Kagi says never to share it. The link stops working when its originating session is signed out, and unused sessions expire after 90 days. Kagi also offers an official Android application. On iOS, the cited Search documentation presents browser and Orion routes rather than a separate search-only Kagi application. Orion itself is a distinct browser and is not required on other platforms. Developers use an API dashboard and keys rather than a consumer Session Link.",
+    "platforms_and_hardware_architectures": "Kagi's principal platform is the Web, so ordinary access depends on a supported browser and network connection rather than a published CPU, memory or storage architecture. Android is an additional native access platform; desktop and iOS access can use browser configuration, extensions or Kagi's separate Orion browser where available. Region and language controls, regional Bangs, maps and vertical providers affect functionality rather than hardware compatibility. Lenses are documented as unavailable for image and video searches, and Privacy Pass is not supported in Safari in the current guide, demonstrating that feature availability can differ by client. The Search and Extract APIs use HTTPS and are client-platform independent, but they require billing and API credentials. No claim of uniform feature availability across every browser, country or mobile application is made here, and no offline consumer package is documented.",
+    "extensions_and_add_on_store": "Kagi does not expose a general third-party add-on store for organic search. Its extension points are user rules and developer interfaces. Custom Lenses can include up to 10 included and 10 excluded websites, plus keyword, file-type and date rules; shared Lenses are copied and later diverge from the original. Custom and Quick Bangs provide additional query routing, and the Bangs definitions have a separate open-source community repository. For developers, the documented production base is `https://kagi.com/api/v1`, with POST `/search` and `/extract` operations, an OpenAPI specification and generated Go, Python, TypeScript and Rust clients. Search API access supports Lenses and optional full Markdown extraction of top results. Current API pricing lists Search at $12 per 1,000 requests and Extract at $4 per 1,000 pages, with up to 10 URLs per Extract request. A hosted MCP endpoint is another authenticated integration, not a consumer search engine version.",
+    "privacy_and_security_model": "Kagi says it loads no analytics or telemetry, does not track result clicks, proxies media and Assistant connections, and limits cookies to application functions. It nevertheless processes account identifiers, subscription and payment records, usage volume and temporary technical data. The main policy lists sampled load-balancer and virtual-machine logs for 7 days and sampled Sentry error information for 90 days. Its rights addendum says search queries are not stored beyond temporary 7-day debugging logs; that statement should not be expanded into deletion of every technical record after 7 days. API queries may likewise appear temporarily in non-account-linked debugging and abuse-prevention logs. Kagi says it does not sell personal information or use it for behavioural advertising, and its addendum warns that data may be processed in the United States. Assistant threads are deleted after one day by default, while reported threads are kept for 30 days. Third-party AI retention varies by selected provider and model, including periods of 24 hours, 30 days, no storage or unverified terms in Kagi's own comparison table.",
+    "update_channels_and_release_cadence": "Kagi Search has no consumer version number, fixed release cadence or comprehensive public changelog covering index sources and ranking in the consulted documentation. Product updates appear through the blog, help centre, API specification and account interface. The privacy page contains its own dated changelog: an entry dated 2026-09-22 records reported-Assistant-thread retention and new API data-handling details, while the rights addendum displays an effective and last-updated date of 2025-11-24. These dates apply to documents, not to a search-engine build. The API path contains `v1`, which identifies an API interface rather than Teclis, TinyGem or the consumer ranking system. Kagi's 2022 independent security audit is also a point-in-time assessment, explicitly acknowledged by Kagi as potentially invalidated by later deployments; it is not a current certification of every subsequent change.",
+    "licensing_and_governance": "Kagi's core search service is proprietary, although individual artefacts such as Bangs definitions, generated API clients and the OpenAPI specification have their own repositories or licence notices. Its public-benefit-corporation charter directs directors to balance stockholder interests, stakeholders and a stated public benefit; this is a governance form, not proof of search quality. The Terms apply Delaware law, provide the service as is and distinguish consumer products from commercial API use: they state that only Kagi API products are licensed for commercial use, while frontend products are for non-commercial use unless another licence is arranged. Subscription pricing currently lists a 100-search Trial, Starter at $5 per month for 300 searches, Professional at $10 for unlimited searches and Ultimate at $25 with premium AI, all plus applicable tax. AI interactions remain subject to fair-use rules, and Fair Pricing credits a month with no searches or AI interactions.",
+    "limitations_and_scope": "Kagi's documentation does not disclose the exact external providers, source count, routing or weighting for every query, so its hybrid results cannot be reduced to either a wholly independent index or a single upstream engine. Claims of superior relevance, ad and tracker down-ranking, anonymity and privacy are publisher statements unless independently tested; this phase did not reproduce ranking, inspect logs or repeat the 2022 security audit. That audit is historical, not a permanent guarantee. A normal account creates billing and identity records, and temporary debugging logs mean that no tracking is not synonymous with no data processing. Privacy Pass has important constraints: it is documented for Professional, Ultimate, Family and Team rather than Starter, and custom Bangs, Lenses and personalised results are unavailable while it authenticates searches. A Session Link is a bearer-like secret, not an anonymity feature. AI answers can inherit source and model errors, and model-specific retention terms change. Prices, allowances and API rates are current-page observations, not permanent commitments.",
+    "who_is_it_for": "Kagi suits users willing to pay for an ad-free search interface who want more control than a fixed results page provides. Domain pinning, lowering and blocking are useful for recurring preferences, while Lenses support repeatable research over defined slices of the Web. Users who frequently move among verticals or external sites can benefit from Bangs and regional shortcuts. Quick Answer is relevant to people who want citations back to result pages rather than an unattributed chat response. Privacy Pass may interest eligible subscribers who accept losing personalisation during its use. Developers can evaluate a documented Search API, content extraction, OpenAPI clients and MCP integration with explicit usage-based prices. Organisations attracted by a public-benefit governance model can also examine the charter and Terms directly.",
+    "who_is_it_not_for": "Kagi is not for users seeking an unrestricted free consumer engine, because ongoing ordinary use is subscription-based and Starter has a monthly search allowance. It is not suitable for anyone requiring a single fully independent index, a published per-query provider list or a reproducible ranking formula. Users who need no account or billing records should look elsewhere, and Privacy Pass does not remove the need for an eligible paid membership or preserve personalised features. Those requiring all AI providers to have one uniform retention policy must instead select and inspect the relevant model documentation. Commercial users should not assume that a consumer subscription licenses commercial frontend use; the Terms distinguish API licensing. Finally, organisations requiring a current independent security certification, offline search, an open-source core engine or guaranteed result quality need evidence beyond this documentation.",
+    "verdict": "Kagi is best understood as a subscription-funded, hybrid search service whose own Teclis and TinyGem indexes coexist with many external result and vertical-data sources. Its strongest user-facing distinctions are concrete controls: Lenses, domain ranking, Bangs, cited Quick Answer output and optional Privacy Pass authentication. Its privacy documentation is more informative than a no-tracking slogan because it records account data, temporary logs, AI-specific retention and United States processing. The main trade-offs are paid access, incomplete per-query source transparency, model-dependent AI terms and reduced personalisation under Privacy Pass. Kagi's public-benefit structure and historical security audit add context but do not independently establish present privacy, security or relevance. It is a substantial option for users who value configurable search and accept those limits, rather than a verified anonymous or wholly self-indexed alternative."
+  },
+  "links": {
+    "homepage": "https://kagi.com/",
+    "history": "https://blog.kagi.com/first-three-years",
+    "search_sources": "https://help.kagi.com/kagi/search-details/search-sources.html",
+    "search_operators": "https://help.kagi.com/kagi/features/search-operators.html",
+    "lenses": "https://help.kagi.com/kagi/features/lenses.html",
+    "personalized_results": "https://help.kagi.com/kagi/features/website-info-personalized-results.html",
+    "bangs": "https://help.kagi.com/kagi/features/bangs.html",
+    "quick_start": "https://help.kagi.com/kagi/getting-started/",
+    "quick_answer": "https://help.kagi.com/kagi/ai/quick-answer.html",
+    "pricing": "https://kagi.com/pricing",
+    "plan_types": "https://help.kagi.com/kagi/plans/plan-types.html",
+    "privacy_policy": "https://kagi.com/privacy",
+    "privacy_rights": "https://kagi.com/privacy/rights",
+    "privacy_pass": "https://help.kagi.com/kagi/privacy/privacy-pass.html",
+    "private_sessions": "https://help.kagi.com/kagi/privacy/private-browser-sessions.html",
+    "llm_privacy": "https://help.kagi.com/kagi/ai/llms-privacy.html",
+    "api_documentation": "https://kagi.com/api/docs",
+    "api_pricing": "https://kagi.com/api/pricing",
+    "security_audit_2022": "https://blog.kagi.com/security-audit"
+  },
+  "sources": [
+    {
+      "title": "Kagi status update: first three years - incorporation and public beta in 2022, PBC transition, Android, Privacy Pass and publisher milestones",
+      "url": "https://blog.kagi.com/first-three-years",
+      "type": "official_company_article",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search Sources - Teclis and TinyGem indexes, anonymised provider calls, vertical sources, ranking policy and Kagi Small Web",
+      "url": "https://help.kagi.com/kagi/search-details/search-sources.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Keyboard Shortcuts and Search Operators - filetype, site, inurl, intitle, Boolean, wildcard, Bang and widget syntax",
+      "url": "https://help.kagi.com/kagi/features/search-operators.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi Lenses - built-in and custom result constraints, domain and keyword limits, dates, sharing and image or video exclusion",
+      "url": "https://help.kagi.com/kagi/features/lenses.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Website Info and Personalized Results - block, lower, normal, higher and pin controls, per-search opt-out and domain information",
+      "url": "https://help.kagi.com/kagi/features/website-info-personalized-results.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi Bangs - internal, external, regional and AI shortcuts, billing treatment, custom Bangs and supported query patterns",
+      "url": "https://help.kagi.com/kagi/features/bangs.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi Quick Start - default-browser setup, personalisation, Lenses, operators, Quick Answer, page summaries and sharing",
+      "url": "https://help.kagi.com/kagi/getting-started/",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Quick Answer - referenced summaries of returned pages, question-mark and keyboard activation, and automatic-trigger setting",
+      "url": "https://help.kagi.com/kagi/ai/quick-answer.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi Pricing - Trial, Starter, Professional and Ultimate prices and allowances, Fair Pricing and subscription funding",
+      "url": "https://kagi.com/pricing",
+      "type": "official_product_page",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi Plan Types - detailed search and AI allowances, search counting, Family and Team plans and Fair Pricing rules",
+      "url": "https://help.kagi.com/kagi/plans/plan-types.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi Privacy Policy and Terms - cookies, temporary logs, account and API processing, AI retention, PBC and Delaware terms",
+      "url": "https://kagi.com/privacy",
+      "type": "legal_document",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi Privacy Rights Addendum effective 2025-11-24 - collected categories, query logging, United States transfers and data-rights procedures",
+      "url": "https://kagi.com/privacy/rights",
+      "type": "legal_document",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi Privacy Pass - eligible plans, cryptographic tokens, personalisation limits, browser support and monthly token limit",
+      "url": "https://help.kagi.com/kagi/privacy/privacy-pass.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Private Browser Session Link - token-based authentication, credential warning, invalidation and 90-day unused-session expiry",
+      "url": "https://help.kagi.com/kagi/privacy/private-browser-sessions.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi LLMs and Privacy - third-party model providers and model-specific training, retention and unverified-data disclosures",
+      "url": "https://help.kagi.com/kagi/ai/llms-privacy.html",
+      "type": "official_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi API Documentation - api/v1 Search and Extract operations, OpenAPI specification, official clients and authenticated MCP access",
+      "url": "https://kagi.com/api/docs",
+      "type": "developer_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi API Pricing - Search and Extract usage rates, Extract URL limit, invoicing and Enterprise arrangements",
+      "url": "https://kagi.com/api/pricing",
+      "type": "developer_documentation",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Kagi independent security audit in 2022 - Illumant assessment, public reports and the publisher's warning about point-in-time validity",
+      "url": "https://blog.kagi.com/security-audit",
+      "type": "official_announcement",
+      "publisher": "Kagi",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

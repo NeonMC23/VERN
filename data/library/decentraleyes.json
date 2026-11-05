@@ -1,0 +1,233 @@
+{
+  "id": "decentraleyes",
+  "name": "Decentraleyes",
+  "type": "application",
+  "summary": "Local CDN emulation extension that redirects explicitly recognised library requests to packaged resources, with stable and staging coverage, site exceptions and distinct Firefox and Chromium MV3 implementations.",
+  "tags": [
+    "browser extension",
+    "local cdn",
+    "content delivery network",
+    "javascript libraries",
+    "request redirection",
+    "local resources",
+    "privacy",
+    "manifest v3",
+    "firefox",
+    "chromium",
+    "declarativenetrequest",
+    "open source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Firefox",
+    "Firefox for Android",
+    "Chrome",
+    "Microsoft Edge"
+  ],
+  "license": "Mozilla Public License 2.0",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Decentraleyes is a free, open-source browser extension that emulates a defined set of content-delivery-network libraries from files bundled inside the extension. When a supported website requests a recognised library from a recognised host, path and version, the extension can supply a local copy instead of allowing that request to reach the CDN. This can reduce third-party connections and repeated downloads for covered resources. It is not a general advertisement blocker, an arbitrary script blocker or a proxy for every CDN. Coverage depends on explicit mappings and packaged files, and many of those libraries are old by current development standards. Version 3.0.2 is available through the Firefox, Chrome and Edge channels, but its Firefox and Chromium implementations are materially different. Repository activity continued after that release, so the project should not be described as abandoned merely because a resource directory or store package has an older date. Decentraleyes is best understood as a compatibility-conscious local CDN emulation layer with finite, inspectable coverage.",
+    "origin_and_history": "Thomas Rientjes created and maintains Decentraleyes, with public source, issue tracking and community translations. The project grew around a simple privacy problem: websites often load common libraries from third-party CDNs, exposing a visitor's network request even when the same file could be supplied locally. Early mappings and interception code date from the project's initial Firefox-oriented design; signed release tags have been part of the distribution workflow since 2016. A major Manifest V3 rewrite culminated in version 3.0.0 in November 2024, followed by further compatibility work. AMO describes version 3.0.1, released on 29 April 2026, as adding Tencent CDN support and updating mappings. Version 3.0.2 followed in August 2026 with release fixes. The repository's latest inspected commit, af6a2e93 on 14 September 2026, added a domain exception after the 3.0.2 packages. That later commit is evidence of maintenance, not evidence that every store already contains the change or that upstream libraries have been refreshed.",
+    "rendering_engine_and_technical_architecture": "Decentraleyes has no rendering engine. Its Firefox 3.0.2 package is Manifest V3 with background module scripts and blocking webRequest. The interceptor considers only GET requests, derives the destination host and path, selects host-specific mappings, extracts a version and constructs a local target. Source map files are explicitly excluded. The target must also exist in the selected stable or staging environment before the extension redirects to a runtime resource URL. If no target is available, the default behaviour leaves the request alone or upgrades an HTTP candidate to HTTPS; enabling blockMissing instead cancels missing candidates. Domain exceptions and the user whitelist can preserve original requests under the default missing-resource behaviour. XMLHttpRequest candidates outside the configured test domain are not locally injected. The Chromium branch uses a different MV3 design: a service worker and declarativeNetRequest static rulesets for stable and staged redirects, blocking, sanitising and transformation. The Firefox interception algorithm must therefore not be attributed unchanged to Chromium packages.",
+    "interface_and_documented_features": "The popup reports local resource injections and can display a badge, while the options page exposes coverage and compatibility settings. Current defaults leave blockMissing disabled, leave enforceStaging disabled, enable metadata stripping, disable network prediction, show the icon badge and show release notes. Enabling blockMissing or enforceStaging selects the staging environment, which contains additional resource paths. The whitelist allows a user to exclude a site domain from candidate interception; managed settings can also be supplied by an administrator. A separate online test utility checks whether selected CDN requests are answered locally, but a successful test covers only the utility's cases rather than every mapping or website. Metadata stripping is distinct from local delivery: on recognised CDN hosts, the Firefox request-header listener can remove Cookie, Origin and Referer headers. The network-prediction option controls the browser's prefetch setting through the privacy API. These are specific controls, not a dashboard for all trackers or all browser cookies.",
+    "installation_and_distribution": "The official website links to Firefox Add-ons, the Chrome Web Store and Microsoft Edge Add-ons. All three showed version 3.0.2 when consulted, but their dates differ: AMO listed 6 August 2026, Edge 7 August and Chrome 8 August. The GitLab v3.0.2 release provides source and downloadable Firefox and Chromium packages. This review statically inspected the AMO XPI and the official GitLab Chromium CRX without installing either one. Their contents should not be assumed to be byte-identical to every store-managed package, and no automatic update channel was tested. Older-browser downloads mentioned by the project belong to a separate compatibility context and do not turn the current package into a legacy XUL extension. Installation from a store remains the normal route for most users; downloading a release artefact is useful for inspection or manual deployment only where the browser permits it. Store availability does not itself guarantee that a particular site's library combination is covered.",
+    "platforms_and_hardware_architectures": "The current tagged manifest requires Firefox and Firefox for Android 115 or later. It uses browser extension APIs rather than native CPU instructions, so no x86, ARM or other hardware architecture matrix is stated. Firefox retains a background-script and blocking-webRequest implementation in the inspected 3.0.2 package. The experimental Chromium manifest instead declares a service worker, declarativeNetRequest and a minimum Chrome version of 101. That branch is the basis of the inspected official CRX, but its architecture should not be generalised to every Chromium store artefact without a package comparison. The official distribution pages address Firefox, Chrome and Edge; this entry does not infer a current Safari package or support for every Chromium fork. Android support comes from the Firefox manifest and AMO metadata, not from an assertion that Chrome on Android can install desktop extensions. Browser API support, store policy and resource coverage are separate compatibility questions even when the displayed version number is the same.",
+    "extensions_and_add_on_store": "Decentraleyes has no internal executable plug-in store. Its functional coverage comes from bundled mappings, environments and resources. The 3.0.2 data defines 15 library families: AngularJS, Backbone, Dojo, Ember, Ext Core, jQuery, jQuery UI, Modernizr, Moment, MooTools, Prototype, script.aculo.us, SWFObject, Underscore and Google Web Font Loader. Sixteen host keys include active CDN hosts, mirrors and deprecated entries. The stable environment declares 213 resource paths across 14 families; staging adds 48, for 261 declared paths. Embedded maxima include jQuery 2.1.4, AngularJS 1.4.8, Backbone 1.2.3 and Underscore 1.8.3 in stable, while staging includes jQuery 3.7.1, AngularJS 1.6.5, Backbone 1.4.0, Underscore 1.13.4 and Moment 2.29.4. These are upper bounds in the packaged data, not claims that they are the latest upstream releases. Browser add-on stores distribute the extension; they do not let users subscribe to arbitrary new CDN libraries at runtime.",
+    "privacy_and_security_model": "For a request that is actually redirected, local delivery prevents that particular CDN connection from carrying the visitor's network metadata to the third-party host. Decentraleyes also strips Cookie, Origin and Referer headers on recognised CDN hosts when metadata stripping is enabled, and it can disable browser network prediction. These mechanisms have different scopes: header filtering does not manage cookies for the visited site, and prefetch control is a browser-wide setting rather than a CDN rule. The extension requests broad host access plus webRequest, navigation, tabs, storage, unlimited storage and privacy capabilities so that it can inspect candidates, redirect resources and maintain settings. Its privacy policy states that it does not collect data, but that statement is not an independent audit of browser-store or update infrastructure. No network capture was performed here. Decentraleyes does not encrypt the connection to the destination website, hide the visitor's IP address, stop first-party tracking or provide anonymity; it addresses a specific class of third-party library requests.",
+    "update_channels_and_release_cadence": "Code, mappings and local resources are packaged with the extension, so coverage changes are associated with extension updates rather than a separately documented live rule feed. Store review can produce different publication dates even for the same 3.0.2 version, as the August 2026 Firefox, Edge and Chrome listings demonstrate. Repository history adds useful context: the resources tree showed a latest directory change on 26 March 2024, while later release notes describe mapping additions and fixes, and a source commit landed on 14 September 2026. A single folder date therefore cannot establish that the whole project is unmaintained. Conversely, a recent source commit does not prove that packaged libraries are current upstream or that the change has reached every store. No fixed release interval is promised by the inspected sources. Users and administrators should check the exact package version and its mappings rather than infer coverage from the repository's latest commit alone. No store update or packaged-resource refresh was replayed during this phase.",
+    "licensing_and_governance": "Decentraleyes is licensed under the Mozilla Public License 2.0, consistently identified in the README and source headers. The public GitLab project accepts issue reports and merge requests, and its contribution documentation describes forks on request, community discussion and translation through Crowdin. The maintainer retains release control, while public mappings and resources make coverage and compatibility behaviour open to inspection. Signed tags since 2016 support the documented release workflow, but this review did not independently verify every tag signature or the Chromium package signature. Third-party JavaScript libraries remain identifiable upstream works; the extension's MPL statement should not be treated as relicensing all of those resources or the CDNs that distribute them. No exhaustive dependency-licence audit was conducted. Open governance artefacts and a public issue tracker provide transparency, not a guarantee of response time, resource freshness or formal security certification.",
+    "limitations_and_scope": "The principal limitation is finite and ageing coverage. A modern library, unrecognised version, different path or unlisted CDN simply has no local target; the request normally proceeds, or can break if blockMissing is enabled. Even declared coverage requires package-level scrutiny. Static inspection of the Firefox 3.0.2 XPI found 259 .jsm resources, but the declared jQuery UI 1.6.0 and 1.7.3 paths were absent. In the inspected Chromium CRX, static DNR rules had 202 stable redirect targets and 48 staging targets, yet none of the 11 stable jQuery UI paths had a redirect target; nine corresponding files were present without a target and two were absent. All other referenced redirect files existed. These findings do not establish the runtime effect on a particular site, because no browser execution was performed, and the CRX was not proven identical to each store package. Whitelists, domain exceptions, XHR handling and HTTP fallback also affect outcomes. Decentraleyes is consequently neither a complete tracker blocklist nor a guarantee of breakage-free local emulation.",
+    "who_is_it_for": "Decentraleyes suits users who visit sites that still load recognised libraries from supported CDNs and want those specific requests served locally. It can complement a tracker blocker by reducing selected third-party connections rather than merely hiding their visual output. Users on metered or high-latency connections may also value avoiding repeated downloads, although this entry makes no benchmark claim. The extension is useful to technically minded people who want an inspectable mapping table, local package contents and compatibility switches such as staging or blockMissing. Administrators can evaluate managed settings, and contributors can report missing resources or problematic domains through the public project. It is most appropriate when users understand its resource-specific scope and are prepared to whitelist a site or adjust an option if a library mismatch breaks page behaviour.",
+    "who_is_it_not_for": "Decentraleyes is not for users who expect every CDN, JavaScript library or current upstream version to be covered automatically. It is not a substitute for a comprehensive tracker blocker, advertisement filter, script-security tool, VPN or anonymity network. People who need guaranteed compatibility with business-critical sites should test the exact browser package and avoid enabling blockMissing without understanding that missing candidates will be cancelled. The static jQuery UI discrepancies also make it unsuitable to promise uniform behaviour across Firefox and Chromium without further runtime verification. Users seeking the newest framework releases will not obtain them merely by installing the extension; the bundled stable and staging versions have fixed maxima. Finally, anyone requiring identical store artefacts, signed-package verification or audited no-network behaviour needs checks beyond the declarations and static inspection presented here.",
+    "verdict": "Decentraleyes remains a maintained, narrowly focused local CDN emulation extension rather than an abandoned or universal privacy solution. Version 3.0.2 is current across the three official browser channels, and a September 2026 source commit provides post-release maintenance evidence. Its explicit host, path and version matching, local resource environments, metadata controls and whitelist give it a clear compatibility model. The Firefox and Chromium architectures are different, however, and static package inspection uncovered specific jQuery UI coverage gaps that prevent an unqualified “all declared resources work” claim. Its library catalog also contains old maxima and should not be confused with upstream currency. For supported requests, Decentraleyes can usefully reduce third-party CDN exposure and repeated downloads. For everything outside its mappings, users need other privacy and security measures, and for sensitive deployments they should test actual sites and the exact package rather than relying on version parity alone."
+  },
+  "links": {
+    "project_home": "https://decentraleyes.org/",
+    "introduction_guide": "https://git.synz.io/Synzvato/decentraleyes/-/wikis/Simple-Introduction",
+    "readme": "https://git.synz.io/Synzvato/decentraleyes/-/raw/master/README.md",
+    "release_3_0_2": "https://git.synz.io/Synzvato/decentraleyes/-/releases/v3.0.2",
+    "amo_versions": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
+    "chrome_listing": "https://chromewebstore.google.com/detail/decentraleyes/ldpochfccmkkmhdbclfhpagapcfdljkj",
+    "edge_listing": "https://microsoftedge.microsoft.com/addons/detail/lmijmgnfconjockjeepmlmkkibfgjmla",
+    "tagged_manifest": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/manifest.json",
+    "chromium_manifest": "https://git.synz.io/Synzvato/decentraleyes/-/raw/experimental/manifest.json",
+    "resource_mappings": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/data/resource/mappings.js",
+    "resource_environments": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/data/resource/environments.js",
+    "request_interceptor": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/core/request/interceptor.js",
+    "request_analyzer": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/core/request/analyzer.js",
+    "request_sanitizer": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/core/request/sanitizer.js",
+    "setting_defaults": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/data/setting/defaults.js",
+    "background_helpers": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/utilities/helpers.js",
+    "storage_manager": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/core/storage.js",
+    "latest_commit": "https://git.synz.io/api/v4/projects/18/repository/commits/af6a2e93def9bf8e859b01722c9d7bad32900897",
+    "resources_tree": "https://git.synz.io/Synzvato/decentraleyes/-/tree/master/resources",
+    "privacy": "https://decentraleyes.org/privacy-policy/",
+    "test_utility": "https://decentraleyes.org/test/",
+    "firefox_package": "https://addons.mozilla.org/firefox/downloads/file/4943310/decentraleyes-3.0.2.xpi",
+    "chromium_package": "https://git.synz.io/-/project/18/uploads/33086c1de24b991723abf72d98bdfbf4/Decentraleyes.v3.0.2-chromium.crx"
+  },
+  "sources": [
+    {
+      "title": "Decentraleyes official site - local CDN emulation purpose, official browser downloads and project scope",
+      "url": "https://decentraleyes.org/",
+      "type": "official_project_site",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes simple introduction - supported-request concept, local delivery and compatibility explanation",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/wikis/Simple-Introduction",
+      "type": "official_project_guide",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes README - project purpose, MPL-2.0 licence, contribution and translation channels",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 release page - release artefacts and current packaged version",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/releases/v3.0.2",
+      "type": "official_release_page",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Firefox Add-ons Decentraleyes version history - 3.0.1/3.0.2 notes, dates, compatibility and MPL-2.0 label",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/versions/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Chrome Web Store Decentraleyes listing - version 3.0.2, 8 August 2026 update and Chromium distribution",
+      "url": "https://chromewebstore.google.com/detail/decentraleyes/ldpochfccmkkmhdbclfhpagapcfdljkj",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Microsoft Edge Add-ons Decentraleyes listing - version 3.0.2 and 7 August 2026 update",
+      "url": "https://microsoftedge.microsoft.com/addons/detail/lmijmgnfconjockjeepmlmkkibfgjmla",
+      "type": "official_store_listing",
+      "publisher": "Microsoft Edge Add-ons / Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 manifest - MV3 Firefox background model, permissions and Gecko 115 minimum",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes experimental Chromium manifest - MV3 service worker, DNR rulesets and Chrome 101 minimum",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/experimental/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 resource mappings - recognised CDN hosts, paths, versions and local targets",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/data/resource/mappings.js",
+      "type": "official_source_data",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 resource environments - stable and staging resource-path inventories",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/data/resource/environments.js",
+      "type": "official_source_data",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 request interceptor - GET matching, local redirects, missing-resource and exception behaviour",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/core/request/interceptor.js",
+      "type": "official_source_code",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 request analyzer - host, base-path, version and target matching rules",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/core/request/analyzer.js",
+      "type": "official_source_code",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 request sanitizer - Cookie, Origin and Referer removal on recognised CDN hosts",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/core/request/sanitizer.js",
+      "type": "official_source_code",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 setting defaults - blockMissing, staging, metadata, prefetch, badge and whitelist values",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/data/setting/defaults.js",
+      "type": "official_source_code",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 helpers - domain whitelist, recognised hosts and network-prediction control",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/utilities/helpers.js",
+      "type": "official_source_code",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes v3.0.2 storage manager - local/managed settings and stable-versus-staging environment selection",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/raw/v3.0.2/code/core/storage.js",
+      "type": "official_source_code",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes repository commit af6a2e93 dated 14 September 2026 - post-release domain-exception maintenance evidence",
+      "url": "https://git.synz.io/api/v4/projects/18/repository/commits/af6a2e93def9bf8e859b01722c9d7bad32900897",
+      "type": "official_repository_metadata",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes resources directory history view - dated resource-tree maintenance context",
+      "url": "https://git.synz.io/Synzvato/decentraleyes/-/tree/master/resources",
+      "type": "official_repository_history",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes privacy policy - publisher declaration concerning data collection",
+      "url": "https://decentraleyes.org/privacy-policy/",
+      "type": "official_privacy_policy",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Decentraleyes official test utility - selected checks for local delivery rather than exhaustive coverage",
+      "url": "https://decentraleyes.org/test/",
+      "type": "official_test_documentation",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Official AMO Decentraleyes 3.0.2 XPI - statically inspected manifest, resources and declared-path discrepancies",
+      "url": "https://addons.mozilla.org/firefox/downloads/file/4943310/decentraleyes-3.0.2.xpi",
+      "type": "official_distribution_package",
+      "publisher": "Mozilla Add-ons / Decentraleyes project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Official GitLab Decentraleyes 3.0.2 Chromium CRX - statically inspected DNR targets and packaged resources",
+      "url": "https://git.synz.io/-/project/18/uploads/33086c1de24b991723abf72d98bdfbf4/Decentraleyes.v3.0.2-chromium.crx",
+      "type": "official_distribution_package",
+      "publisher": "Decentraleyes project",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

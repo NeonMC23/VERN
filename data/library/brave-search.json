@@ -1,0 +1,141 @@
+{
+  "id": "brave-search",
+  "name": "Brave Search",
+  "type": "application",
+  "summary": "Web search engine operated by Brave Software, Inc., serving results from its own crawler-built index, with community re-ranking, cited AI answers, contextual advertising and separately documented browser-specific integrations.",
+  "tags": [
+    "search engine",
+    "web",
+    "privacy",
+    "independent index",
+    "goggles",
+    "rerank",
+    "AI answers",
+    "advertising",
+    "proprietary",
+    "brave"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web"
+  ],
+  "license": "Proprietary service; no source licence published for the consumer search engine itself",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Brave Search is the web search engine operated by Brave Software, Inc., a United States company that also makes the Brave browser. Those products must not be collapsed into one another. The engine is available at search.brave.com in an ordinary browser; the browser is a separate desktop and mobile application with its own shields, rewards, wallet and release channels. Brave Search does not require that browser for ordinary web queries, although a few integrations are browser-specific. Ask Brave and AI Answers are features of the search service, not names for the browser. The Brave Search API is a separate developer product with authentication and usage limits, not a second consumer engine. The subject of this entry is therefore the consumer search service and its publicly described index, ranking controls, advertising and privacy model, rather than the whole Brave software estate.",
+    "origin_and_history": "Brave's own retrospective says that Brave Search launched in June 2021. At launch, according to that publisher account, about 13 percent of queries needed third-party assistance, principally through Bing, while the company worked towards an independent index. A later announcement, updated on 2023-05-03, said that all ordinary web results were then served by Brave's index and that the remaining Bing search API calls had been removed. That is a dated historical statement by Brave, not a measurement performed for this entry. The current help page states more briefly that Brave Search is fully independent. The same documentation still describes optional Google fallback mixing in the Brave browser, so independence should not be read as a promise that no external service can ever participate. No separate launch day or versioned history of the ranking system is published in the material consulted.",
+    "rendering_engine_and_technical_architecture": "The engine has its own crawler and index. Its crawler documentation is unusually specific about identification: Brave does not advertise a differentiated crawler user agent, saying this avoids discrimination by sites that permit only Google crawling, and it will not crawl where Googlebot is barred. For removal, Brave distinguishes robots.txt from the robots noindex directive and offers a URL re-fetch submission route. The crawler is partly informed by the opt-in Web Discovery Project in the Brave browser, which contributes selected queries, result clicks, visited URLs, engagement and page metadata under an unlinkability design. Brave says that ordinary results come solely from its index, while optional Google fallback can mix additional results inside the browser and return query results for index improvement. Public ranking detail is limited: Goggles and Rerank alter ordering, but Brave does not publish the weighting of its general ranking algorithm.",
+    "interface_and_documented_features": "The results interface offers web results and filters for images, news and videos, together with geographical region and publication-recency controls. Documented operators include quoted phrases, plus and minus terms, ext, filetype, inbody, intitle, inpage, lang or language, loc or location and site, with AND, OR and NOT combinations; the operator page calls these features experimental. Bangs transfer a query to another site or quickly filter by source. Discussions identify topics for which forum material may complement ordinary results, initially emphasizing Reddit and StackExchange. Featured snippets extract useful passages from indexed pages. AI Answers provide cited summaries, while Ask Brave supports longer answers, follow-up conversations and a Deep Research mode. These generated features sit alongside, rather than replace, linked web results. The interface also exposes anonymous local results, a manually selected location, SafeSearch choices, units, themes and feedback controls.",
+    "installation_and_distribution": "No installation is needed for the central product: a user opens search.brave.com and submits a query. Brave publishes browser-specific instructions for making it the default engine so that address-bar searches use the service. There is no search-only Brave Search mobile application in the documentation consulted; mobile access is through a browser, including but not limited to Brave. The Brave browser remains a separate download and should not be listed as a prerequisite for the engine. Some optional distribution is commercial or developer-oriented. Search Premium removes advertisements and its help page describes availability exclusively in the Brave browser. The Search API is distributed through a developer dashboard and requires a subscription token in requests. It is not an offline index download. No packaged desktop client, operating-system image or source release of the consumer engine is offered by the cited pages.",
+    "platforms_and_hardware_architectures": "Brave Search is a web service, so its meaningful platform boundary is the browser rather than a processor architecture. It can be reached from desktop and mobile browsers over HTTPS, and no CPU, memory, disk or minimum operating-system requirement is published for the consumer service. Browser-specific integrations change that boundary only for the feature concerned: Google fallback mixing is documented in the Brave browser, Web Discovery Project contributions are opt-in browser contributions, and the Premium help page limits that subscription experience to Brave. The API is accessed over HTTPS and is therefore independent of a client operating system, but its dashboard and token requirements are separate from ordinary search. Regional and language operators can focus results, while anonymous local results can use the device IP address without Brave retaining it, according to the privacy notice. These controls do not amount to a published guarantee of service availability or equal result quality in every country.",
+    "extensions_and_add_on_store": "Brave Search has no conventional add-on store, but it exposes three notable extension mechanisms. Goggles are community-controlled rule sets hosted at a URL and applied as custom re-ranking over Brave's index; followed Goggles are kept in browser localStorage, and ownership remains with whoever controls the hosted definition. Rerank is a lighter built-in control whose raise and discard rules are stored in cookies and converted into an ephemeral Goggle for each request. Bangs provide per-query hand-off to external search services, whose own policies then apply. For developers, the Web Search API provides token-authenticated access to the index, country and language targeting, freshness filters, extra snippets, Goggles and pagination; local enrichment uses a separate endpoint and temporary location identifiers. These are documented interfaces, not evidence that the consumer ranking model or crawler source code is open. The API's quotas and result limits belong to that product and should not be confused with the public results page.",
+    "privacy_and_security_model": "Brave's privacy notice is more specific than a simple no-collection slogan. It says the service stores de-identified search data containing the plain-text query, device platform, operating system, country, language and date, without additional data linking a query to a person, device or IP address, and without grouping queries by those identifiers. Anonymous usage metrics cover aggregate visits, query counts and lengths, session duration, feature usage and browser environment; the metrics page says they are enabled by default and can be disabled. Local results may use IP-derived location without retaining the address. Advertising views and clicks are measured, with country inferred from IP and the address not retained. For service integrity, IP addresses are processed temporarily and described as deleted within seconds. Ask Brave is different: conversations are processed on AWS in the United States, erased after 24 hours of inactivity, or kept up to 7 days if publicly shared. Brave says Nebius receives no user IP and operates with zero data retention. These are publisher commitments, not independently tested findings.",
+    "update_channels_and_release_cadence": "Brave Search has no consumer version number, fixed release cadence or comprehensive changelog in the sources consulted. Its help pages form a living reference: the independence statement, privacy notice, cookie list and feature pages can change without a corresponding software release that a user can identify. The 2023 independence announcement is therefore evidence about a historical milestone, not a current build identifier. AI features make this especially relevant because their models, hosting providers and retention conditions are documented separately from ordinary search. The Web Search API uses a versioned endpoint path, but that path is an API interface version and not a version of Brave Search's index or ranking algorithm. Browser updates likewise must not be reported as search-engine updates. The most reliable public change signals are revised help pages, blog announcements and, for advertisers or developers, changes to their respective product documentation. No date is asserted for pages that do not display one.",
+    "licensing_and_governance": "The consumer engine is proprietary; no source licence for its ranking or crawling system is published in the consulted documentation. This does not prevent individual components or community mechanisms from having their own terms: Goggles remain controlled by the person or group controlling their hosted URL, and Brave says it claims no ownership of them. Governance is exercised through the privacy notice, crawler and delisting instructions, advertising documentation and developer API terms rather than through a public ranking charter. Brave identifies itself as controller of the index and relies on legitimate interests for indexing where personal data is involved. Its right-to-be-forgotten procedure is applied globally subject to local law, may require identity evidence only on request, and states that an accepted delisting can take up to 30 days. Revenue comes principally from contextual search advertising, with Search Premium as an ad-free alternative. Aggregate conversion reporting is presented as the mechanism that funds the free service without advertiser-level user profiles.",
+    "limitations_and_scope": "Several qualifications are necessary. Independence, privacy, anonymity and result quality are claims made by Brave about its own service; this entry does not audit logs, ranking outcomes or index coverage. The broad independence statement coexists with an optional Google fallback and with externally supplied enrichments such as weather or sports data, so it should not be expanded into an absolute no-third-party claim. The crawler's decision not to advertise a distinct user agent and to follow Googlebot accessibility also means that publishers' Google-specific rules affect what Brave can crawl. Search operators are expressly experimental. Goggle URLs and unique Rerank rule sets can themselves become identifying, a risk Brave explicitly acknowledges even while promising not to profile queries. AI answers and generated snippets can be wrong, and their presence does not establish the accuracy of the underlying sources. Finally, public documentation describes re-ranking controls much better than the base ranking algorithm, whose signals and weights remain undisclosed.",
+    "who_is_it_for": "Brave Search suits users who want a general web engine whose operator maintains its own crawler and index, while still offering familiar filters, operators and bangs. It is particularly relevant to people who want direct control over result ordering: Rerank supplies simple domain-level choices, and Goggles allows more elaborate community or personal rule sets without requiring an account. Publishers benefit from public crawling, noindex, re-fetch and delisting instructions, although they need to understand the crawler's Googlebot-related behaviour. Developers can consider the documented API when they need search results or local enrichment inside another application. Privacy-oriented users who are comfortable with de-identified query retention and configurable aggregate metrics may also find the model attractive. Finally, users who want cited AI summaries alongside conventional links, rather than a chat-only interface, are explicitly served by AI Answers and Ask Brave.",
+    "who_is_it_not_for": "It is not a good match for anyone requiring that no query text be retained in any form: the privacy notice expressly says that de-identified plain-text queries are stored. It is also unsuitable for users who interpret independence as excluding every external provider under every optional feature, because fallback, AI infrastructure and rich-data providers are documented. People who need a fully disclosed ranking function, reproducible organic ordering or guaranteed behaviour from every advanced operator will not find those guarantees. A user who relies on a highly unique Goggle or Rerank configuration should not treat it as inherently anonymous. Those who want no advertising without using the Brave browser should note the Premium restriction stated in the help page. Finally, organisations needing an offline index, an open-source consumer engine, a published service-level guarantee or independently audited privacy claims need evidence that this documentation does not provide.",
+    "verdict": "Brave Search is best characterised as an independent-index search service with unusually visible user-controlled re-ranking, not merely as a privacy front end to another consumer engine. Its documentation supports that distinction and gives meaningful detail about crawling, settings, API access and data flows. It also supplies the qualifications itself: de-identified queries are retained, usage metrics exist, optional Google fallback remains documented, and AI conversations have their own processing and retention rules. Those details are more useful than the broad marketing slogans, and this entry relies on them without treating them as independent verification. The strongest differentiators are the combination of an operator-maintained index, Goggles, Rerank and a documented developer API. The main gaps are the absence of a public base-ranking specification, the experimental status of operators and the lack of an independent audit of privacy or result-quality claims. Brave Search is therefore a substantial option, provided its browser-specific features and its exceptions to simple independence and anonymity shorthand are kept in view."
+  },
+  "links": {
+    "homepage": "https://search.brave.com/",
+    "help_overview": "https://search.brave.com/help/index",
+    "independence_announcement": "https://brave.com/blog/search-independence/",
+    "crawler": "https://search.brave.com/help/brave-search-crawler",
+    "search_operators": "https://search.brave.com/help/operators",
+    "goggles": "https://search.brave.com/help/goggles",
+    "rerank": "https://search.brave.com/help/rerank",
+    "ai_features": "https://search.brave.com/help/ai",
+    "privacy_notice": "https://search.brave.com/help/privacy-policy",
+    "usage_metrics": "https://search.brave.com/help/usage-metrics",
+    "advertising_measurement": "https://search.brave.com/help/conversion-reporting",
+    "delisting": "https://search.brave.com/help/brave-search-index-right-to-be-forgotten",
+    "web_search_api": "https://api-dashboard.search.brave.com/app/documentation/web-search/get-started"
+  },
+  "sources": [
+    {
+      "title": "How to use Brave Search: overview of web, image, news and video filters, operators, bangs, Goggles, Discussions, AI Answers, snippets, advertising and Premium",
+      "url": "https://search.brave.com/help/index",
+      "type": "official_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Brave Search independence announcement: June 2021 launch, historical third-party share and removal of Bing API calls; updated 2023-05-03",
+      "url": "https://brave.com/blog/search-independence/",
+      "type": "official_announcement",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Brave Search Crawler: crawler identification, Googlebot accessibility, noindex and re-fetch procedure, and opt-in Web Discovery Project contributions",
+      "url": "https://search.brave.com/help/brave-search-crawler",
+      "type": "official_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search Operators: ext, filetype, inbody, intitle, inpage, language, location, site, phrase, sign and Boolean operators, expressly described as experimental",
+      "url": "https://search.brave.com/help/operators",
+      "type": "official_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Goggles: community-controlled re-ranking rules, hosting and ownership, localStorage and the identifiability risk of rare Goggle URLs",
+      "url": "https://search.brave.com/help/goggles",
+      "type": "official_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Rerank: domain raise and discard rules stored as cookies and converted to an ephemeral Goggle for each search request",
+      "url": "https://search.brave.com/help/rerank",
+      "type": "official_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Brave Search privacy notice: de-identified query storage, metrics, local results, advertising measurement, Ask Brave retention and service-integrity processing",
+      "url": "https://search.brave.com/help/privacy-policy",
+      "type": "legal_document",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Anonymous usage metrics: categories of aggregate measurements, default collection and the setting used to disable them",
+      "url": "https://search.brave.com/help/usage-metrics",
+      "type": "official_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Anonymous cookies: SafeSearch, country, units, local results, location, theme, fallback and Rerank preferences with non-unique values",
+      "url": "https://search.brave.com/help/anonymous-cookies",
+      "type": "official_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search Ads conversion reporting: contextual advertising, aggregate reports, browser-held conversion data and retention of 1, 7 or 30 days depending on campaign",
+      "url": "https://search.brave.com/help/conversion-reporting",
+      "type": "official_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Brave Search index and right to be forgotten: index controllership, legal basis, global delisting process and completion time of up to 30 days",
+      "url": "https://search.brave.com/help/brave-search-index-right-to-be-forgotten",
+      "type": "legal_document",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Brave Web Search API documentation: token authentication, country and language targeting, freshness, extra snippets, Goggles, pagination and local enrichment",
+      "url": "https://api-dashboard.search.brave.com/app/documentation/web-search/get-started",
+      "type": "developer_documentation",
+      "publisher": "Brave",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

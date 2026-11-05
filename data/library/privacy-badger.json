@@ -1,0 +1,229 @@
+{
+  "id": "privacy-badger",
+  "name": "Privacy Badger",
+  "type": "application",
+  "summary": "EFF anti-tracking extension using pre-trained Badger Sett knowledge, optional local heuristics, block and cookie-block actions, GPC/DNT signals, widget replacements and compatibility exceptions rather than general-purpose ad-list filtering.",
+  "tags": [
+    "browser extension",
+    "anti-tracking",
+    "privacy",
+    "heuristic blocking",
+    "cookie blocking",
+    "badger sett",
+    "badger swarm",
+    "global privacy control",
+    "do not track",
+    "fingerprinting",
+    "eff",
+    "open source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Firefox",
+    "Firefox for Android",
+    "Chrome",
+    "Microsoft Edge",
+    "Microsoft Edge for Android",
+    "Opera",
+    "Brave",
+    "Safari on macOS"
+  ],
+  "license": "GNU General Public License v3.0 or later (README/FAQ); AMO listing: v3.0 only",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Privacy Badger is a free, open-source anti-tracking browser extension developed by the Electronic Frontier Foundation (EFF). It is not designed as a general-purpose advertisement blocker: its central test is whether third-party domains behave like trackers across websites, rather than whether content looks like an ad. The extension combines pre-trained tracker knowledge produced with EFF's Badger Sett and Badger Swarm systems, optional local heuristic learning, user controls and compatibility exceptions. It can block a domain, restrict its cookies and storage, or leave it alone; Global Privacy Control (GPC) and Do Not Track (DNT) signals complement those enforcement actions. Current source defaults disable learning from the user's own browsing and learning in incognito, while seed data supplies initial decisions. Privacy Badger also offers widget replacements and selected link-cleaning protections. Distribution now spans Firefox, Chromium-based browsers and Safari on macOS, but versions and implementation artefacts differ by channel. On 2026-11-05, the source manifest and AMO showed 2026.9.15, Chrome showed 2026.9.15.2 and Apple's Mac App Store showed 2026.10.22. These are dated channel observations, not one harmonised release claim.",
+    "origin_and_history": "EFF announced the public beta on 21 July 2014, after an alpha released less than three months earlier. The launch description already combined behavioural tracker detection, blocking or cookie restriction, DNT and click-to-activate replacements for social widgets. The project changelog records version 1.0 on 5 August 2015 and subsequent additions such as fingerprinting and supercookie protections, data import and export, and broader browser support. A major change arrived in 2020: EFF disabled local learning by default because a site could potentially manipulate the learned state to fingerprint a user or probe browsing history. EFF expanded automated Badger Sett training so new installations would retain useful tracker knowledge without relying on each person's browsing. Badger Swarm, introduced publicly in 2023, distributed those scans and enlarged the pre-trained data. Recent maintenance includes Chromium MV3 work, Edge for Android support and continued heuristic and compatibility fixes. In October 2026 EFF launched a Safari version for macOS. This history explains why “automatic learning” now means pre-trained defaults plus optional local learning, not an always-on observation of every user's browsing.",
+    "rendering_engine_and_technical_architecture": "Privacy Badger extends the host browser rather than providing its own rendering engine. The generic source manifest inspected on 2026-11-05 declares a background page, content scripts, webRequest and webRequestBlocking, cookies, storage, tabs, navigation, scripting and broad site access. Source modules maintain distinct local structures: snitch_map records first-party sites where a third party exhibited tracking behaviour, action_map stores the chosen action, and tracking_map retains related observations. The heuristic engine examines identifying cookies, local-storage supercookies, canvas fingerprinting, pixel cookie sharing and Beacon API behaviour. Three distinct first-party sites form the current tracking threshold before an action is learned, subject to exceptions and existing data. Seed actions and remote configuration supplement this heuristic pipeline. Yellowlist, multi-domain first-party and surrogate data reduce breakage, while widget replacements and first-party content scripts address selected tracking surfaces. The source manifest must not be assigned indiscriminately to every package: the changelog documents MV3 Chromium changes even though this generic manifest retains a background page and blocking webRequest permission.",
+    "interface_and_documented_features": "The popup shows domains involved with the current site and uses coloured controls for their state. Red represents blocking, yellow represents cookie-blocking and green means no blocking action; users can move controls themselves, and manually selected actions take priority over learned actions. Site-level disablement offers a broader exception when a page breaks. The options interface manages tracking domains, disabled sites, imported or exported data and advanced settings, including the optional decision to learn from local browsing. A broken-site report is a separate, user-initiated action rather than an automatic upload of history. Beyond domain controls, Privacy Badger can replace potentially useful trackers such as embedded videos, comments or social widgets with click-to-activate placeholders. It also removes selected outgoing link-tracking behaviour on Facebook and Google and sends GPC and DNT signals. These functions have different scopes: a green slider does not mean a domain has been independently certified as harmless, and a widget placeholder is not the same mechanism as a network-domain block.",
+    "installation_and_distribution": "The official site directs users to browser-specific downloads, while the FAQ also documents EFF-hosted Firefox and Chromium packages. Firefox distribution is available through AMO, Chromium through the Chrome Web Store, and Safari on macOS through Apple's App Store. EFF documents compatibility with Edge, Opera and Brave, and the changelog includes Edge on Android work. Channel versions were deliberately kept separate in this review: AMO and the source manifest showed 2026.9.15, Chrome showed 2026.9.15.2, and Safari showed 2026.10.22. The Safari launch requires Safari 26.5 or later, while Apple's compatibility metadata specifies a recent macOS baseline. Store packages, EFF downloads and source builds should not be treated as byte-identical artefacts, especially during MV3 migration. Installation from source is a development activity with its own requirements, not the normal store path. No package was installed, no browser profile was modified and no direct-download update channel was tested during this phase; the distribution description is based on the official pages and repository evidence consulted.",
+    "platforms_and_hardware_architectures": "Privacy Badger's source manifest declares strict minima of 128 for Gecko and Gecko Android, but that generic file is only one source snapshot. The official FAQ lists Chrome, Firefox on desktop and Android, Edge on desktop and Android, Opera and Brave. Browser-store requirements and MV2/MV3 support can alter actual availability, so this list is not a guarantee for every operating-system release. Safari support announced on 19 October 2026 is specifically for macOS with Safari 26.5 or newer. Apple's listing requires macOS 15.7.7 or later and identifies a Mac package; it does not establish an iOS or iPadOS release. EFF says it will look into iOS after resolving macOS issues, which is a future intention rather than current compatibility. No native processor architecture matrix is stated in the inspected manifest. Consequently, this entry does not infer Apple Silicon, x86 or mobile-support details beyond the store metadata, and it does not transfer Firefox Android support to Chrome on Android.",
+    "extensions_and_add_on_store": "Privacy Badger does not expose a general internal add-on store. Its behaviour is extended through maintained data and compatibility mechanisms: pre-trained seed actions, yellowlist entries, multi-domain first-party groups, DNT policy hashes, widget replacements and surrogate scripts. Users can export or import their own data and manually override domain actions, but these are not arbitrary executable plug-ins. External ad-block filter subscriptions are not the product's central model, because EFF selects objectionable behaviours rather than asking users to assemble a conventional list stack. Browser stores distribute the extension and display their own permission and privacy declarations. EFF's FAQ says Privacy Badger is compatible with other privacy extensions and Firefox's built-in Enhanced Tracking Protection, and presents combined use as complementary. That is an EFF compatibility statement, not a test matrix reproduced here; overlapping extensions can still change which requests a given tool observes. The Safari announcement likewise says it can work alongside an ad blocker. Such coexistence does not turn Privacy Badger into a general ad-filter-list manager.",
+    "privacy_and_security_model": "The extension stores snitch_map, action_map, tracking_map, settings and related data locally. EFF says browsing information is not shared unless the user deliberately submits a broken-site report. Separate network activity exists for updates and remote pbconfig data; the FAQ states that these configuration requests use EFF infrastructure through Fastly without cookies or retained IP addresses. These are EFF declarations, not an independent infrastructure audit. Local learning is disabled by default because EFF identified potential fingerprinting and history-sniffing risks; enabling it is a user choice, and incognito learning has its own default. GPC and DNT disclose privacy preferences to visited sites, while DNT policy acceptance can unblock a domain that makes the relevant commitment. Broad permissions permit observation and modification of requests, cookies, page scripts and navigation, so their justification matters even when collection is not intended. Voluntary reports, automatic configuration retrieval and local heuristic storage are three different data paths. Security issues can be reported privately through GitHub Security Advisories rather than public issues.",
+    "update_channels_and_release_cadence": "Privacy Badger receives code and pre-trained tracker knowledge through extension updates distributed by browser stores or EFF's documented download channels. EFF explains that Badger Sett and Badger Swarm generate and expand this training before it reaches users; it is not a live upload of each user's browsing. Remote pbconfig data provides a separate configuration path for assets such as the yellowlist and DNT-related hashes, allowing compatibility data to be refreshed independently of a full extension release. Store review and platform migration can produce different visible versions, as the 2026.9.15, 2026.9.15.2 and 2026.10.22 snapshots demonstrate. The changelog records frequent maintenance but does not establish a fixed public release interval. Users should therefore distinguish the extension version, the embedded seed-data revision and remote configuration freshness. No claim is made here that all channels update simultaneously or that an EFF direct package receives updates in exactly the same way as a store-managed installation. No update request was captured or independently replayed for this review.",
+    "licensing_and_governance": "The repository README and official FAQ describe Privacy Badger as licensed under GPLv3 or later. AMO instead displays “GNU General Public License v3.0 only,” and some source-file headers use version-3 wording without the same “or later” phrase. This entry preserves that metadata divergence rather than silently harmonising it. EFF, a member-supported digital-rights nonprofit, governs the project and applies its Public Projects Code of Conduct. The public repository accepts contributions through documented issue, discussion and pull-request channels, with translation guidance and public project meetings also listed. Security reports have a separate private advisory route. Administrative deployment documentation exists for organisations, but it does not change the licence or make an organisation's policy choices part of EFF's default configuration. Third-party seed inputs, widgets and website behaviour are not relicensed by the extension's GPL terms. Public source and open contribution provide transparency, yet they do not constitute an independent legal opinion, security certification or audit of EFF's update infrastructure.",
+    "limitations_and_scope": "Privacy Badger primarily addresses third-party tracking, not every advertisement or every privacy risk. Non-tracking ads can remain visible, and the FAQ specifically explains that first-party YouTube advertising is outside its ordinary third-party blocking target. First-party protections are narrower and currently focus on features such as selected link cleaning. Heuristic decisions can break sites; yellowlisting, cookie-blocking, surrogates, DNT exceptions and user overrides mitigate breakage by permitting some resources or identifiers under constrained conditions. A DNT commitment is voluntary, and EFF does not continuously certify every adopter's compliance. Optional local learning can improve coverage on less popular sites but carries the fingerprinting and history-sniffing concerns that led EFF to disable it by default. Pre-trained data may not cover every new or regional tracker. Compatibility with other blockers is documented by EFF, not exhaustively tested here. Finally, the generic MV2-looking source manifest, Chromium MV3 changes and Safari package are different implementation contexts; none supports a claim of identical permissions or architecture across channels.",
+    "who_is_it_for": "Privacy Badger suits users who want behavioural third-party tracker protection without assembling and maintaining a large collection of advertising filter lists. Its pre-trained defaults provide immediate coverage, while coloured sliders and site controls let users inspect decisions and repair breakage. People who want GPC and DNT signals alongside blocking, click-to-activate widget replacements or selected link cleaning may value the broader anti-tracking focus. Users visiting less popular sites can consider enabling local learning after understanding its identifiability trade-off. Organisations can evaluate EFF's administrative deployment documentation, and contributors can inspect heuristics, seed handling and compatibility data in the public repository. It is also a reasonable complementary layer for someone who already uses an ad blocker or Firefox tracking protection and understands that overlapping tools are not identical. The product is most appropriate when the goal is limiting cross-site tracking, not simply hiding every promotional element or enforcing a personally curated list of blocked domains.",
+    "who_is_it_not_for": "Privacy Badger is not for users whose primary requirement is comprehensive cosmetic ad removal, a conventional EasyList workflow or blocking first-party advertising such as every YouTube promotion. It does not provide anonymity, a VPN, encrypted transport or protection from a website's own direct data collection merely by blocking third parties. People unwilling to troubleshoot occasional broken login, video, comment or embedded-content behaviour may find heuristic blocking and its exceptions unsuitable. Enabling local learning is not advisable for someone who does not accept EFF's documented fingerprinting and history-sniffing trade-offs. Safari iOS users should not treat the macOS launch or EFF's future intention as an available iOS package. Deployers who need identical versions and permissions across browsers must review each channel rather than relying on the generic source manifest. Finally, users seeking an independently verified no-network or no-logging guarantee should distinguish EFF's policy statements and documented update connections from an external audit, which this entry does not claim to provide.",
+    "verdict": "Privacy Badger is a distinctive anti-tracking extension built around behavioural evidence, pre-trained EFF research and user-controllable enforcement rather than a general advertising blacklist. Its block, cookie-block and allow states, yellowlist and DNT exceptions, widget replacements and local override controls form a nuanced compatibility model. The current default is not continuous local learning: Badger Sett and Badger Swarm supply initial knowledge, while learning from personal browsing remains optional because of documented identifiability risks. EFF's statements about local storage, voluntary reports and update infrastructure are recorded as declarations and mechanisms, not independent audit findings. Browser coverage is broad but not uniform, with separate Chromium, Firefox and Safari artefacts and channel versions, and Safari support presently documented for macOS rather than iOS. Privacy Badger is well suited to limiting third-party tracking, including alongside other privacy tools, but users expecting complete ad blocking, first-party data protection or identical cross-browser behaviour will need a different or additional approach."
+  },
+  "links": {
+    "faq": "https://privacybadger.org/",
+    "readme": "https://raw.githubusercontent.com/EFForg/privacybadger/master/README.md",
+    "design": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/DESIGN-AND-ROADMAP.md",
+    "constants": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/js/constants.js",
+    "storage": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/js/storage.js",
+    "heuristics": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/js/heuristicblocking.js",
+    "background": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/js/background.js",
+    "permissions": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/permissions.md",
+    "source_manifest": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/manifest.json",
+    "broken_sites": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/fixing-broken-sites.md",
+    "yellowlist": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/yellowlist-criteria.md",
+    "contributing": "https://raw.githubusercontent.com/EFForg/privacybadger/master/.github/CONTRIBUTING.md",
+    "security_policy": "https://raw.githubusercontent.com/EFForg/privacybadger/master/.github/SECURITY.md",
+    "changelog": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/Changelog",
+    "launch_2014": "https://www.eff.org/press/releases/stop-sneaky-online-tracking-effs-privacy-badger",
+    "badger_swarm": "https://www.eff.org/deeplinks/2023/10/privacy-badger-learns-block-ever-more-trackers",
+    "dnt_policy": "https://www.eff.org/dnt-policy",
+    "safari_announcement": "https://www.eff.org/deeplinks/2026/10/announcing-privacy-badger-safari-macos",
+    "software_privacy": "https://www.eff.org/code/privacy-policy",
+    "amo_listing": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
+    "chrome_listing": "https://chromewebstore.google.com/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp",
+    "app_store_listing": "https://apps.apple.com/us/app/privacy-badger/id6761143693?mt=12"
+  },
+  "sources": [
+    {
+      "title": "Privacy Badger official FAQ - anti-tracking purpose, permissions, signals, compatibility, data sharing and platform scope",
+      "url": "https://privacybadger.org/",
+      "type": "official_project_faq",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger README - EFF project purpose, GPC and DNT, contribution channels and GPLv3-or-later statement",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger design and roadmap - behavioural tracking model, heuristic observations, actions and compatibility architecture",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/DESIGN-AND-ROADMAP.md",
+      "type": "official_design_documentation",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger constants source - tracking threshold, action states and remote pbconfig location",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/js/constants.js",
+      "type": "official_source_code",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger storage source - snitch_map, action_map, tracking_map and local settings structures",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/js/storage.js",
+      "type": "official_source_code",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger heuristic-blocking source - cookies, supercookies, fingerprinting, pixel and Beacon tracking detection",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/js/heuristicblocking.js",
+      "type": "official_source_code",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger background source - current local-learning, incognito, DNT and user-action defaults and precedence",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/js/background.js",
+      "type": "official_source_code",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger permissions documentation - reasons for site, cookie, navigation, tab, storage and request access",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/permissions.md",
+      "type": "official_permission_documentation",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger generic source manifest - version 2026.9.15, Gecko minima, background page and requested permissions",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/src/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger broken-site guide - yellowlist, cookie-blocking, surrogates, MDFP and debugging compatibility failures",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/fixing-broken-sites.md",
+      "type": "official_technical_documentation",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger yellowlist criteria - conditions for constrained cookie-blocking instead of complete blocking",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/yellowlist-criteria.md",
+      "type": "official_policy_documentation",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger contributor guide - issue, patch, translation and project participation conventions",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/.github/CONTRIBUTING.md",
+      "type": "official_contribution_guide",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger security policy - private vulnerability reporting through GitHub Security Advisories",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/.github/SECURITY.md",
+      "type": "official_security_policy",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Privacy Badger changelog - 1.0 history, local-learning default change, browser releases and MV3 maintenance",
+      "url": "https://raw.githubusercontent.com/EFForg/privacybadger/master/doc/Changelog",
+      "type": "official_changelog",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "EFF Privacy Badger beta announcement dated 21 July 2014 - original behavioural blocking and widget-replacement goals",
+      "url": "https://www.eff.org/press/releases/stop-sneaky-online-tracking-effs-privacy-badger",
+      "type": "official_press_release",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "EFF Badger Swarm announcement - distributed Badger Sett training, pre-trained defaults and local-learning history",
+      "url": "https://www.eff.org/deeplinks/2023/10/privacy-badger-learns-block-ever-more-trackers",
+      "type": "official_research_announcement",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "EFF Do Not Track policy - voluntary domain commitment, accepted versions and limits of EFF compliance monitoring",
+      "url": "https://www.eff.org/dnt-policy",
+      "type": "official_policy_documentation",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "EFF Safari on macOS announcement dated 19 October 2026 - Safari 26.5 requirement and iOS future-work caveat",
+      "url": "https://www.eff.org/deeplinks/2026/10/announcing-privacy-badger-safari-macos",
+      "type": "official_platform_announcement",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "EFF Privacy Policy for Software - software downloads, update connections and information handling declarations",
+      "url": "https://www.eff.org/code/privacy-policy",
+      "type": "official_privacy_policy",
+      "publisher": "Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Firefox Add-ons Privacy Badger listing - version 2026.9.15, permissions, data-collection declaration and GPLv3-only label",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Chrome Web Store Privacy Badger listing - version 2026.9.15.2 and Chrome-channel distribution metadata",
+      "url": "https://chromewebstore.google.com/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Apple App Store Privacy Badger listing - Mac version 2026.10.22, macOS compatibility and privacy declarations",
+      "url": "https://apps.apple.com/us/app/privacy-badger/id6761143693?mt=12",
+      "type": "official_store_listing",
+      "publisher": "Apple App Store / Electronic Frontier Foundation",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "id": "qwant",
+  "name": "Qwant",
+  "type": "application",
+  "summary": "French web search engine operated by QWANT, combining a continuously updated QwantBot-built index with partner results, regional and SafeSearch controls, optional cited AI answers and contextual advertising.",
+  "tags": [
+    "search engine",
+    "web",
+    "privacy",
+    "france",
+    "qwantbot",
+    "partner results",
+    "flash answer",
+    "contextual advertising",
+    "proprietary",
+    "qwant",
+    "staan"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service; no source licence published for the consumer search engine itself",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Qwant is the general web search engine operated by QWANT, a French simplified joint-stock company headquartered in Paris. It combines a continuously updated index built through its own crawling with results and services supplied by partners; describing it either as wholly independent of other indexes or as a simple Bing wrapper would go beyond the public evidence. The engine is available at qwant.com without requiring installation or an account for basic use. Qwant Junior is a separate child-oriented service with its own rules, while Qwant Maps, browser extensions and the Android and iOS applications belong to the surrounding product family. The mobile applications include a privacy-focused browser and must not be confused with the search engine itself. European Search Perspective and its Staan API are related search infrastructure, not alternative names for every Qwant query. This entry covers the general consumer engine, its published ranking and indexing model, optional AI features, advertising and data-processing terms.",
+    "origin_and_history": "An English article on Qwant's official Better Web site, published on 2023-11-14, describes Qwant as founded in 2013 and based in Paris. That supplies a company origin, but not a complete launch chronology or a sequence of index providers, and no such sequence is reconstructed here. The same article discussed an Opera browser distribution with Qwant preselected, illustrating the longstanding distinction between the engine and the browsers through which it is distributed. Qwant's current legal notices identify the operator simply as QWANT, a simplified joint-stock company registered in Paris, rather than as the whole ecosystem of partners. More recently, the documentation has added publisher-facing crawling guidance, account-synchronised settings and AI answers alongside the traditional results page. The appearance of European Search Perspective and Staan in current privacy and API documents marks another infrastructure component, but the public pages do not provide a complete dated migration map from earlier result sources.",
+    "rendering_engine_and_technical_architecture": "Qwant documents a two-stage indexing path. QwantBot discovers pages through known links and sitemaps, follows robots.txt, downloads accessible HTML and then evaluates pages against quality criteria before they become result candidates. Public HTML, PDF, office documents, OpenDocument files and plain text are covered; authenticated pages, blocked resources, noindex pages and content requiring complex client-side interaction are excluded. Crawl frequency considers freshness, incoming-link popularity, server performance and robots directives. QwantBot can be verified through forward-confirmed reverse DNS or published IP ranges, and Crawl-delay is supported. The ranking disclosure lists keyword presence, frequency, emphasis and context, page age, site popularity, readability and accessibility among relative criteria, without publishing weights. It also says third-party indexes, including Microsoft Bing and other content APIs, supplement results. Current privacy documents name Microsoft and European Perspective (Staan) as partners. Staan separately describes its own proprietary index and an American fallback for some API calls, but no per-query routing share for Qwant is published.",
+    "interface_and_documented_features": "The general service presents web results and dedicated news, shopping and mapping experiences, with images and videos covered by the SafeSearch controls. Qwant says ordinary web ranking is based on relevance rather than a user's previous history; configured region can nevertheless influence local sources, market-oriented sites, result language and shopping. News can be ordered by relevance or chronologically, while shopping and map inserts have their own partner and advertising rules. SafeSearch has Strict, Moderate and None levels, with Moderate as default, and Qwant explicitly says it is not parental control. Interface language and results region are separate settings. Flash Answer appears above eligible factual searches as a labelled, source-cited summary and can be disabled; AI Chat can also draw on a model's general knowledge, unlike the more tightly grounded flash response. An optional account synchronises language, region, theme and AI preferences across devices. No comprehensive current public list of advanced query operators was located, so none is invented here.",
+    "installation_and_distribution": "Basic Qwant search requires no software. A user can visit qwant.com or select it manually as the default engine in a browser. Official setup pages cover Chrome, Firefox, Safari, Brave, Edge and Opera, with extensions offered as a one-click way to set both the default engine and, where applicable, the new-tab page. Manual configuration changes only the search engine and installs nothing. On Android and iOS, Qwant distributes an application that its help pages describe as a privacy-focused browser with tabs, private browsing, favourites and a Zap function for clearing browsing data; that application is not a search-only package and is outside this entry's browser scope. An account is optional and is used for preference synchronisation rather than as a prerequisite for basic queries. Staan is distributed separately to developers as an authenticated REST API. No offline consumer index, desktop search-only installer or source release of the engine is provided in the cited documentation.",
+    "platforms_and_hardware_architectures": "Qwant's consumer platform is the web, supported through current desktop and mobile browsers; the installation guide explicitly addresses Windows, macOS and Linux through browser configuration. Android and iOS are additional access platforms through the separate Qwant browser application. No processor architecture, memory, disk or other hardware requirement is published for the web engine. Language and region are functional rather than hardware boundaries: Qwant says its interface is fully translated into several major languages but may leave portions in English or poorly translated in others, and that result quality varies by selected market. These statements do not justify a claim of uniform worldwide availability or relevance. For developers, Staan provides a platform-neutral HTTPS interface with a bearer token and separate Web Search and Web Search for AI endpoints. That B2B interface has its own language, country and fallback behaviour and must not be used as evidence that every consumer Qwant request follows the same route.",
+    "extensions_and_add_on_store": "Qwant does not operate a general add-on store for its search results. Its browser extensions are configuration aids that set Qwant as the default engine and, in supported browsers, as the new-tab page; they do not add new indexes. Account-based preference synchronisation is another optional layer, covering settings rather than third-party plug-ins. Publishers interact with the engine through standard web mechanisms: sitemap files, robots.txt, QwantBot-specific Allow and Disallow rules, Crawl-delay, noindex and DNS or IP-range crawler verification. AI features are built into the results page and can be disabled rather than installed. For organisations needing programmatic search, Staan is the documented extension point, offering ordinary ranked web results and an AI-oriented endpoint with content extraction and re-ranking. Its FAQ describes domain restriction and configurable extra snippets, but also fixed result counts and the absence of an SLA at the time of consultation. These developer capabilities should not be confused with a public API licence for scraping Qwant's consumer results, which the Terms restrict.",
+    "privacy_and_security_model": "Qwant's policy rejects an identifiable search history but does not describe a zero-processing system. It lists queries, browser and device characteristics, interactions, salted IP hashes, approximate geography and pseudonymous identifiers for operations and statistics; Qwant's aggregated data and Piwik Pro's obfuscated data are assigned 25-month retention periods. For results and contextual advertising, Microsoft and European Perspective may receive keywords, browser information, truncated or in some contexts full IP data, approximate location, salted hashes and a random token. The policy says Microsoft de-identifies query data after 6 months and removes specified cross-session identifiers after 18 months. Datadome can receive encrypted query fields and interaction signals for abuse detection, while technical supervision retains the called URL and request for 3 days. Optional account and cookie consent can enable Microsoft advertising personalisation and profiling, which users can refuse. For AI answers, Qwant says the model receives the query but not the IP address, with zero retention by the partner. These are detailed publisher disclosures, not independently audited properties.",
+    "update_channels_and_release_cadence": "Qwant does not publish a consumer engine version number, a fixed release cadence or a comprehensive changelog covering crawling, ranking and result providers. The QwantBot documentation includes illustrative user-agent versions, but those strings identify crawler requests and are not versions of the search engine or its index. Help pages are updated as living documentation: the Staan developer introduction, for example, displayed 2026-10-06 as its last-modified date, which applies only to that documentation. AI answers are explicitly experimental and may change with the model, index and source pages, so repeatability should not be inferred from a static results screenshot. Legal and transparency documents provide separate dates rather than software releases; the general Qwant transparency report covering part of 2024 was published on 2026-01-14. Browser extension and mobile-app updates likewise belong to their respective packages. No release date is assigned to a help page that does not display one.",
+    "licensing_and_governance": "Qwant is a proprietary service, and the Terms grant limited rights to use associated software rather than a source licence for the engine. They also restrict unauthorised collection or reproduction of search results and separate API use from ordinary consumer access. The English Terms expressly identify themselves as a good-faith translation of the enforceable French text, which prevails if they differ; French law governs the service. QWANT's legal notice gives Paris registration B 532 867 256 and names the operator and its legal representatives. Qwant states that commercial agreements do not influence organic relevance, while advertisements are labelled and shopping, maps and partner inserts follow disclosed rules. Its Article 15 DSA transparency report for the period 2024-02-17 through 2024-12-31 was published on 2026-01-14 and records authority orders and handling arrangements; it is a governance disclosure, not an audit of search quality. Delisting, illegal-content reporting and GDPR requests provide additional procedures without giving users control over third-party hosted content.",
+    "limitations_and_scope": "Qwant's architecture is composite, and the exact share of a query served by QwantBot's index, Microsoft, Staan or another content provider is not published. Staan's own American fallback is documented for that API, but it should not be automatically attributed to every Qwant consumer request. Ranking criteria are disclosed only qualitatively, without weights or a reproducible ordering specification, and Qwant says results are not exhaustive. Complex client-side pages may not be indexed. SafeSearch can over-filter or miss material and is not parental control. AI answers are experimental, may be incomplete, obsolete or wrong, and require checking against their cited sources. Privacy marketing must be read with the full policy: operational query processing, partner transfers and retention periods exist, and consent can enable personalised advertising for account users. Regional result quality varies, and some interface translations are incomplete. Finally, no current comprehensive advanced-operator guide or independent audit of privacy, neutrality or result quality was found in the material consulted.",
+    "who_is_it_for": "Qwant suits users who want a European-operated general engine with ordinary links, local and news controls, optional cited AI summaries and the ability to search without an account. It is relevant to people who value a published French legal framework and detailed GDPR disclosures, provided they read the partner and consent provisions rather than relying on slogans. Publishers gain practical QwantBot identification, robots, sitemap, noindex and crawl-frequency guidance, which makes the service more actionable than an opaque syndication-only front end. Users researching different regional perspectives can select a market independently of their physical location, while remembering that quality varies. Developers interested in European search infrastructure can evaluate Staan separately for ranked results or retrieval-augmented generation. Finally, organisations deploying a default engine across managed browsers have official configuration and Windows group-policy documentation available.",
+    "who_is_it_not_for": "Qwant is not for users who require every result to come from a single wholly independent index, because partner results and fallback arrangements are documented and their per-query allocation is not. It is not for anyone requiring zero query processing or zero retention of derived statistics, nor for users unwilling to distinguish default processing from optional consent-based advertising. Those who need a fully specified ranking algorithm, guaranteed exhaustive coverage or reproducible results will not find those commitments. SafeSearch alone is insufficient for child-safety requirements, and experimental AI answers are inappropriate as unverified professional advice. Developers needing guaranteed API availability should note that Staan publishes no SLA at this stage. Users seeking a comprehensive official advanced-query language, an offline index, an open-source consumer engine or independent proof of neutrality and privacy claims will also find the available documentation insufficient.",
+    "verdict": "Qwant is best understood as a French search service with real crawler and publisher infrastructure embedded in a broader network of result and AI partners. Its strongest documentation is practical: QwantBot can be identified and controlled, ranking criteria are named at a high level, regional and SafeSearch behaviour is explained, and AI answers are labelled, cited and optional. Its privacy policy is similarly most useful when read in full, because it records operational processing, partner transfers and retention alongside the promise not to build an identifiable search history. The service therefore offers more than a simple rebranded results feed, but less certainty than a claim of complete index independence would imply. This entry treats neutrality, confidentiality and result quality as Qwant's commitments, not as independently demonstrated findings. Qwant is a credible option for users who want that European, composite model, provided its undisclosed routing proportions, qualitative ranking disclosure, experimental AI and consent-dependent exceptions remain explicit."
+  },
+  "links": {
+    "homepage": "https://www.qwant.com/",
+    "indexing": "https://help.qwant.com/hc/en-us/articles/49002658519569-How-Qwant-Indexes-the-Web",
+    "qwantbot": "https://help.qwant.com/hc/en-us/articles/51146433634833-The-Qwant-bot-QwantBot-and-the-robots-txt-file",
+    "ranking": "https://help.qwant.com/hc/en-us/articles/51727621886353-Referencing-ranking-and-de-referencing-of-web-pages-and-their-media-content",
+    "ai_sources": "https://help.qwant.com/hc/en-us/articles/47119908690705-The-sources-and-data-used-by-Qwant-s-AI",
+    "safesearch": "https://help.qwant.com/hc/en-us/articles/49002557528593-SafeSearch-Filtering-Adult-Content",
+    "language_and_region": "https://help.qwant.com/hc/en-us/articles/48075696859537-Change-Qwant-Language-and-Region",
+    "installation": "https://help.qwant.com/hc/en-us/articles/51233217804689-Install-Qwant-on-my-computer-Windows-Mac-Linux",
+    "privacy_policy": "https://help.qwant.com/hc/en-us/articles/51727570783761-Privacy-policy",
+    "terms_of_service": "https://help.qwant.com/hc/en-us/articles/51727575846545-Terms-of-Service",
+    "legal_notices": "https://help.qwant.com/hc/en-us/articles/51727621453713-Legal-notices",
+    "staan_faq": "https://staan.ai/faq",
+    "staan_api": "https://docs.staan.ai/introduction",
+    "flash_answer_settings": "https://help.qwant.com/hc/en-us/articles/48075703727633-Disable-or-Hide-Qwant-Flash-Answers",
+    "account": "https://help.qwant.com/hc/en-us/articles/48074839374353-Create-a-Qwant-Account",
+    "transparency_report": "https://help.qwant.com/hc/en-us/articles/51727605361937-Qwant-2024-Transparency-Report"
+  },
+  "sources": [
+    {
+      "title": "Qwant and Opera browser distribution - English company article dated 2023-11-14 describing Qwant as founded in 2013 and based in Paris",
+      "url": "https://betterweb.qwant.com/en/2023/11/14/a-new-version-of-the-opera-browser-available-for-qwant-users-in-france/",
+      "type": "official_company_article",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How Qwant Indexes the Web - QwantBot discovery, robots.txt, HTTP 200 crawling, quality evaluation, supported documents, exclusions and crawl frequency",
+      "url": "https://help.qwant.com/hc/en-us/articles/49002658519569-How-Qwant-Indexes-the-Web",
+      "type": "official_documentation",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "QwantBot and robots.txt - user-agent format, forward-confirmed reverse DNS, published IP ranges, Allow, Disallow, Crawl-delay and noindex distinctions",
+      "url": "https://help.qwant.com/hc/en-us/articles/51146433634833-The-Qwant-bot-QwantBot-and-the-robots-txt-file",
+      "type": "official_documentation",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Referencing, ranking and de-referencing - qualitative ranking criteria, third-party indexes, advertising separation, shopping, news, maps and non-exhaustiveness",
+      "url": "https://help.qwant.com/hc/en-us/articles/51727621886353-Referencing-ranking-and-de-referencing-of-web-pages-and-their-media-content",
+      "type": "legal_document",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Sources and data used by Qwant AI - indexed-page grounding, clickable citations, AI Chat general knowledge, query transmission, zero retention and experimental accuracy warning",
+      "url": "https://help.qwant.com/hc/en-us/articles/47119908690705-The-sources-and-data-used-by-Qwant-s-AI",
+      "type": "official_documentation",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "SafeSearch filtering - Strict, Moderate and None levels, Moderate default, image and video coverage and the warning that SafeSearch is not parental control",
+      "url": "https://help.qwant.com/hc/en-us/articles/49002557528593-SafeSearch-Filtering-Adult-Content",
+      "type": "official_documentation",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Change Qwant language and region - separate display and result settings, local relevance, VPN effects and incomplete translations in some languages",
+      "url": "https://help.qwant.com/hc/en-us/articles/48075696859537-Change-Qwant-Language-and-Region",
+      "type": "official_documentation",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Install Qwant on Windows, Mac or Linux - manual browser configuration, extensions, Edge and Opera instructions, mobile applications and managed deployment",
+      "url": "https://help.qwant.com/hc/en-us/articles/51233217804689-Install-Qwant-on-my-computer-Windows-Mac-Linux",
+      "type": "official_documentation",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Qwant Privacy Policy - query and device processing, partner transfers, retention periods, Microsoft and Staan, abuse detection, AI and consent-based advertising",
+      "url": "https://help.qwant.com/hc/en-us/articles/51727570783761-Privacy-policy",
+      "type": "legal_document",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Qwant Terms of Service - good-faith English translation with French text prevailing, proprietary rights, API restrictions, Flash Answer and French law",
+      "url": "https://help.qwant.com/hc/en-us/articles/51727575846545-Terms-of-Service",
+      "type": "legal_document",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Qwant legal notices - QWANT simplified joint-stock company, Paris headquarters, RCS Paris B 532 867 256 and legal representatives",
+      "url": "https://help.qwant.com/hc/en-us/articles/51727621453713-Legal-notices",
+      "type": "legal_document",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Staan FAQ - proprietary European Search Perspective index, API behaviour, language coverage, American fallback, fixed result count and absence of an SLA",
+      "url": "https://staan.ai/faq",
+      "type": "developer_documentation",
+      "publisher": "European Search Perspective",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Staan API introduction - Web Search and Web Search for AI endpoints, bearer authentication, EU hosting and documentation last modified 2026-10-06",
+      "url": "https://docs.staan.ai/introduction",
+      "type": "developer_documentation",
+      "publisher": "European Search Perspective",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Disable or Hide Qwant Flash Answers - visibility controls, local preference storage and account synchronisation",
+      "url": "https://help.qwant.com/hc/en-us/articles/48075703727633-Disable-or-Hide-Qwant-Flash-Answers",
+      "type": "official_documentation",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Create a Qwant Account - optional account for synchronising language, region, theme and AI preferences, with searches not associated with the account",
+      "url": "https://help.qwant.com/hc/en-us/articles/48074839374353-Create-a-Qwant-Account",
+      "type": "official_documentation",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Qwant 2024 DSA transparency report - publication on 2026-01-14, period from 2024-02-17 to 2024-12-31, authority orders and moderation disclosures",
+      "url": "https://help.qwant.com/hc/en-us/articles/51727605361937-Qwant-2024-Transparency-Report",
+      "type": "transparency_report",
+      "publisher": "Qwant",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

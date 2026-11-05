@@ -1,0 +1,215 @@
+{
+  "id": "clearurls",
+  "name": "ClearURLs",
+  "type": "application",
+  "summary": "Firefox Manifest V2 extension that uses an independently updated provider catalog to remove recognised tracking parameters, fragments, raw URL patterns and redirection wrappers without claiming general tracker blocking or anonymity.",
+  "tags": [
+    "browser extension",
+    "url cleaning",
+    "tracking parameters",
+    "query strings",
+    "url fragments",
+    "redirect cleaning",
+    "rule catalog",
+    "privacy",
+    "manifest v2",
+    "firefox",
+    "local logging",
+    "open source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Firefox",
+    "Firefox for Android"
+  ],
+  "license": "GNU Lesser General Public License v3.0 or later (source headers); AMO listing: v3.0 only",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "ClearURLs is a free, open-source browser extension that removes selected tracking elements from web addresses. Its purpose is deliberately narrower than general advertising or tracker blocking: a maintained provider catalog tells it which query parameters, fragments, raw URL patterns and redirection wrappers to process. The extension can therefore turn a long shared link into a shorter address before the browser continues to the destination, while leaving unrelated requests and page content alone. Version 1.27.3, published on 5 February 2025, is a Manifest V2 Firefox extension. The rule repository has a more recent maintenance history than the extension code, so code version and rule freshness must be assessed separately. ClearURLs is not a VPN, an anonymity service, a cookie manager or a comprehensive fingerprinting defence. Its cleaning operation can reduce data carried explicitly in URLs, but it does not make a visitor anonymous to the destination site or guarantee that every tracking mechanism has been removed.",
+    "origin_and_history": "The ClearURLs project is maintained by Kevin Roebert and a public contributor community. The Add-on repository was created on 4 August 2017; that repository date is a development milestone, not a claim about the first packaged release. Its public changelog records successive improvements to provider matching, rule updates, cleaning and browser compatibility. Recursive cleaning arrived in version 1.23.1, allowing a cleaned address to expose another parameter that also needs processing. Later versions refined fragment handling, raw rules, redirection cleaning, logging and local-address behaviour. The maintained rule definitions were separated into their own repository, which lets the data evolve without pretending that every edit is a new extension release. On 2026-11-05 the current AMO version remained 1.27.3 from 5 February 2025, while repository metadata showed the Add-on last pushed on 27 July 2025 and Rules on 3 November 2026. Those dates establish continuing rule-side activity, not a fixed release cadence or a completed migration to Manifest V3.",
+    "rendering_engine_and_technical_architecture": "ClearURLs has no rendering engine of its own; it operates inside the host browser. The published 1.27.3 manifest declares Manifest V2 background code and a blocking webRequest listener for all URLs. A provider supplies a host-matching regular expression, supported HTTP methods and one or more cleaning definitions. Ordinary rules name query fields and fragment fields to delete. Raw rules instead apply regular expressions to the complete URL, so they can alter address structures that are not simple parameters. Redirection definitions are processed before ordinary filtering: the first matching capture is extracted, decoded and validated as an HTTP or HTTPS destination. Filtering then repeats until another pass makes no change, subject to an internal limit. This matters because removing one wrapper can reveal a second trackable URL. Local hostnames and IP ranges are skipped by default. A provider marked completeProvider can cancel a request, but only when the separate domain-blocking setting is enabled; ordinary cleaning is otherwise a rewrite rather than a general request block.",
+    "interface_and_documented_features": "The toolbar popup offers global filtering, statistics, a cleaning tool and access to settings. A context-menu command can copy a cleaned link target, while badge counters expose recent activity when enabled. The optional history records cleaned addresses locally and can be exported to a file through the downloads permission. Logging is disabled by default, its initial limit is 100 entries, and the current implementation enforces a hard upper bound of 5,000 entries. Users can independently disable history recording, hyperlink-auditing pings, ETag-related cleaning, referral-marketing rules or local-host cleaning. The FAQ describes pausing filtering globally, not a conventional per-site allowlist. Consequently, someone who needs to preserve a parameter on just one site has no simple site-scoped switch in the published interface. Advanced users can host a modified rule catalog, but that is a maintenance-heavy workaround rather than the missing whitelist feature. These controls should not be confused with content-blocker element hiding or with permission controls for individual trackers.",
+    "installation_and_distribution": "The official Firefox distribution is the AMO listing, whose version history showed ClearURLs 1.27.3 released on 5 February 2025. That listing reports compatibility with Firefox 58 or later and Firefox for Android 58 or later. The project documentation also mentions packed downloads and a GitLab release route, but no direct package was installed or checked during this review. The current FAQ explicitly describes Mozilla Firefox as the only officially supported browser. Older Chrome-oriented installation instructions therefore cannot establish present-day Chrome support, especially because the add-on remains Manifest V2. Store availability, sideloading and enterprise policy are different installation questions and should not be collapsed into one compatibility claim. No automatic update, package signature or store-review process was independently tested here. A user evaluating a download should also distinguish the extension package from the separately retrieved rule file: both are necessary parts of normal operation, but they have different versions and distribution paths.",
+    "platforms_and_hardware_architectures": "ClearURLs is a browser extension, not a native program with a published processor matrix. No CPU or operating-system architecture requirement appears in the inspected manifest. Its meaningful platform boundary is the browser extension API. The 1.27.3 package uses Manifest V2 with blocking webRequest, which remains available in the Firefox configurations described by the project. Firefox for Android is included in the AMO compatibility metadata, but that does not imply support for Chrome on Android or Safari. Current Chrome is a material limitation: Google's official timeline says Manifest V2 extensions began being disabled in Chrome 138, do not work in Chrome 139 and later, and remaining Manifest V2 store items were scheduled for removal on 31 August 2026. Enterprise exceptions and other Chromium forks can have different policies, but they do not make ClearURLs officially supported there. The documentation acknowledges that a Manifest V3 version is unfinished, so MV3 should not be inferred from the existence of Chromium documentation or an older store listing.",
+    "extensions_and_add_on_store": "ClearURLs does not provide an internal store for executable plug-ins. Its extension point is a data catalog of providers. The rules specification supports ordinary parameter and fragment rules, raw URL expressions, referral-marketing patterns, exceptions, redirection definitions, HTTP methods and complete-provider blocking. A provider can also use forceRedirection to permit the redirection stage even when ordinary filtering is paused. The live catalog retrieved on 2026-11-05 contained 206 providers, 733 ordinary rules, four raw rules, nine referral-marketing rules, 80 exceptions and 65 redirections. Those counts describe one snapshot, not the number of websites fully protected or a guarantee that every rule is correct. Contributions to this catalog follow a separate repository workflow with issues, rule proposals and pull requests. Advanced users can point the extension at their own rule and hash endpoints, but doing so transfers responsibility for maintenance and trust. Neither custom rules nor browser-store installation turns ClearURLs into a general filter-list manager.",
+    "privacy_and_security_model": "The project's privacy document states that ClearURLs does not collect user data. That is a publisher declaration, not an independent infrastructure audit. Normal operation still involves network connections to retrieve the rule catalog and its hash; locally stored settings, statistics and optional history are separate from those downloads. The requested permissions are broad because cleaning requires observing and rewriting requests across sites. Additional permissions support tabs, navigation, context menus, unlimited local storage and log export. Content scripts for specified Google and Yandex paths address page-specific link behaviour rather than making every page script-readable indiscriminately. The downloaded hash is checked against the catalog before an update is accepted, which can detect corruption or mismatched downloads. It does not prove that the rules are accurate, benign or protected against compromise of both endpoints. Most importantly, deleting a tracking parameter addresses information encoded in an address. It does not block all third-party trackers, delete cookies, prevent browser fingerprinting or conceal the visitor's IP address.",
+    "update_channels_and_release_cadence": "Extension updates and rule updates follow distinct channels. A browser store can deliver a new ClearURLs package, while the running extension separately checks the published rule hash and downloads a changed catalog. The implementation trims the remote hash, compares it with the SHA-256 of the trimmed rule file and caches accepted data. If no usable rules can be loaded, the background code reports that cleaning has been deactivated rather than silently treating an empty catalog as complete protection. This review retrieved both live files successfully and reproduced the published hash locally, but did not replay a browser startup or an automatic store update. Repository metadata provides a dated maintenance signal: the Add-on was last pushed on 27 July 2025 and Rules on 3 November 2026. There is no fixed public release interval established by these sources. Recent rule activity should not be reported as a new extension release, and an older package date alone should not be reported as project abandonment.",
+    "licensing_and_governance": "The source-file headers identify ClearURLs as GNU Lesser General Public License version 3 or later. AMO instead labels the add-on “GNU Lesser General Public License v3.0 only.” This entry preserves that metadata divergence rather than choosing one label without explanation. The public Add-on repository accepts bug reports and code contributions, while the separate Rules repository documents issues and pull requests for provider definitions. Contribution guidance asks submitters to explain rules and keep the catalog maintainable; repository automation and published hashes support distribution but are not a legal review or security certification. The project's licence applies to its own code and should not be assumed to relicense websites, destination URLs or every third-party component under identical terms. Public source makes independent inspection possible, but no comprehensive licence audit was performed for this entry. Governance remains project-led, with rule quality and compatibility depending on review and reports from its contributor community.",
+    "limitations_and_scope": "URL rewriting can cause false positives. A parameter that looks like tracking data may also carry search state, campaign-dependent navigation, referral information or another function a site expects. The documentation records breakage involving services such as Google, Microsoft and Amazon, and the implementation offers global pausing and feature toggles rather than a simple per-site allowlist. Redirection cleaning works only for defined provider patterns; it cannot identify every possible wrapper. Likewise, raw rules and recursive passes increase expressive power but do not establish semantic correctness for every destination. The optional history creates a local record that a privacy-sensitive user may prefer to leave disabled, and a large history can add work on relevant requests. Current Chrome incompatibility is another practical boundary. No browser execution, website regression suite or measurement of tracking reduction was performed in this phase. ClearURLs should therefore be evaluated as a specialised URL cleaner with a maintained but fallible rule base, not as a complete privacy or security product.",
+    "who_is_it_for": "ClearURLs suits Firefox users who frequently share or open long links and want recognised tracking parameters removed without manually editing every address. It is useful when the desired protection is specifically about URL-borne identifiers, redirection wrappers and referral-marketing fields. The optional log and export function can help technically curious users inspect what changed, while advanced rule hosting gives administrators and contributors a way to test their own catalog. People already using an advertisement or tracker blocker may value ClearURLs as a complementary layer because its rewriting model addresses a different artefact. It also fits users who are willing to diagnose occasional broken links, pause filtering when necessary and contribute a reproducible rule report. Those who understand that the rule catalog can change independently of the extension will be better able to judge updates and avoid treating the version number as the whole maintenance picture.",
+    "who_is_it_not_for": "ClearURLs is not for someone seeking full advertisement removal, comprehensive third-party request blocking, cookie control, anti-fingerprinting protection or anonymity. It does not replace a VPN, Tor, a tracker blocker or a site's own privacy settings. Users who require a convenient per-site allowlist may find the published global pause and individual feature switches inadequate. Current Chrome users should not rely on the MV2 add-on merely because older Chromium installation material exists; they need a supported alternative or a browser with a clearly documented MV2 exception. People unwilling to investigate a broken checkout, search or redirection may prefer not to rewrite URLs automatically. Finally, organisations that need a verified software-supply-chain guarantee should not treat the matching public hash as a signature or an independent rule audit. It is only one integrity check within the documented update mechanism.",
+    "verdict": "ClearURLs is a focused and technically distinctive URL-cleaning extension. Its strongest feature is the combination of provider-specific query and fragment rules, whole-URL raw rules, redirection extraction and repeated cleaning until the address stabilises. The optional local log, manual cleaning tool and independent rule channel provide useful transparency and maintenance flexibility. Those strengths come with clear boundaries: the current 1.27.3 add-on is MV2, officially targets Firefox, has no straightforward per-site whitelist and depends on rules that can break legitimate address behaviour. The November 2026 rule-repository activity supports a maintenance finding, but it is not a new package release or proof that every provider remains valid. ClearURLs is a reasonable complement for reducing tracking data embedded in links on a supported Firefox installation. It should not be presented as a general tracker blocker, cookie defence, fingerprinting countermeasure or anonymity guarantee."
+  },
+  "links": {
+    "documentation": "https://docs.clearurls.xyz/latest/",
+    "readme": "https://raw.githubusercontent.com/ClearURLs/Addon/master/README.md",
+    "manifest": "https://raw.githubusercontent.com/ClearURLs/Addon/master/manifest.json",
+    "cleaning_engine": "https://raw.githubusercontent.com/ClearURLs/Addon/master/clearurls.js",
+    "pure_cleaning": "https://raw.githubusercontent.com/ClearURLs/Addon/master/core_js/pureCleaning.js",
+    "storage": "https://raw.githubusercontent.com/ClearURLs/Addon/master/core_js/storage.js",
+    "update_tools": "https://raw.githubusercontent.com/ClearURLs/Addon/master/core_js/tools.js",
+    "rules_specification": "https://raw.githubusercontent.com/ClearURLs/Docs/master/content/docs/specs/rules/index.mdx",
+    "rules_repository": "https://raw.githubusercontent.com/ClearURLs/Rules/master/README.md",
+    "rules_contributing": "https://raw.githubusercontent.com/ClearURLs/Rules/master/CONTRIBUTING.md",
+    "live_rules": "https://rules2.clearurls.xyz/data.minify.json",
+    "live_rules_hash": "https://rules2.clearurls.xyz/rules.minify.hash",
+    "permissions": "https://raw.githubusercontent.com/ClearURLs/Docs/master/content/docs/permissions.mdx",
+    "faq": "https://raw.githubusercontent.com/ClearURLs/Docs/master/content/docs/faq.mdx",
+    "troubleshooting": "https://raw.githubusercontent.com/ClearURLs/Docs/master/content/docs/troubleshooting.mdx",
+    "privacy": "https://raw.githubusercontent.com/ClearURLs/Addon/master/PRIVACY.md",
+    "changelog": "https://raw.githubusercontent.com/ClearURLs/Addon/master/CHANGELOG.md",
+    "amo_versions": "https://addons.mozilla.org/en-US/firefox/addon/clearurls/versions/",
+    "addon_repository_metadata": "https://api.github.com/repos/ClearURLs/Addon",
+    "rules_repository_metadata": "https://api.github.com/repos/ClearURLs/Rules",
+    "chrome_mv2_timeline": "https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline"
+  },
+  "sources": [
+    {
+      "title": "ClearURLs official documentation - purpose, current Firefox support, MV3 status and browser limitations",
+      "url": "https://docs.clearurls.xyz/latest/",
+      "type": "official_documentation",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs Add-on README - project purpose, downloads, contribution and rule-update overview",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Addon/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs 1.27.3 source manifest - MV2 background model, permissions and content-script matches",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Addon/master/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs background cleaning engine - provider selection, redirection handling and repeated cleaning",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Addon/master/clearurls.js",
+      "type": "official_source_code",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs pure-cleaning source - query, fragment, raw-rule and exception processing",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Addon/master/core_js/pureCleaning.js",
+      "type": "official_source_code",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs storage defaults - disabled history, 100-entry log limit and local settings",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Addon/master/core_js/storage.js",
+      "type": "official_source_code",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs update utilities - rule retrieval, SHA-256 comparison and hash processing",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Addon/master/core_js/tools.js",
+      "type": "official_source_code",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs rules specification - providers, fields, methods, raw rules, exceptions and redirections",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Docs/master/content/docs/specs/rules/index.mdx",
+      "type": "official_technical_specification",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs Rules README - separately maintained provider catalog and contribution scope",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Rules/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs rule contribution guide - issue, proposal and pull-request workflow",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Rules/master/CONTRIBUTING.md",
+      "type": "official_contribution_guide",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs live minified provider catalog retrieved on 2026-11-05 - independent snapshot counts and hash input",
+      "url": "https://rules2.clearurls.xyz/data.minify.json",
+      "type": "official_live_rule_data",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs published rule-catalog SHA-256 hash used by the update mechanism",
+      "url": "https://rules2.clearurls.xyz/rules.minify.hash",
+      "type": "official_integrity_metadata",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs permission documentation - reasons for site, request, storage, tab, navigation and download access",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Docs/master/content/docs/permissions.mdx",
+      "type": "official_permission_documentation",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs FAQ - cleaning scope, global pause, logging, browser support and lack of a site whitelist",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Docs/master/content/docs/faq.mdx",
+      "type": "official_project_faq",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs troubleshooting documentation - false positives, breakage and diagnostic steps",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Docs/master/content/docs/troubleshooting.mdx",
+      "type": "official_troubleshooting_documentation",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs privacy statement - publisher declaration concerning data collection",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Addon/master/PRIVACY.md",
+      "type": "official_privacy_policy",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs changelog - recursive cleaning, rule-handling and release history through 1.27.3",
+      "url": "https://raw.githubusercontent.com/ClearURLs/Addon/master/CHANGELOG.md",
+      "type": "official_changelog",
+      "publisher": "ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Firefox Add-ons ClearURLs version history - 1.27.3, release date, Firefox/Android compatibility and licence label",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/clearurls/versions/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs Add-on repository metadata - creation date, default branch, issue status and last push",
+      "url": "https://api.github.com/repos/ClearURLs/Addon",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "ClearURLs Rules repository metadata - separate rule project and last-push maintenance signal",
+      "url": "https://api.github.com/repos/ClearURLs/Rules",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / ClearURLs project",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Chrome Manifest V2 deprecation timeline - Chrome 138/139 behaviour and 31 August 2026 store removal",
+      "url": "https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline",
+      "type": "official_platform_documentation",
+      "publisher": "Google Chrome",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

@@ -153,7 +153,22 @@ var LIBRARY_RESOURCES = [
   "yahoo-search",
   "yandex",
   "baidu",
-  "duckduckgo-search"
+  "duckduckgo-search",
+  "brave-search",
+  "startpage",
+  "qwant",
+  "mojeek",
+  "kagi",
+  "ecosia",
+  "swisscows",
+  "metager",
+  "searxng",
+  "ublock-origin",
+  "ublock-origin-lite",
+  "privacy-badger",
+  "clearurls",
+  "decentraleyes",
+  "noscript"
 ];
 
 (function () {

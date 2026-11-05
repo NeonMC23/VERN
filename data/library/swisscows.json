@@ -1,0 +1,127 @@
+{
+  "id": "swisscows",
+  "name": "Swisscows",
+  "type": "application",
+  "summary": "Swiss family-focused search service operated by Swisscows AG, combining claimed proprietary indexing and semantic technology with external search cooperation, experimental operators, advertising-supported free access and an ad-free Pro tier.",
+  "tags": [
+    "search engine",
+    "web",
+    "privacy",
+    "family friendly",
+    "semantic search",
+    "brave",
+    "own index",
+    "advertising",
+    "subscription",
+    "android",
+    "ios"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary hosted service; no open-source licence for the consumer search engine was established in the official material consulted",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Swisscows is a general Web search service operated by Swisscows AG from Egnach, Switzerland. It combines a family-oriented results policy, semantic search claims and country-oriented search with both a proprietary index and external cooperation. The current homepage names Brave in connection with search results while also attributing result quality partly to Swisscows' own index; it does not establish Brave as the sole provider. Access is available through the website, Android and iOS applications, browser extensions and default-search configuration. A free advertising-supported tier coexists with Swisscows Pro, which adds ad removal and user-controlled source and relevance settings. The surrounding VPN, email, cloud and messaging products are separate services, not components of a search index. This entry treats technical and privacy statements as publisher disclosures, not as an independent audit of infrastructure, ranking or anonymity.",
+    "origin_and_history": "The company page identifies Swisscows AG as a subsidiary of Hulbee AG and says the Swisscows project was launched in 2014. It names founder and CEO Andreas Wiebe and describes more than 20 years of prior research by his team in search and intelligent information processing. Hulbee Enterprise AG is presented as a sister company focused on enterprise search, which should not be confused with the consumer service. The company's timeline uses relative labels such as ‘four years ago’; those labels are not converted here into invented calendar dates. A dated article from 23 November 2023 described cooperation with Bing and an exclusive Bing advertising relationship. The current homepage instead names Brave for search cooperation and System1 for advertising. These are differently dated publisher statements, not evidence of one unchanging provider arrangement or of a simultaneous exclusive relationship with all named companies.",
+    "rendering_engine_and_technical_architecture": "Swisscows' technical pages describe four proprietary modules: Search, Semantics, Data Visualization and Crawler. The crawler is said to index Web pages and documents, while semantic analysis identifies relationships between terms and visualization organizes related concepts. The current homepage says its own index contributes to result quality and separately mentions cooperation with Brave. The 2023 article's Bing description is therefore retained as historical evidence, not silently substituted for the current statement. No consulted page publishes a current index size, crawl coverage, query-routing proportion, complete vertical-by-vertical provider list or reproducible ranking formula. It is consequently inaccurate to reduce the service either to a wholly independent single-index engine or to a simple Brave or Bing front end. Advertising infrastructure is also a separate concern: names appearing in ad disclosures must not be treated as organic-result providers without explicit evidence.",
+    "interface_and_documented_features": "The official operator guide documents `ext:`, `filetype:`, `inbody:`, `intitle:`, `inpage:`, `lang:` or `language:`, `loc:` or `location:`, `site:`, plus and minus prefixes, quoted exact phrases, and uppercase `AND`, `OR` and `NOT`. It warns that these operators are experimental and at an early development stage, so consistent behaviour cannot be assumed for every query or upstream result. Family-oriented filtering is a default product characteristic: the homepage says pornographic and sexual material is neither indexed nor displayed, while company material also describes a violent-content-free environment. Swisscows Pro Index adds source inclusion and exclusion, three relevance levels from more to less visible or hidden, and an advanced configuration window. An anonymous result preview is advertised separately; it is not a guarantee that every destination, embedded video or advertising frame has the same privacy properties.",
+    "installation_and_distribution": "Ordinary Web search requires no local installation, and the privacy policy says the service can be used without registration, although additional features can require an account. Official instructions cover default-search setup in Firefox, Chrome, Brave, Opera, Tor and Edge. Firefox, Chrome and Edge have linked extension packages; Brave and Opera instructions use the browser query template `https://swisscows.com/web?query=%s`. The Pro page links the Swisscows Private Search listings for Android through Google Play and for iPhone or iPad through Apple's App Store. These are access clients, not evidence of separate mobile indexes. The free website and a paid Pro subscription are different distribution and feature tiers. Swisscows.Email, VPN, Edelcloud, TeleGuard and Platinum bundles belong to the company's wider product catalogue and should not be installed or treated as prerequisites for basic search.",
+    "platforms_and_hardware_architectures": "Swisscows' documented user platforms are the hosted Web interface, Android and iOS. No processor architecture, memory, storage or other hardware requirement is published for ordinary browser access, and the mobile listings do not turn the service into an offline index or a self-hostable engine. Browser extensions facilitate default-search integration rather than supplying a separate ranking system. Language and location operators can constrain results, while country-related indexing and upstream support may affect what is returned; an interface language is not proof that every result document uses that language. Account-dependent functions, especially Pro controls, should be distinguished from preferences available to an unregistered visitor. No official promise of identical settings or feature availability across every browser, application and device was established in the pages consulted. Platform availability therefore describes access routes, not uniform results or privacy behaviour.",
+    "extensions_and_add_on_store": "Swisscows offers browser extensions and mobile applications, but no general add-on store for third-party ranking or result plugins is documented. Pro Index is a first-party customisation feature, not an extension API. The browser query template is useful for default-search configuration, yet it does not publish an authentication scheme, response schema, quota, service-level commitment or supported developer lifecycle. Searches of the official website and support material did not establish a public general-purpose Web Search API; this is a documentation finding, not proof that no private or commercial arrangement exists. Internal endpoints observed or reused by third-party scrapers are not treated as an official API contract. Integrators should not infer permission, stability or automated-access rights from a browser URL. The company's enterprise-search and technology-licensing activities are separate offers and do not supply consumer Swisscows results under an automatically granted developer licence.",
+    "privacy_and_security_model": "The detailed privacy policy says Swisscows anonymises search queries, does not create personal profiles, avoids identifying cookies, tracking pixels and browser fingerprinting, requires HTTPS and stores limited anonymised analytics in a self-hosted system. It also says incoming-query data is processed to block spam and abusive searches. Registration and support can involve a name, email address or other voluntarily supplied details, so the service is not accurately summarised as processing no data in every context. For advertising fraud prevention, bot detection and regional ad selection, the policy lists a last-octet-masked IP address, a reduced user agent, the query and region settings as information transmitted after anonymisation. It further states that Microsoft Bing and Google advertising iframes automatically transmit personal data to those providers when loaded, regardless of interaction. Embedded videos can likewise contact their hosts. Pro is presented as the ad-free option with the publisher's strongest anonymity claims; none of these statements was independently audited here.",
+    "update_channels_and_release_cadence": "No consumer search-engine version number, fixed release cadence or comprehensive public ranking changelog was established in the consulted material. The website, support centre, company pages, privacy policy and terms are living documents rather than builds of a single dated release. The clearest dated architecture reference used here is the article of 23 November 2023, whose Bing description cannot be projected forward without qualification. Current pages name Brave, System1 and advertising iframes in different contexts, making per-page attribution and access dates essential. The operator guide's experimental warning is more informative about maturity than an invented version number. Pro promises that future features are included in the subscription, but that is not a dated roadmap or a guarantee of delivery. Mobile-application update dates belong to individual store packages, not to the search index, and this entry's 2026-11-05 verification date is a research timestamp only.",
+    "licensing_and_governance": "Swisscows AG is the responsible Swiss company identified by the privacy policy and terms, with its address in Egnach. The consumer search service is proprietary; the terms reserve copyright in website material and require written approval for reproduction or modification unless otherwise stated. They also allow availability interruptions for maintenance and external causes and address account responsibilities and termination without creating an uptime guarantee. The business model is mixed. The current homepage names advertising delivered through System1 and sales of Pro and other privacy products; company material additionally describes AdAnounce, software projects and technology licensing. The 2023 article described Bing-generated search ads as the financial basis at that time. These statements should not be merged into one timeless revenue share or partner list. The privacy policy says Swiss law applies to the company and asserts GDPR compliance, but that assertion is not a regulatory certification verified in this phase.",
+    "limitations_and_scope": "The principal limitation is documentary consistency. Current and historical pages name Brave, Bing, System1, Microsoft Bing, Google and AdAnounce in different search or advertising roles; the sources do not provide a complete current routing diagram. Absolute ‘no data’ slogans and the broad wording of the terms must be read alongside the detailed policy's anti-abuse processing, account data, advertising transmissions and third-party iframes. No independent test was performed of anonymisation, family filtering, semantic relevance, index freshness, result coverage, application behaviour or the claim that Pro stores and shares nothing. Operators remain experimental, and the extent of support across external result sources is not published. Prices and subscription benefits are point-in-time displays from 2026-11-05, not permanent tariffs. Finally, the absence of a located public API guide does not exclude private arrangements, but it prevents this entry from promising endpoints, formats, quotas or redistribution rights.",
+    "who_is_it_for": "Swisscows is relevant to users seeking a general search service with a default family-oriented results policy and a Swiss operator that publishes detailed privacy and subscription documents. Its quoted phrases, site, title, body, file-type, language and country operators can help structured research when their experimental behaviour is acceptable. People who want to influence sources without building a separate search stack may value Pro's inclusion, exclusion and relevance controls, while users primarily seeking an ad-free interface can consider the same paid tier. Browser extensions, default-search instructions and Android or iOS clients make it accessible without changing operating systems. It also suits evaluators who prefer a service disclosing both proprietary technology and external cooperation, provided they check the role and date of each provider statement rather than expecting a single-index architecture.",
+    "who_is_it_not_for": "Swisscows is not a fit for users requiring every result to come from one independently verified, wholly proprietary index, because external cooperation is explicitly documented and query allocation is not public. The free advertising tier is unsuitable for anyone requiring no automatic data transmission to advertising or embedded-content providers. Users needing a public, versioned Search API with documented quotas and formats, a self-hostable engine or an open-source consumer core should not infer those properties from browser integration. Organisations that need guaranteed operator behaviour, a fixed provider list, uniform features across devices or contractual uptime will not find those assurances in the cited pages. Pro also requires accepting account and subscription conditions where applicable. Anyone requiring independent proof of zero retention, complete anonymity, exhaustive filtering or ranking quality needs evidence beyond the publisher material reviewed here.",
+    "verdict": "Swisscows is best described as a Swiss, family-oriented search service with proprietary indexing and semantic components plus external result cooperation, not as a provider-independent index or a mere reseller of one named engine. Its operator guide is unusually broad but expressly experimental, and Pro adds meaningful source and relevance controls alongside ad removal. The central caution is to keep roles and dates straight: Brave appears in the current search description, Bing in a 2023 search-and-ad article, and System1, Microsoft Bing, Google and AdAnounce in different advertising disclosures. Privacy claims likewise require the detailed policy rather than absolute marketing slogans, particularly for free-tier iframes and account or anti-abuse processing. Swisscows is therefore a credible option for users who value its filtering and customisation model while accepting composite infrastructure, paid premium controls and documentation that does not amount to an independent privacy or quality audit."
+  },
+  "links": {
+    "homepage": "https://swisscows.com/en",
+    "company": "https://company.swisscows.com/en",
+    "technology": "https://company.swisscows.com/en/products",
+    "search_engine_blog": "https://blog.swisscows.com/en/how-does-a-search-engine-work/",
+    "search_operators": "https://support.swisscows.com/swisscows-search/search-operators/",
+    "premium": "https://swisscows.com/en/premium",
+    "default_search": "https://swisscows.com/en/default-search",
+    "privacy_policy": "https://swisscows.com/en/privacy",
+    "terms_of_use": "https://swisscows.com/en/terms-of-services",
+    "about_search": "https://swisscows.com/en/search-engine-no-tracking"
+  },
+  "sources": [
+    {
+      "title": "Swisscows company overview - Swisscows AG, Hulbee AG, 2014 project launch, Egnach, proprietary technology and business model",
+      "url": "https://company.swisscows.com/en",
+      "type": "official_company_page",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Swisscows products and technologies - publisher descriptions of Search, Semantics, Data Visualization and Crawler modules",
+      "url": "https://company.swisscows.com/en/products",
+      "type": "official_company_page",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Swisscows homepage - current Brave search cooperation, own-index claim, family filtering, Pro controls and System1 advertising statement",
+      "url": "https://swisscows.com/en",
+      "type": "official_product_page",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How does a search engine work dated 2023-11-23 - historical Bing search cooperation and advertising description",
+      "url": "https://blog.swisscows.com/en/how-does-a-search-engine-work/",
+      "type": "official_company_article",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Swisscows Search Operators - field, file, language, location, Boolean and exact-phrase syntax with experimental-status warning",
+      "url": "https://support.swisscows.com/swisscows-search/search-operators/",
+      "type": "official_documentation",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Swisscows Pro - source inclusion and exclusion, relevance controls, ad-free tier, displayed prices and mobile application links",
+      "url": "https://swisscows.com/en/premium",
+      "type": "official_product_page",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Install Swisscows as default search - browser extensions, setup instructions and the documented browser query template",
+      "url": "https://swisscows.com/en/default-search",
+      "type": "official_documentation",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Swisscows Privacy Policy - query anonymisation, anti-abuse processing, accounts, advertising transfers, iframes, videos and Pro claims",
+      "url": "https://swisscows.com/en/privacy",
+      "type": "legal_document",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Swisscows Terms of Use - website scope, availability, accounts, technical cookies, intellectual property and termination provisions",
+      "url": "https://swisscows.com/en/terms-of-services",
+      "type": "legal_document",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Swisscows search-engine presentation - anonymous preview and marketing privacy claims to be read with the detailed policy",
+      "url": "https://swisscows.com/en/search-engine-no-tracking",
+      "type": "official_product_page",
+      "publisher": "Swisscows AG",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

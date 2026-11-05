@@ -1,0 +1,192 @@
+{
+  "id": "mojeek",
+  "name": "Mojeek",
+  "type": "application",
+  "summary": "British web search engine operated by Mojeek Limited, serving ordinary Web results from its own MojeekBot-built index, with Focus, optional cited summaries, mobile apps, contextual advertising and a paid Search API.",
+  "tags": [
+    "search engine",
+    "web",
+    "privacy",
+    "independent index",
+    "mojeekbot",
+    "focus",
+    "search api",
+    "contextual advertising",
+    "proprietary",
+    "mojeek",
+    "united kingdom"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service; no source licence published for the consumer search engine itself",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Mojeek is a general web search engine operated by Mojeek Limited, a company registered in England. Its defining publisher claim is that ordinary Web results come from Mojeek's own crawler, index and ranking algorithms rather than from Google or Bing. That statement concerns the Web vertical: Wikipedia Infoboxes, image providers, Search Choices and generated summaries are separate components and must not be folded into the same independence claim. Basic search is available in a browser without an account, while Android and iOS applications provide additional access routes. Mojeek Focus lets a user restrict or exclude chosen sites, and the Web Search API is a distinct authenticated commercial product. This entry covers the consumer engine, its crawler and ranking disclosures, settings, advertising, applications and API, without treating Mojeek's statements about neutrality, speed or privacy as independent measurements.",
+    "origin_and_history": "Mojeek's official technology page attributes the technology to Marc Smith and says the service launched in 2004 on two donated servers. It records a complete rewrite and the start of a newly crawled index in 2011, followed by a new Mojeek launch in 2012. The same timeline dates Focus to 2022, the semantic ranking element and Search Summaries to 2024, and a publisher-reported milestone of more than 9 billion pages to 2025. These are Mojeek's own historical statements, not a live census of the index or a complete account of every provider used by individual verticals. Focus itself is described as a revival of Personal Search, a feature first offered in 2006. No consumer software version or day-by-day ranking history is inferred from this milestone list.",
+    "rendering_engine_and_technical_architecture": "Mojeek says its search technology was written from scratch, mostly in C, and runs on infrastructure that the company builds and manages. MojeekBot supplies the Web index. Its publisher documentation says it obeys the Robot Exclusion Standard, makes no more than one request to a site within the same 1 second period, does not support the non-standard `crawl-delay` directive, and honours `noindex`, `nocache` and `nofollow` meta tags. Crawlers can be checked by forward-confirmed reverse DNS or against a published IP list. Ranking remains fundamentally lexical, but a February 2024 announcement added a semantic element, initially for English-language results. API documentation exposes keyword, semantic and query-independent Gravity scores on eligible plans, while warning that scores change. Mojeek's content policy describes its own indexed search data as HTML pages; that does not exclude separately sourced image or enrichment features.",
+    "interface_and_documented_features": "The results page provides ordinary links plus Web, Images and News routes, with an Emotions route labelled as a demo. Documented query operators include `inanchor:`, `intext:`, `intitle:`, `inurl:`, their `all...` forms, `site:`, `since:` and `before:`. Location produces a country-level regional boost, while interface language and preferred result language are separate settings. Safe Search can hide results classified for a mature audience, and the results-per-page setting offers 10, 20, 30 or 40 links. Mojeek says it does not autocorrect misspellings: it offers a Did you mean suggestion instead. Host clustering is enabled by default, with a route to more results from the same site. Optional Summary output cites the underlying results, and a Wikipedia Infobox can be disabled. Search Choices transfers a query to another engine rather than creating a federated Mojeek index.",
+    "installation_and_distribution": "No installation or login is required for basic Web search: a user can visit mojeek.com or configure `https://www.mojeek.com/search?q=%s` as a browser search URL. Official guides cover desktop and mobile browsers, including Firefox, Chrome, Safari, Edge, Brave, Vivaldi and several Firefox derivatives; the exact procedure depends on the browser. Mojeek also distributes an iOS app and an Android app through their respective app stores, and its mobile help page offers a direct Android APK. Those applications are distribution clients for the service, not evidence of an offline index or a separate browser engine. Preferences can be stored locally, and Focus is explicitly designed to work without an account. Developers instead register for an API account and key. No desktop search-only installer, operating-system image or source package of the consumer engine is published in the consulted material.",
+    "platforms_and_hardware_architectures": "Mojeek's central platform is the Web, accessible through current desktop and mobile browsers over HTTPS. Android and iOS are additional application platforms, but no processor architecture, memory, disk or minimum hardware requirement is stated for ordinary search. Browser configuration changes only where address-bar queries are sent; it does not install Mojeek technology locally. Language and region settings alter relevance boosts and do not constitute personal tracking by themselves, although identical settings and timing are the conditions Mojeek uses when describing reproducible non-personalised ordering. The publisher says up to 1,000 results can be reached when enough matches exist, which is an interface cap rather than a guarantee of index completeness. The Search API is platform-neutral for clients able to make authenticated HTTPS requests. Application-store and direct-APK requirements belong to their packages and should be checked separately.",
+    "extensions_and_add_on_store": "Mojeek has no conventional add-on store for its search engine. Focus is its main user-controlled extension mechanism: the current guide allows 10 individual Foci, up to 25 included sites and up to 25 excluded sites per Focus, with cookie storage, backup, restore and sharing rather than mandatory login. For developers, the Search API quickstart uses `https://api.mojeek.com/search` with an API key and supports JSON or XML, pagination, language and region boosts, date limits, clustering and Safe Search. The price page lists Startup at £2 per 1,000 requests with 5 queries per second and up to 10 results, Business at £3 with 10 queries per second and up to 40, and custom Enterprise terms with up to 100. Startup permits one-hour caching, while Business and Enterprise include broader storage rights. Detailed scoring is plan-dependent, and `onscr`, `sescr` and Gravity are documented signals, not a complete public ranking formula.",
+    "privacy_and_security_model": "Mojeek's privacy policy says it does not implement specific user tracking, but it expressly does not say that no logs exist. Standard logs are kept indefinitely and contain visit time, requested page and possible referrer; browser information is held in a separate log. The policy says the IP address is replaced by a two-letter country code, and that the remaining data supports historical traffic volumes and country demographics. Cookies are not placed by default unless a function such as preferences requires agreement; Focus settings are cookie-based. A visible campaign URL parameter is used to determine whether a landing-page visit leads to a first search. Aggregate non-personal search data may improve results. The 2024 Summary launch used retrieval-augmented generation with Mixtral through Lepton at that time, which must not be presented as a verified current provider. Separately, the API advertises standard 90-day retention, optional zero data retention and no search-result subprocessors; those API terms do not rewrite the consumer policy.",
+    "update_channels_and_release_cadence": "The consumer engine has no public version number, fixed release cadence or comprehensive changelog in the material consulted. Mojeek's technology timeline, blog, support pages and API documentation are the visible change channels, and they can be updated independently. The semantic matching article is dated 2024-02-07 and the Summary article 2024-04-03; their descriptions of initial English coverage and the then-current Mixtral/Lepton arrangement are therefore time-bound, not permanent deployment guarantees. The privacy policy displays an update date of 2022-02-02, while other product pages are newer, so that date must not be mistaken for the last update of the whole service. API scores are expressly subject to change without notice. Mobile applications and a directly offered APK have package versions of their own, none of which identifies the version of Mojeek's index or ranking system.",
+    "licensing_and_governance": "Mojeek is a proprietary service. Its Terms grant a limited right to use the service software, not a source licence for the crawler, index or ranking system. They identify Mojeek Limited as company 06918197 in England, apply English law and reserve automated access to authorised uses such as the API; unauthorised scraping is prohibited. Advertising is permitted by the Terms, while the current Ads page describes an invite-only programme using query intent, category, keyword and country targeting under a non-tracking publisher claim. The content policy says ranking is automated without human curation, with exceptions for CSAM, spam, malware and legal obligations. It also describes removal from Mojeek's index rather than deletion from the originating website, and commits to transparency reporting. These are governance commitments by the operator, not independent findings of neutrality, legal compliance or completeness.",
+    "limitations_and_scope": "Mojeek's independent Web-index claim is unusually clear, but this phase did not audit its crawl coverage, ranking output, servers or logs. The 9 billion-page milestone and statements about speed, neutrality and result quality remain publisher claims. Ranking weights are not fully disclosed, and the semantic element's initial English limitation is a 2024 fact, not a verified map of present language coverage. A page can be absent because it is new, blocked by robots or meta directives, or dependent on JavaScript; the index is not the whole Web. No tracking must not be paraphrased as no retention because standard logs are kept indefinitely after IP replacement. The 2024 LLM provider may have changed. API documentation is also inconsistent about the base host: the quickstart uses `api.mojeek.com`, while the parameter page says to append endpoints to `www.mojeek.com`; integrators should resolve that discrepancy against current account documentation rather than assume equivalence. Finally, consumer privacy and API retention are different scopes.",
+    "who_is_it_for": "Mojeek suits users who want a general engine whose operator explicitly maintains its own Web crawler and index, while retaining familiar site, title, text, URL and date operators. It is useful to people who prefer simple lexical search with a documented semantic addition, optional rather than compulsory summaries, and no automatic spelling rewrite. Focus is particularly relevant for repeatable searches over a chosen set of sites without creating an account. Publishers receive concrete MojeekBot rules, crawl-rate expectations, meta-tag behaviour and verification methods. Developers who need licensed programmatic access can evaluate the separately priced API, its output controls and storage terms. Users who want to compare engines can use Search Choices, provided they understand that the destination service then applies its own policies.",
+    "who_is_it_not_for": "Mojeek is not for anyone requiring an independently audited index size, ranking neutrality, response time or privacy implementation. It is unsuitable for users who interpret no tracking as the complete absence of server-side records, or who cannot accept indefinite standard-log retention after IP replacement. People needing exhaustive Web coverage, guaranteed indexing of JavaScript-heavy pages, automatic query correction or a fully published ranking function will not find those commitments. A user who wants every image, summary and enrichment to come from Mojeek's own infrastructure must inspect each component separately. Developers needing one unambiguous documented API base URL, a free indefinite storage tier or an offline index should not assume those features. Finally, organisations requiring an open-source consumer engine or a contractual service-level guarantee for ordinary free search need different evidence.",
+    "verdict": "Mojeek is best characterised as an independent-index Web search service with unusually direct crawler documentation, a small but useful operator set and user-controlled Focus searches. Its own Web results are presented as separate from Google and Bing, while verticals, external information boxes and generated summaries require a more granular reading. The strongest practical evidence is the combination of MojeekBot controls, explicit settings, Focus limits and a documented commercial API. The principal cautions are equally concrete: ranking details remain incomplete, generated-summary documentation is time-bound, and the privacy policy retains standard logs indefinitely after replacing IP addresses with country codes. Mojeek is therefore a meaningful alternative for users who value an operator-maintained index, not a demonstrated zero-log or fully audited search system. Its consumer service, mobile clients and API should be evaluated within their respective documented scopes."
+  },
+  "links": {
+    "homepage": "https://www.mojeek.com/",
+    "technology_and_history": "https://www.mojeek.com/about/technology.html",
+    "independent_web_results": "https://www.mojeek.com/about/why-mojeek",
+    "mojeekbot": "https://www.mojeek.com/bot.html",
+    "search_operators": "https://www.mojeek.com/support/search-operators.html",
+    "search_tips": "https://www.mojeek.com/support/search/tips.html",
+    "focus": "https://www.mojeek.com/support/search/focus.html",
+    "browser_setup": "https://www.mojeek.com/support/browsers/",
+    "mobile_apps": "https://www.mojeek.com/support/smartphones/",
+    "privacy_policy": "https://www.mojeek.com/about/privacy/",
+    "terms_of_service": "https://www.mojeek.com/about/terms.html",
+    "content_policy": "https://www.mojeek.com/about/content/",
+    "summary_2024": "https://blog.mojeek.com/2024/04/mojeek-search-summary.html",
+    "semantic_update_2024": "https://blog.mojeek.com/2024/02/major-algorithm-update.html",
+    "web_search_api": "https://www.mojeek.com/services/search/web-search-api/",
+    "api_quickstart": "https://www.mojeek.com/support/api/search/quickstart.html",
+    "api_request_parameters": "https://www.mojeek.com/support/api/search/request_parameters.html",
+    "api_scoring": "https://www.mojeek.com/support/api/search/results_scoring.html",
+    "advertising": "https://www.mojeek.com/ads/"
+  },
+  "sources": [
+    {
+      "title": "Team, Technology and History - development in C, owned infrastructure, 2004 launch, 2011 index rebuild and publisher milestones through 2025",
+      "url": "https://www.mojeek.com/about/technology.html",
+      "type": "official_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Why Mojeek - publisher claim of independent Web results, result settings, Search Choices, applications and the scope of index independence",
+      "url": "https://www.mojeek.com/about/why-mojeek",
+      "type": "official_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "MojeekBot - crawl frequency, robots.txt, unsupported crawl-delay, noindex, nocache, nofollow and DNS or IP verification",
+      "url": "https://www.mojeek.com/bot.html",
+      "type": "official_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search Operators - inanchor, intext, intitle, inurl, all-prefixed forms, site, since and before syntax",
+      "url": "https://www.mojeek.com/support/search-operators.html",
+      "type": "official_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mojeek search tips - country and language boosts, Safe Search, result counts, Summary, Infobox, News, clustering and spelling suggestions",
+      "url": "https://www.mojeek.com/support/search/tips.html",
+      "type": "official_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mojeek Focus - cookie-based site inclusion and exclusion, current Focus and domain limits, backup, restore and sharing",
+      "url": "https://www.mojeek.com/support/search/focus.html",
+      "type": "official_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Add Mojeek to a browser - official desktop, iOS and Android browser configuration routes",
+      "url": "https://www.mojeek.com/support/browsers/",
+      "type": "official_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mojeek on smartphones - iOS and Android applications, direct Android APK and mobile browser setup",
+      "url": "https://www.mojeek.com/support/smartphones/",
+      "type": "official_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mojeek Privacy Policy updated 2022-02-02 - cookies, campaign parameter, indefinite standard logs and IP replacement by country code",
+      "url": "https://www.mojeek.com/about/privacy/",
+      "type": "legal_document",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mojeek Terms of Service - English company 06918197, automated-access restrictions, advertising, proprietary rights and English law",
+      "url": "https://www.mojeek.com/about/terms.html",
+      "type": "legal_document",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search Content Policy - automated ranking, exceptions for illegal and harmful material, index removal, government requests and transparency reporting",
+      "url": "https://www.mojeek.com/about/content/",
+      "type": "policy_document",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mojeek Search Summaries dated 2024-04-03 - optional cited RAG summaries and Mixtral through Lepton as the provider described at launch",
+      "url": "https://blog.mojeek.com/2024/04/mojeek-search-summary.html",
+      "type": "official_announcement",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Major Algorithm Update dated 2024-02-07 - lexical matching retained, semantic element added and initial English-language scope",
+      "url": "https://blog.mojeek.com/2024/02/major-algorithm-update.html",
+      "type": "official_announcement",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mojeek Web Search API - plan prices and limits, storage rights, standard 90-day retention, optional ZDR and infrastructure claims",
+      "url": "https://www.mojeek.com/services/search/web-search-api/",
+      "type": "developer_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search API Quickstart - api.mojeek.com search endpoint, API key and example language, region and JSON parameters",
+      "url": "https://www.mojeek.com/support/api/search/quickstart.html",
+      "type": "developer_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search API Request Parameters - pagination, language and region boosts, dates, clustering, Safe Search and JSON or XML output",
+      "url": "https://www.mojeek.com/support/api/search/request_parameters.html",
+      "type": "developer_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search API Results Scoring - overall score, onscr, sescr, Gravity, plan restrictions and changeable scoring signals",
+      "url": "https://www.mojeek.com/support/api/search/results_scoring.html",
+      "type": "developer_documentation",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mojeek Ads - invite-only contextual advertising with category, keyword and country targeting under the publisher's non-tracking claim",
+      "url": "https://www.mojeek.com/ads/",
+      "type": "official_product_page",
+      "publisher": "Mojeek",
+      "accessed": "2026-11-05"
+    }
+  ]
+}

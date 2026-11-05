@@ -1,0 +1,176 @@
+{
+  "id": "ecosia",
+  "name": "Ecosia",
+  "type": "application",
+  "summary": "German not-for-profit search service operated by Ecosia GmbH, combining Bing, Google and EUSP results with climate-funded advertising, provider-dependent controls, optional AI features and mobile browser applications.",
+  "tags": [
+    "search engine",
+    "web",
+    "privacy",
+    "climate action",
+    "tree planting",
+    "bing",
+    "google",
+    "eusp",
+    "staan",
+    "advertising",
+    "ecosia"
+  ],
+  "status": "active",
+  "platforms": [
+    "Web",
+    "Android",
+    "iOS"
+  ],
+  "license": "Proprietary service; no source licence published for the consumer search engine itself",
+  "last_verified": "2026-11-05",
+  "content": {
+    "introduction": "Ecosia is a general web search service operated by Ecosia GmbH in Berlin. It presents itself as a not-for-profit social business rather than a charity: advertising revenue first covers operating costs, and the company says all resulting profits support climate action, principally tree planting. Its ordinary organic results are supplied by Microsoft Bing, Google or European Search Perspective (EUSP), depending on factors such as location, device, browser and cookie permissions. Ecosia adds its own interface, settings, sustainability indicators and optional AI features around those results. The Android and iOS applications are browser products with integrated search, not proof of a separate mobile index; the desktop browser is likewise outside this entry's browser scope. Basic Web search does not require an account. This entry distinguishes Ecosia's consumer service from EUSP's Staan infrastructure, from upstream providers and from the company's wider climate and browser activities.",
+    "origin_and_history": "Ecosia's tenth-anniversary history dates its foundation to 2009 by Christian Kroll with help from his sister and friends. It records the consolidation of smaller projects into the main engine in 2011 and the beginning of financial-report publication that year. In October 2018, Kroll announced a steward-owned structure with legally binding restrictions intended to prevent shares being sold at a profit and profits being taken out of the company. Ecosia later created European Search Perspective with Qwant: an August 2025 announcement says EUSP began supplying part of its French results through the Staan index, and a July 2026 announcement extends that rollout to Germany. These are dated publisher milestones, not evidence that every Ecosia query now uses a European index. Historical user, tree and revenue figures are not reused as current measurements.",
+    "rendering_engine_and_technical_architecture": "Ecosia is a multi-provider search service rather than a single-index system. Its provider documentation names Microsoft Bing, Google and EUSP and says the selected source can change between searches, even for one user; advertisements can come from a different provider than the organic results. Ecosia says it does not manually reorder or override the organic ordering returned by its partners, whose own ranking algorithms apply. EUSP is a joint venture with Qwant, and its Staan index supplies Web results that Ecosia displays with its own features. Separate providers enrich the page with weather, maps, translations, dictionaries, flights, currency conversion and other modules. Leaf and fossil-fuel icons surface external assessments or datasets rather than an Ecosia sustainability certification. The removal guide also says image results come from Bing. Thus EUSP's independent index does not make every vertical, result page or AI feature independent of external infrastructure.",
+    "interface_and_documented_features": "Ecosia offers Web, Images, News, Videos and Shopping routes, with filters whose availability depends on provider and region. Documented operators include quoted phrases, `AND`, `OR`, minus exclusion, `site:` and, where the upstream provider supports it, `filetype:`. Search tags such as `#w` or `!w` transfer a query to another service, while `#i`, `#n`, `#s` and `#v` open Ecosia verticals. Settings separate website language from search region and can expose a preferred provider only where several are available. Safe Search offers Moderate or Strict where customisation is permitted; some regions force Strict. AI Overviews provide cited generated summaries, currently documented as using Mistral Small 3.2 through Staan/EUSP, while AI Chat offers conversational modes and optional history. An AI-free setting disables Overviews, Chat navigation and auto-routing, but the current guide limits that combined setting to desktop users. Generated answers remain distinct from ordinary organic links.",
+    "installation_and_distribution": "Basic Ecosia search requires no installation or account: a browser can open ecosia.org or use `https://ecosia.org/search?q=%s` as a custom search URL. Official instructions cover default-engine configuration in several desktop and mobile browsers, with availability sometimes dependent on the browser's regional list. Ecosia also distributes Android and iOS applications that its own setup guide treats as default-browser candidates; they are not search-only packages. A separate desktop browser and optional browser extensions belong to distribution rather than to the result index. Website search settings are stored in browser cookies and are not synchronised between browsers or devices, even when the user is signed in. Optional accounts support features such as AI Chat history and, in the surrounding browser products, selectable data synchronisation; those account functions should not be confused with the cookie-based search preferences.",
+    "platforms_and_hardware_architectures": "Ecosia's main platform is the Web, with Android and iOS applications as additional access routes. No processor, memory, disk or other hardware requirement is published for ordinary browser-based search. Provider, market, device, browser, consent choices and app version can all change available functionality, so platform presence does not imply an identical results page. Region settings depend on upstream market coverage, and language settings do not force result documents into the interface language. AI Overviews and AI Chat have their own country lists and rollout limits; AI-free search is presently documented for desktop, with mobile support left for a future update. EUSP availability is likewise regional rather than universal. No offline consumer index is supplied. The autocomplete URL shown in browser setup is a suggestion endpoint, not a general Web Search API, and no processor architecture is implied by any of these network services.",
+    "extensions_and_add_on_store": "Ecosia does not operate an add-on store for extending organic search. Users can configure browser defaults, install Ecosia's browser-related products, create searches with tags and adjust cookie-based settings. Rich results are instead built through named data providers such as Mapbox, AccuWeather, Oxford Languages, Open Exchange and Tripadvisor, with source labels where possible. Following a search tag or external result transfers the user to a service whose own tracking and terms apply. No public general-purpose Ecosia Web Search API was located in the official material consulted, and the Terms prohibit automated access and extraction; this is a documentation finding, not a claim that no private commercial arrangement can exist. EUSP separately offers Staan search infrastructure to other organisations, but that B2B interface is not an API licence for Ecosia's consumer results. Browser sync and AI history are account features, not plug-in mechanisms for changing upstream ranking.",
+    "privacy_and_security_model": "Ecosia's policy is not a zero-data description. It says search terms, IP address and technical information such as browser, language and approximate region are processed to provide results and ads and to prevent abuse. Queries and IP addresses are automatically shared with the relevant search partners, and rich features can expose an IP address to additional providers. Ecosia says it anonymises IP addresses internally after a maximum of 7 days; its help page states 6 months for Microsoft and 9 months for Google, whose own policies therefore matter. Essential cookies support service and anti-fraud functions, while partner personalisation, additional analytics and Microsoft Clarity require consent in the described flows. Contextual ads can still use the query and general IP-derived location without behavioural personalisation. For AI, prompts go principally to Mistral under a stated zero-retention arrangement, with OpenAI documented as a fallback retaining input and output for 30 days. Optional chat history is encrypted, uploads are retained for 7 days, temporary chats for one day plus a possible further 24-hour deletion period, and sampled Langfuse quality data for up to 30 days.",
+    "update_channels_and_release_cadence": "Ecosia publishes no consumer engine version number, fixed release cadence or comprehensive ranking changelog in the sources consulted. Its Help Center, privacy policy, blog and provider documentation are living pages with separate dates. The privacy policy was last modified on 2026-05-21; the provider article shows 2026-08-12, search features 2026-09-22, the removal guide 2026-10-01, transparency 2026-10-23 and the AI guide 2026-11-04. These dates document page revisions, not engine builds. Provider routing and AI availability can change without a version visible to users, making the provider indicator beside a result more informative for a particular query than a static architecture diagram. Monthly financial reports and tree-project updates are governance and impact publications, not software releases. The France and Germany EUSP announcements are dated rollout evidence, not a guarantee of future country coverage or query share.",
+    "licensing_and_governance": "Ecosia's consumer service is proprietary, and its Terms grant limited use rather than a source licence for the search system. They prohibit automated access, collection and extraction, permit personal and legitimate business use within the stated conditions, and apply German law. Advertising is the main source of income: Ecosia says it earns money when users click partner-supplied ads and dedicates 100% of profits, after costs, to climate action. That is not a claim to devote 100% of revenue or a fixed quantity of trees per query. Monthly financial reports and project receipts are the publisher's main accountability mechanism. Organic ranking is described as upstream-controlled, with labelled ad slots and no payment to alter organic order. Ecosia says upstream providers must handle result or ad removal because it cannot remove their content itself, while it coordinates reporting and harmful-content measures. Its transparency statement also cautions that user counts are limited to people who opted into analytical cookies.",
+    "limitations_and_scope": "Official pages are not fully synchronised about EUSP. The provider article, marked updated 2026-08-12, still says EUSP is available only in France, whereas Ecosia's 2026-07-30 announcement says results are also live in Germany. This entry preserves that discrepancy and recommends checking the per-result provider indicator instead of inventing one definitive country list. More broadly, the Bing/Google/EUSP mix, operator support, filters and AI functions vary by market, device and consent. No independent audit of ranking, privacy, provider retention, climate impact or result quality was performed in this phase. Monthly reports are evidence published by Ecosia, not a measurement made here. Privacy claims must be read with automatic partner transfers, optional cookies and AI fallback retention. Green icons are third-party signals, not comprehensive certification. Generative answers can be wrong or biased, and no fixed searches-per-tree or carbon-neutrality guarantee is inferred. Finally, no public general Search API is asserted where official documentation did not establish one.",
+    "who_is_it_for": "Ecosia suits users who want free general Web search while directing advertising-funded profits towards climate projects according to a published social-business model. It is relevant to people who value monthly financial and project reporting and who want to inspect which upstream provider served a result. Users in EUSP rollout areas can also encounter results from a European index without changing to a separate engine. Search tags, region controls and familiar operators support ordinary research, provided provider-dependent behaviour is acceptable. Desktop users who prefer conventional links can enable the AI-free setting, while those who want generated assistance have Overviews and Chat with documented controls. Organisations deploying a default engine across browsers can use official setup guides, and users evaluating sustainability indicators can follow the external datasets rather than treating the icons as Ecosia certifications.",
+    "who_is_it_not_for": "Ecosia is not for users requiring every result to come from one wholly independent Ecosia-owned index, because Bing and Google remain documented providers and EUSP coverage is partial. It is unsuitable for anyone requiring no query or IP transmission to third parties, or who cannot accept region- and consent-dependent processing. People needing uniform advanced operators, identical settings across devices or guaranteed feature availability will not find those properties; cookie deletion can reset search preferences. Mobile users requiring the combined AI-free switch should note its current desktop limitation. Developers needing a documented public Web Search API or permission to scrape the consumer service should not assume either. Users requiring a fixed environmental outcome per search, an open-source core engine, independently verified ranking quality or an exhaustive sustainability score need evidence that Ecosia's search documentation does not supply.",
+    "verdict": "Ecosia is best characterised as a climate-funded, multi-provider search service with a growing European-index component, not simply as a Bing front end and not yet as a universally independent engine. Its most useful disclosures identify the provider behind results, explain that organic ordering remains upstream, and separate advertising, enrichments and AI from ordinary links. The business model is equally specific: ads fund operations and Ecosia says all profits, rather than all revenue, support climate action through published reports. Important cautions remain: partner data transfers and retention differ, settings and AI features vary, official EUSP country guidance conflicts, and generated or sustainability-labelled content needs source checking. Ecosia is therefore a credible choice for users who value its mission and provider transparency while accepting a composite technical and privacy model. It should not be presented as zero-data, uniformly EUSP-powered or independently verified in this phase."
+  },
+  "links": {
+    "homepage": "https://www.ecosia.org/",
+    "history": "https://blog.ecosia.org/ecosia-old-10-birthday/",
+    "steward_ownership": "https://blog.ecosia.org/trees-not-profits/",
+    "search_providers": "https://support.ecosia.org/article/579-search-results-providers",
+    "eusp_france_rollout": "https://blog.ecosia.org/launching-our-european-search-index/",
+    "eusp_germany_rollout": "https://blog.ecosia.org/eusp-germany-rollout/",
+    "search_features": "https://support.ecosia.org/article/447-search-features",
+    "settings": "https://support.ecosia.org/article/349-ecosia-settings",
+    "mobile_setup": "https://support.ecosia.org/article/653-installing-ecosia-on-your-mobile-device",
+    "privacy_policy": "https://www.ecosia.org/privacy",
+    "privacy_faq": "https://support.ecosia.org/article/377-ip-addresses",
+    "generative_ai": "https://support.ecosia.org/article/1006-ai-search",
+    "advertising": "https://support.ecosia.org/article/397-ads-on-ecosia",
+    "business_model": "https://support.ecosia.org/article/33-how-does-ecosia-make-money",
+    "transparency": "https://support.ecosia.org/article/402-reports-transparency",
+    "terms_of_service": "https://www.ecosia.org/terms-of-service",
+    "content_removal": "https://support.ecosia.org/article/506-content-and-ad-removal-requests-on-ecosia"
+  },
+  "sources": [
+    {
+      "title": "Ecosia turns 10 - official history of the 2009 foundation, early consolidation, financial reporting and later stewardship milestone",
+      "url": "https://blog.ecosia.org/ecosia-old-10-birthday/",
+      "type": "official_company_article",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Trees not profits dated 2018-10-25 - founder's announcement of steward ownership and restrictions on sale and profit extraction",
+      "url": "https://blog.ecosia.org/trees-not-profits/",
+      "type": "official_announcement",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search Result Providers updated 2026-08-12 - Bing, Google and EUSP routing, ranking, enrichment sources, settings and France-only statement",
+      "url": "https://support.ecosia.org/article/579-search-results-providers",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "European search index goes live dated 2025-08-07 - EUSP with Qwant, Staan and initial delivery of partial results in France",
+      "url": "https://blog.ecosia.org/launching-our-european-search-index/",
+      "type": "official_announcement",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "EUSP results live in Germany dated 2026-07-30 - expansion beyond France and publisher description of European hosting and rollout",
+      "url": "https://blog.ecosia.org/eusp-germany-rollout/",
+      "type": "official_announcement",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Search features updated 2026-09-22 - operators, tags, filters, rich content, AI routes and third-party sustainability indicators",
+      "url": "https://support.ecosia.org/article/447-search-features",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Ecosia Search settings updated 2026-06-19 - region, language, provider preference, SafeSearch, AI-free desktop control and cookie storage",
+      "url": "https://support.ecosia.org/article/349-ecosia-settings",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Mobile Ecosia setup - Android and iOS browser applications, default-browser choices and custom search or autocomplete URLs",
+      "url": "https://support.ecosia.org/article/653-installing-ecosia-on-your-mobile-device",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Ecosia Privacy Policy last modified 2026-05-21 - search and partner processing, cookies, retention, AI providers, accounts and rights",
+      "url": "https://www.ecosia.org/privacy",
+      "type": "legal_document",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Ecosia privacy FAQ updated 2026-03-23 - collected search data, partner sharing and stated IP anonymisation periods",
+      "url": "https://support.ecosia.org/article/377-ip-addresses",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Generative AI on Ecosia updated 2026-11-04 - Overviews, Chat, Mistral models, AI-free control, retention, accuracy and rollout limits",
+      "url": "https://support.ecosia.org/article/1006-ai-search",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Ads on Ecosia Search - partner-supplied labelled advertising, separation from organic ranking, revenue role and privacy settings",
+      "url": "https://support.ecosia.org/article/397-ads-on-ecosia",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "How Ecosia makes money updated 2025-07-14 - social-business status, ad-click revenue and 100 percent of profits for climate action",
+      "url": "https://support.ecosia.org/article/33-how-does-ecosia-make-money",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Transparency at Ecosia updated 2026-10-23 - monthly financial reports, regulatory statement, upstream ranking and opt-in audience measurement",
+      "url": "https://support.ecosia.org/article/402-reports-transparency",
+      "type": "transparency_report",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Ecosia Terms of Service - automated-access prohibition, permitted use, proprietary rights, availability disclaimers and German law",
+      "url": "https://www.ecosia.org/terms-of-service",
+      "type": "legal_document",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    },
+    {
+      "title": "Content and ad removal requests updated 2026-10-01 - provider identification, upstream reporting routes, EUSP removal and Bing-only images",
+      "url": "https://support.ecosia.org/article/506-content-and-ad-removal-requests-on-ecosia",
+      "type": "official_documentation",
+      "publisher": "Ecosia",
+      "accessed": "2026-11-05"
+    }
+  ]
+}
