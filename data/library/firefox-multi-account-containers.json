@@ -1,0 +1,198 @@
+{
+  "id": "firefox-multi-account-containers",
+  "name": "Firefox Multi-Account Containers",
+  "type": "application",
+  "summary": "Mozilla Firefox extension for colour-coded contextual identities with separate website storage and logins, custom containers, site assignments and optional Sync or VPN integration, distinct from profiles, private browsing and native Firefox containers.",
+  "tags": [
+    "browser extension",
+    "firefox",
+    "containers",
+    "contextual identities",
+    "cookie separation",
+    "website storage",
+    "multiple accounts",
+    "site assignments",
+    "firefox sync",
+    "mozilla vpn",
+    "privacy",
+    "public source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Firefox desktop"
+  ],
+  "license": "MPL-2.0 for the Multi-Account Containers extension; Mozilla VPN and other integrated services have separate terms",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "Firefox Multi-Account Containers is a Mozilla extension for separating browsing contexts inside one Firefox profile. Each named, colour-coded container provides a distinct contextual identity with its own cookie store and separated website state, allowing simultaneous logins to different accounts on the same site. The extension adds container management, site assignments, tab operations, optional Mozilla account synchronisation and VPN or proxy integration. It does not create a virtual machine, a complete browser profile or an anonymous network identity. Firefox 153 also introduced a native Containers preview: it coexists with the extension but does not yet implement every extension feature. Current channel metadata is likewise split. Firefox Add-ons and the main-branch manifest displayed 8.4.0, while the latest GitHub release endpoint still identified 8.3.8. These differences matter when assessing permissions, site-association behaviour and support, and none of the source readings below is a functional isolation or anonymity test.",
+    "origin_and_history": "The public mozilla/multi-account-containers repository was created on 1 December 2016 and is maintained under Mozilla's participation rules. The feature grew from Firefox contextual-identity experiments into an extension that made container creation and site-specific workflows broadly accessible. Mozilla's older project wiki remains useful for the OriginAttributes design, but contains historical Nightly instructions and unimplemented proposals that must not be mistaken for the current user interface. On 21 July 2026, Mozilla announced a native Containers preview in Firefox 153 with built-in creation, customisation and tab opening. The announcement explicitly says existing users can keep the extension alongside native containers and that not all add-on features are available natively. In October, AMO published extension 8.4.0 with UI fixes and migration of per-site associations into Firefox's newer contextual-identity API. The main manifest matches 8.4.0; GitHub's latest release remains 8.3.8, so repository, release and store channels must remain distinct.",
+    "rendering_engine_and_technical_architecture": "Containers are implemented by Firefox's contextual-identity and storage architecture, not by a rendering engine supplied by the extension. MDN describes each identity's name, colour, icon and unshared cookieStoreId; the project design explains a userContextId added to OriginAttributes alongside the usual origin tuple. Consequently, a site opened in two containers receives different cookie and supported website-storage state even though both tabs belong to the same Firefox profile. Mozilla's design documentation lists cookies, localStorage, indexedDB and HTTP/image caches as separated, while history, bookmarks and several other browser-level data classes are not separated or are intentionally shared. That historical list is design evidence, not an exhaustive guarantee for every current data type. The extension calls contextualIdentities and tabs APIs to create, update, reopen or remove contexts. It changes the browsing context of requests; it does not place each tab in a separate process, operating-system account, browser profile or security virtual machine.",
+    "interface_and_documented_features": "The toolbar panel and right-click menus open tabs in a chosen identity, while Manage Containers supports adding a container and changing its name, colour or icon. Users can delete a container, hide or show its tabs, sort tabs and move a group to another window. Site management includes Always Open in This Container, removal of an assigned site and Limit to designated sites, which sends other destinations to No Container according to the user guide. Bookmarks menus are optional and require bookmark access. Source also implements reopening the current tab in another container and configurable keyboard commands, but availability and bindings should be checked in Firefox rather than assumed across versions. Version 8.4.0 adds bidirectional coordination between extension assignments and Firefox's native per-site association API: Firefox's existing associations are imported first at startup, then subsequent changes travel both ways. This is a site-routing feature layered on contextual identities, not a second isolation system.",
+    "installation_and_distribution": "The extension is distributed through Firefox Add-ons as Multi-Account Containers, with source and release history in Mozilla's GitHub repository. Installation requires accepting a broad permission set because the extension manages tabs, cookies, site data and navigation. The current main manifest is Manifest V2, identifies the add-on as @testpilot-containers and declares incognito not_allowed. It sets a Firefox strict minimum of 91.1.0, whereas the AMO 8.4.0 version page states Firefox 91.0.0 and later; this small channel difference is retained rather than silently normalised. Firefox 153 users can instead begin with native containers, or run both because Mozilla explicitly supports coexistence. Native Firefox containers are not another download of this extension and do not automatically supply its Sync, site-assignment or VPN features. No XPI was downloaded, installed, signature-checked or executed, and no migration from an older release was performed.",
+    "platforms_and_hardware_architectures": "Multi-Account Containers targets Firefox's proprietary contextualIdentities API. MDN lists no equivalent support in Chrome, Edge, Opera or Safari, so this is not a general cross-browser WebExtension despite using familiar manifest technology. The reviewed code is JavaScript and has no separate CPU architecture requirement, but the exact Firefox version, packaging method and browser preferences determine available functions. MDN notes that contextual identities can still be disabled through privacy.userContext.enabled, causing API calls to reject; current native availability should be understood through SUMO and the Firefox 153 announcement rather than the MDN page's older Nightly-only wording. Containers are disabled in Private Browsing windows and when Never Remember History is selected. Mozilla VPN integration additionally requires a supported non-sandbox Firefox installation and does not work with the documented Snap or Flatpak cases. No Firefox desktop, Android, operating-system, sandboxed-package or native/extension coexistence matrix was executed.",
+    "extensions_and_add_on_store": "The extension's integration surface is Firefox itself, not a marketplace of third-party container plug-ins. contextualIdentities, cookies, tabs and webRequest capabilities manage identities and navigation; optional bookmarks support adds container-opening menu entries. Optional nativeMessaging, proxy and related permissions support Mozilla VPN or custom proxy workflows, which are separate services and configuration boundaries. Firefox 153's native container manager now shares the underlying identity concept and newer site-association API, but SUMO still attributes site assignments, synchronisation and VPN or own-proxy integration to the extension. Other container-themed add-ons, including Facebook Container, have different automatic rules and cleanup behaviour and should not be treated as interchangeable. AMO distributes and updates this particular Mozilla extension; a listing for another container add-on proves nothing about identical site storage or assignment semantics. Public source permits inspection of those integration points, but does not turn every optional service into part of the MPL-licensed extension.",
+    "privacy_and_security_model": "Containers primarily separate website-accessible state. They can prevent one container from automatically sending another container's cookies and can keep concurrent account sessions apart, reducing some cross-context tracking and ambient-credential exposure. They do not hide network or device characteristics: Mozilla explicitly notes that IP address, operating system and device information persist across containers. Browser-level history, bookmarks, saved passwords and other profile features must not be assumed partitioned; the historical design document specifically identifies several shared or intentionally unseparated classes. The extension requests all URLs, cookies, contextualIdentities, history, management, tabs, webRequest and other permissions, with optional bookmarks, browsingData, nativeMessaging and proxy access. AMO declares no required data collection, which is not an audit of websites, Mozilla accounts, Sync, VPN or a compromised browser. Sync concerns identities and site assignments rather than copying cookie jars into a new profile. Container separation is therefore a useful privacy boundary for site state, not anonymity, endpoint protection or a complete security sandbox.",
+    "update_channels_and_release_cadence": "Extension updates come through AMO or the project's release process, while native container features arrive with Firefox itself. AMO published 8.4.0 on 26 October 2026, describing UI fixes and migration of per-site associations into Firefox's contextual-identity API. The main-branch manifest and package metadata also declare 8.4.0, but GitHub's latest release endpoint remains 8.3.8. This is a channel-state difference, not evidence that one version number should replace the others or that an AMO XPI is byte-identical to a source archive. The 8.4.0 migration is especially significant because newer Firefox versions can own native site associations while the extension retains its stored assignments and synchronises changes. Sync updates from other devices and extension updates are independent events. Recent releases and repository activity show continuing maintenance but no guaranteed cadence, and the native preview does not by itself announce deprecation of the extension. No upgrade, association migration, rollback or cross-version Sync test was executed.",
+    "licensing_and_governance": "The extension's source files and repository are licensed under Mozilla Public License 2.0, a file-level copyleft licence with notice and source-availability obligations for covered modifications. That licence applies to the extension source, not automatically to Firefox, Mozilla VPN, third-party proxies, websites or data placed in Sync. Mozilla's public repository, contribution guide and community participation rules provide the governance context, while AMO supplies the signed distribution channel and its own metadata. The native Containers preview is a Firefox feature with its own browser development and release process rather than a separately licensed offer created by this entry. Public source and MPL permissions support modification and redistribution under the licence conditions, but do not establish that every store package was reproducibly built or independently audited. Users integrating VPN or custom proxy services must assess those providers and terms separately instead of extending the MPL label or Mozilla's extension data declaration to the whole workflow.",
+    "limitations_and_scope": "Containers are not complete Firefox profiles: profiles hold broader settings, installed extensions, bookmarks, passwords and other user data. They are also different from Private Browsing, which is a temporary session that discards specified data at its end and likewise does not make the user anonymous. Containers are disabled in private windows and with Never Remember History. The project design's storage list is historical and should not be expanded into a guarantee that every browser database or future API is partitioned. Removing an identity, closing its tabs and deleting its cookies or local storage are separate operations in source; a Delete action should not be assumed to provide a forensic wipe without checking the exact workflow. Site associations can have matching and migration edge cases, and current source retains an extension fallback for an ambiguous hostname/port representation. Sync does not transfer an entire profile or active login state. VPN integration needs its client, subscription and supported installation. MDN's older experimental wording diverges from current SUMO documentation. No isolation, deletion, Sync, VPN, anonymity, security or performance test was performed.",
+    "who_is_it_for": "Multi-Account Containers suits Firefox users who need several concurrent accounts on the same sites or want durable work, personal, banking and shopping contexts without repeatedly logging out. Names, colours and icons make those contexts visible, while assignments reduce accidental opening in the wrong account. Limit to designated sites can support disciplined routines, and tab hiding or sorting helps users managing several activities in one window. Mozilla account Sync is useful for carrying container names and site assignments between eligible devices when that limited scope is understood. Developers and privacy-conscious users can inspect the public implementation and choose whether optional VPN or proxy integration is appropriate. It is most effective for people who deliberately separate identities, review the broad permissions and remember that network addresses and profile-level browser features remain shared.",
+    "who_is_it_not_for": "This extension is not for users who need full browser-profile separation, independent extensions and settings, separate operating-system credentials or a virtual machine. It is also unsuitable as an anonymity tool: websites, networks and device characteristics can still identify or correlate activity, and a VPN changes only part of that equation. People seeking temporary sessions whose data disappears at close should evaluate Private Browsing rather than treating persistent containers as equivalent. Users on Chrome, Safari or other browsers cannot assume support for Firefox's contextualIdentities API. Those requiring guaranteed deletion of every trace, complete isolation of history and passwords, or verified protection against a compromised browser need stronger controls and independent testing. Snap or Flatpak users requiring Mozilla VPN integration face a documented incompatibility, and anyone expecting every extension feature in native Firefox 153 containers should retain the extension or reassess the missing functions.",
+    "verdict": "Firefox Multi-Account Containers is a focused and mature way to separate website state and concurrent accounts within Firefox. Its strengths are visible contextual identities, custom names and colours, site assignments, tab management, scoped Sync and optional network integration. The native Firefox 153 preview makes the underlying concept more accessible but does not eliminate the extension's additional workflows. Version and compatibility evidence must stay channel-specific: AMO and main source show 8.4.0, GitHub's latest release shows 8.3.8, and the manifest and store express slightly different Firefox minima. The central privacy benefit is separated site storage, not total browser or network isolation. Used deliberately, containers can reduce account collisions and some cross-context tracking; they should never be described as virtual machines, complete profiles, private-browsing replacements, guaranteed data erasure or proof of anonymity."
+  },
+  "links": {
+    "repository_readme": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/README.md",
+    "extension_user_guide": "https://support.mozilla.org/en-US/kb/containers",
+    "native_containers_guide": "https://support.mozilla.org/en-US/kb/how-use-firefox-containers",
+    "firefox_profiles": "https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
+    "private_browsing": "https://support.mozilla.org/en-US/kb/private-browsing-use-firefox-without-history",
+    "vpn_integration": "https://support.mozilla.org/en-US/kb/protect-your-container-tabs-mozilla-vpn",
+    "native_preview_announcement": "https://blog.mozilla.org/en/firefox/firefox-containers-preview/",
+    "contextual_identities_api": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/contextualIdentities",
+    "container_design": "https://wiki.mozilla.org/Security/Contextual_Identity_Project/Containers",
+    "source_manifest": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/manifest.json",
+    "sync_source": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/js/background/sync.js",
+    "assignment_source": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/js/background/assignManager.js",
+    "native_association_source": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/js/background/siteAssociation.js",
+    "container_logic_source": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/js/background/backgroundLogic.js",
+    "license": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/LICENSE",
+    "repository_metadata": "https://api.github.com/repos/mozilla/multi-account-containers",
+    "latest_github_release": "https://api.github.com/repos/mozilla/multi-account-containers/releases/latest",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/",
+    "firefox_version_history": "https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/versions/"
+  },
+  "sources": [
+    {
+      "title": "Multi-Account Containers README - Mozilla extension scope, documentation, governance and MPL-2.0 notice",
+      "url": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Mozilla Multi-Account Containers guide - creation, customisation, deletion, assignments, Sync and VPN scope",
+      "url": "https://support.mozilla.org/en-US/kb/containers",
+      "type": "official_usage_documentation",
+      "publisher": "Mozilla Support",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Mozilla native Containers guide - website-state separation, persistent device traits and extension additions",
+      "url": "https://support.mozilla.org/en-US/kb/how-use-firefox-containers",
+      "type": "official_usage_documentation",
+      "publisher": "Mozilla Support",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Mozilla Firefox Profiles guide - broader profile data, settings, extensions, bookmarks and passwords",
+      "url": "https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
+      "type": "official_reference_documentation",
+      "publisher": "Mozilla Support",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Mozilla Private Browsing guide - temporary session data and explicit non-anonymity warning",
+      "url": "https://support.mozilla.org/en-US/kb/private-browsing-use-firefox-without-history",
+      "type": "official_reference_documentation",
+      "publisher": "Mozilla Support",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Mozilla container VPN guide - required client, active subscription and per-container integration",
+      "url": "https://support.mozilla.org/en-US/kb/protect-your-container-tabs-mozilla-vpn",
+      "type": "official_integration_documentation",
+      "publisher": "Mozilla Support",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Mozilla Firefox 153 Containers Preview - 21 July 2026 native feature and extension coexistence",
+      "url": "https://blog.mozilla.org/en/firefox/firefox-containers-preview/",
+      "type": "official_release_announcement",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "MDN contextualIdentities API - cookieStoreId, identity operations, permissions and Firefox-only scope",
+      "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/contextualIdentities",
+      "type": "official_api_documentation",
+      "publisher": "Mozilla / MDN",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Mozilla contextual-identity design - userContextId, separated storage classes and shared-data limitations",
+      "url": "https://wiki.mozilla.org/Security/Contextual_Identity_Project/Containers",
+      "type": "official_historical_design_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers source manifest - version 8.4.0, MV2, Firefox minimum and permissions",
+      "url": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers sync.js - synced identities, assignments, deletions and instance information",
+      "url": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/js/background/sync.js",
+      "type": "official_source_code",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers assignManager.js - local assignment storage and native-association coordination",
+      "url": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/js/background/assignManager.js",
+      "type": "official_source_code",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers siteAssociation.js - Firefox-first migration and bidirectional site associations",
+      "url": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/js/background/siteAssociation.js",
+      "type": "official_source_code",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers backgroundLogic.js - identity create/update/remove, tab handling and separate data deletion",
+      "url": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/src/js/background/backgroundLogic.js",
+      "type": "official_source_code",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers LICENSE - Mozilla Public License version 2.0 text",
+      "url": "https://raw.githubusercontent.com/mozilla/multi-account-containers/main/LICENSE",
+      "type": "official_license",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers repository metadata - main branch, 2016 creation, activity and MPL metadata",
+      "url": "https://api.github.com/repos/mozilla/multi-account-containers",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers latest GitHub release metadata - divergent 8.3.8 release channel",
+      "url": "https://api.github.com/repos/mozilla/multi-account-containers/releases/latest",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / Mozilla",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons Multi-Account Containers listing - version 8.4.0, permissions and data-collection declaration",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Multi-Account Containers AMO version history - 8.4.0 date, Firefox range and association-migration notes",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/versions/",
+      "type": "official_store_version_history",
+      "publisher": "Mozilla Add-ons",
+      "accessed": "2026-11-06"
+    }
+  ]
+}

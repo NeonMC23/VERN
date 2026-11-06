@@ -168,7 +168,16 @@ var LIBRARY_RESOURCES = [
   "privacy-badger",
   "clearurls",
   "decentraleyes",
-  "noscript"
+  "noscript",
+  "consent-o-matic",
+  "dark-reader",
+  "bitwarden-browser-extension",
+  "keepassxc-browser",
+  "singlefile",
+  "violentmonkey",
+  "tampermonkey",
+  "sponsorblock",
+  "firefox-multi-account-containers"
 ];
 
 (function () {

@@ -1,0 +1,274 @@
+{
+  "id": "sponsorblock",
+  "name": "SponsorBlock",
+  "type": "application",
+  "summary": "Open-source YouTube extension and crowdsourced segment service that retrieves community timestamps and applies configurable local skip, mute, overlay or chapter behaviour, with a public API, voting, submission and distinct third-party clients.",
+  "tags": [
+    "browser extension",
+    "youtube",
+    "crowdsourced data",
+    "segment skipping",
+    "public api",
+    "local processing",
+    "votes",
+    "moderation",
+    "privacy",
+    "manifest v2",
+    "manifest v3",
+    "public source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome and Chromium-based browsers",
+    "Firefox desktop and Android",
+    "Microsoft Edge",
+    "Safari on macOS and iOS",
+    "Third-party clients with implementation-dependent support"
+  ],
+  "license": "GPL-3.0-or-later for current extension source; AMO still displays LGPL-3.0-only, while the server and public dataset have separate licences",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "SponsorBlock combines a browser extension, a crowdsourced database and a public API. Users submit timestamps and categories for YouTube videos; the service stores, filters and distributes those contributions; the extension retrieves applicable records and locally decides whether to display, skip, mute or navigate them. These layers must not be collapsed into a claim that every marked segment is correct or that every SponsorBlock-compatible client has the same features. Categories cover sponsorships, self or unpaid promotion, interaction reminders, intros, outros, previews, hooks, filler, non-music sections, highlights, chapters and full-video labels. Action types include skip, mute, full, poi and chapter, with category-specific combinations rather than one universal jump operation. Version 6.1.7 is the current GitHub and Firefox release checked, while the Chrome Web Store still displayed 6.1.6. The extension is open source, but the community data, server code and third-party ports have their own governance and limits.",
+    "origin_and_history": "The public ajayyy/SponsorBlock repository was created on 10 July 2019 and describes the project as originally forked from YTSponsorSkip, with little of that code remaining. The separate SponsorBlockServer repository provides the backend rather than being a component version that can be inferred from the extension. Current extension release 6.1.7 was published on 13 July 2026; its release note concerns a Firefox cookie-disabled failure, illustrating continuing browser-specific maintenance rather than a guaranteed uniform platform behaviour. Firefox Add-ons also displayed 6.1.7, whereas Chrome displayed 6.1.6 with a 26 June update. The server has its own code and AGPL licence, and the downloadable dataset has separate terms. SponsorBlock has grown from sponsor skipping into multiple segment categories, voting, VIP moderation, chapters, mute actions and API integrations. Repository activity and an old server release number do not establish the deployed service's exact build, a release cadence or equivalence with third-party ports.",
+    "rendering_engine_and_technical_architecture": "The extension runs in the host browser's WebExtension environment and modifies supported YouTube interfaces; it does not supply a video rendering engine. On a video lookup, current client source derives a SHA-256 prefix of the video ID, calls the configured server and then filters the returned records to the exact video ID. The inspected master branch uses a five-character prefix, while the API guide recommends four characters as a k-anonymity measure and permits a documented range. This distinction should be preserved rather than describing one value as universal. Server responses contain timestamps, category, action type, UUID, votes, lock state and submission-time video duration. Local configuration then determines whether a record is hidden, overlaid, manually skipped, automatically skipped or used for navigation. Chrome's current manifest variant is MV3 with a service worker and host permissions; the MV2 variant has background scripts and different declarations. Community timestamps are remote data, but playback manipulation and rule application occur in the client.",
+    "interface_and_documented_features": "The popup and player controls expose segment creation, submission, voting and skip notices. Category options distinguish Disabled, Show Overlay, Manual Skip and Auto Skip; mute and full-video behaviour, notice presentation, minimum segment duration, channel-specific profiles and advanced conditional rules provide further control. Advanced rules can consider time, category, action, chapter source, channel and video attributes. Current source includes configurable bindings for skipping, jumping to a highlight, starting and submitting a segment, previewing, chapter navigation, closing notices and voting; these are extension settings, not promises for other clients. Unsubmitted segments can remain local for personal use and can be exported with options. Many preferences use browser sync storage, whereas current source places unsubmitted segments, local downvote state and custom skip profiles in local storage. Consequently, browser synchronisation is not a complete transfer of every local item. The FAQ also provides a separate private userID import/export workflow and warns that some anonymised statistics cannot be transferred.",
+    "installation_and_distribution": "Official extension routes include the Chrome Web Store, Firefox Add-ons, an Edge channel and Safari. Safari is available as a paid App Store application for macOS and iOS or through a documented self-build using the release archive, Xcode and Safari's unsigned-extension workflow; those are materially different installation and update experiences. The release page also offers browser-specific packages, but no package was installed or executed for this entry. Installing the extension grants access to supported YouTube origins and the SponsorBlock service, while adding third-party YouTube frontends can request optional host access. A user should then choose categories and behaviours rather than assuming every category is automatically skipped by default. Ports for mobile, television, MPV, Kodi and other environments are listed separately and explicitly described as not made or reviewed by the SponsorBlock author. Their presence is not an official endorsement, and installation or issue support belongs to each port's developer.",
+    "platforms_and_hardware_architectures": "SponsorBlock's extension code is not distributed as separate processor-specific desktop binaries in the channels reviewed, but browser API support and YouTube's interface determine compatibility. Current source declares Firefox 102 and Firefox for Android 113 as strict minima in its Gecko settings, and Safari 14 in its Safari fragment; these source declarations should be checked against the exact store package rather than generalised to a third-party client. Chrome MV3 and the MV2 variant have different background and permission architectures. The manifests cover YouTube and youtube-nocookie embeds, and the Firefox listing also mentions mobile YouTube, old YouTube and Invidious support, with optional permissions for added frontends. Safari's app has its own platform distribution. Third-party Android, TV, media-player and userscript implementations can support only subsets such as automatic skipping or seek-bar colours. No browser, mobile, embed, frontend or processor matrix was run, so listed support is not proof of identical playback or submission behaviour.",
+    "extensions_and_add_on_store": "SponsorBlock's main extensibility boundary is its documented HTTP API and downloadable dataset, not a plug-in marketplace inside the extension. API consumers can query segments directly by video ID or through a hashed-prefix route, request selected categories and action types, submit records and vote with the required identifiers. A raw API response does not itself move playback, display an overlay, provide the extension's shortcuts or enforce its local profiles; each client must implement those functions. Likewise, a third-party port can share the database without sharing the extension's interface, privacy settings or update channel. The official ports page warns that these implementations are not reviewed by the project author and documents real feature differences. Browser stores distribute the extension and declare their own permissions and licence metadata. Public database availability supports independent uses and backups, but its CC BY-NC-SA terms and the API rules, including the prohibition on automated segment submission, remain separate constraints.",
+    "privacy_and_security_model": "SponsorBlock requires a locally generated private userID for submission and voting. In the extension's currently pinned maze-utils helper, that ID is 36 alphanumeric characters generated with browser cryptographic randomness when available; this implementation detail must not be generalised to every client. The server hashes the submitted private ID to form the public identifier used in segment records, so the public database ID is not the private option value. The privacy policy also describes salted hashed IP addresses for rate limiting, optional skip tracking, rotating-salt view counting, Cloudflare processing and short-lived error logs under stated conditions. Hash-prefix lookup reduces direct disclosure of the exact watched ID in that request but is not complete anonymity: submissions, votes, errors and other requests have different data paths, and IP-level network metadata still exists. Host permissions allow modification of supported pages, while a custom server or added frontend changes the trust relationship. These are declared mechanisms, not an independent privacy audit or proof that a third-party port follows them.",
+    "update_channels_and_release_cadence": "Extension updates arrive through browser stores, Safari's app channel or project release packages; server deployment and community data changes are separate. Release 6.1.7 appeared on GitHub on 13 July 2026 and on the checked Firefox listing, while Chrome remained at 6.1.6 when consulted. Those values should not be harmonised or used to claim that one store serves bytes identical to the GitHub archive. A server repository's old 1.0.34 release is not evidence of the currently deployed API version, and continuously edited submissions can change without any extension update. Third-party clients release independently and may lag or interpret new categories differently. Browser sync propagates eligible settings through the browser vendor's service, whereas community records arrive from the configured SponsorBlock server. No extension update, server upgrade, store-package comparison or third-party release check was executed. Recent repository activity demonstrates maintenance only, not a promised release interval or future YouTube compatibility.",
+    "licensing_and_governance": "The extension README states GNU GPL version 3 or any later version, and the repository contains the GPLv3 text. Its licence-history file explains that older code before a specified commit was LGPL 3.0. The checked Firefox listing nevertheless still displays LGPL-3.0-only; this channel metadata divergence is recorded rather than silently resolved. SponsorBlockServer is a separate work whose README specifies AGPL-3.0-only. The downloadable database is separately offered under Creative Commons BY-NC-SA 4.0 unless explicit permission is obtained, and icons or other third-party material retain their own notices. Thus the extension, server and dataset cannot responsibly be bundled under one licence label. Public repositories and community guidelines make contribution and moderation processes visible, but they do not make every submission authoritative or every port officially governed by the same maintainers. Downstream API, database and client use requires separate licence and rule review.",
+    "limitations_and_scope": "Crowdsourced timing can be wrong, miscategorised, outdated or abusive. Votes, overlapping-segment selection, locks and VIP moderation reduce some problems but do not turn records into verified truth; the FAQ says submissions at -2 are hidden from normal delivery while remaining in the database. Submitted timestamps are not edited in place in the ordinary workflow: a correction involves downvoting and submitting again. Current extension source blocks non-full segment submission during a running livestream or premiere, so live support must not be assumed. Embeds are covered by content-script declarations, but source also hides the info button on embeds, illustrating UI differences. videoDuration helps identify stale submissions, yet edited videos, timing offsets and YouTube server-side ad injection can invalidate alignment. YouTube interface or API changes can break retrieval and controls, and failed service requests leave no segment data to apply. No live, embed, voting, moderation, duration-shift, privacy, security or performance test was performed, and extension behaviour cannot be generalised to the API or third-party ports.",
+    "who_is_it_for": "SponsorBlock suits viewers who want configurable control over recurring YouTube interruptions and are comfortable relying on community annotations rather than deterministic content recognition. It is useful for automatically skipping selected categories, keeping others as overlays, muting audio where visual context matters, navigating chapters or jumping to highlights. Contributors who will read the category guidelines and frame timestamps carefully can submit and vote, while users who want private local marks can leave them unsubmitted. Developers can build on the documented API and public dataset if they implement their own client behaviour and respect the service and data terms. People who understand the private/public userID distinction, browser permissions and optional tracking settings can make a more informed setup. It is especially valuable for users willing to review skips, correct mistakes and keep category choices conservative on channels where context matters.",
+    "who_is_it_not_for": "SponsorBlock is not appropriate for anyone requiring authoritative, editorially verified segment boundaries or guaranteed preservation of every spoken transition and sponsorship disclosure. Users who cannot tolerate an occasional wrong skip should favour manual or overlay modes rather than broad automatic skipping. It does not promise equivalent support on every YouTube surface, live stream, embed, alternative frontend or third-party application, nor does API access alone provide the extension's full interface. People requiring zero server requests or zero network metadata should not confuse local playback decisions with an offline product. Organisations evaluating confidentiality must separately assess the service, Cloudflare, browser sync and any custom client. It is also a poor fit for unattended automated submission, which the API rules prohibit, or for redistribution that ignores the dataset's non-commercial share-alike terms. A current independent privacy, security or accuracy certification cannot be inferred from public source and store listings.",
+    "verdict": "SponsorBlock is a powerful combination of community data, a public service and configurable local playback controls. Its category system, manual and automatic behaviours, submission and voting workflows, local unsubmitted segments and API make it substantially more flexible than a single-purpose sponsor skipper. Its fundamental limitation is the same community and platform dependence that makes it useful: records can be wrong or stale, YouTube can change, and clients can implement different subsets. The checked 6.1.7 GitHub/Firefox and 6.1.6 Chrome versions, GPL-versus-AMO licence metadata, browser manifests and live/embed rules must remain distinct. Used with conservative category settings and an understanding of its privacy and contribution model, it can save time without pretending to be infallible. It should never be presented as guaranteed truth, universal client compatibility, complete anonymity or a feature-equivalent API across every port."
+  },
+  "links": {
+    "project_home": "https://sponsor.ajay.app/",
+    "extension_readme": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/README.md",
+    "segment_types": "https://wiki.sponsor.ajay.app/w/Types",
+    "submission_guidelines": "https://wiki.sponsor.ajay.app/w/Guidelines",
+    "faq": "https://wiki.sponsor.ajay.app/w/FAQ",
+    "api_documentation": "https://wiki.sponsor.ajay.app/w/API_Docs",
+    "privacy_policy": "https://gist.github.com/ajayyy/aa9f8ded2b573d4f73a3ffa0ef74f796",
+    "advanced_skip_options": "https://wiki.sponsor.ajay.app/w/Advanced_skip_options",
+    "third_party_ports": "https://github.com/ajayyy/SponsorBlock/wiki/3rd-Party-Ports",
+    "safari_installation": "https://github.com/ajayyy/SponsorBlock/wiki/Safari",
+    "base_manifest": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/manifest/manifest.json",
+    "chrome_manifest": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/manifest/chrome-manifest-extra.json",
+    "mv2_manifest": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/manifest/manifest-v2-extra.json",
+    "firefox_manifest": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/manifest/firefox-manifest-extra.json",
+    "category_action_configuration": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/config.json.example",
+    "client_configuration": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/src/config.ts",
+    "segment_fetch_source": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/src/utils/segmentData.ts",
+    "content_behaviour_source": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/src/content.ts",
+    "installation_identity_source": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/src/background.ts",
+    "pinned_userid_generator": "https://raw.githubusercontent.com/ajayyy/maze-utils/6b5b5be38f9db60d9bab70c1d3c196504578e552/src/setup.ts",
+    "server_readme": "https://raw.githubusercontent.com/ajayyy/SponsorBlockServer/master/README.MD",
+    "server_submission_source": "https://raw.githubusercontent.com/ajayyy/SponsorBlockServer/master/src/routes/postSkipSegments.ts",
+    "server_vote_source": "https://raw.githubusercontent.com/ajayyy/SponsorBlockServer/master/src/routes/voteOnSponsorTime.ts",
+    "licence_history": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/LICENSE-HISTORY.txt",
+    "repository_metadata": "https://api.github.com/repos/ajayyy/SponsorBlock",
+    "latest_release_metadata": "https://api.github.com/repos/ajayyy/SponsorBlock/releases/latest",
+    "chrome_listing": "https://chromewebstore.google.com/detail/sponsorblock/mnjggcdmjocbbbhaepdhchncahnbgone",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/sponsorblock/"
+  },
+  "sources": [
+    {
+      "title": "SponsorBlock official site - crowdsourced extension, segment retrieval, local skipping and public database scope",
+      "url": "https://sponsor.ajay.app/",
+      "type": "official_project_site",
+      "publisher": "SponsorBlock / Ajay Ramachandran",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock README - extension/server separation, distribution, API, project origin and GPL v3-or-later",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock segment Types - community segment categories and action distinctions",
+      "url": "https://wiki.sponsor.ajay.app/w/Types",
+      "type": "official_taxonomy_documentation",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock Guidelines - category boundaries, timing, main-content and submission rules",
+      "url": "https://wiki.sponsor.ajay.app/w/Guidelines",
+      "type": "official_contribution_guidelines",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock FAQ - voting, moderation, correction, local segments, userID transfer and client limits",
+      "url": "https://wiki.sponsor.ajay.app/w/FAQ",
+      "type": "official_faq",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock API Docs - lookup, hash-prefix privacy, submission, voting, actions and client obligations",
+      "url": "https://wiki.sponsor.ajay.app/w/API_Docs",
+      "type": "official_api_documentation",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock privacy policy - private userID, hashed IP handling, optional tracking, Cloudflare and logs",
+      "url": "https://gist.github.com/ajayyy/aa9f8ded2b573d4f73a3ffa0ef74f796",
+      "type": "official_privacy_policy",
+      "publisher": "Ajay Ramachandran / SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock advanced skip options - conditional attributes, categories and local actions",
+      "url": "https://wiki.sponsor.ajay.app/w/Advanced_skip_options",
+      "type": "official_configuration_documentation",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock third-party ports - unreviewed implementations and explicitly different capabilities",
+      "url": "https://github.com/ajayyy/SponsorBlock/wiki/3rd-Party-Ports",
+      "type": "official_third_party_directory",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock Safari guide - paid app and separate Xcode/unsigned-extension self-build route",
+      "url": "https://github.com/ajayyy/SponsorBlock/wiki/Safari",
+      "type": "official_installation_documentation",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock base manifest - version 6.1.7, common storage/scripting permissions and options page",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/manifest/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock Chrome manifest fragment - MV3 service worker, host access and YouTube/embed injection",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/manifest/chrome-manifest-extra.json",
+      "type": "official_source_manifest",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock MV2 manifest fragment - background scripts, permissions and content-script variant",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/manifest/manifest-v2-extra.json",
+      "type": "official_source_manifest",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock Firefox manifest fragment - Gecko desktop/Android minima and non-persistent background",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/manifest/firefox-manifest-extra.json",
+      "type": "official_source_manifest",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock configuration example - category list, permitted action combinations and server address",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/config.json.example",
+      "type": "official_configuration_source",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock client configuration - category behaviours, shortcuts, sync defaults and local state",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/src/config.ts",
+      "type": "official_source_code",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock segmentData.ts - five-character video-ID hash prefix, API request and exact-ID filtering",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/src/utils/segmentData.ts",
+      "type": "official_source_code",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock content.ts - local playback decisions, live/premiere submission block and embed UI differences",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/src/content.ts",
+      "type": "official_source_code",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock background.ts - first-install userID generation and browser-specific content registration",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/src/background.ts",
+      "type": "official_source_code",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock pinned maze-utils setup.ts - 36-character alphanumeric private userID generator",
+      "url": "https://raw.githubusercontent.com/ajayyy/maze-utils/6b5b5be38f9db60d9bab70c1d3c196504578e552/src/setup.ts",
+      "type": "official_pinned_dependency_source",
+      "publisher": "Ajay Ramachandran / maze-utils",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlockServer README - separate backend, downloadable database, CC BY-NC-SA data and AGPL-3.0-only",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlockServer/master/README.MD",
+      "type": "official_server_documentation",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlockServer postSkipSegments.ts - private-ID hashing, validation, duration and injection checks",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlockServer/master/src/routes/postSkipSegments.ts",
+      "type": "official_server_source_code",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlockServer voteOnSponsorTime.ts - vote identities, moderation and video-duration change handling",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlockServer/master/src/routes/voteOnSponsorTime.ts",
+      "type": "official_server_source_code",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock licence history - earlier LGPL 3.0 scope before the specified licensing change",
+      "url": "https://raw.githubusercontent.com/ajayyy/SponsorBlock/master/LICENSE-HISTORY.txt",
+      "type": "official_license_history",
+      "publisher": "SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock repository metadata - master branch, 2019 creation, activity and public-source status",
+      "url": "https://api.github.com/repos/ajayyy/SponsorBlock",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SponsorBlock latest release metadata - version 6.1.7, 13 July 2026 and browser-specific assets",
+      "url": "https://api.github.com/repos/ajayyy/SponsorBlock/releases/latest",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Chrome Web Store SponsorBlock listing - version 6.1.6, 26 June 2026 update and host-access explanation",
+      "url": "https://chromewebstore.google.com/detail/sponsorblock/mnjggcdmjocbbbhaepdhchncahnbgone",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / SponsorBlock",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons SponsorBlock listing - version 6.1.7, permissions and divergent LGPL store label",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/sponsorblock/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / SponsorBlock",
+      "accessed": "2026-11-06"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "id": "bitwarden-browser-extension",
+  "name": "Bitwarden Browser Extension",
+  "type": "application",
+  "summary": "Browser-only Bitwarden vault client with URI-based autofill, passkeys, account and self-hosted service support, distinct Chromium MV3 and Firefox MV2 packages, documented session safeguards and plan-dependent features.",
+  "tags": [
+    "browser extension",
+    "password manager",
+    "encrypted vault",
+    "autofill",
+    "passkeys",
+    "totp",
+    "vault timeout",
+    "self-hosted",
+    "manifest v2",
+    "manifest v3",
+    "end-to-end encryption",
+    "public source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome",
+    "Firefox",
+    "Microsoft Edge",
+    "Opera",
+    "Safari on macOS"
+  ],
+  "license": "GPL v3.0 by default in the clients repository; files under bitwarden_license use Bitwarden License v1.0, subject to file headers and directory scope",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "Bitwarden Browser Extension is the browser client for Bitwarden's encrypted password vault, not the desktop application, mobile app, CLI, web vault or server. It lets a signed-in user create and retrieve vault items, generate passwords, autofill recognised forms, save or use passkeys, and synchronise with Bitwarden-hosted or self-hosted services. Autofill depends on saved website URIs and offers popup suggestions, an inline menu, context-menu and keyboard methods, with additional warnings for HTTP and untrusted iframes. The current browser-specific release is 2026.10.2, displayed by the Chrome, Firefox, Edge and Opera stores when checked. Its packages are not architecturally identical: inspected Chrome, Edge and Opera assets use Manifest V3, whereas Firefox uses Manifest V2. The extension is a networked client with local vault state and configurable locking, not a stand-alone offline password file. Its security documentation, account plan, service environment and broad browser permissions all need to be understood together.",
+    "origin_and_history": "Bitwarden Inc maintains the extension in the public bitwarden/clients monorepository alongside other client applications. The browser README identifies a Web Extension API and Angular implementation and links the principal browser stores. Browser releases use their own browser-v tag namespace, preventing a desktop, mobile, CLI or web-vault version from being attributed to this entry merely because it appears in the same repository. Release browser-v2026.10.2 was published on 2 November 2026 and contains a focused fix for LastPass direct-import login failure. Repository metadata showed a last push on 6 November 2026 and did not mark the project archived. The current implementation has accumulated popup and inline autofill, passkey support, account switching, biometric integration and MV3 service-worker support while retaining an MV2 Firefox package. Those dates and features describe an actively developed client, but they do not establish a fixed release cadence or prove that every store and Safari bundle advances in lockstep.",
+    "rendering_engine_and_technical_architecture": "The extension has no rendering engine of its own; it combines extension UI, background logic and content scripts in the host browser. The inspected 2026.10.2 Chrome, Edge and Opera packages use MV3 service workers and declare Chrome 134 or later. Firefox instead has an MV2 persistent background page and a Gecko 91 minimum. Content scripts run at document start on HTTP, HTTPS and file patterns, exclude XML documents, and place the autofill injection trigger in all frames. The popup, notification bar, inline overlay and sandboxed menu pages are separate extension surfaces; a FIDO2 page script supports passkey interaction. These details explain why autofill and session behaviour can vary by browser even at the same numeric version. The extension keeps local vault and session state while communicating with the selected service for account and sync operations. Native messaging is optional and supports integration with the desktop application rather than turning the desktop app into part of this entry. No package was installed or executed during this review.",
+    "interface_and_documented_features": "The vault interface supports logins, notes, cards and identities, with folders, search, filters, import, export and organisation ownership where applicable. Bitwarden's plan documentation lists unlimited storage of those core item types and cross-device sync in the Free individual plan. Users can generate passwords, edit website URIs, copy fields and choose matching suggestions; the inline menu can also handle passkeys, TOTP codes and SSH public keys. Up to five accounts can be signed in simultaneously in the browser extension, although account switching is unavailable on Safari. Notification settings control prompts to add or update logins and to save or use passkeys. Integrated TOTP generation is a paid capability for Premium or eligible paid organisations, while storing authenticator keys is available to all accounts; this is separate from the standalone Bitwarden Authenticator app. The extension therefore combines free core vault functions with plan-dependent features rather than making every advertised Bitwarden capability universally available.",
+    "installation_and_distribution": "Official distribution includes the Chrome Web Store, Firefox Add-ons, Microsoft Edge Add-ons and Opera Add-ons. All four displayed version 2026.10.2 on 6 November 2026, with early-November channel updates; this numeric alignment does not imply identical archives or manifests. The corresponding GitHub release provides regular dist-chrome, dist-edge, dist-firefox and dist-opera assets, all of which were inspected statically, alongside separately named bit-dist variants that were outside this review. Store packages were not compared byte-for-byte with the GitHub assets. Safari follows another route: its web extension is packaged with the Bitwarden desktop app obtained from the macOS App Store, and current documentation restricts supported Safari web extensions to that App Store distribution. No Safari asset was inferred from the Chromium or Firefox ZIPs. Store installation, manual release download and the Safari desktop bundle are thus distinct update and provenance paths, even when the extension's user-facing version family is the same.",
+    "platforms_and_hardware_architectures": "The extension targets Chrome, Firefox, Edge, Opera and Safari, with compatible Chromium browsers potentially using a Chromium store package. There is no native processor requirement because this is WebExtension and Angular code; browser API support is the meaningful architecture boundary. The inspected Chromium MV3 packages require Chrome 134 or later and use a service worker, while Firefox 2026.10.2 remains MV2 and declares Gecko 91 or later. Safari 14 or later is documented for the web extension bundled with the macOS desktop app. Feature parity should not be assumed: Safari lacks account switching and context-menu autofill, while biometric setup differs between Safari and the Chromium/Firefox desktop-integration flow. Firefox ESR is expressly excluded from the documented biometric-support statement even though the extension itself has a broader Gecko minimum. Mobile applications, the desktop vault and CLI are outside scope. No runtime matrix was executed across browser forks, operating systems or processors, so manifest minima are not a guarantee of every feature on every supported host.",
+    "extensions_and_add_on_store": "Bitwarden Browser Extension does not expose an internal marketplace for arbitrary executable plug-ins. Its integration points are browser extension APIs, optional native messaging to the desktop app, passkey/FIDO2 interaction and configurable service environments. Browser stores distribute the extension itself and apply their own review and update processes; the Safari bundle adds Apple's desktop-app distribution model. The public monorepository also supports source builds and separate regular and bit-dist release assets, which should not be collapsed into one licensing or package assumption. Vault import and export can move data between supported systems, but those formats are not executable extension plug-ins. Organisation policies can constrain timeout, URI matching or unlock options without creating a third-party add-on API. This limited extensibility is appropriate for a security-sensitive client: users should review official package provenance and service configuration rather than installing unverified “Bitwarden plug-ins” or treating another client's capabilities as automatically present in the browser extension.",
+    "privacy_and_security_model": "Autofill requires unusually sensitive access. The inspected Chromium MV3 manifest declares activeTab, alarms, clipboard read/write, context menus, idle, offscreen, scripting, sidePanel, storage, tabs, unlimitedStorage, webNavigation, webRequest, webRequestAuthProvider and notifications, with HTTP/HTTPS host access; nativeMessaging and privacy are optional. Firefox MV2 instead includes all URLs and webRequestBlocking with a persistent background page. Bitwarden's documentation says vault data is encrypted locally before service storage, using AES-256-CBC-HMAC-SHA256, with RSA-OAEP for public-key sharing features, under a zero-knowledge model. These are vendor-documented design statements, not a fresh cryptographic audit in this entry. Locking is the default timeout action and retains vault data for offline unlock; logging out removes local vault data and requires online authentication. The “Never” timeout warns that the encryption key is stored unencrypted on the device. PIN unlock can weaken local protection, logs out after five failed attempts and normally requires the master password after browser restart. Biometrics use native platform APIs, with desktop integration and optional native messaging on Chromium and Firefox.",
+    "update_channels_and_release_cadence": "Browser-specific GitHub tags and store packages provide the extension's update channels, while vault synchronisation is an entirely separate operation. Browser-v2026.10.2 was published on 2 November 2026, and the four checked browser stores displayed that version shortly afterwards. Safari updates arrive with the desktop App Store bundle and should not be assigned the GitHub ZIP's version without evidence. Repository activity on 6 November 2026 is a current maintenance signal, not a promised release interval or proof that every channel is byte-identical. For vault data, edits are pushed to the selected cloud or self-hosted server; other clients sync at login and regularly while unlocked. A manual “Sync vault now” action applies to the active account and can run even when its vault is locked. This review inspected release assets and documentation but did not trigger store updates, measure rollout delays or test live sync. A current extension version therefore says nothing by itself about whether a particular vault has completed a server sync.",
+    "licensing_and_governance": "The clients repository has directory- and header-dependent licensing. Its root licence states that GPL v3.0 is the default unless a file header specifies otherwise, while code under bitwarden_license is covered by Bitwarden License v1.0. It would therefore be inaccurate to label the entire monorepository simply GPL or to treat the browser store's single licence label as a complete source review. The 2026.10.2 release includes regular dist assets and separately named bit-dist assets; only the regular Chrome, Edge, Firefox and Opera packages were inspected here. Bitwarden Inc governs the public project and publishes contribution and security material. Its audit page links a 2025 Cure53 assessment specifically covering the browser extension and autofill overlay, but that historical report is not this phase's independent audit of 2026.10.2. Public source and third-party reports support scrutiny without eliminating the need to check the exact package, file-level licence scope and current deployment configuration.",
+    "limitations_and_scope": "Autofill is not universal. A login needs an appropriate URI, Base domain is the default match rule, and blocked or excluded domains change behaviour. Unusual forms can require linked custom fields or manual correction. On-page-load autofill is disabled by default because a compromised or untrusted site could exploit it to steal credentials; untrusted iframes suppress that automatic path and trigger warnings for manual methods. TOTP is not autofilled by page-load, although automatic clipboard copying has its own defaults and retention settings. Passkeys require the relevant setting and are suppressed on excluded domains; only one passkey is stored per login item. A popped-out extension does not observe the selected vault timeout, and “Never” has an explicit key-storage warning. Biometric unlock depends on browser and desktop-integration conditions. Finally, this phase did not execute autofill, passkeys, biometric unlock or sync, did not audit the cryptography and did not establish byte identity between GitHub and store packages. Documented safeguards must not be converted into guaranteed security outcomes.",
+    "who_is_it_for": "The extension suits people who want one encrypted vault available across browsers and other Bitwarden clients, with convenient but configurable autofill. It is useful for generating unique passwords, storing core item types without a Free-plan item limit, handling passkeys and choosing among several fill methods when a site's forms differ. Users with personal and work accounts can switch among up to five accounts on supported browsers. Organisations can apply policies and sharing workflows, while individuals who operate a compatible server can select a self-hosted environment instead of Bitwarden's hosted regions. Security-conscious users can combine a finite timeout, master-password-on-restart behaviour, URI restrictions and careful on-page-load choices. It is most appropriate for someone willing to review broad permissions, understand the selected account plan and test autofill on important services rather than treating every fill or sync indicator as infallible.",
+    "who_is_it_not_for": "This is not the right object for someone seeking a purely local, account-free password file or a server implementation; the extension depends on a Bitwarden account and a hosted or self-hosted service for login and synchronisation. Users unwilling to grant page, clipboard, navigation and storage access should not install it without a narrower alternative. People who expect flawless autofill on every custom form, identical Safari features or automatic security regardless of timeout settings will be disappointed. Enabling on-page-load filling, permanent sessions or PIN persistence across restarts can be inappropriate on a shared or high-risk device. Organisations needing a current independent assurance statement must evaluate the exact 2026.10.2 package and their server configuration rather than citing an older audit. Finally, anyone needing desktop, mobile, CLI or web-vault behaviour should consult those separate clients instead of extrapolating their capabilities from this browser-only entry.",
+    "verdict": "Bitwarden Browser Extension is a full-featured vault client whose strengths are URI-based autofill, passkey support, flexible session controls, multi-account use and hosted or self-hosted synchronisation. The current 2026.10.2 packages share a version number but not an architecture: Chrome, Edge and Opera use MV3 service workers, while Firefox retains MV2 and blocking webRequest. Its Free plan covers substantial core vault functionality, with TOTP generation and other capabilities dependent on plan. Broad permissions, remote service trust, local key handling and autofill choices make security configuration as important as the encryption description. Safari packaging and feature differences require separate attention. The extension is a strong choice for users who want an integrated Bitwarden workflow and will review those trade-offs. It should not be described as an offline-only vault, a universally reliable form filler, a single-licence monorepository or a package independently audited by this catalog entry."
+  },
+  "links": {
+    "browser_extension_guide": "https://bitwarden.com/help/getting-started-browserext/",
+    "autofill_guide": "https://bitwarden.com/help/auto-fill-browser/",
+    "vault_timeout": "https://bitwarden.com/help/vault-timeout/",
+    "pin_unlock": "https://bitwarden.com/help/unlock-with-pin/",
+    "biometric_unlock": "https://bitwarden.com/help/biometrics/",
+    "passkey_guide": "https://bitwarden.com/help/storing-passkeys/",
+    "vault_sync": "https://bitwarden.com/help/vault-sync/",
+    "self_hosted_environment": "https://bitwarden.com/help/change-client-environment/",
+    "account_plans": "https://bitwarden.com/help/password-manager-plans/",
+    "encryption_protocols": "https://bitwarden.com/help/what-encryption-is-used/",
+    "security_audit_index": "https://bitwarden.com/help/is-bitwarden-audited/",
+    "safari_distribution": "https://bitwarden.com/help/install-safari-app-extension/",
+    "browser_readme": "https://raw.githubusercontent.com/bitwarden/clients/main/apps/browser/README.md",
+    "mv2_source_manifest": "https://raw.githubusercontent.com/bitwarden/clients/main/apps/browser/src/manifest.json",
+    "mv3_source_manifest": "https://raw.githubusercontent.com/bitwarden/clients/main/apps/browser/src/manifest.v3.json",
+    "repository_license_scope": "https://raw.githubusercontent.com/bitwarden/clients/main/LICENSE.txt",
+    "repository_metadata": "https://api.github.com/repos/bitwarden/clients",
+    "browser_2026_10_2_release_metadata": "https://api.github.com/repos/bitwarden/clients/releases/tags/browser-v2026.10.2",
+    "chrome_2026_10_2_package": "https://github.com/bitwarden/clients/releases/download/browser-v2026.10.2/dist-chrome-2026.10.2.zip",
+    "edge_2026_10_2_package": "https://github.com/bitwarden/clients/releases/download/browser-v2026.10.2/dist-edge-2026.10.2.zip",
+    "firefox_2026_10_2_package": "https://github.com/bitwarden/clients/releases/download/browser-v2026.10.2/dist-firefox-2026.10.2.zip",
+    "opera_2026_10_2_package": "https://github.com/bitwarden/clients/releases/download/browser-v2026.10.2/dist-opera-2026.10.2.zip",
+    "chrome_listing": "https://chromewebstore.google.com/detail/bitwarden-free-password-m/nngceckbapebfimnlniiiahkandclblb",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/",
+    "edge_listing": "https://microsoftedge.microsoft.com/addons/detail/bitwarden-free-password-m/jbkfoedolllekgbhcbcoahefnbanhhlh",
+    "opera_listing": "https://addons.opera.com/en/extensions/details/bitwarden-free-password-manager/"
+  },
+  "sources": [
+    {
+      "title": "Bitwarden browser-extension guide - vault workflow, five accounts, Safari packaging and pop-out timeout limit",
+      "url": "https://bitwarden.com/help/getting-started-browserext/",
+      "type": "official_usage_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden autofill guide - URI matching, fill methods, HTTP/iframe warnings and page-load risk",
+      "url": "https://bitwarden.com/help/auto-fill-browser/",
+      "type": "official_usage_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden session-timeout guide - lock versus logout, offline unlock and Never key-storage warning",
+      "url": "https://bitwarden.com/help/vault-timeout/",
+      "type": "official_security_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden PIN unlock guide - restart default, local-protection caveat and five-failure logout",
+      "url": "https://bitwarden.com/help/unlock-with-pin/",
+      "type": "official_security_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden biometrics guide - native validation, browser support and desktop/native-messaging integration",
+      "url": "https://bitwarden.com/help/biometrics/",
+      "type": "official_security_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden passkey guide - browser save/use setting, excluded domains and one passkey per login",
+      "url": "https://bitwarden.com/help/storing-passkeys/",
+      "type": "official_usage_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden vault-sync guide - server push, client synchronisation and manual active-account sync",
+      "url": "https://bitwarden.com/help/vault-sync/",
+      "type": "official_service_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden client-environment guide - hosted regions, self-hosted HTTPS URL and custom services",
+      "url": "https://bitwarden.com/help/change-client-environment/",
+      "type": "official_service_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden Password Manager plans - Free core storage/sync and plan-dependent premium features",
+      "url": "https://bitwarden.com/help/password-manager-plans/",
+      "type": "official_plan_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden encryption documentation - local vault encryption, AES-CBC-HMAC and RSA-OAEP statements",
+      "url": "https://bitwarden.com/help/what-encryption-is-used/",
+      "type": "official_security_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden audit index - 2025 Cure53 browser-extension and autofill-overlay assessment reference",
+      "url": "https://bitwarden.com/help/is-bitwarden-audited/",
+      "type": "official_assurance_index",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden Safari web-extension guide - Safari 14 scope and macOS App Store desktop bundle",
+      "url": "https://bitwarden.com/help/install-safari-app-extension/",
+      "type": "official_platform_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden browser README - Web Extension API, Angular and official store links",
+      "url": "https://raw.githubusercontent.com/bitwarden/clients/main/apps/browser/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden MV2 source manifest - Firefox-capable persistent-background and permission model",
+      "url": "https://raw.githubusercontent.com/bitwarden/clients/main/apps/browser/src/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden MV3 source manifest - service worker, Chrome 134 minimum and Chromium permissions",
+      "url": "https://raw.githubusercontent.com/bitwarden/clients/main/apps/browser/src/manifest.v3.json",
+      "type": "official_source_manifest",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden clients root licence - GPL v3 default and bitwarden_license directory exception",
+      "url": "https://raw.githubusercontent.com/bitwarden/clients/main/LICENSE.txt",
+      "type": "official_license_scope",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden clients repository metadata - main branch, archive status and last push",
+      "url": "https://api.github.com/repos/bitwarden/clients",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden browser-v2026.10.2 release metadata - publication, browser-only tag and package assets",
+      "url": "https://api.github.com/repos/bitwarden/clients/releases/tags/browser-v2026.10.2",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden 2026.10.2 Chrome ZIP - statically inspected MV3 manifest and declared-digest match",
+      "url": "https://github.com/bitwarden/clients/releases/download/browser-v2026.10.2/dist-chrome-2026.10.2.zip",
+      "type": "official_distribution_package",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden 2026.10.2 Edge ZIP - statically inspected MV3 manifest and declared-digest match",
+      "url": "https://github.com/bitwarden/clients/releases/download/browser-v2026.10.2/dist-edge-2026.10.2.zip",
+      "type": "official_distribution_package",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden 2026.10.2 Firefox ZIP - statically inspected MV2 manifest and declared-digest match",
+      "url": "https://github.com/bitwarden/clients/releases/download/browser-v2026.10.2/dist-firefox-2026.10.2.zip",
+      "type": "official_distribution_package",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Bitwarden 2026.10.2 Opera ZIP - statically inspected MV3 manifest and declared-digest match",
+      "url": "https://github.com/bitwarden/clients/releases/download/browser-v2026.10.2/dist-opera-2026.10.2.zip",
+      "type": "official_distribution_package",
+      "publisher": "Bitwarden",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Chrome Web Store Bitwarden listing - version 2026.10.2 and 2 November 2026 channel update",
+      "url": "https://chromewebstore.google.com/detail/bitwarden-free-password-m/nngceckbapebfimnlniiiahkandclblb",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / Bitwarden Inc.",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons Bitwarden listing - version 2026.10.2, permissions and 2 November 2026 update",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / Bitwarden Inc.",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Edge Bitwarden listing - version 2026.10.2 and 2 November 2026 channel update",
+      "url": "https://microsoftedge.microsoft.com/addons/detail/bitwarden-free-password-m/jbkfoedolllekgbhcbcoahefnbanhhlh",
+      "type": "official_store_listing",
+      "publisher": "Microsoft Edge Add-ons / Bitwarden Inc.",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Opera Add-ons Bitwarden listing - current 2026.10.2 channel and permission descriptions",
+      "url": "https://addons.opera.com/en/extensions/details/bitwarden-free-password-manager/",
+      "type": "official_store_listing",
+      "publisher": "Opera Add-ons / Bitwarden",
+      "accessed": "2026-11-06"
+    }
+  ]
+}
