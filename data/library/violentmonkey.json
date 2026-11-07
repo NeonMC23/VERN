@@ -1,0 +1,233 @@
+{
+  "id": "violentmonkey",
+  "name": "Violentmonkey",
+  "type": "application",
+  "summary": "Open-source userscript manager for installing, organising and updating third-party browser scripts, with metadata-driven matching, page/content injection contexts, privileged GM APIs, optional synchronisation, and distinct MV2 and MV3 packages.",
+  "tags": [
+    "browser extension",
+    "userscript manager",
+    "javascript",
+    "metadata",
+    "url matching",
+    "gm api",
+    "script updates",
+    "synchronisation",
+    "manifest v2",
+    "manifest v3",
+    "content scripts",
+    "public source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome and Chromium-based browsers",
+    "Firefox",
+    "Microsoft Edge",
+    "Opera via Chrome Web Store"
+  ],
+  "license": "MIT for Violentmonkey; installed userscripts and third-party dependencies retain their own licences",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "Violentmonkey is a WebExtension that installs, organises and executes userscripts in supported browsers. It supplies the manager, editor, matching engine, update mechanism and privileged GM APIs; it does not author or vouch for the third-party scripts a user installs. Stable version 2.50.0 is available through distinct Manifest V3 Chrome and Edge packages, a Manifest V2 Firefox/WebExt package and a legacy MV2 CRX. Scripts declare where and when they run through metadata, can be enabled or disabled individually, and may receive capabilities for storage, page interaction, downloads and cross-origin requests. Those capabilities make review of source, URL scope and grants essential. Current MV3 and MV2 architecture, browser minima and permission sets differ, while page, content and automatic injection contexts address different compatibility needs without creating an absolute security boundary.",
+    "origin_and_history": "The public violentmonkey/violentmonkey repository was created on 3 September 2013 and remains under active development. Its official site presents a userscript manager compatible with many WebExtension browsers and with a broad range of Greasemonkey and Tampermonkey scripts, rather than promising universal compatibility. Stable release 2.50.0 was published on 26 October 2026 and introduced a GitHub-compatible synchronisation provider and a cron-style update schedule among its noted changes. Chrome, Firefox and Edge listings displayed 2.50.0 when checked; the Chrome channel reported a 27 October update. The project also exposes beta and automatically generated test builds, explicitly warning that they may contain bugs or cause data loss. Stable, beta, test and legacy packages therefore serve different purposes, and repository activity does not establish a fixed release cadence.",
+    "rendering_engine_and_technical_architecture": "Violentmonkey relies on the host browser's JavaScript and WebExtension environments. Its dashboard, popup, editor, background logic and injected bridges manage code that ultimately runs in web pages or content-script contexts. The inspected MV2 packages register injected scripts at document start on all URLs and all frames, supported by background scripts. The MV3 package instead uses a service worker and the userScripts, webNavigation, declarativeNetRequest and offscreen APIs; it does not carry the same static content-script declaration. Userscripts themselves are not transpiled by the manager, so their syntax must be supported by the target browser. Injection can use page context, the isolated content context or auto mode, which tries page context and falls back to content when CSP blocks it. Content isolation changes access to page JavaScript objects, but DOM access and granted APIs remain powerful. It is not a general malware sandbox.",
+    "interface_and_documented_features": "The toolbar popup shows scripts relevant to a tab and provides commands, while the dashboard supports creating, editing, enabling, disabling, ordering and updating scripts. Per-script settings can override matching, run timing, injection mode and update behaviour, and a values editor exposes script-specific stored data. Users can import from or export to ZIP, including values and settings according to configuration, and choose direct synchronisation providers. An installation or new-script workflow combines JavaScript with a metadata block; name and namespace identify a script for replacement and conflict handling. Global injection controls and blacklist settings provide another layer of control. The current release includes GitHub-compatible sync and cron update options alongside established Dropbox, Google Drive, OneDrive and WebDAV workflows. These management conveniences do not review the correctness, privacy or safety of the scripts being managed.",
+    "installation_and_distribution": "The official installation page directs Chrome and Chromium users to an MV3 Chrome Web Store build, Firefox users to an MV2 Add-ons build and Edge users to an MV3 Microsoft store build. GitHub releases provide MV3 ZIP, WebExt ZIP and a signed legacy MV2 CRX for compatible Chromium browsers; this review identified the CRX3 container but did not verify its signature. Opera users are directed to the Chrome Web Store because the Opera store no longer reviews the extension. Current Chromium messages can ask the user to enable Allow User Scripts, with Developer Mode mentioned for older browsers. Beta and CI test builds are separate channels and the project recommends exporting data before trying them. No current official Safari package is established by these channels. Installing the manager is only the first step: each userscript still requires its own provenance, permission and matching review.",
+    "platforms_and_hardware_architectures": "The inspected 2.50.0 MV3 manifest requires Chrome 135 or later, reflecting its userScripts implementation. The MV2 CRX and WebExt manifests declare Chrome 86 or later, and the WebExt package sets Gecko 68 as its strict minimum. In contrast, the general installation page and Firefox listing describe Firefox 57 or later; that broader channel statement should not overwrite the stricter requirement of the inspected current asset. Firefox for Android is offered by the Mozilla listing, while Opera and other Chromium derivatives depend on their WebExtension compatibility and the Chrome package. There is no separate native CPU build for the WebExtension, but browser JavaScript support and API availability determine whether a script works. No runtime matrix was executed across Firefox, Android, Chromium forks or operating systems, so matching version numbers do not prove identical injection timing, CSP behaviour or GM API results.",
+    "extensions_and_add_on_store": "Userscripts are Violentmonkey's extension mechanism, but they are not a curated store catalogue with a uniform publisher or licence. A script can be installed from a URL, written in the editor or imported, and its metadata can fetch additional code through @require and data through @resource. Those dependencies execute or become available within the script's workflow and require the same scrutiny as the main file. Compatibility with many Greasemonkey and Tampermonkey scripts is a project goal, not proof that every API, directive or timing assumption transfers unchanged. ZIP export provides backup and migration rather than a security review. External editors, synchronisation providers and userscript hosting sites are separate trust relationships. Browser stores review and distribute Violentmonkey itself; their listing of the manager should not be interpreted as endorsement of every script subsequently installed from elsewhere.",
+    "privacy_and_security_model": "The manager requests extensive access because scripts may act on arbitrary sites. MV2 declares all URLs, webRequest and webRequestBlocking, cookies, notifications, storage, unlimitedStorage, context menus and clipboardWrite; MV3 separates host access and adds userScripts, webNavigation, identity, offscreen, alarms and DNR-related capability. The FAQ explains clipboardWrite as write access for GM_setClipboard, not clipboard reading. Scripts and settings are stored in the extension's local storage area, while optional synchronisation sends them directly to the chosen service. Violentmonkey's policy declares no collection by the project, but expressly warns that third-party scripts can use privileged APIs and send credentialed requests. GM value storage, resources, tabs, notifications, downloads, cookies and GM_xmlhttpRequest make narrow @grant and URL rules important. Page mode shares page objects; content mode is isolated in a specific technical sense but is not a guarantee against malicious behaviour.",
+    "update_channels_and_release_cadence": "Manager updates through stores or GitHub are separate from updates of installed userscripts and from synchronisation. For scripts, @downloadURL identifies the location checked automatically at intervals or manually on request; the metadata guide states that automatic updating is unavailable when @version is absent. Current update code distinguishes update and download URLs, compares versions and can refresh dependencies, while 2.50.0 adds a cron schedule option. An update can therefore retrieve new executable code and resources long after the original installation decision, making the update host part of the trust decision. Stable release 2.50.0 was published on 26 October 2026, with store rollout dates varying by channel. Beta and test builds may move differently and carry explicit risk warnings. No fixed future cadence, successful update or safety of a fetched script was tested during this review.",
+    "licensing_and_governance": "Violentmonkey's root licence is MIT, granting broad reuse subject to preserving the copyright and permission notice and disclaiming warranty. That licence covers the manager, not the userscripts, remote @require libraries, @resource content or synchronisation services, each of which can have separate terms. The public repository and official API documentation provide the preferred basis for examining current behaviour. Release files are minified; the project's FAQ describes them as minified rather than obfuscated, a project statement rather than an independent reproducible-build finding. Store licence labels and public source do not establish that a third-party script is safe or legally redistributable. Users distributing modified managers or script bundles should review all included notices instead of applying the MIT label to the whole bundle.",
+    "limitations_and_scope": "Matching and injection require careful interpretation. Exclusions take precedence; @match considers scheme, host and path but ignores query and fragment, and a script with neither match nor include rules is assumed to match. @include can accept broad globs or regular expressions, so an apparently small rule change can widen execution substantially. Browser injection normally follows hard navigations; SPA history or hash changes may require the script to observe URL and DOM changes itself. Page injection can fail under strict CSP, while auto fallback to content changes access to page objects. Document-start timing has conditions and does not universally guarantee execution before every page script. @noframes limits nested-frame execution, and @grant none intentionally removes the standard sandbox. Browser-specific GM behaviour, dependencies and remote updates can break scripts or alter their privileges. No userscript corpus, compatibility test, signature verification or store-package comparison was performed here.",
+    "who_is_it_for": "Violentmonkey suits technically confident users who need to customise sites, automate repetitive browser tasks or maintain a personal collection of userscripts across supported browsers. Its editor, per-script values, ordering, matching overrides and export facilities are useful for people who actively inspect and maintain their setup. Direct synchronisation can help users who understand the selected provider, while automatic updates and dependency handling reduce manual maintenance when the source is trusted. Developers benefit from documented GM APIs, injection contexts and timing controls when diagnosing browser differences. It is especially appropriate for someone willing to read installed code, restrict @match and @grant scope, review update URLs and keep backups before beta channels or major changes. The manager's open source and local storage model support that hands-on workflow without requiring a vendor account.",
+    "who_is_it_not_for": "This is not a curated, inherently safe extension catalogue for users unwilling or unable to assess JavaScript and remote dependencies. People who grant every script access to every site, accept unknown update hosts or interpret content isolation as complete protection face significant risk. It is also unsuitable for anyone requiring an official current Safari build, guaranteed Greasemonkey or Tampermonkey compatibility, identical MV2/MV3 behaviour or deterministic execution on every SPA and CSP-protected page. Organisations with strict controls on arbitrary code execution may prefer to prohibit userscript managers or manage them through a separate review process. Users needing zero broad page permissions, no remote update path or professionally audited third-party scripts should choose a narrower tool. Export and synchronisation are operational aids, not substitutes for that scrutiny.",
+    "verdict": "Violentmonkey is a mature and highly configurable userscript manager whose strengths are precise metadata controls, a substantial GM API surface, flexible injection, local management, export and optional direct synchronisation. Version 2.50.0 modernises update and sync options while maintaining materially different MV2 and MV3 packages. Its central risk is inseparable from its purpose: it executes third-party code in sensitive browsing contexts and can later fetch updates and dependencies. Sound use therefore depends on restrictive matching, minimal grants, trusted sources and attention to browser-specific behaviour. The project supplies the mechanisms and documentation for that review, not an assurance that installed scripts are safe. For experienced users who accept that responsibility, it is a powerful manager; it should never be described as an isolation guarantee or as a vetted repository of userscripts."
+  },
+  "links": {
+    "project_home": "https://violentmonkey.github.io/",
+    "installation_channels": "https://violentmonkey.github.io/get-it/",
+    "creating_userscript": "https://violentmonkey.github.io/guide/creating-a-userscript/",
+    "metadata_block": "https://violentmonkey.github.io/api/metadata-block/",
+    "matching_rules": "https://violentmonkey.github.io/api/matching/",
+    "injection_contexts": "https://violentmonkey.github.io/posts/inject-into-context/",
+    "gm_api": "https://violentmonkey.github.io/api/gm/",
+    "faq": "https://violentmonkey.github.io/faq/",
+    "privacy_policy": "https://violentmonkey.github.io/privacy/",
+    "readme": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/README.md",
+    "mv2_source_manifest": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/src/manifest.yml",
+    "manifest_variant_builder": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/scripts/manifest-helper.js",
+    "script_update_source": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/src/background/utils/update.js",
+    "default_options": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/src/common/options-defaults.js",
+    "license": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/LICENSE",
+    "repository_metadata": "https://api.github.com/repos/violentmonkey/violentmonkey",
+    "release_2_50_0_metadata": "https://api.github.com/repos/violentmonkey/violentmonkey/releases/tags/v2.50.0",
+    "mv3_2_50_0_package": "https://github.com/violentmonkey/violentmonkey/releases/download/v2.50.0/Violentmonkey-mv3-v2.50.0.zip",
+    "mv2_crx_2_50_0_package": "https://github.com/violentmonkey/violentmonkey/releases/download/v2.50.0/Violentmonkey-mv2-v2.50.0.crx",
+    "webext_2_50_0_package": "https://github.com/violentmonkey/violentmonkey/releases/download/v2.50.0/Violentmonkey-webext-v2.50.0.zip",
+    "chrome_listing": "https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/",
+    "edge_listing": "https://microsoftedge.microsoft.com/addons/detail/eeagobfjdenkkddmbclomhiblgggliao"
+  },
+  "sources": [
+    {
+      "title": "Violentmonkey official site - userscript-manager scope, features and MV3 store notice",
+      "url": "https://violentmonkey.github.io/",
+      "type": "official_project_site",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey Get It - stable MV2/MV3 channels, browser scope, beta and test-build warnings",
+      "url": "https://violentmonkey.github.io/get-it/",
+      "type": "official_installation_documentation",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey userscript guide - metadata, program code and browser-native JavaScript requirement",
+      "url": "https://violentmonkey.github.io/guide/creating-a-userscript/",
+      "type": "official_usage_documentation",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey metadata reference - matching, dependencies, run timing, grants, injection and updates",
+      "url": "https://violentmonkey.github.io/api/metadata-block/",
+      "type": "official_api_documentation",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey matching reference - include/exclude precedence, URL scope and SPA navigation limits",
+      "url": "https://violentmonkey.github.io/api/matching/",
+      "type": "official_api_documentation",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey injection-context guide - page/content/auto modes, CSP and isolated-world limits",
+      "url": "https://violentmonkey.github.io/posts/inject-into-context/",
+      "type": "official_technical_documentation",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey privileged API reference - values, resources, UI, downloads, cookies and requests",
+      "url": "https://violentmonkey.github.io/api/gm/",
+      "type": "official_api_documentation",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey FAQ - clipboard permission, local script storage, third-party sync and release minification",
+      "url": "https://violentmonkey.github.io/faq/",
+      "type": "official_faq",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey privacy policy - non-collection declaration, direct sync and third-party script warning",
+      "url": "https://violentmonkey.github.io/privacy/",
+      "type": "official_privacy_policy",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey repository README - project scope, browsers and development channels",
+      "url": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey MV2 source manifest - all-URL injection, permissions and browser minima",
+      "url": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/src/manifest.yml",
+      "type": "official_source_manifest",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey manifest-helper.js - MV3 service worker, userScripts and Chrome 135 transformation",
+      "url": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/scripts/manifest-helper.js",
+      "type": "official_build_source_code",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey update.js - update/download URLs, version comparison, dependencies and cron scheduling",
+      "url": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/src/background/utils/update.js",
+      "type": "official_source_code",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey default options - update, injection, sync, export and userscript UI settings",
+      "url": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/src/common/options-defaults.js",
+      "type": "official_source_code",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey MIT licence - permission, notice and warranty disclaimer",
+      "url": "https://raw.githubusercontent.com/violentmonkey/violentmonkey/master/LICENSE",
+      "type": "official_license",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey repository metadata - master branch, project origin, activity and archive status",
+      "url": "https://api.github.com/repos/violentmonkey/violentmonkey",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey v2.50.0 release metadata - 26 October 2026 publication, sync/cron notes and packages",
+      "url": "https://api.github.com/repos/violentmonkey/violentmonkey/releases/tags/v2.50.0",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey 2.50.0 MV3 ZIP - statically inspected service worker, permissions and declared-digest match",
+      "url": "https://github.com/violentmonkey/violentmonkey/releases/download/v2.50.0/Violentmonkey-mv3-v2.50.0.zip",
+      "type": "official_distribution_package",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey 2.50.0 legacy MV2 CRX - statically inspected CRX3 container and manifest, signature not verified",
+      "url": "https://github.com/violentmonkey/violentmonkey/releases/download/v2.50.0/Violentmonkey-mv2-v2.50.0.crx",
+      "type": "official_distribution_package",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Violentmonkey 2.50.0 WebExt ZIP - statically inspected MV2 manifest and declared-digest match",
+      "url": "https://github.com/violentmonkey/violentmonkey/releases/download/v2.50.0/Violentmonkey-webext-v2.50.0.zip",
+      "type": "official_distribution_package",
+      "publisher": "Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Chrome Web Store Violentmonkey listing - version 2.50.0 and 27 October 2026 channel update",
+      "url": "https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons Violentmonkey listing - version 2.50.0, permissions and 26 October 2026 update",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / Violentmonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Edge Violentmonkey listing - current 2.50.0 MV3 channel",
+      "url": "https://microsoftedge.microsoft.com/addons/detail/eeagobfjdenkkddmbclomhiblgggliao",
+      "type": "official_store_listing",
+      "publisher": "Microsoft Edge Add-ons / Violentmonkey",
+      "accessed": "2026-11-06"
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "id": "consent-o-matic",
+  "name": "Consent-O-Matic",
+  "type": "application",
+  "summary": "Rule-driven browser extension that recognises supported consent-management interfaces and submits the user's stored preferences, with remote rule updates, per-site controls and explicit limits on coverage and legal meaning.",
+  "tags": [
+    "browser extension",
+    "cookie consent",
+    "consent management platform",
+    "gdpr",
+    "rule engine",
+    "automation",
+    "dom selectors",
+    "privacy",
+    "manifest v3",
+    "remote rules",
+    "open source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome",
+    "Firefox",
+    "Microsoft Edge",
+    "Safari on macOS, iOS and iPadOS"
+  ],
+  "license": "MIT License",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "Consent-O-Matic is a free, MIT-licensed browser extension developed at Aarhus University's Centre for Advanced Visualization and Interaction. It automates interactions with recognised cookie-consent interfaces rather than merely hiding every banner or blocking all cookies. After the user records preferences, the extension looks for a matching Consent Management Platform rule, opens the relevant options, applies the requested choices and normally saves the form. A check mark reports a handled interface, while other badge states distinguish searching, no match and errors. The current source and GitHub packages are version 1.1.5, but several stores still distribute 1.1.3. The project advertises support for more than 200 CMPs; that is a rule-coverage claim, not a guarantee that every site, language, customised banner or legal requirement will be handled correctly. Consent-O-Matic is therefore best understood as a preference-answering tool whose results depend on rules, page structure and the choices the user has delegated to it.",
+    "origin_and_history": "The project is maintained by CAVI researchers and public contributors. Its GitHub repository was created on 28 November 2019, a repository milestone rather than a proven first-release date. The README connects the extension to academic work on consent interfaces and adversarial interoperability, and invites new or revised JSON rules as banner implementations change. Version 1.1.0 moved the extension to Manifest V3; subsequent releases addressed rule completion, translations, reporting and the build system. GitHub published 1.1.5 on 17 June 2025 as a small bug-fix release. Repository metadata showed a last push on 7 February 2026 and did not mark the project archived. Those observations do not establish a fixed release cadence, and the older store packages alone do not prove abandonment. The separately updated rule index is also important: an extension package can remain unchanged while its remotely retrieved rule definitions evolve.",
+    "rendering_engine_and_technical_architecture": "Consent-O-Matic extends the host browser and has no rendering engine of its own. Its content code runs at document start on matching HTML pages, including frames and about:blank contexts, then uses the top-level host when deciding whether the site is enabled. The engine constructs CMP objects from JSON rules, orders utility rules first and searches with present and showing matchers. It observes DOM mutations, also scans at 500-millisecond intervals and stops after roughly five seconds when no CMP is found. Once a rule matches, the normal sequence can hide the interface, run OPEN_OPTIONS, apply DO_CONSENT and execute SAVE_CONSENT, with progress display and scroll-behaviour handling. The inspected 1.1.5 Chromium package uses an MV3 service worker; the Firefox package uses an MV3 background script and requires Gecko 109 or later. Both contain no packaged rules directory, making the separately fetched rule lists central to operation.",
+    "interface_and_documented_features": "The options page exposes six internal consent categories: preferences, performance, information, content, advertising and other. All six default to false, although the user can enable them; older store text that mentions five categories should not override the current implementation. Rules translate these internal types into the controls presented by each CMP, so the labels are not a universal legal taxonomy. The toolbar popup can enable or disable the extension for the current host and provides a voluntary route to report an unhandled site. Users can choose picture-in-picture progress or hiding behaviour, manage remote rule-list URLs, force an update, add custom rules and open the rule editor. Development flags can delay clicks, skip submission, reveal matchers or retain the progress dialog; these are diagnostic controls that can deliberately alter normal behaviour. Local statistics count handled forms and estimated clicks by CMP, but they do not measure whether every choice was legally valid or correctly interpreted by the destination service.",
+    "installation_and_distribution": "The README recommends the browser's official store so that updates arrive through the normal extension channel. On 6 November 2026, Firefox Add-ons and GitHub identified version 1.1.5 published on 17 June 2025. The Chrome Web Store showed 1.1.3 updated on 3 October 2024, Edge Add-ons showed 1.1.3 from 2 October 2024, and Apple's listing showed 1.1.3 from 30 September 2024. These are real channel differences, not versions to harmonise into one number. GitHub's 1.1.5 release offers unpacked Chromium and Firefox ZIPs for developer-mode installation; this review inspected both statically and did not install them or prove them byte-identical to store packages. The release has no equivalent Safari asset, while Safari is distributed through Apple's App Store. Manual installation, store review and browser-managed updates are consequently separate paths with different versions and trust decisions.",
+    "platforms_and_hardware_architectures": "Official distribution covers Chrome and compatible Chromium environments, Firefox, Edge, and Safari on macOS, iOS and iPadOS. There is no native processor-architecture matrix because the product is JavaScript and WebExtension code packaged for each browser. The meaningful boundaries are extension APIs and permission models. All three source manifests are MV3, but Chromium uses a service worker while Firefox and Safari declare background scripts; the Firefox package specifies Gecko 109 as its strict minimum. Safari's store bundle and browser permission flow are platform-specific and should not be treated as proof that an unpacked Chromium ZIP is installable there. Mobile Safari support does not imply Chrome or Firefox Android support. Features also depend on access to all relevant sites and frames, which a user or browser may restrict. No runtime compatibility matrix was executed for this entry, so store availability and manifest declarations should not be mistaken for successful handling on every browser version.",
+    "extensions_and_add_on_store": "Consent-O-Matic has no internal marketplace for arbitrary executable plug-ins. Its extension mechanism is a data-driven rule format covering detectors, DOM actions, consent mappings and named methods. The live rules-list index retrieved on 6 November 2026 contained 206 references, of which 203 URLs were unique after three repeated references were discounted. This review successfully retrieved and parsed all 203 unique referenced files and counted 202 distinct top-level rule identifiers; one identifier appeared in two files. These figures are not counts of verified CMP products or websites, because entries include CMP variants, utilities and site-specific interfaces. The project itself describes more than 200 compatible CMPs, including Cookiebot, OneTrust and Usercentrics. Rule lists can contain references to other lists, and custom rules are merged after fetched lists. That flexibility enables maintenance without a new package, but it also means that a custom or remote list is trusted input requiring its own review.",
+    "privacy_and_security_model": "The extension needs broad page access because it examines consent interfaces and clicks their controls. The inspected packages request activeTab, tabs and storage, with host access to all URLs and content scripts in all frames. The options page checks that the necessary origin and browser permissions have been granted. Current code stores consent values, general settings, debug flags, rule-list URLs and disabled hosts through storage.sync; cached rules, custom rules and statistics use storage.local. Browser-managed Sync is not a separate Consent-O-Matic account, but it should not be paraphrased as proof that every setting can never leave the device. The README describes extension-originated web communication as rule-list retrieval and voluntary reports of unhandled sites. In the current popup code, such a report sends the site's host as a URL-encoded query value to an Aarhus University endpoint; the project site notes ordinary network processing of the reporter's IP address. These statements are project documentation, not an independent server audit.",
+    "update_channels_and_release_cadence": "Package updates and rule updates follow different clocks. Stores may deliver 1.1.3 or 1.1.5 depending on the browser, while the running extension retrieves the default rules-list index from the project's GitHub raw URL. The background code caches fetched lists and uses a random maximum staleness of 22 to 48 hours; a debug setting can force updates. Referenced lists are fetched recursively and merged. If retrieval fails, a cached entry can be reused even when stale, preventing an empty rule set but potentially preserving outdated selectors. The inspected release ZIPs did not contain the rules directory, confirming the importance of this channel for those packages. Repository activity on 7 February 2026 is a maintenance signal, not evidence of a scheduled release or proof that every rule remains current. This review measured the live index and read the update code but did not replay an automatic browser update or test how long a particular installation retains a cached rule.",
+    "licensing_and_governance": "The repository and package metadata identify the MIT License, with copyright notices for Janus Bager Kristensen, Rolf Bagge and CAVI at Aarhus University. The licence permits use, modification and redistribution under its notice and disclaimer terms; it does not make a CMP's own software, website content or remote third-party rule list MIT-licensed. Development is public, and the README presents rule contributions as a central way to keep pace with changing consent interfaces. That governance model separates extension-code releases from community-maintained detection data. It also places responsibility on reviewers to assess selectors, consent mappings and remote-list provenance rather than treating every contribution as a legal endorsement. No exhaustive licence review of bundled browser or build dependencies was performed for this entry. Academic authorship and public source support inspection and research, but neither constitutes a regulatory approval of the extension's automated choices.",
+    "limitations_and_scope": "Recognition is necessarily incomplete. A CMP can change its selectors, hide controls in another frame, use an unanticipated language, customise category names or require an interaction not represented by the rule. Multiple matches, stale rules and site-specific variants can produce errors or incomplete handling. The five-second search boundary and asynchronous page behaviour also matter. Hiding a dialog is not the same as refusing processing, and successfully clicking Save does not prove that the site honoured the result. Conversely, automated acceptance is possible when a user enables a category: the extension acts with the authority delegated by those settings. It cannot determine whether consent is informed, freely given or legally valid, nor certify a website's GDPR compliance. This phase performed static rule and package inspection only; it did not execute the engine against a website corpus or verify the semantic correctness of 202 rule identifiers. Store packages were not proven byte-identical to the inspected GitHub assets.",
+    "who_is_it_for": "Consent-O-Matic suits users who repeatedly encounter supported consent dialogs and want to record a consistent preference instead of clicking through each interface manually. It is especially useful for people whose browsers delete site data frequently, causing the same questions to return. Technically curious users can inspect local handling statistics, disable automation on a chosen host, force rule updates or contribute a reproducible rule for an unsupported CMP. Researchers and administrators can review public JSON definitions and MV3 manifests before deployment. The extension works best when the user understands that false defaults are preferences to be applied where rules permit, not a universal refusal mechanism. It is also appropriate for someone willing to inspect important consent decisions manually and to treat reporting, remote lists and browser Sync as separate trust choices.",
+    "who_is_it_not_for": "The extension is not suitable as a stand-alone cookie blocker, tracker blocker, anonymity tool or legal-compliance guarantee. Users who expect every banner to disappear, every category to be rejected regardless of its settings, or every site to honour an automated answer will be disappointed. It is a poor choice for anyone unwilling to review broad all-site access or the possibility that browser Sync handles some preferences. Organisations with strict consent governance should not delegate policy to unreviewed remote rules or assume that internal A/B/D/E/F/X labels map perfectly to their legal categories. People who need deterministic manual review of every vendor and purpose should keep that workflow. Likewise, a user investigating a specific site's processing must inspect the resulting consent state directly rather than relying solely on a check mark, click counter or successful form submission.",
+    "verdict": "Consent-O-Matic is a technically focused and transparent attempt to automate a repetitive part of browsing. Its strength is the combination of DOM matchers, explicit consent actions, six stored preference types, per-host control and a separately maintained rule ecosystem. The live rule inventory is substantial, but its file and identifier counts are not evidence of universal recognition. The inspected 1.1.5 packages are MV3 and rely on remote rules, while Chrome, Edge and Apple still display 1.1.3; distribution therefore requires channel-specific scrutiny. Local caching, browser Sync, voluntary reports and broad page access also deserve informed review. Consent-O-Matic is a reasonable choice for users who want preference-based automation and will monitor important exceptions. It should not be presented as a universal banner remover, a guaranteed refusal of tracking, or a substitute for legal judgement and direct verification of consequential consent choices."
+  },
+  "links": {
+    "project_home": "https://consentomatic.au.dk/",
+    "readme": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/README.md",
+    "live_rule_index": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/rules-list.json",
+    "preference_defaults_and_storage": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/GDPRConfig.js",
+    "consent_engine": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/ConsentEngine.js",
+    "rule_update_and_reporting_background": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/background.js",
+    "content_runner": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/contentScript.js",
+    "popup_and_site_report": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/popup.js",
+    "chromium_manifest": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/manifest.chromium.json",
+    "firefox_manifest": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/manifest.firefox.json",
+    "safari_manifest": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/manifest.safari.json",
+    "package_metadata": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/package.json",
+    "license": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/LICENSE",
+    "repository_metadata": "https://api.github.com/repos/cavi-au/Consent-O-Matic",
+    "release_1_1_5_metadata": "https://api.github.com/repos/cavi-au/Consent-O-Matic/releases/tags/v1.1.5",
+    "chromium_1_1_5_package": "https://github.com/cavi-au/Consent-O-Matic/releases/download/v1.1.5/consent-o-matic-v1.1.5-unpacked-release-chromium.zip",
+    "firefox_1_1_5_package": "https://github.com/cavi-au/Consent-O-Matic/releases/download/v1.1.5/consent-o-matic-v1.1.5-unpacked-release-firefox.zip",
+    "chrome_listing": "https://chromewebstore.google.com/detail/consent-o-matic/mdjildafknihdffpkfmmpnpoiajfjnjd",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/consent-o-matic/",
+    "edge_listing": "https://microsoftedge.microsoft.com/addons/detail/consentomatic/eflcfflijdiekjkegjghbchoncjhfkda",
+    "safari_listing": "https://apps.apple.com/us/app/consent-o-matic/id1606897889"
+  },
+  "sources": [
+    {
+      "title": "Consent-O-Matic official site - supported browsers, local-settings statement, reporting and recognition limits",
+      "url": "https://consentomatic.au.dk/",
+      "type": "official_project_site",
+      "publisher": "CAVI / Aarhus University",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic README - purpose, store links, CMP scope, permissions, network behaviour and installation",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic live rules-list index - 206 references and 203 unique rule-file URLs at consultation",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/rules-list.json",
+      "type": "official_live_rule_data",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic GDPRConfig source - six defaults, Sync/Local storage, rule lists and per-host switches",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/GDPRConfig.js",
+      "type": "official_source_code",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic engine source - DOM observation, timeouts and OPEN_OPTIONS/DO_CONSENT/SAVE_CONSENT sequence",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/ConsentEngine.js",
+      "type": "official_source_code",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic background source - recursive rule retrieval, 22-48-hour cache and stale-cache fallback",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/background.js",
+      "type": "official_source_code",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic content runner - HTML scope, top-level host handling and rule/custom-rule merge",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/contentScript.js",
+      "type": "official_source_code",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic popup source - per-host toggle and voluntary host report to Aarhus University",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/popup.js",
+      "type": "official_source_code",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic Chromium source manifest - MV3 service worker, permissions and all-frame content script",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/manifest.chromium.json",
+      "type": "official_source_manifest",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic Firefox source manifest - MV3 background script and Gecko 109 minimum",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/manifest.firefox.json",
+      "type": "official_source_manifest",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic Safari source manifest - MV3 non-persistent background-script variant",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/Extension/manifest.safari.json",
+      "type": "official_source_manifest",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic package metadata - version 1.1.5, MIT label and browser build targets",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/package.json",
+      "type": "official_package_metadata",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic MIT licence text and project copyright notices",
+      "url": "https://raw.githubusercontent.com/cavi-au/Consent-O-Matic/master/LICENSE",
+      "type": "official_license",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic repository metadata - creation date, master branch, archive status and last push",
+      "url": "https://api.github.com/repos/cavi-au/Consent-O-Matic",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic v1.1.5 release metadata - publication date, notes and official unpacked assets",
+      "url": "https://api.github.com/repos/cavi-au/Consent-O-Matic/releases/tags/v1.1.5",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic 1.1.5 Chromium ZIP - statically inspected MV3 manifest and declared-digest match",
+      "url": "https://github.com/cavi-au/Consent-O-Matic/releases/download/v1.1.5/consent-o-matic-v1.1.5-unpacked-release-chromium.zip",
+      "type": "official_distribution_package",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Consent-O-Matic 1.1.5 Firefox ZIP - statically inspected MV3 manifest and declared-digest match",
+      "url": "https://github.com/cavi-au/Consent-O-Matic/releases/download/v1.1.5/consent-o-matic-v1.1.5-unpacked-release-firefox.zip",
+      "type": "official_distribution_package",
+      "publisher": "Consent-O-Matic project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Chrome Web Store Consent-O-Matic listing - version 1.1.3 and 3 October 2024 channel update",
+      "url": "https://chromewebstore.google.com/detail/consent-o-matic/mdjildafknihdffpkfmmpnpoiajfjnjd",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / CAVI",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons Consent-O-Matic listing - version 1.1.5 and 17 June 2025 channel update",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/consent-o-matic/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / CAVI",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Edge Consent-O-Matic listing - version 1.1.3 and 2 October 2024 channel update",
+      "url": "https://microsoftedge.microsoft.com/addons/detail/consentomatic/eflcfflijdiekjkegjghbchoncjhfkda",
+      "type": "official_store_listing",
+      "publisher": "Microsoft Edge Add-ons / CAVI",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Apple App Store Consent-O-Matic listing - Safari distribution and version 1.1.3 history",
+      "url": "https://apps.apple.com/us/app/consent-o-matic/id1606897889",
+      "type": "official_store_listing",
+      "publisher": "Apple App Store / Aarhus University",
+      "accessed": "2026-11-06"
+    }
+  ]
+}

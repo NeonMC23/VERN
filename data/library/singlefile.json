@@ -1,0 +1,257 @@
+{
+  "id": "singlefile",
+  "name": "SingleFile",
+  "type": "application",
+  "summary": "Browser extension that assembles a page and its resources into a portable single-HTML capture, with selection, annotation, deferred-content and batch options, separate MV2/MV3 packages, and a distinct browser-driven CLI.",
+  "tags": [
+    "browser extension",
+    "web capture",
+    "single html",
+    "offline reading",
+    "resource embedding",
+    "annotations",
+    "batch capture",
+    "command line",
+    "manifest v2",
+    "manifest v3",
+    "local processing",
+    "public source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome and Chromium-based browsers",
+    "Firefox desktop and Android",
+    "Microsoft Edge",
+    "Safari on macOS, iOS and iPadOS"
+  ],
+  "license": "AGPL-3.0-or-later in project and package notices; third-party-derived code retains its respective licences",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "SingleFile saves a web page as one portable HTML file by processing the current document and assembling its styles, images, fonts, frames and other available resources instead of leaving a separate companion folder. It is intended for offline reading, portable snapshots and annotation, not for creating a perfect executable copy of a web application or an archival copy of an entire site. The current extension version is 1.35.0, with a Firefox Manifest V2 package and Chromium and Edge Manifest V3 packages. Safari has a separate App Store distribution. SingleFile CLI is related but distinct: version 2.24.0 drives a browser from the command line rather than embedding the WebExtension. Capture options can remove scripts and unused content, attempt deferred resource loading, and select local or configured remote destinations. Consequently, output fidelity, file size, network activity and suitability depend on both the page and the chosen settings.",
+    "origin_and_history": "Gildas Lormeau's main SingleFile repository dates from 12 September 2010 and remains actively developed. The project now separates its MV2 extension line from the SingleFile-MV3 repository, while single-file-cli has its own command-line repository and release sequence. Extension version 1.35.0 was published through both extension repositories on 4 November 2026; CLI version 2.24.0 followed on 6 November. Chrome, Firefox, Edge and Safari listings displayed 1.35.0 when consulted, although their packages and update metadata should not be assumed identical. Over time, the extension has accumulated selection and frame capture, annotation, auto-save, configurable destinations, compressed output options and browser-specific integrations. Those dates show continuing maintenance, not a promised cadence. Nor does a shared extension version erase the architectural difference between the older Firefox manifest, Chromium's service worker and Safari's application bundle.",
+    "rendering_engine_and_technical_architecture": "SingleFile uses the host browser's document and extension APIs rather than supplying a rendering engine. Content code initialises the capture processor, handles the selected document and frames, retrieves resources and obtains page data for download. The inspected packages inject capture support at document start across frames, including about:blank and eligible origin-fallback cases, but that declaration does not guarantee access to every sandboxed frame. During assembly, resources can be embedded into the HTML, duplicate images grouped, unused styles or fonts removed and markup compressed. Scripts are blocked by default, so the result is primarily a preserved document state rather than a running copy of the original application. Optional compressed and self-extracting archive modes have different trade-offs from ordinary HTML. The CLI uses the same broad capture purpose through a separate browser-driven implementation: Chrome DevTools Protocol for Chromium and WebDriver BiDi for Firefox.",
+    "interface_and_documented_features": "The toolbar action saves the current page and can cancel an active capture. Menus support a selection, a selected frame, the current tab, selected or unpinned tabs and all tabs. An editor provides annotation and removal workflows before saving. Auto-save can run after loading or before unloading for configured tab groups, while filename templates, profiles and resource controls support repeated workflows. The manifests suggest Ctrl+Shift+Y for selected tabs and Ctrl+Shift+U for all tabs, with browser-specific alternatives and user customisation. Deferred-content handling is enabled in the inspected default configuration, including an idle delay and scroll event to encourage lazy resources to load. Users can also keep a raw page, alter script blocking, remove frames, adjust optimisation or choose compressed output. These are capture choices, not guarantees that every late request or interactive control will survive offline.",
+    "installation_and_distribution": "The extension is distributed through the Chrome Web Store, Firefox Add-ons, Microsoft Edge Add-ons and Apple's App Store for Safari, with official GitHub release ZIPs for Firefox, Chromium and Edge. The default destination is the browser's download folder, but clipboard and configured remote destinations are also available. Capturing or displaying infobars on local files can require an explicit file-URL permission; Firefox 153 additionally requires its local-file access permission. Store domains and other protected pages may prohibit extension execution altogether. The CLI follows another installation path: download a standalone executable, or use the documented Deno/npm routes, then provide Chrome, Chromium or Firefox as the capturing browser. A browser executable path may be necessary for non-standard installations. Installing the CLI does not install the browser extension, and neither route was executed during this review.",
+    "platforms_and_hardware_architectures": "SingleFile's documentation covers Chrome, Firefox desktop and Android, Edge, Safari and several Chromium-derived browsers. The inspected Firefox 1.35.0 package is MV2 with a background page; Chromium and Edge packages are MV3 with a service worker, scripting, offscreen and side-panel capabilities. Their permission sets differ even at the same version. Safari is distributed as an app and its listing requires iOS or iPadOS 15, or macOS 13.1, rather than inheriting the Chromium manifest. The CLI release lists standalone Linux and macOS binaries for x86_64 and aarch64 plus a Windows executable, while its package metadata specifies current Deno, Bun or Node runtime minima for source-based use. Firefox CLI automation has documented limitations, including no create-browser-profile option. No browser, mobile, operating-system or processor matrix was run, so listed compatibility is not a measured guarantee of identical capture results.",
+    "extensions_and_add_on_store": "SingleFile does not depend on a remote archiving service or provide a general plug-in marketplace. Browser stores distribute the extension, and the source repositories provide buildable variants. Its integration points include optional nativeMessaging for SingleFile Companion, a user-script event mode around capture, clipboard or bookmark features and configured destination APIs. The CLI, MHTML conversion tools and companion programs are separate projects or utilities and should not be treated as components automatically installed with the extension. Google Drive, Dropbox, GitHub, WebDAV, S3 and REST destinations are output integrations, not evidence that every capture is uploaded. Browser extensions with access to the same page can also affect the DOM being captured. Users evaluating provenance should distinguish the official MV2, MV3, Safari and CLI channels rather than downloading an unrelated repackaged “SingleFile” add-on.",
+    "privacy_and_security_model": "By default, the developer states that processing and storage occur locally and that SingleFile does not collect user data. That is not equivalent to no network activity. Capture can download images, CSS, fonts or frame content that were not displayed or cached, and an optional Referer retry changes request behaviour. Configured cloud, WebDAV, S3, GitHub or REST destinations transmit saved data to the selected service; option synchronisation uses the browser vendor's service, and the optional proof-of-existence feature sends a page SHA-256 hash to Woleet. The privacy policy also notes that Chromium sites may detect the extension through web-accessible resources. Broad all-URL, tab, download and storage permissions are therefore security-relevant, particularly on authenticated pages. Optional nativeMessaging and identity permissions add further boundaries. These are documented behaviours and settings, not an independent audit of the extension, destination services or saved-file safety.",
+    "update_channels_and_release_cadence": "Firefox MV2, Chromium MV3, Edge MV3, Safari and the CLI have distinct release or distribution paths. The two extension repositories published 1.35.0 on 4 November 2026, and the inspected GitHub assets matched their declared SHA-256 digests. Store listings also displayed 1.35.0, but no byte identity with those GitHub ZIPs was established. Safari's extracted listing used a relative update age, so no exact update date is assigned here. The CLI's 2.24.0 release on 6 November belongs only to the command-line tool and does not indicate a newer extension. Repository pushes around the consultation date show active development without proving a regular release schedule. Saved HTML files do not automatically track later changes to the original page or to SingleFile; a new capture is a new snapshot with its own settings and omissions.",
+    "licensing_and_governance": "SingleFile's source and package notices use the GNU Affero General Public License, with version 3-or-later language in source and CLI package metadata. The CLI documentation also notes MIT licensing for code derived from third-party projects, so third-party notices should be retained rather than collapsing every dependency into one label. The main, MV3 and CLI repositories are public and maintained by the same project author, but their releases and artefacts remain distinct. AGPL obligations can be particularly relevant when modified code is offered through a network service; this entry does not provide legal advice or determine a downstream deployment's obligations. Public source supports inspection and modification, while browser-store review and licence labels do not substitute for checking the exact bundle and its included components.",
+    "limitations_and_scope": "SingleFile's FAQ explicitly recommends WARC-based tools for professional web archiving rather than presenting this extension as that kind of system. Scripts are removed by default because offline execution is not guaranteed; dynamic maps, carousels and folding elements may stop working. Canvas, video, sandboxed Firefox frames, protected store pages and external resources referenced from local files have documented limitations. Authenticated pages can be captured only within the access already available to the browser or CLI profile; there is no documented universal bypass for login, CAPTCHA or anti-bot controls. Deferred loading can miss late, failed or conditionally requested resources, and Referer restrictions can omit images. Optimisation can reduce output but also consumes processing time and may remove content; embedded resources can still make files large. No fidelity score, size ratio, performance benchmark, site corpus or end-to-end capture was produced, and the extension is not by itself a complete site crawler.",
+    "who_is_it_for": "SingleFile suits readers, researchers and practitioners who need a movable snapshot of a specific page rather than a fragile HTML-plus-folder save. It is helpful for offline reference, preserving a currently visible state, annotating a document, collecting several open tabs and choosing how aggressively resources or markup should be optimised. Users working with logged-in pages can evaluate captures within an existing browser session, while automation users can consider the separate CLI with bounded URL lists or crawls and explicit exit codes. People comfortable reviewing broad page permissions and optional destination settings can keep the default local workflow or deliberately connect another service. It is most effective when important captures are opened and checked, especially where lazy loading, frames, authentication or dynamic presentation matter.",
+    "who_is_it_not_for": "This is not the right sole instrument for an archive programme requiring WARC workflows, crawl-wide provenance or verified completeness, nor for someone expecting a full site mirror from one toolbar click. Users who need the original application's JavaScript interactions to remain fully functional offline should not assume that a document capture provides them. It does not promise access behind authentication, CAPTCHA or anti-bot systems, and it should not be used to infer permission to collect restricted content. People requiring zero network requests must account for resource retrieval and disable or avoid optional remote features rather than relying on the phrase “local processing”. Those needing guaranteed small files, deterministic rendering across browsers, unattended success on every dynamic site or a current independent privacy audit will need additional tools and testing.",
+    "verdict": "SingleFile is a capable page-capture extension whose central value is a portable HTML document with assembled resources, flexible selection and annotation, and substantial control over deferred content and optimisation. Version 1.35.0 spans distinct Firefox MV2, Chromium/Edge MV3 and Safari channels, while CLI 2.24.0 is a separate browser-driven automation tool. Its local-by-default workflow is attractive, but resource requests and configured destinations make absolute offline or no-network claims inaccurate. The same options that improve portability can change appearance, size and interactivity, and scripts are intentionally blocked by default. SingleFile is therefore a strong choice for checked, page-level snapshots and personal offline collections. It should not be represented as a perfect reproduction, a professional WARC archiving solution, a guaranteed authenticated crawler or a remote archiving service."
+  },
+  "links": {
+    "readme": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/README.MD",
+    "faq": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/faq.md",
+    "known_issues": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/known-issues.md",
+    "privacy_policy": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/privacy.md",
+    "mv2_source_manifest": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/manifest.json",
+    "default_configuration": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/src/core/bg/config.js",
+    "capture_content_source": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/src/core/content/content.js",
+    "mv3_source_manifest": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile-MV3/main/manifest.json",
+    "cli_readme": "https://raw.githubusercontent.com/gildas-lormeau/single-file-cli/main/README.MD",
+    "cli_options": "https://raw.githubusercontent.com/gildas-lormeau/single-file-cli/main/options.js",
+    "cli_package_metadata": "https://raw.githubusercontent.com/gildas-lormeau/single-file-cli/main/package.json",
+    "extension_license": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/LICENSE",
+    "cli_license": "https://raw.githubusercontent.com/gildas-lormeau/single-file-cli/main/LICENSE",
+    "repository_metadata": "https://api.github.com/repos/gildas-lormeau/SingleFile",
+    "mv3_repository_metadata": "https://api.github.com/repos/gildas-lormeau/SingleFile-MV3",
+    "cli_repository_metadata": "https://api.github.com/repos/gildas-lormeau/single-file-cli",
+    "release_1_35_0_metadata": "https://api.github.com/repos/gildas-lormeau/SingleFile/releases/tags/v1.35.0",
+    "mv3_release_1_35_0_metadata": "https://api.github.com/repos/gildas-lormeau/SingleFile-MV3/releases/tags/v1.35.0",
+    "cli_release_2_24_0_metadata": "https://api.github.com/repos/gildas-lormeau/single-file-cli/releases/tags/v2.24.0",
+    "firefox_1_35_0_package": "https://github.com/gildas-lormeau/SingleFile/releases/download/v1.35.0/singlefile-extension-firefox.zip",
+    "chromium_1_35_0_package": "https://github.com/gildas-lormeau/SingleFile-MV3/releases/download/v1.35.0/singlefile-extension-chromium.zip",
+    "edge_1_35_0_package": "https://github.com/gildas-lormeau/SingleFile-MV3/releases/download/v1.35.0/singlefile-extension-edge.zip",
+    "chrome_listing": "https://chromewebstore.google.com/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/single-file/",
+    "edge_listing": "https://microsoftedge.microsoft.com/addons/detail/efnbkdcfmcmnhlkaijjjmhjjgladedno",
+    "safari_listing": "https://apps.apple.com/us/app/singlefile-for-safari/id6444322545"
+  },
+  "sources": [
+    {
+      "title": "SingleFile README - single-HTML capture, selections, annotations, auto-save, shortcuts and browser distribution",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/README.MD",
+      "type": "official_repository_documentation",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile FAQ - script removal, deferred resources, local-file access, performance and WARC limitation",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/faq.md",
+      "type": "official_faq",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile known issues - protected domains, canvas/video, sandboxed frames and local-resource limitations",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/known-issues.md",
+      "type": "official_limitations_documentation",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile privacy policy - local defaults, resource retrieval, configured destinations, sync and Woleet hash",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/privacy.md",
+      "type": "official_privacy_policy",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile MV2 source manifest - Firefox background, all-frame capture and browser permissions",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile configuration source - script blocking, deferred loading, HTML optimisation and destination defaults",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/src/core/bg/config.js",
+      "type": "official_source_code",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile content capture source - document processor, frame handling and page-data assembly path",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/src/core/content/content.js",
+      "type": "official_source_code",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile-MV3 source manifest - service worker, host access, scripting and Chromium permissions",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile-MV3/main/manifest.json",
+      "type": "official_source_manifest",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile CLI README - separate browser-driven tool, profiles, batches, bounded crawls and exit codes",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/single-file-cli/main/README.MD",
+      "type": "official_cli_documentation",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile CLI options - Chromium/Firefox engines, timing, network, output and crawl controls",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/single-file-cli/main/options.js",
+      "type": "official_cli_source_code",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile CLI package metadata - version 2.24.0, runtime engines and AGPL-3.0-or-later label",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/single-file-cli/main/package.json",
+      "type": "official_package_metadata",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile LICENSE - GNU Affero General Public License version 3 text",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/SingleFile/main/LICENSE",
+      "type": "official_license",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile CLI LICENSE - separate CLI repository licence text",
+      "url": "https://raw.githubusercontent.com/gildas-lormeau/single-file-cli/main/LICENSE",
+      "type": "official_license",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile repository metadata - main branch, project origin, activity and archive status",
+      "url": "https://api.github.com/repos/gildas-lormeau/SingleFile",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile-MV3 repository metadata - separate Manifest V3 development line",
+      "url": "https://api.github.com/repos/gildas-lormeau/SingleFile-MV3",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile CLI repository metadata - distinct command-line project and activity",
+      "url": "https://api.github.com/repos/gildas-lormeau/single-file-cli",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile v1.35.0 release metadata - 4 November 2026 publication and Firefox package",
+      "url": "https://api.github.com/repos/gildas-lormeau/SingleFile/releases/tags/v1.35.0",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile-MV3 v1.35.0 release metadata - Chromium and Edge packages",
+      "url": "https://api.github.com/repos/gildas-lormeau/SingleFile-MV3/releases/tags/v1.35.0",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile CLI v2.24.0 release metadata - separate 6 November 2026 command-line release",
+      "url": "https://api.github.com/repos/gildas-lormeau/single-file-cli/releases/tags/v2.24.0",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile 1.35.0 Firefox ZIP - statically inspected MV2 manifest, defaults and declared-digest match",
+      "url": "https://github.com/gildas-lormeau/SingleFile/releases/download/v1.35.0/singlefile-extension-firefox.zip",
+      "type": "official_distribution_package",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile 1.35.0 Chromium ZIP - statically inspected MV3 manifest and declared-digest match",
+      "url": "https://github.com/gildas-lormeau/SingleFile-MV3/releases/download/v1.35.0/singlefile-extension-chromium.zip",
+      "type": "official_distribution_package",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile 1.35.0 Edge ZIP - statically inspected MV3 manifest and declared-digest match",
+      "url": "https://github.com/gildas-lormeau/SingleFile-MV3/releases/download/v1.35.0/singlefile-extension-edge.zip",
+      "type": "official_distribution_package",
+      "publisher": "Gildas Lormeau / SingleFile",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Chrome Web Store SingleFile listing - version 1.35.0 and extension distribution channel",
+      "url": "https://chromewebstore.google.com/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons SingleFile listing - version 1.35.0 and Firefox distribution channel",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/single-file/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Edge SingleFile listing - current 1.35.0 channel",
+      "url": "https://microsoftedge.microsoft.com/addons/detail/efnbkdcfmcmnhlkaijjjmhjjgladedno",
+      "type": "official_store_listing",
+      "publisher": "Microsoft Edge Add-ons / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "SingleFile for Safari App Store listing - separate Safari distribution and Apple platform minima",
+      "url": "https://apps.apple.com/us/app/singlefile-for-safari/id6444322545",
+      "type": "official_store_listing",
+      "publisher": "Apple App Store / Gildas Lormeau",
+      "accessed": "2026-11-06"
+    }
+  ]
+}

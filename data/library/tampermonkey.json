@@ -1,0 +1,258 @@
+{
+  "id": "tampermonkey",
+  "name": "Tampermonkey",
+  "type": "application",
+  "summary": "Proprietary userscript manager for installing, editing and updating third-party browser scripts, with metadata-driven URL scope, configurable injection contexts, privileged GM APIs, backups and optional browser or cloud synchronisation.",
+  "tags": [
+    "browser extension",
+    "userscript manager",
+    "javascript",
+    "metadata",
+    "url matching",
+    "gm api",
+    "script updates",
+    "synchronisation",
+    "injection contexts",
+    "content scripts",
+    "proprietary software",
+    "third-party code"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome and Chromium-based browsers",
+    "Firefox",
+    "Microsoft Edge",
+    "Safari on macOS, iOS and iPadOS",
+    "Opera Next"
+  ],
+  "license": "Proprietary freeware EULA for current Tampermonkey builds; installed userscripts and third-party dependencies retain their own licences",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "Tampermonkey is a browser extension that installs, organises and executes userscripts. It supplies the dashboard, editor, URL matching, injection machinery, update checks and privileged Greasemonkey-compatible APIs; the JavaScript that a user installs remains a separate third-party work with its own behaviour and licence. Scripts can change pages, automate actions, store values and, when authorised, communicate across origins. Tampermonkey therefore sits between two trust decisions: installing the manager and accepting every script, dependency and update host thereafter. Current distribution is not one uniform package. The checked Chrome listing displayed 5.5.1, Firefox Add-ons 5.5.0 and Apple's US App Store 5.6.6243. Those channels also differ in price, permissions and browser capabilities. Neither store availability nor the manager's sandbox terminology establishes that a userscript is safe, compatible with every site or isolated from all sensitive data.",
+    "origin_and_history": "Tampermonkey is developed by Jan Biniok and distributed through browser-specific stable and beta channels. Its public Tampermonkey/tampermonkey GitHub repository was created on 16 March 2015, but that date describes the repository, not the beginning of the software. More importantly, the repository README says that its source covers Tampermonkey only up to version 2.9 and that newer versions are proprietary. It is consequently useful for project history, not as the current source of the 5.x builds. The official site now presents Chrome, Edge, Firefox, Safari and Opera channels, an editor, automatic updates, backups and synchronisation. Store versions consulted on 6 November 2026 were not synchronised: Chrome 5.5.1, Firefox 5.5.0 and Safari 5.6.6243. Repository activity, store badges and the existence of beta packages do not establish a fixed release cadence or equivalence between those builds.",
+    "rendering_engine_and_technical_architecture": "Tampermonkey uses the host browser's JavaScript and WebExtension environments rather than providing a separate web renderer. Background components manage scripts, updates, storage and network facilities, while injected code interacts with a page or an extension-related world. The documented @sandbox modes distinguish MAIN_WORLD, ISOLATED_WORLD and USERSCRIPT_WORLD. Raw mode targets page context and is the documented default when @sandbox is omitted; if main-world injection is impossible, for example because of CSP, another enabled context may be used. JavaScript mode addresses unsafeWindow needs, while DOM mode is intended when direct page-object access is unnecessary. These are compatibility and capability choices, not an absolute malware boundary. The official FAQ warns that DOM execution in extension context can expose broad extension privileges. With @grant none, the documented sandbox is disabled and only GM_info remains among the GM facilities described.",
+    "interface_and_documented_features": "The toolbar popup exposes running scripts and common controls, while the dashboard lists installed scripts and opens the built-in editor. Users can create a script, paste JavaScript, enable or disable it, inspect metadata and initiate update checks. A metadata block controls scope and behaviour: @match uses scheme, host and path patterns; @include accepts broad patterns and documented regular-expression forms; @exclude removes matching URLs. @run-at selects document-start, document-body, document-end, document-idle or context-menu injection, and @noframes restricts execution to the main frame. @require loads JavaScript before the script, @resource preloads named data, and @grant declares GM functions, unsafeWindow or powerful window operations. Import and export are available through ZIP, JSON files, text and configured cloud routes. Script Sync offers cloud providers or Browser Sync, although its limited quota means Browser Sync processes scripts with a downloadable public URL rather than providing an unrestricted full-profile replica.",
+    "installation_and_distribution": "The normal first step is to install the exact package from the browser's official store or the vendor's linked channel, then review each userscript before installing or enabling it. Chromium has an additional gate: for Tampermonkey 5.3 and later, the official FAQ requires Allow User Scripts in Chrome 138 and later, or Developer Mode where that route applies. Thus a visible extension icon does not prove that injection is authorised. Scripts can be installed from a .user.js URL or created in the dashboard; local-file workflows may additionally require the browser's file-URL access setting. Chrome, Firefox, Edge, Safari and Opera packages should not be treated as interchangeable downloads. Safari is distributed as an Apple application, whose US listing displayed a paid offer, while the browser extensions are presented as freeware. Beta and legacy channels have their own compatibility trade-offs and should not be confused with the stable package.",
+    "platforms_and_hardware_architectures": "Tampermonkey's WebExtension and Safari packages have no separate CPU-specific build in the channels reviewed, but actual support depends on browser version, WebExtension APIs and policy. The official Chrome page currently labels its stable and beta channels Chrome 120 or later; this is not a universal minimum for Firefox, Safari or every Chromium derivative. The checked versions were 5.5.1 on Chrome, 5.5.0 on Firefox and 5.6.6243 on Safari, demonstrating why a single version claim would be inaccurate. Safari's App Store package covers Mac, iPhone and iPad according to its listing, with its own pricing and platform restrictions. Other Chromium browsers depend on their store compatibility and the required userScripts permission flow. No runtime matrix was executed across browsers, mobile devices or operating systems, so documented support does not establish identical GM behaviour, injection timing, CSP fallback or userscript syntax support.",
+    "extensions_and_add_on_store": "Userscripts are Tampermonkey's extension mechanism, not a uniformly curated catalogue. A script may come from a hosting site, a gist, a local editor or an imported archive, and its publisher and licence can differ from Tampermonkey's. @require adds executable dependencies before the main script; @resource retrieves data exposed through resource APIs. Both can carry integrity hashes. Tampermonkey's SRI documentation supports checking declared resource hashes and refusing mismatches, but a matching hash proves only correspondence with the pinned bytes, not that those bytes are benign or suitable. @updateURL and @downloadURL introduce further remote trust relationships. The manager offers compatibility features for older Greasemonkey-style scripts, yet that is not a promise of universal directive or API support. Browser stores distribute the manager itself; their review or listing should never be interpreted as approval of scripts and dependencies installed later from elsewhere.",
+    "privacy_and_security_model": "The manager needs substantial browser access because scripts may run on many sites and use privileged functions. Firefox's listing includes all-website data, tabs, navigation, downloads, notifications and clipboard writing, with optional proxy control; other browsers present different permission models. GM_xmlhttpRequest is dispatched from Tampermonkey's background context, and @connect controls allowed request domains, including initial and final URLs. GM value APIs provide script-specific storage, while unsafeWindow and page-context execution expose page objects. These mechanisms can handle sensitive page content and credentials and require narrow grants and URL scope. Tampermonkey's own policy separately declares anonymous usage statistics and automatic internal-error reports to self-hosted Matomo, controllable through Anonymous statistics. Incognito non-collection is qualified by technical support for split mode. Cloud sync, WebDAV, remote dependencies and userscript requests create additional flows not eliminated by that setting. A blacklist can block known sources, but it is neither a complete review nor a guarantee against unknown malicious code.",
+    "update_channels_and_release_cadence": "Updating the manager, updating an installed userscript and synchronising a script collection are different operations. Store or vendor channels update Tampermonkey. For a userscript, @updateURL identifies an update location, @downloadURL identifies where new code is obtained, and the documentation requires @version for update checks; @downloadURL none disables that check. Automatic or manual retrieval can therefore change executable code after the original installation decision, and @require resources may change the effective dependency chain as well. SRI can pin expected dependency content when correctly used, but it does not review the main script or an intentionally changed trusted source. Browser Sync has quota and public-URL constraints, while cloud services have their own accounts and conflict behaviour. Current store releases displayed different versions and dates, so no common release train or future cadence is asserted. No update, dependency refresh or rollback was executed during this review.",
+    "licensing_and_governance": "Current Tampermonkey builds are governed by the project's proprietary End-User License Agreement. It grants a limited, revocable, non-exclusive right of use, describes freeware for personal, commercial, non-profit and educational purposes, and restricts redistribution and modification without permission. Apple's paid Safari listing is a distribution offer, not a different open-source licence. The historical public repository contains a GPLv3 text, but its README expressly limits that source tree to version 2.9 and labels newer versions proprietary; applying GPLv3 to the current 5.x builds would therefore be wrong. Installed userscripts, @require libraries, @resource content and sync providers are separate works or services with their own terms. Store licence labels and the EULA do not grant redistribution rights over a third-party script collection. Public issue channels and historical source do not amount to current open-source governance or a reproducible-build claim.",
+    "limitations_and_scope": "URL metadata needs precise review. @exclude can remove otherwise included pages, broad @include expressions can match more than intended, and @include does not support matching the URL hash. @match patterns are not a full description of single-page application behaviour; scripts may need to observe later URL and DOM changes themselves. @run-at expresses the earliest requested injection point, but dependency retrieval can delay execution, so document-start is not an unconditional ordering guarantee. @noframes prevents iframe execution only when applied, while embedded and cross-origin frames introduce their own constraints. CSP can block a desired page context and cause a fallback with different object access. Browser-internal pages, store pages and local files may be restricted by the browser or require explicit access. Site redesigns, browser API differences, remote dependencies and updates can break a previously working script. No userscript corpus, CSP suite, compatibility test, security audit or package signature check was performed.",
+    "who_is_it_for": "Tampermonkey suits technically confident users who want to customise websites, automate repetitive browser tasks or maintain their own userscript collection. Its editor, per-script enablement, metadata controls and execution modes are useful for developers diagnosing page integration, while ZIP or JSON exports support backups and migration. Browser or cloud synchronisation can help people who understand the selected service and its limits. The GM APIs are valuable when a script genuinely needs cross-origin requests, persistent values, resources or page-object access and the user is prepared to review those capabilities. It is particularly appropriate for someone who checks source and provenance, narrows @match and @connect rules, treats updates as new code decisions and verifies important scripts after browser or site changes. The manager supplies flexible tooling without requiring every script to come from one central catalogue.",
+    "who_is_it_not_for": "Tampermonkey is not a safe-by-default script catalogue for users unwilling to inspect JavaScript, dependencies and update locations. People who install every offered script, grant broad site and network scope or interpret a sandbox label as complete isolation face substantial risk. It is also unsuitable for anyone requiring an open-source current build, identical features across all browser channels, guaranteed Greasemonkey compatibility or deterministic execution on every SPA and CSP-protected page. Organisations that prohibit arbitrary third-party code may need to block or centrally review userscript managers rather than rely on a blacklist. Users seeking zero telemetry, no remote requests or no broad permissions must examine the manager settings and every script separately; installing it does not meet those requirements automatically. Export and synchronisation do not replace provenance review, backups of sensitive values or a controlled test environment.",
+    "verdict": "Tampermonkey is a mature, highly capable userscript manager whose strengths are its editor, metadata controls, multiple injection contexts, GM API surface, backups and optional synchronisation. Those same capabilities make it a privileged host for third-party code rather than a safety certification. The checked 5.5.1 Chrome, 5.5.0 Firefox and 5.6.6243 Safari channels must remain distinct, and current proprietary licensing must not be confused with the historical GPLv3 repository. Effective use depends on restrictive URL and grant rules, trusted dependency and update hosts, attention to Chromium's execution permission, and an understanding that context isolation is limited and configurable. For experienced users willing to maintain that review process, Tampermonkey is a powerful customisation platform. It should not be represented as proof that userscripts are safe, universally compatible, permanently isolated or covered by one common release and licence."
+  },
+  "links": {
+    "project_home": "https://www.tampermonkey.net/index.php?locale=en",
+    "manager_overview": "https://www.tampermonkey.net/faq.php?locale=en&q=Q101",
+    "script_installation": "https://www.tampermonkey.net/faq.php?locale=en&q=Q102",
+    "script_sync": "https://www.tampermonkey.net/faq.php?locale=en&q=Q105",
+    "import_export": "https://www.tampermonkey.net/faq.php?locale=en&q=Q106",
+    "chromium_execution_permission": "https://www.tampermonkey.net/faq.php?locale=en&q=Q209",
+    "matching_rules": "https://www.tampermonkey.net/documentation.php?locale=en&q=include",
+    "external_dependencies": "https://www.tampermonkey.net/documentation.php?locale=en&q=externals",
+    "grant_rules": "https://www.tampermonkey.net/documentation.php?locale=en&q=grant",
+    "run_timing": "https://www.tampermonkey.net/documentation.php?locale=en&q=run_at",
+    "network_domain_rules": "https://www.tampermonkey.net/documentation.php?locale=en&q=connect",
+    "injection_sandbox": "https://www.tampermonkey.net/documentation.php?locale=en&q=sandbox",
+    "sandbox_security_faq": "https://www.tampermonkey.net/faq.php?locale=en&q=Q404",
+    "frame_rule": "https://www.tampermonkey.net/documentation.php?locale=en&q=noframes",
+    "xmlhttprequest_api": "https://www.tampermonkey.net/documentation.php?locale=en&q=GM_xmlhttpRequest",
+    "value_storage_api": "https://www.tampermonkey.net/documentation.php?locale=en&q=GM_values",
+    "subresource_integrity": "https://www.tampermonkey.net/documentation.php?locale=en&q=sri",
+    "script_update_metadata": "https://www.tampermonkey.net/documentation.php?locale=en&q=update_url",
+    "blacklist_faq": "https://www.tampermonkey.net/faq.php?locale=en&q=Q303",
+    "privacy_policy": "https://www.tampermonkey.net/privacy.php?locale=en",
+    "current_eula": "https://www.tampermonkey.net/eula.php?locale=en",
+    "historical_source_readme": "https://raw.githubusercontent.com/Tampermonkey/tampermonkey/master/README.md",
+    "repository_metadata": "https://api.github.com/repos/Tampermonkey/tampermonkey",
+    "chrome_listing": "https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/",
+    "safari_listing": "https://apps.apple.com/us/app/tampermonkey/id6738342400"
+  },
+  "sources": [
+    {
+      "title": "Tampermonkey official site - manager scope, browser channels, editor, updates, sync and compatibility features",
+      "url": "https://www.tampermonkey.net/index.php?locale=en",
+      "type": "official_project_site",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey FAQ Q101 - popup, background page, dashboard, editor and import/export overview",
+      "url": "https://www.tampermonkey.net/faq.php?locale=en&q=Q101",
+      "type": "official_usage_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey FAQ Q102 - script installation, dashboard editor, metadata and local-file workflow",
+      "url": "https://www.tampermonkey.net/faq.php?locale=en&q=Q102",
+      "type": "official_usage_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey FAQ Q105 - cloud and Browser Sync providers, public-URL quota constraint and conflicts",
+      "url": "https://www.tampermonkey.net/faq.php?locale=en&q=Q105",
+      "type": "official_sync_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey FAQ Q106 - ZIP, JSON, text, cloud and URL import/export",
+      "url": "https://www.tampermonkey.net/faq.php?locale=en&q=Q106",
+      "type": "official_usage_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey FAQ Q209 - Chrome 138 Allow User Scripts and Developer Mode execution gate",
+      "url": "https://www.tampermonkey.net/faq.php?locale=en&q=Q209",
+      "type": "official_permission_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey metadata include reference - @include, @match and @exclude URL scope",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=include",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey externals reference - @require, @resource and dependency integrity fragments",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=externals",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey grant reference - GM API declarations, unsafeWindow and @grant none",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=grant",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey run-at reference - injection moments, default idle timing and dependency delay",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=run_at",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey @connect reference - request-domain authorisation and initial/final URL checks",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=connect",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey @sandbox reference - main, isolated and userscript worlds with CSP fallback",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=sandbox",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey FAQ Q404 - sandbox selection and explicit extension-context security warning",
+      "url": "https://www.tampermonkey.net/faq.php?locale=en&q=Q404",
+      "type": "official_security_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey @noframes reference - main-frame-only script execution",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=noframes",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey GM_xmlhttpRequest reference - background networking, responses and browser-dependent options",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=GM_xmlhttpRequest",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey GM value APIs - script-specific storage, retrieval, deletion and change listeners",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=GM_values",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey Subresource Integrity - supported dependency hashes and mismatch refusal",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=sri",
+      "type": "official_security_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey update metadata - @updateURL, @downloadURL, @version and disabled checks",
+      "url": "https://www.tampermonkey.net/documentation.php?locale=en&q=update_url",
+      "type": "official_api_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey FAQ Q303 - manual and remote userscript/@require blacklist scope and controls",
+      "url": "https://www.tampermonkey.net/faq.php?locale=en&q=Q303",
+      "type": "official_security_documentation",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey privacy policy - extension statistics, Matomo error reports, controls and incognito qualification",
+      "url": "https://www.tampermonkey.net/privacy.php?locale=en",
+      "type": "official_privacy_policy",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey EULA - current proprietary freeware licence, use scope and redistribution restrictions",
+      "url": "https://www.tampermonkey.net/eula.php?locale=en",
+      "type": "official_license",
+      "publisher": "Jan Biniok / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey historical repository README - source stops at 2.9 and newer builds are proprietary",
+      "url": "https://raw.githubusercontent.com/Tampermonkey/tampermonkey/master/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Tampermonkey repository metadata - public historical repository origin, branch and activity fields",
+      "url": "https://api.github.com/repos/Tampermonkey/tampermonkey",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Chrome Web Store Tampermonkey listing - version 5.5.1, 4 October 2026 update and privacy declarations",
+      "url": "https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons Tampermonkey listing - version 5.5.0, permissions and All Rights Reserved label",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / Tampermonkey",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Apple App Store Tampermonkey listing - version 5.6.6243, Apple platforms and paid US distribution",
+      "url": "https://apps.apple.com/us/app/tampermonkey/id6738342400",
+      "type": "official_store_listing",
+      "publisher": "Apple App Store / Jan Biniok",
+      "accessed": "2026-11-06"
+    }
+  ]
+}

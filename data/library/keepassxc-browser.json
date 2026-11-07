@@ -1,0 +1,236 @@
+{
+  "id": "keepassxc-browser",
+  "name": "KeePassXC-Browser",
+  "type": "application",
+  "summary": "Browser companion to the KeePassXC desktop password manager, using an authorised Native Messaging association for URL-matched credentials, autofill, TOTP and passkeys, with distinct Chromium MV3 and Firefox MV2 packages.",
+  "tags": [
+    "browser extension",
+    "password manager",
+    "keepassxc",
+    "native messaging",
+    "autofill",
+    "totp",
+    "passkeys",
+    "local database",
+    "manifest v2",
+    "manifest v3",
+    "url matching",
+    "public source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome",
+    "Chromium",
+    "Firefox",
+    "Tor Browser",
+    "Microsoft Edge",
+    "Vivaldi",
+    "Brave"
+  ],
+  "license": "GPL-3.0 for KeePassXC-Browser; the KeePassXC desktop application is a separate work with its own licence scope",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "KeePassXC-Browser connects a supported browser to the KeePassXC desktop password manager. It is not a stand-alone vault: KeePassXC, an accessible database and a successful browser association are required before credentials can be retrieved. The current extension release is 1.10.4.1, while the separately released desktop application is 2.8.0; the extension package declares KeePassXC 2.6.0 as its minimum compatible application version. After the user enables integration and authorises a named connection, the extension can find entries for a site, fill login forms, generate passwords, save or update credentials, and use capabilities such as TOTP and passkeys. Chromium and Firefox packages share that version number but use different extension architectures. Access prompts, URL rules, database locking and local Native Messaging configuration are therefore part of the product's normal security and usability model, not incidental setup details.",
+    "origin_and_history": "The KeePassXC Team maintains the extension in the public keepassxreboot/keepassxc-browser repository, created on 27 December 2017, separately from the KeePassXC desktop repository. This separation matters because an application release does not automatically describe the browser client. Extension release 1.10.4.1 was published on 2 October 2026, and the Chrome, Firefox and Edge listings displayed that version when checked. KeePassXC 2.8.0 followed on 21 October as a desktop release with its own packages. The extension's protocol and documentation have developed beyond basic password filling to include association keys, additional entry URLs, TOTP, passkeys and database/group operations. Repository activity observed in late October and November 2026 indicates continued development, but supplies neither a guaranteed release interval nor evidence that every browser channel contains byte-identical code.",
+    "rendering_engine_and_technical_architecture": "The extension has no rendering engine of its own. Browser content scripts recognise fields and provide filling interfaces, while background code keeps connection state, local settings and association material. Native Messaging then starts a local KeePassXC proxy process. In the inspected KeePassXC 2.8.0 source, that proxy reads framed messages from standard input, forwards them through a QLocalSocket to the running application, and writes socket responses to standard output. The documented protocol associates a browser key with a database and encrypts protocol messages; KeePassXC remains responsible for database access. This chain is deliberately different from a cloud password client and from a browser-only encrypted file. It also creates several failure boundaries: the browser, proxy, local socket, application, association and database must all be available. Encryption and a native process do not by themselves sandbox a malicious page or make every local process trustworthy.",
+    "interface_and_documented_features": "The toolbar icon distinguishes a disconnected application, an unassociated current database, a locked database and a ready connection; a numeric badge reports matching credentials. On a recognised login form, the user can choose an entry through the field icon, generate a password from the context menu, and add or update an entry after submission. Protocol actions also cover TOTP retrieval, passkey registration or assertion, groups and Auto-Type requests where the desktop application supports them. The inspected 1.10.4.1 package enables automatic credential retrieval by default but leaves automatic form submission disabled, two behaviours that should not be conflated. Additional fields can be mapped through KPH attributes and custom field selection. A KeePassXC access dialog can require the user to select credentials and choose Allow Selected, optionally remembering the decision. These features still depend on entry data, page structure and current policy.",
+    "installation_and_distribution": "Official extension channels are the Chrome Web Store, Firefox Add-ons and Microsoft Edge Add-ons, with Chromium-compatible browsers using the appropriate Chromium package. Installation alone is insufficient. In KeePassXC, the user enables Browser Integration, selects the relevant browsers, unlocks the database and opens or restarts the browser. Choosing Connect in the extension prompts for a unique name for that browser/database association, followed by Save and allow access. This is a local authorisation workflow, not creation of a KeePassXC cloud account. Reusing a connection name in the same database overwrites the previous browser connection and can prevent access. Native Messaging host files must also be installed in locations recognised by the browser. Managed Edge deployments and custom browsers can require explicit host configuration, so a store install and a working integration are separate milestones.",
+    "platforms_and_hardware_architectures": "The inspected 1.10.4.1 Chromium ZIP is Manifest V3, uses a service worker and declares Chrome 124 or later. The Firefox ZIP is Manifest V2 with background scripts and declares Gecko 115 or later. Official documentation lists Chrome, Chromium, Firefox, Tor Browser, Edge, Vivaldi and Brave; it does not establish an equivalent Safari or mobile offering. WebExtension code has no native CPU requirement, but the KeePassXC desktop dependency does have operating-system packages and processor builds of its own. On Linux, Snap and Flatpak browsers are generally unsupported for this integration, with Ubuntu's Firefox Snap documented as the current exception. Custom Browser configuration is offered on Linux and macOS. Separate browser profiles normally need their own association and Native Messaging visibility. KeePassXC 2.8.0 source also supports searching all open, associated databases when that option is enabled; otherwise it searches the current database.",
+    "extensions_and_add_on_store": "KeePassXC-Browser does not contain a general marketplace for executable plug-ins. Its own browser stores distribute and update the extension, while the public protocol is an integration boundary between the browser client and KeePassXC. Entry-level additional URLs, custom KPH fields, group restrictions and site preferences configure behaviour without becoming third-party browser add-ons. KeePassXC's desktop plug-in decisions, other password-manager clients and unrelated KeePass-compatible extensions are outside this entry. The limited surface is significant for a credential tool: installing another extension that claims KeePassXC compatibility does not give it the same association, permissions or trustworthiness. Users should review the exact publisher and package, then authorise only the intended browser connection. Native Messaging should likewise be understood as a local communication mechanism, not as an app store or a guarantee that every program able to reach it is safe.",
+    "privacy_and_security_model": "The extension handles unusually sensitive data and requests broad page access in addition to nativeMessaging, navigation, storage and related browser capabilities. The Chromium and Firefox manifests are not permission-identical, but both can interact with login pages across sites. KeePassXC's privacy policy describes local processing rather than a vendor-hosted password service; optional favicon retrieval and version checks can still create network requests, and a user may separately choose external database synchronisation. Association keys and remembered site decisions alter who or what can retrieve entries, so they deserve the same care as the database itself. Access confirmation can limit disclosure, while a permissive always-allow setting or overly broad URL rule increases exposure. Filling credentials into a lookalike or compromised page remains a user and matching risk. The protocol's encrypted messages do not provide absolute endpoint security, and this review did not independently audit the cryptography or the desktop application's database protection.",
+    "update_channels_and_release_cadence": "Extension updates arrive through browser stores or the extension's GitHub release assets; KeePassXC desktop updates use the application's own download and release channels. Their version numbers and dates must not be synchronised artificially. Release 1.10.4.1 appeared on 2 October 2026, whereas KeePassXC 2.8.0 appeared on 21 October. The extension can check a KeePassXC release endpoint when its update-check setting allows that request, which is distinct from updating the extension or synchronising credentials. The two inspected release ZIPs matched the SHA-256 digests declared by GitHub, but were not compared byte-for-byte with store-served packages. Recent repository activity does not establish a fixed cadence or a guarantee that an older association will survive every future browser, proxy or protocol change. Database locking, cloud/file synchronisation and software updates are three separate operations with different failure modes.",
+    "licensing_and_governance": "The extension repository provides the GNU General Public License version 3 text and is identified as GPL-3.0; that statement applies here to KeePassXC-Browser, not indiscriminately to every KeePass-family project or to the desktop application's complete dependency tree. KeePassXC is governed and released separately, with its own licence files and third-party components. Public source, release metadata and the protocol document make the integration inspectable, but do not turn this catalogue entry into a legal review or security certification. Browser-store labels are useful channel metadata rather than a substitute for file-level licence scope. Users redistributing modified packages should read the actual source notices and preserve the distinction between the extension, desktop application and bundled libraries.",
+    "limitations_and_scope": "A disconnected proxy, stopped application, locked or unassociated database prevents normal retrieval; Reload cannot substitute for unlocking or authorisation. Form detection and filling vary with unusual controls, dynamically rendered pages and cross-origin frames, and the 1.10.4.1 release specifically includes restrictions in that area. URL matching is more than a simple string comparison: KeePassXC 2.8.0 considers entry and site hosts, optional scheme and port rules, additional URLs and wildcards, with wildcard support documented from 2.7.10. Incorrect URLs can therefore cause either missing or undesired matches. Multiple databases require attention to association and to the search-all-databases option. Snap, Flatpak and managed-browser restrictions can break otherwise correct setups. No real browser/desktop pairing, autofill, passkey, TOTP, multi-profile or multi-database workflow was executed here. Static manifests and source readings establish declared mechanisms, not universal compatibility, signature validity, store-package identity or an independent security outcome.",
+    "who_is_it_for": "KeePassXC-Browser suits people who already keep credentials in KeePassXC and want browser filling without moving their vault to a browser-only or hosted account model. It is useful for generating unique passwords, selecting among several matching entries, saving new logins and using desktop-backed TOTP or passkeys where supported. Users with several browsers can name and manage separate associations, while administrators can deploy explicit Native Messaging configuration where policy requires it. It rewards careful maintenance of entry URLs, review of access prompts and a clear understanding of locked versus connected states. People comfortable granting page and native-process permissions in exchange for local desktop integration will benefit most, especially if they test important sites and retain manual KeePassXC Auto-Type or copy workflows as a fallback.",
+    "who_is_it_not_for": "This is not appropriate for someone seeking an autonomous browser vault, a cloud account with device sync provided by the extension, or an officially documented Safari/mobile equivalent. Users unable to install or run the KeePassXC desktop application and its Native Messaging proxy will not obtain the core workflow. Those unwilling to grant broad site access or to manage local associations should consider a narrower manual process. It is also a poor fit for anyone expecting automatic submission on every form, flawless handling of dynamic frames, unrestricted Snap/Flatpak integration or guaranteed matching from incomplete entry URLs. On shared or tightly managed machines, the required native host configuration and credential permissions may be unacceptable. A current independent assurance requirement cannot be satisfied by these static package and documentation checks alone.",
+    "verdict": "KeePassXC-Browser is a focused companion that brings KeePassXC entries into supported browsers while leaving database custody and unlock behaviour in the desktop application. Its strengths are explicit association, selectable credential access, flexible URL rules, password generation and support for newer authentication workflows. Its costs are a multi-component setup, broad browser permissions and sensitivity to database, proxy, browser and page state. Version 1.10.4.1 is current across the checked extension channels, but Chromium MV3 and Firefox MV2 are materially different packages, and KeePassXC 2.8.0 remains a separate release. The design is compelling for users committed to KeePassXC who will configure associations and matching carefully. It should never be presented as a stand-alone password manager, as proof that Native Messaging is inherently secure, or as an integration whose autofill and compatibility were independently exercised by this review."
+  },
+  "links": {
+    "getting_started": "https://keepassxc.org/docs/KeePassXC_GettingStarted.html",
+    "browser_integration_2_8_0": "https://raw.githubusercontent.com/keepassxreboot/keepassxc/2.8.0/docs/topics/BrowserIntegration.adoc",
+    "extension_readme": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/README.md",
+    "protocol": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/keepassxc-protocol.md",
+    "chromium_source_manifest": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/dist/manifest_chromium.json",
+    "firefox_source_manifest": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/dist/manifest_firefox.json",
+    "extension_client_actions": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/keepassxc-browser/background/keepass.js",
+    "extension_default_settings": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/keepassxc-browser/background/page.js",
+    "native_messaging_proxy_2_8_0": "https://raw.githubusercontent.com/keepassxreboot/keepassxc/2.8.0/src/proxy/NativeMessagingProxy.cpp",
+    "browser_service_2_8_0": "https://raw.githubusercontent.com/keepassxreboot/keepassxc/2.8.0/src/browser/BrowserService.cpp",
+    "browser_settings_2_8_0": "https://raw.githubusercontent.com/keepassxreboot/keepassxc/2.8.0/src/browser/BrowserSettings.cpp",
+    "privacy_policy": "https://keepassxc.org/privacy/",
+    "desktop_download": "https://keepassxc.org/download/",
+    "extension_license": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/LICENSE",
+    "extension_repository_metadata": "https://api.github.com/repos/keepassxreboot/keepassxc-browser",
+    "desktop_repository_metadata": "https://api.github.com/repos/keepassxreboot/keepassxc",
+    "release_1_10_4_1_metadata": "https://api.github.com/repos/keepassxreboot/keepassxc-browser/releases/tags/1.10.4.1",
+    "desktop_2_8_0_release_metadata": "https://api.github.com/repos/keepassxreboot/keepassxc/releases/tags/2.8.0",
+    "chromium_1_10_4_1_package": "https://github.com/keepassxreboot/keepassxc-browser/releases/download/1.10.4.1/keepassxc-browser_1.10.4.1_chromium.zip",
+    "firefox_1_10_4_1_package": "https://github.com/keepassxreboot/keepassxc-browser/releases/download/1.10.4.1/keepassxc-browser_1.10.4.1_firefox.zip",
+    "chrome_listing": "https://chromewebstore.google.com/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/",
+    "edge_listing": "https://microsoftedge.microsoft.com/addons/detail/keepassxcbrowser/pdffhmdngciaglkoonimfcmckehcpafo"
+  },
+  "sources": [
+    {
+      "title": "KeePassXC Getting Started - required desktop application, browser association, icon states and credential confirmation",
+      "url": "https://keepassxc.org/docs/KeePassXC_GettingStarted.html",
+      "type": "official_usage_documentation",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC 2.8.0 Browser Integration guide - setup, entry URLs, wildcards, multi-browser and OS-specific configuration",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc/2.8.0/docs/topics/BrowserIntegration.adoc",
+      "type": "official_versioned_documentation",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser README - desktop dependency, supported browsers, protocol and installation scope",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser protocol - association, encrypted Native Messaging messages and browser actions",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/keepassxc-protocol.md",
+      "type": "official_protocol_documentation",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser Chromium source manifest - MV3 background and nativeMessaging permission model",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/dist/manifest_chromium.json",
+      "type": "official_source_manifest",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser Firefox source manifest - MV2 background, Gecko minimum and permissions",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/dist/manifest_firefox.json",
+      "type": "official_source_manifest",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser keepass.js - KeePassXC 2.6.0 minimum, association and credential/TOTP/passkey actions",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/keepassxc-browser/background/keepass.js",
+      "type": "official_source_code",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser page.js - local settings, automatic credential retrieval and no automatic submission defaults",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/keepassxc-browser/background/page.js",
+      "type": "official_source_code",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC 2.8.0 NativeMessagingProxy.cpp - STDIN/STDOUT proxy and local-socket transport",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc/2.8.0/src/proxy/NativeMessagingProxy.cpp",
+      "type": "official_versioned_source_code",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC 2.8.0 BrowserService.cpp - access decisions, URL matching, unlocked databases and association keys",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc/2.8.0/src/browser/BrowserService.cpp",
+      "type": "official_versioned_source_code",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC 2.8.0 BrowserSettings.cpp - access, scheme, multi-database and custom-proxy settings",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc/2.8.0/src/browser/BrowserSettings.cpp",
+      "type": "official_versioned_source_code",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC privacy policy - local processing and optional favicon/version-check network statements",
+      "url": "https://keepassxc.org/privacy/",
+      "type": "official_privacy_policy",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC official download page - separate desktop application and operating-system packages",
+      "url": "https://keepassxc.org/download/",
+      "type": "official_distribution_documentation",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser LICENSE - GNU General Public License version 3 text",
+      "url": "https://raw.githubusercontent.com/keepassxreboot/keepassxc-browser/develop/LICENSE",
+      "type": "official_license",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser repository metadata - develop branch, creation, activity and archive status",
+      "url": "https://api.github.com/repos/keepassxreboot/keepassxc-browser",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC repository metadata - separate desktop repository, activity and licence metadata",
+      "url": "https://api.github.com/repos/keepassxreboot/keepassxc",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser 1.10.4.1 release metadata - 2 October 2026 publication and browser assets",
+      "url": "https://api.github.com/repos/keepassxreboot/keepassxc-browser/releases/tags/1.10.4.1",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC 2.8.0 release metadata - separate desktop release published 21 October 2026",
+      "url": "https://api.github.com/repos/keepassxreboot/keepassxc/releases/tags/2.8.0",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser 1.10.4.1 Chromium ZIP - statically inspected MV3 manifest and declared-digest match",
+      "url": "https://github.com/keepassxreboot/keepassxc-browser/releases/download/1.10.4.1/keepassxc-browser_1.10.4.1_chromium.zip",
+      "type": "official_distribution_package",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "KeePassXC-Browser 1.10.4.1 Firefox ZIP - statically inspected MV2 manifest and declared-digest match",
+      "url": "https://github.com/keepassxreboot/keepassxc-browser/releases/download/1.10.4.1/keepassxc-browser_1.10.4.1_firefox.zip",
+      "type": "official_distribution_package",
+      "publisher": "KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Chrome Web Store KeePassXC-Browser listing - version 1.10.4.1 and 4 October 2026 channel update",
+      "url": "https://chromewebstore.google.com/detail/keepassxc-browser/oboonakemofpalcgghocfoadofidjkkk",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons KeePassXC-Browser listing - version 1.10.4.1 and Firefox 115 minimum",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / KeePassXC Team",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Edge KeePassXC-Browser listing - current 1.10.4.1 channel",
+      "url": "https://microsoftedge.microsoft.com/addons/detail/keepassxcbrowser/pdffhmdngciaglkoonimfcmckehcpafo",
+      "type": "official_store_listing",
+      "publisher": "Microsoft Edge Add-ons / KeePassXC Team",
+      "accessed": "2026-11-06"
+    }
+  ]
+}

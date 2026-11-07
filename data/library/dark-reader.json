@@ -1,0 +1,250 @@
+{
+  "id": "dark-reader",
+  "name": "Dark Reader",
+  "type": "application",
+  "summary": "Customisable dark-theme extension with Dynamic, Filter, Filter+ and Static engines, global and per-site settings, multiple MV2/MV3 packages, documented rendering limits and functional network paths that rule out an absolute offline claim.",
+  "tags": [
+    "browser extension",
+    "dark mode",
+    "dynamic theme",
+    "css filters",
+    "static theme",
+    "per-site settings",
+    "site fixes",
+    "accessibility",
+    "manifest v2",
+    "manifest v3",
+    "thunderbird",
+    "open source"
+  ],
+  "status": "active",
+  "platforms": [
+    "Chrome",
+    "Firefox",
+    "Microsoft Edge",
+    "Thunderbird",
+    "Safari on macOS, iOS and iPadOS"
+  ],
+  "license": "MIT License",
+  "last_verified": "2026-11-06",
+  "content": {
+    "introduction": "Dark Reader is an MIT-licensed extension that generates alternative colour schemes for web pages instead of relying solely on a site's own dark mode. It offers Dynamic, Filter, Filter+ and Static theme engines, brightness and contrast controls, per-site overrides, inclusion or exclusion lists, font settings and developer tools for site-specific fixes. Dynamic is the default and analyses page styling in depth; the other engines trade different rendering characteristics for simplicity or speed. GitHub's current release is 4.9.135, but Chrome displayed 4.9.134 and Thunderbird 4.9.131 when checked, while Firefox and Edge displayed 4.9.135. Safari uses a separate 1.5.x App Store line. Dark Reader can make bright pages more comfortable and expose useful accessibility choices, but no engine renders every site correctly. Protected pages, initial white flashes, already-dark content, complex styles and performance costs remain practical considerations. Its privacy policy also should not be shortened to “no network”: the code contains news, optional configuration-sync and resource-loading paths.",
+    "origin_and_history": "The project began under Alexander Shutau and is now published by Dark Reader Ltd. Its repository was created on 15 November 2014; that date describes the repository, not a precisely reconstructed first public release. The README presents the extension as a continuing response to changing web technologies and separately documents a JavaScript API for websites, which should not be confused with the browser-extension packages described here. Development includes theme engines, site-fix configuration, browser-specific manifests and localisations. GitHub published 4.9.135 on 6 November 2026, and repository metadata recorded a push on the same day with the project not archived. Releases can be frequent, but these observations do not establish a guaranteed cadence. Distribution has also diversified: Chrome has both MV2 and MV3 assets, Firefox and Thunderbird retain MV2 packages, and Safari follows a distinct product and versioning path rather than simply receiving the same numbered ZIP.",
+    "rendering_engine_and_technical_architecture": "Dark Reader operates inside the host browser and does not replace its rendering engine. Dynamic theme code analyses stylesheets, inline styles, background images and vector graphics, then injects and updates modified styling as the page changes. Filter applies CSS inversion to the whole page and reverses selected elements; Filter+ uses custom SVG filters for different colour handling; Static rapidly generates a more basic stylesheet. The inspected 4.9.135 Chrome MV3 package uses a service worker, a MAIN-world proxy, isolated content scripts at document start and a later colour-scheme watcher. Its MV2 counterpart uses a persistent background page and fewer script-world distinctions. Firefox also splits fallback and injection code between MAIN and ISOLATED worlds but remains MV2. These are meaningful architectural differences, not cosmetic manifest labels. The source default is Dynamic with dark mode, brightness and contrast at 100, and grayscale and sepia at zero. No rendering-quality or performance benchmark was performed for this entry.",
+    "interface_and_documented_features": "The toolbar provides global on/off and current-site toggles, with shortcuts for common actions. Filter controls adjust brightness, contrast, sepia and grayscale; an “Only for” control scopes those settings to the current site instead of changing the global theme. Users can select fonts and text stroke, choose the generation engine and create site-specific fixes through developer tools. The site list supports two opposite models: “Invert listed only” restricts operation to listed addresses, while “Not invert listed” excludes them. Patterns can cover domains, subdomains and paths, and slash-delimited regular expressions are supported. Dark Reader can also detect sites that already have a dark theme, a default-enabled setting that may leave such pages unchanged. Built-in overrides select Filter for several Office and Google applications, illustrating why a global default is not the whole configuration. System-scheme automation and optional context actions add convenience, but conflicting darkening extensions can make the final rendering difficult to diagnose.",
+    "installation_and_distribution": "The README links official Chrome, Firefox, Edge, Thunderbird and Safari distribution routes, as well as source builds. On 6 November 2026, GitHub and Firefox identified 4.9.135, Edge displayed 4.9.135, Chrome displayed 4.9.134 updated on 27 October, and Thunderbird displayed 4.9.131 from 14 September. GitHub's 4.9.135 release contains Chrome MV3, Chrome MV2, Firefox XPI and Thunderbird XPI assets; this review downloaded and inspected their manifests without executing them. It did not establish that any store package is byte-identical to those assets, and a store page alone does not reveal which Chrome architecture it serves. Safari is distributed as Dark Reader for Safari through Apple's App Store and displayed version 1.5.10, a separate line from 4.9.x. Official stores normally provide browser-managed updates, whereas manual ZIP or XPI installation requires deliberate package and provenance checks.",
+    "platforms_and_hardware_architectures": "The principal targets are Chrome and other compatible Chromium browsers, Firefox, Edge, Thunderbird, and Safari on Apple platforms. There is no native CPU matrix; practical compatibility comes from WebExtension APIs and the host application. The inspected Chrome MV3 package declares Chrome 106 or later, while the MV2 asset has no equivalent minimum in its manifest. Firefox requires Gecko 78 or later and includes a Gecko Android section, although that declaration was not runtime-tested. Thunderbird's source and store metadata identify 78.0a1 or later and add message-modification access for email content. Safari requires its own App Store bundle: Apple's metadata lists iOS or iPadOS 15 and macOS 11 minima, while the project's Safari page uses different macOS wording, so the current device store check is safer than inferring compatibility from the desktop repository. Browser store pages, protected internal pages and some local or private contexts remain subject to host restrictions.",
+    "extensions_and_add_on_store": "Dark Reader does not provide an internal marketplace for arbitrary executable add-ons. Its customisation points are themes, URL lists, presets and site-fix configuration rather than third-party plug-ins. Developer tools can edit dynamic-theme fixes, inversion fixes and static themes for particular selectors. Releases bundle configuration for dark-site detection, theme fixes, static themes, colour schemes and detector hints. Optional synchronisation can retrieve updated versions of those files between packages, but it is disabled by default; the README explains that automatic global synchronisation was discontinued rather than presenting GitHub as a free CDN. The separate Dark Reader JavaScript API lets a website invoke theme generation itself, but that API is not an extension-store plug-in mechanism and is outside this entry's package scope. Browser stores remain the distribution channels for the extension. Community fixes can improve individual sites without implying universal coverage, and local edits should be reviewed before being shared or applied broadly.",
+    "privacy_and_security_model": "Broad site access is intrinsic to analysing and modifying page appearance. The inspected Chrome MV3 package requests alarms, fontSettings, scripting and storage with HTTP/HTTPS host access, plus optional context menus. The MV2 Chrome package instead includes tabs and all URLs with a persistent background page; Firefox adds theme and context-menu capabilities, while Thunderbird adds messagesModify. Dark Reader's privacy policy declares that the extension does not collect personal data or browsing history, describes Sync/Local storage and localStorage for settings and fixes, and says possible future technical data would require permission. That is a publisher policy, not an independent infrastructure audit or a statement that no requests occur. By default, fetchNews is enabled and the background code retrieves darkreader.org/blog/posts.json, initially and through a four-hour alarm. Optional site-fix sync retrieves configuration from GitHub with local fallback. Theme generation can also fetch CSS or image resources needed for rendering; cross-origin requests omit credentials in the inspected network helper. These functional connections are not proof of history collection, but they make an absolute “never sends anything anywhere” claim inaccurate.",
+    "update_channels_and_release_cadence": "Package updates, bundled site fixes, optional remote fixes and news are separate mechanisms. Store and GitHub versions can differ, as the 4.9.134 Chrome and 4.9.131 Thunderbird listings demonstrate beside 4.9.135 elsewhere. A new release incorporates accumulated configuration changes. If synchronise-site-fixes is enabled, ConfigManager instead requests the remote configuration set with a cache-busting query and a ten-second timeout, then falls back to packaged files after a failure. With the default disabled setting, it loads local configuration. News retrieval has its own default-enabled switch and does not establish that theme rules are being updated. Repository activity on 6 November 2026 confirms current development activity but not a fixed release schedule or the freshness of every store package. This review inspected those code paths and release manifests; it did not trigger a browser update, measure propagation delay or capture network traffic. Users should therefore check both the numeric package version and the architecture offered by their chosen channel.",
+    "licensing_and_governance": "The current repository contains the MIT License with a 2026 Dark Reader Ltd copyright notice, and the README likewise identifies the project as MIT-licensed. Public source permits review of theme generation, storage, network and browser-specific behaviour, while releases make the resulting packages available across several host applications. The licence's permission and disclaimer terms apply to the project's software; they do not relicense websites, fonts, images or every third-party service reached during rendering. Project governance includes public issues, discussions and contributions of code and site fixes. Safari's separately versioned App Store product and optional paid or premium offerings should not be used to infer a different licence for every repository file or to assume feature parity with the 4.9.x packages. No exhaustive licence audit of bundled dependencies was performed here. The availability of source is valuable for inspection, but it is not a rendering-quality certification or an independent privacy audit.",
+    "limitations_and_scope": "Every engine has failure modes. The documentation notes that Dynamic needs resources during initial processing, Filter depends on GPU behaviour and can disable sub-pixel text rendering, invert already-dark areas or lag on large pages, and Filter+ works poorly in Firefox. Static is simpler and less tailored. Dark-site detection can be wrong, custom fixes can become stale, and another darkening extension can conflict with the output. Browser store and settings pages may remain white because scripts cannot be injected there; selecting a browser theme is a separate task. A white flash can occur before the extension modifies a newly loaded page. Local files and private browsing may require explicit permission, and protected pages are not universally supported. The documentation itself acknowledges incorrect display and slow sites. No website corpus, visual comparison, memory profile or frame-rate measurement was performed in this phase, so claims of superior quality or performance remain engine-specific documentation rather than independently measured results.",
+    "who_is_it_for": "Dark Reader suits people who need a darker or differently balanced presentation on sites that do not provide a suitable native theme. Its per-site settings are valuable when one global recipe produces poor results, and inclusion or exclusion lists support both broad and highly selective use. Users sensitive to bright pages can experiment with Dynamic, Filter or Static while retaining a quick site toggle. Advanced users can tune colours, fonts and text stroke, follow system appearance, or contribute a narrow site fix instead of waiting for a global workaround. Thunderbird users have a distinct package for message display, while Safari users can choose the separate Apple product. The extension is most effective for someone willing to test a few engine and site combinations, review broad page access and understand that optional sync, news and resource requests are different from the publisher's data-collection policy.",
+    "who_is_it_not_for": "Dark Reader is not for users who expect a universal, perfectly accurate dark mode with no visual or performance trade-offs. People working with colour-critical design, image editing, medical imagery or detailed data visualisation should verify output rather than assuming transformed colours preserve intent. Those who only want a site's native theme may prefer to use that native option and avoid broad extension access. It is also unsuitable as a privacy or anonymity tool: it does not hide browsing activity, and its code contains functional network requests. Users unable to permit all-site modification, or administrators who must certify exact rendering and package provenance, need additional testing. Anyone expecting the same version and feature set on Chrome, Firefox, Thunderbird and Safari should reconsider, because architectures, store versions and product lines differ. A person unwilling to troubleshoot an occasional broken or slow page may find a native site or browser theme less intrusive.",
+    "verdict": "Dark Reader is a mature, highly configurable approach to web-page darkening, with four distinct engines and unusually useful global and per-site controls. Dynamic offers deep style processing, while Filter, Filter+ and Static provide alternatives with their own documented weaknesses. The inspected 4.9.135 assets demonstrate real architectural diversity: Chrome MV2 and MV3, Firefox MV2 and Thunderbird MV2. Store versions are not synchronised, and Safari's 1.5.x line must remain separate. The publisher's no-personal-data declaration coexists with default news retrieval, optional remote fixes and rendering-related resource loads, so precise network language matters. Dark Reader is a strong option for users prepared to tune settings and tolerate occasional rendering problems. It should not be marketed as universally compatible, measurably fastest, entirely offline or equivalent to a native dark theme on every website."
+  },
+  "links": {
+    "help_and_engine_guide": "https://darkreader.org/help/en/",
+    "privacy_policy": "https://darkreader.org/privacy/",
+    "safari_product_guide": "https://darkreader.org/safari/",
+    "safari_listing": "https://apps.apple.com/us/app/dark-reader-for-safari/id1438243180",
+    "readme": "https://raw.githubusercontent.com/darkreader/darkreader/main/README.md",
+    "license": "https://raw.githubusercontent.com/darkreader/darkreader/main/LICENSE",
+    "default_settings": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/defaults.ts",
+    "configuration_manager": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/background/config-manager.ts",
+    "news_retrieval": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/background/newsmaker.ts",
+    "background_startup_and_settings": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/background/extension.ts",
+    "network_endpoints": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/utils/links.ts",
+    "resource_network_helper": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/utils/network.ts",
+    "chrome_mv3_manifest": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/manifest-chrome-mv3.json",
+    "firefox_manifest": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/manifest-firefox.json",
+    "thunderbird_manifest": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/manifest-thunderbird.json",
+    "repository_metadata": "https://api.github.com/repos/darkreader/darkreader",
+    "release_4_9_135_metadata": "https://api.github.com/repos/darkreader/darkreader/releases/tags/v4.9.135",
+    "chrome_mv3_4_9_135_package": "https://github.com/darkreader/darkreader/releases/download/v4.9.135/darkreader-chrome-mv3.zip",
+    "chrome_mv2_4_9_135_package": "https://github.com/darkreader/darkreader/releases/download/v4.9.135/darkreader-chrome.zip",
+    "firefox_4_9_135_package": "https://github.com/darkreader/darkreader/releases/download/v4.9.135/darkreader-firefox.xpi",
+    "thunderbird_4_9_135_package": "https://github.com/darkreader/darkreader/releases/download/v4.9.135/darkreader-thunderbird.xpi",
+    "chrome_listing": "https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh",
+    "firefox_listing": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
+    "edge_listing": "https://microsoftedge.microsoft.com/addons/detail/dark-reader/ifoakfbpdcdoeenechcleahebpibofpc",
+    "thunderbird_listing": "https://addons.thunderbird.net/en-US/thunderbird/addon/darkreader/"
+  },
+  "sources": [
+    {
+      "title": "Dark Reader help - engines, global and per-site settings, URL patterns, permissions and rendering limitations",
+      "url": "https://darkreader.org/help/en/",
+      "type": "official_usage_documentation",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader privacy policy - collection declaration, technical-data condition, storage and payment/site separation",
+      "url": "https://darkreader.org/privacy/",
+      "type": "official_privacy_policy",
+      "publisher": "Dark Reader Ltd",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader Safari guide - separate Apple product, per-site themes and Safari-specific issues",
+      "url": "https://darkreader.org/safari/",
+      "type": "official_platform_documentation",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader for Safari App Store listing - separate 1.5.10 version line and Apple compatibility metadata",
+      "url": "https://apps.apple.com/us/app/dark-reader-for-safari/id1438243180",
+      "type": "official_store_listing",
+      "publisher": "Apple App Store / Dark Reader Ltd",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader README - store links, build targets, JavaScript API distinction and site-fix sync status",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/README.md",
+      "type": "official_repository_documentation",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader MIT licence text and 2026 Dark Reader Ltd copyright notice",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/LICENSE",
+      "type": "official_license",
+      "publisher": "Dark Reader Ltd",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader defaults - Dynamic engine, dark-mode values, dark-site detection and sync switches",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/defaults.ts",
+      "type": "official_source_code",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader ConfigManager - local versus remote fix loading, ten-second timeout and fallback",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/background/config-manager.ts",
+      "type": "official_source_code",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader Newsmaker - news retrieval and four-hour update alarm",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/background/newsmaker.ts",
+      "type": "official_source_code",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader background startup - fetchNews subscription and settings-dependent behaviour",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/background/extension.ts",
+      "type": "official_source_code",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader endpoint definitions - darkreader.org news and GitHub configuration URLs",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/utils/links.ts",
+      "type": "official_source_code",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader resource-network helper - CSS/image retrieval, credential handling and cross-origin limits",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/utils/network.ts",
+      "type": "official_source_code",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader Chrome MV3 source manifest - service worker, script worlds, permissions and Chrome 106 minimum",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/manifest-chrome-mv3.json",
+      "type": "official_source_manifest",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader Firefox source manifest - MV2 background, Gecko 78 minimum and Firefox permissions",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/manifest-firefox.json",
+      "type": "official_source_manifest",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader Thunderbird source manifest - MV2, message modification and Gecko 78.0a1 minimum",
+      "url": "https://raw.githubusercontent.com/darkreader/darkreader/main/src/manifest-thunderbird.json",
+      "type": "official_source_manifest",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader repository metadata - creation date, main branch, archive status and last push",
+      "url": "https://api.github.com/repos/darkreader/darkreader",
+      "type": "official_repository_metadata",
+      "publisher": "GitHub / Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader v4.9.135 release metadata - 6 November 2026 publication and browser-specific assets",
+      "url": "https://api.github.com/repos/darkreader/darkreader/releases/tags/v4.9.135",
+      "type": "official_release_metadata",
+      "publisher": "GitHub / Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader 4.9.135 Chrome MV3 ZIP - statically inspected manifest and declared-digest match",
+      "url": "https://github.com/darkreader/darkreader/releases/download/v4.9.135/darkreader-chrome-mv3.zip",
+      "type": "official_distribution_package",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader 4.9.135 Chrome MV2 ZIP - statically inspected persistent-background manifest",
+      "url": "https://github.com/darkreader/darkreader/releases/download/v4.9.135/darkreader-chrome.zip",
+      "type": "official_distribution_package",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader 4.9.135 Firefox XPI - statically inspected MV2 manifest and declared-digest match",
+      "url": "https://github.com/darkreader/darkreader/releases/download/v4.9.135/darkreader-firefox.xpi",
+      "type": "official_distribution_package",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Dark Reader 4.9.135 Thunderbird XPI - statically inspected MV2 and messagesModify manifest",
+      "url": "https://github.com/darkreader/darkreader/releases/download/v4.9.135/darkreader-thunderbird.xpi",
+      "type": "official_distribution_package",
+      "publisher": "Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Chrome Web Store Dark Reader listing - version 4.9.134 and 27 October 2026 channel update",
+      "url": "https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh",
+      "type": "official_store_listing",
+      "publisher": "Chrome Web Store / Dark Reader Ltd",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Firefox Add-ons Dark Reader listing - version 4.9.135 and permission summary",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/darkreader/",
+      "type": "official_store_listing",
+      "publisher": "Mozilla Add-ons / Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Edge Dark Reader listing - version 4.9.135 and separate Plus description",
+      "url": "https://microsoftedge.microsoft.com/addons/detail/dark-reader/ifoakfbpdcdoeenechcleahebpibofpc",
+      "type": "official_store_listing",
+      "publisher": "Microsoft Edge Add-ons / Dark Reader project",
+      "accessed": "2026-11-06"
+    },
+    {
+      "title": "Thunderbird Add-ons Dark Reader listing - version 4.9.131 and 14 September 2026 channel update",
+      "url": "https://addons.thunderbird.net/en-US/thunderbird/addon/darkreader/",
+      "type": "official_store_listing",
+      "publisher": "Thunderbird Add-ons / Dark Reader project",
+      "accessed": "2026-11-06"
+    }
+  ]
+}
