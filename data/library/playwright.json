@@ -1,0 +1,92 @@
+{
+  "id": "playwright",
+  "name": "Playwright",
+  "type": "framework",
+  "summary": "Playwright is a Microsoft open-source framework for web testing and browser automation: it drives Chromium, Firefox and WebKit (including patched builds) from Node.js, Python, Java or .NET APIs, with an end-to-end test runner, per-test browser-context isolation, auto-waiting assertions, tracing and device emulation. It automates browsers — it is not a browser itself.",
+  "tags": ["test automation", "end-to-end testing", "framework", "browser automation", "chromium", "firefox", "webkit", "microsoft", "open source", "apache-2.0"],
+  "status": "active",
+  "platforms": ["Windows", "macOS", "Linux"],
+  "license": "Apache-2.0",
+  "content": {
+    "introduction": "Testing a web application across real browsers is repetitive work: open a page, click, type, wait, check the result, and do it again for every browser and every device class. Playwright is a framework built to automate exactly that loop. It drives browsers programmatically, runs the same test suites across Chromium, Firefox and WebKit, and packages the whole experience — runner, assertions, reports, debugging traces — into one toolchain.",
+    "what_is_it": "Playwright's documentation introduces its testing face directly: 'Playwright Test is an end-to-end test framework for modern web apps. It bundles test runner, assertions, isolation, parallelization and rich tooling.' Underneath sits the automation layer: 'Playwright Library provides unified APIs for launching and interacting with browsers, while Playwright Test provides all this plus a fully managed end-to-end Test Runner and experience.'\n\nSo Playwright is two related things sharing one API: a library for driving browsers (launch, context, page, interact) and a test framework on top (fixtures, web-first assertions, projects, reporters). It automates browsers; it is not a browser. Its home page adds that the same capabilities are 'also available for Python, .NET, and Java', alongside the Node.js/TypeScript core.",
+    "origin_and_history": "Playwright is developed in the open in the `microsoft/playwright` repository on GitHub and distributed through npm; its LICENSE file is the Apache License 2.0. It grew out of browser-automation needs at Microsoft and is now a standalone project with its own documentation site, release notes and extension points (VS Code extension, CLI, MCP server as documented at the consultation date).\n\nA defining historical trait is its relationship to browser engines: Playwright maintains patched builds of Firefox and WebKit and open-source Chromium builds, and pins exact browser binaries for each Playwright release — 'Each version of Playwright needs specific versions of browser binaries to operate.' Those pairings move with every release and must be read from current release documentation.",
+    "architecture_and_runtime": "Playwright operates real browser engines. For Chromium it uses open-source Chromium builds 'ahead of the branded browsers' — when Chrome is at version N, Playwright already supports Chromium N+1 — and ships a separate chromium headless shell for headless runs, with an option for the newer full-Chromium headless mode. For branded browsers it can drive installed Google Chrome and Microsoft Edge through channels (stable, beta, dev, canary).\n\nTwo engine relationships are distinctive and documented explicitly: 'Playwright's Firefox version matches the recent Firefox Stable build. Playwright doesn't work with the branded version of Firefox since it relies on patches.' And 'Playwright's WebKit is derived from the latest WebKit main branch sources… Playwright doesn't work with the branded version of Safari since it relies on patches.' Patches give the automation hooks that stock browsers do not expose — at the cost of never running on the branded binaries.\n\nIsolation is architectural: 'Each test gets a fresh browser context — equivalent to a brand new browser profile.' Browser binaries are downloaded from Microsoft's CDN at install time and are version-pinned per Playwright release.",
+    "languages_and_technologies": "The primary surface is Node.js with TypeScript or JavaScript (`playwright` for the library, `@playwright/test` for the runner), installed through npm, yarn or pnpm. The documentation advertises official ports 'for Python, .NET, and Java'. APIs are asynchronous and Promise-based.\n\nThe surrounding tooling is part of the product: a CLI that installs browsers and system dependencies (`npx playwright install --with-deps`), a code generator that records browser actions into test code, a Trace Viewer with DOM snapshots and network logs, an HTML reporter, a UI mode with time-travel debugging, and a VS Code extension. System requirements (Node versions, OS floors) are version-dependent and published in the docs.",
+    "integration_in_software": "Playwright plugs into projects as a dependency. The standard path scaffolds a config file (`playwright.config`), a tests directory and browser binaries; the config declares projects — a matrix of browsers and emulated devices ('Desktop Chrome', 'iPhone', 'Pixel', branded channels) — and the runner executes each test against them, in parallel, locally or in CI. Web-first assertions auto-retry until conditions hold, and locators ('getByRole', 'getByLabel', 'getByTestId') target elements the way users perceive them.\n\nThe library form integrates Playwright into custom Node scripts or services: explicit launch, context, page lifecycle, route interception, and manual cleanup. Authentication state can be saved once and reused across tests through storage states. For regression policies that require shipping browsers, the stable `chrome`/`msedge` channels can be selected instead of the bundled Chromium — a documented trade-off (media codecs and enterprise policies differ).",
+    "security_model": "Playwright's security posture is operational rather than a product sandbox. Tests execute application code against real browsers with real capabilities — network access, downloads, permissions — so the documented safeguards are isolation and containment: a fresh browser context per test (a clean profile), route interception to block or mock requests, and separate fixtures per test with automatic cleanup. Trusted-device emulation and permission controls are part of the context options.\n\nThe documentation warns where responsibility sits: enterprise browser policies may block Playwright's control of Chrome and Edge, and 'running in an environment with browser policies is outside of the Playwright project's scope'; browser binaries are fetched from Microsoft's CDN, with documented proxy and custom-CA procedures. As a testing tool that can drive arbitrary navigation and code execution, it inherits the security properties of the pages it visits — running it against untrusted targets is the user's risk decision.",
+    "platforms_and_hardware_architectures": "Playwright runs on Windows, macOS and Linux — 'Chromium, Firefox, and WebKit on Linux, macOS, and Windows. Headless and headed.' The documented system requirements (version-dependent at consultation: Node.js 22.x/24.x/26.x, Windows 11+/Server 2019+/WSL, macOS 14+, Debian 12/13, Ubuntu 22.04/24.04/26.04, x86-64 or arm64) set the floor. Native mobile emulation covers Chrome (Android) and Mobile Safari device classes; some capabilities (media codecs in particular) vary substantially between operating systems, and the docs note the closest-to-Safari experience requires running WebKit on macOS.",
+    "licensing_and_governance": "Playwright is open source under the Apache License 2.0 (LICENSE in the `microsoft/playwright` repository). Development is public on GitHub under the Microsoft organisation, with release notes published on the documentation site. The browser builds it downloads are separate works with their own licenses (Chromium, Firefox, WebKit codebases); Playwright's patches are applied on top and distributed under its own terms.",
+    "limitations_and_scope": "Playwright is a test and automation framework, not a browser and not a general browser-security product. Its engines are pinned per release — updating Playwright means re-downloading matching browser binaries — and its Firefox and WebKit builds are patched: tests cannot target branded Firefox or Safari. Feature availability varies by operating system (codecs, IME), enterprise browser policies are out of scope, and browser downloads need network access to Microsoft's CDN (or a configured proxy).\n\nSystem requirements are version-dependent and moving (newer Node.js and OS floors over time); any concrete compatibility statement must be checked against current docs. Automation against untrusted content carries the usual risks of executing web code locally.",
+    "advantages": [
+      "One API and one test suite across Chromium, Firefox and WebKit, plus branded Chrome/Edge channels and device emulation.",
+      "Per-test isolation through fresh browser contexts, with reusable authentication state — documented as near-zero overhead by the project.",
+      "Deep tooling: codegen, Trace Viewer, HTML/UI reporters, VS Code extension, parallelism and sharding for CI.",
+      "Apache-2.0 licensing, multi-language bindings (Node.js, Python, Java, .NET) and active maintenance in the open."
+    ],
+    "disadvantages": [
+      "Patched Firefox and WebKit builds mean branded Firefox and Safari can never be tested directly — engine fidelity is documented but not identical to shipping browsers.",
+      "Exact browser binaries are pinned per Playwright release: version coupling and re-installation are part of the workflow.",
+      "Operating-system variance (codecs, platform features) complicates cross-OS parity, especially for WebKit on Linux versus macOS.",
+      "Enterprise policies, proxies and offline environments need extra configuration and are partly outside the project's scope."
+    ],
+    "who_is_it_for": [
+      "Web development teams running end-to-end tests across browsers and devices in local and CI workflows.",
+      "Automation engineers needing scripted browser control (scraping, verification, tooling) with a maintained multi-engine API.",
+      "Organisations wanting traceable test failures: traces, reports and per-test isolation as first-class features."
+    ],
+    "who_is_it_not_for": [
+      "End users: Playwright is a developer tool with no end-user interface of its own.",
+      "QA that must test branded Firefox or Safari specifically: Playwright's patched builds are not those browsers.",
+      "Non-automated or manual exploratory testing as a primary method, and environments where browser downloads or policies forbid external binaries."
+    ],
+    "verdict": "Playwright is the mainstream open-source framework for cross-browser web testing and automation: serious multi-engine coverage, real isolation semantics and unusually complete debugging tooling, maintained by Microsoft in the open under Apache-2.0. It fits teams that test web applications for a living, with eyes open about patched engines, pinned binaries and OS variance — and it remains a driver of browsers, never one of them."
+  },
+  "links": {
+    "documentation": "https://playwright.dev/docs/intro",
+    "library_vs_test": "https://playwright.dev/docs/library",
+    "browsers": "https://playwright.dev/docs/browsers",
+    "repository": "https://github.com/microsoft/playwright",
+    "license": "https://raw.githubusercontent.com/microsoft/playwright/main/LICENSE",
+    "release_notes": "https://playwright.dev/docs/release-notes",
+    "python_docs": "https://playwright.dev/python/docs/intro"
+  },
+  "sources": [
+    {
+      "title": "Playwright documentation Introduction - 'end-to-end test framework' definition, bundled runner/assertions/isolation/parallelization, Chromium-WebKit-Firefox on Windows/Linux/macOS, mobile emulation, installation, system requirements (version-dependent)",
+      "url": "https://playwright.dev/docs/intro",
+      "type": "official_documentation",
+      "publisher": "Playwright project (playwright.dev)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Playwright Library documentation - Library vs Test split ('unified APIs for launching and interacting with browsers' vs 'fully managed end-to-end Test Runner'), async API, packages",
+      "url": "https://playwright.dev/docs/library",
+      "type": "official_documentation",
+      "publisher": "Playwright project (playwright.dev)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Playwright Browsers documentation - pinned browser binaries per release; open-source Chromium builds and headless shell; branded Chrome/Edge channels; patched Firefox ('doesn't work with the branded version') and WebKit from main sources; Microsoft CDN downloads; device emulation registry",
+      "url": "https://playwright.dev/docs/browsers",
+      "type": "official_documentation",
+      "publisher": "Playwright project (playwright.dev)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Playwright home page - product surfaces (Playwright Test, CLI, MCP), test isolation via fresh browser contexts, locators, parallelism/sharding, codegen, Trace Viewer, VS Code extension, Python/.NET/Java availability",
+      "url": "https://playwright.dev/",
+      "type": "official_site",
+      "publisher": "Playwright project (playwright.dev)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Playwright LICENSE - Apache License 2.0 full text",
+      "url": "https://raw.githubusercontent.com/microsoft/playwright/main/LICENSE",
+      "type": "legal_document",
+      "publisher": "Microsoft / Playwright project (GitHub)",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}

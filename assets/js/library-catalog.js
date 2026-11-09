@@ -183,7 +183,10 @@ var LIBRARY_RESOURCES = [
   "javascriptcore",
   "cef",
   "electron",
-  "webview2"
+  "webview2",
+  "qt-webengine",
+  "playwright",
+  "web-platform-tests"
 ];
 
 (function () {
