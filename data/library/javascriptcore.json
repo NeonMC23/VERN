@@ -1,0 +1,97 @@
+{
+  "id": "javascriptcore",
+  "name": "JavaScriptCore",
+  "type": "technology",
+  "summary": "JavaScriptCore is Apple's open-source JavaScript engine and the built-in JavaScript engine of the WebKit project: it runs the JavaScript inside Safari and other WebKit-based applications, and exposes a JavaScriptCore API to macOS and iOS apps. It implements ECMAScript (ECMA-262) as an optimizing multi-tier virtual machine, while the web platform around it comes from WebKit or from the host application.",
+  "tags": ["javascript engine", "webkit", "apple", "safari", "embedded engine", "open source", "jit compiler", "virtual machine"],
+  "status": "active",
+  "platforms": ["macOS", "iOS", "Windows", "Linux"],
+  "license": "BSD-style and LGPL-2.1+",
+  "content": {
+    "introduction": "JavaScriptCore is the software component that executes JavaScript for WebKit — the open-source web engine behind Apple's Safari browser and used by many macOS and iOS applications. It reads script source, compiles it through several stages of increasingly optimized code, and manages memory automatically. The project is developed in the open as part of WebKit, and its documentation is unusually detailed about how its execution tiers work.",
+    "what_is_it": "A JavaScript engine executes JavaScript. JavaScriptCore — often abbreviated JSC — is WebKit's JavaScript engine: WebKit's documentation calls it 'the built-in JavaScript engine for WebKit, which implements ECMAScript as in ECMA-262 specification', and elsewhere simply 'WebKit's JavaScript engine'. ECMAScript is the standard behind the JavaScript language.\n\nOn Apple platforms, Apple also exposes a JavaScriptCore API to macOS and iOS applications, so app developers can evaluate JavaScript directly, outside a web view. As with every JavaScript engine, web page structure (the DOM) and web APIs come from the surrounding host — WebKit for web content, or the application itself when using the JavaScriptCore API.",
+    "origin_and_history": "JavaScriptCore lives inside the WebKit source tree (Source/JavaScriptCore) and is developed as part of the open-source WebKit project; MDN lists it as 'Apple's JavaScriptCore', used in Safari and other WebKit-based browsers.\n\nThe engine has been known by several names over time: its developers document the internal codenames SquirrelFish and SquirrelFish Extreme, and note that 'Nitro' and 'Nitro Extreme' — Apple's marketing terms — are commonly used in the Safari context, while 'the name of the project and the library is always JavaScriptCore'.\n\nWebKit's engineering blog tracks the engine's evolution as an optimizing virtual machine with four execution tiers: a byte-code interpreter, a Baseline JIT compiler, the DFG (Data Flow Graph) JIT with aggressive type speculation, and the FTL (Faster Than Light) JIT built on the B3 compiler backend. Recent releases continue engine work at the WebKit level: Safari 18.2 added WebAssembly garbage collection and tail calls, and Safari 27 added WebAssembly JavaScript Promise Integration.",
+    "javascript_engine_and_technical_architecture": "WebKit's documentation describes JavaScriptCore as an optimizing virtual machine built from documented layers. A hand-written lexer and a hand-written recursive-descent parser turn source text into byte code. The LLInt (Low Level Interpreter) executes that byte code with near-zero start-up cost; it is written in 'offlineasm', a portable assembly language that also compiles to C, which helps portability.\n\nFunctions that run repeatedly 'tier up': the Baseline JIT compiles them to machine code while collecting profiling data, the DFG JIT uses that data for aggressive type speculation and optimization, and the most frequently executed code is recompiled by the FTL JIT using the B3 backend. If a speculative assumption fails, execution de-optimizes (an 'OSR exit') back to the Baseline tier, which also acts as the fallback for the optimizing tiers. The documentation emphasizes that all tiers are designed to maintain identical execution semantics — a program may run in several tiers at once without any visible effect other than performance.",
+    "languages_and_technologies": "JavaScriptCore implements ECMAScript as specified in ECMA-262. WebKit ships WebAssembly support alongside it in its products — recent release notes document WebAssembly garbage collection, tail calls and JavaScript Promise Integration.\n\nThe engine is written mostly in C++ with bits of C and assembly (notably for the LLInt and JIT backends), and integrates with Objective-C on Apple platforms through the JavaScriptCore API. WebKit's codebase documentation describes the rest of the web platform — HTML and CSS parsing, the DOM, rendering — as separate components (WebCore and the WebKit layers) around the engine.",
+    "integration_in_software": "JavaScriptCore is embedded wherever WebKit is. WebKit's project pages describe WebKit as the engine of Safari and of the macOS/iOS framework used by applications such as Mail, Notes, Books, News and the App Store, and Apple's release notes state that third-party applications are 'powered by the HTML, CSS, and JavaScript that's rendered by WebKit and JavaScriptCore — the same engines inside Safari'.\n\nMDN lists JavaScriptCore as the engine of Safari and other WebKit-based browsers, and names the Bun runtime among its non-browser uses. On macOS and iOS, applications can also call the JavaScriptCore API directly to run JavaScript without any web content at all.",
+    "platforms_and_hardware_architectures": "WebKit's documentation states that its platform abstraction covers 'macOS, iOS, Windows, Linux, etc.' — the platforms WebKit can run on — and that the JavaScriptCore API is provided to macOS and iOS applications. In practice JavaScriptCore therefore ships on Apple operating systems through Safari and WebKit, and is built by WebKit's desktop ports on Linux and Windows for embedders there; the LLInt's portable-assembly design is part of how the engine stays portable across processor families.",
+    "licensing_and_governance": "JavaScriptCore is part of the WebKit open-source project. WebKit's official project page sets out its licensing goals: 'we use BSD-style and LGPL licenses. Specifically, we aim for licensing compatible with LGPL 2.1+', with no plan to move to LGPL 3 — a choice explicitly made so WebKit 'remain[s] freely usable for both open source and proprietary applications'.\n\nThe project is developed in the open, with a public source repository, bug tracking and contribution processes, and publishes its goals (web compatibility, standards compliance, security, privacy, portability) on the same page. Safari ships Apple's productised build of the engine — the product marketed as 'Nitro'.",
+    "limitations_and_scope": "JavaScriptCore executes JavaScript (and supports WebKit's WebAssembly features); it is not a browser engine and provides no DOM or web APIs — those live in WebKit's other components, or in the host application when using the JavaScriptCore API. WebKit's own project page states the boundary plainly for the wider engine: 'WebKit is an engine, not a browser.'\n\nNaming is a known source of confusion: 'Nitro', 'Nitro Extreme' and 'SquirrelFish' all refer to versions or marketing names of what the code and documentation call JavaScriptCore. The documentation is engineering-oriented (deep dives into JIT internals), and, as part of WebKit, the engine evolves on the WebKit/Safari cadence rather than with an independent release schedule for external embedders.",
+    "advantages": [
+      "A four-tier optimizing design (LLInt, Baseline JIT, DFG JIT, FTL JIT on B3) documented in unusual depth by the project itself.",
+      "Deployed in Safari and across the Apple ecosystem, making it one of the most widely exercised JavaScript engines on macOS and iOS.",
+      "Licensing designed for reuse: BSD-style and LGPL-2.1+ compatible terms, explicitly intended to permit both open-source and proprietary use.",
+      "A public JavaScriptCore API lets macOS and iOS applications evaluate JavaScript directly, not only inside web content."
+    ],
+    "disadvantages": [
+      "Provides no web platform features of its own: DOM and web APIs come from WebKit or from the host application.",
+      "Documentation and tooling centre on WebKit/Safari development; guidance for external embedders is thinner than the in-tree material.",
+      "The speculative multi-tier pipeline is complex: behavior depends on profiling and heuristics, which makes performance characteristics harder to reason about than a simple interpreter's.",
+      "As part of WebKit, it evolves on the WebKit/Safari release cadence without a separate stability contract for third-party embedders."
+    ],
+    "who_is_it_for": [
+      "Developers building macOS or iOS applications that need to evaluate JavaScript via the JavaScriptCore API.",
+      "WebKit and Safari contributors, and engineers studying multi-tier JIT and speculative optimization design.",
+      "Runtime authors (such as Bun) who want to build a JavaScript environment on an existing engine."
+    ],
+    "who_is_it_not_for": [
+      "End users: it is a library inside other software.",
+      "Developers who need a complete web engine: WebKit is the web engine, JavaScriptCore is only its JavaScript part.",
+      "Projects that need DOM or web APIs without WebKit: those must be supplied by another host."
+    ],
+    "verdict": "JavaScriptCore is the JavaScript engine to know for the Apple and WebKit world: permissively licensed, deployed in Safari and countless macOS/iOS applications, and documented at the architecture level by its own developers. Its scope stops at language execution — the web platform comes from WebKit around it — so it suits app developers on Apple platforms, WebKit contributors and engine students, while its centre of gravity remains the WebKit codebase and Safari's release train."
+  },
+  "links": {
+    "documentation": "https://docs.webkit.org/Deep%20Dive/JSC/JavaScriptCore.html",
+    "webkit_introduction": "https://docs.webkit.org/Getting%20Started/Introduction.html",
+    "project_site": "https://webkit.org/project/",
+    "blog": "https://webkit.org/blog/",
+    "source_code": "https://github.com/WebKit/WebKit",
+    "recent_engine_work": "https://webkit.org/blog/18325/webkit-features-for-safari-27-0/"
+  },
+  "sources": [
+    {
+      "title": "JavaScriptCore - WebKit Documentation - official engine description: ECMAScript implementation, naming (SquirrelFish/Nitro), core architecture (LLInt, Baseline JIT, DFG JIT, FTL JIT), tier semantics",
+      "url": "https://docs.webkit.org/Deep%20Dive/JSC/JavaScriptCore.html",
+      "type": "official_documentation",
+      "publisher": "WebKit project (Apple)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "Introduction to WebKit - WebKit documentation - JSC as WebKit's JavaScript engine, four execution tiers and B3 backend, JavaScriptCore API for macOS/iOS applications, platform coverage, surrounding components",
+      "url": "https://docs.webkit.org/Getting%20Started/Introduction.html",
+      "type": "official_documentation",
+      "publisher": "WebKit project (Apple)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "The WebKit Open Source Project - project goals, licensing (BSD-style and LGPL, aimed at LGPL 2.1+), 'WebKit is an engine, not a browser', portability",
+      "url": "https://webkit.org/project/",
+      "type": "official_site",
+      "publisher": "WebKit project (Apple)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "WebKit Features for Safari 27.0 - current JavaScript and WebAssembly engine work (JavaScript Promise Integration)",
+      "url": "https://webkit.org/blog/18325/webkit-features-for-safari-27-0/",
+      "type": "official",
+      "publisher": "WebKit project (Apple)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "WebKit Features in Safari 18.2 - WebAssembly garbage collection and tail calls, WebAssembly type reflection",
+      "url": "https://webkit.org/blog/16301/webkit-features-in-safari-18-2/",
+      "type": "official",
+      "publisher": "WebKit project (Apple)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "MDN JavaScript technologies overview - Apple's JavaScriptCore (also known as SquirrelFish/Nitro) used in Safari and other WebKit-based browsers; non-browser usage such as Bun",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/JavaScript_technologies_overview",
+      "type": "official_documentation",
+      "publisher": "Mozilla (MDN)",
+      "accessed": "2026-11-08"
+    }
+  ],
+  "last_verified": "2026-11-08"
+}

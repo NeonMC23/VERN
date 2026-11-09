@@ -1,0 +1,91 @@
+{
+  "id": "v8",
+  "name": "V8",
+  "type": "technology",
+  "summary": "V8 is Google's open-source JavaScript and WebAssembly engine, written in C++: it runs the JavaScript inside Google Chrome and Node.js among other software, and can be embedded in any C++ application. It implements the ECMAScript and WebAssembly specifications, but provides no browser features of its own — the host application supplies the DOM and the APIs around it.",
+  "tags": ["javascript engine", "webassembly", "google", "chrome", "chromium", "node.js", "embedded engine", "open source", "c++", "jit compiler"],
+  "status": "active",
+  "platforms": ["Windows", "macOS", "Linux"],
+  "license": "BSD-3-Clause",
+  "content": {
+    "introduction": "V8 is the software component that executes JavaScript for Google Chrome and for many other programs, from server runtimes to desktop applications. Instead of interpreting a program line by line, it translates JavaScript into machine code — the raw instructions a processor executes directly — which is one reason modern web applications can feel responsive. V8 is developed as an open-source project, so anyone can read its source code, study how it works, or embed the engine inside their own software.",
+    "what_is_it": "A JavaScript engine is the part of a program that runs JavaScript. V8 is Google's JavaScript engine. Its own documentation describes it as 'Google's open source high-performance JavaScript and WebAssembly engine, written in C++', used in Chrome and in Node.js, among others. WebAssembly is a binary format designed to run code from languages such as C, C++ and Rust at near-native speed, and V8 implements both standards.\n\nV8 deliberately stops at language execution. Web page structure — the Document Object Model, or DOM — is not provided by the engine but by its host: Chrome supplies the DOM and the web APIs, while Node.js supplies server-side APIs instead. The same engine can therefore serve very different products.",
+    "origin_and_history": "Google hired Lars Bak in autumn 2006 to build a new JavaScript engine for a secret internal project that became the Chrome browser; the team began work in Aarhus, Denmark, and the engine's name is a playful reference to the powerful engine of a classic muscle car. V8 was released as open source on 2 September 2008, the same day Chrome launched, and its first public revision dates from 30 June 2008.\n\nEarly versions supported the ia32 and ARM instruction sets and compiled straight to machine code. The project's own retrospective traces the major steps that followed: the Irregexp regular-expression engine (2009), the first Node.js release embedding V8 (2009), the Crankshaft optimizing compiler (2010), an incremental garbage collector and multi-instance Isolates (2011), the TurboFan optimizing compiler (2014), the Ignition interpreter (work began in 2015), and WebAssembly support. Although V8 began inside Chrome, its maintainers describe it as 'a stand-alone project with a separate codebase and an embedding API that allows any program to use its JavaScript execution services'.",
+    "javascript_engine_and_technical_architecture": "V8 compiles and executes JavaScript source code, allocates memory for objects, and reclaims memory that is no longer needed with a garbage collector — an automatic memory-management system. Its documented pipeline pairs Ignition, a bytecode interpreter that starts executing code quickly, with TurboFan, an optimizing compiler that turns frequently used ('hot') functions into highly optimized machine code. V8's documentation describes its garbage collector as stop-the-world, generational and accurate.\n\nSome built-in functions are written in Torque, a small language created for the project that generates efficient low-level code, and WebAssembly has its own documented compilation pipeline. The engine also ships developer tooling: the d8 shell for running JavaScript outside a browser, an inspector protocol for debuggers, profiler integration, and tracing support.",
+    "languages_and_technologies": "V8 implements ECMAScript — the standard behind the JavaScript language, maintained by the TC39 committee — and WebAssembly, following their respective specifications. The project documents a feature-launch process for shipping new JavaScript and WebAssembly language features, and supports the ECMAScript internationalization API. The engine itself is written primarily in C++, with Torque for built-ins.",
+    "integration_in_software": "V8 is designed to be embedded: its documentation states that 'V8 can be embedded into any C++ application', and it exposes an API through which a host program registers its own objects and functions for JavaScript code to call.\n\nThe best-known integrations are Google Chrome, which supplies the DOM and the browser-side web APIs, and Node.js, which supplies a server-side API surface instead. MDN's documentation lists V8 as the engine of Chrome and of Chromium-based browsers such as Opera, Edge and Brave, and names Node.js, Deno and Electron among its non-browser uses. Because the engine excludes browser features on purpose, each host decides what its JavaScript environment looks like.",
+    "platforms_and_hardware_architectures": "V8's documentation states that it runs on Windows, macOS and Linux systems using x64, IA-32 or ARM processors. Additional systems (IBM i, AIX) and processors (MIPS, ppcle64, s390x) are maintained externally and tracked as ports. The build documentation also covers cross-compiling for ARM/Android and for iOS, for embedders targeting those platforms.",
+    "licensing_and_governance": "V8's LICENSE file applies a 3-clause BSD license to all parts of V8 that are not externally maintained libraries; the third-party components (test suites, an assembler backend, a header file) carry their own licenses, itemised in the same file. Copyright is held by 'the V8 project authors'.\n\nDevelopment happens in the open: the project's official Git repository is hosted on Chromium infrastructure and mirrored on GitHub, and V8's documentation includes public contribution, release and security processes. The engine is developed by Google as part of its Chromium open-source work.",
+    "limitations_and_scope": "V8 executes JavaScript and WebAssembly only. It is not a browser and contains no rendering engine, DOM, networking stack or user interface: those belong to the host application, which is why Chrome and Node.js can share one engine while offering completely different APIs.\n\nEmbedding is powerful but low-level — the host decides which objects to expose to scripts and manages the engine's lifecycle through the documented embedding API. The optimizing pipeline and the garbage collector are substantial subsystems with their own memory and maintenance costs; the documentation devotes dedicated sections to memory-leak investigation and to mitigations for running untrusted code. Third-party components under other licenses, listed in the LICENSE file, need to be accounted for when redistributing.",
+    "advantages": [
+      "Executes JavaScript as native machine code through a documented multi-tier pipeline (Ignition interpreter plus TurboFan optimizing compiler).",
+      "Genuinely embeddable: an official embedding guide shows how to use V8 inside any C++ program, and large projects such as Node.js already build on it.",
+      "Open source under a permissive 3-clause BSD license, with the third-party license exceptions itemised in the LICENSE file.",
+      "Deployed in widely used products (Chrome, Node.js), with an extensive documented test and release infrastructure behind it."
+    ],
+    "disadvantages": [
+      "Provides no web platform features of its own: without a host application supplying APIs, the engine only executes the language.",
+      "Building and embedding V8 requires C++ expertise and a non-trivial build setup (GN, per-target cross-compilation profiles).",
+      "The multi-tier JIT pipeline and the garbage collector are complex subsystems whose memory cost and tuning matter, especially on constrained devices.",
+      "Redistribution must account for the separately licensed third-party components listed in the LICENSE file."
+    ],
+    "who_is_it_for": [
+      "C++ developers who want to execute JavaScript or WebAssembly inside their own application.",
+      "Developers working with Node.js, Deno, Electron or Chromium-based browsers who want to understand the runtime beneath their tools.",
+      "Engineers and students studying how a modern multi-tier JavaScript engine is designed and documented."
+    ],
+    "who_is_it_not_for": [
+      "End users: V8 has no user interface and is only used inside other software.",
+      "People who need browser features such as the DOM: those come from a browser or web engine, not from V8.",
+      "Someone looking for a small embeddable interpreter: V8 is a full optimizing engine with a substantial build and memory footprint."
+    ],
+    "verdict": "V8 is the reference JavaScript runtime for anyone whose work touches the Chrome or Node.js ecosystems, or who needs industrial-grade JavaScript and WebAssembly execution inside a C++ product. Its scope is deliberately narrow — language execution, with everything else supplied by the host — so it suits embedding projects and engine learners alike, while readers wanting 'a browser' should look at the applications built on top of it rather than at the engine itself."
+  },
+  "links": {
+    "documentation": "https://v8.dev/docs",
+    "blog": "https://v8.dev/blog",
+    "embedding_guide": "https://v8.dev/docs/embed",
+    "source_code_mirror": "https://github.com/v8/v8",
+    "official_repository": "https://chromium.googlesource.com/v8/v8",
+    "history": "https://v8.dev/blog/10-years",
+    "license": "https://github.com/v8/v8/blob/main/LICENSE"
+  },
+  "sources": [
+    {
+      "title": "V8 official documentation - definition, ECMAScript and WebAssembly scope, supported systems and processors, embedding, DOM/host boundary, engine components",
+      "url": "https://v8.dev/docs",
+      "type": "official_documentation",
+      "publisher": "V8 project (Google)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "Celebrating 10 years of V8 - official project history: origins in 2006, open-source release with Chrome on 2 September 2008, Node.js embedding, compiler lineage to Ignition and TurboFan",
+      "url": "https://v8.dev/blog/10-years",
+      "type": "official",
+      "publisher": "V8 project (Google)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "V8 LICENSE - 3-clause BSD terms and itemised third-party license exceptions",
+      "url": "https://raw.githubusercontent.com/v8/v8/main/LICENSE",
+      "type": "legal_document",
+      "publisher": "V8 project authors",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "V8 Git repository official mirror - source layout and development activity",
+      "url": "https://github.com/v8/v8",
+      "type": "official_source_code",
+      "publisher": "V8 project (Google)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "MDN JavaScript technologies overview - JavaScript engine landscape: V8 used in Chrome and Chromium-based browsers (Opera, Edge, Brave); non-browser uses in Node.js, Deno, Electron",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/JavaScript_technologies_overview",
+      "type": "official_documentation",
+      "publisher": "Mozilla (MDN)",
+      "accessed": "2026-11-08"
+    }
+  ],
+  "last_verified": "2026-11-08"
+}
