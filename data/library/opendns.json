@@ -1,0 +1,69 @@
+{
+  "id": "opendns",
+  "name": "OpenDNS",
+  "type": "service",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "OpenDNS is a suite of consumer DNS services operated under the OpenDNS brand by Cisco. Its official site presents it as 'a suite of consumer products aimed at making your internet faster, safer, and more reliable' (opendns.com, consulted 2026-11-09), built around recursive DNS resolution with optional content filtering applied at the network level. The same site carries the banner 'OpenDNS is now part of Cisco' and directs enterprise buyers to Cisco Secure Access, a separate product line — the distinction between the consumer DNS services documented here and Cisco's enterprise portfolio is explicit on the vendor's own pages."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "A family of free, DNS-layer services for homes and small businesses, delivered in three consumer editions documented on the official 'Home Internet Security' page (consulted 2026-11-09): OpenDNS FamilyShield ('preconfigured to block adult content — set it & forget it', no sign-up required); OpenDNS Home ('our classic, free service with customizable filtering and basic protection', requiring account sign-up); and OpenDNS Public Service ('our classic, free service with basic DNS-layer protection and built-in filtering configurations', no sign-up). Because the filtering happens in DNS responses, settings configured at the router 'apply to every device' on the network (vendor claim). OpenDNS is not a browser, an operating system, or application software; the downloadable 'OpenDNS Update Client' seen in support channels is an auxiliary tool for dynamic IP addresses, not the service itself."
+    },
+    "origin_and_history": {
+      "category": "FAIT",
+      "text": "The official 'About' page states: 'Improving the internet since 2006. OpenDNS was founded in 2006 with the mission to provide a safer, faster, and better internet browsing experience for all users. Initially, OpenDNS provided a recursive DNS service for use at home, and in 2009 introduced a service for the enterprise market. In 2012, OpenDNS launched an enterprise security product, called Umbrella. Its rapid success and customer adoption led to OpenDNS being acquired by Cisco in 2015.' The page concludes that today the OpenDNS-branded products serve consumers while the enterprise security product 'is now branded Cisco Secure Access' (opendns.com/about, consulted 2026-11-09). The Cisco acquisition page is linked from every OpenDNS page under the banner 'OpenDNS is now part of Cisco'."
+    },
+    "operation_and_infrastructure": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "OpenDNS operates recursive resolvers reached at fixed anycast-style addresses (see configuration section) and states it runs 'global data centers and peering partnerships' through which it 'shorten[s] the routes between every network and our data centers' (opendns.com, consulted 2026-11-09) — a performance rationale [ÉDITEUR] not independently benchmarked here. Queries sent to the service are resolved and, depending on the edition and dashboard settings, filtered against categorisation data (the support taxonomy exposes 'Content Filtering' and 'Domain Categorization' categories). The consumer architecture is network-centric: configuration is done once at the router or device level and covers 'laptops, smartphones, tablets, DVRs, game consoles, TVs, literally anything that connects to the internet from your home network' (vendor claim). Infrastructure scale, resolver counts, and geographic footprint beyond the qualitative 'global data centers' statement are [NON ÉTABLI] from the consulted sources."
+    },
+    "protocols_and_encryption": {
+      "category": "NON ÉTABLI",
+      "text": "The OpenDNS pages consulted on 2026-11-09 (opendns.com home, Home Internet Security, setup guide, about) describe plain-DNS configuration via IPv4 nameservers and do not document encrypted-DNS transports (DoH, DoT, DoQ) for the consumer services. Support for such transports is therefore [NON ÉTABLI] from the consulted sources — no absence is claimed, only that these pages do not establish it. No statement about DNSSEC validation is made on those pages either."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "Using OpenDNS FamilyShield means agreeing to 'the OpenDNS Terms of Service and the Cisco Online Privacy Statement' (setup guide, consulted 2026-11-09) — the consumer legal framework is OpenDNS-branded terms plus Cisco's group privacy statement; the detailed logging and retention policy for the consumer resolvers is not reproduced on the consulted pages [NON ÉTABLI]. Security claims centre on blocking: the benefit matrix advertises 'built-in protection for malicious phishing' and parental controls that block 'adult content and more' [ÉDITEUR]. Filtering is category-based ('Domain Categorization', 'Content Filtering' in the support taxonomy) and adjustable per account on the Home edition. Service availability is jurisdiction-dependent: an official notice on the vendor's support community states 'OpenDNS reactivated for users in Belgium' (community.cisco.com notice, consulted 2026-11-09 via content fetch — direct HTTP checks are bot-blocked (403); exact URL recorded in the phase sources) [VERSION]. Nothing here was independently audited."
+    },
+    "configuration_and_access": {
+      "category": "FAIT+VERSION",
+      "text": "The official setup guide (consulted 2026-11-09) documents the endpoints: 'Our nameservers are always: 208.67.222.222 / 208.67.220.220', and 'our FamilyShield nameservers are: 208.67.222.123 / 208.67.220.123' [VERSION]. Setup instructions are provided per device class — 'Home routers (Recommended!)', computer workstations and laptops, smart devices, servers — with the router recommended so that protection covers the whole network. A test page (welcome.opendns.com) checks a configuration. FamilyShield and Public Service need no account ('Easy access with no sign-up required'); OpenDNS Home requires sign-up (signup.opendns.com) and unlocks customizable filtering plus the dashboard (dashboard.opendns.com). All three consumer editions are free of charge ('Price | Free | Free' in the benefit matrix)."
+    },
+    "governance_and_operator": {
+      "category": "FAIT",
+      "text": "The operator is Cisco: every official page carries 'OpenDNS is now part of Cisco' and links the Cisco acquisition page; the About page records the 2015 acquisition and frames OpenDNS as Cisco's consumer DNS brand while 'our enterprise security product, is now branded Cisco Secure Access' (consulted 2026-11-09). Legal and privacy accountability therefore sits with Cisco (Cisco Online Privacy Statement); support is delivered through Cisco's community forums (support.opendns.com redirects to community.cisco.com) and vendor knowledge-base articles. The community taxonomy (Content Filtering, Domain Categorization, Network Management, OpenDNS Update Client, Router Configuration, Security Settings, Stats and Logs) reflects the product's functional areas. Corporate ownership before 2015 and internal organisational details are only described through the founding/acquisition narrative above."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Scope limits follow from the sources: (1) the documented services are consumer/SoHo editions — enterprise protection is a different product (Cisco Secure Access) and is out of scope of this entry; (2) protection operates at the DNS layer only — the pages claim safety improvements ('safer internet', anti-phishing) but make no claim of endpoint protection [ÉDITEUR claims as such]; (3) categorisation-based filtering can over- or under-block (the support forum carries a 'False Positive: Domain Blocked by OpenDNS' label area) [FAIT observation of channel structure]; (4) availability varies by jurisdiction (Belgium notice); (5) encrypted-DNS transports are [NON ÉTABLI] from these pages; (6) the exact privacy/logging behaviour of the resolvers is deferred to the Cisco Online Privacy Statement, not itemised on the product pages. Performance benefits ('faster, more reliable') are vendor claims, unbenchmarked here."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Established from the official pages: entirely free consumer tiers (FamilyShield, Home, Public Service); zero-sign-up editions (FamilyShield, Public Service) that are explicitly 'set it & forget it'; whole-network coverage from a single router configuration; preconfigured adult-content blocking (FamilyShield) and customisable category filtering (Home); long operational record ('Improving the internet since 2006'); a stable, documented endpoint pair (208.67.222.222/220.220) in use across editions; professional-grade backing (Cisco infrastructure and support channels); a built-in configuration test page. The separation of preconfigured vs customisable tiers lets users choose simplicity or control without cost."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Established limits: encrypted-DNS transports are undocumented on the consulted pages [NON ÉTABLI] — users requiring DoH/DoT cannot confirm support from these sources; filtering is category-based and configurable only on the Home edition (FamilyShield is preconfigured-only; Public Service has 'built-in filtering configurations'); account registration (with network IP registration) is required for the customisable tier, and support threads revolve around dynamic-IP friction (e.g. 'Network already exists' registration issues visible on the support community, consulted 2026-11-09) [FAIT observation]; service availability is jurisdiction-dependent (Belgium notice); privacy behaviour is governed by group-level (Cisco) terms rather than a product-specific public logging policy on the consulted pages; the free consumer tiers carry no SLA or support commitment documented here."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Households and small businesses wanting free, network-wide DNS-layer protection with minimal setup: families using FamilyShield for preconfigured adult-content blocking ('set it & forget it'); users who want customisable content filtering without cost (OpenDNS Home, with dashboard); networks whose devices cannot run endpoint software (the pages list 'DVRs, game consoles, TVs, literally anything'); users preferring a long-established provider operating since 2006 under Cisco's umbrella; administrators wanting a simple, documented IP pair to push via router DHCP."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: enterprise buyers (the site redirects them to Cisco Secure Access, a different product); users requiring verifiable encrypted-DNS transports from the documented sources ([NON ÉTABLI] here); users wanting per-device, query-level filtering apps (the service is network-level DNS); users needing a no-logging promise stated at product level (not itemised on the consulted pages); users in jurisdictions where the service is restricted (availability varies — Belgium notice); users seeking a non-US corporate operator (the operator is Cisco, US company); users wanting free-tier customisable filtering without registering a network account (Home requires sign-up)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "OpenDNS is a free consumer DNS service suite (FamilyShield, Home, Public Service) operated by Cisco since the 2015 acquisition of a company founded in 2006, offering network-wide filtering at documented endpoints 208.67.222.222/208.67.220.220 (FamilyShield 208.67.222.123/208.67.220.123). Its established strengths are zero-cost, whole-network coverage and simple tiering from preconfigured to customisable filtering; its documented limits are category-granularity filtering, jurisdiction-dependent availability, and the absence — on the consulted official pages — of any statement about encrypted-DNS transports or product-specific logging detail (deferred to Cisco's privacy statement). Vendor performance and safety claims are [ÉDITEUR]. All URLs cited were reachable on 2026-11-09; this entry reflects the consumer DNS services only, not Cisco Secure Access."
+    }
+  },
+  "sources": [
+    "https://www.opendns.com/",
+    "https://www.opendns.com/home-internet-security/",
+    "https://www.opendns.com/setupguide/",
+    "https://www.opendns.com/about/"
+  ]
+}

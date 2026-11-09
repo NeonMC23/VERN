@@ -1,0 +1,77 @@
+{
+  "id": "google-public-dns",
+  "name": "Google Public DNS",
+  "type": "service",
+  "summary": "Google Public DNS is a free, global recursive DNS resolution service operated by Google, reachable at 8.8.8.8 and 8.8.4.4 (plus IPv6), with DNSSEC validation and encrypted transports (DoH, DoT). It resolves names without filtering content or redirecting non-existent domains; client IP addresses are logged only temporarily, per Google's documented privacy commitments for the service.",
+  "tags": ["dns", "recursive resolver", "public dns", "google", "dnssec", "doh", "dot", "service", "infrastructure"],
+  "status": "active",
+  "platforms": ["Any DNS-capable device (IPv4 and IPv6)"],
+  "license": "Free online service (Google terms of service)",
+  "content": {
+    "introduction": "Every connection on the Internet starts with a DNS lookup, and most people use whatever resolver their network provider assigns. Google Public DNS is one of the best-known alternatives: a free, globally distributed DNS resolution service that anyone can configure on a device or router in place of the ISP's resolver. For a general audience, it is the easiest way to change who answers the question 'what is the address of this name?' — and, by extension, who can see every name one visits.",
+    "what_is_it": "Google's documentation defines it plainly: 'A free, global DNS resolution service that you can use as an alternative to your current DNS provider.' Users point their network settings at the IP addresses 8.8.8.8 and 8.8.4.4 (IPv6 addresses are supported too), and from then on every DNS lookup the device makes is answered by Google's service.\n\nIts scope is deliberately narrow: 'Public DNS is only a name resolver' — it is not an authoritative hosting service (Google's Cloud DNS covers that) and, per the FAQ, 'the service does not filter content, requires no account'. Alongside classic DNS over UDP or TCP, it offers DNS over TLS and DNS over HTTPS 'for greater security and privacy', and it promises results 'with absolutely no redirection' for non-existent domains.",
+    "origin_and_history": "Google Public DNS is operated by Google as part of its public infrastructure (the documentation sits in Google for Developers, under 'Make the Web Faster'). The service publishes its technical posture in a long-form security guide and a detailed FAQ, and keeps its documentation current (the FAQ page was last updated 2026-11-06 at consultation time).\n\nThe exact launch date is not established by the sources consulted here. What the documentation does establish is the service's design lineage: it documents classic open-resolver threats (cache poisoning including 'Kaminsky attacks', DoS and amplification) and the countermeasures it implements, positioning itself as a hardened public recursive resolver. [VERSION] Features and policies evolve; the FAQ and security pages are the reference, not any third-party summary.",
+    "operation_and_infrastructure": "Google Public DNS answers through anycast routing — the FAQ's own framing ('How does Google Public DNS know where to send my queries?') explains that queries reach the nearest servers of a worldwide deployment; the documentation states the servers are deployed 'all over the world' to keep users close to CDN content as well.\n\nOperational transparency is unusually concrete: Google publishes the IP address ranges its resolvers use to query authoritative name servers, available programmatically as a JSON file and an RFC 8805 geolocation feed (and historically as a DNS TXT record being phased out). For content delivery interplay, the service uses EDNS Client Subnet (RFC 7871) so authoritative servers can return location-optimised answers — sending only part of the client's address (first 24/56 bits or less for IPv4/IPv6).",
+    "protocols_and_encryption": "The service supports the full classic DNS transport (UDP and TCP) plus the encrypted client-side transports: DNS over TLS (DoT) and DNS over HTTPS (DoH), which the documentation frames as protection against eavesdropping on the last hop. Its security guide devotes its core to DNS hardening: DNSSEC validation ('DNSSEC uses digital signatures to authenticate DNS responses'), response validity checks, entropy techniques against spoofing (randomised source ports and name-server choice, DNS cookies, 0x20 query-name case randomisation, nonce label prepending), duplicate-query removal and rate limiting.\n\nThe FAQ addresses the relationship explicitly ('Why do we need DNS over HTTPS when we already have DNSSEC?'): the two answer different threats — data authentication versus last-hop confidentiality. IPv6 is fully supported, and EDNS Client Subnet (RFC 7871) covers CDN geolocation needs.",
+    "privacy_and_security_model": "The privacy model is documented in the FAQ (with a dedicated privacy page referenced by it). Client IP addresses 'are only logged temporarily (erased within a day or two)'; ISP and city/metro-level location data are kept longer to operate and improve the service. No stored data is associated with a Google account, and Google states it does not correlate or combine these logs with personal information from its other services. Information is not shared outside Google 'except in the limited circumstances described in Google's privacy policy, such as legal processes and enforceable governmental requests' — a transparency report covers such requests. Google Public DNS complies with Google's main privacy policy.\n\nOn the security side, DNSSEC validation and the anti-poisoning measures of the security guide protect authenticity; the FAQ is explicit that the service does not block or filter unwanted sites — content protection is out of scope, unlike filtering resolvers. [ÉDITEUR] These are commitments of the operator, not independently audited claims here.",
+    "configuration_and_access": "Setup is a network configuration change, not a software install: set DNS servers to 8.8.8.8 and 8.8.4.4 (both recommended; order does not matter per the FAQ), with documented IPv6 addresses; the FAQ covers devices, offices, ISPs and CDN behaviour. Encrypted endpoints are documented in dedicated DoH and DoT guides. No Google account is needed. The service is global ('In which countries is Google Public DNS available?' is answered in the FAQ) and free of charge.",
+    "governance_and_operator": "The operator is Google; the service runs under Google's corporate terms and main privacy policy, with a dedicated FAQ and documentation set, a public support group, and a transparency report for user-data requests. It is a commercial operator's public service: there is no independent foundation, no community governance, and the software is not distributed as an open product (the FAQ discusses open-source questions; the answer was not retained here, so no claim is made). Funding and business model are Google's; the FAQ addresses advertising questions directly ('Will Google Public DNS be used to serve ads in the future?').",
+    "limitations_and_scope": "Google Public DNS is a recursive resolver only: it hosts no domains and filters no content. The privacy trade-offs are documented and structural — temporary client-IP logging, longer retention of coarse location/ISP data, legal-process disclosure, and a single commercial operator with global reach. Resolver-side location can affect CDN answers; the service mitigates this with worldwide deployment and EDNS Client Subnet but documents the general limitation honestly.\n\nAs with any public resolver, changing DNS is not a full privacy solution: the transport to the resolver can still be observed unless encrypted transports are used, and the resolver itself sees every name queried. [VERSION] Policies and durations ('a day or two') are those of the documentation at consultation time.",
+    "advantages": [
+      "Memorable, widely deployed anycast endpoints (8.8.8.8/8.8.4.4) that are free and need no account.",
+      "Documented hardening: DNSSEC validation, anti-spoofing entropy measures, DoH and DoT support, published query-source IP ranges.",
+      "Explicit no-redirection policy for NXDOMAIN and no content filtering — answers are plain resolution.",
+      "Transparent, written privacy commitments: temporary client-IP logs, no account linkage, no cross-service correlation, published transparency report."
+    ],
+    "disadvantages": [
+      "Operated by an advertising company: structural trust question even with documented log practices and legal-process disclosure.",
+      "Temporary client-IP logging and longer retention of ISP/location data differ from no-log resolvers.",
+      "No malware or content filtering — users wanting protection must add it elsewhere.",
+      "Single operator dependency (availability, policy changes, jurisdiction) versus community-run or multi-operator options."
+    ],
+    "who_is_it_for": [
+      "Individuals and households wanting a simple, fast, well-documented alternative to their ISP's resolver.",
+      "Network administrators wanting globally distributed resolvers with published IP ranges and DNSSEC validation.",
+      "Users who value written privacy commitments and a transparency report over a no-logging charter."
+    ],
+    "who_is_it_not_for": [
+      "Users demanding zero-logging resolvers under a non-profit charter — other public resolvers serve that niche.",
+      "Anyone expecting DNS-level malware or content filtering: the service explicitly filters nothing.",
+      "Organisations needing authoritative DNS hosting: Google Public DNS is a resolver, not a hosting service."
+    ],
+    "verdict": "Google Public DNS is the reference mainstream public resolver: global anycast reach, serious documented DNS hardening, encrypted transports and candid privacy documentation — at the price of being one large commercial operator's service with temporary client-IP logging and legal-process disclosure. It suits users who want dependable plain resolution with written commitments; readers seeking no-log charters or threat blocking should compare the other public resolvers of this category, each with its own documented model."
+  },
+  "links": {
+    "documentation": "https://developers.google.com/speed/public-dns",
+    "security": "https://developers.google.com/speed/public-dns/docs/security",
+    "faq": "https://developers.google.com/speed/public-dns/faq",
+    "dns_over_https": "https://developers.google.com/speed/public-dns/docs/doh",
+    "dns_over_tls": "https://developers.google.com/speed/public-dns/docs/dns-over-tls",
+    "ip_ranges": "https://www.gstatic.com/ipranges/publicdns.json",
+    "transparency_report": "https://www.google.com/transparencyreport/userdatarequests/"
+  },
+  "sources": [
+    {
+      "title": "Google Public DNS home - service definition ('free, global DNS resolution service'), 8.8.8.8/8.8.4.4, IPv6, UDP/TCP + DoT + DoH, 'only a name resolver'",
+      "url": "https://developers.google.com/speed/public-dns",
+      "type": "official_documentation",
+      "publisher": "Google (Google for Developers)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Public DNS Security Benefits - DNS threat model (cache poisoning, Kaminsky attacks, DoS), DNSSEC, encrypted client transports, validity checks, entropy measures, rate limiting",
+      "url": "https://developers.google.com/speed/public-dns/docs/security",
+      "type": "official_documentation",
+      "publisher": "Google (Google for Developers)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Public DNS FAQ - no content filtering, no redirection, anycast, DNSSEC, EDNS Client Subnet (RFC 7871), privacy answers (temporary client-IP logging, no account linkage, no cross-service correlation, legal-process sharing), published IP ranges (last updated 2026-11-06)",
+      "url": "https://developers.google.com/speed/public-dns/faq",
+      "type": "official_documentation",
+      "publisher": "Google (Google for Developers)",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}

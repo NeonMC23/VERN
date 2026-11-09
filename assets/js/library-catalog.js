@@ -186,7 +186,13 @@ var LIBRARY_RESOURCES = [
   "webview2",
   "qt-webengine",
   "playwright",
-  "web-platform-tests"
+  "web-platform-tests",
+  "google-public-dns",
+  "cloudflare-1-1-1-1",
+  "quad9",
+  "opendns",
+  "nextdns",
+  "adguard-dns"
 ];
 
 (function () {
