@@ -1,0 +1,68 @@
+{
+  "id": "adguard-dns",
+  "name": "AdGuard DNS",
+  "type": "service",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "AdGuard DNS is a DNS resolution service with built-in filtering, described by its official FAQ as 'a free, privacy-oriented ad-blocking DNS server' that, 'in addition to resolving DNS requests, blocks ads, trackers, and malicious domains' (adguard-dns.io/en/welcome.html, consulted 2026-11-09). It is operated by AdGuard Software Limited and offered in free public editions plus paid private servers. The service is distinct from AdGuard's ad-blocking applications, which integrate it as one selectable DNS backend; the service itself is consumed as network DNS, not as application software."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "A recursive DNS resolver whose blocking works by answering filtered requests with 'a null response instead of an IP address', using 'a frequently updated database of domain names' (official FAQ). The public service ships in three documented modes keyed by server address (adguard-dns.io/en/welcome.html and /en/privacy.html, consulted 2026-11-09): 'Default' blocks 'ads, trackers, malware and phishing websites'; 'Family protection' does the same plus blocking 'websites with adult content' and enforcing 'Safe search' where supported; 'Non-filtering' provides 'a secure and reliable connection but doesn't block anything'. A fourth product type, 'Private AdGuard DNS', blocks or modifies responses per the user's own rules and shows queries/statistics on a dashboard, requiring an AdGuard account. Filtering rules combine default filters (the community-fed AdGuardSDNSFilter list is linked from the privacy policy) with per-user manual allow/deny decisions on private servers."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Founding dates for the service and its operator are [NON ÉTABLI] from the consulted sources. The homepage FAQ documents a notable protocol claim: of DNS-over-QUIC, it states 'AdGuard DNS is the first public resolver that supports it' [ÉDITEUR]. The privacy policy consulted carries the revision date 'August 6, 2024' [FAIT]. The service positions itself in a lineage of AdGuard products: free public servers exist alongside paid integration 'in many paid AdGuard and AdGuard VPN apps' and paid 'personal AdGuard DNS servers with advanced functionality' (FAQ). No further timeline (launch dates per mode, user counts) is established here."
+    },
+    "operation_and_infrastructure": {
+      "category": "FAIT",
+      "text": "The operating model is documented at the level of logic rather than data centres: every device query is answered or nulled according to the chosen mode's domain database; 'due to the nature of how DNS works, all DNS traffic of your device will go through AdGuard' once configured (FAQ). The blocking database is 'constantly updated based on the community feedback' for the Default mode's filter list (privacy policy, link to the public AdGuardSDNSFilter). The policy also documents backend bookkeeping: 'aggregated performance metrics of our DNS servers, namely the number of complete requests to a particular server, the number of blocked requests, and the speed of processing requests', plus 'an anonymous database of domains requested in the last 24 hours' used 'to identify and block new trackers and threats' and counts of tracker blockings used 'to remove outdated rules'. Server counts, geographic footprint and capacity figures are [NON ÉTABLI] from the consulted sources."
+    },
+    "protocols_and_encryption": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "The FAQ states the service 'supports all popular secure DNS communication protocols: DNSCrypt, DNS-over-HTTPS (DoH), DNS-over-TLS (DoT), and DNS-over-QUIC (DoQ)' and characterises DoH/DoT as 'more reliable than DNSCrypt' and 'both supported'. On DoQ the vendor claims first-mover status ('the first public resolver that supports it') and lists QUIC benefits — 'out-of-the-box encryption, reduced connection times, better performance when data packets are lost' and reduced metadata-leak surface versus DoH [ÉDITEUR evaluation]. DNSSEC is supported: it 'allows you to verify the authenticity of the stored DNS records with a digital signature' against forgery of queries/responses (FAQ). Transport-level claims were not independently tested here; the protocol list itself is established vendor documentation [FAIT as documentation]."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "The AdGuard DNS Privacy Policy (revision 'August 6, 2024', consulted 2026-11-09) names the controller — 'ADGUARD SOFTWARE LIMITED', registered 'in Limassol, Cyprus' (Anexartisias and Athinon 79, Nora Court) — and states a minimisation principle: 'We do not collect anything about the user specifically, except where necessary'. For the public resolvers: 'We do not process any of your Personal Data when you connect to and use public AdGuard DNS' (aggregated statistics only, 'not linked to you in any way'); the anonymous 24-hour domain database carries 'no information whatsoever that could link any of these domain names to the original user'. Data 'is not shared with any third parties' except derived outputs ('lists of domains that our servers recognize as advertising, tracking, or malicious'). Account data (email, password hash) and payments (via Paddle.com Market Ltd) are processed for private-server subscriptions; deletion rights run through adguardaccount.com or privacy@adguard.com. The policy summary commits: 'We do not share or sell your personal information' [ÉDITEUR commitments; no independent audit established here]."
+    },
+    "configuration_and_access": {
+      "category": "FAIT+VERSION",
+      "text": "Public endpoints are documented on the setup page (adguard-dns.io/en/public-dns.html, consulted 2026-11-09) [VERSION]: Default — 94.140.14.14 / 94.140.15.15 (IPv6: 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff); Non-filtering — 94.140.14.140 / 94.140.14.141 (IPv6: 2a10:50c0::1:ff, 2a10:50c0::2:ff); Family — 94.140.14.15 / 94.140.15.16 (IPv6: 2a10:50c0::bad1:ff, 2a10:50c0::bad2:ff). DoH/DoT-style hostnames are published: dns.adguard-dns.com (Default), unfiltered.adguard-dns.com (Non-filtering), family.adguard-dns.com (Family). Setup guides cover Android (Private DNS), iOS and macOS (configuration profiles with a 'profile constructor' for custom exclusions), Windows (per-adapter IPv4/IPv6) and others; installing the AdGuard app is offered as the 'Recommended' path with automatic server selection. The public servers are free ('you can use public AdGuard DNS servers for free — there's no catch' [ÉDITEUR]); customised rule sets require the paid private servers and an account."
+    },
+    "governance_and_operator": {
+      "category": "FAIT",
+      "text": "The operator is AdGuard Software Limited — a company 'registered in Limassol, Cyprus', acting 'as the data controller' (privacy policy, consulted 2026-11-09); the AdGuard DNS service is one product in a portfolio that includes ad-blocking apps and AdGuard VPN (distinct products per the FAQ). Support is provided through published contact channels (support@adguard.com for classification disputes — 'If you disagree with our classification of a certain domain… contact us'; privacy@adguard.com for data rights). Filter-list maintenance combines vendor curation with community input ('constantly updated based on the community feedback', with the AdGuardSDNSFilter list published on GitHub Pages). Payment processing for private servers is delegated to Paddle. Corporate structure beyond the Cyprus registration is not established here."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) DNS-layer scope — blocking happens at resolution time (null responses) and nothing is claimed about non-DNS traffic; (2) family mode actively alters page outcomes: enforced SafeSearch 'can result in modified search results, missing comment sections, and other differences in the appearance of web pages' (privacy policy) — a documented side effect; (3) free public servers offer no per-user customisation — 'Customized filtering' and dashboards require paid private servers and an account; (4) domain classification is vendor/community curation and admits disputes (official channel exists for misclassification); (5) scale figures (users, queries, servers) are [NON ÉTABLI] from consulted pages; (6) privacy commitments are policy-level [ÉDITEUR] with no independent audit established here; (7) the 24-hour anonymous domain database exists even on public resolvers — 'anonymous' per policy, but not zero-retention; (8) the 'first public resolver' DoQ claim is vendor-sourced [ÉDITEUR]."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: genuinely free public tiers across three modes (ads/trackers/malware blocking, family protection with SafeSearch, or non-filtering resolution) with no account required; unusually broad encrypted-transport coverage (DNSCrypt, DoH, DoT and DoQ) plus DNSSEC; explicit privacy posture for public use — no personal data processed, anonymous 24-hour domain data only, no third-party sharing except derived filter lists (policy, 2024-08-06); transparent filter-list heritage (public AdGuardSDNSFilter, community feedback loop); practical multi-platform setup (Android Private DNS, Apple configuration profiles with custom-exclusion constructor, Windows, routers via apps); a non-filtering option for users who want encryption/reliability without blocking; paid private tier exists for per-device rules and statistics without changing providers."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: free tiers are fixed-function (no custom lists/allowlists without paid private servers); family mode changes page appearance (SafeSearch enforcement side effects, explicitly documented); the no-logs ideal is not absolute — aggregated metrics and the anonymous 24h domain database are retained by design (policy purposes stated); classification accuracy depends on vendor/community curation with dispute resolution by email; scale, performance and audit status are [NON ÉTABLI]/[ÉDITEUR] from consulted sources; DoQ and protocol-quality statements rest on vendor claims; account-linked features require sharing an email address with the operator and payments through Paddle; the service resolves only what devices actually send to it — devices with hardcoded resolvers bypass it."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Users wanting free, account-free DNS-level ad/tracker/malware blocking with modern encrypted transports: households choosing the Family mode for adult-content blocking plus SafeSearch across all devices; privacy users who want encryption (DoH/DoT/DoQ/DNSCrypt) and DNSSEC without giving personal data on public resolvers; users in censored-restricted setups who prefer a non-filtering encrypted resolver (the unfiltered mode); AdGuard application users wanting integrated DNS; technical users comfortable with IP/hostname configuration across Android Private DNS, Apple profiles or Windows adapters; users who may later need per-device rules and statistics via the paid private tier under the same operator."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users requiring custom block/allow lists without paying (free tiers are preconfigured); users wanting zero retention of any query-derived data (the policy documents an anonymous 24-hour domain database and aggregate metrics); users needing enterprise SLAs, support contracts or on-prem deployment ([NON ÉTABLI] here); users objecting to SafeSearch/page-modification side effects in family mode (documented consequence); users wanting verified third-party-audited privacy claims (none established here); users needing protection beyond the DNS layer; users seeking a non-EU corporate operator (controller is Cyprus-registered AdGuard Software Limited) or, conversely, users needing operators in specific other jurisdictions."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "AdGuard DNS is a free, privacy-oriented ad-blocking DNS service (AdGuard Software Limited, Cyprus) offering three public modes (Default, Family, Non-filtering) plus paid private servers, at documented endpoints 94.140.14.14/94.140.15.15 and mode-specific hostnames (dns/unfiltered/family.adguard-dns.com). Its documented differentiators are the broadest encrypted-transport set in its class (DNSCrypt, DoH, DoT, DoQ — with a vendor 'first public resolver' claim for DoQ [ÉDITEUR]), DNSSEC support, and a public-resolver privacy posture processing no personal data per its 2024-08-06 policy (anonymous 24-hour domain database for threat detection; aggregate metrics only). Documented limits: free tiers are fixed-function, family mode alters page appearance (SafeSearch), classification is curated (disputes via support), and scale/audit information is [NON ÉTABLI] from the consulted sources. All cited URLs were reachable on 2026-11-09."
+    }
+  },
+  "sources": [
+    "https://adguard-dns.io/en/welcome.html",
+    "https://adguard-dns.io/en/public-dns.html",
+    "https://adguard-dns.io/en/privacy.html"
+  ]
+}

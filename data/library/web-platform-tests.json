@@ -1,0 +1,100 @@
+{
+  "id": "web-platform-tests",
+  "name": "Web Platform Tests (WPT)",
+  "type": "project",
+  "summary": "Web Platform Tests (WPT) is a cross-browser test suite for the Web platform: a community-maintained project of short, self-contained tests — reftests, testharness.js, wdspec and more — organised by specification and run inside real browsers to verify interoperability of W3C, WHATWG and other standards. Results are published on wpt.fyi and the suite is deployed publicly at wpt.live.",
+  "tags": ["test suite", "web standards", "interoperability", "conformance testing", "w3c", "whatwg", "cross-browser", "open source", "bsd"],
+  "status": "active",
+  "platforms": ["Cross-browser (Chromium, Gecko, WebKit)", "Windows", "macOS", "Linux"],
+  "license": "BSD-3-Clause",
+  "content": {
+    "introduction": "Web standards only work if browsers implement them the same way. Writing the specification is one half of that story; proving that every implementation behaves identically is the other half. Web Platform Tests (WPT) is where that proof lives: a vast, shared suite of tests written against the specifications, run in every major browser engine, and used as the common reference for what 'implementing the standard' means.",
+    "what_is_it": "The project's own definition: 'The web-platform-tests project is a cross-browser test suite for the Web-platform stack.' Its README explains the purpose in two directions: writing tests that run in all browsers 'gives browser projects confidence that they are shipping software which is compatible with other implementations', and gives 'Web authors/developers confidence that they can actually rely on the Web platform to deliver on the promise of working across browsers and devices'.\n\nWPT is not a browser, not a benchmark and not a certification body. It is a test suite — mostly HTML pages that either verify themselves programmatically or spell out steps for a human — plus infrastructure to serve, run and report them. It is a project: sources on GitHub, docs on web-platform-tests.org, a live deployment at wpt.live and a results archive at wpt.fyi.",
+    "origin_and_history": "WPT is maintained as a community project on GitHub (`web-platform-tests/wpt`), described on its repository as 'Test suites for Web platform specs — including WHATWG, W3C, and others'. Its review documentation refers to the goal 'to encourage a high level of quality in the W3C test suites', and the master branch is automatically synced to the public deployments wpt.live and w3c-test.org — evidence of its role alongside W3C infrastructure.\n\nThe repository's scale speaks to sustained history rather than a single release cycle: as observed on 2026-11-09 it carries roughly 77,584 commits, 1,342 branches and 71,283 tags (repository statistics of that date). Substantial process changes go through a dedicated RFC repository (`web-platform-tests/rfcs`), and a documented policy governs the use of LLMs in contributions: machine-assisted tests are acceptable but 'every change must be attributable to a human who understands and can take responsibility for the proposed change'.",
+    "test_suite_design": "The suite is organised by specification. 'Most of the repository's top-level directories hold tests for specific web standards' — W3C specs under their shortnames, WHATWG specs under their subdomains, and a dedicated `css/` tree for CSS Working Group specifications. Inside a spec directory, tests are laid out flat or nested under the heading ids of the specification, with `META.yml` and `WEB_FEATURES.yml` files carrying review metadata and shared resources kept in `common`, `images`, `fonts`, `media` and `resources`.\n\nTests express expectations in several documented forms: reftests (two or more pages that must render identically), visual tests (human or per-user-agent screenshot comparison), testharness.js tests (JavaScript interfaces behaving as expected), wdspec tests (Python, exercising the WebDriver protocol), aamtests (Python, accessibility API mappings) and manual tests. The guiding properties: tests are 'short, cross-platform, and self-contained, and should be easy to run in any browser'.",
+    "languages_and_technologies": "Test authoring is web-native: HTML pages, JavaScript (the testharness.js library), CSS for rendering tests, and Python for protocol and accessibility-mapping tests (wdspec, aamtest) and for the project tooling. The `wpt` command-line frontend provides `wpt serve` (HTTP server for the suite), `wpt run` (execute tests in a browser), `wpt lint`, `wpt manifest` and `wpt install` (browser and WebDriver server provisioning).\n\nExecution targets are browser engines themselves — the suite runs in Chromium-based browsers, Gecko-based browsers and WebKit-based browsers — and the project infrastructure integrates with continuous integration systems such as Taskcluster, whose status badge is published on the README.",
+    "execution_and_infrastructure": "Tests can be run several documented ways: from the web against the public deployment (wpt.live, 'allowing anyone to run the tests by visiting from an Internet-enabled browser of their choice'), from a local checkout through `wpt serve`/`wpt run`, or from CI. Certificates for secure-context testing are part of the documented tooling.\n\nResults have a public home: wpt.fyi is 'an archive of test results collected from an array of web browsers on a regular basis', making cross-engine behaviour comparable over time. The master branch is automatically synced to wpt.live and w3c-test.org. Communication and coordination run through the `#wpt:matrix.org` chat room and the W3C `public-test-infra` mailing list.",
+    "relationship_with_web_standards": "WPT is the de facto conformance companion of the web standards process. Its test directories mirror specification families (W3C shortnames, WHATWG subdomains, CSS WG), its repository covers 'Web platform specs — including WHATWG, W3C, and others', and its review policy speaks of 'the W3C test suites'. The suite's value is interoperability evidence: the same expectations checked in every engine, so a specification change can be validated against implementations and an implementation can be validated against the specification text.\n\nWPT does not define the standards — it tests them. Conformance here means behaviour matching the shared test expectations as reviewed and merged by the project, and observable publicly on wpt.fyi; it is not a formal certification, and passing tests is evidence of interoperability, not a legal guarantee.",
+    "contribution_and_review": "Contribution is open and explicitly welcoming: 'Absolutely everyone is welcome to contribute to test development. No test is too small or too simple, especially if it corresponds to something for which you've noted an interoperability bug in a browser.' The workflow is the familiar fork-branch-pull-request model with `wpt lint` checks.\n\nQuality is enforced by peer review: 'test contributions must be reviewed by a peer', the review must happen in public, and 'Every pull request submitted to WPT must be approved by at least one project collaborator before it can be merged.' Reviewers are signalled through `META.yml` files per directory; the policy prefers merging with minor nits and filing follow-up issues over leaving pull requests open indefinitely, especially for vendor-upstreamed tests. The documented AI policy requires human attribution and responsibility for every change, and restricts LLM participation in discussions.",
+    "licensing_and_governance": "WPT is open source under the 3-Clause BSD License, 'Copyright © web-platform-tests contributors' (LICENSE.md in the repository). Governance is that of a contributor-run project: GitHub for code, issues and pull requests; a public test-review policy with collaborator approvals; an RFC repository for substantial changes; a project-administration documentation set (tooling, secrets, emergency playbook); and open coordination channels (Matrix room, `public-test-infra` mailing list) hosted alongside W3C infrastructure.",
+    "limitations_and_scope": "WPT tests specifications, not products: it cannot prove a browser is 'fully standard-compliant', only that it passes the merged test expectations of the suite. Coverage inevitably trails the specifications — tests are written by contributors as implementations advance, and gaps exist by construction. Some tests remain manual or platform-sensitive (rendering, codecs, accessibility mappings), and running the suite needs its own infrastructure (browser binaries, the wpt server, certificates).\n\nAs a community project, its pace and coverage follow contributor activity and the standards process itself; 'passing WPT' is interoperability evidence, not a warranty. The LLM policy and review process add friction by design, to keep tests attributable and reviewed.",
+    "advantages": [
+      "One shared cross-engine test suite aligned with W3C/WHATWG/CSS specifications — the common ground for interoperability discussions.",
+      "Self-contained, short tests with several well-documented formats (reftest, testharness.js, wdspec, aamtest, manual).",
+      "Public infrastructure: wpt.live deployment, wpt.fyi results archive, `wpt` tooling, CI integration.",
+      "Open governance with peer review, collaborator approvals, RFC process, and a BSD-3-Clause licence."
+    ],
+    "disadvantages": [
+      "Coverage is contributor-driven and inevitably incomplete relative to the full specification corpus.",
+      "Not a certification: passing tests is evidence, not a guarantee of standards conformance.",
+      "Running the suite requires real browsers and project tooling; some tests are manual or platform-dependent.",
+      "Review and attribution policies (human responsibility, approvals) slow high-volume or automated contributions by design."
+    ],
+    "who_is_it_for": [
+      "Browser engine developers verifying implementations against shared expectations, and tracking regressions over releases.",
+      "Specification editors and standards participants needing implementation evidence for W3C/WHATWG/CSS work.",
+      "Web platform researchers, tooling authors and interoperability advocates who need a public, comparable corpus of cross-browser behaviour."
+    ],
+    "who_is_it_not_for": [
+      "End users and application developers seeking a product: WPT is a test suite and infrastructure, not software to run your site.",
+      "Anyone looking for a formal compliance certificate — WPT provides evidence and archives, not warranties.",
+      "Teams testing their own applications: application-level tests belong in tools such as Playwright or Selenium; WPT tests the platform itself."
+    ],
+    "verdict": "Web Platform Tests is the shared bedrock of web interoperability: a specification-aligned, cross-browser test suite with public results and open, review-based governance. For the browser and standards world it is indispensable infrastructure; for everyone else it is best read as the open evidence trail of what the Web platform actually does — powerful, incomplete by nature, and never a certificate."
+  },
+  "links": {
+    "documentation": "https://web-platform-tests.org/",
+    "repository": "https://github.com/web-platform-tests/wpt",
+    "license": "https://raw.githubusercontent.com/web-platform-tests/wpt/master/LICENSE.md",
+    "test_suite_design": "https://web-platform-tests.org/test-suite-design.html",
+    "reviewing_tests": "https://web-platform-tests.org/reviewing-tests/index.html",
+    "results_dashboard": "https://wpt.fyi/",
+    "live_deployment": "https://wpt.live/",
+    "rfcs": "https://github.com/web-platform-tests/rfcs"
+  },
+  "sources": [
+    {
+      "title": "web-platform-tests documentation home - 'cross-browser test suite for the Web-platform stack', purpose (browser and author confidence), project hubs (GitHub, docs, wpt.live, wpt.fyi, Matrix, public-test-infra)",
+      "url": "https://web-platform-tests.org/",
+      "type": "official_documentation",
+      "publisher": "web-platform-tests project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "web-platform-tests README - project definition, wpt command-line tools (serve/run/lint/manifest/install), master synced to wpt.live and w3c-test.org, contribution workflow, RFC repository, LLM policy, repository statistics observed 2026-11-09",
+      "url": "https://raw.githubusercontent.com/web-platform-tests/wpt/master/README.md",
+      "type": "official_documentation",
+      "publisher": "web-platform-tests project (GitHub)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Test Suite Design documentation - per-specification directory layout (W3C shortnames, WHATWG subdomains, css/), META.yml and WEB_FEATURES.yml metadata, test types (reftests, visual tests, testharness.js, wdspec, aamtest, manual tests), self-contained cross-platform test principles",
+      "url": "https://web-platform-tests.org/test-suite-design.html",
+      "type": "official_documentation",
+      "publisher": "web-platform-tests project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Reviewing Tests documentation - peer review policy for W3C test suites, public review, at least one collaborator approval per pull request, META.yml reviewers, merge-with-nits policy",
+      "url": "https://web-platform-tests.org/reviewing-tests/index.html",
+      "type": "official_documentation",
+      "publisher": "web-platform-tests project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "web-platform-tests GitHub repository - 'Test suites for Web platform specs — including WHATWG, W3C, and others', per-spec directory tree, activity statistics",
+      "url": "https://github.com/web-platform-tests/wpt",
+      "type": "official_source_code",
+      "publisher": "web-platform-tests project (GitHub)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "web-platform-tests LICENSE.md - 3-Clause BSD License (web-platform-tests contributors)",
+      "url": "https://raw.githubusercontent.com/web-platform-tests/wpt/master/LICENSE.md",
+      "type": "legal_document",
+      "publisher": "web-platform-tests project (GitHub)",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}

@@ -1,0 +1,77 @@
+{
+  "id": "quad9",
+  "name": "Quad9",
+  "type": "service",
+  "summary": "Quad9 is a free, open recursive DNS service operated by the Swiss non-profit Quad9 Foundation, combining privacy by design — end-user IP addresses are never logged — with security blocking of malicious domains fed by threat intelligence from dozens of providers. It supports DoT, DoH and DNSCrypt, runs resolver clusters worldwide, and commits in writing to withdraw from jurisdictions that would force it to harm its users.",
+  "tags": ["dns", "recursive resolver", "public dns", "non-profit", "privacy", "security", "malware blocking", "switzerland", "dnssec", "service"],
+  "status": "active",
+  "platforms": ["Any DNS-capable device (IPv4 and IPv6)"],
+  "license": "Free service operated by the non-profit Quad9 Foundation",
+  "content": {
+    "introduction": "Most people never choose their DNS resolver — the network they connect to does it for them. Quad9 is a public resolver built on the opposite premise: that the service answering one's name lookups should be run for the public benefit, in a strong legal jurisdiction, with blocking of known-malicious domains and without keeping records of who asked what. It is the security-and-privacy end of the public DNS spectrum, run by a foundation rather than a corporation.",
+    "what_is_it": "Quad9's own documentation describes it as 'a Swiss-based, non-profit organization which operates a privacy-and-security focused, open DNS recursive service for the masses, which is used by an estimated tens of millions of devices worldwide, and is intended for everyone, from home users to large-scale enterprises.'\n\nConcretely, it is a free service that replaces the DNS configuration of an ISP or enterprise: 'When your computer performs any Internet transaction that uses the DNS… Quad9 blocks lookups of malicious host names from an up-to-the-minute list of threats', protecting against 'malware, phishing, spyware, and botnets'. The service is operated by the Swiss-based Quad9 Foundation, 'whose mission is to provide a safer and more robust Internet for everyone'.",
+    "origin_and_history": "The homepage states the platform 'has been designed to be GDPR-compliant from the first public announcement in 2017', which fixes the earliest date established by the sources consulted here (the precise founding date is [NON ÉTABLI] here). A defining historical move is the organisation's relocation to Switzerland — documented on the site through its own text and supporting statements from Swiss and European actors (Digitale Gesellschaft, NCSC Switzerland and others): the policies 'are now bound by the strength of Swiss law', and the Swiss government reportedly provided findings that Quad9 will not be required to retain personal information.\n\nThe service's identity is charter-driven: 'Quad9 is the only large DNS resolver with a founding charter that includes privacy as a primary goal' — a claim of the organisation itself [ÉDITEUR]. Public documentation includes a transparency report and human-rights considerations alongside the ordinary service pages.",
+    "operation_and_infrastructure": "Quad9 routes queries 'through a secure network of servers around the globe'; the homepage reports '230+ resolver clusters in over 110 countries' and stresses deployment 'in hundreds of communities around the world in order to provide service locally', with the non-commercial status giving 'equal priority to otherwise underserved regions' [ÉDITEUR statistics and claims]. The resolver set includes a security-enabled service at 9.9.9.9 (documented in the docs overview).\n\nThreat blocking is fed by external intelligence: 'threat intelligence from more than a dozen of the industry's leading cybersecurity companies' — the homepage counts '25+ threat intelligence providers' — giving a real-time view of which domains host malware or other threats; known-bad lookups are refused. The homepage counter '670M+ average daily blocks' conveys scale [ÉDITEUR].",
+    "protocols_and_encryption": "Quad9 supports the classic DNS transports plus three encrypted client-side options: 'DNS over TLS (DoT), DNS over HTTPS (DoH), and DNSCrypt' — a broader encrypted-transport menu than most rivals. Encryption is presented as part of the privacy posture ('Connections can employ encryption if your system supports it'), protecting the last hop between device and resolver.\n\nAs a recursive service it performs full resolution on the user's behalf, with DNSSEC in the validation chain per its service design; the detailed technical profile of each endpoint variant lives in the project documentation. [VERSION] Endpoint menus and protocol support evolve; the docs overview at consultation time lists DoT, DoH and DNSCrypt explicitly.",
+    "privacy_and_security_model": "Privacy is the service's founding commitment and is stated in absolute terms: 'Quad9 will never log/record enduser IP addresses. Ever.' — 'When your devices use Quad9 normally, no data containing your IP address is ever logged in any Quad9 system.' The docs tie this to law, not only policy: 'As an organization based in Switzerland, Quad9 is bound by strict Swiss internet privacy laws', and the data-and-privacy framework includes a transparency report, an 'anomalous conditions' document and human-rights considerations.\n\nThe governance commitment is unusually explicit: 'If a government were to use national law to attempt to force Quad9 to act in a way that would harm users (such as collecting information that might de-anonymize an at-risk individual), Quad9 would withdraw from operations in that country', keeping the service reachable from nearby countries instead. The same page is candid about limits: 'Our privacy policy is a shield to protect the privacy rights of the public. However, it is not a shield for individuals who seek to harm others with impunity.' Security-wise, malicious-domain blocking uses threat-intelligence feeds from 25+ providers, with the FAQ and privacy pages describing the balance Quad9 seeks between privacy, security and performance. [ÉDITEUR] All of these are the operator's commitments.",
+    "configuration_and_access": "Setup is a DNS configuration change on any device or router; the support section publishes set-up guides, and the documented service endpoint for the security-enabled resolver is 9.9.9.9 (with further addresses and encrypted endpoints in the project documentation). The service is free and open to everyone — 'from home users to large-scale enterprises' — and funded in part by donations ('Quad9 is funded in part by users just like you'), with no advertising-driven data use.",
+    "governance_and_operator": "The operator is the Quad9 Foundation, a Swiss non-profit organisation with a mission statement (a safer, more robust Internet), a governing board described as multi-stakeholder, and public positions on human rights and transparency. Funding mixes donations with support from sponsors and partners (the site thanks institutions welcoming the Swiss move); commercial status is explicitly rejected as a model: the service exists 'to serve the public benefit directly, rather than profiting from their personal data'.\n\nLegal domicile is a governance feature: Swiss law, GDPR-adjacent guarantees, and the documented willingness to leave a jurisdiction rather than compromise users distinguish its model from corporate resolvers. [ÉDITEUR] The organisational claims are Quad9's own; no independent audit of practices is documented in the sources consulted here.",
+    "limitations_and_scope": "Quad9 is a recursive DNS service: it does not encrypt general device traffic, does not host domains, and its malware blocking is DNS-level category blocking — it cannot inspect the content of reached sites and its threat lists are only as good as their feeds. The privacy stance (never logging end-user IPs) narrows operational visibility by design; the homepage admits conflicts between privacy, security and performance occur and are balanced case by case.\n\nBeing a non-profit means reliance on donations and partners; coverage and anycast reach, while broad ('230+ clusters', [ÉDITEUR]), remain a single organisation's footprint. Blocking determinations are policy decisions of the operator and its intelligence partners; the appeal/exception process is part of the service's documentation set.",
+    "advantages": [
+      "Charter-driven privacy: end-user IP addresses never logged, backed by Swiss law and a documented withdrawal-from-jurisdiction commitment.",
+      "Security blocking of malware, phishing, spyware and botnet domains from 25+ threat-intelligence providers, free of charge.",
+      "Broad encrypted-transport support: DoT, DoH and DNSCrypt, alongside classic DNS.",
+      "Non-profit governance with transparency report, human-rights considerations and public accountability documents."
+    ],
+    "disadvantages": [
+      "DNS-level blocking is blunt: category lists can over- or under-block, and no content inspection happens.",
+      "A single non-funded-by-commerce organisation's reach and features depend on donations and partners.",
+      "No independent audit of practices documented in the sources consulted (commitments are self-published).",
+      "Performance and coverage vary by region despite the broad cluster footprint (claims of scale are the operator's [ÉDITEUR])."
+    ],
+    "who_is_it_for": [
+      "Privacy-first users who want a no-client-IP-logging resolver under a non-profit charter and strong legal jurisdiction.",
+      "Households, schools and enterprises wanting free DNS-level blocking of malware, phishing and botnet domains.",
+      "Users needing encrypted DNS beyond the usual DoH/DoT — DNSCrypt is supported too."
+    ],
+    "who_is_it_not_for": [
+      "Users wanting unfiltered plain resolution with no blocking of any kind (a non-filtering variant exists in the project's documentation, but the flagship service blocks).",
+      "Anyone treating DNS blocking as a complete security solution — endpoint protection and content inspection are out of scope.",
+      "Organisations needing contractual SLAs and enterprise support: Quad9 is a donation-funded public service."
+    ],
+    "verdict": "Quad9 is the public-DNS field's non-profit option with teeth: Swiss-law privacy in absolute wording, real-time malicious-domain blocking from a wide intelligence consortium, and governance documents (transparency, human rights, jurisdictional withdrawal) that no commercial resolver matches in form. It suits users who want security and privacy to be the operator's charter rather than a product feature — while its DNS-level limits, donation-funded scale and self-published commitments should be read alongside the promise."
+  },
+  "links": {
+    "website": "https://quad9.net/",
+    "documentation": "https://docs.quad9.net/",
+    "privacy_page": "https://quad9.net/service/privacy/",
+    "data_and_privacy_policy": "https://quad9.net/privacy/policy/",
+    "transparency_report": "https://quad9.net/about/transparency-report/",
+    "setup_guides": "https://quad9.net/support/set-up-guides",
+    "donations": "https://quad9.net/donate"
+  },
+  "sources": [
+    {
+      "title": "Quad9 home - service definition, threat blocking (malware/phishing/spyware/botnets), Quad9 Foundation (Swiss non-profit), statistics (670M+ daily blocks, 230+ clusters in 110+ countries, 25+ intelligence providers), no-IP-logging statement, GDPR-compliant design since 2017 announcement, Switzerland relocation",
+      "url": "https://quad9.net/",
+      "type": "official_site",
+      "publisher": "Quad9 Foundation",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Quad9 Documentation overview - 'Swiss-based, non-profit organization... open DNS recursive service', estimated tens of millions of devices, 'will never log/record enduser IP addresses. Ever.', secure service 9.9.9.9, DoT/DoH/DNSCrypt support, donation funding",
+      "url": "https://docs.quad9.net/",
+      "type": "official_documentation",
+      "publisher": "Quad9 Foundation",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Quad9 Privacy page - charter (no personal data collection, malicious-domain blocking, local deployment), withdrawal-from-country commitment under legal pressure, limits of the policy ('not a shield for individuals who seek to harm others'), transparency report and human-rights documents",
+      "url": "https://quad9.net/service/privacy/",
+      "type": "official_documentation",
+      "publisher": "Quad9 Foundation",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}

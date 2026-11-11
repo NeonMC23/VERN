@@ -1,0 +1,85 @@
+{
+  "id": "cef",
+  "name": "Chromium Embedded Framework (CEF)",
+  "type": "framework",
+  "summary": "CEF (Chromium Embedded Framework) is an open-source framework for embedding Chromium-based browsers in other applications: it wraps the Chromium browser engine behind C and C++ APIs so native applications can display web content without building a browser themselves. Founded in 2008 and BSD-licensed, it ships binary distributions for Windows, macOS and Linux and supports windowed, lightweight-shell and off-screen rendering use cases.",
+  "tags": ["embedded browser", "chromium", "framework", "c++", "c api", "off-screen rendering", "native applications", "open source", "bsd"],
+  "status": "active",
+  "platforms": ["Windows", "macOS", "Linux"],
+  "license": "BSD-3-Clause",
+  "content": {
+    "introduction": "Many native applications need to display web content — an help centre, a dashboard, a map — without becoming a web browser. The Chromium Embedded Framework (CEF) exists for exactly that job: it is a layer of stable APIs around the Chromium browser engine that lets a C or C++ application open web pages, run web applications, or render web content behind its own interface. Instead of compiling the enormous Chromium codebase itself, a developer downloads a CEF binary distribution, links against it, and gets a browser-grade web platform inside the application.",
+    "what_is_it": "CEF is a framework, not a browser: its own README describes it as 'a simple framework for embedding Chromium-based browsers in other applications'. Where the Chromium project focuses on the Google Chrome application, CEF focuses on 'facilitating embedded browser use cases in third-party applications', insulating the developer from Chromium and Blink internals through stable APIs, release branches that track Chromium releases, and ready-made binary distributions.\n\nThe typical use cases listed by the project are: embedding an HTML5-compliant web browser control in an existing native application; creating a lightweight native 'shell' whose interface is written mostly with web technologies; rendering web content off-screen in applications that have their own drawing systems; and hosting automated tests of web properties. The host application keeps control of everything around the web content — its own menus, windowing and lifecycle — while CEF supplies the web engine.",
+    "origin_and_history": "CEF was founded by Marshall Greenblatt in 2008 as an open-source project based on the Google Chromium project (the LICENSE file dates the copyright from 2008). The second generation, CEF3, moved the project onto Chromium's multi-process Content API, which the documentation credits with improved stability (JavaScript runs in its own process), GPU-accelerated WebGL and 3D CSS, and faster access to new web features.\n\nCEF tracks Chromium closely: it maintains development and release branches that follow Chromium branches, and security fixes arrive as Chromium releases — the project instructs distributors to keep their CEF version up to date because Chromium vulnerabilities affect CEF at the matching Chromium version. The project states there are 'over 100 million installed instances of CEF around the world' (a claim of the project itself, not independently verified here).",
+    "architecture_and_runtime": "CEF's base framework exposes C and C++ programming interfaces through native libraries (libcef and a C++ wrapper) that hide Chromium and Blink implementation details. Internally it is a multi-process system modelled on Chromium's Content API: JavaScript and plugins run in separate processes from the host application, and CEF documents explicit process types, threads, and inter-process communication (including asynchronous JavaScript bindings and a generic message router).\n\nThe documented object model revolves around a few classes: CefApp and CefClient connect the host to the framework, CefBrowser and CefFrame represent the browser and its frames, and CefSettings configures startup behaviour. A distinctive capability is off-screen rendering (OSR): applications with their own drawing frameworks can receive painted web content instead of a native window. The host can optionally take over resource loading, navigation, context menus and printing, and define custom protocols, plugins, and JavaScript extensions.",
+    "languages_and_technologies": "CEF itself is written in C and C++ and exposes C and C++ APIs; the web content it renders is standard HTML, CSS and JavaScript, executed by the embedded Chromium engine. The project points to community bindings for other languages and frameworks — CefSharp and CefGlue (.NET), java-cef (Java), cefpython (Python), CEF4Delphi (Delphi), and Go bindings — which are explicitly 'not maintained by CEF'.\n\nIntegration is build-system friendly: binary distributions ship a CMake configuration, headers and prebuilt libraries, and the project documents building from source for developers who need it.",
+    "integration_in_software": "A developer downloads a binary distribution (all files needed to build a CEF-based application on Windows, macOS or Linux), links the CEF libraries into the native application, and creates browser instances through the documented API. The host decides where web content appears: in a native window, in a lightweight shell window, or off-screen into its own rendering pipeline.\n\nBecause the host keeps control of navigation, resource loading, menus and printing, CEF is commonly used to add web-based panels to existing native software rather than to build whole applications from web technology. Automated testing is an official use case as well, via the DevTools remote debugging protocol and ChromeDriver.",
+    "security_model": "CEF inherits Chromium's multi-process architecture: web content, JavaScript and plugins execute in separate processes from the host application, which the documentation lists as a stability and security advantage. Its security guidance is explicit about the supply chain: 'CEF is based on Chromium, so Chromium security vulnerabilities (CVEs) are likely to affect CEF using the same Chromium version. Applications that distribute CEF should keep their CEF version up to date.' Security fixes are announced through the Chrome Releases blog; CEF runs no separate security announcement channel, and the project warns there may be a delay between a Chromium release and the availability of matching CEF builds.\n\nThe sandboxing of renderer processes follows Chromium's own model and options; CEF documentation discusses process layout and command-line switches for hosts to configure. Responsibility is shared: the framework delivers the engine, the host application owns its integration code and update cadence.",
+    "platforms_and_hardware_architectures": "CEF binary distributions exist for Windows, macOS and Linux (the three platforms named by the documentation), on the processor families Chromium supports there. The application-layout documentation covers the platform differences of packaging (Windows, Linux and macOS each have a documented layout section). Other languages reached through third-party bindings follow those bindings' own support.",
+    "licensing_and_governance": "CEF is 'a BSD-licensed open source project': its LICENSE file carries a 3-clause BSD licence, copyright Marshall A. Greenblatt (2008–2020) with portions copyrighted by Google (2006–2009), including the usual clause forbidding endorsement using the Google or Chromium Embedded Framework names.\n\nDevelopment happens in the open on GitHub, with a public issue tracker, a support forum, documentation published via GitHub Pages, and binary builds hosted publicly. Numerous individuals and organisations contribute; the project welcomes community involvement and points to sponsorships for infrastructure. Release engineering is organised around branches that track Chromium's.",
+    "limitations_and_scope": "CEF is not a browser and ships no end-user browser product: it is the engine and API layer, and the application around it — interface, updates, distribution — is the integrator's responsibility. That makes the maintenance cost real: CEF tracks Chromium releases, security fixes arrive on the Chromium schedule (with possible delays before matching CEF builds), and upgrading means moving between CEF branches.\n\nThe base framework supports C and C++; other languages depend on external bindings that 'are not maintained by CEF'. The API surface is large (processes, threads, reference counting, IPC), and the documentation is written for developers comfortable with native C++ integration. Web compatibility is that of the bundled Chromium version — version-dependent by construction.",
+    "advantages": [
+      "Turns a native application into a host for full web content without building a browser: stable C/C++ APIs over Chromium and Blink.",
+      "Off-screen rendering lets applications composite web content into their own drawing systems, not only into native windows.",
+      "Permissive BSD-3-Clause licence and public binary distributions lower the cost of adoption.",
+      "Multi-process design isolates web content from the host application, following Chromium's architecture."
+    ],
+    "disadvantages": [
+      "Security maintenance follows Chromium's cadence: distributors must track CEF/Chromium updates themselves, and matching builds can lag releases.",
+      "Native C++ integration (processes, threads, reference counting, IPC) has a steep learning curve; non-C++ languages rely on third-party bindings outside the project.",
+      "Binary size and update logistics fall on the integrating application: CEF is a browser-grade engine to package and service.",
+      "Version pinning ties the application's web platform to a specific Chromium generation."
+    ],
+    "who_is_it_for": [
+      "Native application developers (C/C++) who need to embed web content or web applications inside existing software.",
+      "Teams building lightweight 'shell' applications whose interface is written with web technologies but distributed as native apps.",
+      "Developers needing off-screen web rendering inside custom drawing or game-like engines, or automated test hosts for web properties."
+    ],
+    "who_is_it_not_for": [
+      "End users: CEF is a developer framework with no user interface of its own.",
+      "Developers wanting a ready-made browser: CEF embeds browser capability; it is not a browser product.",
+      "Web-only teams with no native integration work: CEF's API layer only matters inside a native host application."
+    ],
+    "verdict": "CEF is the established way to put a real Chromium-based web engine inside a native application while keeping control of the surrounding software — a strong fit for desktop software vendors, custom shells and off-screen rendering, provided the team accepts native C++ integration and owns the Chromium update burden. For readers who never ship native code, it is best understood as the engine behind many 'native' apps that quietly display web content."
+  },
+  "links": {
+    "project_repository": "https://github.com/chromiumembedded/cef",
+    "documentation": "https://chromiumembedded.github.io/cef/",
+    "general_usage": "https://chromiumembedded.github.io/cef/general_usage.html",
+    "tutorial": "https://chromiumembedded.github.io/cef/tutorial",
+    "binary_downloads": "https://cef-builds.spotifycdn.com/index.html",
+    "license": "https://github.com/chromiumembedded/cef/blob/master/LICENSE.txt",
+    "issue_tracker": "https://github.com/chromiumembedded/cef/issues"
+  },
+  "sources": [
+    {
+      "title": "CEF official README - project definition ('a simple framework for embedding Chromium-based browsers'), 2008 founding and BSD licence statement, use cases, C/C++ interfaces, security-update policy, external bindings",
+      "url": "https://raw.githubusercontent.com/chromiumembedded/cef/master/README.md",
+      "type": "official_documentation",
+      "publisher": "Chromium Embedded Framework project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "CEF General Usage documentation - CEF3 multi-process architecture (Chromium Content API), object model (CefApp/CefClient/CefBrowser/CefFrame), off-screen rendering, IPC and network layer, binary distributions for Windows/macOS/Linux",
+      "url": "https://chromiumembedded.github.io/cef/general_usage.html",
+      "type": "official_documentation",
+      "publisher": "Chromium Embedded Framework project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "CEF LICENSE.txt - BSD 3-clause licence text, copyright Marshall A. Greenblatt 2008-2020 and Google Inc. 2006-2009",
+      "url": "https://raw.githubusercontent.com/chromiumembedded/cef/master/LICENSE.txt",
+      "type": "legal_document",
+      "publisher": "Chromium Embedded Framework project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "CEF official GitHub repository - source tree, issue tracker and development activity",
+      "url": "https://github.com/chromiumembedded/cef",
+      "type": "official_source_code",
+      "publisher": "Chromium Embedded Framework project",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}

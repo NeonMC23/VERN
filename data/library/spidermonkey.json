@@ -1,0 +1,99 @@
+{
+  "id": "spidermonkey",
+  "name": "SpiderMonkey",
+  "type": "technology",
+  "summary": "SpiderMonkey is Mozilla's open-source JavaScript and WebAssembly engine, written in C++, Rust and JavaScript: it runs the JavaScript inside Firefox, can be embedded in C++ and Rust applications, and can run as a standalone shell. It is documented as a project in its own right and is best known as the JavaScript layer of Gecko, Mozilla's rendering engine.",
+  "tags": ["javascript engine", "webassembly", "mozilla", "firefox", "gecko", "embedded engine", "open source", "jit compiler", "rust"],
+  "status": "active",
+  "platforms": ["Windows", "macOS", "Linux", "Android"],
+  "license": "MPL-2.0",
+  "content": {
+    "introduction": "SpiderMonkey is the software component that executes JavaScript for Mozilla Firefox and for a number of other programs. It takes JavaScript source text, compiles it through several stages of increasingly optimized machine code, and manages program memory automatically. It is an open-source project with its own documentation, community and embedding support — and it is also one component of a much larger system, which is why its relationship with Gecko, Mozilla's rendering engine, is explained in a dedicated section below.",
+    "what_is_it": "A JavaScript engine executes JavaScript. SpiderMonkey is Mozilla's JavaScript engine: Firefox Source Docs describes it as 'the JavaScript and WebAssembly implementation library of the Mozilla Firefox web browser', with behaviour defined by the ECMAScript (JavaScript) and WebAssembly specifications. The project's own site states it is 'written in C++, Rust and JavaScript', that it can be embedded into C++ and Rust projects, and that it can be run as a stand-alone shell — a small program for executing scripts directly.\n\nLike every JavaScript engine, SpiderMonkey executes the language itself. Web page structure (the DOM) and browser APIs are provided by the host around it; in Firefox, that host is Gecko.",
+    "origin_and_history": "MDN's official documentation identifies SpiderMonkey as 'the first ever JavaScript engine, created by Brendan Eich at Netscape': it was written in the mid-1990s to run the new JavaScript language inside Netscape Navigator, and was later stewarded by the Mozilla project as Netscape's code was opened up.\n\nOver the following decades the engine gained several generations of just-in-time (JIT) compilers; Mozilla's documentation and blog trace this line through TraceMonkey, JägerMonkey and IonMonkey to today's WarpMonkey, which replaced IonMonkey as the highest optimization tier. Recent milestones published on the project's official channels include a new regular-expression engine (2020), the Baseline Interpreter for faster cold-code execution (2019), and the removal of the legacy asm.js execution mode (2026).",
+    "javascript_engine_and_technical_architecture": "Mozilla's documentation describes SpiderMonkey as a layered system. Source text is parsed into an abstract syntax tree and lowered to bytecode via a 'Stencil' representation that does not use the garbage collector; lazy parsing defers compiling functions until they are first executed, which saves time and memory since many functions are never called.\n\nBytecode runs first in an interpreter written in C++, then 'tiers up' through JIT compilers as code runs more often: the Baseline Interpreter attaches small inline-cache fragments to individual bytecodes, the Baseline Compiler translates whole functions to machine code, and WarpMonkey — the highest tier — inlines and specializes code based on collected feedback. Memory is managed by a garbage-collected heap whose cells are traced from roots, and object 'shapes' let the JITs quickly recognize similarly structured objects. The project keeps extensive design notes in the source itself (SMDOC comments) and publishes architecture documentation on Firefox Source Docs.",
+    "languages_and_technologies": "SpiderMonkey's behaviour is defined by the ECMAScript (JavaScript) and WebAssembly specifications; language features follow the public TC39 process, and Mozilla maintains a JavaScript language-feature checklist for engine work. The engine is written in C++, Rust and JavaScript — the last for self-hosted built-in functions — and its embedding surface is the JSAPI, usable from both C++ and Rust. Scripts can also be run through the project's stand-alone shell, and the engine can be compiled to the WebAssembly System Interface (WASI) for non-traditional environments.",
+    "integration_in_software": "SpiderMonkey's primary integration is Gecko, the rendering engine used by Firefox and Thunderbird (see the next section). Beyond the browser, MDN lists SpiderMonkey as used in Firefox, Servo and Flow, with non-browser uses including the MongoDB and CouchDB databases.\n\nFor external embedders, Mozilla publishes embedding examples for C++ (the spidermonkey-embedding-examples repository), the Servo project maintains Rust bindings (mozjs), and a stand-alone shell is available for running scripts without any host application.",
+    "relationship_with_gecko": "SpiderMonkey and Gecko are related but not interchangeable, and Mozilla's own documentation draws the line clearly.\n\nGecko is 'Mozilla's rendering engine for the web': its official overview describes it as made up of HTML parsing and rendering, networking, JavaScript, IPC, DOM, OS widget abstractions and more, shared by applications such as Firefox for Desktop, Firefox for Android and Thunderbird. In that overview, the JavaScript part is listed as a component titled 'JavaScript (SpiderMonkey)', responsible for 'running JavaScript code both in content processes for webpages as well as the JavaScript code that makes up the bulk of the UI in applications like Firefox and Thunderbird'.\n\nSpiderMonkey, in turn, is documented as a project with its own source tree (js/src), documentation (Firefox Source Docs and spidermonkey.dev), team and embedding story: 'the JavaScript and WebAssembly implementation library of the Mozilla Firefox web browser'. In short: SpiderMonkey executes the language; Gecko supplies the web platform around it — DOM, networking, rendering, UI. This mirrors the usual engine/host split in the industry (a JavaScript engine does not provide the DOM; the host does).\n\nThis page documents SpiderMonkey only. Gecko is a separate and larger subject with its own documentation; no structural relationship between them is asserted here beyond the facts stated in Mozilla's sources.",
+    "platforms_and_hardware_architectures": "SpiderMonkey is built from the Firefox source tree and therefore ships on the platforms where Firefox runs: Mozilla's overview names Firefox for Desktop and Firefox for Android, and the project documents building and testing on its source-docs site for the major desktop systems (Windows, macOS and Linux). For other embedders, the practical platform set follows the host application; the project additionally demonstrates compiling the engine to WASI targets. Architectures follow Firefox's: standard desktop and mobile processor families.",
+    "licensing_and_governance": "Mozilla's licensing policy states that Mozilla source code is made available under the Mozilla Public License and that binaries released by the Mozilla project are distributed under the MPL; the license text in force is the Mozilla Public License, Version 2.0. (The policy page itself notes that it is informative rather than authoritative: individual source file headers take precedence.)\n\nSpiderMonkey is developed inside the Firefox code base, with bugs filed publicly in Bugzilla under Core / JavaScript Engine. The project maintains its own site (spidermonkey.dev) with blog, documentation index, chat channels and contribution guidance, and development is led within the Mozilla project behind Firefox.",
+    "limitations_and_scope": "SpiderMonkey executes JavaScript and WebAssembly; it is not a browser engine and provides no DOM, networking or rendering — those live in Gecko or in another host application. The embedding documentation makes the boundary explicit: embedders get the JSAPI and related interfaces, and must provide everything else themselves.\n\nThe documentation is written substantially for people working on or with the engine and assumes strong C++ knowledge. The multi-tier JIT design trades memory and code complexity for speed — a cost embedders inherit — and, as SpiderMonkey evolves inside the Firefox release train, external embedders track a fast-moving codebase whose interfaces are primarily documented for engine developers.",
+    "advantages": [
+      "Deeply documented architecture: SMDOC in-source notes, Firefox Source Docs and the project site describe every layer from parser to JIT tiers and garbage collector.",
+      "Embeddable in C++ and Rust applications, with official embedding examples, plus a stand-alone shell and a WASI build option.",
+      "Standards-driven: behaviour defined by the ECMAScript and WebAssembly specifications, with language features tracked through the public TC39 process.",
+      "Open source under the Mozilla Public License 2.0, developed in the open with public bug tracking and its own community channels."
+    ],
+    "disadvantages": [
+      "Provides no web platform features of its own: DOM and browser APIs come from the host (in Firefox, Gecko), so a standalone embedding is a language runtime only.",
+      "The documentation assumes strong C++ knowledge and is aimed mainly at engine developers and Firefox contributors, which raises the entry cost for external embedders.",
+      "The multi-tier JIT design carries real memory and code-complexity costs that embedders must budget for.",
+      "Evolution follows the Firefox release train: changes land for Firefox's needs first, without a separate stability contract for third-party embedders."
+    ],
+    "who_is_it_for": [
+      "Developers embedding a JavaScript and WebAssembly runtime into C++ or Rust software.",
+      "Firefox and Gecko contributors, and engineers studying how a modern multi-tier JavaScript engine is structured.",
+      "Tooling and server teams (such as the databases MongoDB and CouchDB) that reuse Mozilla's engine for scripting."
+    ],
+    "who_is_it_not_for": [
+      "End users: SpiderMonkey has no user interface of its own.",
+      "Developers who need DOM or web APIs outside a browser: those are provided by Gecko or another host, not by the engine.",
+      "Anyone looking for a lightweight interpreter: SpiderMonkey is a full JIT-based engine with an associated build and memory footprint."
+    ],
+    "verdict": "SpiderMonkey is the natural reference for anyone working with Firefox and Gecko internals, or looking for an embeddable, standards-driven JavaScript and WebAssembly engine with Mozilla's engineering documentation behind it. Its scope stops at language execution — everything around it comes from the host — so outside a browser its usefulness depends on what the embedding application builds on top, while inside Firefox it is the quiet layer that runs both the web's scripts and much of the browser's own interface code."
+  },
+  "links": {
+    "project_site": "https://spidermonkey.dev/",
+    "documentation": "https://firefox-source-docs.mozilla.org/js/index.html",
+    "gecko_overview": "https://firefox-source-docs.mozilla.org/overview/gecko.html",
+    "embedding_examples": "https://github.com/mozilla-spidermonkey/spidermonkey-embedding-examples",
+    "source_code": "https://searchfox.org/mozilla-central/source/js/src",
+    "blog": "https://spidermonkey.dev/blog",
+    "license_policy": "https://www.mozilla.org/en-US/foundation/licensing/"
+  },
+  "sources": [
+    {
+      "title": "SpiderMonkey official project site - description (Mozilla's JavaScript and WebAssembly Engine), implementation languages, embedding in C++/Rust, stand-alone shell, WASI build, blog and documentation links",
+      "url": "https://spidermonkey.dev/",
+      "type": "official_site",
+      "publisher": "Mozilla SpiderMonkey team",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "SpiderMonkey - Firefox Source Docs - official engine overview: JavaScript and WebAssembly implementation library of Firefox, parser/Stencil and lazy parsing, interpreter, Baseline and WarpMonkey JIT tiers, garbage collector, shapes and JSAPI",
+      "url": "https://firefox-source-docs.mozilla.org/js/index.html",
+      "type": "official_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "Gecko overview - Firefox Source Docs - Gecko components incl. 'JavaScript (SpiderMonkey)': engine runs JavaScript in content processes and in the application UI of Firefox and Thunderbird",
+      "url": "https://firefox-source-docs.mozilla.org/overview/gecko.html",
+      "type": "official_documentation",
+      "publisher": "Mozilla",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "MDN JavaScript technologies overview - SpiderMonkey: first ever JavaScript engine, created by Brendan Eich at Netscape; used in Firefox, Servo, Flow; non-browser usage incl. MongoDB and CouchDB",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/JavaScript_technologies_overview",
+      "type": "official_documentation",
+      "publisher": "Mozilla (MDN)",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "Mozilla Licensing Policies - Mozilla source code and release binaries under the Mozilla Public License; per-file headers authoritative",
+      "url": "https://www.mozilla.org/en-US/foundation/licensing/",
+      "type": "legal_document",
+      "publisher": "Mozilla Foundation",
+      "accessed": "2026-11-08"
+    },
+    {
+      "title": "Mozilla Public License, Version 2.0 - full license text",
+      "url": "https://www.mozilla.org/en-US/MPL/2.0/",
+      "type": "legal_document",
+      "publisher": "Mozilla Foundation",
+      "accessed": "2026-11-08"
+    }
+  ],
+  "last_verified": "2026-11-08"
+}

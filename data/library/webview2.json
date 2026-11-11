@@ -1,0 +1,92 @@
+{
+  "id": "webview2",
+  "name": "Microsoft Edge WebView2",
+  "type": "technology",
+  "summary": "Microsoft Edge WebView2 is a control, SDK and runtime for embedding web technologies (HTML, CSS, JavaScript) in native Windows applications, using Microsoft Edge (Chromium) as the rendering engine. Apps embed the WebView2 control, develop against the WebView2 SDK, and depend on the redistributable WebView2 Runtime — Evergreen (auto-updated) or Fixed Version — rather than on the Edge browser itself.",
+  "tags": ["webview", "microsoft edge", "chromium", "windows", "control", "sdk", "runtime", "native applications", "hybrid apps"],
+  "status": "active",
+  "platforms": ["Windows"],
+  "license": "Microsoft Software License Terms (proprietary)",
+  "content": {
+    "introduction": "Windows developers often want part of an application to be web content — a report viewer, a sign-in page, a dashboard — while the rest stays native. Microsoft Edge WebView2 provides exactly that: a control that displays web technologies inside a native Windows application, powered by the same Chromium engine as Microsoft Edge. It is Microsoft's component for hybrid applications, where web and native code share one product.",
+    "what_is_it": "Microsoft's documentation defines WebView2 as a control: 'The Microsoft Edge WebView2 control allows you to embed web technologies (HTML, CSS, and JavaScript) in your native apps. The WebView2 control uses Microsoft Edge as the rendering engine to display the web content in native apps.'\n\nWebView2 is not a browser: it is a platform of three main pieces. The SDK provides the development APIs; the control is the visible web area embedded in the application; and the WebView2 Runtime is the browser engine installed on user machines — 'a browser engine… Microsoft Edge browser component that contains WebView2 APIs and runs your web-side code'. Microsoft notes that once installed, the Runtime 'doesn't appear as a user-visible browser app' — no browser icon, no Start-menu entry.",
+    "origin_and_history": "WebView2 was introduced by Microsoft as the supported way to embed web content in Windows applications after years of the legacy Internet Explorer-based MSHTML control; it is built on the Chromium engine of Microsoft Edge. Microsoft develops and documents it as part of the Microsoft Edge developer platform on Microsoft Learn.\n\nThe platform's distribution story is a defining part of its history: the Evergreen Runtime (automatically updated, comparable to the Visual C++ or .NET runtimes as a shared component) is the recommended mode, while the Fixed Version mode serves applications that must pin a specific engine version. Microsoft has been delivering the Evergreen Runtime to eligible Windows 10 devices and ships it as part of Windows 11 (deployment details are version-dependent and documented on Microsoft Learn).",
+    "architecture_and_runtime": "The documented architecture separates development-time and run-time pieces. On the developer machine, the WebView2 SDK is added to a Visual Studio project (as a NuGet package) and exposes APIs such as CoreWebView2, CoreWebView2Controller and CoreWebView2Environment, plus AddHostObjectToScript for interop between native code and JavaScript. On user machines, the WebView2 Runtime provides the engine — 'modified Microsoft Edge binaries that are fine-tuned and tested for WebView2 apps'.\n\nAn application may embed several WebView2 control instances side by side with native UI, or build its entire interface in one instance — Microsoft's 'hybrid app approach' deliberately positions WebView2 between purely web and purely native applications. Two release channels of the SDK exist: Release (stable APIs only, for shipping) and Prerelease (experimental APIs, for development against Edge preview channels).",
+    "languages_and_technologies": "On the web side, a WebView2 control runs standard HTML, CSS and JavaScript (with WebView2 JavaScript APIs for talking to the host). On the native side, Microsoft documents support for Win32 C/C++, .NET Framework 4.6.2+, .NET Core 3.1+, .NET 5+, WinUI 2.0 and WinUI 3.0; the API reference additionally covers .NET/C#, WinRT/C# and Win32/C++ surfaces. The rendering engine is Chromium-based Microsoft Edge.",
+    "integration_in_software": "Integration follows the documented split: the developer adds the WebView2 SDK to the project, places WebView2 control instances where web content should appear, and distributes the WebView2 Runtime to user machines. Communication between native and web code runs through documented mechanisms (host objects exposed to script, JavaScript APIs, messages).\n\nMicrosoft positions WebView2 for incremental adoption: web components can be added piece by piece to an existing native application, and apps may mix WebView2 areas with purely native areas. In production, an app may only use the WebView2 Runtime as its backing web platform — Microsoft explicitly forbids depending on the Microsoft Edge Stable channel, so that applications do not inherit the browser's update policies or presence requirements.",
+    "security_model": "The web content runs inside the Edge (Chromium) engine of the WebView2 Runtime, inheriting Chromium's process isolation and security servicing. Microsoft documents the operational side closely: the Evergreen Runtime receives 'regular platform updates and security patches' automatically, while Fixed Version users must update the packaged engine themselves; enterprise servicing is supported through Windows Server Update Services (WSUS).\n\nMicrosoft's documentation also states that WebView2 collects required and optional diagnostic data, described in its data-and-privacy article and acknowledged through the Runtime's license terms. Application-side responsibility remains with the developer: choosing what content the control loads, and how native and web code trust each other, is part of the app's security design.",
+    "platforms_and_hardware_architectures": "WebView2 is a Windows-only platform. The supported Windows versions are documented as 'the same as those supported by Microsoft Edge' — at the time of consultation, the documentation lists Windows 10 (SAC 1709 and later, plus Enterprise LTSC 2015/2016/2019/2021 and IoT variants), Windows 11, and Windows Server 2016/2019/2022 (LTSC) and SAC. These lists are version-dependent and evolve with Microsoft Edge's support matrix. Processor architectures follow Windows and Edge support; no other operating system is supported.",
+    "licensing_and_governance": "WebView2 is proprietary Microsoft technology. The WebView2 Runtime is governed by the 'Microsoft Software License Terms for the Microsoft Edge WebView2 Runtime' (shown in a dialog on the official download page), which permit distributing the Runtime's object code with applications under conditions defined by Microsoft; the SDK is distributed as NuGet packages under Microsoft's license terms. This is markedly different from the open-source licensing of CEF or Electron.\n\nDevelopment, documentation and support are provided by Microsoft through Microsoft Learn and the Microsoft Edge developer programme; the documentation set is public and versioned, and preview channels (Beta, Dev, Canary) are offered for forward-compatibility testing.",
+    "limitations_and_scope": "WebView2 targets native Windows applications only — there is no macOS or Linux story. The application must ensure the Runtime is present on client machines (Microsoft recommends distributing it even where Evergreen is expected); production apps cannot fall back on the Edge browser. The Fixed Version mode trades automatic security updates for version control, and the documentation is explicit that Runtime updates then become the developer's job.\n\nBecause the platform is Microsoft's, its roadmap, licence conditions and data collection apply as documented by Microsoft; several operational details (supported Windows versions, preinstallation scope) are version-dependent and change over time.",
+    "advantages": [
+      "Embeds a modern Chromium-based web engine in native Windows apps without shipping a browser of your own.",
+      "Evergreen Runtime model keeps the web platform updated with security patches and new APIs, shared across apps.",
+      "Broad official API coverage: Win32 C/C++, .NET (WPF, WinForms), WinUI 2/3, with documented native-web interop.",
+      "Incremental adoption: hybrid apps can mix native areas and web areas under Microsoft support."
+    ],
+    "disadvantages": [
+      "Windows-only: no support on macOS or Linux, so cross-platform products need a different approach per platform.",
+      "Proprietary licence and Microsoft-documented data collection apply to the Runtime; redistribution conditions are Microsoft's.",
+      "Runtime deployment is a real obligation (check presence, distribute, or manage Fixed Version updates yourself).",
+      "Supported Windows versions and API availability are version-dependent, tied to the Edge release matrix."
+    ],
+    "who_is_it_for": [
+      "Windows application developers (Win32, .NET, WinUI) who want web-based panels or full hybrid UIs inside native apps.",
+      "Enterprises modernising parts of legacy Windows applications by replacing old web controls with a Chromium-based engine.",
+      "Teams standardising on Microsoft tooling who want Microsoft-supported web embedding with Evergreen updates."
+    ],
+    "who_is_it_not_for": [
+      "End users: WebView2 is a developer platform, not an application.",
+      "Cross-platform desktop projects: WebView2 supports Windows only.",
+      "Anyone looking for an open-source embeddable engine: WebView2 is proprietary Microsoft technology."
+    ],
+    "verdict": "WebView2 is the natural web-embedding component for Windows-native development: a supported Chromium-based control with a well-documented runtime distribution story (Evergreen or Fixed Version) and APIs across Win32, .NET and WinUI. It fits Windows-centric teams and hybrid modernisation projects, while its proprietary terms, Windows-only scope and runtime obligations are the deliberate trade-offs against fully open-source embeddable engines."
+  },
+  "links": {
+    "documentation": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/",
+    "platform_components": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/platform-components",
+    "evergreen_vs_fixed": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/evergreen-vs-fixed-version",
+    "distribution": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution",
+    "api_reference": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/webview2-api-reference",
+    "runtime_download": "https://developer.microsoft.com/microsoft-edge/webview2",
+    "data_and_privacy": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/data-privacy"
+  },
+  "sources": [
+    {
+      "title": "Introduction to Microsoft Edge WebView2 (Microsoft Learn) - control definition, Edge rendering engine, hybrid app approach, benefits as stated by Microsoft, SDK/Runtime components, supported Windows versions (version-dependent), supported programming environments",
+      "url": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/",
+      "type": "official_documentation",
+      "publisher": "Microsoft (Microsoft Learn)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Components of the WebView2 platform (Microsoft Learn) - App/SDK/Control/Runtime/preview channels, CoreWebView2 APIs, NuGet SDK packaging, native-web interop",
+      "url": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/platform-components",
+      "type": "official_documentation",
+      "publisher": "Microsoft (Microsoft Learn)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Evergreen vs. fixed version of the WebView2 Runtime (Microsoft Learn) - Runtime as redistributable backing platform with modified Edge binaries; Evergreen and Fixed Version modes, pros/cons, Windows 11 preinstallation (version-dependent)",
+      "url": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/evergreen-vs-fixed-version",
+      "type": "official_documentation",
+      "publisher": "Microsoft (Microsoft Learn)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Distribute your app and the WebView2 Runtime (Microsoft Learn) - Runtime requirement on client machines; production apps may only use the WebView2 Runtime, not the Microsoft Edge Stable channel; deployment and WSUS servicing",
+      "url": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution",
+      "type": "official_documentation",
+      "publisher": "Microsoft (Microsoft Learn)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Data and privacy in WebView2 (Microsoft Learn) - Microsoft Software License Terms for the WebView2 Runtime; documented diagnostic data collection",
+      "url": "https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/data-privacy",
+      "type": "official_documentation",
+      "publisher": "Microsoft (Microsoft Learn)",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}

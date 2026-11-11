@@ -1,0 +1,92 @@
+{
+  "id": "qt-webengine",
+  "name": "Qt WebEngine",
+  "type": "technology",
+  "summary": "Qt WebEngine is an optional Qt extension module for embedding web content in Qt applications: it provides C++ classes and QML types for rendering HTML, CSS and JavaScript through a Chromium-based engine, split into Core, Widgets and Quick modules plus a separate Qt WebEngine Process. It is a web-integration technology of the Qt ecosystem — not a browser — licensed under Qt commercial terms or LGPL/GPL, with the embedded Chromium part under its own licenses.",
+  "tags": ["qt", "webview", "chromium", "embedding", "c++", "qml", "web integration", "module", "open source"],
+  "status": "active",
+  "platforms": ["Windows", "macOS", "Linux"],
+  "license": "Qt commercial / LGPL-3.0 / GPL-3.0 / GPL-2.0 (Qt parts) ; Chromium part LGPL-2.1 most restrictive",
+  "content": {
+    "introduction": "Qt applications are mostly native software written in C++ and QML, but many of them need to display web content: an embedded help centre, a map, a dashboard, a sign-in page. Qt WebEngine is the component of the Qt ecosystem for that job. It adds web rendering capabilities to Qt applications while staying a Qt citizen — the same classes, the same build system, the same deployment model as the rest of the framework.",
+    "what_is_it": "Qt's documentation defines the module's role in one line: 'Qt WebEngine provides functionality for rendering regions of dynamic web content.' It is an optional extension module — 'Qt Framework… is fully functional without Qt WebEngine' — that applications add specifically when they need access to web content.\n\nWhat the module exposes is a set of APIs, not a browser: C++ classes and QML types 'for rendering HTML, XHTML, and SVG documents, styled using Cascading Style Sheets (CSS) and scripted with JavaScript', including fully editable documents through `contenteditable`. Developers embed web views inside their own windows and keep control of the surrounding application.",
+    "origin_and_history": "Qt WebEngine is part of the Qt framework maintained under The Qt Company and the Qt Project; the documentation set includes a 'Porting from Qt WebKit to Qt WebEngine' guide, marking it as the successor to Qt's earlier web-embedding path in current Qt series.\n\nThe module follows its own release discipline within Qt: its Chromium base is 'the version used by the latest stable Chrome version at the time of Qt feature freeze for the current version of Qt WebEngine', with security patches cherry-picked from newer Chrome releases into Qt patch releases — and patch releases accelerated if Chrome publishes critical fixes outside the release window. Qt WebEngine can also be built against older Qt versions back to the last Qt LTS (for example Qt WebEngine 6.4 with Qt 6.2.x), and in Qt LTS releases it may be replaced wholesale by a newer version to ease security patching. Exact version pairings are version-dependent and published in Qt's ChromiumVersions wiki and the CHROMIUM_VERSION file.",
+    "architecture_and_runtime": "The documented architecture has three API layers and one out-of-process component. Qt WebEngine Core provides the shared public API and 'is based on the Chromium Project' — Chromium supplies its own network and painting engines (the QtNetwork stack is not used, though proxy and certificate setup can be synchronised). Qt WebEngine Widgets offers web views for QWidget-based applications (view, page, profile, history, actions); Qt WebEngine Quick and the QML types offer the equivalent for Qt Quick applications.\n\n'Page rendering and JavaScript execution are separated from the GUI process into the Qt WebEngine Process' — a library that must be shipped with the application whenever the Qt libraries are bundled. Pages belong to profiles holding shared settings, scripts and cookies; profiles isolate pages from each other, with a dedicated private-browsing profile as the documented use case. Widget rendering composes pages through the Qt Quick scene graph on the GPU, via the Qt Rendering Hardware Interface.\n\nA documented boundary of the embedding: 'Qt WebEngine is based on Chromium, but does not contain or use any services or add-ons that might be part of the Chrome browser that is built and delivered by Google.'",
+    "languages_and_technologies": "On the host side, Qt WebEngine is C++ and QML: classes such as QWebEngineView, QWebEnginePage, QWebEngineProfile, QWebEngineSettings and QWebEngineCookieStore for widgets, and QML types for Qt Quick. On the web side it runs standard HTML, XHTML, SVG, CSS and JavaScript.\n\nBuilding the module from source requires heavy tooling that mirrors its Chromium heritage: a C++20 compiler (an exception — Qt as a whole requires C++17), CMake, 64-bit Node.js, Python 3, Ninja, gperf, bison and flex, plus platform-specific requirements (Visual Studio on Windows — MinGW is not supported; GCC ≥ 10 or Clang ≥ 17 on Linux; Xcode on macOS).",
+    "integration_in_software": "Integration follows Qt conventions. A developer adds the module (optionally with Qt Positioning and Qt WebChannel, on which Qt WebEngine depends by default but can be built without), places a web view in the widget or QML interface, and loads content with `load(QUrl(...))`. Profiles, settings, cookie stores and request interceptors let the application shape the web runtime: private browsing profiles, disabled JavaScript or image loading, custom certificate handling.\n\nDeployment has one Qt-specific rule: the Qt WebEngine Process must be shipped with the application when Qt libraries are bundled. Static builds are not supported, and applications using Qt WebEngine are documented as incompatible with the Mac App Store (Chromium uses private APIs and its sandbox conflicts with App Sandbox). For security-maintenance flexibility, Qt WebEngine can be built against Qt versions back to the last LTS.",
+    "security_model": "Qt WebEngine inherits two security regimes. First, Chromium's: the engine ships Chromium's process separation, same-origin policy and sandboxing, and its security fixes — 'Qt WebEngine tracks the release schedule of Chromium. The latest Qt WebEngine version includes the security fixes released in Chromium', with cherry-picked patches in Qt patch releases and an accelerated release when critical fixes land outside the window.\n\nSecond, Qt's own: 'As part of Qt, Qt WebEngine follows Qt's security policies.' The dedicated security page instructs application developers to handle untrusted and sensitive data carefully (it warns about XSS and dialog spoofing), and to harden deployments through QWebEngineSettings — restricting JavaScript, remote loads or local-content access, in a 'zero-trust' spirit. Responsibility is split: the module delivers a patched engine, the application owns what it loads and shows.",
+    "platforms_and_hardware_architectures": "Qt WebEngine builds on the three desktop families documented by Qt's platform notes: Windows (Visual Studio 2019 or later; MinGW explicitly unsupported), Linux/X11 (documented compiler and library floors, detected largely through pkg-config), and macOS (10.14 or later, Xcode 12 or later, no 32-bit builds). These build requirements are version-dependent and evolve with Qt releases. Static linking is not supported, and the Mac App Store is a documented exclusion. Other platforms of the wider Qt portfolio are out of scope for this module's documented support.",
+    "licensing_and_governance": "Licensing is dual by design. 'The Qt specific parts of the Qt WebEngine module are available under commercial licenses from The Qt Company. Alternatively, they are available under GNU Lesser General Public License v3.0, or GNU General Public License v3.0, or GNU General Public License v2.0.' The embedded Chromium part 'contains code available under various licenses, with the most restrictive license being the GNU Lesser General Public License v2.1 (LGPL 2.1)', and distributors must comply with both sets. Qt states the LGPL/GPL availability is preserved even when WebEngine ships in commercial-only LTS releases, and documents how commercial customers may distribute and rebuild the sources.\n\nGovernance follows Qt's: the module lives in Qt's open repositories, its documentation is published by The Qt Company (© The Qt Company Ltd, GFDL), and security policy is Qt's security policy. Chromium licensing obligations are documented in an exhaustive third-party licenses table.",
+    "limitations_and_scope": "Qt WebEngine is a module, not a product: no browser shell, no user-facing application. Its weight is real — a Chromium build, a separate process to ship, heavy build tooling (C++20, Node.js, Python at build time), and no static linking. Distribution carries licensing obligations from both Qt and Chromium's third-party set.\n\nVersion coupling governs maintenance: the Chromium base is fixed at Qt's feature freeze and only receives backported security patches afterwards; getting newer web platform features means moving to a newer Qt WebEngine, though the back-to-LTS build support softens this. The Mac App Store is excluded by design, MinGW is not supported on Windows, and enterprise-style policies belong to the application layer.",
+    "advantages": [
+      "Native Qt integration: C++ classes and QML types consistent with the rest of the Qt framework, in widgets and Qt Quick applications alike.",
+      "Chromium-based web platform with documented security patch tracking of Chromium releases and accelerated releases for critical fixes.",
+      "Process isolation between the application GUI and web content via the Qt WebEngine Process, plus profile-level isolation and private browsing support.",
+      "Flexible licensing (commercial or LGPL/GPL) and the ability to build the module against Qt versions back to the last LTS."
+    ],
+    "disadvantages": [
+      "Chromium inheritance cuts both ways: build complexity (C++20 toolchain, Node.js, Python), a shipped helper process, and a security cadence tied to Qt patch releases.",
+      "Licensing compliance spans Qt terms and Chromium's third-party licenses (LGPL 2.1 being the most restrictive).",
+      "Platform exclusions: no static builds, no MinGW, no Mac App Store distribution.",
+      "The web platform version is pinned at Qt feature freeze; newer engine features require a newer Qt WebEngine release."
+    ],
+    "who_is_it_for": [
+      "Qt developers (C++ or QML) who need web content inside native Qt applications without leaving the Qt toolchain.",
+      "Desktop software vendors standardising on Qt who want one documented, supported web-embedding module rather than an external integration.",
+      "Teams with security-update constraints who value Qt's documented Chromium patch-tracking and LTS policies."
+    ],
+    "who_is_it_not_for": [
+      "End users: Qt WebEngine is a developer module with no standalone application.",
+      "Non-Qt projects: outside a Qt application, CEF or WebView2-style components are the relevant tools.",
+      "App Store-distributed macOS software or MinGW/Windows-only toolchains: documented platform exclusions."
+    ],
+    "verdict": "Qt WebEngine is the web-embedding component of the Qt ecosystem: a Chromium-based module that speaks C++ and QML and follows Qt's engineering and security discipline, at the price of Chromium-scale build and licensing complexity. It is the natural choice inside Qt applications — and, for projects outside Qt, best understood as the Qt-flavoured member of the same embeddable-engine family as CEF, not as a browser."
+  },
+  "links": {
+    "documentation": "https://doc.qt.io/qt-6/qtwebengine-index.html",
+    "overview": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-overview.html",
+    "features": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-features.html",
+    "licensing": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-licensing.html",
+    "security": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-security.html",
+    "platform_notes": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-platform-notes.html",
+    "deploying": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-deploying.html"
+  },
+  "sources": [
+    {
+      "title": "Qt WebEngine documentation index - definition ('rendering regions of dynamic web content'), optional Qt extension module, modules Core/QML/Quick/Widgets, dependencies Qt Positioning and Qt WebChannel",
+      "url": "https://doc.qt.io/qt-6/qtwebengine-index.html",
+      "type": "official_documentation",
+      "publisher": "The Qt Company (doc.qt.io)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Qt WebEngine Overview - architecture (Chromium-based Core, Widgets, Quick, Qt WebEngine Process), view/page/profile model, no Chrome services, Chromium version policy and security patch handling",
+      "url": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-overview.html",
+      "type": "official_documentation",
+      "publisher": "The Qt Company (doc.qt.io)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Qt WebEngine Licensing - Qt parts under commercial or LGPLv3/GPLv3/GPLv2; Chromium part LGPL 2.1 most restrictive; compliance duties and third-party license table",
+      "url": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-licensing.html",
+      "type": "legal_document",
+      "publisher": "The Qt Company (doc.qt.io)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Qt WebEngine Security Considerations - Qt security policies, Chromium release tracking, XSS/untrusted data guidance, QWebEngineSettings hardening",
+      "url": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-security.html",
+      "type": "official_documentation",
+      "publisher": "The Qt Company (doc.qt.io)",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Qt WebEngine Platform Notes - build requirements per platform (Windows/Linux/macOS), C++20, no static builds, no MinGW, Mac App Store incompatibility, building against earlier Qt versions",
+      "url": "https://doc-snapshots.qt.io/qtwebengine/qtwebengine-platform-notes.html",
+      "type": "official_documentation",
+      "publisher": "The Qt Company (doc.qt.io)",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}

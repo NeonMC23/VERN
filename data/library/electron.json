@@ -1,0 +1,92 @@
+{
+  "id": "electron",
+  "name": "Electron",
+  "type": "framework",
+  "summary": "Electron is an open-source framework for building desktop applications with JavaScript, HTML and CSS: it embeds Chromium and Node.js in a single binary, so one web codebase can ship cross-platform apps for Windows, macOS and Linux. Its multi-process architecture — one main process plus a renderer process per window, bridged by preload scripts — and its documented security model are central to how Electron apps are built and hardened.",
+  "tags": ["desktop applications", "framework", "chromium", "node.js", "javascript", "cross-platform", "open source", "mit"],
+  "status": "active",
+  "platforms": ["Windows", "macOS", "Linux"],
+  "license": "MIT",
+  "content": {
+    "introduction": "Electron lets web developers build desktop applications — the kind with icons, menus and system dialogs — using the tools they already know: JavaScript, HTML and CSS. Instead of rewriting an interface for each operating system, a team writes it once as web content and ships it as a native-looking application on Windows, macOS and Linux. Many widely used desktop tools are built this way, and Electron is the framework that makes it possible.",
+    "what_is_it": "Electron's own documentation defines it plainly: 'Electron is a framework for building desktop applications using JavaScript, HTML, and CSS. By embedding Chromium and Node.js into its binary, Electron allows you to maintain one JavaScript codebase and create cross-platform apps.'\n\nElectron is not a browser — its security documentation says so explicitly: 'Electron is not a web browser. It allows you to build feature-rich desktop applications with familiar web technologies, but your code wields much greater power.' The web engine (Chromium) renders the interface, Node.js provides system-level capabilities, and the application developer decides how the two are combined.",
+    "origin_and_history": "Electron was created at GitHub (its LICENSE file carries 'Copyright (c) 2013-2020 GitHub Inc.', alongside 'Copyright (c) Electron contributors') and grew out of the earlier Atom editor's shell. It is now maintained as an open-source project with its own governance, release process and documentation site.\n\nThe framework deliberately tracks its foundations: Electron keeps up with alternating Chromium and Node.js releases, and its published release timelines document how each Electron version maps to specific Chromium and Node.js versions. Those numbers move constantly, so any concrete version pairing should be read from the current release documentation rather than from general articles.",
+    "architecture_and_runtime": "Electron inherits Chromium's multi-process architecture, which its documentation describes as 'architecturally very similar to a modern web browser'. Developers work with two kinds of processes. A single main process acts as the application's entry point: it runs in a full Node.js environment, creates and manages windows (the BrowserWindow module), controls the application lifecycle (the app module), and exposes native desktop features such as menus, dialogs and tray icons.\n\nEach window (and each embedded web view) gets its own renderer process, which displays the web content and behaves like a web page environment: HTML as entry point, CSS for styling, JavaScript for behaviour, no direct access to Node.js. Preload scripts bridge the two: they run inside the renderer before the page loads and may expose carefully chosen APIs on the window object. The documentation notes that running full Node.js in renderers 'used to be the default, but this feature was disabled for security reasons'.",
+    "languages_and_technologies": "The application side of Electron is web technology: JavaScript, HTML and CSS, with the usual tooling (bundlers, npm packages). The runtime underneath combines Chromium (web engine) and Node.js (system APIs, filesystem, processes) plus Electron's own native APIs for desktop integration. Applications are packaged as native executables per platform; the documentation covers distribution tooling in its dedicated section.",
+    "integration_in_software": "An Electron application is structured by the developer: the main process builds windows and orchestrates the app, renderers display the interface, and preload scripts define the contract between them. Electron's native modules (menus, dialogs, tray, global shortcuts, notifications and more) let the web-based app behave like a first-class desktop citizen.\n\nBecause the framework embeds Chromium and Node.js, each shipped application carries those runtimes — the trade-off for having one codebase across operating systems. Applications that display mostly local content keep the trusted surface small; the documentation names this as the pattern of the most popular Electron apps.",
+    "security_model": "Electron's security documentation is unusually direct. It warns that 'displaying arbitrary content from untrusted sources poses a severe security risk that Electron is not intended to handle', and that application security 'is the result of the overall security of the framework foundation (Chromium, Node.js), Electron itself, all NPM dependencies and your code'.\n\nThe official checklist covers at least: load only secure content; never enable Node.js integration for remote content; enable context isolation and process sandboxing; handle session permission requests; keep web security on; define a Content-Security-Policy; limit navigation and new windows; never open untrusted content with shell.openExternal; and keep the Electron version current so patched vulnerabilities (such as nodeIntegration bypasses) are closed. Electron prints security warnings in the developer console during development. The multi-process design itself (isolation between windows, sandboxed renderers) is inherited from Chromium's security architecture.",
+    "platforms_and_hardware_architectures": "Electron applications run on Windows, macOS and Linux — the three desktop platforms named by its documentation — on the processor architectures those platforms' Electron builds support. Platform-specific behaviour (menus, dock, single-instance handling and more) is covered by the API documentation; mobile platforms are out of scope for Electron itself.",
+    "licensing_and_governance": "Electron is open source under the MIT licence ('Copyright (c) Electron contributors; Copyright (c) 2013-2020 GitHub Inc.'), one of the most permissive common licences. Development is public on GitHub with an issue tracker, published release timelines and a documented contribution process; the project maintains its own documentation site and learning tools (such as Electron Fiddle). Security reports follow a dedicated disclosure policy (SECURITY.md).",
+    "limitations_and_scope": "Electron is a desktop application framework, not a browser and not a web platform for third-party content: its own docs warn against loading untrusted remote code with privileged access. Applications ship with embedded Chromium and Node.js runtimes, so installers are larger than purely native equivalents and update logistics belong to each application.\n\nVersion coupling is real: Electron's capabilities and security posture depend on its Chromium and Node.js versions, which evolve quickly — teams must track releases (the project's timelines document the pairing) and rebuild. The privileged API surface (filesystem, shell, processes) makes secure defaults and careful preload design mandatory, not optional.",
+    "advantages": [
+      "One web codebase produces native desktop applications for Windows, macOS and Linux.",
+      "Full access to Node.js and native desktop APIs (menus, dialogs, tray, notifications) from a web-based UI.",
+      "Chromium's multi-process architecture provides isolation between windows and a mature web engine.",
+      "MIT licence, public governance and extensive official documentation (tutorial, process model, security checklist)."
+    ],
+    "disadvantages": [
+      "Each application bundles Chromium and Node.js: larger installers and a per-application update burden.",
+      "The privileged runtime raises the stakes: insecure patterns (Node in renderers, remote code with privileges) are dangerous, and the security checklist is long by design.",
+      "Rapid Chromium/Node.js cadence requires frequent rebuilds and dependency vigilance.",
+      "Memory and disk footprint per application is higher than that of purely native toolkits — an engineering trade-off, not a defect."
+    ],
+    "who_is_it_for": [
+      "Web developers who want to ship desktop applications without learning a native GUI toolkit per platform.",
+      "Teams building developer tools, dashboards or content-centric desktop apps whose interface naturally lives in HTML/CSS/JS.",
+      "Organisations wanting one codebase across Windows, macOS and Linux with native desktop integration."
+    ],
+    "who_is_it_not_for": [
+      "End users: Electron is a framework for building applications, not an application itself.",
+      "Projects that must display arbitrary untrusted remote content with privileges — the documentation explicitly warns against this.",
+      "Mobile development: Electron targets desktop operating systems."
+    ],
+    "verdict": "Electron is the mainstream choice for turning web skills into cross-platform desktop software, with a documented architecture and a serious security playbook that teams must actually follow. It suits product teams who value one codebase and rich desktop integration, and who accept the memory, size and maintenance costs of shipping Chromium and Node.js inside every application — while readers should see it as a way to build apps, never as a browser or a safe host for untrusted code."
+  },
+  "links": {
+    "documentation": "https://www.electronjs.org/docs/latest/",
+    "process_model": "https://www.electronjs.org/docs/latest/tutorial/process-model",
+    "security_checklist": "https://www.electronjs.org/docs/latest/tutorial/security",
+    "api_reference": "https://www.electronjs.org/docs/latest/api/app",
+    "repository": "https://github.com/electron/electron",
+    "license": "https://github.com/electron/electron/blob/main/LICENSE",
+    "release_timelines": "https://www.electronjs.org/docs/latest/tutorial/electron-timelines"
+  },
+  "sources": [
+    {
+      "title": "Electron documentation - framework definition (desktop applications with JavaScript, HTML, CSS; Chromium and Node.js embedded; Windows, macOS, Linux), documentation structure",
+      "url": "https://www.electronjs.org/docs/latest/",
+      "type": "official_documentation",
+      "publisher": "Electron project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Electron Process Model documentation - multi-process architecture inherited from Chromium; main process (Node.js, BrowserWindow, app lifecycle, native APIs), renderer processes, preload scripts; Node in renderers disabled by default for security",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/process-model",
+      "type": "official_documentation",
+      "publisher": "Electron project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Electron Security documentation - 'Electron is not a web browser'; risk of untrusted content; security responsibilities (Chromium, Node.js, dependencies, application code); official security checklist",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+      "type": "official_documentation",
+      "publisher": "Electron project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Electron LICENSE - MIT licence text (Electron contributors; GitHub Inc. 2013-2020)",
+      "url": "https://raw.githubusercontent.com/electron/electron/main/LICENSE",
+      "type": "legal_document",
+      "publisher": "Electron project",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Electron official GitHub repository - source code and issue tracker",
+      "url": "https://github.com/electron/electron",
+      "type": "official_source_code",
+      "publisher": "Electron project",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}

@@ -177,7 +177,22 @@ var LIBRARY_RESOURCES = [
   "violentmonkey",
   "tampermonkey",
   "sponsorblock",
-  "firefox-multi-account-containers"
+  "firefox-multi-account-containers",
+  "v8",
+  "spidermonkey",
+  "javascriptcore",
+  "cef",
+  "electron",
+  "webview2",
+  "qt-webengine",
+  "playwright",
+  "web-platform-tests",
+  "google-public-dns",
+  "cloudflare-1-1-1-1",
+  "quad9",
+  "opendns",
+  "nextdns",
+  "adguard-dns"
 ];
 
 (function () {

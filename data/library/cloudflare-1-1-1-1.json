@@ -1,0 +1,83 @@
+{
+  "id": "cloudflare-1-1-1-1",
+  "name": "Cloudflare 1.1.1.1",
+  "type": "service",
+  "summary": "Cloudflare 1.1.1.1 is a free public DNS resolver run by Cloudflare in partnership with APNIC, built 'privacy first': no sale of user data, source IPs truncated and deleted within 25 hours, limited logs deleted within 25 hours, and an annual external audit commitment. It supports DoH, DoT and DNS over Tor, and offers a filtering variant (1.1.1.1 for Families) that blocks malware and optionally adult content.",
+  "tags": ["dns", "recursive resolver", "public dns", "cloudflare", "apnic", "privacy", "doh", "dot", "service", "infrastructure"],
+  "status": "active",
+  "platforms": ["Any DNS-capable device (IPv4 and IPv6)"],
+  "license": "Free online service (Cloudflare terms of service)",
+  "content": {
+    "introduction": "When a device goes online, its first question is always the same: what is the address of this name? By default an ISP's resolver answers — and, as Cloudflare's documentation puts it, 'some ISPs and third-party DNS providers log your queries, sell data about your Internet activity, or use it to target you with ads'. Cloudflare 1.1.1.1 is the company's answer: a free public DNS resolver whose stated design goal is privacy first, reachable at the memorable address 1.1.1.1.",
+    "what_is_it": "Cloudflare's developer documentation defines it as 'Cloudflare's public DNS resolver': when you type a domain name, the resolver translates it into an IP address so your device knows which server to contact. 'Switching to 1.1.1.1 gives you a faster, more private alternative. Unlike most DNS resolvers, 1.1.1.1 does not sell user data to advertisers.'\n\nThe resolver is free and 'setting it up takes minutes and does not require any special software' — any device or router that speaks DNS can use it. Two optional layers sit on top: 1.1.1.1 for Families (blocking malware, and optionally adult content) and encrypted transports (DoH, DoT, and 1.1.1.1 as a Tor hidden service). This fiche covers the public resolver — not Cloudflare's authoritative DNS products, and not the company itself (a separate object of the roadmap's infrastructure category, per case C-06).",
+    "origin_and_history": "The service was announced on Cloudflare's official blog under the title 'Announcing 1.1.1.1: the fastest, privacy-first consumer DNS service'. The announcement frames the motivation — DNS privacy and censorship problems (including the 2014 episode where Turkey blocked Twitter at the DNS level and people spray-painted 8.8.8.8 on walls) — and the launch commitments: never write querying IP addresses to disk, wipe all logs within 24 hours, and retain an audit firm (named as KPMG in that post) to publish an annual report.\n\nThe address itself has institutional history: Cloudflare 'partnered with APNIC Labs — the regional Internet registry for the Asia-Pacific region, which provided the 1.1.1.1 IP address for use as a public DNS resolver'. [VERSION] Current commitments are those of the privacy document (last updated March 27, 2024), which speaks of deletion 'within 25 hours' — the wording and durations have evolved since the 2018 announcement.",
+    "operation_and_infrastructure": "1.1.1.1 runs on Cloudflare's own global network — 'hundreds of cities worldwide' per the product page — with the resolver close to users and to the authoritative servers it queries. The privacy document details the operational logging needed to run the service: transaction and debug fields (query name and type, protocol, response codes and times, datacentre identifiers, validation state, and outgoing authoritative subrequests), all covered by the deletion commitments below.\n\nThe APNIC partnership is operational as well as historical: under a Research Cooperative Agreement, APNIC gets limited access to anonymised data (query names, types, resolver location and other metadata — never client IPs) to study Internet functioning, such as DDoS volumes and IPv6 adoption. Aggregated statistics (per datacentre, region or autonomous system) may be stored indefinitely to power Cloudflare Radar and improve the service.",
+    "protocols_and_encryption": "Classic DNS over UDP and TCP is available, and the documented emphasis is on encrypted transports: DNS over HTTPS and DNS over TLS 'to encrypt your DNS queries and prevent eavesdropping', plus a distinctive third option — accessing 1.1.1.1 as a Tor hidden service. The setup documentation explains DoH (queries carried as HTTPS requests) and DoT (TLS on dedicated port 853) and publishes the endpoints for each mode, including the Families hostnames security.cloudflare-dns.com and family.cloudflare-dns.com.\n\nOn the standard resolver, DNSSEC validation state is part of the logged transaction fields, and the product page positions the service within Cloudflare's broader DNS platform (which also serves authoritative DNS customers with DNSSEC and route-leak protection — different products, listed for context).",
+    "privacy_and_security_model": "The privacy document is the core of the product: 'The 1.1.1.1 public DNS resolver was designed for privacy first', with five numbered commitments — no sale or sharing of personal data with third parties and no ad targeting; retention of what is asked, not who asks it; source IPs not kept in non-volatile storage (anonymised by truncation — last IPv4 octet, last 80 bits of IPv6 — and deleted within 25 hours, with at most 0.05% of traffic sampled in raw packets for troubleshooting and DoS mitigation); limited Public Resolver Logs deleted within 25 hours; and log sharing with no one but APNIC under the research agreement. 'Cloudflare has taken technical steps to ensure that we cannot retain our user's information', and an external audit of the practices is published ('one of the top four accounting firms'; the 2018 announcement named KPMG).\n\nSecurity-wise, encrypted transports fight eavesdropping and man-in-the-middle attacks on the last hop; the Families variant adds threat blocking — queries to malicious domains return 0.0.0.0 instead of a real address. [ÉDITEUR] All commitments are the operator's; the audit is the operator's own commissioned process.",
+    "configuration_and_access": "Configuration is per device or router: published guides cover Android, iOS, Windows, macOS, Linux, routers, gaming consoles and major clouds; some ISPs and network-equipment providers already offer 1.1.1.1. The classic resolvers are 1.1.1.1 and 1.0.0.1 (IPv6 equivalents documented); Families mode uses 1.1.1.2/1.0.0.2 (block malware) or 1.1.1.3/1.0.0.3 (block malware and adult content), with DoH/DoT hostnames per mode and public test URLs to verify filtering. The service is free; the separate WARP client encrypts all device traffic (a different product, listed as related).",
+    "governance_and_operator": "The operator is Cloudflare, a commercial infrastructure company; the resolver is governed by Cloudflare's Privacy Policy plus the dedicated commitments above. The APNIC relationship (address provision and research cooperation) is contractual and documented. A separate privacy policy governs the consumer 1.1.1.1 apps, and the 'Resolver for Firefox' variant runs under Mozilla's instructions as a data processor — three distinct privacy scopes the documentation takes care to separate. [VERSION] Policies, log field lists and durations change over time; the privacy page carries its own revision date.",
+    "limitations_and_scope": "1.1.1.1 is a recursive resolver, not a security suite and not the Cloudflare company: the standard resolver blocks nothing (filtering is the opt-in Families variant), and using it does not encrypt anything except DNS — device traffic protection is WARP's job. The privacy model retains coarse operational data (aggregates indefinitely; sampled raw packets up to 0.05%; 25-hour transaction logs) — stronger than ad-supported resolvers, weaker than a strict no-logs reading.\n\nTrust rests on commitments and a commissioned audit rather than technical impossibility; jurisdiction is Cloudflare's, and the service's policy evolution is the operator's to make. Claims of speed leadership ('measured as the fastest public DNS resolver') are third-party rankings cited by Cloudflare — [ÉDITEUR], not measurements reproduced here.",
+    "advantages": [
+      "Privacy-first design with precise, published commitments: truncated source IPs, 25-hour log deletion, no ad targeting, no third-party sale.",
+      "External annual audit commitment and a documented research partnership (APNIC) with hard limits on data access.",
+      "Encrypted DNS in three flavours — DoH, DoT and a Tor hidden service — plus simple, well-documented setup for every common platform.",
+      "Opt-in threat and content filtering (1.1.1.1 for Families) with published endpoints and test URLs, under the same privacy commitments."
+    ],
+    "disadvantages": [
+      "Commercial operator: commitments are policy plus commissioned audit, not technical impossibility; policy wording has already shifted once (24 h in 2018 to 25 h in the 2024 document).",
+      "Some data retention remains by design: sampled packets, operational logs (25 h) and indefinite aggregates (Radar).",
+      "The standard resolver filters nothing; Families mode is a blunt category blocklist returning 0.0.0.0.",
+      "Single-operator and single-address dependency (1.1.1.1), with the company itself being a separate, larger object (case C-06) whose practices extend well beyond this service."
+    ],
+    "who_is_it_for": [
+      "Privacy-conscious users wanting a free resolver with written, audited, time-bounded log commitments.",
+      "Households wanting optional malware/adult-content blocking at the DNS level (1.1.1.1 for Families).",
+      "Users wanting encrypted DNS with minimal setup — DoH/DoT endpoints documented per platform, or DNS-over-Tor for stronger transport anonymity."
+    ],
+    "who_is_it_not_for": [
+      "Users requiring a community/non-profit charter resolver with no commercial operator behind it.",
+      "Anyone treating DNS choice as complete device security: only DNS is covered; traffic encryption is WARP, and filtering is opt-in.",
+      "Those uncomfortable with any aggregate or sampled retention: the model is minimal retention, not zero retention."
+    ],
+    "verdict": "Cloudflare 1.1.1.1 is the public-resolver market's privacy benchmark in commercial form: unusually specific commitments (truncated IPs, 25-hour deletion, APNIC-scoped sharing, external audit), broad encrypted-transport support and an optional family filter. It fits users who want audited minimal-logging from a large operator — while its nature as a company service, its remaining retention and the shift in commitment wording over time belong in the same sentence as its strengths."
+  },
+  "links": {
+    "documentation": "https://developers.cloudflare.com/1.1.1.1/",
+    "privacy_commitment": "https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/",
+    "setup": "https://developers.cloudflare.com/1.1.1.1/setup/",
+    "encryption": "https://developers.cloudflare.com/1.1.1.1/encryption/",
+    "announcement": "https://blog.cloudflare.com/announcing-1111/",
+    "consumer_page": "https://one.one.one.one/"
+  },
+  "sources": [
+    {
+      "title": "1.1.1.1 (DNS Resolver) documentation - resolver definition, no sale of user data, Families variant, encrypted DNS (DoH/DoT/DNS-over-Tor), related products",
+      "url": "https://developers.cloudflare.com/1.1.1.1/",
+      "type": "official_documentation",
+      "publisher": "Cloudflare",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "1.1.1.1 Public DNS Resolver privacy commitment (page version March 27, 2024) - APNIC partnership, five commitments (no sale/ads, truncated source IPs deleted within 25 h, logs deleted within 25 h, APNIC-only sharing), external audit, log fields, indefinite aggregates",
+      "url": "https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/",
+      "type": "official_documentation",
+      "publisher": "Cloudflare",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Set up 1.1.1.1 resolver documentation - device/router guides, Families endpoints (1.1.1.2/1.1.1.3 and IPv6), 0.0.0.0 blocking response, DoH/DoT hostnames, test URLs",
+      "url": "https://developers.cloudflare.com/1.1.1.1/setup/",
+      "type": "official_documentation",
+      "publisher": "Cloudflare",
+      "accessed": "2026-11-09"
+    },
+    {
+      "title": "Cloudflare Blog 'Announcing 1.1.1.1' - launch announcement, privacy/censorship motivation (Turkey 2014), launch commitments (no IP on disk, 24 h log wipe, KPMG annual audit), APNIC address provision",
+      "url": "https://blog.cloudflare.com/announcing-1111/",
+      "type": "official_site",
+      "publisher": "Cloudflare",
+      "accessed": "2026-11-09"
+    }
+  ],
+  "last_verified": "2026-11-09"
+}
