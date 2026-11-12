@@ -1,0 +1,75 @@
+{
+  "id": "unbound",
+  "name": "Unbound",
+  "type": "application",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "Unbound is a validating, recursive, caching DNS resolver developed by NLnet Labs and distributed as free, open-source software under the BSD license (nlnetlabs.nl/projects/unbound/about, consulted 2026-11-10). It is the reference example of self-hosted DNS infrastructure in this library: instead of sending queries to a hosted service, the administrator runs Unbound on a machine or network and resolves names directly against the authoritative DNS. The project states its guiding principles are 'first and foremost the security and privacy of the user' and that 'all functionality must be backed by well established open standards'."
+    },
+    "origin_and_history": {
+      "category": "FAIT+VERSION",
+      "text": "The consulted About page does not date the first release — the project's founding date is [NON ÉTABLI] here. The current release history is documented on the download page (nlnetlabs.nl/projects/unbound/download, consulted 2026-11-10) [VERSION]: Unbound 1.26.0 (4 August 2026), 1.26.1 (16 September 2026), and 1.26.2 — 'Current version', dated 21 October 2026. The 1.26.2 release fixes five security advisories (CVE-2026-97206 DoQ path-migration use-after-free, CVE-2026-50106 insecure NXDOMAIN under an island trust anchor, CVE-2026-96405 decompression degradation, CVE-2026-109125 cache side-channel poisoning via 'unwanted-reply-threshold', CVE-2026-35501 NSEC-based trust-anchor bypass); 1.26.1 fixed nine further CVEs (including DNSKEY digesting heap overflow, DNSSEC canonicalisation overflows, DoH/DoQ stream use-after-frees). The cadence and the external researcher credits (Tsinghua, Nankai, Palo Alto Networks, Peking University and others) document an active security-fix process."
+    },
+    "rendering_engine_and_technical_architecture": {
+      "category": "FAIT",
+      "text": "Unbound has no rendering engine — it is a headless network daemon, and this section documents its resolver architecture (same treatment as for the SearXNG entry in this library). The About page defines it: 'a validating, recursive, caching DNS resolver… designed to be fast and lean and incorporates modern features based on open standards'. 'Validating' means DNSSEC validation of answers; 'recursive' means it walks the delegation chain from the root; 'caching' means answers are retained per TTL. Documented architectural elements (About page and release notes, consulted 2026-11-10): Query Name Minimisation (RFC 9156) — resolving 'while giving it as little information as possible about the queries to other DNS servers'; 'Aggressive Use of DNSSEC-Validated Cache' (RFC 8198) — synthesising answers from cached NSEC records; authority zones (RFC 7706) — 'can be used to load a copy of the root zone' locally, reducing root-server traffic. Release notes document further internals: local-zone types (`block_a`, `block_aaaa`, `_wdata` variants), `local-data` management, respip/DNS64 interactions, cachedb, 'serve-expired' handling and transfer-size limits for auth-zone/RPZ transfers."
+    },
+    "interface_and_documented_features": {
+      "category": "FAIT",
+      "text": "Configuration is file-based: 'Setting up a resolver for your machine or network can be done with only a few lines of configuration' (About page). Documented surfaces (About/download pages, consulted 2026-11-10): `unbound.conf`-style configuration, a man page (`unbound.docs.nlnetlabs.nl`), a Windows manual PDF, `unbound-anchor` (ICANN trust-anchor maintenance — 1.26.0 updated its certificate bundle to cover keys 'for 2009 to 2029 and for 2025 to 2045'), `unbound-control` (referenced through release-note fixes to log ids and thread startup), and verbose logging. Feature highlights from the 1.26.0 notes: `max-transfer-size`/`max-transfer-time` hardening against unbounded zone transfers, `local_data_remove`, and a `block_aaaa` zone type 'to suppress AAAA queries'. A dedicated 'RFC Compliance' page and a 'Security Advisories' page are maintained on the project site."
+    },
+    "installation_and_distribution": {
+      "category": "FAIT",
+      "text": "Distribution is broad and package-first: 'Unbound runs on all Linux and BSD distributions, as well as macOS, with packages available for most platforms. It is included in the base-system of all major BSD operating systems and in the standard repositories of most Linux distributions' (About page, consulted 2026-11-10). The download page provides source tarballs with sha1/sha256 checksums and PGP signatures, a stable alias `unbound-latest.tar.gz`, and Windows binaries: a 64-bit installer (`unbound_setup_1.26.2.exe`), 32-bit variants and no-install ZIP archives, each with PGP signatures. The page notes Linux/*BSD sources and binaries 'can easily be obtained using your (favorite) package manager or ports collection'."
+    },
+    "platforms_and_hardware_architectures": {
+      "category": "FAIT",
+      "text": "Documented platforms: Linux and *BSD distributions, macOS, and Windows (64-bit installer plus 32-bit builds — download page, consulted 2026-11-10). Inclusion in the base system of 'all major BSD operating systems' (OpenBSD, FreeBSD, NetBSD, DragonFly — the About page's wording) and in standard Linux repositories establishes the deployment breadth. The page publishes binaries for x86 (32/64-bit); other hardware architectures are served through platform packages (repology link on the About page lists package versions across ecosystems) — specific embedded/SBC deployments are plausible but [NON ÉTABLI] from the consulted pages."
+    },
+    "extensions_and_add_on_store": {
+      "category": "FAIT",
+      "text": "There is no extension store or add-on marketplace — Unbound is a single daemon, and this section documents its real extensibility mechanisms (honest treatment of a canvas section written for applications; same approach as the SearXNG entry). Documented extension points (release notes and About page, consulted 2026-11-10): local-zone/local-data policy rules (including synthesised `block_a`/`block_aaaa` responses), Response Policy Zones (RPZ) with transfer limits hardened in 1.26.0, authority zones and secondary transfers, respip and DNS64 modules, cachedb, and Python module support (the Windows manual and standard configuration reference module use; module specifics beyond release notes are [NON ÉTABLI] here). Third-party integrations (e.g. Pi-hole or other panels driving Unbound) are outside the project's own documentation consulted here."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT",
+      "text": "Privacy engineering is explicit and standards-based (About page, consulted 2026-11-10): Query Name Minimisation (RFC 9156) limits what upstream servers learn; DNSSEC validation protects answer authenticity; aggressive DNSSEC-validated caching (RFC 8198) and local root-zone copies (RFC 7706) both reduce dependence on and disclosure toward external servers. The project declares security and privacy as its primary development priorities and maintains a public Security Advisories page; the 1.26.1/1.26.2 changelogs show coordinated disclosure with named external researchers and prompt CVE fixes. Self-hosting means query data stays on the operator's machine by construction — but the project publishes no telemetry claims because it collects none by design (nothing to the contrary is documented; any built-in telemetry is [NON ÉTABLI] and not suggested by the docs). Note that deployment misconfiguration (open resolvers, no rate limiting) is an operator responsibility — the docs consulted emphasise easy setup but do not absolve operators."
+    },
+    "update_channels_and_release_cadence": {
+      "category": "FAIT+VERSION",
+      "text": "Release cadence from the download page (consulted 2026-11-10) [VERSION]: 1.26.0 on 2026-08-04 (feature release: trust-anchor bundle to 2045, transfer limits, `block_aaaa`, `local_data_remove`), 1.26.1 on 2026-09-16 (security: nine CVE fixes), 1.26.2 on 2026-10-21 (security: five CVE fixes) — roughly monthly maintenance in this window, with security fixes shipped between feature work. Channels: the `unbound-latest.tar.gz` alias, per-version tarballs, distribution/ports packages (repology-listed), Windows installers/ZIPs, all PGP-signed with published checksums. Security announcements go to the dedicated Security Advisories page; older versions remain listed on the download page."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT",
+      "text": "'It is free, open source software under the BSD license' (About page, consulted 2026-11-10). Governance is by NLnet Labs, with a documented commercial-policy stance: 'we do not make custom builds or provide specific features to paying customers only' — paid support contracts exist (linked 'services/contracts') but features are shared; 'Sponsored functionality will be given a higher priority where possible and is evaluated on a case-by-case basis', with priorities guided by user-base feedback and 'the wider Internet community'. Corporate details of NLnet Labs (legal form, country) are [NON ÉTABLI] from the consulted pages. The development model is open: source on the platform's download page, advisories and RFC-compliance documentation published on the project site."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Scope limits follow from the nature of the software: (1) it is a resolver, not a service — there is no operator to trust, but also no hosted filtering: ad/tracker blocking requires the operator's own RPZ/local-zone work (no built-in blocklists are documented); (2) it requires installation, configuration and maintenance ('a few lines of configuration' is still configuration, plus upgrades — the 1.26.x CVE stream shows why); (3) 'validating' protects integrity but privacy toward the authoritative DNS depends on the operator's choices (forwarders vs full recursion, QNAME minimisation being automatic per RFC 9156); (4) the documentation does not claim anti-malware filtering — threat blocking is not part of the product as documented; (5) Windows support is documented but secondary (manual PDF, installers); (6) performance and hardening (rate limiting, socket tuning) are deployment matters [NON ÉTABLI] from the pages consulted; (7) this entry documents the software only — public resolvers built on Unbound are separate subjects."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: full control and data locality — queries never leave infrastructure the operator chose; DNSSEC validation, QNAME minimisation, aggressive DNSSEC caching and local root-zone support are built-in, standards-backed privacy/robustness features; BSD licence (free, permissive, no paid tier gating — 'no custom builds… for paying customers only'); extraordinary packaging breadth (base system of all major BSDs, standard Linux repos, macOS, Windows installers, PGP-signed tarballs); transparent, rapid security maintenance (14 CVE fixes across 1.26.1–1.26.2 in five weeks, coordinated disclosure with named researchers); lightweight design ('fast and lean') with easy initial setup; mature RFC-compliance documentation; extensibility via RPZ, auth zones, Python modules and policy zones for operators who want filtering."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: no hosted convenience — the operator owns updates, hardening and uptime (the 2026 CVE stream is a reminder of the maintenance duty); no built-in content/ad blocking (contrast the hosted services in this library — filtering must be assembled via RPZ/local zones); no dashboards, analytics or per-device policies out of the box; expertise required for correct deployment (avoiding open resolvers, choosing recursion vs forwarding); privacy toward authoritative servers is improved by design but the operator still resolves publicly unless additional measures (root-zone copy, prefetching) are configured; Windows story is thinner than Unix; some canvas areas (extension store, rendering) are structurally not applicable and are documented as such rather than filled; version/platform details are [VERSION]-dependent."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Administrators and self-hosters who want recursive DNS under their own control: privacy-conscious users preferring local resolution with DNSSEC validation and QNAME minimisation over any hosted service; BSD/Linux users wanting the resolver already in their base system or repositories; networks needing a validating resolver (e.g. behind Pi-hole or enterprise resolvers using it as an upstream engine); operators subject to policies that forbid third-party DNS; developers and researchers needing a standard-compliant, inspectable resolver (BSD licence, RFC documentation); organisations wanting long-term stability with paid support available but no feature paywall."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users wanting zero-configuration hosted DNS with built-in ad/malware blocking (the `control-d` and `mullvad-dns` entries in this library cover that model); users unwilling to operate software (install, configure, patch — CVE fixes in 1.26.1/1.26.2 are part of the deal); users needing dashboards, query logs or per-device analytics products (not part of Unbound); users expecting anti-phishing/malware intelligence feeds (undocumented — not a feature); users needing vendor-hosted SLAs (Unbound is software; support contracts are optional); users wanting a GUI — configuration is file-based."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "Unbound (NLnet Labs, BSD licence) is the self-hosted counterpart to the hosted DNS entries of this library: a validating, recursive, caching resolver with standards-backed privacy (QNAME minimisation RFC 9156, aggressive DNSSEC cache RFC 8198, local root-zone RFC 7706) and DoT/DoH support, distributed across all major BSDs as base system, standard Linux repositories, macOS and Windows (version 1.26.2 of 2026-10-21, 14 CVE fixes across the 1.26.1–1.26.2 pair) [VERSION]. Its strengths are control, transparency and an un-gated BSD codebase with active coordinated-disclosure maintenance; its costs are operational responsibility (patching, hardening) and the absence of built-in content blocking or hosted conveniences. Canvas sections written for GUI applications (rendering engine, extension store) are documented as not applicable with the real mechanisms named instead. All cited URLs were reachable on 2026-11-10; the founding date and NLnet Labs corporate details are [NON ÉTABLI] from the consulted sources."
+    }
+  },
+  "sources": [
+    "https://nlnetlabs.nl/projects/unbound/about/",
+    "https://nlnetlabs.nl/projects/unbound/download/"
+  ]
+}

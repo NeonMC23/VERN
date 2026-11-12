@@ -1,0 +1,76 @@
+{
+  "id": "bind-9",
+  "name": "BIND 9",
+  "type": "application",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "BIND 9 is the reference name-server software of the Internet Systems Consortium (ISC), described on its official page as 'versatile, classic, complete name server software' and, in the vendor's words, 'the first, oldest, and most commonly deployed solution' in the DNS server field (isc.org/bind, consulted 2026-11-10) [the superlative is [ÉDITEUR]]. It is open source under the MPL 2.0 license, developed publicly on GitLab (gitlab.isc.org/isc-projects/bind9). BIND 9 covers both authoritative service and recursive/caching resolution: ISC states it is 'used successfully for every application from publishing the (DNSSEC-signed) DNS root zone and many top-level domains… to service providers with large resolver farms'. It is infrastructure software installed and operated by the user, not a hosted service."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "The consulted pages establish BIND's lineage qualitatively — 'the first, oldest, and most commonly deployed solution' (isc.org/bind) — but give no founding date; the project's origin date is [NON ÉTABLI] here. The current release structure is documented precisely (isc.org/bind, consulted 2026-11-10) [VERSION]: three supported branches — Stable, Extended-Support (ESV) and Development — with BIND 9.20.30 as 'Current Stable/ESV' (released Oct 2026, support until Q2 2028), BIND 9.18.50 (Jun 2026) marked EOL, and BIND 9.21.27 as the Development branch (Oct 2026). The features matrix (kb.isc.org/docs/aa-01310, updated 2026-06-11) records the branch history of major capabilities (DoT/DoH since 9.18, network stack refactor to libuv in the 9.16/9.18 generation, DNSSEC validation default 'auto')."
+    },
+    "rendering_engine_and_technical_architecture": {
+      "category": "FAIT",
+      "text": "BIND 9 has no rendering engine — it is a headless daemon (`named`); this section documents its DNS architecture (same convention as the SearXNG and Unbound entries). The Administrator Reference Manual (bind9.readthedocs.io/en/latest, consulted 2026-11-10) defines the two service roles: authoritative name servers and 'Resolver (Caching Name Servers)', with zone-file operation (SOA/RRs), incremental zone transfers (IXFR), NOTIFY and dynamic updates. Documented architectural elements: Split DNS, IPv6 support, Dynamically Loadable Zones (DLZ) and Dynamic Database (DynDB), Catalog Zones, and 'DNS Firewalls and Response Policy Zones' (RPZ). The features matrix adds: DNS COOKIE, EDNS buffer size 1232 bytes (DNS Flag Day 2020), Extended DNS Errors (RFC 8914), answer synthesis from cached NSEC (RFC 8198), forwarding over TLS including dynamic updates, and `libuv`-based network I/O since the 9.16/9.18 refactoring [FAIT as documented design]."
+    },
+    "interface_and_documented_features": {
+      "category": "FAIT",
+      "text": "Administration is file- and tool-based: `named.conf` configuration reference and BIND 9 statistics are documented in the ARM chapter 8; operational tools ('Tools for Use With the Name Server Daemon') and signals in chapter 4; troubleshooting in chapter 9. DNSSEC is a first-class documented area — zone signing, secure delegation, validation, dynamic trust anchor management and PKCS#11 (HSM) support (ARM chapter 5 plus a full DNSSEC Guide appendix). Security configuration has its own chapter: threat model, access control lists, chroot/setuid, dynamic-update security, TSIG and SIG(0). Notable options from the 9.20 features set: `dnssec-policy` extensions (cdnskey, cds-digest-types, `key-store` for HSMs, `offline-ksk`), the `dnssec-ksr` utility (Key Signing Requests), DNSSEC multi-signer model 2 (RFC 8901), and `dnstap` entries distinguishing DoT and DoH queries [VERSION]."
+    },
+    "installation_and_distribution": {
+      "category": "FAIT+VERSION",
+      "text": "Sources are published on the ISC website and FTP (downloads.isc.org/isc/bind9/cur/) with per-version archives and release notes; ISC maintains its own packages for Ubuntu (Launchpad PPA), RHEL/CentOS/Fedora (COPR) and works with the standard Debian packages; an official Docker image exists (`internetsystemsconsortium/bind9`) (isc.org/bind, consulted 2026-11-10). The ARM documents installation/upgrade ('Installing and Upgrading the latest version of BIND 9') and a build chapter (required libraries, optional features, macOS, packager builds). Each supported version has its own ARM (HTML/PDF) and release notes [VERSION]."
+    },
+    "platforms_and_hardware_architectures": {
+      "category": "FAIT",
+      "text": "Documented deployment targets: Linux distributions (Ubuntu, RHEL/CentOS/Fedora, Debian packages as above), other Unix-like systems per the ARM's 'Supported Platforms' section (chapter 2), macOS (build chapter), containers (official Docker image) and Windows is not listed among ISC's own packages [FAIT as observed on the pages consulted]. The ARM's resource-requirements chapter documents hardware, CPU and memory guidance, including 'Name Server-Intensive Environment Issues'. A separate ISC 'supported platforms' KB article is referenced (kb.isc.org/docs/supported-platforms) but its detailed content was not consulted here [NON ÉTABLI]."
+    },
+    "extensions_and_add_on_store": {
+      "category": "FAIT",
+      "text": "There is no app store — this section documents BIND's real extension mechanisms (honest treatment of a canvas section written for GUI applications). The ARM documents a **plugin system** ('Plugins', 'Configuring Plugins', 'Developing Plugins', chapter 4) and the features matrix lists 'BIND Modules: plug-in support for query processing'. Dynamically Loadable Zones (DLZ) and Dynamic Database (DynDB) extend zone back-ends; RPZ supplies policy-based filtering; response policy and `ede` options extend error signalling. A commercial layer exists beside the open source: the '-S (stable preview) editions… available to ISC customers with certain paid support contracts… offer some features that are not included in the open source' (features matrix) — e.g. resolver-side EDNS Client-Subnet is listed for 9.20-S but not for open-source 9.20 [FAIT as documented matrix]."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT",
+      "text": "Security engineering is central and documented: a published **threat model** (ARM chapter 7), ACLs, chroot/setuid isolation, TSIG and SIG(0) for authenticated updates and transfers, DNSSEC validation (default 'auto' in current branches) with dynamic trust-anchor management and PKCS#11 HSM integration, DNS COOKIE against off-path spoofing, and RPZ as a 'DNS firewall'. Operational security processes are also documented: a 'Security Advisories' area (linked from the product page), early vulnerability notifications (EVN) for support customers — 5 days for paid tiers, 3 days for basic (support table, [ÉDITEUR] as contractual claim) — and a public CHANGES file. As self-hosted software, BIND leaves query data on the operator's own infrastructure; the software itself documents no telemetry, and none is suggested by the consulted pages [NON ÉTABLI for any built-in telemetry beyond documented statistics channels]."
+    },
+    "update_channels_and_release_cadence": {
+      "category": "FAIT+VERSION",
+      "text": "Three parallel branches are supported at a time (Stable, Extended-Support, Development) with explicit release and EOL dates on the product page [VERSION]: e.g. 9.20.30 (Oct 2026) with EOL Q2 2028, 9.18.50 (Jun 2026) now EOL. Users are directed to the Known Issues wiki before updating, to the CHANGES file and to per-branch upgrade articles (9.11→9.16, 9.16→9.18, 9.18→9.20). Updates ship as source archives, ISC package repositories (Launchpad/COPR/Debian) and Docker images; subscription customers get confidential 24×7 support and EVN. The cadence visible in the table (9.20.30 and 9.21.27 both Oct 2026) shows active maintenance [VERSION]."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "'BIND 9 is transparent open source, licensed under the MPL 2.0 license. Users are free to add functionality to BIND 9 and contribute back to the community through our open GitLab' (isc.org/bind, consulted 2026-11-10). Governance sits with the Internet Systems Consortium (ISC), which funds development partly through support subscriptions (Gold/Silver/Bronze/Basic with published response SLAs) [ÉDITEUR contractual framing]; the -S preview editions are explicitly customer-gated. Community support runs through the public bind-users mailing list. The legal form of ISC and its funding details are [NON ÉTABLI] from the consulted pages. Commercial products with an ISC business relationship are listed separately ('commercial products' page) — not consulted here."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) BIND 9 is infrastructure software — it ships no ad/tracker blocking product; filtering exists only as RPZ policy machinery that the operator must feed; (2) configuration and operation are expert tasks (`named.conf`, DNSSEC key ceremonies, zone files) — the ARM itself runs to ten chapters plus appendices; (3) some resolver features (e.g. ECS) are reserved for the paid '-S' editions in the current branches (features matrix) — open-source users lack them by design; (4) security maintenance is an operator duty (Known Issues wiki, upgrade articles, CVE-driven releases imply recurring work); (5) performance and sizing are deployment-dependent (ARM resource chapter) — no benchmark is claimed here; (6) platform support is version-dependent [VERSION]; (7) the superlatives ('first, oldest, most commonly deployed') are vendor claims [ÉDITEUR]."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: complete, standards-first DNS coverage (authoritative + recursive, DNSSEC signing/validation, TSIG, IXFR/NOTIFY, catalog zones, DLZ/DynDB, RPZ, DoT/DoH transports since 9.18) — 'Whatever your application is, BIND 9 probably has the required features' [ÉDITEUR framing of a documented breadth]; deployment ubiquity (root zone and TLD operators, ISPs, enterprises per ISC) and a huge familiar user base; MPL 2.0 openness with public GitLab contribution and transparent CHANGES/security advisories; mature documentation (ARM, DNSSEC Guide, man pages, upgrade paths, feature matrix with EOL dates); three-branch lifecycle (Stable/ESV/Development) with published EOL horizon; official packages and Docker image; optional professional support with SLAs and early vulnerability notifications; plugin/module API for query-processing extensions."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: complexity and operational cost (expert configuration, DNSSEC lifecycle, upgrade discipline across a strict branch/EOL scheme); no built-in content filtering product (RPZ requires external feeds and policy work); feature gating of '-S' editions means open-source users don't get everything (ECS resolver example); legacy footprint — the software's breadth is also its learning curve (ARM scope); maintenance cadence demands attention (Known Issues before upgrading is ISC's own advice); vendor superlatives and SLA claims are [ÉDITEUR]; some platform and telemetry details remain [NON ÉTABLI] from the consulted pages; no GUI — file/tool administration only."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Operators who need authoritative and/or recursive DNS at infrastructure grade: TLD and zone publishers (ISC documents DNSSEC-signed root/TLD usage), ISPs and service providers running large resolver farms, enterprises hosting internal and external zones, universities and government networks (the product page's depicted user categories), registries and hosting providers with many small zones, and any organisation standardising on the most widely known name-server software with optional commercial support. Also for teams needing RPZ-based DNS firewalls or DNSSEC signing/validation with HSM (PKCS#11) support."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users wanting an ad-blocking DNS sinkhole out of the box (see the Pi-hole entry) or a self-hosted DNS appliance with a web console and app store (see the Technitium entry); administrators without DNS expertise seeking 'zero configuration'; users needing resolver-side ECS on open-source builds (paid -S only in the documented matrix); small deployments wanting a lightweight consumer tool (BIND is infrastructure-scale software); users seeking a hosted service (BIND is software you run)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "BIND 9 (ISC, MPL 2.0) is the classic, complete name-server software — authoritative and recursive/caching — documented across DNSSEC (signing, validation, HSM, multi-signer), zone operations (IXFR, catalog zones, DLZ), security (threat model, TSIG, chroot, RPZ DNS firewalls) and transports (DoT/DoH since 9.18), at version 9.20.30 (Oct 2026, EOL Q2 2028) with parallel ESV/Development branches [VERSION]. Its strengths are breadth, ubiquity and documented maturity; its costs are operational complexity and the fact that filtering and convenience features (RPZ feeds, GUI) are operator-assembled or reserved to paid '-S' editions. Vendor superlatives and support SLAs are [ÉDITEUR]; founding date and ISC corporate details are [NON ÉTABLI] here. All cited URLs were reachable on 2026-11-10."
+    }
+  },
+  "sources": [
+    "https://www.isc.org/bind/",
+    "https://kb.isc.org/docs/aa-01310",
+    "https://bind9.readthedocs.io/en/latest/"
+  ]
+}

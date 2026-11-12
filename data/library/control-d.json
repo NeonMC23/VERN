@@ -1,0 +1,69 @@
+{
+  "id": "control-d",
+  "name": "Control D",
+  "type": "service",
+  "content": {
+    "introduction": {
+      "category": "ÉDITEUR",
+      "text": "Control D is a DNS filtering and security platform presented by its vendor as 'DNS Filtering for Every OS' (controld.com, consulted 2026-11-10) [ÉDITEUR tagline]. It is operated from Toronto, Canada and describes itself as 'the sister company of Windscribe, an industry-leading VPN' (controld.com/free-dns) [ÉDITEUR]. The platform has a paid, per-endpoint enterprise offering and a free public DNS tier documented at controld.com/free-dns and docs.controld.com; this entry covers both, keeping the distinction explicit. Control D is a hosted network service, not application software installed for its own sake — although native clients exist for policy enforcement on endpoints."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "A hosted recursive DNS service with optional filtering, plus a management platform. The free tier ('Free and Public DNS Servers', consulted 2026-11-10) provides ready-made resolver flavours: Unfiltered ('Nothing blocked'), Malware Protection, Ads & Tracking, Social, Family Friendly (adult content and drug sites blocked) and Advanced ('Unblocks censored domains from various countries'), plus community blocklists (OISD Full/Basic, StevenBlack Unified, 1Hosts Lite — 'These are community lists and are not maintained by Control D') and a custom-config builder with free filters (Ads & Trackers, Adult Content, Dating, Drugs, Gambling, Government Sites, Malware, Phishing, Social) and premium-only filters (Artificial Intelligence, Clickbait, Crypto, Dynamic DNS, File Hosting, Games, IoT Telemetry, New Domains, Torrents & Piracy, URL Shorteners, VPN & DNS). The paid platform adds dashboards, per-endpoint policies, multi-tenancy, API/CLI and SIEM streaming (controld.com, consulted 2026-11-10). The official documentation states the free resolvers 'are not a full dashboard / profile management system' and provide no analytics (docs.controld.com/docs/free-dns)."
+    },
+    "origin_and_history": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "The founding date of Control D is [NON ÉTABLI] from the consulted sources. The documented corporate context: the company is 'based in Toronto, Canada' and is 'the sister company of Windscribe' (controld.com/free-dns, consulted 2026-11-10) [ÉDITEUR]. The homepage advertises a '99.98% malware block rate' attributed to an external test — 'Verified by Nexxwave, 2025', linked to a third-party tech blog — and claims '100M+ real users powering threat intelligence' and '1,000+ blockable apps and services' [ÉDITEUR; the Nexxwave test itself was not consulted]. A cost calculator on the homepage cites competitor pricing (including NextDNS, Cloudflare) with a note 'verified June 17, 2026' [ÉDITEUR]. No corporate timeline beyond the above is established here."
+    },
+    "operation_and_infrastructure": {
+      "category": "FAIT+VERSION",
+      "text": "The free service runs on 'an anycast infrastructure to reduce latency and improve reliability' (docs.controld.com/docs/free-dns, consulted 2026-11-10). Filtering is applied at resolution time against curated native filters and third-party lists; 'All Filters are rebuilt and deployed from their original sources every 30 minutes' [VERSION]. Endpoints are published per flavour — plain DNS on IPv4 `76.76.2.0-5` / `76.76.10.0-5` and IPv6 `2606:1a40::0-:5` (p0 Unfiltered → p3 Social, then Family, Uncensored), secure DNS at `https://freedns.controld.com/p0` (DoH), `p0.freedns.controld.com` (DoT/DoQ) and equivalents for p1/p2/p3/family/uncensored; third-party-list endpoints `x-oisd`, `x-oisd-basic`, `x-stevenblack`, `x-1hosts-lite/-pro/-xtra`, `x-hagezi-light/-normal/-pro/-proplus/-ultimate/-tif`, `x-adguard` each get dedicated IPs and hostnames [VERSION]. On 2026-11-10 a bare GET to `https://freedns.controld.com/p0` and `/p2` returned HTTP 400 (a live server rejecting a non-RFC-8484 request) — reachability observed, functional DoH resolution not separately tested; UDP/53 resolution was not tested because `dig` is unavailable in this environment (documented as not executed). Claimed scale ('100M+ real users', '6.65ms resolution speed') is [ÉDITEUR], unbenchmarked here."
+    },
+    "protocols_and_encryption": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "The homepage states support for 'DNS-over-HTTPS/3, DNS-over-TLS, DNS-over-QUIC, and Do53 (DNS over port 53). Encrypted by default' (controld.com, consulted 2026-11-10) [FAIT as documented support; 'encrypted by default' is an [ÉDITEUR] qualifier]. The free-DNS documentation confirms 'Support encrypted DNS (DoH, DoT, QUIC)' for the secure endpoints and lists legacy plain-DNS IPs for unencrypted use (docs.controld.com/docs/free-dns). DoH/3 and DoQ support place the service among the broader-transport resolvers in this library (cf. AdGuard DNS's DoQ claim, lot 20). DNSSEC validation is not documented on the consulted pages — [NON ÉTABLI]."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "For the free resolvers the vendor states: 'We do not store any individual browsing history, timestamps, or logs' and 'we don't use any 3rd party tracking or analytics services to track your activity on this website either' (controld.com/free-dns FAQ, consulted 2026-11-10) [ÉDITEUR]; the documentation repeats 'Not store logs (no individual browsing history, timestamps, or query logs)'. For the paid platform the posture differs by design: '30-day query logs on every plan, plus a year of analytics' (homepage) [ÉDITEUR]. The privacy policy (controld.com/privacy, 'Last updated on 2026-02-26') states Control D 'primarily acts as a PII Processor', claims ISO 27701 compliance, collects technical data on its website (URLs, IP address, browser, timestamps), processes 'anonymized data that you have voluntarily provided to us… for model training' with an opt-out, limits third-party sharing to subcontractors/legal obligations, and handles EU/EEA transfers with standard contractual clauses [FAIT as policy text; commitments are [ÉDITEUR], no independent audit established here]. Certifications displayed: SOC 2, ISO 27001, ISO 27701 [ÉDITEUR]."
+    },
+    "configuration_and_access": {
+      "category": "FAIT+VERSION",
+      "text": "Free use needs no account: point a device or router at one of the published endpoints (docs.controld.com/docs/free-dns, consulted 2026-11-10) — e.g. `76.76.2.2`/`76.76.10.2` for Ads & Tracking, `https://freedns.controld.com/family` or `family.freedns.controld.com` for Family Friendly [VERSION]. A 'Free DNS Link Checker' lets users test a domain against a chosen filter. Custom-config endpoints are generated by selecting filters in a builder on the free-dns page. The paid platform deploys via 'native clients for Mac, Windows, Linux, iOS, and Android' with silent install, or network-level configuration 'requires no agent at all' (homepage) — free trial 'No credit card required'. Setup guides exist per platform ('Setup Guide' links). Whether the free tier still matches these exact endpoints over time is [VERSION]-dependent."
+    },
+    "governance_and_operator": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "The operator is the Toronto-based company described as Windscribe's sister company (controld.com/free-dns, consulted 2026-11-10) [ÉDITEUR]. Legal entity name and registration details are [NON ÉTABLI] from the consulted pages. Governance of filters is split: native filters are vendor-curated (false-positive curation claimed for Ads & Trackers: 'Comprehensive and curated to remove thousands of false positives that plague most community maintained lists' [ÉDITEUR]), while community blocklists are explicitly third-party ('Any false positives/negatives should be reported to the list maintainer'). A trust/compliance page is linked from the homepage ('security and trust certifications'); contact routes include `security@controld.com` (privacy policy). The policy also documents a corporate-event clause (data transfer in case of merger/acquisition)."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) the free tier is fixed-function — no custom domain rules, no per-device profiles, no analytics ('not a full dashboard', docs.controld.com); (2) community-list endpoints inherit third-party list quality, with disputes routed to list maintainers, not Control D; (3) filtering operates at the DNS layer only; (4) the no-logs claim covers the free resolvers, while paid plans deliberately retain 30-day query logs and a year of analytics — users must not conflate the two; (5) privacy policy allows use of volunteered anonymized platform data for model training (opt-out) and collects website technical data — narrower than a blanket 'no data' posture; (6) efficacy/scale/certification claims (99.98 % Nexxwave, 100M+ users, 6.65 ms, SOC 2/ISO) are vendor-published [ÉDITEUR]; the underlying Nexxwave test was not consulted [NON ÉTABLI]; (7) DNSSEC status is [NON ÉTABLI]; (8) endpoint stability is [VERSION]-dependent."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: a genuinely free, account-free public DNS tier with a broad set of ready-made protection levels (including an Uncensored mode that 'unblocks censored domains from various countries' and a Family Friendly mode); wide transport coverage (DoH incl. HTTP/3, DoT, DoQ and plain DNS) with per-flavour hostnames and IPs; custom filter composition (nine free filters) without paying; community blocklist endpoints (OISD, StevenBlack, 1Hosts, Hagezi, AdGuard) for users who prefer those lists; 30-minute filter rebuild cadence [VERSION]; anycast deployment; a free link-checker tool; paid escalation path (dashboards, API/CLI, SIEM, multi-tenancy) under the same operator; explicit no-logs statement for the free tier [ÉDITEUR]; compliance artefacts (SOC 2/ISO 27001/27701) displayed [ÉDITEUR]."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: free tier cannot customise beyond filter selection and has no analytics or logs visibility (by design); the privacy model differs between free (no logs) and paid (30-day logs + 1 year analytics) tiers, which is easy to misread; model-training use of anonymised platform data (opt-out) and website technical-data collection are documented in the policy; third-party blocklist quality is out of Control D's hands on `x-*` endpoints; DNS-layer scope cannot stop non-DNS traffic or in-app ads that don't resolve through it; corporate identity is described only as 'sister company of Windscribe' — legal entity details [NON ÉTABLI]; key performance and security claims are vendor-sourced [ÉDITEUR] with no independent verification here; DNSSEC support is undocumented on consulted pages [NON ÉTABLI]; the platform's per-endpoint pricing model targets organisations more than individuals."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Individuals wanting free, no-signup DNS filtering with a clear protection-level choice (malware only, ads/trackers, social blocking, family, or uncensored access) and encrypted transports including DoQ/HTTP3; users who prefer well-known community blocklists (OISD, StevenBlack, 1Hosts, Hagezi, AdGuard) behind a single anycast endpoint; households needing adult-content and drug-site blocking (Family Friendly); users in censored environments wanting domain unblocking at DNS level (Advanced/Uncensored); organisations and MSPs wanting per-endpoint DNS security with dashboards, SIEM streaming, multi-tenancy and compliance artefacts (paid plans); users migrating from other DNS filters who want a free trial without a credit card."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users requiring per-domain custom allow/deny rules or query analytics without paying (free tier excludes them); users wanting a strict zero-data policy including anonymised model-training data (the policy permits it with opt-out) or objecting to website technical-data collection; users needing DNSSEC validation confirmed from documentation ([NON ÉTABLI] here); users wanting self-hosted/open-source resolvers (this is a hosted commercial service — see the Unbound entry in this library for that model); users needing protection beyond the DNS layer; users who want verified independent security audits (certifications are vendor-displayed [ÉDITEUR]); users requiring an operator with published legal entity transparency ([NON ÉTABLI] here)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "Control D is a Toronto-based DNS filtering platform (Windscribe's sister company [ÉDITEUR]) offering a free, account-free public DNS tier — six native presets, custom filter builder, community-list endpoints — on documented endpoints `76.76.2.x`/`76.76.10.x`/`freedns.controld.com`, with DoH(/3), DoT, DoQ and plain DNS and 30-minute filter refresh [VERSION], plus a paid per-endpoint platform. Its documented differentiators are transport breadth (incl. DoQ/HTTP3), an Uncensored preset, and explicit no-logs wording for the free tier; its documented limits are the free/paid logging split (30-day logs on paid plans), DNS-layer scope, vendor-sourced claims (99.98 % Nexxwave test not consulted; certifications [ÉDITEUR]), model-training/website data collection in the 2026-02-26 policy, and [NON ÉTABLI] DNSSEC and legal-entity detail. Reachability of `freedns.controld.com` was observed on 2026-11-10 (HTTP 400 on bare GET). All cited URLs were reachable; UDP/53 testing was not executed (`dig` unavailable)."
+    }
+  },
+  "sources": [
+    "https://controld.com/",
+    "https://controld.com/free-dns",
+    "https://docs.controld.com/docs/free-dns",
+    "https://controld.com/privacy"
+  ]
+}

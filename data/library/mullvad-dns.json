@@ -1,0 +1,68 @@
+{
+  "id": "mullvad-dns",
+  "name": "Mullvad DNS",
+  "type": "service",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "Mullvad DNS was the free public encrypted DNS service of Mullvad (the Swedish VPN operator), providing DNS-over-HTTPS and DNS-over-TLS resolution with optional content blocking — usable 'even if you are not a Mullvad customer' (mullvad.net help page, consulted 2026-11-10). Its defining current fact is a discontinuation: the official guide carries the notice 'the public encrypted DNS service will be discontinued on November 2, 2026', and an official blog post of 2026-09-03 announces the shutdown and a decision to sponsor the Quad9 Foundation instead. As of this entry's consultation date (2026-11-10, i.e. after the announced date), functional DoH resolution was still measured working (see operation section) — both facts are documented without reconciling them by conjecture."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "A hosted recursive DNS service reachable only over encrypted transports, offered in six documented variants keyed by hostname (mullvad.net/en/help/dns-over-https-and-dns-over-tls, consulted 2026-11-10): `dns.mullvad.net` (no blocking); `adblock.dns.mullvad.net` (ads, trackers); `base.dns.mullvad.net` (plus malware); `extended.dns.mullvad.net` (plus social media); `family.dns.mullvad.net` (plus adult content and gambling); `all.dns.mullvad.net` (everything). A limited plain-DNS listener on UDP/TCP 53 exists 'only to aid with resolving hostnames related to this service' (bootstrap), while the published IPs 'can only be used with DNS resolvers that support DoH or DoT, not with DNS over UDP/53 or TCP/53'. The service required no account and no Mullvad subscription. It is a network service, distinct from Mullvad VPN and from the Mullvad Browser (which used it by default when the VPN was off)."
+    },
+    "origin_and_history": {
+      "category": "FAIT",
+      "text": "The official shutdown post states 'Mullvad has operated public encrypted DNS (DoH) servers since 2022' (mullvad.net blog, 2026-09-03, consulted 2026-11-10). The same post gives the rationale — the service is redundant with the VPN ('traffic is already encrypted and Mullvad VPN's internal DNS handles all queries') and 'Running a privacy-focused public DNS service is a highly specialized undertaking' — and announces that Mullvad will 'support Quad9… instead of running it ourselves', calling the Quad9 Foundation 'the undisputed leader in the field' [ÉDITEUR]. Users were told to 'switch before November 2nd 2026'; Mullvad Browser defaults (DoH and included ad blocking) 'will automatically be migrated to Quad9', and iOS/macOS DNS profiles 'will stop working'. Historical hostnames `doh.mullvad.net`/`dot.mullvad.net` and IPs 193.19.108.2/3 are documented as retired (help page 'Notes')."
+    },
+    "operation_and_infrastructure": {
+      "category": "FAIT",
+      "text": "The service is anycast: 'Multiple Mullvad servers in different locations are configured to provide the same DNS service', with failover to the next-closest server; named unfiltered servers are listed for Frankfurt, London (×2), Göteborg, Malmö, Stockholm, Singapore, Dallas and New York (help page, consulted 2026-11-10). Blocking works by untruthful NXDOMAIN answers: 'our resolver simply lies to the client and says that the hostname does not exist', against Mullvad-curated theme lists 'sourced from publicly available block lists', inventoried publicly at `github.com/mullvad/dns-blocklists`. IPv4/IPv6 endpoints: 194.242.2.2 (dns) through 194.242.2.9 (all) and 2a07:e340::2–::9, DoH port 443, DoT port 853. **Measured 2026-11-10** (journal P190): bare GETs to `https://dns.mullvad.net/dns-query` and `base.dns.mullvad.net/dns-query` returned HTTP 400 (alive, RFC-8484-invalid request), and a real DoH resolution via `curl --doh-url` fetched `https://example.com` with HTTP 200 through both hostnames — the service was still functionally resolving 8 days after the announced discontinuation date. The cause of this discrepancy is [NON ÉTABLI]."
+    },
+    "protocols_and_encryption": {
+      "category": "FAIT",
+      "text": "DNS-over-HTTPS and DNS-over-TLS only for actual resolution — 'Our public encrypted DNS service uses DNS over HTTPS (DoH) and DNS over TLS (DoT)… your DNS queries are encrypted between your device and our DNS server', with the explicit restriction that the IPs are for DoH/DoT resolvers 'not with DNS over UDP/53 or TCP/53' (help page, consulted 2026-11-10). Ports: DoH 443, DoT 853. Privacy-protocol engineering includes 'QNAME minimization': resolvers give other DNS servers 'as little information as possible about the queries'. DNSSEC validation by the service is not documented on the consulted page — [NON ÉTABLI]. Configuration profiles for Apple devices are published at `github.com/mullvad/encrypted-dns-profiles` (DoH and DoT versions)."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "The service's purpose statement: protecting DNS queries 'from being snooped on by third parties when not connected to our VPN service', e.g. stopping the ISP from seeing visited domains (help page; blog). Mullvad's company-wide no-logging policy (mullvad.net/en/help/no-logging-data-policy, consulted 2026-11-10) states: 'we never store any activity logs of any kind', accounts are anonymous numbered accounts ('no username, no password, no email address'), and payment handling is documented in detail — cash envelopes shredded, cryptocurrency with 20-day truncation (Monero tx_hash kept longer to prevent double-crediting), card/PayPal/Swish/wire via Stripe/PayPal/SEB with statutory retention ('Swedish Accounting Act… seven years') [FAIT as policy text; commitments [ÉDITEUR]]. WireGuard configuration stores account number, pubkey and tunnel address. Swedish jurisdiction is established by the policy's own references (Swedish legislation, SEB, Swedish Accounting Act). Independent audits of these commitments are [NON ÉTABLI] from the consulted sources."
+    },
+    "configuration_and_access": {
+      "category": "FAIT",
+      "text": "The help page documents complete setup for Mullvad Browser (default provider), Firefox, Chrome/Brave/Edge (secure-DNS custom URL), Android 9+ (Private DNS hostname), iOS/iPadOS and macOS (configuration profiles via the GitHub repository), Windows 11 (manual DNS + DoH template) and Linux (systemd-resolved with `DNSOverTLS=yes`), including the six DoH URLs `https://<host>/dns-query` and the matching IPs (help page, consulted 2026-11-10). A verification page (`mullvad.net/check`) shows the serving DNS server ('No DNS leaks'). The service was free and accountless. **With the shutdown announced for 2026-11-02, these instructions are historical**: Mullvad directs former users to Quad9 guides (`docs.quad9.net`) and states iOS/macOS profiles will stop working (blog, 2026-09-03). The 2026-11-10 measurement (still resolving) does not restore any service commitment."
+    },
+    "governance_and_operator": {
+      "category": "FAIT",
+      "text": "The operator is Mullvad, a Swedish VPN company (its policies reference Swedish law and the Swedish Accounting Act; the no-logging policy documents numbered accounts and self-hosted cryptocurrency nodes). Exact legal entity details are in the linked Terms of Service/Privacy Policy (not detailed here). Governance decisions are published openly: the 2026-09-03 blog post explains the shutdown rationale and the pivot to financially sponsoring Quad9; the blocklists are maintained in a public GitHub repository (`mullvad/dns-blocklists`); the content-blocking curation is Mullvad's ('Mullvad curates a collection of theme lists'). The Mullvad Browser is developed with the Tor Project (mullvad.net home, consulted 2026-11-10) and consumed this DNS service by default when the VPN was off."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented limits: (1) **the service is discontinued** — officially as of 2026-11-02 (blog 2026-09-03); measured still functional on 2026-11-10, an unreconciled state documented as such [NON ÉTABLI cause]; (2) encrypted transports only — no plain-DNS resolution beyond bootstrap, so legacy devices cannot use it; (3) DNS-level blocking limits acknowledged by the vendor: 'DNS content blocking can not block all ads and trackers. For example it can not block YouTube ads' (help page); (4) recommended only when the VPN is off — 'When you are already connected to our VPN service the security benefits… is negligible and it will always be slower'; (5) anycast routing issues documented ('Known issues' — ISP BGP can route to another continent; Android can give up on high latency); per-city unfiltered servers exist but without content blocking; (6) iCloud Private Relay can override the Apple profiles (documented note); (7) SOCKS5 proxy DNS bypasses the service (documented note); (8) no custom allow/deny lists or analytics were offered (fixed variants only)."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths (of the service as operated): completely free and accountless, aligned with Mullvad's no-logging policy; six clear protection levels from unfiltered to fully blocked; encrypted-only transports (DoH/DoT) with QNAME minimisation and per-city unfiltered servers; transparent blocking methodology (NXDOMAIN lies) with public blocklist sources on GitHub; honest documentation of limits (YouTube ads, anycast issues, VPN redundancy); default integration in Mullvad Browser; privacy-first operator with a detailed, dated no-logging policy (numbered accounts, shredded cash, crypto truncation). Its final act is also pro-privacy in substance: rather than a partial service, Mullvad funds the established non-profit alternative ('sponsoring Quad9 instead')."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "The decisive disadvantage: **the public service is officially discontinued (2026-11-02)** — new configurations are pointless and existing ones are unsanctioned leftovers (measured still resolving on 2026-11-10, but with no service commitment and migration to Quad9 recommended by the operator itself). Further documented limits: no plain DNS for legacy devices; no custom filtering, per-domain rules or analytics (fixed variants only); blocking granularity is theme-level with acknowledged misses (YouTube ads); recommended away from its own VPN (value limited to Mullvad-VPN-less contexts); anycast performance is ISP-dependent with documented timeout risks (especially Android); the service was always a side offering — the shutdown rationale itself states running such a service 'is a highly specialized undertaking' better left to a dedicated foundation."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Historically: privacy-conscious users not on a VPN wanting encrypted DNS with sensible defaults and Mullvad-grade no-logging commitments; Mullvad Browser users (it was the default); households wanting family-level blocking (adult/gambling) without an account; users preferring transparent, GitHub-published blocklists. Today (post-2026-11-02): only readers of this entry as a documented, discontinued service — for live DNS protection the operator itself points to Quad9 (documented elsewhere in this library) or to Mullvad VPN's internal DNS for Mullvad customers."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at (and no longer available to): anyone setting up DNS today — the service is discontinued per its operator; users needing plain DNS; users needing custom allow/deny rules, logs or analytics; Mullvad VPN users (the VPN's own DNS is recommended as faster and sufficient); users needing guaranteed long-term endpoints (the shutdown and the 'will stop working' profiles note make stability moot); users objecting to NXDOMAIN-style blocking side effects (the vendor documents that blocked content simply doesn't load); users who need a supported, contracted service (this was free and is now retired)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "Mullvad DNS was a free, accountless, encrypted-only (DoH/DoT) public DNS service with six content-blocking variants (NXDOMAIN-based, GitHub-published lists), QNAME minimisation and anycast servers in nine cities, backed by Mullvad's dated no-logging policy — and it is now discontinued: the official blog (2026-09-03) set 2026-11-02 as the end date and redirected users to Quad9, which Mullvad now sponsors. A measurement on 2026-11-10 showed DoH resolution still functioning (HTTP 200 via `curl --doh-url`), an unreconciled observation recorded without speculation. The entry documents the service as a matter of record — its design merits (transparency, privacy posture, honest limitation docs) and its terminal state — and is not a recommendation to use it. All cited URLs were reachable on 2026-11-10; four superseded Mullvad URLs returned 404 during research and are logged in the phase sources."
+    }
+  },
+  "sources": [
+    "https://mullvad.net/en/help/dns-over-https-and-dns-over-tls",
+    "https://mullvad.net/en/blog/2026/9/3/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead/",
+    "https://mullvad.net/en/help/no-logging-data-policy"
+  ]
+}

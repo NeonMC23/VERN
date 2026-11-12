@@ -1,0 +1,80 @@
+{
+  "id": "pi-hole",
+  "name": "Pi-hole",
+  "type": "application",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "Pi-hole is a network-wide DNS sinkhole — 'a black hole for Internet advertisements' (github.com/pi-hole/pi-hole, consulted 2026-11-10) — that blocks ads, trackers and other unwanted domains at the DNS layer for every device on a local network, 'without installing any client-side software' (docs.pi-hole.net). It is self-hosted open-source software installed on Linux hardware (or Docker), operated through a built-in web interface and REST API, and developed by a distributed volunteer team under the Pi-hole LLC organisation (named in the project's privacy policy). This entry documents the software; the blocking lists it consumes are community-maintained third parties."
+    },
+    "origin_and_history": {
+      "category": "FAIT+VERSION",
+      "text": "Founding dates are [NON ÉTABLI] from the consulted pages (a 2017 blog post is referenced for load figures, bounding but not establishing the timeline). Documented project facts (pi-hole.net, docs.pi-hole.net, GitHub, consulted 2026-11-10): the team lists Dan Schaper (Co-Founder, Core Developer), Adam Warner (Docker Maintainer) and Dominik Derigs (FTL Designer) among 'a 100% remote-work team'; database-based domain management arrived with **Pi-hole v5.0** and subscribed external allowlists with **v6.0** (docs 'Domain Database') [VERSION]; the current generation is v6 (dashboard screenshots dated 2026/09) with FTL release branch v6.8 merged 2026-10-17 and FTL v6.7.1 referenced in commit history; the core repository shows continuous activity (last commit 2026-11-06, 7 294 commits, 130 tags) [VERSION]."
+    },
+    "rendering_engine_and_technical_architecture": {
+      "category": "FAIT",
+      "text": "No rendering engine exists — this section documents the sinkhole's architecture (same convention as the SearXNG, Unbound, BIND 9 and Technitium entries). Pi-hole is composed of three documented components (pi-hole.net links, consulted 2026-11-10): **Core** (pi-hole/pi-hole — installer, gravity, scripts), **Web** (AdminLTE — the dashboard, now embedded) and **FTL** (pi-hole/FTL — 'The Pi-hole FTL engine', described in the prerequisites page as 'the resolver at the heart of Pi-hole'). The FTL repository documents its base: an embedded, patched **dnsmasq** ('Update dnsmasq tag to v2.93+30', sources under `src/dnsmasq/`), an **embedded SQLite3** database ('Update embedded SQLite3 to 5.53.3') and an embedded web server (CivetWeb, serving the API with CORS). Blocking state lives in the SQLite domain database: `domainlist` (exact/regex allow/deny), `adlist` (subscribed list URLs), and the `gravity`/`antigravity` tables 'flushed and completely rebuilt' at each `pihole -g` run (docs 'Domain Database'). Resolution priority is documented: exact allow > regex allow > exact deny > subscribed allow > subscribed deny > regex deny."
+    },
+    "interface_and_documented_features": {
+      "category": "FAIT",
+      "text": "The web interface ('built into Pi-hole, so there's no separate web server to install') shows total/blocked queries, per-client activity, query types, upstream servers and top domains (pi-hole.net, consulted 2026-11-10). Documented management features: Group Management ('Different rules for different devices'); Allow/Deny domains with 'powerful regex statements'; community blocklist/allowlist subscriptions kept 'up to date automatically'; a Query Log with long-term database and one-click allow/deny; a full REST API 'with built-in documentation' and app passwords for scripts/home automation; four Privacy Modes; expert-mode 'Every Setting, One Place'; Teleporter backup/restore; optional built-in DHCP server (IPv6 capable) and an optional NTP server (port 123, per prerequisites). CLI tools (`pihole` command family incl. `pihole -g` for gravity) are quality-assured for interoperability (docs overview)."
+    },
+    "installation_and_distribution": {
+      "category": "FAIT+VERSION",
+      "text": "Installation runs either as a Docker container (github.com/pi-hole/docker-pi-hole) or via 'our automated installer' on supported Linux distributions ('One command starts the installer… less than ten minutes', pi-hole.net/docs, consulted 2026-11-10). Hardware prerequisites are modest and published: 'Min. 2GB free space, 4GB recommended; 512MB RAM'; a static IP is required ('a DHCP reservation is just fine'); ports: 53/tcp+udp (DNS), 80/443 (web, falling back to 8080/8443 if taken), optional 67/547 (DHCP), optional 123 (NTP) (docs 'Prerequisites'). Officially supported OSes [VERSION]: Alpine, Armbian OS, Debian, CentOS Stream, Fedora, Raspberry Pi OS, Ubuntu — 'actively maintained versions' only. Prebuilt `pihole-FTL` binaries cover x86_64 (amd64/i686), armv6, armv7, armv8 (aarch64) and riscv64; other architectures compile from source."
+    },
+    "platforms_and_hardware_architectures": {
+      "category": "FAIT",
+      "text": "Documented targets: any hardware running a supported OS — 'Despite the name, you are not limited to running Pi-hole on a Raspberry Pi. Any hardware that runs one of the supported operating systems will do!' — with 'A Raspberry Pi, an old PC, a VM or a NAS' given as examples (pi-hole.net, docs.pi-hole.net/main/prerequisites, consulted 2026-11-10). Binary architectures: x86_64 (amd64 and i686), armv6, armv7, armv8 (aarch64), riscv64 [VERSION]; Docker runs on any suitable container host. Scaling is claimed 'capable of handling hundreds of millions of queries when installed on server-grade hardware' [ÉDITEUR — a 2017 blog post is cited by the docs]."
+    },
+    "extensions_and_add_on_store": {
+      "category": "FAIT",
+      "text": "There is no app store — this section documents the real extension surfaces (honest treatment of a canvas section written for GUI applications; same convention as the Unbound and BIND 9 entries). The REST API is the official extension mechanism: 'Everything the web interface can do, you can do through the API. Interactive documentation is built into every Pi-hole, and app passwords let your scripts and home-automation tools connect securely' (pi-hole.net, consulted 2026-11-10). The project also publishes guidance for third-party developers ('Developing Apps For Pi-hole' page, brand guidelines) and a community ecosystem (Discourse, Reddit). Script-level extensibility exists in the installer/debug scripts, explicitly documented as readable resources for contributors (docs overview)."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "Privacy positioning: 'open-source software which helps ensure you are the sole person in control of your privacy' (docs overview) — query data lives in the operator's own long-term database and 'Only Pi-hole administrators can see this information' (privacy page, in its site context). Four selectable Privacy Modes govern what the query log records (pi-hole.net) [FAIT as feature; mode details not enumerated on the consulted page]. The project's own website policy (pi-hole.net/privacy/, consulted 2026-11-10) names **Pi-hole LLC** as data controller for the sites (voluntary collection only, 'We will not sell or rent this information', WordPress/Jetpack stats, Discourse forum data, BunnyCDN, contact `legal@pi-hole.net`) — it covers the project's web presence, not the self-hosted software. Security maintenance is visible in the repositories: vulnerability-reporting guidelines revised 2026-11-06 (core) and a security fix GHSA-8fc6-q9x4-892v (API TXT buffer bookkeeping, FTL, Oct 2026) [VERSION]. Independent audits are [NON ÉTABLI] here."
+    },
+    "update_channels_and_release_cadence": {
+      "category": "FAIT+VERSION",
+      "text": "Releases are distributed through the GitHub repositories (Core: 130 tags, 7 294 commits, last commit 2026-11-06; FTL: 129 tags, 9 190 commits, release branch v6.8 merged 2026-10-17) and through the Docker images (github.com/pi-hole/docker-pi-hole) [VERSION]. The updater path is the project's `pihole` tooling (the automated install handles upgrades); the docs and Discourse carry release communication. A formal published EOL/LTS policy is [NON ÉTABLI] from the consulted pages; the project states it supports 'actively maintained versions' of its supported OSes only [VERSION]. Funding is donation-based (PayPal/Stripe, cryptocurrency via Coinbase, Patreon, affiliate links) with 'volunteer developers' covering expenses (docs overview)."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "The project describes itself as free, open-source software (docs overview) and hosts all code publicly on GitHub under the pi-hole organisation; the exact licence text of each repository was not read in the consulted excerpts — licence specifics are [NON ÉTABLI] here (the trademark is asserted: 'Pi-hole®', with published 'Trademark rules and brand guidelines'). Governance: Pi-hole LLC appears as the legal entity for the web properties (privacy page); development is maintainer-led by the named team (co-founder, Docker maintainer, FTL designer) with community contributions via GitHub templates (docs overview) and public forums (Discourse/Reddit). Decision-making processes beyond this are [NON ÉTABLI] from the consulted pages."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) DNS-layer blocking only — the docs concede nothing about non-DNS tracking; the project's own recommendation pairs Pi-hole with browser tools for what DNS cannot reach is implied by scope, and its VPN guide extends coverage to mobile devices; (2) it needs exclusive DNS service on its host: 'If you happen to have another DNS server running, such as BIND, you will need to turn it off in order for Pi-hole to respond to DNS queries' (prerequisites) — integration with other resolvers is via upstream forwarding, not co-hosting on port 53; (3) blocking accuracy depends on subscribed community lists and user regex rules (gravity rebuild model); (4) a static IP and basic network/firewall configuration are required (prerequisites document iptables/firewalld/ufw rules); (5) officially supported OS list is narrow and version-bound [VERSION]; (6) the 'hundreds of millions of queries' figure is a 2017-era [ÉDITEUR] claim; (7) query logging is a local feature — privacy modes exist but the default trade-off (log vs insight) is operator-chosen; (8) licence text and independent audits are [NON ÉTABLI] from the consulted pages."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: true network-wide blocking 'in places a browser extension can't reach, such as mobile apps, smart TVs and IoT devices' with one installation; lightweight, published hardware requirements (512 MB RAM, 2 GB disk) and wide binary coverage (x86_64, armv6/v7/v8, riscv64) plus Docker; sophisticated list management (gravity database, exact/regex allow/deny with documented priority order, subscribed allow- AND denylists, per-group rules); built-in web dashboard, long-term query log and full REST API with app passwords; optional DHCP (IPv6) and NTP servers for all-in-one network roles; four privacy modes; free, donation-funded, volunteer-developed with active maintenance (security fix Oct 2026, commits Nov 2026); Teleporter backup/restore; VPN pairing guidance for on-the-go blocking."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: occupies port 53 on its host — cannot coexist with BIND or another local DNS server without re-architecting (prerequisites note); DNS-layer scope misses non-DNS ads/trackers; relies on community blocklists (false positives/negatives are list quality issues, resolved via allowlists); needs a static IP and manual firewall rules for exposed services; supported-OS list is restrictive ('actively maintained versions' of 7 named distributions) [VERSION]; capacity claims rest on a 2017 blog figure [ÉDITEUR]; licence text [NON ÉTABLI] from consulted pages; donation/volunteer sustainability is stated as a challenge by the project itself ('There are many reoccurring costs… your support is absolutely vital'); no published EOL/LTS policy [NON ÉTABLI]."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Households and small networks wanting one-box, network-wide ad/tracker blocking without per-device software; users with always-on Linux hardware (Raspberry Pi, NAS, VM, old PC) meeting the modest requirements; families using group management and per-device rules; self-hosters who value a built-in dashboard, long-term query log and scriptable REST API; users pairing DNS blocking with a VPN (WireGuard) for mobile protection; network tinkerers wanting optional DHCP/NTP consolidation on the same box."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: hosts that must keep another DNS server on port 53 (BIND, Technitium, Unbound as local service conflict — the prerequisites say to turn them off); users wanting authoritative DNS service, zone hosting or DNSSEC signing (Pi-hole is a sinkhole/forwarder, not an authoritative server product — cf. BIND 9, Technitium); users needing Windows/macOS hosts (supported OS list is Linux-only) [VERSION]; users wanting hosted, zero-maintenance DNS; users requiring a specific licence or an audited privacy posture documented in the consulted sources [NON ÉTABLI]; users unwilling to manage lists/allowlists or static-IP networking."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "Pi-hole (Pi-hole LLC / volunteer community) is the reference self-hosted DNS sinkhole: Core + Web + FTL (patched dnsmasq v2.93+30, embedded SQLite 5.53.3, embedded web/API server), blocking via gravity-built community lists with a documented six-tier priority model, per-group rules, four privacy modes, and optional DHCP/NTP — installable on modest Linux hardware across x86_64/armv6-v8/riscv64 or Docker (v6 generation, FTL v6.8 branch Oct 2026) [VERSION]. Its documented strengths are network-wide reach, list-management depth and an integrated dashboard/API; its documented limits are the port-53 exclusivity, Linux-only support, community-list dependence, and [ÉDITEUR]/[NON ÉTABLI] items (2017 capacity figure, licence text, audits). All cited URLs were reachable on 2026-11-10 (one documented redirect: database/gravity → Domain Database page)."
+    }
+  },
+  "sources": [
+    "https://pi-hole.net/",
+    "https://docs.pi-hole.net/",
+    "https://docs.pi-hole.net/main/prerequisites/",
+    "https://docs.pi-hole.net/database/gravity/",
+    "https://pi-hole.net/privacy/",
+    "https://github.com/pi-hole/pi-hole",
+    "https://github.com/pi-hole/FTL"
+  ]
+}

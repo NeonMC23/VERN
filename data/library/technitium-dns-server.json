@@ -1,0 +1,75 @@
+{
+  "id": "technitium-dns-server",
+  "name": "Technitium DNS Server",
+  "type": "application",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "Technitium DNS Server is an open-source, self-hosted DNS server — 'an open source authoritative as well as recursive DNS server that can be used for self hosting a DNS server for privacy & security' (technitium.com/dns, consulted 2026-11-10) — combining full DNS service (authoritative zones, recursion, caching) with DNS-level ad/malware blocking and a browser-based admin console. It is distributed as installable software (Windows setup, cross-platform .NET app, Docker, source) under the GNU GPLv3 licence, developed by Technitium Software with an openly hosted repository (github.com/TechnitiumSoftware/DnsServer). The current documented version is 15.6.2 [VERSION]."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Founding and first-release dates are [NON ÉTABLI] from the consulted pages (the earliest linked install instructions date from a 2017 blog post, which bounds but does not establish the timeline). What is documented (technitium.com/dns, consulted 2026-11-10): an active release line at version 15.6.2 with a published changelog and a download archive of older versions; a sponsorship banner ('Sponsored By WavSpeed Inc | Texas') [FAIT as displayed, nature of the sponsorship not detailed]; and a feature set that positions the product around self-hosted privacy (encrypted forwarders, blocking, logging) for home and organisational networks. The privacy policy (updated 2021-06-06) frames the project's data posture [VERSION]."
+    },
+    "rendering_engine_and_technical_architecture": {
+      "category": "FAIT",
+      "text": "No rendering engine exists — this section documents the server's architecture (same convention as the SearXNG, Unbound and BIND 9 entries). The implementation is 'a high performance DNS server based on async IO' on .NET 10 (portable build), cross-platform (Windows/Linux/macOS/Raspberry Pi arm7) [the throughput figure 'millions of requests per minute… more than 100,000 request/second' on an i7-8700 is an [ÉDITEUR] load-test claim]. Documented architecture: authoritative AND recursive roles in one daemon; latency-based name-server selection with concurrency for recursion and forwarders; advanced caching (Serve Stale, Prefetch, persistent cache saved to disk across restarts); Primary/Secondary/Stub/Conditional-Forwarder zones with static-stub support; Catalog Zones (RFC 9432); record aging; AXFR/IXFR/NOTIFY with **XFR-over-TLS (RFC 9103)** and XFR-over-QUIC; dynamic updates (RFC 2136) with security policy; TSIG (RFC 8945); EDNS(0), ECS (RFC 7871), Extended DNS Errors (RFC 8914), EDNS EXPIRE; DNS64 (RFC 6147) via an App; DANE TLSA (RFC 6698), SVCB/HTTPS (RFC 9460), URI (RFC 7553), SSHFP (RFC 4255), DNAME (RFC 6672); proprietary ANAME (CNAME flattening at apex) and APP records; QNAME minimisation (RFC 9156) and QNAME case randomisation (draft-vixie-dnsext-dns0x20); out-of-order processing over DoT/DoTCP (RFC 7766)."
+    },
+    "interface_and_documented_features": {
+      "category": "FAIT",
+      "text": "The admin web console ('accessible using any modern web browser', dark mode included) is the primary interface: default `http://localhost:5380/` with initial credentials admin/admin (to be changed) (technitium.com/dns, consulted 2026-11-10). An HTTP API ('Built in HTTP API to allow 3rd party apps to control and configure the DNS Server', documented in APIDOCS.md) exposes every console action; multi-user role-based access with non-expiring API tokens, TOTP two-factor authentication, and LDAP or OpenID Connect (SSO) authentication are documented. Operational features: built-in DHCP server (multi-network), built-in DNS client with response import, system and query logging, DNSBL/RBL hosting (RFC 5782), Split Horizon and geolocation responses via Apps, bulk conditional forwarding via the Advanced Forwarding App, wildcard subdomains, enable/disable of zones and records for testing, and IPv6 in the core."
+    },
+    "installation_and_distribution": {
+      "category": "FAIT+VERSION",
+      "text": "Distribution channels (technitium.com/dns, consulted 2026-11-10): a Windows setup package (Windows 7 SP1 / Server 2012 R2 and above, 5.62 MB, published SHA-256) ; a portable .NET 10 app (5.82 MB tar.gz, SHA-256 published) for Windows/Linux/macOS/Raspberry Pi arm7 (Raspberry Pi 1/Zero excluded — arm6) ; a one-line Linux installer/updater (`curl -sSL …/install.sh | sudo bash`) with blog install instructions ; the official Docker image `technitium/dns-server` with docker-compose example ; and build-from-source instructions on GitHub. Older versions are kept in a public archive; the changelog documents each release [VERSION]."
+    },
+    "platforms_and_hardware_architectures": {
+      "category": "FAIT",
+      "text": "Documented platforms: Windows (7 SP1+/Server 2012 R2+ via setup), Windows/Linux/macOS/Raspberry Pi arm7 via the portable .NET 10 runtime build, Linux (installer script), Docker (any host running it) and source builds (GitHub build.md) (technitium.com/dns, consulted 2026-11-10). Raspberry Pi support is explicitly arm7 ('Raspberry Pi 1 and Raspberry Pi Zero which have arm6 CPU are not supported') [VERSION]. The performance claim targets 'commodity desktop PC hardware' (i7-8700 load test) [ÉDITEUR]; no minimum hardware figures are published on the consulted pages [NON ÉTABLI]."
+    },
+    "extensions_and_add_on_store": {
+      "category": "FAIT",
+      "text": "Unlike the BIND 9 and Pi-hole entries, Technitium documents a genuine extension store: the **DNS App Store**, consulted over HTTPS by the server, and the **APP record** type 'that allows custom DNS Apps to directly handle DNS requests and return a custom DNS response based on any business logic' (technitium.com/dns, consulted 2026-11-10). Documented Apps include Advanced Blocking (REGEX-based block lists, different lists per client IP/subnet), Advanced Forwarding (bulk conditional forwarding), DNS64, and DNS Rebinding Protection; Split Horizon and geolocation are also implemented as Apps. Custom Apps can be developed (the APP record and API enable business-logic responses). This extension model is part of the product's documented surface, not third-party speculation."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "The privacy policy (technitium.com/dns/privacypolicy.html, 'Updated on: 6 June, 2021', consulted 2026-11-10) states: no registration and no PII collected by the software; technitium.com web-server logs (IP, browser) cover downloads (Tor suggested to mask them); update checks and App Store requests go over HTTPS and log the server's (or proxy's) IP; third-party block-list hosts may log access themselves; 'Apart from the web server logs, we do not collect/know any information of any user using the software' [ÉDITEUR commitment, not independently audited here]. Security features documented on the product page: DoT/DoH/DoQ forwarders 'protects you from man-in-the-middle attacks'; self-hosted encrypted DNS; DNSSEC validation (RSA/ECDSA/EdDSA) for recursion/forwarders/conditional forwarders with DNSSEC across all transports; DNS rebinding protection (App); TOTP 2FA, RBAC, LDAP/OIDC; HTTP/SOCKS5 proxy support to route DNS over Tor or a hidden resolver. As self-hosted software, query logs stay on the operator's machine ('DNS logs and stats' give 'more insights into your network')."
+    },
+    "update_channels_and_release_cadence": {
+      "category": "FAIT+VERSION",
+      "text": "The product page hosts the current version (15.6.2 at consultation, 2026-11-10), a linked changelog ('What's New?'), and a public archive of older builds with published SHA-256 checksums [VERSION]. The Linux installer doubles as updater; Docker users pull `technitium/dns-server:latest`; source builds track the GitHub repository. A Patreon donation channel and a support email (support@technitium.com) are published; no formal release-cadence commitment or LTS/EOL policy is documented on the consulted pages [NON ÉTABLI]."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT",
+      "text": "'Source code available under GNU GPLv3 Licence on GitHub' (technitium.com/dns, consulted 2026-11-10). The project is maintained by Technitium Software (support contact and privacy policy operator); the corporate entity's legal form and country are [NON ÉTABLI] from the consulted pages. A sponsor banner (WavSpeed Inc, Texas) is displayed [FAIT as display]; funding otherwise runs through donations (Patreon). Governance is maintainer-led with public source, public API docs, a public RFC-support list (SupportedRFCs.md) and a user community (Reddit /r/technitium, help topics)."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) self-hosted software — the operator owns uptime, updates and hardening; (2) the privacy policy is dated 2021-06-06 [VERSION] — current practices beyond it are [NON ÉTABLI]; (3) performance figures (100,000+ req/s) are vendor load-test claims [ÉDITEUR], no independent benchmark here; (4) block lists are third-party hosted and may log the fetching server (policy note); (5) default credentials (admin/admin) and open console port are documented — security depends on the operator changing them (the page warns to change the password 'to disable auto login'); (6) Raspberry Pi 1/Zero unsupported (arm6) [VERSION]; (7) no minimum hardware published [NON ÉTABLI]; (8) blocking quality depends on subscribed lists and regex rules — no efficacy figures are published on the consulted pages [NON ÉTABLI]; (9) sponsorship arrangement with WavSpeed is displayed but not detailed [NON ÉTABLI]."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: single daemon combining authoritative + recursive DNS with sinkhole blocking and a friendly web console ('works out-of-the-box with no or minimal configuration'); unusually broad transport coverage — self-hosted DoT/DoH (HTTP/1.1, HTTP/2, HTTP/3) and **DoQ**, plus DoT/DoH/DoQ forwarders to public resolvers; the DNS App Store extension model (APP records, per-client REGEX blocking, DNS64, rebinding protection); operational features (clustering, SSO OIDC, LDAP, TOTP 2FA, RBAC, API, DHCP, persistent cache, Serve Stale, XFR-over-TLS/QUIC, catalog zones, DANE/SVCB); GPLv3 with public source and published SHA-256 builds; proxy support for Tor/hidden-resolver routing; documented no-PII software posture [ÉDITEUR]; daily auto-updating block lists with Quick Add presets."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: privacy policy not refreshed since 2021-06-06 [VERSION]; vendor-only performance claims [ÉDITEUR]; default admin/admin credentials and network-exposed console require operator diligence; arm6 Raspberry Pis unsupported [VERSION]; third-party block-list fetches leak the server's IP to list hosts (policy note); smaller documentation/enterprise-ecosystem footprint than BIND (no published EOL/LTS policy [NON ÉTABLI]); sponsorship/maintainer funding model is informal (Patreon, banner); .NET 10 runtime dependency for the portable build; no independent security audit documented on the consulted pages [NON ÉTABLI]."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Home-lab and small-organisation operators wanting one self-hosted box for DNS authority, recursion and ad/malware blocking with a modern web console; privacy users wanting encrypted DNS forwarding (including DoQ/HTTP3) with everything on their own hardware; networks needing Split Horizon, geolocation or scripted DNS behaviour (APP records, API); users who value clustering/SSO/LDAP for multi-instance management; tinkerers comfortable with Docker or a .NET app and default-credential hygiene."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users wanting zero-install hosted DNS (this is software you run); organisations requiring a documented LTS/EOL policy or independent audits [NON ÉTABLI here]; operators needing registry/TLD-grade authoritative service with commercial support contracts (cf. BIND 9's subscription model); users on arm6 Raspberry Pi 1/Zero [VERSION]; users wanting a pure ad-blocker appliance without DNS-server management (cf. Pi-hole); users unwilling to change default credentials or expose/harden a web console; users requiring a long-established privacy policy beyond the 2021 document."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "Technitium DNS Server (Technitium Software, GNU GPLv3, .NET 10) is a self-hosted authoritative+recursive DNS server with built-in sinkhole blocking, a web console/API, and the broadest documented encrypted-transport set in this library (DoT/DoH incl. HTTP/3, DoQ, XFR-over-TLS/QUIC), at version 15.6.2 [VERSION]. Documented differentiators: the DNS App Store/APP-record extension model, clustering/SSO/LDAP, and out-of-the-box usability; documented limits: a 2021-dated privacy policy, vendor-only performance claims, default credentials, and arm6 Pi exclusion. No independent audit or benchmark is established here; sponsorship (WavSpeed) is displayed without detail. All cited URLs were reachable on 2026-11-10."
+    }
+  },
+  "sources": [
+    "https://technitium.com/dns/",
+    "https://technitium.com/dns/privacypolicy.html"
+  ]
+}

@@ -192,7 +192,13 @@ var LIBRARY_RESOURCES = [
   "quad9",
   "opendns",
   "nextdns",
-  "adguard-dns"
+  "adguard-dns",
+  "control-d",
+  "mullvad-dns",
+  "unbound",
+  "bind-9",
+  "technitium-dns-server",
+  "pi-hole"
 ];
 
 (function () {
