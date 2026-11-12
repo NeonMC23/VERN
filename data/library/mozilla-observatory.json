@@ -1,0 +1,69 @@
+{
+  "id": "mozilla-observatory",
+  "name": "Mozilla Observatory",
+  "type": "service",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "Mozilla Observatory (now the 'HTTP Observatory' on MDN) is a free, hosted web-security configuration scanner developed by Mozilla: it 'performs an in-depth assessment of a site's HTTP headers and other key security configurations' and returns 'detailed, actionable feedback' — a score, a letter grade (A+ to F) and linked documentation (developer.mozilla.org/en-US/observatory, consulted 2026-11-12). Launched in 2016, it has 'provided insights to over 6.9 million websites through 47 million scans' [ÉDITEUR figures]. This entry documents the scanning service and its documented methodology; **no scan of any domain was executed in this phase** (D-L23-7)."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "An automated test of a website's HTTP-layer defences: the service fetches the site's responses and evaluates documented security features (secure cookies, CORS, CSP, HSTS, HTTPS redirection, Referrer-Policy, SRI, X-Content-Type-Options, frame-ancestors/X-Frame-Options, Cross-Origin-Resource-Policy — blog and scoring page, consulted 2026-11-12). Mozilla's own framing of its value: it 'gamifies the process of improving website security' and 'helps developers make sense of website security requirements' (MDN blog). It is a configuration linter with a public grading scale — NOT a security audit and NOT a certification (the project's own FAQ says an A+ grade does not mean the site is secure — see limitations)."
+    },
+    "origin_and_history": {
+      "category": "FAIT+VERSION",
+      "text": "Documented history (MDN blog + FAQ, consulted 2026-11-12): first released in 2016 by April King, then a Mozilla security engineer, originally as an internal tool for Mozilla's own sites, then published as a website; maintained by Mozilla's Infrastructure Security Team with tests added/removed as practices evolved. The new HTTP Observatory launched on MDN on **July 2, 2024**; the older Mozilla Observatory — which bundled HTTP Observatory with TLS Observatory, SSH Observatory and Third-party tests — was sunset in **October 2024**, and historic scan data was preserved in the per-domain scan history [VERSION]. The v1 API was shut down on October 31, 2024; the current API reports `algorithm_version: 4` (FAQ sample payload). Post-migration test changes: X-XSS-Protection and Flash/Silverlight embedding tests removed, a CORP test added, the Referrer-Policy test updated (FAQ)."
+    },
+    "operation_and_infrastructure": {
+      "category": "FAIT",
+      "text": "Scan conditions (FAQ, consulted 2026-11-12): anyone may enter a domain/URL; a site 'can only be scanned and a new result returned every 60 seconds' (otherwise a cached result is returned); deep-linking into a report triggers a rescan only if the previous data is older than 24 hours. The v2 API is `https://observatory-api.mdn.mozilla.net/api/v2/scan` (POST with `host=`), returning concise JSON (grade, score, tests_passed/failed/quantity, algorithm_version, details_url); v1's verbose fields (full response-header dump) were deliberately dropped 'of limited use for CI integration'. Scan history per domain is **public** and includes historic data from the old Observatory (FAQ). The tool 'is designed for scanning websites, not API endpoints' though APIs can be scanned with caveats (FAQ)."
+    },
+    "protocols_and_encryption": {
+      "category": "FAIT",
+      "text": "Canvas-adaptation convention (D-L23-2): this section documents the protocols/configurations actually examined. The scoring page (consulted 2026-11-12) documents 12 test groups with full modifier tables: Content Security Policy (11 result modifiers, e.g. `csp-not-implemented` −25, `csp-implemented-with-no-unsafe-default-src-none` +10), Cookies (Secure/HttpOnly/SameSite, −40 to +5), Cross-Origin-Embedder Policy, Cross-Origin-Opener Policy, CORS (universal access with credentials −50), Redirection (first HTTP→HTTPS hop on the same host; off-host hops and invalid chains penalised), Referrer-Policy, Strict-Transport-Security (preload +5, missing −20, min-age six months), Subresource Integrity (insecure external scripts −50), X-Content-Type-Options, X-Frame-Options/frame-ancestors, Cross-Origin-Resource-Policy. The new tool explicitly provides **no TLS/certificate analysis** ('no plans to include these features: it provides a clear focus on HTTP data' — FAQ)."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT",
+      "text": "Documented data posture (FAQ, consulted 2026-11-12): 'Anyone can choose to scan any domain, and the scan history for each domain is public. However, HTTP Observatory does not store user data related to each scan' — the old public/private flag and 'recent scans' list were removed at migration, leaving domain-level public history only. Nothing beyond the scanned domain's HTTP behaviour is required (no account). Consequences for operators: scanning a domain discloses it in public history — a reason this phase executed **no scan at all** (mandate §12: no active scanning of third-party domains without authorisation; no authorised test perimeter was established). As a Mozilla/MDN service it follows MDN's platform policies [their content is **[NON ÉTABLI]** here]."
+    },
+    "configuration_and_access": {
+      "category": "FAIT",
+      "text": "Free access via the MDN-hosted UI (developer.mozilla.org/en-US/observatory: enter a domain name or URL, 'Scan') and via the public v2 API (no key); rate limiting is documented (1 new scan per host per 60 seconds). Recommendations are aggregated post-migration ('all shown together, instead of one at a time') and linked to MDN's Practical security implementation guides. No authentication or account exists [FAQ framing: anyone can scan any domain]. The scanner implementation is developed publicly by Mozilla/MDN; its licence is **[NON ÉTABLI]** from the pages consulted here."
+    },
+    "governance_and_operator": {
+      "category": "FAIT",
+      "text": "Originally Mozilla (Infrastructure Security Team), the tool now lives on MDN; the migration was 'done in collaboration with Mozilla's Infrastructure and Security Risk teams' and the MDN team updated the UI, tests and documentation (blog, consulted 2026-11-12). The accompanying documentation set is MDN's practical security implementation guides. Governance beyond MDN's editorial process (roadmap, contribution policy for the scanner) is **[NON ÉTABLI]** from the consulted pages."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented limits, chiefly the project's own: (1) **'If I get an A+ grade, does that mean my site is secure?' — 'We'd love to say… but there are a lot of security considerations that we can't test'**: Observatory tests preventative measures against XSS, MiTM, cross-domain leakage, insecure cookies, CDN compromises and improperly issued certificates, but NOT outdated software, SQL injection, vulnerable CMS plugins, password creation/storage 'and more' (FAQ) — a configuration analysis, never a full security audit; (2) the grading chart and modifiers are 'essentially arbitrary' (based on industry feedback) and 'may change as baselines shift' (scoring page); (3) no TLS/certificate data since the migration (FAQ); (4) only HTTP-layer defences of the scanned responses are examined; (5) scan history is public per domain; (6) scoring maximum is 145 with bonuses gated at ≥ 90 — the scale rewards specific best practices, not overall security; (7) **no scan was executed in this phase** (D-L23-7): no authorised perimeter, mandate forbids third-party scanning."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: fully documented methodology — every test result key and score modifier is published (scoring page); free, account-free, with a keyless public API suited to CI; MDN-linked remediation documentation per finding (the 'understandable feedback' praised in the blog); historic continuity (scan histories preserved across the 2024 migration); the tool's own documentation is explicitly anti-overclaiming (A+ ≠ secure); tests are kept current with practice (obsolete tests removed, CORP added) and the modifier tables are versioned by `algorithm_version` in the API."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: scope is HTTP configuration only (FAQ enumerates what it misses); the gamified score can be mistaken for certification despite Mozilla's contrary warning; grade bands are self-described as arbitrary and can shift over time; public per-domain scan history is a privacy consideration for scanned domains; one-scan-per-minute rate limit; no TLS/certificate analysis anymore (deliberate removal); the API targets websites (API-endpoint results 'may not accurately reflect the security posture'); scanner licence and MDN platform data policies [NON ÉTABLI] from consulted pages; no independent audit of the scoring is documented here [NON ÉTABLI]."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Site operators and developers wanting a free, documented check of their HTTP security headers and configuration with actionable MDN-linked fixes; teams wiring header checks into CI via the v2 API; educators demonstrating CSP/HSTS/SRI/COOP effects; anyone mid-hardening who wants a shareable grade with a published rubric."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users seeking certification or proof of security (Mozilla's FAQ explicitly refuses this reading); operators needing TLS/certificate analysis (removed at migration); full attack-surface assessments (ports, CMS vulns, SQLi, password storage are out of scope); API-only endpoints (documented caveats); scanners of domains they are not authorised to test (public history + mandate §12); users expecting the grade scale to be stable forever (modifiers may change)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "Mozilla Observatory (service ; 'HTTP Observatory' on MDN since 2024-07-02) is the reference free HTTP-security-configuration grader: 12 documented test groups (CSP, cookies, COOP/COEP/CORP, CORS, redirection, Referrer-Policy, HSTS, SRI, MIME/frame protections), a published 100-based rubric with gated bonuses (max 145) and A+–F grades, a keyless v2 API, and public per-domain scan histories [VERSION: algorithm v4, tests updated post-migration]. Its documentation is admirably explicit that a grade is not a security verdict — the analysis covers HTTP-layer preventative measures only. This fiche draws a strict line between configuration analysis and security audit (mandate §5.3). **No scan was executed in this phase.** All cited URLs were reachable on 2026-11-12 (one documented 404 on a guessed FAQ path, real FAQ located at /observatory/docs/faq)."
+    }
+  },
+  "sources": [
+    {"title": "HTTP Observatory — MDN service page (purpose, figures 6.9M/47M [ÉDITEUR])", "url": "https://developer.mozilla.org/en-US/observatory", "type": "official_site", "publisher": "Mozilla / MDN", "accessed": "2026-11-12"},
+    {"title": "Introducing the MDN HTTP Observatory (history 2016/April King, tested features)", "url": "https://developer.mozilla.org/en-US/blog/mdn-http-observatory-launch/", "type": "official_documentation", "publisher": "Mozilla / MDN", "accessed": "2026-11-12"},
+    {"title": "HTTP Observatory FAQ (A+ ≠ secure, public scan history, migration dates, API v2)", "url": "https://developer.mozilla.org/en-US/observatory/docs/faq", "type": "official_documentation", "publisher": "Mozilla / MDN", "accessed": "2026-11-12"},
+    {"title": "Tests & Scoring (methodology, grading chart, 12 test groups and score modifiers)", "url": "https://developer.mozilla.org/en-US/observatory/docs/tests_and_scoring", "type": "official_documentation", "publisher": "Mozilla / MDN", "accessed": "2026-11-12"}
+  ]
+}

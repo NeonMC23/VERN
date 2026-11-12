@@ -198,7 +198,10 @@ var LIBRARY_RESOURCES = [
   "unbound",
   "bind-9",
   "technitium-dns-server",
-  "pi-hole"
+  "pi-hole",
+  "eff-cover-your-tracks",
+  "privacytests",
+  "mozilla-observatory"
 ];
 
 (function () {

@@ -1,0 +1,68 @@
+{
+  "id": "eff-cover-your-tracks",
+  "name": "EFF Cover Your Tracks",
+  "type": "service",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "Cover Your Tracks is a free, hosted browser-tracking and fingerprinting test operated by the Electronic Frontier Foundation (EFF) at coveryourtracks.eff.org, described in its own documentation as a tool whose 'primary goal is to help you determine your own balance between privacy and convenience. By giving you a summary of your overall protection and a list of characteristics that make up your digital fingerprint, you can see exactly how your browser appears to trackers, and how implementing different protection methods changes this visibility' (eff.org /learn, consulted 2026-11-12). It is both a public testing service and, per the same project, an educational/research project about online tracking and browser fingerprinting. Its code is published as EFForg/cover-your-tracks on GitHub."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "A web service a user runs in their own browser: the page loads controlled test resources and reports how the tested browser behaves against them — tracker/ad blocking outcomes and the distinctiveness of the browser's fingerprint — plus the list of characteristics that compose it. The project repository titles it 'Cover Your Tracks (formerly Panopticlick)' with the tagline 'How Unique - and Trackable - Is Your Browser?' (GitHub README, consulted 2026-11-12). The service is self-hostable: the README documents installation via docker/docker-compose or a host install (pipenv, Python 3.13, config file, nginx/gunicorn) — the object documented here is the hosted EFF service [FAIT]."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "The GitHub README establishes the lineage ('formerly Panopticlick') [FAIT]; the repository's LICENSE file was added 2015-11-06 and the codebase has been maintained since (commit history observed 2026-11-12, latest commit 2026-10-27 'Fix reported XSS vulnerability'). Exact launch dates of Panopticlick (commonly dated 2010, updated 2015) come only from press sources and are **[NON ÉTABLI]** here. A fingerprinting-metric versioning is visible in the code (a 'whorl (v3)' addition 'loads_remote_fonts', 2022) [FAIT as repository history]. Recent maintenance (2026-08/2026-10 commits: dependency updates, template hardening, XSS fix) shows the service is actively maintained [VERSION]."
+    },
+    "operation_and_infrastructure": {
+      "category": "FAIT",
+      "text": "Documented mechanics (GitHub README and repository layout, consulted 2026-11-12): the backend records test results in a database (`db.py`, `tracking/`, `fingerprint/`); fingerprint characteristics are called 'whorls' in the code; an entropy helper computes fingerprint distinctiveness (`entropy_helper.py`); the uniqueness baseline is a rolling window — the admin route `/epoch-update-totals` updates 'the totals table to reflect the number of times we've seen each fingerprinting characteristic in the last epoch (45 days)' [FAIT as documented design]. The site's /learn page documents what trackers do (cookies vs fingerprinting) and what the test makes visible ('a summary of your overall protection and a list of characteristics that make up your digital fingerprint'). The measurement surface is browser-visible state: HTTP requests 'broadcast your device and browser version', and scripts gather 'seemingly insignificant data (like screen resolution and installed fonts)' (/learn)."
+    },
+    "protocols_and_encryption": {
+      "category": "FAIT",
+      "text": "Canvas-adaptation convention (D-L23-2): this section documents what the test observes and how it is delivered. Observed signals (per /learn and the repository's measurement code): HTTP headers of the test requests (device/browser version), font loading behaviour ('loads_remote_fonts' whorl), screen characteristics and other fingerprinting vectors gathered by scripts; tracker-blocking is tested by loading controlled advertising/tracking resources ('massive lists' of tracking scripts are the blocking tools' own mechanism, per /learn). Delivery: the service is served over HTTPS to the user's browser; the page source includes an EFF audience-measurement beacon call to `anon-stats.eff.org/js/?idsite=40` (observed in fetched page source, 2026-11-12) [FAIT as observed, purpose inferred from the EFF-hosted stats endpoint naming only]."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Documented data handling: 'the key to the HMAC function for storing IP addresses' (README, `/refresh-key` admin route) — IP addresses are stored hashed with a keyed function, per the project's own documentation [FAIT as documented design]; test outcomes are aggregated in the project's dataset for the 45-day epoch comparisons [FAIT]. The hosted page loads EFF's own analytics beacon (observed above). EFF's general privacy policy page was not consulted in this phase — the full data-protection commitments of the hosted service are **[NON ÉTABLI]** here. /learn is explicit that the project's goal is education and helping users find their own balance, not promising anonymity; it also warns that protections themselves can become identifying ('a mystery user with a very specific combination of privacy protections installed')."
+    },
+    "configuration_and_access": {
+      "category": "FAIT",
+      "text": "Access is account-free: visit the site and run the test in the browser under test (the results page is JavaScript-rendered — the exact result cards could not be captured as static text in this phase, documented limitation). Self-hosting is documented end-to-end: docker-compose with self-signed certificates for the test hosts (`examples/nginx/generate_self_signed_certs.sh`), secrets in `docker/secrets/`, admin routes gated by a password (`/refresh-key`, `/migrate-db`, `/epoch-update-totals`). A `config_example.py` names the configurable test hostnames. The companion /learn page is public documentation (cookies vs fingerprinting, protection options, incognito behaviour)."
+    },
+    "governance_and_operator": {
+      "category": "FAIT",
+      "text": "Operator: the Electronic Frontier Foundation (EFF) — the service runs on EFF infrastructure (eff.org domain family) and its code lives in the EFForg GitHub organisation (recent commits by EFF contributors such as 'Hainish'). Development is public on GitHub (24 branches, 0 tags observed 2026-11-12). The project is presented by EFF as an educational/research effort on tracking and fingerprinting (/learn). Organisational funding details are **[NON ÉTABLI]** from the consulted pages."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) a run measures ONE browser configuration at ONE moment under the test's conditions — the project itself frames the output as 'how your browser appears to trackers' in this test, not a universal privacy measurement; (2) fingerprint uniqueness is relative to EFF's recent dataset (characteristic totals over 45-day epochs, README) — 'unique' means unusual in that dataset, not identified [FAIT as mechanism + documented framing]; (3) the test's resources are a sample of tracking techniques, not the whole web (the /learn pedagogy itself concedes 'completely blocking trackers is difficult'); (4) protections can themselves increase identifiability (documented warning); (5) the hosted /faq page was unavailable (HTTP 500, 2026-11-12) — some official interpretations could not be consulted; (6) the results page is JavaScript-only, so this phase documents the service from its documentation and code, not from a captured run; (7) **no test was executed in this phase** (D-L23-7): no real browser is available here and the mandate forbids tests involving personal data."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: it shows the actual characteristics composing the fingerprint (the README's promise, beyond a bare uniqueness verdict); it covers tracker/ad blocking AND fingerprinting in one run; free and account-free; open source and fully self-hostable (documented install paths); uniqueness comparisons rest on a transparent rolling dataset mechanism (45-day epochs, documented in the README); the pedagogy (/learn) is unusually candid — it warns against self-defeating tweaks (spoofed user-agents, over-customization) and acknowledges the usability/privacy trade-off; the project recommends proportionate action ('privacy protection does not have to be perfect to make a big difference')."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: the uniqueness verdict is dataset-relative and time-windowed (45-day epochs) — not an absolute identifiability measure; results are configuration- and moment-specific and must not be extrapolated to other sites or contexts (mandate §5.1 respected in this fiche); the four result cards of the live test could not be captured here (JavaScript page) and the official /faq was down (HTTP 500) at consultation; the full privacy policy of the hosted test rests on EFF's general policy, not consulted here [NON ÉTABLI]; the page embeds an EFF analytics beacon (observed) — users seeking zero-logging must weigh this; recommendations name specific products (Tor Browser, Brave, Privacy Badger, NoScript) in EFF's own voice [ÉDITEUR editorial]; no independent audit of the measurement is documented here [NON ÉTABLI]."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Users who want an educational snapshot of how their browser currently appears to trackers (blocked resources + fingerprint characteristics); people comparing a configuration before/after enabling protections; educators explaining cookies vs fingerprinting (the /learn material); browser and extension developers checking the fingerprinting exposure of defaults; self-hosters wanting their own instance (documented docker/pipenv paths)."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users treating a 'unique' verdict as proof they are identified or followed (the project's own framing is statistical distinctiveness in its dataset); anyone needing a universal or permanent privacy score; people expecting the test to cover the entire web's tracking techniques; users unwilling to have their tested browser's characteristics enter EFF's comparison dataset while using the hosted service (self-hosting avoids this); users intending to run tests with personal or sensitive data (mandate §5.1 prohibition, echoed here)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "EFF Cover Your Tracks (service ; code EFForg/cover-your-tracks) is the reference free browser tracking/fingerprinting test: it reports tracker/ad blocking outcomes and the fingerprint characteristics of the tested browser, compared against EFF's rolling 45-day dataset (epoch mechanism documented in the README), with honest pedagogy about limits (protections can fingerprint you; results are contextual). Documented strengths: characteristic-level transparency, self-hostability, active maintenance (2026 commits incl. a security fix); documented limits: dataset-relative uniqueness, JavaScript-only results page, /faq HTTP 500 at consultation, hosted data policy [NON ÉTABLI]. **No test was run in this phase** — everything above is documentary. All cited URLs were reachable on 2026-11-12 except the documented 500."
+    }
+  },
+  "sources": [
+    {"title": "Cover Your Tracks (test page)", "url": "https://coveryourtracks.eff.org/", "type": "official_site", "publisher": "Electronic Frontier Foundation (EFF)", "accessed": "2026-11-12"},
+    {"title": "Cover Your Tracks — learn (methodology and protection guidance)", "url": "https://coveryourtracks.eff.org/learn", "type": "official_documentation", "publisher": "Electronic Frontier Foundation (EFF)", "accessed": "2026-11-12"},
+    {"title": "EFForg/cover-your-tracks GitHub repository (README, admin routes, code layout)", "url": "https://github.com/EFForg/cover-your-tracks", "type": "official_source_code", "publisher": "Electronic Frontier Foundation (EFF, GitHub)", "accessed": "2026-11-12"}
+  ]
+}

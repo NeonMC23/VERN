@@ -1,0 +1,80 @@
+{
+  "id": "privacytests",
+  "name": "PrivacyTests.org",
+  "type": "project",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "PrivacyTests.org is an open-source testing program that measures browser privacy characteristics, together with a website that publishes the results — in the project's own words: 'PrivacyTests is an open-source testing program that measures browser privacy characteristics, and a website, https://privacytests.org, that renders the results for human consumption' (GitHub README, consulted 2026-11-12). The results site presents itself as 'Open-source tests of web browser privacy.' (site header, consulted 2026-11-12). This entry documents the project and its published outputs; the published results are dated snapshots of specific browser versions and configurations, not permanent truths and not a general security/privacy ranking (mandate §5.2 respected)."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "Two coupled artefacts (README, consulted 2026-11-12): (1) a test program — Node.js scripts driving real browser binaries through automated privacy tests, a test server (`live/`, Express) and result files (raw JSON in `results/`); (2) a static results website rendered from those results and published from a separate repository (`privacytests-website`). Each results cell on the site exposes the actual test code (write/read functions) and the per-run outputs (site rendering, consulted 2026-11-12). The project is licensed MIT (README)."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Repository activity observed 2026-11-12: 2,266 commits on `master`, 6 branches, 0 tags, 7 contributors, latest commit 2026-11-12 by Arthur Edelstein ('switch order of media settings in fp tests'). The results site is issue-numbered — 'No. 106, Updated 2026-11-09' at consultation [VERSION]. An archived repository (`privacytests.org-backup`) preserves 'privacytests.org before we split code and website HTML' (organisation page, observed) — the code/website split happened in 2026 (backup archived Aug 2026) [FAIT as repository metadata]. The precise founding date of the project is **[NON ÉTABLI]** from the consulted pages."
+    },
+    "test_program_and_scope": {
+      "category": "FAIT",
+      "text": "The program measures 'browser privacy characteristics' such as 'fingerprinting resistance, partitioning between websites, etc.' (scripts README, consulted 2026-11-12). Documented test categories (CLI `--categories`): `main`, `misc`, `https`, `session`, `trackingCookies`, `dns`, `deviceFingerprint`, `settingsFingerprint` (scripts README). The published tables group tests under explanatory headings — e.g. 'State Partitioning tests: Which browsers isolate websites to prevent them from sharing data to track you?' with named sub-tests such as Alt-Svc (verifying the Alt-Svc cache is partitioned between first parties — inline test code and results visible on the site, consulted 2026-11-12). Scope is what web pages can observe and share across sites within the tested browsers — not malware, not network-level adversaries."
+    },
+    "browsers_and_platforms_covered": {
+      "category": "VERSION",
+      "text": "Published coverage (site tabs, consulted 2026-11-12): Desktop browsers (default settings), Desktop private modes, iOS browsers, Android browsers, Nightly builds, Nightly private modes. The desktop default-settings table of issue No. 106 (updated 2026-11-09) lists 12 browsers with the exact versions tested: brave 157.1, chrome 157.0, duckduckgo 1.214, edge 157.0, firefox 159.0, librewolf 159.0, mullvad 16.0, opera 139.0, safari 27.2, tor 16.0, ungoogled 156.0, vivaldi 8.3 [VERSION — snapshot values, valid for that issue only]. For RUNNING the tests, the scripts README documents Mac, iOS and Android ('Linux and Windows are not currently supported') — iOS runs require a Mac (scripts README)."
+    },
+    "test_categories_and_criteria": {
+      "category": "FAIT",
+      "text": "Outcome legend (site, consulted 2026-11-12): 'Passed = Passed privacy test', 'Failed = Failed privacy test', 'Unsupported = No such feature' — three states, so absence of a feature is distinguished from failing one. Each cell embeds the test's source code and raw run outputs (e.g. the Alt-Svc test writes/reads an HTTP/3 protocol state and compares same-first-party vs different-first-party results across 5 repetitions, throwing 'Unsupported' where the feature is absent). Criteria are thus code-level and inspectable, per test — the site deliberately exposes them ('Click anywhere for more info')."
+    },
+    "execution_methodology_and_conditions": {
+      "category": "FAIT",
+      "text": "Documented execution (scripts README, consulted 2026-11-12): `node test --browser=firefox --out=...` drives installed browser binaries (default app directory `/Applications/` on Mac); flags cover `--incognito` (private windows), `--tor` (Brave's private-with-Tor windows), `--nightly` builds, `--aggregate`, `--skip`, `--versions`, `--hurry` (skips a 60s feature-flag warmup — implying tests account for browser feature-flag settling), `--kill`; local HTTPS uses mkcert. Publishing: `node prepare <YYYYMMDD>` copies rendered results into the `privacytests-website` repo, `node bump` increments the site's issue number. Conditions are therefore: default browser settings (stated on the results tables), the browsers' installed versions that day, one operator machine family (Mac/iOS/Android per README)."
+    },
+    "published_results_and_their_limits": {
+      "category": "FAIT",
+      "text": "The published matrix (issue No. 106) is a per-test pass/fail/unsupported grid across 12 desktop browsers with visible versions and inline code [VERSION]. Its documented limits: results are tied to the issue date (2026-11-09), to the versions listed, to default settings ('default settings' is stated in the table header), and to the platform on which runs are executed; private-mode, iOS, Android and nightly variants are separate tables, not directly comparable to the default table. The site's headline framing ('What are the best private browsers in 2026?') is editorial [ÉDITEUR] — this entry does NOT turn the grid into a general security/privacy ranking (mandate §5.2): a browser's column reflects only the tests of that issue, on that platform, at those settings."
+    },
+    "update_and_release_cadence": {
+      "category": "FAIT+VERSION",
+      "text": "Updates are issue-based (site 'No. 106 / Updated 2026-11-09' at consultation) and the repository commits continuously (latest 2026-11-12; test tweaks days apart: 'issue 106 news', 'separate out screen fingerprinting tests') [VERSION]. The repository has **0 tags** — no versioned releases are published (observed 2026-11-12); the site's issue number (`node bump`) is the publication counter. No formal cadence commitment or EOL policy is documented on the consulted pages [NON ÉTABLI]."
+    },
+    "sources_scripts_and_reproducibility": {
+      "category": "FAIT",
+      "text": "All test code and rendering scripts are public (MIT) in `privacytests/privacytests` (README: scripts 'to run browser privacy tests…, save the results to a JSON file, and render those results in web pages'), with per-test source shown on the site itself — methodological transparency is a core documented property. Reproducibility is partial and documented as such by the tooling: runs require specific browser binaries and platforms (Mac/iOS/Android), an HTTP/3 test path depends on a pinned fork of aioquic (submodule `aioquic @ 6996091`, observed), results files are raw JSON committed per run, and no tagged releases exist (0 tags) — re-running later with newer browsers yields different, non-comparable numbers. The 'hurry' flag documents a 60s feature-flag warmup that tests normally wait for."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "MIT licence (README; LICENSE file with yearly copyright updates, observed 2026-11-12). Governance is maintainer-led: Arthur Edelstein is the visible principal (latest commits; the site's earlier history under `arthuredelstein/privacytests.org` is referenced by the archived backup's description), with 7 contributors total (observed). The GitHub organisation `privacytests` hosts the test repo, the `privacytests-website` publishing repo, and the archived backup. The maintainer's professional affiliations and the project's funding are **[NON ÉTABLI]** from the consulted pages (press/forum claims not adopted)."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented limits: (1) published results are snapshots (issue, date, versions, default settings) — not permanent truths (mandate §5.2); (2) test execution supports Mac/iOS/Android only — 'Linux and Windows are not currently supported' (scripts README) — so the hardware/OS of published runs constrains what is measured [the exact machine of the published runs is **[NON ÉTABLI]**]; (3) 0 tags → no stable release to pin; (4) the grid must not be read as a general ranking of browser security/privacy (it covers only the project's test set); (5) some categories need platform-specific paths (iOS via Mac; Tor windows only in Brave); (6) test flakiness/maintenance burden is visible in repo activity (timeouts, per-test fixes) though not quantified here; (7) **no test was executed in this phase** (D-L23-7) — the environment cannot run the suite (Mac-only execution path)."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: fully open-source test program AND per-cell test code on the results site (verifiability of criteria); MIT licence; multi-platform coverage including iOS/Android, private modes and nightly builds; three-state criteria (passed/failed/unsupported) avoid penalising absent features; raw JSON results and issue-numbered publications give dated traceability; active maintenance (commits days apart, issue No. 106); the harness is re-runnable by third parties on supported platforms (README documents the full workflow)."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: execution currently excludes Linux/Windows (scripts README); results are snapshot-bound (versions/dates/settings) and not cross-issue comparable without care; no tagged releases (0 tags) — no stable reference point; platform gaps (iOS runs need a Mac; Tor-window tests are Brave-specific); the headline 'best private browsers' framing invites over-reading the grid [ÉDITEUR]; maintainer affiliation/funding [NON ÉTABLI]; no independent audit of the tests themselves is documented here [NON ÉTABLI]; per-run repetition options (`--aggregate`) show results can vary across runs — published cells are aggregated snapshots."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Readers wanting dated, code-level evidence of how common browsers behave on privacy tests (partitioning, fingerprinting, cookies, DNS-related checks); browser developers tracking regressions across releases (nightly tables); researchers needing an open, re-runnable harness on Mac/iOS/Android; anyone comparing default configurations who understands the snapshot limits."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users wanting a permanent verdict or a general security/privacy ranking of browsers (the matrix is issue- and setting-bound); Linux/Windows-based testers (execution unsupported); people treating 'Passed' as a guarantee in other contexts; users needing vendor-neutral certification (the project is community-maintained, affiliation unestablished here); those expecting stability guarantees (0 tagged releases)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "PrivacyTests.org (`project`, MIT) is an open-source browser-privacy test program with published, code-transparent results across 12 desktop browsers (issue No. 106, updated 2026-11-09) plus private/iOS/Android/nightly tables [VERSION]. Its differentiators: per-cell test code, three-state criteria, dated issue publications, re-runnable harness on Mac/iOS/Android; its documented limits: snapshot-bound results, default-settings scope, no Linux/Windows execution, 0 tagged releases, and no established affiliation/audit. The published grid is evidence about specific versions at specific dates — this fiche deliberately draws no general ranking from it. **No test was executed in this phase.** All cited URLs were reachable on 2026-11-12."
+    }
+  },
+  "sources": [
+    {"title": "privacytests.org results site (issue No. 106, updated 2026-11-09) — tabs, legend, inline test code", "url": "https://privacytests.org/", "type": "official_site", "publisher": "PrivacyTests.org project", "accessed": "2026-11-12"},
+    {"title": "privacytests/privacytests GitHub repository — README (program definition, MIT, layout, publishing)", "url": "https://github.com/privacytests/privacytests", "type": "official_source_code", "publisher": "PrivacyTests.org project (GitHub)", "accessed": "2026-11-12"},
+    {"title": "scripts/README.md — execution methodology (platforms, CLI flags, categories, publishing workflow)", "url": "https://raw.githubusercontent.com/privacytests/privacytests/master/scripts/README.md", "type": "official_documentation", "publisher": "PrivacyTests.org project (GitHub)", "accessed": "2026-11-12"}
+  ]
+}
