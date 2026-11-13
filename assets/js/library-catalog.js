@@ -204,7 +204,10 @@ var LIBRARY_RESOURCES = [
   "mozilla-observatory",
   "ssl-labs-server-test",
   "securityheaders",
-  "owasp-zap"
+  "owasp-zap",
+  "http-toolkit",
+  "mitmproxy",
+  "fiddler"
 ];
 
 (function () {

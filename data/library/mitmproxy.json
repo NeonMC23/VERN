@@ -1,0 +1,76 @@
+{
+  "id": "mitmproxy",
+  "name": "mitmproxy",
+  "type": "application",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "mitmproxy is a free and open-source interactive HTTPS proxy — 'a free and open source interactive HTTPS proxy' (mitmproxy.org, consulted 2026-11-13); the project repository describes it as 'An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers'. It is installable software executed by the operator (binaries, installer, Homebrew, Docker) — explicitly **not a hosted service** (mandate §5.2 respected): all interception runs locally. The MIT-licensed project (copyright 2013, Aldo Cortesi) distributes three related interfaces — `mitmproxy`, `mitmweb`, `mitmdump` — documented individually below."
+    },
+    "origin_and_history": {
+      "category": "FAIT+VERSION",
+      "text": "The LICENSE file carries 'Copyright (c) 2013, Aldo Cortesi' [FAIT — earliest documented date on consulted sources; the exact founding date is [NON ÉTABLI]]. Repository activity observed 2026-11-13: 11,288 commits, 123 tags, 15 branches, and a latest commit dated the same day (HTTP/3 stream/QPACK handling), showing very active maintenance. The current published release is **12.3.1** (download links and 'Release Notes (v12.3)' on mitmproxy.org) [VERSION]. Governance history beyond the copyright line (succession of maintainers, legal entity) is **[NON ÉTABLI]** from the consulted pages."
+    },
+    "rendering_engine_and_technical_architecture": {
+      "category": "FAIT",
+      "text": "No rendering engine — this section documents the suite's real architecture (canvas convention D-L22-2). The project ships three tools around one core (mitmproxy.org, consulted 2026-11-13): **`mitmproxy`**, the interactive command-line interface ('your swiss-army knife for debugging, testing, privacy measurements, and penetration testing'), which can 'intercept, inspect, modify and replay web traffic such as HTTP/1, HTTP/2, HTTP/3, WebSockets, or any other SSL/TLS-protected protocols'; **`mitmweb`**, 'mitmproxy's main features in a graphical interface… a similar experience [to Chrome's DevTools] for any other application or device, plus additional features such as request interception and replay'; and **`mitmdump`**, the headless companion driven by the **Python API** — 'write powerful addons and script mitmproxy with mitmdump. The scripting API offers full control over mitmproxy… to automatically modify messages, redirect traffic, visualize messages, or implement custom commands'. Message bodies are decoded/prettified 'from HTML to Protobuf', and intercepted messages can be modified before delivery or replayed later."
+    },
+    "interface_and_documented_features": {
+      "category": "FAIT",
+      "text": "Documented uses span 'debugging, testing, privacy measurements, and penetration testing' (site). The Python scripting example on the homepage demonstrates the addon model (redirect a request to another host; answer directly from the proxy with a crafted response — the sample returns HTTP 418). Documented capabilities: on-the-fly interception of specific messages, modification before delivery, replay to client or server, decoding of varied message types, and full programmatic control via the scripting API. Interfaces are chosen per workflow: interactive TUI (`mitmproxy`), browser-based GUI (`mitmweb`), automation (`mitmdump` + addons)."
+    },
+    "installation_and_distribution": {
+      "category": "FAIT+VERSION",
+      "text": "Distribution (mitmproxy.org, consulted 2026-11-13): Windows installer (and Microsoft Store), Linux x86_64 binaries (tar.gz), macOS via Homebrew (`brew install mitmproxy`), and the official Docker image (`mitmproxy/mitmproxy` on Docker Hub); further packages via the downloads page. Version at consultation: **12.3.1** [VERSION]. Releases are tagged on GitHub (123 tags observed) with published release notes (v12.3 series)."
+    },
+    "platforms_and_hardware_architectures": {
+      "category": "FAIT",
+      "text": "Documented distribution targets: Windows (x86_64 installer/Store), Linux (x86_64 binaries; other packaging via Homebrew/Docker), macOS (Homebrew), and containers (Docker Hub) [FAIT as distribution matrix]. The repository's CI provisions macOS code-signing and Docker publishing (workflows observed). Python-ecosystem packaging (pip) is typical of the project but was not displayed on the consulted pages — additional platform channels are **[NON ÉTABLI]** here."
+    },
+    "extensions_and_add_on_store": {
+      "category": "FAIT",
+      "text": "Extension is code-first, not store-based (honest treatment of the canvas section). The documented mechanism is the **Python API / addon system** ('write powerful addons… full control over mitmproxy'), with a community ecosystem the site itself lists: `mitmproxy/examples/contrib` (community-contributed addons), `mitmproxy2swagger` (capture → OpenAPI 3.0 conversion) and `kubetap` (kubectl plugin to proxy Kubernetes services interactively). 'Mitmproxy has a vibrant ecosystem of addons and tools building on it' [ÉDITEUR framing of the three documented projects]."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT",
+      "text": "The tool is explicitly positioned for legitimate technical work on the operator's own or authorised systems: 'debugging, testing, privacy measurements, and penetration testing' (site) and 'penetration testers and software developers' (repository). As local software, captures stay on the operator's machine (structural property; no hosted capture is described). TLS interception is a core documented capability of the proxy ('TLS-capable intercepting… any other SSL/TLS-protected protocols'); the detailed certificate-authority mechanics are **[NON ÉTABLI]** from the consulted pages. Funding is transparent: corporate sponsors (NLnet, Proxyman, Netograph, LLC.org, vpsserver, route4me, netrouting) and individual GitHub Sponsors (mhils) listed on the homepage. This phase executed **no** interception and deployed **no** proxy (D-L25-7)."
+    },
+    "update_channels_and_release_cadence": {
+      "category": "FAIT+VERSION",
+      "text": "Releases are published as tagged versions on GitHub (123 tags observed 2026-11-13) and distributed through the download channels above; the site leads with the current release (12.3.1) and its release notes (v12.3). Repository commits land daily (last commit same day as consultation, including HTTP/3 work). No formal EOL/LTS policy was displayed on the consulted pages [NON ÉTABLI]; the visible cadence is frequent, rolling maintenance [VERSION]."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT",
+      "text": "Licence: **MIT** — the LICENSE file ('Copyright (c) 2013, Aldo Cortesi') grants unrestricted use, modification and distribution with attribution (consulted 2026-11-13). Governance is community/maintainer-led: contribution and support channels are public (GitHub repository and discussions, Slack developer chat, GitHub Sponsors for maintainer mhils); funding partners are listed openly on the site (NLnet and others). A formal legal entity or governance charter is **[NON ÉTABLI]** from the consulted pages."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) it is a local proxy tool — clients must be pointed at it (structural; no hosted mode); (2) advanced automation requires Python addon scripting (the documented path, but a skill requirement); (3) Windows distribution is x86_64-only in the published binaries [VERSION]; (4) TLS interception of clients implies installing trust on those clients — mechanics [NON ÉTABLI] here; (5) its documented uses (privacy measurement, pentesting) presume authorised scope — this phase performed **no** functional test, **no** interception, **no** installation (D-L25-7); (6) founding date/legal entity [NON ÉTABLI]; (7) no independent audit or benchmark is documented here [NON ÉTABLI]."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: free, MIT-licensed, very actively maintained (daily commits, 123 tags, HTTP/3 support under development in November 2026); three complementary interfaces (interactive TUI, DevTools-like web UI, headless daemon) over one core; broad protocol coverage (HTTP/1, HTTP/2, HTTP/3, WebSockets, other TLS-protected protocols); powerful replay and modification workflow; a full Python scripting API with a documented community addon ecosystem; simple distribution (installers, Homebrew, Docker, Store); transparent sponsorship (NLnet et al.); explicitly designed for debugging, testing and privacy measurement use cases."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: no GUI installer parity on all channels (Linux is tar.gz binaries; Windows is x86_64); advanced automation hinges on Python scripting expertise; community-funded model (sponsors/maintainer) rather than commercial support SLAs [NON ÉTABLI support terms]; certificate/trust mechanics undocumented on the consulted pages; the tool's power implies authorised-use discipline (no built-in governance of targets); no independent audit documented here [NON ÉTABLI]; functional claims are documentation-based only in this entry (D-L25-7)."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Developers and penetration testers wanting a free, scriptable intercepting proxy for their own or authorised systems; privacy researchers performing measurements (a documented use case); automation authors needing a headless, addon-driven capture/rewrite engine (mitmdump + Python API); users preferring terminal/web tooling over a commercial GUI; teams embedding interception into test harnesses via the scripting API."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users wanting one-click GUI interception with account-based commercial support and enterprise features (cf. Fiddler Everywhere in this lot); users wanting a hosted or zero-install capture service (nothing is hosted); non-technical users (the toolset is CLI/API-centric); anyone intending to intercept third-party traffic without authorisation (outside documented legitimate use); users needing official Windows ARM binaries (not in the published download set)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "mitmproxy (`application`, MIT, copyright 2013 Aldo Cortesi) is the reference free, open-source interactive HTTPS proxy: one core with three documented interfaces (`mitmproxy` TUI, `mitmweb` DevTools-like GUI, `mitmdump` + Python API), covering HTTP/1-2-3, WebSockets and other TLS protocols with interception, modification and replay — actively maintained (v12.3.1, commits of 2026-11-13) and sponsor-funded (NLnet et al.). Distinct in model from HTTP Toolkit (freemium AGPL suite) and Fiddler (commercial family) of the same lot. **No tool was installed, no traffic intercepted, no test executed in this phase.** All cited URLs reachable on 2026-11-13."
+    }
+  },
+  "sources": [
+    {"title": "mitmproxy.org — product site (v12.3.1, three interfaces, downloads, sponsors, ecosystem)", "url": "https://www.mitmproxy.org/", "type": "official_site", "publisher": "mitmproxy project", "accessed": "2026-11-13"},
+    {"title": "mitmproxy/mitmproxy GitHub — repository (activity 11,288 commits/123 tags, project description)", "url": "https://github.com/mitmproxy/mitmproxy", "type": "official_source_code", "publisher": "mitmproxy project (GitHub)", "accessed": "2026-11-13"},
+    {"title": "LICENSE — MIT licence, Copyright (c) 2013, Aldo Cortesi", "url": "https://raw.githubusercontent.com/mitmproxy/mitmproxy/main/LICENSE", "type": "legal_document", "publisher": "mitmproxy project (GitHub)", "accessed": "2026-11-13"}
+  ]
+}

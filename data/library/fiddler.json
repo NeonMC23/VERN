@@ -1,0 +1,76 @@
+{
+  "id": "fiddler",
+  "name": "Fiddler",
+  "type": "application",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "Fiddler is the name of a family of web-debugging proxy tools published by Progress® Telerik®: 'Find Bugs Faster With Fiddler — Capture, inspect, and modify HTTP/S traffic so you can find bugs in minutes, not hours' (telerik.com/fiddler, consulted 2026-11-13). The publisher presents several distinct products under the brand — its homepage literally offers to 'Choose Your Fiddler': **Fiddler Everywhere** (the current commercial cross-platform debugger), **Fiddler Classic** (the original Windows tool, now restricted to non-commercial use), **Fiddler Everywhere Reporter** (a free capture utility) and **FiddlerCore** (an embeddable .NET library). This entry documents the family as officially presented, **without merging the products into one description** (scope decision D-L25-3); they differ in licence, platform, protocol coverage and lifecycle."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "The official documentation states: 'Fiddler Classic is the original product that laid the foundations for the modern-day Fiddler Everywhere application' (Fiddler Classic Introduction, updated 2026-10-05). A licensing milestone is documented precisely: the Fiddler Classic EULA was updated effective **August 3, 2026**, making Classic 'licensed exclusively for non-commercial use — personal use and internal business operations only', with commercial transition to Fiddler Everywhere required by **September 17, 2026**; Classic is 'not in active development and offers no commitments for releases, patches, or technical support. By using this product you assume all associated risks' [FAIT as published terms]. Fiddler Everywhere is the actively developed product (its Classic-import wizard exists 'starting with version 5.20.0'; the comparison documentation was updated 2026-11-11) [VERSION]. The identity of Fiddler's original author and the pre-Progress ownership history are **[NON ÉTABLI]** from the consulted pages."
+    },
+    "rendering_engine_and_technical_architecture": {
+      "category": "FAIT",
+      "text": "No rendering engine — this section documents the two distinct technical lineages (canvas convention D-L22-2; the editions are documented separately, never fused). **Fiddler Classic**: a Windows-only tool that 'monitors, inspects, edits, and logs all HTTPS traffic on Windows' (Introduction), extended through '.NET Framework WinForms plugins' (custom inspectors, per the official comparison table), with documented capabilities for HTTPS decryption, channel-binding authentication, reverse-proxy use, upstream proxy chaining and remote-machine monitoring. **Fiddler Everywhere**: a cross-platform proxy (default port **8866** vs Classic's **8888** — the migration guide warns this difference is 'often overlooked') supporting 'HTTP/1.x and HTTP/2' and TLS up to **1.3** (Classic: HTTP/1.x, TLS 1.2 max), streaming protocols 'WebSocket, SSE, Socket.IO, and gRPC', low-level network capturing (Windows and macOS), sandboxed browser capturing, and optional reuse of the Classic root CA (BouncyCastle/BCCertMaker) during migration (comparison table + import wizard, consulted 2026-11-13)."
+    },
+    "interface_and_documented_features": {
+      "category": "FAIT",
+      "text": "Per the official comparison table (Fiddler Classic Migration, updated 2026-11-11): Classic offers AutoResponder ('limited options'), predefined filters, a Statistics tab, manual export, and HOSTS-based redirection; Everywhere offers enhanced **Rules**, advanced filtering, a built-in **Comparison** tab for HTTP sessions, an **Overview** tab with diagrams, Host Remapping (per-mapping port/protocol override, OS hosts-file import), collaboration ('Sharing, local and cloud saves, and manual export'), an **AI assistant** and an **MCP server** ('Fiddler MCP lets compatible AI coding assistants… access context from captured HTTPS traffic' — Fiddler Classic Commercial announcement), custom inspectors 'in preview on Windows' that can reuse Classic inspectors, and enterprise options (technical support, SSO login, offline mode, managed app configuration). The Fiddler homepage additionally documents **Fiddler Everywhere Reporter** (free cross-platform capture: 'Start instantly without installation… Skip registration or licensing… Receive web traffic from end users or internal teams for debugging'; portable/zip Windows, Intel/ARM Mac) and **FiddlerCore** ('an embeddable .NET library which enables you to integrate traffic capture capabilities directly into your code'). Documentation sections for Everywhere also cover Scripting, Command Line, Agent Tools, Agent Cache, Compose API Requests and Security (doc tree observed)."
+    },
+    "installation_and_distribution": {
+      "category": "FAIT",
+      "text": "Distribution (telerik.com/fiddler, consulted 2026-11-13): Fiddler Everywhere — download/trial from Telerik (Windows, macOS, Linux); Fiddler Classic — a dedicated download page 'for eligible non-commercial use' (Windows); Fiddler Everywhere Reporter — 'Windows - Portable App', 'Windows - Zip', 'Intel Mac', 'ARM Mac' direct downloads (api.getfiddler.com), with 'no installation' and 'no registration or licensing'; FiddlerCore — trial via the Telerik site (library form). The Everywhere import wizard (v5.20.0+) migrates Classic settings, AutoResponder rules, filters, quick filters and custom inspectors (Windows)."
+    },
+    "platforms_and_hardware_architectures": {
+      "category": "FAIT",
+      "text": "Documented platform matrix (comparison table + downloads, consulted 2026-11-13): Fiddler Classic — **Windows only** (client-configuration docs additionally cover capturing from Android, iOS and legacy devices through the Windows host); Fiddler Everywhere — **Windows, macOS and Linux**, with low-level network capturing on Windows and macOS; Reporter — Windows (portable/zip) and macOS (Intel/ARM). Minimum hardware requirements are not published on the consulted pages [NON ÉTABLI]."
+    },
+    "extensions_and_add_on_store": {
+      "category": "FAIT",
+      "text": "No app store — documented extension mechanisms differ by edition (canvas section adapted; never fused): Classic extends via '.NET Framework WinForms plugins' custom inspectors; Everywhere offers custom inspectors 'in preview on Windows' with documented **reuse of Fiddler Classic inspectors**, plus Rules/Rules Presets and its documented Scripting/Command Line surfaces (doc tree). FiddlerCore is itself the embedding surface for third-party .NET applications. A public marketplace of third-party extensions is not documented on the consulted pages [NON ÉTABLI]."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "As MITM debugging proxies, both editions intercept and can decrypt HTTPS of clients configured to use them — documented controls include Classic's 'Decrypt HTTPS traffic' and 'Ignore server certificate errors (unsafe)' options (import wizard names them explicitly) and Everywhere's 'Capture HTTPS traffic' setting plus optional reuse of the Classic root CA. The Everywhere offering documents enterprise security postures: 'Enterprise-ready, including SOC 2 certification' [ÉDITEUR claim], SSO login, offline mode and managed app configuration (comparison table). Reporter's model is deliberate minimal data: no registration, no licensing, capture 'even as a non-technical user' to relay traffic to a debugger. Interception tooling is for authorised traffic only; this phase executed **no** capture and deployed **no** proxy (D-L25-7). A dedicated privacy policy for the products was not consulted here [NON ÉTABLI]."
+    },
+    "update_channels_and_release_cadence": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Fiddler Everywhere: actively developed with 'a regular release cadence' (vendor statement, Fiddler Classic Commercial page) and documentation updated through November 2026; the only version datum captured is the import wizard's 'starting with version 5.20.0' [VERSION]. Fiddler Classic: frozen — 'not in active development and offers no commitments for releases, patches, or technical support' [FAIT as published]. Current version numbers and formal cadence/EOL policies for Everywhere are **[NON ÉTABLI]** from the consulted pages."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT",
+      "text": "Publisher/rights-holder: **Progress Software** — the products are branded 'Progress® Telerik®' throughout the official documentation (consulted 2026-11-13). Documented licensing split: Fiddler Classic — 'licensed exclusively for non-commercial use — personal use and internal business operations only' since the 2026-08-03 EULA update (full terms at the Fiddler Classic License Agreement); commercial/business/organisational/revenue-generating use 'requires Fiddler Everywhere, the supported commercial Fiddler offering' (transition deadline 2026-09-17); Fiddler Everywhere — commercial/team/enterprise licensing (the homepage frames it as 'licensed for professional and commercial use'; pricing not consulted [NON ÉTABLI]); Fiddler Everywhere Reporter — free, 'Skip registration or licensing'; FiddlerCore — trial offered, terms [NON ÉTABLI]. The site markets the family with adoption claims ('4 million developers', 'Hundreds of Thousands of Organizations', G2 4.4/5) [ÉDITEUR]."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented limits: (1) the name 'Fiddler' spans products with different licences and lifecycles — this entry's perimeter is the officially presented family (D-L25-3) and each statement is edition-attributed; users must not transfer capabilities between editions (the official table shows gaps: no HTTP/2, no TLS 1.3, no AI/MCP, Windows-only for Classic); (2) Classic is frozen with explicit risk transfer ('By using this product you assume all associated risks'); (3) commercial use of Classic is contractually excluded since 2026-08-03; (4) Everywhere's headline features (AI assistant, MCP server, cloud saves) may raise data-handling questions not documented on the consulted pages [NON ÉTABLI]; (5) pricing, current versions and ownership history [NON ÉTABLI]; (6) marketing figures [ÉDITEUR]; (7) **no product was installed or executed in this phase** (D-L25-7) — all capabilities are documentation-based."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: a long-lived, widely recognised debugging-proxy brand with an official, edition-by-edition comparison table; Fiddler Everywhere covers Windows/macOS/Linux with modern protocols (HTTP/2, TLS 1.3, gRPC/SSE/Socket.IO), enhanced Rules, session comparison, host remapping, AI-assisted debugging (MCP) and enterprise options (SSO, offline, managed config, SOC 2 claim [ÉDITEUR]); a documented migration path from Classic (import wizard, CA reuse); free tools in the family (Reporter for no-install capture, Classic for eligible non-commercial use); FiddlerCore embeds capture into custom .NET software; documentation actively maintained (Nov 2026)."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: the brand's duality is inherently confusing (two products, two EULAs, two port defaults — 8888/8866 — and a frozen legacy edition whose commercial use is now prohibited); Classic's users carry all risk with no patches/support; Everywhere is commercial (pricing undisclosed on consulted pages); low-level capturing excludes Linux (table: Windows and macOS only); custom inspectors for Everywhere remain 'in preview on Windows'; data practices of AI/cloud features [NON ÉTABLI]; adoption/rating claims unverified [ÉDITEUR]; no independent audit documented here [NON ÉTABLI]; no functional validation performed in this phase (D-L25-7)."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Professional developers and QA teams wanting a supported cross-platform HTTP(S) debugging proxy with modern protocol coverage, collaboration and enterprise controls (Fiddler Everywhere); individuals with non-commercial Windows debugging needs (Fiddler Classic, at their own risk); support teams collecting captures from non-technical end users (Fiddler Everywhere Reporter); .NET developers embedding traffic capture (FiddlerCore)."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: open-source-only procurement (both core products are proprietary; cf. mitmproxy's MIT licence or HTTP Toolkit's AGPL/Apache/MIT mix in this lot); commercial users attached to Fiddler Classic (contractually excluded since 2026-08-03 and pushed to Everywhere); Linux users needing low-level network capturing (documented absent); users wanting free automated modern debugging (Classic's AutoResponder is 'limited options'); anyone intending to intercept third-party traffic without authorisation (outside documented legitimate use)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "Fiddler (`application`, Progress Telerik) is a documented family of debugging proxies — Fiddler Everywhere (commercial, Windows/macOS/Linux, HTTP/2 + TLS 1.3, Rules, AI/MCP, enterprise options), Fiddler Classic (original Windows tool, non-commercial-only and frozen since the 2026-08-03 EULA update), plus the free Reporter capture utility and the FiddlerCore .NET library — with an official comparison table that keeps the editions explicitly distinct. This fiche documents the family without fusing its products (D-L25-3) and marks vendor claims [ÉDITEUR] and unestablished items (pricing, versions, ownership history) accordingly. **No tool was installed, no traffic intercepted, no test executed in this phase.** All cited URLs reachable on 2026-11-13."
+    }
+  },
+  "sources": [
+    {"title": "telerik.com/fiddler — product family ('Choose Your Fiddler': Everywhere, Classic, Reporter, FiddlerCore)", "url": "https://www.telerik.com/fiddler/", "type": "official_site", "publisher": "Progress Software (Telerik)", "accessed": "2026-11-13"},
+    {"title": "Fiddler Classic — Introduction (product scope, 2026-08-03 EULA non-commercial-only, no active development)", "url": "https://www.telerik.com/fiddler/fiddler-classic/documentation/introduction", "type": "official_documentation", "publisher": "Progress Software (Telerik)", "accessed": "2026-11-13"},
+    {"title": "Fiddler Classic Migration guide (official Classic vs Everywhere comparison table, import wizard v5.20.0+, ports 8888/8866)", "url": "https://www.telerik.com/fiddler/fiddler-everywhere/documentation/fiddler-classic-migration-guide", "type": "official_documentation", "publisher": "Progress Software (Telerik)", "accessed": "2026-11-13"}
+  ]
+}

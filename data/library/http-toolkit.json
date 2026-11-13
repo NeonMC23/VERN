@@ -1,0 +1,76 @@
+{
+  "id": "http-toolkit",
+  "name": "HTTP Toolkit",
+  "type": "application",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "HTTP Toolkit is a cross-platform, open-source desktop application to 'intercept, view & edit any HTTP traffic' — in the project's words, 'an open-source tool for debugging, testing and building with HTTP on Windows, Linux & Mac' (httptoolkit.com and GitHub README, consulted 2026-11-13). It is installable software (per-platform installers), not a hosted service: the interception proxy and all tooling run on the user's machine. Its commercial sustainability model (paid Pro/Team tiers funding open-source development, '100% open source' including the paid features) distinguishes it from the other two interception tools of this lot (mitmproxy, Fiddler) — each documented separately."
+    },
+    "origin_and_history": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "The project is developed in the `httptoolkit` GitHub organisation; the meta-repository's principal committer is Tim Perry (pimterry), and the README credits three contributors on that repository (observed 2026-11-13). The site claims '8+ years of development, 1M+ users around the world, 178 open-source contributors, 11K+ GitHub stars across httptoolkit's repos' and 'Join 1,585,066 developers' [ÉDITEUR figures, not independently verified]. Funding is documented on the repository badge line: 'sustainably funded by its Pro users & supporters', plus grants from the **EU's Horizon 2020 (NGI Pointer)** and **NLnet (NGI Zero Entrust, project AppInterception)** [FAIT as published badges]. A SECURITY.md incident-reporting policy was added in January 2025 [VERSION]. The exact founding date is **[NON ÉTABLI]** from the consulted pages."
+    },
+    "rendering_engine_and_technical_architecture": {
+      "category": "FAIT",
+      "text": "No rendering engine — this section documents the product's real architecture (canvas convention D-L22-2). Per the repository README (consulted 2026-11-13): the UI is 'a TypeScript + React app that powers most of the functionality you use'; the backend is 'a TypeScript + node.js server that does the things the UI can't do: starting a proxy, and setting up client interception'; the proxy itself is **Mockttp**, 'the HTTP(S) proxy itself, and all low-level logic around that, as a standalone TypeScript library'; the desktop distribution is 'a TypeScript + Electron wrapper, which combines the UI & the server and builds convenient per-platform installers'; an Android companion app (native Kotlin + Java) 'manages certificate trust & enforces HTTP interception on Android devices'. The proxy is transparent and multiplexed: 'HTTP Toolkit is a transparent HTTP proxy, and can intercept plain HTTP, encrypted HTTPS, WebSockets, HTTP/2, proxy requests, direct requests, manually redirected packets… all on one port.' Body rendering (JSON, Protobuf, Base64, HTML, XML, JS, hex) is 'built on top of Monaco - the editing tools from Visual Studio Code' (homepage)."
+    },
+    "interface_and_documented_features": {
+      "category": "FAIT",
+      "text": "Documented feature set (homepage + README, consulted 2026-11-13): one-click interception of 'browsers, most backend & scripting languages (from Node.js to PHP), Android devices, Electron apps and more', plus manual proxy connection for any client; precise per-client targeting ('just the traffic you care about'); full headers/body inspection with inline MDN documentation for standard headers; categorisation and free-text/structured filtering; **breakpoints** to pause and edit live traffic (redirect, change method/headers/status/body, answer without forwarding, hard-close connections); a full HTTP **client** (send custom requests, resend intercepted ones); automated **rewrite rules** — mock responses, transforms, error/timeout injection, rulesets import/export — marked **Pro features** on the homepage. The Android/iOS interception capability targets those devices as clients; the desktop app itself runs on Windows/Linux/Mac."
+    },
+    "installation_and_distribution": {
+      "category": "FAIT",
+      "text": "Download channels (homepage, consulted 2026-11-13): Windows (installer, Winget, standalone zip), macOS (DMG for Apple Silicon and Intel, Homebrew), Linux (DEB, RPM, Arch/AUR, AppImage, standalone zip x64 and arm64). Builds come from the `httptoolkit-desktop` repository releases (download-counter badge observed). The GitHub organisation publishes every component (website, UI, server, Mockttp, Android app, desktop wrapper) with per-repo setup READMEs. Version numbers were not displayed on the consulted pages — the current release number is **[NON ÉTABLI]** here."
+    },
+    "platforms_and_hardware_architectures": {
+      "category": "FAIT",
+      "text": "Host platforms: Windows, Linux and macOS (explicit, per installers above), with x64 and arm64 Linux builds and Apple Silicon/Intel macOS builds [FAIT as distribution matrix]. Interception targets extend beyond the host: Android devices and iOS/Android apps (via the Android companion app and device configuration), Docker containers, browser windows, backend processes (Node.js, Java, Python, Ruby) and terminal sessions (homepage). Minimum hardware requirements are not published on the consulted pages [NON ÉTABLI]."
+    },
+    "extensions_and_add_on_store": {
+      "category": "FAIT",
+      "text": "No app store exists — this section documents the real extension surfaces (honest treatment of a canvas section). Documented extensibility: automated **rewrite rules** created from real traffic, grouped, aliased and exported/imported as shareable rulesets (Pro); **custom OpenAPI specs** feeding the documentation/validation feature; HAR import/export and code export 'for 20+ tools'; and, for developers, the entire codebase — Mockttp is explicitly 'usable standalone as a testing tool, or as a programmatically controllable intercepting HTTP(S) proxy' (README). Team plans list 'Self-hosted infrastructure' among options available on request (get-pro page)."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "As desktop software, captured traffic is processed locally (structural property of the architecture: the proxy runs on the operator's machine; no hosted capture is described on the consulted pages). Security engineering artefacts: a published SECURITY.md incident-reporting policy (2025-01), and TLS-safety controls documented as Pro features — 'TLS passthrough' (leave TLS unintercepted), 'Reconfigure upstream TLS settings', client certificates and whitelists (get-pro). Account management for paid tiers runs at accounts.httptoolkit.tech (observed). The details of HTTPS certificate generation/trust handling in the desktop app are **[NON ÉTABLI]** from the consulted pages (the Android app's certificate-trust role is documented). Use of interception tooling is legitimate only on traffic the operator is authorised to test — this phase executed **no** interception (D-L25-7)."
+    },
+    "update_channels_and_release_cadence": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Distribution flows through the website downloads and `httptoolkit-desktop` GitHub releases (badge observed); the meta-repository's last commit is from February 2026 and the site carries a 2026 blog post on funding open source, indicating an active project [VERSION]. Release version numbers, a changelog and a cadence/EOL policy were not visible on the consulted pages — **[NON ÉTABLI]** here."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT",
+      "text": "Licensing (README, consulted 2026-11-13): 'HTTP Toolkit is 100% open source… even the account management servers, even the paid features, everything. All of that is open source, licensed as a mixture of copyleft **AGPL** (for the HTTP Toolkit-specific components, ensuring all direct derivative projects are open-source too) and permissive **Apache-2/MIT** licenses (for all the general-purpose reusable libraries).' Business model: paid Professional (US$15/month) and Team (US$24/user/month) tiers, with Hobbyist features free — 'sustainably funded by its Pro users & supporters', plus EU Horizon 2020 NGI Pointer and NLnet grants; 'All contributors get free HTTP Toolkit Pro' (README, rewarding any contribution: code, docs, articles, bug/security reports). Governance is maintainer-led (Tim Perry and the GitHub organisation) with community input via GitHub issues."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented limits: (1) key automation and workflow features are **Pro-gated** — the Hobbyist tier lacks automated rules, import/export, resend, compression/caching analysis and advanced configuration (feature matrix on get-pro) — so '100% open source' describes code availability, not feature parity at zero cost (the Pro code is open, access to Pro features requires a subscription or a contribution); (2) marketing reach figures (1M+ users, 1,585,066 developers) are [ÉDITEUR]; (3) current version number and founding date [NON ÉTABLI]; (4) HTTPS interception requires installing/trusting a certificate on target clients (mechanism documented only for the Android app here); (5) an interception proxy is only for authorised traffic — this phase performed **no** functional test, **no** interception and **no** installation (D-L25-7); (6) no independent audit or benchmark is documented here [NON ÉTABLI]."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: one-click, per-client interception across an unusually wide target range (browsers, languages/runtimes, Docker, Android/iOS apps) with a transparent multiplexed proxy (HTTP, HTTPS, WebSockets, HTTP/2 on one port); polished inspection (Monaco-based decoding, MDN inline docs); live breakpoints and a built-in client; automated mocking/rewriting rules with shareable rulesets; fully open codebase (AGPL/Apache-2/MIT split documented) including paid features and account servers; free Hobbyist tier covering core interception/inspection; contributor rewards (free Pro); multi-format installers for all three desktop OSes; grant + community funding transparency (EU NGI Pointer, NLnet)."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: Pro subscription needed for the automation and advanced tooling (the feature matrix marks whole rows '–' for Hobbyist); '100% open source' coexists with paid feature gating (a model users must understand: source openness ≠ free access to Pro features); account required for paid tiers (account server is third-party infrastructure, though self-hosting is offered for Team on request); version/changelog transparency absent from the consulted pages [NON ÉTABLI]; AGPL copyleft on product components may deter some commercial integrations (documented licence choice); reach/impact claims unverified [ÉDITEUR]; no functional validation performed in this phase (D-L25-7)."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Developers and testers wanting fast, polished HTTP(S) interception on the desktop with one-click setup for their own clients (browsers, apps, containers, devices); teams prototyping API behaviour with mock/rewrite rules (Pro); users wanting a modern UI with strong decoding and an integrated client; organisations preferring open-source tooling whose paid tiers fund development; contributors (any contribution earns Pro)."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users needing full automation at zero cost (Hobbyist lacks rules/import-export); headless/CLI-first workflows (mitmproxy's mitmdump/scripting model fits that better, see that entry); users requiring a long-established commercial support/enterprise package (Fiddler Everywhere documents SSO/offline/managed options, see that entry); anyone intending to intercept third-party traffic without authorisation (outside any documented legitimate use); users wanting a hosted service (everything runs locally)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "HTTP Toolkit (`application`) is a modern open-source (AGPL + Apache-2/MIT) interception suite — Electron desktop app, TypeScript/React UI, Node.js server, Mockttp proxy, Android companion — with one-click client interception, Monaco-based inspection, breakpoints, a built-in client, and Pro-gated automated rewrite rules (US$15/mo individual, US$24/user/mo team [VERSION 2026-11-13]), sustainably funded by users plus EU NGI Pointer and NLnet grants. Documented limits: Pro gating of automation features, unverified reach claims [ÉDITEUR], undisclosed current version [NON ÉTABLI]. Distinct in model from mitmproxy (community MIT suite) and Fiddler (commercial product family) of the same lot. **No tool was installed, no traffic intercepted, no test executed in this phase.** All cited URLs reachable on 2026-11-13."
+    }
+  },
+  "sources": [
+    {"title": "httptoolkit.com — product page (intercept/inspect/breakpoint/send/modify-Pro, download matrix)", "url": "https://httptoolkit.com/", "type": "official_site", "publisher": "HTTP Toolkit project", "accessed": "2026-11-13"},
+    {"title": "httptoolkit/httptoolkit GitHub — README (features, transparent proxy, AGPL/Apache-2/MIT licensing, components, funding)", "url": "https://github.com/httptoolkit/httptoolkit", "type": "official_source_code", "publisher": "HTTP Toolkit project (GitHub)", "accessed": "2026-11-13"},
+    {"title": "httptoolkit.com/get-pro/ — editions (Hobbyist/Professional $15/Team $24) and feature matrix", "url": "https://httptoolkit.com/get-pro/", "type": "official_site", "publisher": "HTTP Toolkit project", "accessed": "2026-11-13"}
+  ]
+}
