@@ -1,0 +1,69 @@
+{
+  "id": "securityheaders",
+  "name": "SecurityHeaders.com",
+  "type": "service",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "SecurityHeaders.com is a free hosted tool that analyses the HTTP response headers of a website and grades them: 'Analyse your HTTP response headers' (homepage, consulted 2026-11-13). It is 'a part of Snyk, a leading cybersecurity company, and was originally created by Scott Helme' — 'a free and easy to use tool designed to help you better deploy and understand modern security features that are available for your website' (About page). The site is published as 'A snyk.io project' under CC-BY-SA 4.0. Like SSL Labs Server Test (same lot) it is an online tester, not installable software; unlike it, the analysed layer is the HTTP header set, not TLS."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "A web-based HTTP security-header analyser with a letter-grade system: submit a URL, receive a report listing present/missing headers with explanatory notes and a grade from **A+ down to F**, plus **R** when 'the site responded with a redirect and you should follow the redirects using the link provided' (FAQ, consulted 2026-11-13). 'To get an A+ grade your site needs to issue all the HTTP response headers that we check for.' A public API exists (`api.securityheaders.com`, key required) and the homepage publishes live statistics: **413,359,787 scans** graded to date (A+ 9,368,694 / A 45,950,327 / B 19,893,075 / C 19,107,095 / D 54,942,838 / E 9,985,141 / F 191,247,917 / R 62,864,700) [VERSION, observed 2026-11-13], plus public Recent Scans, Hall of Fame and Hall of Shame lists."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Documented provenance (About page, consulted 2026-11-13): originally created by Scott Helme; now part of Snyk — 'Now that Security Headers is a part of Snyk, it will continue to operate with input from Scott, but also from Snyk's team!' The stated mission is to 'drive up the usage of security based headers across the Web' by making assessment easy and documenting how to deploy missing headers. Exact founding date, acquisition date and history of the grading scheme are **[NON ÉTABLI]** from the consulted pages (the FAQ points to the founder's blog for scoring details — external, not adopted here). The site content is licensed CC-BY-SA 4.0 (footer, observed)."
+    },
+    "operation_and_infrastructure": {
+      "category": "FAIT",
+      "text": "Documented scanning behaviour (FAQ + API docs, consulted 2026-11-13): the scanning engine 'presents a modern, Chrome UA string when scanning, and it will contain the static string \"SecurityHeaders\" to identify us'; the service publishes the IPv4 address used for scans (`.well-known/ipv4.txt`) so operators can allowlist it; the API accepts `q` (domain/URL), `hide` (hide result from the homepage lists) and `followRedirects`. Responses carry per-header colour coding and explanatory `info` text (with links to documentation articles), plus a `gradeCap` field in the API summary. Scan results appear in the public homepage lists unless hidden."
+    },
+    "protocols_and_encryption": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Canvas-adaptation convention (D-L24-2): this section documents the analysed layer. The tool examines **HTTP response headers**; the FAQ states the score 'is representative of how many security based HTTP response headers your site issues' and that blue-highlighted headers are 'additional information… like the value of the Server header or other platform specific headers like X-Powered-By divulging information about the software running on the server'. Headers observed in the official API example [FAIT as documented example, not an exhaustive list]: Strict-Transport-Security, Content-Security-Policy, Cross-Origin-Embedder-Policy (report-only), Cross-Origin-Opener-Policy (report-only), Cross-Origin-Resource-Policy, Expect-CT (noted 'will soon be deprecated'), Feature-Policy (noted 'has been renamed to Permissions Policy'), NEL, Permissions-Policy, Referrer-Policy, Report-To. The exhaustive set of checked headers is deliberately not published as a list ('It's best to conduct a scan and see the list of headers that are present and missing') — the complete rubric is **[NON ÉTABLI]** from static official documentation."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Documented data posture: scanned results are listed publicly by default (Recent Scans / Hall of Fame / Hall of Shame on the homepage); the `hide=on` parameter and the web UI allow hiding a result from the homepage; the service identifies itself honestly in its User-Agent and publishes its scan IP for allowlisting. The site's content licence is CC-BY-SA 4.0. A dedicated privacy policy for the scanner (now under Snyk's umbrella) was not located on the consulted pages — data-retention commitments are **[NON ÉTABLI]** here. Contact channel: hello@securityheaders.com (FAQ)."
+    },
+    "configuration_and_access": {
+      "category": "FAIT",
+      "text": "Free web access: enter a URL, optionally follow redirects; no account required for the web tool. Programmatic access goes through the paid API ('An API key must be provided in the x-api-key HTTP request header. You can purchase an API key here') at `https://api.securityheaders.com/` with documented parameters `q`, `hide`, `followRedirects` (all required in the query string) and a JSON response (grade, summary, rawHeaders, gradeCap). Terms for API use live at securityheaders.com/api/terms/ (not consulted here [NON ÉTABLI])."
+    },
+    "governance_and_operator": {
+      "category": "FAIT",
+      "text": "Operator: Snyk ('Security Headers is a part of Snyk… a leading cybersecurity company'); original author Scott Helme; operation continues 'with input from Scott, but also from Snyk's team'. The project states its purpose as driving up security-header adoption across the web. Content licence CC-BY-SA 4.0. Governance beyond these statements (roadmap, funding of the free tier) is **[NON ÉTABLI]** from the consulted pages."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) it analyses HTTP response headers only — not TLS configuration (cf. SSL Labs Server Test), not application vulnerabilities (cf. ZAP), not server hardening beyond header disclosure hints; (2) the grade measures header coverage ('how many security based HTTP response headers your site issues'), not overall site security — the tool itself does not claim otherwise; (3) the exhaustive checked-header list and grade modifiers are not published as static documentation (FAQ: run a scan; scoring details on the founder's blog) — [NON ÉTABLI] from official pages; (4) results are public by default on the homepage lists unless hidden; (5) API access is paid and terms were not consulted; (6) `Expect-CT` and `Feature-Policy` notices in the example show the checked set evolves with the platform (renamed/deprecated headers); (7) **no scan was executed in this phase** (D-L24-7) — no third-party domain was submitted, per the prohibition on active tests."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: free, frictionless header analysis with a simple, widely understood grade scale (A+…F plus R for redirects); per-header colour coding with explanatory notes and deployment links (the stated pedagogical goal); honest scanner identification (published IP, marked User-Agent) that respects operators' allowlists; `hide` control over public listing; a documented JSON API (grade, gradeCap, rawHeaders with info text) for automation; continuity commitment under Snyk with the founder's continued input [ÉDITEUR]; enormous published scan corpus (413 M+ grades) giving informal context to a score [VERSION]."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: header-layer scope only; grade = coverage of checked headers, easily misread as overall security; checked-header list and scoring modifiers not published in static official docs; public-by-default scan lists (privacy consideration for scanned URLs — the homepage even displays full scanned URLs including query strings in its lists, observed); API is paid while the web tool is free; no documented privacy policy for the scanner on the consulted pages [NON ÉTABLI]; dependent on one operator (Snyk) for availability; R-grade handling requires following a link manually; no independent audit of the grading is documented here [NON ÉTABLI]."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Site owners and developers verifying which security headers they emit and learning how to deploy the missing ones (the tool's stated mission); teams tracking header regressions via the API; educators demonstrating CSP/HSTS/Permissions-Policy effects; operators who want a quick, free grade with actionable per-header guidance."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: TLS/certificate assessment (cf. SSL Labs Server Test); web-application vulnerability scanning (cf. OWASP ZAP); users needing the full scoring rubric from static documentation; operators who require scan results to stay private by default (they are listed publicly unless hidden); API automation on a zero budget (API keys are purchased); anyone treating an A+ as proof of overall security (the FAQ frames the grade as header coverage only)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "SecurityHeaders.com (`service`, a Snyk project, originally by Scott Helme, CC-BY-SA 4.0) is the reference free HTTP security-header grader: A+…F (+ R for redirects), per-header colour-coded explanations, a published scan IP/UA, `hide` control, and a paid JSON API — 413 M+ scans graded [VERSION 2026-11-13]. Documented limits: header-layer only, grade = header coverage (never a security certificate), rubric not statically published, public-by-default lists. It complements without overlapping SSL Labs Server Test (TLS layer) and OWASP ZAP (local application testing software) of the same lot. **No scan was executed in this phase.** All cited URLs reachable on 2026-11-13."
+    }
+  },
+  "sources": [
+    {"title": "SecurityHeaders.com homepage — service, grading totals (413,359,787 scans), public lists, Snyk/CC-BY-SA footer", "url": "https://securityheaders.com/", "type": "official_site", "publisher": "Snyk (Security Headers)", "accessed": "2026-11-13"},
+    {"title": "About (Who, Why & How) — origin (Scott Helme), Snyk ownership, stated mission", "url": "https://securityheaders.com/about/", "type": "official_documentation", "publisher": "Snyk (Security Headers)", "accessed": "2026-11-13"},
+    {"title": "FAQ — scoring semantics (A+…F, R), blue informational headers, scan IP/UA identification", "url": "https://securityheaders.com/faq/", "type": "official_documentation", "publisher": "Snyk (Security Headers)", "accessed": "2026-11-13"},
+    {"title": "API Docs — auth (x-api-key), parameters q/hide/followRedirects, JSON response with grade/gradeCap/rawHeaders", "url": "https://securityheaders.com/api/docs/", "type": "official_documentation", "publisher": "Snyk (Security Headers)", "accessed": "2026-11-13"}
+  ]
+}

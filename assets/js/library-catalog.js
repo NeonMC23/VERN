@@ -201,7 +201,10 @@ var LIBRARY_RESOURCES = [
   "pi-hole",
   "eff-cover-your-tracks",
   "privacytests",
-  "mozilla-observatory"
+  "mozilla-observatory",
+  "ssl-labs-server-test",
+  "securityheaders",
+  "owasp-zap"
 ];
 
 (function () {

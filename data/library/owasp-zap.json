@@ -1,0 +1,82 @@
+{
+  "id": "owasp-zap",
+  "name": "ZAP (Zed Attack Proxy)",
+  "type": "application",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "ZAP — the Zed Attack Proxy, presented as 'ZAP by Checkmarx' — is a free, open-source web-application security scanner: 'the world's most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to' (zaproxy.org and GitHub README, consulted 2026-11-13 — the superlative is [ÉDITEUR]). It is software the user installs and runs against web applications 'while you are developing and testing' them, and 'also a great tool for experienced pentesters… for manual security testing' (README). **Naming note (documented, id kept):** the canonical identifier `owasp-zap` follows the project roadmap (phase169e lot-plan) and the mandate, but the project itself states that references to 'OWASP ZAP' are out of date — ZAP left OWASP in September 2023 (see licensing_and_governance)."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "An installable desktop/CLI security-testing application (Java, Gradle build — javadoc artifact `org.zaproxy:zap`) that helps 'automatically find security vulnerabilities in your web applications' and supports manual penetration testing (README). The homepage organises its use around a Quick Start Guide, an Automation Framework ('ZAP provides range of options for security automation'), and the ZAP Marketplace of community add-ons. Unlike the two online testers of this lot (SSL Labs Server Test, SecurityHeaders.com), ZAP is not a hosted service: it is downloaded and executed by the operator against targets they are authorised to test."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Documented governance history (ZAP Ownership page + repository, consulted 2026-11-13): the project 'regrettably had to take ZAP out of OWASP in September 2023 in order to obtain enough funding to keep maintaining and improving the software' (announced in the 2023-08-01 post 'ZAP is Joining the Software Security Project'); since the 2024-09-24 post 'ZAP Has Joined Forces With Checkmarx' it is known as 'ZAP by Checkmarx' because '3 of the Core Team are employed by Checkmarx to work on ZAP'. The repository shows 10,462 commits and 618 tags (observed 2026-11-13); the snapshot commit 'Update version to 2.17.0' (snap, SECURITY.md) is dated December 2025 [VERSION]. The project's founding date and the current release among the 618 tags are **[NON ÉTABLI]** from the consulted pages."
+    },
+    "rendering_engine_and_technical_architecture": {
+      "category": "FAIT",
+      "text": "No rendering engine exists — this section documents the scanner's architecture (canvas convention D-L24-2, followed since the SearXNG/Unbound/BIND 9 entries). ZAP is a Java application built with Gradle (`build.gradle.kts`, Gradle Wrapper 8.13), distributed with bundled JREs per platform (buildSrc notes declaring 'bundled JRE architecture' for native ARM64 macOS execution). The core code lives in `zap/`, with `docs/` (including automation framework documentation and scan-rule IDs — e.g. a reserved ID for a passive secrets scan rule), `docker/` images with a 'Docker Live Release' workflow, `python/scripts` (installers), and `snap` packaging. Engineering infrastructure documented by the repository's badges and workflows: GitHub Actions Java CI, integration tests, CodeQL analysis, a SonarCloud Quality Gate, javadoc publication (javadoc.io, `org.zaproxy:zap`), and the CII Best Practices badge (observed 2026-11-13)."
+    },
+    "interface_and_documented_features": {
+      "category": "FAIT",
+      "text": "Documented on the consulted pages: an introductory video and a Quick Start Guide for newcomers; automated testing through the Automation Framework; manual security testing for experienced pentesters; extensibility via the ZAP Marketplace ('add-ons that have been contributed by the community'); download packages from the site (installers, Windows executable, Linux builds, snap, Docker). Repository governance artifacts: CONTRIBUTING.md, CLA.md ('ZAP CLA v1.0'), LEGALNOTICE.md (refreshed 2026-11-12), SECURITY.md (versioned per release), RELEASING.md (updated December 2025). Vulnerability reporting for ZAP itself is directed to the project's admin email channel (zaproxy.org error page, observed). Feature-level detail (passive/active scan rule counts, spider, fuzzer, API specifics) is beyond the pages consulted here — **[NON ÉTABLI]** in this entry."
+    },
+    "installation_and_distribution": {
+      "category": "FAIT",
+      "text": "Distribution (repository + homepage, consulted 2026-11-13): platform installers produced with install4j (Windows executable explicitly maintained — 'Update installers and Windows executable… Remove OWASP references. Change installation dir and group to ZAP', Aug 2023), Linux builds (the deb package build was removed in 2023 — 'the users can still download/install the deb package from the provided Linux builds'), snap packaging (version 2.17.0 snapshot commit, Dec 2025), Docker images (`zaproxy` Docker workflow, 'Docker Live Release'), and source builds via Gradle (BUILDING.md). macOS is served by the bundled-JRE packaging (Info.plist architecture declaration for native ARM64). The download hub is zaproxy.org/download/."
+    },
+    "platforms_and_hardware_architectures": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Documented platform support: Windows (installer/executable), Linux (builds + snap; deb build retired but packages still provided), macOS (bundled JRE, ARM64 native declaration), and containers (Docker) [FAIT as documented distribution channels]. The Java/Gradle codebase implies JVM portability, but the project's official platform/version matrix and minimum hardware were not consulted here — exact supported versions are **[NON ÉTABLI]**. Repository activity (commits 2026-11-12, CI workflows live) shows active maintenance on `main` [VERSION]."
+    },
+    "extensions_and_add_on_store": {
+      "category": "FAIT",
+      "text": "The ZAP Marketplace is the documented extension mechanism: 'ZAP marketplace contains add-ons that have been contributed by the community. Check out how you can extend ZAP with the add-ons!' (homepage). Add-ons are versioned separately from the core (the core repository focuses on `zap/` plus tooling), and the scan-rule documentation under `docs/` shows rule IDs being reserved/managed as a public scheme (e.g. the passive secrets scan rule ID reservation). Contribution paths are formalised (CONTRIBUTING.md, ZAP CLA v1.0)."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT",
+      "text": "As locally executed software, ZAP's scans run from the operator's own machine and results are held there — no hosted service processes the targets on the user's behalf (structural property of the download-and-run model; contrast the two online testers of this lot whose assessments run on third-party infrastructure). The project maintains security engineering artefacts: a versioned SECURITY.md, LEGALNOTICE.md, CodeQL analysis and a SonarCloud Quality Gate in CI, the CII Best Practices badge, and a published vulnerability-reporting channel (zaproxy-admin contact on zaproxy.org). Use is governed by the Apache 2.0 licence terms and the project's LEGALNOTICE; testing systems without authorisation is outside any documented mandate of the project (this entry documents the tool, and this phase executed **no** test with it — D-L24-7)."
+    },
+    "update_channels_and_release_cadence": {
+      "category": "FAIT+VERSION",
+      "text": "Releases are published on GitHub (618 tags observed 2026-11-13) with download links on zaproxy.org/download/; the snap channel carries versions (2.17.0 dated December 2025); Docker images publish via a live-release workflow; SECURITY.md is updated per release; RELEASING.md documents the release process (updated December 2025). The repository shows continuous maintenance (latest commit 2026-11-12, dependabot and CI activity in the same week). A formal LTS/EOL policy is **[NON ÉTABLI]** from the consulted pages."
+    },
+    "licensing_and_governance": {
+      "category": "FAIT",
+      "text": "Licence: **Apache License, Version 2.0** (LICENSE file, full text, and README badge — consulted 2026-11-13). Governance: 'ZAP is an independent Open Source project controlled by the ZAP Core Team and supported by Checkmarx' (Ownership page); three Core Team members are employed by Checkmarx to work on ZAP ('ZAP by Checkmarx'); contributors sign the ZAP CLA v1.0. The project left OWASP in September 2023 for funding reasons and notes that any source still saying 'OWASP ZAP' is out of date — the team 'are still OWASP supporters and some of us are still OWASP Project leaders'. This entry keeps the roadmap identifier `owasp-zap` while documenting the current naming (D-L24-3)."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) it is a web-application testing tool — results depend on configuration, scope and the operator's expertise ('a great tool for experienced pentesters' implies a learning curve); (2) automated scanning is not a complete security audit (structural to the category — the project does not claim certification anywhere on the consulted pages); (3) rule sets, add-on versions and scan coverage evolve (marketplace model) — no efficacy figures are established here [NON ÉTABLI]; (4) exact platform matrix, current version and founding date [NON ÉTABLI] from consulted pages; (5) 'OWASP ZAP' naming in third-party sources is outdated per the project; (6) running it against systems without authorisation is out of scope of any legitimate use documented here; (7) **ZAP was not installed or executed in this phase** (D-L24-7 — no tools installed, no active tests)."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: free, open-source (Apache 2.0), community-driven ('anyone can contribute to', Top-1000 GitHub project [ÉDITEUR framing of a documented community model]); dual use — automated vulnerability finding during development/testing and manual pentesting; automation framework for CI/CD-style security testing; marketplace of community add-ons; wide distribution (installers, Windows, Linux builds, snap, Docker, macOS bundled JRE); strong engineering hygiene visible in the repository (CI, CodeQL, SonarCloud, CII Best Practices, integration tests, CLA, LEGALNOTICE, SECURITY.md); active maintenance (commits November 2026); transparent governance documentation (independent project, Checkmarx support, OWASP exit explained)."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: expertise required (aimed in part at 'experienced pentesters'); automated findings are candidates, not verdicts (category property, no certification claims); naming confusion persists in the ecosystem ('OWASP ZAP' sources are stale by the project's own account); funding-driven history (OWASP exit 2023) shows sustainability pressures [FAIT as documented history]; 618 tags but no published LTS/EOL policy [NON ÉTABLI]; feature depth (rule counts, scan types) not established from the consulted pages [NON ÉTABLI]; heavy Java tooling footprint (bundled JREs, installers) versus lightweight CLI tools; no independent benchmark documented here [NON ÉTABLI]."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Developers and testers wanting free, local vulnerability scanning of their own web applications during development; pentesters needing a manual-interception-style companion tool (the project's stated audience); security teams wiring automated scanning into pipelines via the Automation Framework; organisations wanting auditable, self-hosted tooling (Apache 2.0, local execution); contributors seeking a community open-source security project (CLA-based contribution)."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: users wanting a hosted one-shot grade of a public site (cf. SSL Labs Server Test for TLS, SecurityHeaders.com for headers — both free hosted testers of the same lot); operators seeking certification or a 'clean bill of health'; users unwilling to run Java-based tooling or manage add-ons; anyone intending to scan systems without authorisation (outside documented legitimate use); users needing vendor-supported commercial SLAs (support model not documented on the consulted pages [NON ÉTABLI])."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "ZAP (Zed Attack Proxy) — roadmap id `owasp-zap`, current project name 'ZAP by Checkmarx' — is the lot's (and one of the ecosystem's) reference free, open-source (Apache 2.0) web-application security scanners: local installable Java software with automated + manual testing, an Automation Framework, a community Marketplace, and disciplined engineering (CI, CodeQL, SonarCloud, CII Best Practices) actively maintained in November 2026 [VERSION]. Documented governance: independent ZAP Core Team project, Checkmarx-supported since 2024, out of OWASP since September 2023. Distinct in nature from the lot's two hosted testers (TLS grading and header grading). **ZAP was not installed or executed in this phase.** All cited URLs reachable on 2026-11-13 except the documented 404 of zaproxy.org/about/ (replaced by the Ownership page)."
+    }
+  },
+  "sources": [
+    {"title": "zaproxy.org homepage — product definition, Quick Start/Automation/Marketplace links", "url": "https://www.zaproxy.org/", "type": "official_site", "publisher": "ZAP project (ZAP by Checkmarx)", "accessed": "2026-11-13"},
+    {"title": "ZAP Ownership — independent project, ZAP Core Team, Checkmarx support, OWASP exit September 2023", "url": "https://www.zaproxy.org/docs/zap-ownership/", "type": "official_documentation", "publisher": "ZAP project", "accessed": "2026-11-13"},
+    {"title": "zaproxy/zaproxy GitHub repository — activity (10,462 commits, 618 tags), build/distribution, CI badges", "url": "https://github.com/zaproxy/zaproxy", "type": "official_source_code", "publisher": "ZAP project (GitHub)", "accessed": "2026-11-13"},
+    {"title": "LICENSE — Apache License, Version 2.0 (full text)", "url": "https://raw.githubusercontent.com/zaproxy/zaproxy/main/LICENSE", "type": "legal_document", "publisher": "ZAP project (GitHub)", "accessed": "2026-11-13"},
+    {"title": "README.md — product statement, dual use (automated + manual), Apache 2 badge", "url": "https://raw.githubusercontent.com/zaproxy/zaproxy/main/README.md", "type": "official_documentation", "publisher": "ZAP project (GitHub)", "accessed": "2026-11-13"}
+  ]
+}

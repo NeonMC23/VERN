@@ -1,0 +1,68 @@
+{
+  "id": "ssl-labs-server-test",
+  "name": "SSL Labs Server Test",
+  "type": "service",
+  "content": {
+    "introduction": {
+      "category": "FAIT",
+      "text": "SSL Labs Server Test (the 'SSL Server Test', 'Powered by Qualys SSL Labs') is a free hosted service that performs 'a deep analysis of the configuration of any SSL web server on the public Internet' (ssllabs.com/ssltest/, consulted 2026-11-13). A user submits a hostname and receives an 'SSL Report' — the report engine version observed on the page is v2.4.3 [VERSION] — grading the server's TLS/SSL configuration, with results optionally shown on public boards. It is one of the two online testers of this lot; unlike OWASP ZAP (see that entry) it is not installable software — assessments 'are carried out by Qualys's servers, not locally' (official API documentation v4)."
+    },
+    "what_is_it": {
+      "category": "FAIT",
+      "text": "A web-based TLS/SSL configuration linter for public servers: enter a hostname, the service analyses the endpoint(s) and returns a per-endpoint report with letter grades. The public page displays grade classes A+, A, B, F and T on its boards (Recently Seen / Recent Best / Recent Worst — 'T' observed 2026-11-13; its meaning is **[NON ÉTABLI]** from the consulted pages). The results boards are public by default with an opt-out checkbox ('Do not show the results on the boards') and a public `publish` parameter in the API (default off). A machine interface exists: the SSL Labs Assessment APIs (`api.ssllabs.com/api/v4/`) with a published Go reference client, `ssllabs-scan`, 'designed for automated and/or bulk testing' (GitHub)."
+    },
+    "origin_and_history": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Operated by Qualys under its SSL Labs brand (page footer and API documentation authorship: Nauman Shah, Qualys). The public repository `ssllabs/ssllabs-scan` dates back to October 2014 (AUTHORS and LICENSE files) and documents API versions v2 (deprecated), v3 and v4 — the v4 documentation was last updated 2023-10-17 [VERSION]. The reference client's latest commit is from March 2024 and the repo has 6 tags (observed 2026-11-13). The web report engine is versioned independently ('SSL Report v2.4.3', observed). The founding date of SSL Labs itself is **[NON ÉTABLI]** from the consulted pages."
+    },
+    "operation_and_infrastructure": {
+      "category": "FAIT",
+      "text": "Documented mechanics (API v4 documentation, consulted 2026-11-13): HTTP+JSON protocol; `info` returns engine and criteria versions plus concurrency limits; `analyze` starts or retrieves an assessment (parameters `host`, `publish` default off, `startNew`, `fromCache`, `maxAge`, `all`), returning a Host object with per-Endpoint results — an endpoint can fail independently ('statusMessage' should contain 'Ready'). Assessments run on Qualys infrastructure ('assessments are carried out by Qualys's servers, not locally' — stated in the terms discussion as a privacy/compliance-relevant fact). Results are cached server-side; `fromCache`/`maxAge` serve cached reports, `startNew` forces a new assessment. Since API v4, clients must `register` (first name, last name, organisation name, organisation email — free-mail providers refused). A Go reference client supports bulk/automated use."
+    },
+    "protocols_and_encryption": {
+      "category": "FAIT+NON ÉTABLI",
+      "text": "Canvas-adaptation convention (D-L24-2): this section documents the layer actually analysed. The service analyses the TLS/SSL configuration of public web servers — cipher suites, certificates and protocol behaviour are within its declared scope ('deep analysis of the configuration of any SSL web server on the public Internet'). The full scoring rubric (the Qualys 'SSL Server Rating Guide') could **not** be consulted: both the FAQ page and the Rating Guide PDF returned HTTP 404 on 2026-11-13 (documented failures) — the precise grade modifiers are therefore **[NON ÉTABLI]** from primary sources here. What is documented: grades are produced per endpoint; the `info` API exposes 'engine and criteria version' — i.e. the criteria are versioned [FAIT]."
+    },
+    "privacy_and_security_model": {
+      "category": "FAIT+ÉDITEUR",
+      "text": "An explicit commitment is displayed on the test page: 'Please note that the information you submit here is used only to provide you the service. We don't use the domain names or the test results, and we never will.' [ÉDITEUR commitment, not independently audited]. Counterpoint documented on the same page: results appear on public boards by default (opt-out checkbox present); the API's `publish` parameter defaults to off. The API terms (ssllabs.com/about/terms.html) were not consulted in this phase [NON ÉTABLI]; the API documentation notes their spirit ('system operators can test their own infrastructure') and warns that end users should understand assessments are performed by Qualys servers for privacy/compliance reasons."
+    },
+    "configuration_and_access": {
+      "category": "FAIT",
+      "text": "The web tester is free and account-free (submit a hostname). The APIs are 'provided free of charge, subject to our terms and conditions', with commercial use 'generally not allowed, except with an explicit permission from Qualys' — CAs, CDNs, hosting companies and registrars are told they are welcome but must contact Qualys first (API v4 documentation). API v4 additionally requires registration with identity and organisation data. Board publication is controllable (checkbox; `publish` parameter)."
+    },
+    "governance_and_operator": {
+      "category": "FAIT",
+      "text": "Operator: Qualys (SSL Labs is a Qualys property — page branding 'Powered by Qualys SSL Labs'; API documentation authored by a Qualys engineer). Development artifacts (reference client, API docs) are public on GitHub (`ssllabs/ssllabs-scan`, 255 commits observed). Terms of use live at ssllabs.com/about/terms.html (not consulted here). No further governance detail (organisation of SSL Labs, funding) is established from the consulted pages [NON ÉTABLI]."
+    },
+    "limitations_and_scope": {
+      "category": "FAIT",
+      "text": "Documented or structural limits: (1) scope is the TLS/SSL configuration of servers on the **public Internet** — it is not a web-application security test (no XSS/SQLi-type testing) nor a substitute for one (cf. ZAP); (2) the detailed rating rubric could not be consulted (FAQ and Rating Guide both 404) — grade semantics beyond the letter scale are [NON ÉTABLI] here, including the observed 'T' class; (3) results are cached server-side and can be stale unless `startNew` is used; (4) boards publish results by default (opt-out available) — a privacy consideration for operators who do not notice; (5) API use requires registration and is contractually restricted (commercial use); (6) assessments originate from Qualys infrastructure — relevant for compliance-sensitive targets; (7) **no test was executed in this phase** (D-L24-7): no domain was submitted to any scan, per the prohibition on active testing of third-party systems."
+    },
+    "advantages": {
+      "category": "FAIT",
+      "text": "Documented strengths: free, account-free deep TLS/SSL configuration analysis of any public server; per-endpoint granularity (individual servers of a host assessed and reported separately); versioned criteria and engine (exposed via `info`); cached reports avoid redundant assessments; an official API with a documented protocol and a Go reference client for automation/bulk use; explicit on-page privacy commitment [ÉDITEUR]; public boards provide transparency of recent results with an opt-out."
+    },
+    "disadvantages": {
+      "category": "FAIT",
+      "text": "Documented limits: SSL/TLS configuration only; rating details unconsultable at the time of writing (FAQ and Rating Guide PDF return 404); board publication is default-on (opt-out must be chosen); API v4 gates automation behind identity/organisation registration and forbids most commercial use without permission; cached results can lag; the 'T' grade class is displayed but undocumented in the consulted pages [NON ÉTABLI]; the free-mail restriction on registration excludes individual hobbyist automation; no independent audit of the grading is documented here [NON ÉTABLI]."
+    },
+    "who_is_it_for": {
+      "category": "FAIT",
+      "text": "Server and site operators checking their TLS/SSL configuration against an independent, widely recognised grader; system administrators validating certificate/protocol changes; CAs, CDNs, hosts and registrars (explicitly welcomed for API use after contacting Qualys); security teams needing bulk monitoring via the official API and reference client."
+    },
+    "who_is_it_not_for": {
+      "category": "FAIT",
+      "text": "Not aimed at: web-application vulnerability testing (cf. OWASP ZAP for software that does that); private/internal servers (public Internet scope); users needing the exact scoring rubric from primary sources at all times (documentation currently 404); automation users unwilling to register with organisation details or operating under commercial terms Qualys has not approved; operators requiring that results never transit third-party infrastructure (assessments run on Qualys servers)."
+    },
+    "verdict": {
+      "category": "FAIT",
+      "text": "SSL Labs Server Test (Qualys ; `service`) is the reference free hosted TLS/SSL configuration grader for public servers: deep per-endpoint analysis, letter grades (A+…F and an observed T class [semantics NON ÉTABLI]), versioned criteria (SSL Report v2.4.3) and a documented free API v4 with registration and a Go reference client. Documented strengths: depth, automation path, on-page no-reuse commitment [ÉDITEUR]; documented limits: SSL/TLS layer only, rubric pages 404 at consultation, default-on public boards, contractual API restrictions. **No scan was executed in this phase.** All cited URLs reachable on 2026-11-13 except the two documented 404s."
+    }
+  },
+  "sources": [
+    {"title": "SSL Server Test (Powered by Qualys SSL Labs) — service page, privacy commitment, boards, SSL Report v2.4.3", "url": "https://www.ssllabs.com/ssltest/", "type": "official_site", "publisher": "Qualys SSL Labs", "accessed": "2026-11-13"},
+    {"title": "ssllabs/ssllabs-scan — reference CLI client for SSL Labs APIs, API docs v2/v3/v4", "url": "https://github.com/ssllabs/ssllabs-scan", "type": "official_source_code", "publisher": "Qualys SSL Labs (GitHub)", "accessed": "2026-11-13"},
+    {"title": "SSL Labs API v4 Documentation (register/info/analyze, terms, server-side assessment note)", "url": "https://raw.githubusercontent.com/ssllabs/ssllabs-scan/master/ssllabs-api-docs-v4.md", "type": "official_documentation", "publisher": "Qualys SSL Labs (GitHub)", "accessed": "2026-11-13"}
+  ]
+}
